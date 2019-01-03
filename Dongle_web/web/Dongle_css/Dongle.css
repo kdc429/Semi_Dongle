@@ -1,0 +1,48 @@
+body {
+	/* position: absolute; */
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center;
+	justify-content: center;
+}
+
+div {
+	/* border: 1px solid black; */
+	
+}
+
+.headerBack {
+	width: 1024px;
+	height: auto;
+}
+
+.headerBack .logo {
+	font-size: 50px;
+}
+
+.bar {
+	background-color: rgba(130, 238, 41, 0.8);
+}
+
+section>.myDongle {
+	width: 1024px;
+	height: 300px;
+}
+
+section>.editorPick {
+	width: 1024px;
+	height: 300px;
+}
+
+section>.dongleRank {
+	width: 1024px;
+	height: 300px;
+}
+
+.loginMember {
+	float: right;
+}

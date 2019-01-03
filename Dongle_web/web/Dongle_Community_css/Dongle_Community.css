@@ -1,0 +1,89 @@
+body {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 컨테이너 스타일 */
+.back {
+	width: 1024px;
+	height: 100vh;
+}
+
+/* 우측사이드 메뉴 스타일 */
+.btn {
+	margin-left: 0;
+	margin-bottom: 1px;
+	border: 0px;
+	background-color: rgb(253, 253, 253);
+	width: 100px;
+	color: rgb(41, 41, 41);
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+/* 게시판 스타일 */
+.main {
+	/* display: flex; */
+	/* flex-direction: column; */
+	justify-content: center;
+	align-items: center;
+	margin-left: 170px;
+	margin-top: 62.8px;
+	z-index: 1;
+}
+
+/* 행 스타일 적용
+        flex-direction: row; -> 가로로 정렬
+         */
+.center {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+}
+
+.sideback {
+	/* position: relative; */
+	/* display: flex; */
+	flex-direction: row;
+}
+
+/* 왼쪽 사이드 div
+         */
+.sidel {
+	width: 170px;
+	height: auto;
+	position: fixed;
+	margin-top: 62.8px;
+}
+
+/* 오른쪽 사이드 div */
+.sider {
+	width: 170px;
+	height: auto;
+	position: fixed;
+	margin-top: 62.8px;
+	margin-left: 854px;
+}
+
+/* 로고 div
+            z-index 설정은 스크롤 내릴때 .logo 와 .main이 겹칠때 .logo가 상위에 있게 하기 위함
+         */
+.logo {
+	position: fixed;
+	z-index: 2;
+}
+
+/* 왼쪽 사이드 컨텐트 */
+.sideitem {
+	margin-left: 15px;
+	margin-right: 15px;
+}
