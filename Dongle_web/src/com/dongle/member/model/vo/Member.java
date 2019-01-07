@@ -6,6 +6,7 @@ public class Member {
 	private String memberNo;
 	private String memberId;
 	private String memberPwd;
+	private String memberName;
 	private String gender;
 	private String ssn;
 	private String phone;
@@ -59,6 +60,14 @@ public class Member {
 
 	public void setMemberPwd(String memberPwd) {
 		this.memberPwd = memberPwd;
+	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getGender() {

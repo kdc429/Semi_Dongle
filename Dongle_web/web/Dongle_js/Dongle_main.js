@@ -24,7 +24,7 @@ $('.left').click(function() {
 		//이전 버튼 클릭시 돌아왔을때 moveWidthR 값을 재설정하여 리턴함
 		moveWidthR = moveWidthL;
 		
-		var trans = "translateX(" + -moveWidthL + "px)";
+		var trans = "translateX(" + -moveWidthL + "vh)";
 		$('.item').css({
 			'transform' : trans,
 			'transition' : 'all 0.5s ease 0s'
@@ -45,11 +45,11 @@ $('.right').click(function() {
 	} else {
 		i += 5;
 		// 5의 배수 인덱스를 가진 li의 위치를 moveWidthR에 누적
-		moveWidthR += ($('.item>li').eq(i - 1).offset().left);
-		moveWidth = ($('.item>li').eq(i - 1).offset().left);
+		moveWidthR += 88;
+		moveWidth = 88;
 		
 		// moveWidthR 값을 translateX 속성값에 적용
-		var trans = "translateX(" + -moveWidthR + "px)";
+		var trans = "translateX(" + -moveWidthR + "vh)";
 		$('.item').css({
 			'transform' : trans,
 			'transition' : 'all 0.5s ease 0s'
