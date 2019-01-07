@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	
-%>
+<%@ page import="com.dongle.group.model.vo.Group"%>
+<%@ page import="com.dongle.group.service.GroupService"%>
+<%@ page import="java.util.*" %> 
 <%@ include file="header.jsp"%>
+
+<%	
+	List<Group> list=new GroupService().selectGroup(LoginMember.getMemberId());
+%>
 	<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/Dongle_css/Dongle_Main.css" />
 	
@@ -18,109 +22,22 @@
         <!--캐러셀 아이템   -->
         <div class="carousel-box">
                 <ol class="item">
-                    <li class="first">
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li class="5">
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li class="10">
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">7</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li>
-                        <button class="dongle-icon">1</button>
-                    </li>
-                    <li class="last">
-                        <button class="dongle-icon">7</button>
-                    </li>
-
+                    <% if(list==null||list.isEmpty()){%>
+                    	<li>DONGLE 에 가입하세요!</li>
+                    <%}else{ 
+                    	for(Group g:list){
+                    %>
+                    	<li class="dongle-icon">
+                    		<a href="#">
+                    			
+                    			<img src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+                    		</a>
+                    	</li>
+                    	
+                    <%} 
+                    }
+                    %>
+	
                 </ol>
 
     	</div>

@@ -17,14 +17,27 @@
 }
 .item{
 	margin-top: 55px;
-	padding-left:10px;
+	padding-left:8px;
 	
 }
 .item>li {
 	
-	display: inline;
-	font-size: 100px;
+	display: inline-block;
+	margin-right:25px;
 }
+
+.dongle-icon>a>img {
+	width: 130px;
+	height: 130px;
+	border-radius: 10px 10px 10px 10px;
+}
+
+.dongle-icon>a {
+	width: 130px;
+	height: 130px;
+	text-decoration: none;
+}
+
 .item>li>button:hover{
 	background-image: linear-gradient(to right, rgba(130, 238, 41, 0.01)0,rgba(130, 238, 41, 0.3)50%,rgba(130, 238, 41, 0.01)100%);
 	

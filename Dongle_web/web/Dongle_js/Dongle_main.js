@@ -45,8 +45,8 @@ $('.right').click(function() {
 	} else {
 		i += 5;
 		// 5의 배수 인덱스를 가진 li의 위치를 moveWidthR에 누적
-		moveWidthR += 101;
-		moveWidth = 101;
+		moveWidthR += 102;
+		moveWidth = 102;
 		
 		// moveWidthR 값을 translateX 속성값에 적용
 		var trans = "translateX(" + -moveWidthR + "%)";
