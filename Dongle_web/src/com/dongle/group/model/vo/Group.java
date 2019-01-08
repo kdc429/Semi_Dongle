@@ -122,6 +122,14 @@ public class Group {
 	public void setReportGroupCnt(int reportGroupCnt) {
 		this.reportGroupCnt = reportGroupCnt;
 	}
+
+	@Override
+	public String toString() {
+		return "Group [memberNo=" + memberNo + ", groupNo=" + groupNo + ", groupName=" + groupName + ", topicCode="
+				+ topicCode + ", groupDateCtg=" + groupDateCtg + ", minAge=" + minAge + ", maxAge=" + maxAge
+				+ ", imgPath=" + imgPath + ", groupIntro=" + groupIntro + ", groupEnrollDate=" + groupEnrollDate
+				+ ", reportGroupCnt=" + reportGroupCnt + "]";
+	}
 	
 	
 	
