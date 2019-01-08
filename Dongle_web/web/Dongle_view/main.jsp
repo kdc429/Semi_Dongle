@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.group.model.vo.Group"%>
-<%@ page import="com.dongle.group.service.GroupService"%>
+<%@ page import="com.dongle.group.model.service.GroupService"%>
 <%@ page import="java.util.*" %> 
 <%@ include file="header.jsp"%>
 
@@ -13,7 +13,12 @@
 	
 
 <section>
-	
+	<script>
+		function community_join(){
+			var gNo=$('[name=gNo]').val();
+			location.href="<%=request.getContextPath()%>/communityJoin?="+gNo;
+		}
+	</script>
 	<!-- 가입한 동글 캐러셀 -->
 	<div class="carousel-back">
 
@@ -27,19 +32,23 @@
                     <%}else{ 
                     	for(Group g:list){
                     %>
+                    	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>" name="join">
                     	<li class="dongle-icon">
-                    		<a href="#">
+                    			<a href="#" onclick="document.forms['join'].submit();">
                     			
-                    			<img src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
-                    		</a>
+                    				<img src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+                    				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
+				
+                    			</a>
                     	</li>
+                    	</form>
                     	
                     <%} 
                     }
                     %>
 	
                 </ol>
-
+			
     	</div>
 		<!-- 다음 버튼 -->
     	<button class="right">></button>

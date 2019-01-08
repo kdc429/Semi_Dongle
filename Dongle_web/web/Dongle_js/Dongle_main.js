@@ -7,7 +7,7 @@ function loadJQuery() {
 }
 
 var i = 0; 
-var lengthLi = $('.item>li').length; // li 태그 개수 
+var lengthLi = $('.item>form').length; // li 태그 개수 
 var moveWidthR = 0; // 오른쪽 translateX 값
 var moveWidthL = 0; // 왼쪽 translateX 값
 

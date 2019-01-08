@@ -16,12 +16,17 @@
 	overflow: hidden;
 }
 .item{
+	list-style:none;
 	margin-top: 55px;
 	padding-left:8px;
 	
 }
+.item>form{
+	display:inline-block;
+	margin-right:25px;
+}
 .item>li {
-	
+	list-style:none;
 	display: inline-block;
 	margin-right:25px;
 }

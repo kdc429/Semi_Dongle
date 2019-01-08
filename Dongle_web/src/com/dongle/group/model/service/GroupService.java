@@ -1,4 +1,4 @@
-package com.dongle.group.service;
+package com.dongle.group.model.service;
 
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.close;
@@ -19,6 +19,14 @@ public class GroupService {
 		close(conn);
 		return list;
 		
+	}
+	
+	public Group selectGrInfo(int gNo) {
+		
+		Connection conn=getConnection();
+		Group g=new GroupDao().selectGrInfo(conn,gNo);
+		close(conn);
+		return g;
 	}
 
 }

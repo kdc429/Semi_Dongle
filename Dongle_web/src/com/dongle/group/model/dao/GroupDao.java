@@ -29,7 +29,7 @@ public class GroupDao {
 		}
 	}
 	
-	public List<Group> selectGroup(Connection conn, String id){
+	public List<Group> selectGroup(Connection conn, String id){ //동글 리스트 데이터 dao
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -68,6 +68,44 @@ public class GroupDao {
 		return list;
 		
 		
+	}
+	
+	public Group selectGrInfo(Connection conn,int gNo) { // 동글정보 객체 dao
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Group g=null;
+		String sql=prop.getProperty("selectGrInfo");
+		System.out.println(gNo);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, gNo);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				g=new Group();
+				g.setMemberNo(rs.getInt("member_no"));
+				g.setGroupNo(rs.getInt("group_no"));
+				g.setGroupName(rs.getString("group_name"));
+				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setGroupDateCtg(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupIntro(rs.getString("group_introduce"));
+				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return g;
 	}
 
 }
