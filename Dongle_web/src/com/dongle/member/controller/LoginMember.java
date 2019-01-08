@@ -35,8 +35,8 @@ public class LoginMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("userId");
-		String pw = request.getParameter("password");
+		String id = request.getParameter("userId");//입력한 아이디	
+		String pw = request.getParameter("password");//입력한 패스워드
 		MemberService ms = new MemberService();
 		Member m = new Member();
 		m.setMemberId(id);
@@ -61,10 +61,10 @@ public class LoginMember extends HttpServlet {
 				// 쿠키이용하여 회원아이디 저장하기
 				
 
-				view = "Dongle_view/main.jsp";// 메인화면으로 localhost:9090/06_helloMVC/
+				view = "Dongle_view/main.jsp";// 메인화면으로 
 
 //				request.setAttribute("LoginMember", data);
-				// 로그인이 성공했으므로 session객체에 값을 넣고 유지하자!
+				// 로그인이 성공했으므로 session객체에 값을 넣고 유지
 
 				HttpSession session = request.getSession();// 세션생성~!
 				session.setAttribute("LoginMember", data);

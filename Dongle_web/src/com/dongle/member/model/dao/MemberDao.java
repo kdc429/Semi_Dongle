@@ -19,7 +19,7 @@ public class MemberDao {
 		String fileName = MemberDao.class.getResource("./memberquery.properties").getPath();
 
 		try {
-			prop.load(new FileReader(fileName));
+			prop.load(new FileReader(fileName)); //properties 로드
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class MemberDao {
 //			pstmt.setString(2, pw);
 			rs=pstmt.executeQuery();
 			
-			if(rs.next()) {
+			if(rs.next()) {//일단 아이디 패스워드만 받음 추후 수정할 예정
 				data=new Member();
 				data.setMemberId(rs.getString("member_id"));
 				data.setMemberPwd(rs.getString("member_pwd"));

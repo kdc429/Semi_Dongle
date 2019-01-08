@@ -13,12 +13,7 @@
 	
 
 <section>
-	<script>
-		function community_join(){
-			var gNo=$('[name=gNo]').val();
-			location.href="<%=request.getContextPath()%>/communityJoin?="+gNo;
-		}
-	</script>
+
 	<!-- 가입한 동글 캐러셀 -->
 	<div class="carousel-back">
 
@@ -28,14 +23,16 @@
         <div class="carousel-box">
                 <ol class="item">
                     <% if(list==null||list.isEmpty()){%>
+                    	<!-- 로그인 하지 않았을 경우 -->
                     	<li>DONGLE 에 가입하세요!</li>
                     <%}else{ 
                     	for(Group g:list){
                     %>
                     	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>" name="join">
                     	<li class="dongle-icon">
-                    			<a href="#" onclick="document.forms['join'].submit();">
-                    			
+                    			<a href="#" onclick="document.forms['join'].submit();"> 
+                    			<!-- onclick:form태그 사용 구문 -->
+                    			<!-- 여기서 그룹 넘버 전송 -->
                     				<img src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
                     				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
 				

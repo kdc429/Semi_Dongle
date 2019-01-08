@@ -29,7 +29,7 @@ public class GroupDao {
 		}
 	}
 	
-	public List<Group> selectGroup(Connection conn, String id){ //동글 리스트 데이터 dao
+	public List<Group> selectGroup(Connection conn, String id){ //가입한 동글 리스트 데이터 dao
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

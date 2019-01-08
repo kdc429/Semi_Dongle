@@ -11,7 +11,7 @@ import com.dongle.group.model.vo.Group;
 
 public class GroupService {
 	
-	public List<Group> selectGroup(String id){
+	public List<Group> selectGroup(String id){// 가입한 그룹 찾기
 		
 		Connection conn=getConnection();
 		List<Group> list=new GroupDao().selectGroup(conn,id);
@@ -21,7 +21,7 @@ public class GroupService {
 		
 	}
 	
-	public Group selectGrInfo(int gNo) {
+	public Group selectGrInfo(int gNo) {// 그룹정보 데이터 출력
 		
 		Connection conn=getConnection();
 		Group g=new GroupDao().selectGrInfo(conn,gNo);
