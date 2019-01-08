@@ -9,7 +9,7 @@
 	List<Group> list=new GroupService().selectGroup(LoginMember.getMemberId());
 %>
 	<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/Dongle_css/Dongle_Main.css" />
+	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 	
 
 <section>
