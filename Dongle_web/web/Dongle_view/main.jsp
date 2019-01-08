@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.group.model.vo.Group"%>
-<%@ page import="com.dongle.group.service.GroupService"%>
+<%@ page import="com.dongle.group.model.service.GroupService"%>
 <%@ page import="java.util.*" %> 
 <%@ include file="header.jsp"%>
 
@@ -9,7 +9,7 @@
 	List<Group> list=new GroupService().selectGroup(LoginMember.getMemberId());
 %>
 	<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/Dongle_css/Dongle_Main.css" />
+	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 	
 
 <section>

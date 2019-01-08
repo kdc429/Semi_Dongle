@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>당신을 위한-DONGLE</title>
-<link href="<%=request.getContextPath()%>/Dongle_css/Login.css"
+<link href="<%=request.getContextPath()%>/css/Login.css"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
@@ -32,6 +32,5 @@
             </form>
         </div>
     </div>
-    <!-- 안녕-정하 -->
 </body>
 </html>

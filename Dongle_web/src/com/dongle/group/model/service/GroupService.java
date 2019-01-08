@@ -1,4 +1,4 @@
-package com.dongle.group.service;
+package com.dongle.group.model.service;
 
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.close;
