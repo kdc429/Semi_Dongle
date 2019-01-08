@@ -28,6 +28,7 @@
                     </label><br>
                     <button id="btn" onclick='login()'>로그인</button><br>
                     <button id="btn">회원가입</button><br>
+                    <button></button>
                 </div>
             </form>
         </div>
