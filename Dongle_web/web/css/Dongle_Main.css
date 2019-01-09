@@ -32,12 +32,18 @@
 }
 
 .dongle-icon>a>img {
-	width: 130px;
-	height: 130px;
+	
+	
+	max-width: 130px;
+	max-height: 130px;
+	width:auto;
+	height:auto;
 	border-radius: 10px 10px 10px 10px;
 }
 
 .dongle-icon>a {
+	text-align:center;
+	margin:auto auto;
 	width: 130px;
 	height: 130px;
 	text-decoration: none;
