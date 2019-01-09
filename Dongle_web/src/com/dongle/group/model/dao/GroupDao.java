@@ -105,7 +105,7 @@ public class GroupDao {
 			close(rs);
 			close(pstmt);
 		}
-		
+		System.out.println(g);
 		return g;
 	}
 	public List<EditPickGroup> selectEditGr(Connection conn){

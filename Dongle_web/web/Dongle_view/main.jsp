@@ -67,8 +67,11 @@
 					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>" name=edit-pick">
 						<div class="editor-img-back">
 							<div class="editor-img" onclick="document.forms['edit-pick'].submit();">
+								<button class="join-btn" >
 								<img class="eImg" src="<%=request.getContextPath() %><%=epg.getEditFilePath()%>">
 								<input type="hidden" name="gNo" value="<%=epg.getGroupNo()%>"/>
+								
+								</button>
 							</div>
 						</div>
 					</form>
