@@ -12,7 +12,6 @@
     				cookieValue = c.getValue();
     			}
     		}
-
     	}
 %>
 <!DOCTYPE html>
@@ -39,12 +38,11 @@
 <body>
 	<header>
         <div class="headerBack">
-            <div class="bar" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=LoginMember.getMemberId()%>'"/><%=LoginMember.getMemberId()%>님, 환영합니다!</div>
+            <div class="bar" onclick="location.href='<%=request.getContextPath()%>/memberView?userId=<%=LoginMember.getMemberId()%>'"/><%=LoginMember.getMemberId()%>님, 환영합니다!</div>
             <div class="logo">DONGLE
             </div>
             <div class="bar">로고 BAR</div>
         </div>
-        <button>ss</button>
     </header>
 </body>
 </html>
