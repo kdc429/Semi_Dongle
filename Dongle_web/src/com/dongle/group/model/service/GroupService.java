@@ -1,12 +1,13 @@
 package com.dongle.group.model.service;
 
-import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.dongle.group.model.dao.GroupDao;
+import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 
 public class GroupService {
@@ -27,6 +28,16 @@ public class GroupService {
 		Group g=new GroupDao().selectGrInfo(conn,gNo);
 		close(conn);
 		return g;
+	}
+	
+	public List<EditPickGroup> selectEditGr(){// 에디터픽 그룹 찾기
+		
+		Connection conn=getConnection();
+		List<EditPickGroup> editList=new GroupDao().selectEditGr(conn);
+		
+		close(conn);
+		return editList;
+		
 	}
 
 }

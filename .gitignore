@@ -1,3 +1,4 @@
+
 # Created by https://www.gitignore.io/api/eclipse
 # Edit at https://www.gitignore.io/?templates=eclipse
 
@@ -59,10 +60,6 @@ local.properties
 .scala_dependencies
 .worksheet
 
-### Eclipse Patch ###
-# Eclipse Core
-
-# JDT-specific (Eclipse Java Development Tools)
 
 # Annotation Processing
 .apt_generated
