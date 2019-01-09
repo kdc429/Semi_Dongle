@@ -1,23 +1,27 @@
 package com.dongle.gallery.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.gallery.model.service.GalleryService;
+import com.dongle.gallery.model.vo.AlbumCategory;
+
 /**
- * Servlet implementation class AlbumPlusServlet
+ * Servlet implementation class AlbumNameCheckServlet
  */
-@WebServlet("/albumPlus")
-public class AlbumPlusServlet extends HttpServlet {
+@WebServlet("/albumNameCheck")
+public class AlbumNameCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlbumPlusServlet() {
+    public AlbumNameCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,19 +30,33 @@ public class AlbumPlusServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
+		String albumNameP = request.getParameter("albumNameP");
+		/*int groupNo=Integer.parseInt(request.getParameter("groupNo"));*/
 		String groupNo=request.getParameter("groupNo");
 		System.out.println(groupNo);
-		if(memberId==null||!memberId.equals("admin"))
+		AlbumCategory ac = new AlbumCategory();
+		ac.setAlbumName(albumNameP);
+		/*ac.setGroupNo(groupNo);*/
+		AlbumCategory oldAc = new GalleryService().checkAlbumName(ac);
+		
+		String msg="";
+		String loc="";
+		String view="/views/common/msg.jsp";
+		if(oldAc!=null)
 		{
-			request.setAttribute("msg", "잘못된 경로로 접근하였습니다.");
-			request.setAttribute("loc", "/albumGet?no="+groupNo);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			return;
+			msg="같은 앨범명이 존재합니다. 다시 시도해 주세요.";
+			loc="/albumGet?groupNo="+groupNo+"&adminId=admin";
 		}
-		request.setAttribute("groupNo", groupNo);
-		request.setAttribute("memberId", memberId);
-		request.getRequestDispatcher("/views/gallery/albumPlus.jsp").forward(request, response);
+		else
+		{
+			msg="앨범 등록에 성공하였습니다.";
+			loc="/albumGet?groupNo"+groupNo+"&adminId=admin";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher(view).forward(request, response);
+		
+		
 	}
 
 	/**

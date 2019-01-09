@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
  <%
  	List<AlbumCategory> list = (List)request.getAttribute("list");
+ 	String groupNo=(String)request.getAttribute("groupNo");
  	String memberId=(String)request.getAttribute("memberId");
  	int count=1;
  %>
@@ -30,16 +31,16 @@ function fn_validateFrm(){
 function albumPlusClick(){
 	//팝업창에 대한 설정해주기@ : window.open(url,title,shape)로 열 수 있음
 	// 서블릿으로 넘겨줄 매핑주소
-	var url="<%=request.getContextPath()%>/albumPlus"; 
+	var url="<%=request.getContextPath()%>/albumPlus?groupNo="+<%=groupNo%>; 
 	/* 내부에서 체크함 */
 	var title="albumPlus";
 	var shape="left=500px, top=300px, width=300px, height=200px";
 	var popup=open("",title,shape);
-	$('#albumPlus').target=title;
-	$('#albumPlus').action=url;
-	$('#albumPlus').method="post";
+	albumPlus.target=title;
+	albumPlus.action=url;
+	albumPlus.method="post";
 	//입력한 값을 제출하는 것
-	$('#albumPlus').submit();
+	albumPlus.submit();
 }
 </script>
 
