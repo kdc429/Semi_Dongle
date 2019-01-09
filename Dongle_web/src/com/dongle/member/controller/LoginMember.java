@@ -41,6 +41,7 @@ public class LoginMember extends HttpServlet {
 		Member m = new Member();
 		m.setMemberId(id);
 		m.setMemberPwd(pw);
+		
 
 		Member data = ms.selectMember(m);
 		String view = "";

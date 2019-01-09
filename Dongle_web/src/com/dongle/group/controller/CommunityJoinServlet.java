@@ -31,7 +31,7 @@ public class CommunityJoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
-		
+		System.out.println(gNo);
 		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
 		String view="/Dongle_view/msg.jsp";
 		String msg="";

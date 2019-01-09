@@ -30,17 +30,18 @@
                     	<li>DONGLE 에 가입하세요!</li>
                     <%}else{ 
                     	for(Group g:list){
+                    		System.out.println(g);
                     %>
                     	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>" name="join">
                     	<li class="dongle-icon">
                     		<div class="icon-back">
-                    			<a href="#" onclick="document.forms['join'].submit();"> 
+                    			<button class="join-btn" type="submit" href="#" onclick="document.forms['join'].submit();"> 
                     			<!-- onclick:form태그 사용 구문 -->
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
                     				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
 				
-                    			</a>
+                    			</button>
                     		
                     		</div>
                     	</li>
