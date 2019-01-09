@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.dongle.member.model.vo.*" %>
+
+
     
 <!DOCTYPE html>
 <html>
@@ -13,17 +14,19 @@
 <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<%@ page import="com.dongle.member.model.vo.Member" %>
+
+
 <%
 	Member m=(Member)request.getAttribute("member");
 	String id=m.getMemberId();
-	String pw=m.getMemberPwd();
 	String name=m.getMemberName();
-	String gender=m.getGender();
 	String ssn=m.getSsn();
 	String phone=m.getPhone();
 	String address=m.getAddress();
 	String email=m.getEmail();	
-
 %>
 </head>
 <body>
@@ -60,30 +63,8 @@
 						<input type="text"  
 						id="userName" name="userName" value='<%=name %>' required>
 					</td>
-				</tr>			
-					<th>이메일</th>
-					<td>
-						<input type="email"  
-						id="email" name="email" 
-						placeholder="db123@dfd.com" value='<%=email %>' required>
-					</td>
-				</tr>			
-				<tr>
-					<th>휴대폰</th>
-					<td>
-						<input type="tel"  
-						id="phone" name="phone" maxlength="11"
-						placeholder="(-없이)01012345678" value='<%=phone %>' required>
-					</td>
 				</tr>
-				<tr>
-					<th>주소</th>
-					<td>
-						<input type="text"  
-						id="address" name="address" value='<%=address %>' required>
-					</td>
-				</tr>
-				<tr>
+<%-- 			<tr>
 					<th>성별</th>
 					<td>
 						<%if(gender.equals("M")) {%>
@@ -102,7 +83,40 @@
 							<label for="gender1">여</label>
 						<%} %>
 					</td>
+				</tr> --%>
+				<tr>
+					<th>생년월일</th>
+					<td>
+						<input type="text"  
+						id="age" name="age"  
+						placeholder="931230" value='<%=ssn %>' required>
+					</td>
 				</tr>
+				<tr>
+					<th>휴대폰</th>
+					<td>
+						<input type="tel"  
+						id="phone" name="phone" maxlength="11"
+						placeholder="(-없이)01012345678" value='<%=phone %>' required>
+					</td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td>
+						<input type="text"  
+						id="address" name="address" value='<%=address %>' required>
+					</td>
+				</tr>
+				<tr>			
+					<th>이메일</th>
+					<td>
+						<input type="email"  
+						id="email" name="email" 
+						placeholder="db123@dfd.com" value='<%=email %>' required>
+					</td>
+				</tr>			
+
+
 						
 			</table>
 			<input type="button" onclick="fn_update_member();" value="정보수정"/>
@@ -113,7 +127,7 @@
 	</section>	
 	<script>
 		function fn_update_password(){
-			var url="<%=request.getContextPath()%>/member/updatePassword?userId=<%=id%>";
+			var url="<%=request.getContextPath()%>/updatePassword?userId=<%=id%>";
 			var title="updatePassword";
 			var status="left=200px, top=200px, width=400px, height=210px";
 			var popUp=open(url,title,status);
@@ -129,12 +143,10 @@
 			
 			var frm=$('#memberFrm');
 			
-			var url="<%=request.getContextPath()%>/member/memberUpdate";
+			var url="<%=request.getContextPath()%>/memberUpdate";
 			frm.attr('action',url);
 			
 			frm.submit();
-			
-			
 		}
 	
 	

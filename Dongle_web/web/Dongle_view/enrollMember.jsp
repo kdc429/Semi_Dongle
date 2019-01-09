@@ -124,7 +124,8 @@
 					<th>생년월일</th>
 					<td>
 						<input type="text"  
-						id="age" name="age" required>
+						id="age" name="age" 
+						placeholder="931230" required>
 					</td>
 				</tr>			
 			

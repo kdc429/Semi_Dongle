@@ -16,8 +16,8 @@ import com.dongle.member.service.MemberService;
 /**
  * Servlet implementation class MemberUpdateServlet
  */
-
-@WebServlet(name="MemberUpdateServlet", urlPatterns="/member/memberUpdate")
+@WebServlet("/memberUpdate")
+//@WebServlet(name="MemberUpdateServlet", urlPatterns="/member/memberUpdate")
 public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,23 +34,31 @@ public class MemberUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		String userId=request.getParameter("userId");
 		String password=request.getParameter("password");
 		String userName=request.getParameter("userName");	
-		String gender=request.getParameter("gender");
 		String ssn=request.getParameter("age");
 		String phone=request.getParameter("phone");
 		String address=request.getParameter("address");
 		String email=request.getParameter("email");
 
-		Member m=new Member(userId,password,userName,gender,ssn,phone,address,email, null, 0, 0);
+//		Member m=new Member(userId,password,userName,gender,ssn,phone,address,email, null, 0, 0);
+		
+		Member m=new Member();
+		m.setMemberId(userId);
+		m.setMemberName(userName);
+		m.setAddress(address);
+		m.setSsn(ssn);
+		m.setEmail(email);
+		m.setPhone(phone);
 		
 		int result=new MemberService().memberUpdate(m);
 		
 		String msg="";
 		String loc="";
-		
-		String view="/views/common/msg.jsp";
+		String view="/Dongle_view/msg.jsp";
 		
 		if(result>0)
 		{
@@ -60,7 +68,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		else 
 		{
 			msg="회원정보수정을 실패하였습니다.";
-			loc="/views/member/memberView.jsp";
+			loc="/Dongle_view/memberView.jsp";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

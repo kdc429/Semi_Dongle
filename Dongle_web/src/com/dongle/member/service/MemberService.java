@@ -12,13 +12,35 @@ import com.dongle.member.model.vo.Member;
 
 public class MemberService {
 	
-	public Member selectMember(Member m) {
-		
+	public int updatePassword(Member data)
+	{
+		Connection conn=getConnection();
+		int result=new MemberDao().updatePassword(conn,data);
+		if(result>0)
+		{
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;		
+	}
+	
+	
+	
+	public Member selectMember(Member m)
+	{
+		//contrller가 전달한 정보와 DB접속정보를 DAO에게 전달
+		//DB접속정보(Connection)에 대한 관리 : 객체반환(close())
+		//insert,update,delete한 후 rollback, commit관리!
 		Connection conn=getConnection();
 		Member data=new MemberDao().selectMember(conn,m);
 		close(conn);
 		return data;
+		
 	}
+	
 	
 	public int insertMember(Member m)
 	{
@@ -34,7 +56,9 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+		
 	}
+	
 	
 	public int memberUpdate(Member m)
 	{
