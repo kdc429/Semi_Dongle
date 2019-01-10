@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.member.model.vo.Member;
 
 /**
  * Servlet implementation class CommunityJoinServlet
@@ -30,6 +31,8 @@ public class CommunityJoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		System.out.println(loginMember.getMemberNo());
 		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
 		System.out.println(gNo);
 		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
@@ -43,6 +46,7 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.setAttribute("loc",loc);
 		}else {
 			loc="/Dongle_Community_view/Community_main.jsp";
+			request.setAttribute("group", g);
 			request.getRequestDispatcher(loc).forward(request, response);
 			request.setAttribute("loc",loc);
 		}
