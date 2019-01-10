@@ -34,7 +34,7 @@ function albumPlusClick(){
 	var url="<%=request.getContextPath()%>/albumPlus?groupNo="+<%=groupNo%>; 
 	/* 내부에서 체크함 */
 	var title="albumPlus";
-	var shape="left=500px, top=300px, width=300px, height=200px";
+	var shape="left=500px, top=300px, width=500px, height=200px";
 	var popup=open("",title,shape);
 	albumPlus.target=title;
 	albumPlus.action=url;
