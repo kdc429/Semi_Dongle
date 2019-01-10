@@ -32,7 +32,7 @@
 		<div class='logoback' style='width: 1024px; height: auto'>
 			<!-- 로고 grid -->
 			<div class='logo'
-				style='width: 1024px; height: auto; background-color: rgba(130, 238, 41, 0.8)'>
+				style='width: 1024px; height: auto; background-color: rgb(228, 228, 228)'>
 				<h2
 					style="color: darkcyan; font-family: 'Bungee', cursive; margin-left: 15px;">DONGLE</h2>
 			</div>
