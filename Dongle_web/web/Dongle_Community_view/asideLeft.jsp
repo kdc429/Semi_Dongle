@@ -31,13 +31,14 @@
 					<span class="demoSpan1"></span>
 				</div>
 				<!-- 회원정보 -->
-				<table class="user_info">
-					<td><%=m.getMemberName() %></td>
-				</table>
+				<div class="user_info">
+					<p><%=m.getMemberName() %></p><br/>
+					<img src="<%=request.getContextPath()%>/images/member_img/<%=m.getMemberImaPath()%>" width="50px" height="50px">
+				</div>
 				</div>
 				<!-- 소개글 -->
 				<div class="sideitem"
-					style='border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 150px;'>
+					style='border: 1px solid rgba(255,0,0,0.1); margin: 100px 15px 0px 15px; left: 10%; right: 10%; height: 150px;'>
 					<%=g.getGroupIntro() %>
 				</div>
 			</div>
