@@ -68,7 +68,7 @@ public class LoginMember extends HttpServlet {
 				// 로그인이 성공했으므로 session객체에 값을 넣고 유지
 
 				HttpSession session = request.getSession();// 세션생성~!
-				session.setAttribute("LoginMember", data);
+				session.setAttribute("loginMember", data);
 				RequestDispatcher rd = request.getRequestDispatcher(view);
 				rd.forward(request, response);
 

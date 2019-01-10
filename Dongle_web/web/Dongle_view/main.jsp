@@ -7,7 +7,7 @@
 <%@ include file="header.jsp"%>
 
 <%	
-	List<Group> list=new GroupService().selectGroup(LoginMember.getMemberId());
+	List<Group> list=new GroupService().selectGroup(loginMember.getMemberId());
 	List<EditPickGroup> editList=new GroupService().selectEditGr();
 %>
 	<link rel="stylesheet"
@@ -38,7 +38,7 @@
                     			<button class="join-btn" type="submit" onclick="document.forms['join'].submit();"> 
                     			<!-- onclick:form태그 사용 구문 -->
                     			<!-- 여기서 그룹 넘버 전송 -->
-                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+                    				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>"/>
                     				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
 				
                     			</button>
@@ -65,7 +65,7 @@
 			<ul>
 				<%for(EditPickGroup epg : editList){ %>
 				<li>
-					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>" name=edit-pick">
+					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>" name="edit-pick">
 						<div class="editor-img-back">
 							<div class="editor-img" onclick="document.forms['edit-pick'].submit();">
 								<button class="join-btn" >
