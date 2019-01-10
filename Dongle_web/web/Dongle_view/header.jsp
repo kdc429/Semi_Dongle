@@ -3,7 +3,7 @@
 <%@ page import="com.dongle.member.model.vo.Member"%>
 
 <%
-    	Member LoginMember = (Member) session.getAttribute("LoginMember");
+    	Member loginMember = (Member) session.getAttribute("loginMember");
     	Cookie[] cookies = request.getCookies();
     	String cookieValue = "";
     	if (cookies != null) {
@@ -20,15 +20,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/Dongle_css/Dongle.css" />
+	href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/Dongle_css/Dongle_Main.css" />
+	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 <link href="https://fonts.googleapis.com/css?family=Bungee"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif:700" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -38,7 +39,7 @@
 <body>
 	<header>
         <div class="headerBack">
-            <div class="bar" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=LoginMember.getMemberId()%>'"/><%=LoginMember.getMemberId()%>님, 환영합니다!</div>
+            <div class="bar" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>'"/><%=loginMember.getMemberId()%>님, 환영합니다!</div>
             <div class="logo">DONGLE
             </div>
             <div class="bar">로고 BAR</div>

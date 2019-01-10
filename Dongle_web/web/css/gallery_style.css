@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+/* albumView - 앨범화면 */
+section#album-container *{ 
+padding: 0px;
+font-family:"a흑진주B";
+}
+section#album-container form#albumFolder> table tr td.albumFolBox{
+	font-family:"a흑진주B";
+	border:1px solid red;
+	display:inline-block;
+	text-align: center;
+	align-items: center;
+	padding:15px;
+}
+section#album-container form#albumFolder> table tr td.albumFolBox .alImg,p{
+	display:block;
+	border: 1px solid orange;
+}
+.alImg{
+	border: 1px solid orange;
+	width:150px; height:150px;
+	border-radius: 2px;
+}
+
+/* galleryView - 갤러리 사진(4x3) */
+section#gallery-container *{ 
+padding: 0px;
+font-family:"a흑진주B";
+}
+section#gallery-container form#galleryList> table tr td.galleryBox{
+	font-family:"a흑진주B";
+	border:1px solid red;
+	display:inline-block;
+	text-align: center;
+	align-items: center;
+	padding:15px;
+}
+section#gallery-container form#galleryList> table tr td.galleryBox .galImg{
+	display:block;
+	border: 1px solid orange;
+}
+.galImg{
+	width:120px; height:120px;
+	border-radius: 3px;
+}
+section#gallery-container form#galleryList> table tr td.galleryBox .galImg:hover{
+	background-color:rgb(200,200,200);
+}
+section#gallery-container table tr td{border:1px solid red;}
+section#gallery-container table tr td ul.pagnation li{text-align:center; color:green;}
+section#gallery-container table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50)}
