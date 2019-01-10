@@ -31,10 +31,11 @@ public class AlbumGetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupNo="1";
+		String groupNo=request.getParameter("groupNo");
 		String memberId=request.getParameter("adminId");
 		System.out.println(memberId); //테스트를 위해 adminId가 박혀있음
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
+		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("memberId", memberId);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/gallery/albumView.jsp").forward(request, response);

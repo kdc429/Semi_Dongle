@@ -46,5 +46,12 @@ public class GalleryService {
 		close(conn);
 		return result;
 	}
-
+	
+	public AlbumCategory checkAlbumName(AlbumCategory ac)
+	{
+		Connection conn = getConnection();
+		AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac);
+		close(conn);
+		return oldAc;
+	}
 }
