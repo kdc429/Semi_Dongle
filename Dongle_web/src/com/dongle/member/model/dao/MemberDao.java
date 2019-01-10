@@ -19,7 +19,7 @@ public class MemberDao {
 		String fileName = MemberDao.class.getResource("./memberquery.properties").getPath();
 
 		try {
-			prop.load(new FileReader(fileName));
+			prop.load(new FileReader(fileName)); //properties 로드
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,18 +37,20 @@ public class MemberDao {
 //			pstmt.setString(2, pw);
 			rs=pstmt.executeQuery();
 			
-			if(rs.next()) {
+			if(rs.next()) {//일단 아이디 패스워드만 받음 추후 수정할 예정
 				data=new Member();
+				data.setMemberNo(rs.getInt("member_no"));
 				data.setMemberId(rs.getString("member_id"));
 				data.setMemberPwd(rs.getString("member_pwd"));
-//				data.setMemberName(rs.getString("username"));
-//				data.setGender(rs.getString("gender"));
-//				data.setAge(rs.getInt("age"));
-//				data.setEmail(rs.getString("email"));
-//				data.setPhone(rs.getString("phone"));
-//				data.setAddress(rs.getString("address"));
-//				data.setHobby(rs.getString("hobby"));
-//				data.setEnrollDate(rs.getDate("enrolldate"));
+				data.setMemberName(rs.getString("member_name"));
+				data.setGender(rs.getString("member_gen"));
+				data.setSsn(rs.getString("member_ssn"));
+				data.setEmail(rs.getString("member_email"));
+				data.setPhone(rs.getString("member_phone"));
+				data.setAddress(rs.getString("member_address"));
+				data.setEnrollDate(rs.getDate("member_enroll_date"));
+				data.setBlackList(rs.getInt("blacklist_yn"));
+				data.setReportCount(rs.getInt("report_member_count"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

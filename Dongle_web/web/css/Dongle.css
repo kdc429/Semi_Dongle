@@ -23,10 +23,12 @@ div {
 .headerBack .logo {
 	font-size: 50px;
 	font-family: 'Bungee', cursive;
+	
 }
 
 .bar {
 	background-color: rgba(130, 238, 41, 0.8);
+	font-family: 'Open Sans', sans-serif;
 }
 
 section>.myDongle {
@@ -36,7 +38,7 @@ section>.myDongle {
 
 section>.editorPick {
 	width: 1024px;
-	height: 300px;
+	height: 420px;
 }
 
 section>.dongleRank {
