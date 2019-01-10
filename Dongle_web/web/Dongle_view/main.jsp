@@ -34,7 +34,7 @@
                     	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>" name="join">
                     	<li class="dongle-icon">
                     		<div class="icon-back">
-                    			<button class="join-btn" type="submit" href="#" onclick="document.forms['join'].submit();"> 
+                    			<button class="join-btn" type="submit" onclick="document.forms['join'].submit();"> 
                     			<!-- onclick:form태그 사용 구문 -->
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>"/>
