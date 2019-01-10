@@ -7,7 +7,7 @@ function loadJQuery() {
 }
 
 var i = 0; 
-var lengthLi = $('.item>li').length; // li 태그 개수 
+var lengthLi = $('.item>form').length; // li 태그 개수 
 var moveWidthR = 0; // 오른쪽 translateX 값
 var moveWidthL = 0; // 왼쪽 translateX 값
 
@@ -45,8 +45,8 @@ $('.right').click(function() {
 	} else {
 		i += 5;
 		// 5의 배수 인덱스를 가진 li의 위치를 moveWidthR에 누적
-		moveWidthR += 102;
-		moveWidth = 102;
+		moveWidthR += 101;
+		moveWidth = 101;
 		
 		// moveWidthR 값을 translateX 속성값에 적용
 		var trans = "translateX(" + -moveWidthR + "%)";
@@ -70,7 +70,7 @@ var caInterval;
 var imgW; // 사진 한장의 너비	
 $(document).ready(function() {
 
-	carouselInit(250, 3000);
+	carouselInit(350, 3000);
 });
 
 $(window).resize(function() {
