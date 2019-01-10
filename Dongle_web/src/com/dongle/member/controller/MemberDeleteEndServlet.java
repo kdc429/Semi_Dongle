@@ -1,7 +1,6 @@
 package com.dongle.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.dongle.member.model.vo.Member;
 import com.dongle.member.service.MemberService;
 
-
-
 /**
- * Servlet implementation class UpdatePasswordEndServelt
+ * Servlet implementation class MemberDeleteEndServlet
  */
-@WebServlet("/updatePasswordEnd")
-/*@WebServlet(name="UpdatePasswordEndServelt",urlPatterns="/updatePasswordEnd")*/
-public class UpdatePasswordEndServelt extends HttpServlet {
+@WebServlet("/memberDeleteEnd")
+public class MemberDeleteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePasswordEndServelt() {
+    public MemberDeleteEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,46 +30,38 @@ public class UpdatePasswordEndServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String cPassword=request.getParameter("password");
-		String nPassword=request.getParameter("password_new");
-		String id=request.getParameter("userId");
-		System.out.println("current : "+cPassword + " new : "+nPassword+" id : "+id);
-		Member m=new Member();
-		m.setMemberId(id);
-		m=new MemberService().selectMember(m);
+		request.setCharacterEncoding("UTF-8");
+		String userid = request.getParameter("userId");
+		
+		Member m = new Member();
+		m.setMemberId(userid);
+		
+		int result =  new MemberService().memberDelete(m);
+		System.out.println(result);
+		
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";
 		
-		if(m.getMemberPwd().equals(cPassword))
+		if(result>0)
 		{
-			Member data=new Member();
-			data.setMemberId(id);
-			data.setMemberPwd(nPassword);
-			int result=new MemberService().updatePassword(data);
-			
-			if(result>0)
-			{
-				msg="비밀번호 변경 성공!";
-				String script="self.close()";
-				request.setAttribute("script", script);
-			}
-			else 
-			{
-				msg="비밀번호 변경에 실패!";
-				loc="/Dongle_view/updatePassword?userId="+id;
-			}
+			msg="회원탈퇴을 완료했습니다.";
+			loc="/Dongle_view/main.jsp";
 		}
-		else
+		else 
 		{
-			msg="현재암호와 일치하지 않습니다!";
-			loc="/Dongle_view/updatePassword?userId="+id;
+			msg="회원탈퇴을 실패하였습니다.";
+			loc="/Dongle_view/memberView.jsp";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher(view).forward(request, response);
+		//페이지 포워딩
+		//경로앞에 /써주면 : 절대경로
+		  //* root컨택스트가 붙임(어플리케이션명)
+		//경로앞에 /안써주면 : 상대경로
+		 //* 받은경로에서부터 시작!
+		request.getRequestDispatcher(view).forward(request, response);	
 		
-				
 	}
 
 	/**

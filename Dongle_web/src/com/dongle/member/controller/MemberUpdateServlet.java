@@ -63,7 +63,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		if(result>0)
 		{
 			msg="회원정보수정을 완료했습니다.";
-			loc="/";
+			loc="/Dongle_view/main.jsp";
 		}
 		else 
 		{

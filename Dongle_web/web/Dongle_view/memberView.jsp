@@ -133,7 +133,7 @@
 			var popUp=open(url,title,status);
 		}
 		
-	
+	n 
 		function fn_update_validate(){
 			
 			return true;
@@ -149,6 +149,17 @@
 			frm.submit();
 		}
 	
+		//회원 탈퇴
+		
+		function confirmDelete(){
+			
+			var dele=$('#memberFrm');
+			
+			var url="<%=request.getContextPath()%>/memberDeleteEnd";
+			dele.attr('action',url);
+			
+			dele.submit();
+		}
 	
 	</script>
 

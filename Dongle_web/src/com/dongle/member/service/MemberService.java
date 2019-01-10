@@ -46,6 +46,7 @@ public class MemberService {
 	{
 		Connection conn=getConnection();
 		int result=new MemberDao().insertMember(conn, m);
+		
 		if(result>0)//입력성공
 		{
 			commit(conn);
@@ -76,4 +77,24 @@ public class MemberService {
 		
 		return result;		
 	}
+	
+	public int memberDelete(Member m)
+	{
+		Connection conn=getConnection();
+		int result=new MemberDao().memberDelete(conn,m);
+		System.out.println(result);
+		if(result>0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;		
+	}
+	
+	
 }

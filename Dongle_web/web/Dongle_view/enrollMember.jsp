@@ -116,7 +116,7 @@
 						id="gender0" name="gender" value='M' >
 						<label for="gender0">남</label>
 						<input type="radio"  
-						id="gender1" name="gender" value='F' >
+						id="gender1" name="gender" value='W' >
 						<label for="gender1">여</label>
 					</td>
 				</tr>			

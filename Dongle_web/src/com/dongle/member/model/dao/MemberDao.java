@@ -139,4 +139,25 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	public int memberDelete(Connection conn, Member m)
+	{
+		PreparedStatement pstmt = null;
+		int result =0;
+		String sql = prop.getProperty("memberDelete");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,m.getMemberId());
+			
+			result=pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
