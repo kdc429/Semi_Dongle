@@ -27,12 +27,12 @@ public class AlbumPlusServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId=request.getParameter("memberId");
-		String groupNo=request.getParameter("groupNo");
-		System.out.println(groupNo);
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		System.out.println("여기 albumPlus서블릿: "+groupNo+" : "+memberId);
 		if(memberId==null||!memberId.equals("admin"))
 		{
 			request.setAttribute("msg", "잘못된 경로로 접근하였습니다.");
-			request.setAttribute("loc", "/albumGet?no="+groupNo);
+			request.setAttribute("loc", "/albumGet?groupNo="+groupNo+"&memberId="+memberId);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}

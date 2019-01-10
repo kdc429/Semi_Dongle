@@ -1,23 +1,6 @@
-<%@page import="com.dongle.member.controller.LoginMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"import="com.dongle.group.model.vo.Group,com.dongle.member.model.vo.Member"%>
-	<%
-		Group gg = (Group)request.getAttribute("group");
-		Member loginMember2=(Member) request.getAttribute("loginMember");
-	%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>asideRight</title>
-</head>
-<script>
-function galleryTag(){
-	location.href="<%=request.getContextPath()%>/albumGet?<%=gg.getGroupNo()%>=&adminId=<%=loginMember2.getMemberId()%>";
-}
-</script>
-<body>
-	<nav>
+	pageEncoding="UTF-8"%>
+<nav>
 		<div class="sideback center">
 
 			<div class="sider"
@@ -36,8 +19,8 @@ function galleryTag(){
 			</div>
 		</div>
 	</nav>
-	
-	
-
-</body>
-</html>
+	<script>
+function galleryTag(){
+	location.href="<%=request.getContextPath()%>/albumGet?groupNo=<%=g.getGroupNo()%>&memberId=<%=loginMember.getMemberId()%>";
+}
+</script>

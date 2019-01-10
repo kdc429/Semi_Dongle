@@ -32,9 +32,7 @@ public class CommunityJoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println(loginMember.getMemberNo());
 		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
-		System.out.println(gNo);
 		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
@@ -45,7 +43,8 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 			request.setAttribute("loc",loc);
 		}else {
-			loc="/Dongle_Community_view/Community_main.jsp";
+			/*loc="/Dongle_Community_view/Community_main.jsp";*/
+			loc="/Dongle_Community_view/test_community_main.jsp";
 			request.setAttribute("group", g);
 			request.getRequestDispatcher(loc).forward(request, response);
 			request.setAttribute("loc",loc);

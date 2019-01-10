@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
  <%
  	List<AlbumCategory> list = (List)request.getAttribute("list");
- 	String groupNo=(String)request.getAttribute("groupNo");
+ 	int groupNo=(int)request.getAttribute("groupNo");
  	String memberId=(String)request.getAttribute("memberId");
  	int count=1;
  %>
@@ -31,7 +31,7 @@ function fn_validateFrm(){
 function albumPlusClick(){
 	//팝업창에 대한 설정해주기@ : window.open(url,title,shape)로 열 수 있음
 	// 서블릿으로 넘겨줄 매핑주소
-	var url="<%=request.getContextPath()%>/albumPlus?groupNo="+<%=groupNo%>; 
+	var url="<%=request.getContextPath()%>/albumPlus?groupNo=<%=groupNo%>&memberId<%=memberId%>"; 
 	/* 내부에서 체크함 */
 	var title="albumPlus";
 	var shape="left=500px, top=300px, width=500px, height=200px";
@@ -84,7 +84,7 @@ function albumPlusClick(){
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>
 							<input type="hidden" name="memberId" id="memberId" value="<%=memberId%>"/>
 						</td>
-						<%count++;%>
+						<%count++;%> 
 					<%} %>
 				<%} %>
 			<%}

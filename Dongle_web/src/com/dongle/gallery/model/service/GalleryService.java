@@ -16,7 +16,7 @@ public class GalleryService {
 	
 	public GalleryService() {}
 	
-	public List<AlbumCategory> albumGet(String groupNo){
+	public List<AlbumCategory> albumGet(int groupNo){
 		Connection conn = getConnection();
 		List<AlbumCategory> list=new GalleryDao().albumGet(conn,groupNo);
 		if(list.size()!=0)
@@ -47,11 +47,22 @@ public class GalleryService {
 		return result;
 	}
 	
-	public AlbumCategory checkAlbumName(AlbumCategory ac)
+	public AlbumCategory checkAlbumName(AlbumCategory ac, int groupNo)
 	{
 		Connection conn = getConnection();
-		AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac);
+		AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac,groupNo);
 		close(conn);
 		return oldAc;
+	}
+	public int insertAlbum(String albumNameP,int groupNo)
+	{
+		Connection conn = getConnection();
+		int rs= new GalleryDao().inserAlbum(conn,albumNameP,groupNo);
+		if(rs!=0)
+		{
+			commit(conn);
+		}
+		else {rollback(conn);}
+		return rs;
 	}
 }

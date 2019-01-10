@@ -27,7 +27,7 @@ public class GalleryDao {
 		}
 	}
 	
-	public List<AlbumCategory> albumGet(Connection conn,String groupNo)
+	public List<AlbumCategory> albumGet(Connection conn,int groupNo)
 	{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -36,7 +36,7 @@ public class GalleryDao {
 		AlbumCategory ac=null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, groupNo);
+			pstmt.setInt(1, groupNo);
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -127,7 +127,7 @@ public class GalleryDao {
 		return result;
 	}
 	
-	public AlbumCategory checkAlbumName(Connection conn, AlbumCategory ac)
+	public AlbumCategory checkAlbumName(Connection conn, AlbumCategory ac,int groupNo)
 	{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -136,7 +136,7 @@ public class GalleryDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, ac.getAlbumName());
-			/*pstmt.setInt(2, ac.getGroupNo());*/
+			pstmt.setInt(2, groupNo);
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -157,5 +157,27 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		return checkAc;
+	}
+	
+	public int inserAlbum(Connection conn,String albumNameP,int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		int rs=0;
+		String sql=prop.getProperty("insertAlbum");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setString(2, albumNameP);
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return rs;
 	}
 }

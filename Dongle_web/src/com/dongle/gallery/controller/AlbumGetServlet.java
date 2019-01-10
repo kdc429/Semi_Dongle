@@ -31,9 +31,9 @@ public class AlbumGetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupNo=request.getParameter("groupNo");
-		String memberId=request.getParameter("adminId");
-		System.out.println(memberId); //테스트를 위해 adminId가 박혀있음
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		String memberId=request.getParameter("memberId");
+		System.out.println("여기 albumget서블릿: "+groupNo+":"+memberId); //테스트를 위해 adminId가 박혀있음
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("memberId", memberId);
