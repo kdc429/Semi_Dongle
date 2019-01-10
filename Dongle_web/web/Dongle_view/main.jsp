@@ -37,7 +37,7 @@
                     			<button class="join-btn" type="submit" href="#" onclick="document.forms['join'].submit();"> 
                     			<!-- onclick:form태그 사용 구문 -->
                     			<!-- 여기서 그룹 넘버 전송 -->
-                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+                    				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>"/>
                     				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="mNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
@@ -65,6 +65,7 @@
 				<%for(EditPickGroup epg : editList){ %>
 				<li>
 					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" name=edit-pick">
+
 						<div class="editor-img-back">
 							<div class="editor-img" onclick="document.forms['edit-pick'].submit();">
 								<button class="join-btn" >

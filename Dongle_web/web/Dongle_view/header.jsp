@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.member.model.vo.Member"%>
 <%
-    	Member loginMember = (Member) session.getAttribute("LoginMember");
+
+    	Member loginMember = (Member) session.getAttribute("loginMember");
     	Cookie[] cookies = request.getCookies();
     	String cookieValue = "";
     	if (cookies != null) {
