@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ page import="com.dongle.member.model.vo.Member,com.dongle.group.model.vo.Group"%>
+<%
+    	Member loginMember = (Member) session.getAttribute("LoginMember");
+    	Group group=(Group)request.getAttribute("group");
+%>
 <!DOCTYPE html>
 <html lang="en">
 

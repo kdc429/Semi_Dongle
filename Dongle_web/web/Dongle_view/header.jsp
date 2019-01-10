@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.member.model.vo.Member"%>
 <%
-    	Member LoginMember = (Member) session.getAttribute("LoginMember");
+    	Member loginMember = (Member) session.getAttribute("LoginMember");
     	Cookie[] cookies = request.getCookies();
     	String cookieValue = "";
     	if (cookies != null) {
@@ -39,7 +39,7 @@
 <body>
 	<header>
         <div class="headerBack">
-            <div class="bar"><%=LoginMember.getMemberId()%>님, 환영합니다!</div>
+            <div class="bar"><%=loginMember.getMemberId()%>님, 환영합니다!</div>
             <div class="logo">DONGLE
             </div>
             <div class="bar">로고 BAR</div>
