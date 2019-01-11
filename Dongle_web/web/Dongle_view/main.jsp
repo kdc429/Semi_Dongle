@@ -59,6 +59,7 @@
 	<hr>
 	<!-- 에디터 픽 캐러셀 -->
 	<div class="editorPick">
+	<div class="bar">BAR</div>
 		<h2 class="item-logo">Editor Pick's</h2>
 		<div id="carousel_section">
 			<ul>
@@ -83,10 +84,11 @@
 				<%} %>
 			</ul>
 		</div>
-		<div class="bar">BAR</div>
+		
 	</div>
 	<hr>
 	<!-- 분야별 랭킹 컨텐츠 -->
+	<div class="bar">BAR</div>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
 	<div class="dongle-rank">
 	
