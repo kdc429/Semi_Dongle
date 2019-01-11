@@ -37,7 +37,7 @@
                     			<button class="join-btn" type="submit" onclick="document.forms['join'].submit();"> 
                     			<!-- onclick:form태그 사용 구문 -->
                     			<!-- 여기서 그룹 넘버 전송 -->
-                    				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>"/>
+                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
                     				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="mNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
@@ -64,7 +64,7 @@
 			<ul>
 				<%for(EditPickGroup epg : editList){ %>
 				<li>
-					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" name=edit-pick">
+					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" method="get" name=edit-pick">
 
 						<div class="editor-img-back">
 							<div class="editor-img" onclick="document.forms['edit-pick'].submit();">
@@ -88,7 +88,7 @@
 	<hr>
 	<!-- 분야별 랭킹 컨텐츠 -->
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
-	<div class="dongle-ranking">
+	<div class="dongle-rank">
 	
 		<div class="dongle-ranker">
 			
