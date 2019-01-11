@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="com.dongle.group.model.vo.Group" %>
+
+<%@ page import="com.dongle.group.model.vo.Group" %>
 <!DOCTYPE html>
 <%
 	Group g = (Group)request.getAttribute("group");
@@ -19,12 +20,12 @@
 				style='height: 100vh; background-color: rgba(130, 238, 41, 0.8)'>
 				<div class="sideitem"
 					style="border: 1px solid red; left: 10%; right: 10%; height: 250px;">
-					<img src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>" width="100px" height="100px">
+					<img src="<%=request.getContextPath()%><%=g.getImgPath()%>" width="100px" height="100px">
 					프로필
 					</div>
 					
 				<div class="sideitem"
-					style='border: 1px solid red; left: 10%; right: 10%; height: 150px'>소개글</div>
+					style='border: 1px solid red; left: 10%; right: 10%; height: 150px'><%=g.getGroupName() %></div>
 			</div>
 		</div>
 

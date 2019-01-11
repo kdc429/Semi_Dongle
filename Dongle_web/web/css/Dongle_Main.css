@@ -2,16 +2,13 @@
 	text-align: right;
 	box-shadow: 4px 4px rgba(112, 110, 110, 0.3);
 }
-
+/* 가입한 동글 스타일 */
 .carousel-back {
 	display: flex;
 	justify-content: space-between;
 	background-color: rgba(195, 195, 195, 0.5);
 }
-.editorPick{
-	width: 1024px;
-	height: 400px;
-}
+
 .carousel-box {
 	
 	white-space: nowrap;
@@ -113,7 +110,11 @@
 	border-radius: 10px 10px 10px 10px;
 	font-size: 50px;
 }
-
+/* 에디터픽 스타일 */
+.editorPick{
+	width: 1024px;
+	height: 400px;
+}
 #carousel_section {
 	width: 1024px;
 	height: 350px;
@@ -181,4 +182,8 @@
 	width:auto;
 	height:auto;
 	border-radius:10px 10px;
+}
+.content{
+	
+	font-size:20px;
 }
