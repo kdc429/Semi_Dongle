@@ -34,7 +34,7 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemberId());
-//			pstmt.setString(2, pw);
+//			pstmt.setString(2, pw));
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {//일단 아이디 패스워드만 받음 추후 수정할 예정
