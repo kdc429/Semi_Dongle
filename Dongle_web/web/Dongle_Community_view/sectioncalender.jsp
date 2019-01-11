@@ -119,12 +119,16 @@ i[class^=icon-chevron]{
 			
 		             <div id="calendar">
                     <div id="calendar_header"><i class="icon-chevron-left"></i>
-                        <h1></h1><i class="icon-chevron-right"></i>
+                        <h1 id="yearmonths"></h1><i class="icon-chevron-right"></i>
                     </div>
                     <div id="calendar_weekdays"></div>
+                 
+                 <form action="" id="calenderfrm" method="get">   
                     <div id="calendar_content" type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal"></div>
                     <br><br><br><br><br><br>
-                                          <!-- Modal -->
+                  </form>                    
+                  
+                   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -176,9 +180,40 @@ i[class^=icon-chevron]{
 
 		</div>
 
+<style>
+	#receipt{
+		display: none;
+	}
+</style>
+
 	</section>
 	
-
+        <script>
+            var betal = 1000;
+            $('#before_total').html('남은 회비(전) :' +betal);
+        
+        
+            function input3()
+            {
+              var text1 = document.getElementById('text1').value;
+              $('#cast1').html(parseInt(text1) + betal);
+        
+              var text2 = document.getElementById('text2').value;
+              $('#cast2').html(parseInt(text2) );
+        
+              var cast1 = document.getElementById('cast1').innerHTML;
+              var cast2 = document.getElementById('cast2').innerHTML;
+                $('#cast3').html(cast1-cast2);
+            }
+            
+            function rec()
+            {
+              $('#receipt').slideToggle();
+            }
+        
+        </script>
+        
+        
 
 
 
@@ -214,9 +249,43 @@ $(function(){
     //------------------------------------------- 
     $('#calendar_content #tt').click(function(){
         var day_text=$(this)[0].innerHTML;
-        console.log(day_text);
+        var frm = $('#calenderfrm');
+        var url = "";
+        var yearmonths = $("#yearmonths").text();
+        var ymArr =yearmonths.split(" ");
+        var months ="";
+      
+        if(ymArr[0]==('JANUARY')){
+        	months =1;
+        }else if(ymArr[0]==('FEBRUARY')){
+        	months =2;
+    	}else if(ymArr[0]==('MARCH')){
+    		months =3;
+     	}else if(ymArr[0]==('APRIL')){
+    		months =4;
+    	}else if(ymArr[0]==('MAY')){
+    		months =5;
+    	}else if(ymArr[0]==('JUNE')){
+    		months =6;
+    	}else if(ymArr[0]==('JULY')){
+    		months =7;
+    	}else if(ymArr[0]==('AUGUST')){
+    		months =8;
+    	}else if(ymArr[0]==('SEPTEMBER')){
+    		months =9;
+    	}else if(ymArr[0]==('OCTOBER')){
+    		months =10;
+    	}else if(ymArr[0]==('NOVEMBER')){
+    		months =11;
+    	}else if(ymArr[0]==('DECEMBER')){
+    		months =12;
+    	}; 
+    	
+        console.log(ymArr[1]+"년  "+months+"월  "+day_text);
+        
         if(!$('.blank'))
         {
+        	url="<%=request.getContextPath()%>/calender/loadcontent?date=";
             return day_text;
         }
     });
