@@ -3,17 +3,17 @@ package com.dongle.member.model.vo;
 import java.sql.Date;
 
 public class Member {
-	private String memberNo;
-	private String memberId;
-	private String memberPwd;
-	private String memberName;
-	private String gender;
-	private String ssn;
-	private String phone;
-	private String address;
-	private String email;
-	private Date enrollDate;
-	private int blackList;
+	private int memberNo; //MEMBER_NO
+	private String memberId; //MEMBER_ID
+	private String memberPwd; //MEMBER_PWD
+	private String memberName; //MEMBER_NAME
+	private String gender; //MEMBER_GEN
+	private String ssn; //MEMBER_SSN
+	private String phone; //MEMBER_PHONE
+	private String address; //MEMBER_ADDRESS
+	private String email; //MEMBER_EMAIL
+	private Date enrollDate; //MEMBER_ENROLL_DATE
+	private int blackList; //BLACKLIST_YN
 	private int reportCount;
 	
 	public Member() {
@@ -21,7 +21,7 @@ public class Member {
 	}
 	
 
-	public Member(String memberNo, String memberId, String memberPwd, String gender, String ssn, String phone,
+	public Member(int memberNo, String memberId, String memberPwd, String gender, String ssn, String phone,
 			String address, String email, Date enrollDate, int blackList, int reportCount) {
 		super();
 		this.memberNo = memberNo;
@@ -38,11 +38,11 @@ public class Member {
 	}
 
 
-	public String getMemberNo() {
+	public int getMemberNo() {
 		return memberNo;
 	}
 
-	public void setMemberNo(String memberNo) {
+	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
 

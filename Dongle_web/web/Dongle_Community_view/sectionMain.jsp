@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>sectionMain</title>
-<link rel="stylesheet" href="Dongle_Community_css/Dongle_Community.css" />
+
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/Dongle_Community.css" />
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -23,7 +25,7 @@
 			style='width: 684px; height: 1000px; background-color: rgb(255, 255, 255); border: 1px solid black;'>
 			<br>
 			<br>1234565
-
+			
 		</div>
 
 	</section>

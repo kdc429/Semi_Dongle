@@ -1,0 +1,51 @@
+body {
+	/* position: absolute; */
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center;
+	justify-content: center;
+}
+
+div {
+	/* border: 1px solid black; */
+	
+}
+
+.headerBack {
+	width: 1024px;
+	height: auto;
+}
+
+.headerBack .logo {
+	font-size: 50px;
+	font-family: 'Bungee', cursive;
+	
+}
+
+.bar {
+	background-color: rgba(130, 238, 41, 0.8);
+	font-family: 'Open Sans', sans-serif;
+}
+
+section>.myDongle {
+	width: 1024px;
+	height: 300px;
+}
+
+section>.editorPick {
+	width: 1024px;
+	height: 420px;
+}
+
+section>.dongle-rank {
+	width: 1024px;
+	height: 300px;
+}
+
+.loginMember {
+	float: right;
+}

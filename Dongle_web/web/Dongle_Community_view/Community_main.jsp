@@ -6,7 +6,10 @@
 	<%@ include file="header.jsp" %>
 	<%@ include file="asideLeft.jsp" %>
 	<%@ include file="sectionMain.jsp" %>
+	
 	<%@ include file="nav.jsp" %>
+	
+	
 
 </div>
 
