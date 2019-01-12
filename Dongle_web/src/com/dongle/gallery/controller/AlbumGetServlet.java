@@ -35,7 +35,7 @@ public class AlbumGetServlet extends HttpServlet {
 		//동글그룹번호와 들어온 멤버번호 받기
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		
+		System.out.println("album서블릿: "+groupNo+ " 와 "+memberNo);
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,memberNo);
 		

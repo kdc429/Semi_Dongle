@@ -79,7 +79,7 @@
 <script>
 /* 갤러리 클릭시 매핑함수 */
 function galleryTag(){
-	location.href="<%=request.getContextPath()%>/gallery/albumGet?<%=g.getGroupNo()%>=&memberNo=<%=loginMember.getMemberNo()%>";
+	location.href="<%=request.getContextPath()%>/gallery/albumGet?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>";
 }
 </script>
 </body>

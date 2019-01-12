@@ -1,9 +1,10 @@
-<%@page import="com.dongle.gallery.model.vo.AlbumCategory,java.util.*"%>
+<%@page import="com.dongle.gallery.model.vo.AlbumCategory,java.util.*,com.dongle.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
  	List<AlbumCategory> list = (List)request.getAttribute("list");
  	int groupNo=(int)request.getAttribute("groupNo");
+ 	Member loginMember = (Member)session.getAttribute("loginMember");
  	String memberId=(String)request.getAttribute("memberId");
  	int count=1;
  %>
@@ -51,7 +52,7 @@ function albumPlusClick(){
 	<table border="1" width="370px" id="albumPlus-tbl">
 		<tr>
 			<td>
-				<%if(memberId!=null&&memberId.equals("admin")){ %>
+				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>
 					<form action="" method="post" name="albumPlus" id="albumPlus" onsubmit="return fn_validateFrm()">
 						<input style="float:right;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가하기" onclick="albumPlusClick()"/>
 						<input type="hidden" name="memberId" id="memberId" value="<%=memberId%>"/>
@@ -68,7 +69,7 @@ function albumPlusClick(){
 						<tr>
 						</tr>
 						<td class="albumFolBox">
-							<img class="alImg" src="images/gallery/defaultimg.png" onclick="galClick(this);">
+							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png" onclick="galClick(this);">
 							<p>[&nbsp;<%=t.getAlbumName()%>&nbsp;]</p>
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=t.getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>
@@ -78,7 +79,7 @@ function albumPlusClick(){
 					<%} 
 					else{%>
 						<td class="albumFolBox">
-							<img class="alImg" src="images/gallery/defaultimg.png" onclick="galClick(this);">
+							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png" onclick="galClick(this);">
 							<p>[&nbsp;<%=t.getAlbumName()%>&nbsp;]</p>
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=t.getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>

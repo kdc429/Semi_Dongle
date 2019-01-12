@@ -39,11 +39,6 @@
 		console.log("<%=request.getContextPath()%>/albumGet?groupNo="+gNo+"&adminId="+mNo);
 		return gNo,mNo;
 		
-	function galleryTag(){
-		location.href="<%=request.getContextPath()%>/albumGet?groupNo="+gNo+"&adminId="+mNo;
-		console.log("<%=request.getContextPath()%>/albumGet?groupNo="+gNo+"&adminId="+mNo);
-	}
-	};
 
 
 </script>
@@ -60,7 +55,7 @@
 				<br>
 				<button class='btn btn-primary' value='3'>피드</button>
 				<br>
-				<button class='btn btn-primary' onclick="galleryTag();" >갤러리</button>
+				<button class='btn btn-primary' >갤러리</button>
 				<br>
 				<button class='btn btn-primary' value='5'>일정</button>
 				<br>

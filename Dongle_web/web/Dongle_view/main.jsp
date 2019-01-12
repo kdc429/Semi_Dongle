@@ -31,19 +31,18 @@
                     <%}else{ 
                     	for(Group g:list){
                     %>
-                    	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>" name="join">
-                    	<li class="dongle-icon">
-                    		<div class="icon-back">
-                    			<button class="join-btn" type="submit" onclick="document.forms['join'].submit();"> 
-                    			<!-- onclick:form태그 사용 구문 -->
-                    			<!-- 여기서 그룹 넘버 전송 -->
-                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
-                    				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
-									<input type="hidden" name="mNo" value="<%=loginMember.getMemberNo() %>"/>
-                    			</button>
-                    		
-                    		</div>
-                    	</li>
+                    	<form action="<%=request.getContextPath()%>/communityJoin" name="join" method="post">
+	                    	<li class="dongle-icon">
+	                    		<div class="icon-back">
+	                    			<button class="join-btn" type="submit" onclick="document.forms['join'].submit();"> 
+	                    			<!-- onclick:form태그 사용 구문 -->
+	                    			<!-- 여기서 그룹 넘버 전송 -->
+	                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+	                    				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
+										<input type="hidden" name="mNo" value="<%=loginMember.getMemberNo() %>"/>
+	                    			</button>
+	                    		</div>
+	                    	</li>
                     	</form>
                     	
                     <%} 
@@ -64,7 +63,7 @@
 			<ul>
 				<%for(EditPickGroup epg : editList){ %>
 				<li>
-					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" method="get" name=edit-pick">
+					<form action="<%=request.getContextPath()%>/communityJoin" method="get" name=edit-pick">
 
 						<div class="editor-img-back">
 							<div class="editor-img" onclick="document.forms['edit-pick'].submit();">
@@ -106,8 +105,7 @@
 	</div>
 	
 </section>
-<script
-	src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
+<script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
 
 </body>

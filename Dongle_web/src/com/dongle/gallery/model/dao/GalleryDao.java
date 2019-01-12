@@ -199,7 +199,7 @@ public class GalleryDao {
 						rs.getInt("group_no"),
 						rs.getInt("member_no"),
 						rs.getString("group_member_nickname"),
-						rs.getString("group_member_iamge_path"),
+						rs.getString("group_member_image_path"),
 						rs.getDate("group_member_enroll_date"),
 						rs.getString("blacklist_yn"),
 						rs.getInt("report_dongle_count")
