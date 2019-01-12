@@ -46,9 +46,6 @@
 	};
 
 
-
-
->>>>>>> refs/remotes/origin/workTest
 </script>
 <body>
 	<nav>

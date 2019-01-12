@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.dongle.group.model.vo.Group,com.dongle.member.model.vo.Member"%>
+	<%
+		Group g = (Group)request.getAttribute("group");
+		Member loginMember = (Member)session.getAttribute("loginMember");
+	%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,18 +69,19 @@
                     <button class='btn btn-primary'>HOME</button><br>
                     <button class='btn btn-primary'>공지사항</button><br>
                     <button class='btn btn-primary'>피드</button><br>
-                    <button class='btn btn-primary'>갤러리</button><br>
+                    <button class='btn btn-primary' onclick="galleryTag();">갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
                 </div>
             </div>
         </aside>
-
-
-
     </div>
 
-
-
+<script>
+/* 갤러리 클릭시 매핑함수 */
+function galleryTag(){
+	location.href="<%=request.getContextPath()%>/gallery/albumGet?<%=g.getGroupNo()%>=&memberNo=<%=loginMember.getMemberNo()%>";
+}
+</script>
 </body>
 
 </html>

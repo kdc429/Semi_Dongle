@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.dongle.gallery.model.vo.AlbumCategory;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GalleryDao {
 	
@@ -179,5 +180,40 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		return rs;
+	}
+	
+	public GroupMember groupMemberCheck(Connection conn, int groupNo, int memberNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql = prop.getProperty("groupMemberCheck");
+		GroupMember gm = null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, memberNo);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				gm= new GroupMember(
+						rs.getInt("group_no"),
+						rs.getInt("member_no"),
+						rs.getString("group_member_nickname"),
+						rs.getString("group_member_iamge_path"),
+						rs.getDate("group_member_enroll_date"),
+						rs.getString("blacklist_yn"),
+						rs.getInt("report_dongle_count")
+						);
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return gm;
 	}
 }

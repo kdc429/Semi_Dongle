@@ -40,13 +40,15 @@ public class CommunityJoinServlet extends HttpServlet {
 		String loc="";
 		
 		if(g==null) { //데이터 없을시 에러페이지 이동으로 변경예정
-			msg="접속실패!";
+			msg="접속실패! 다시 시도해주세요.";
 			loc="/login";
 			request.getRequestDispatcher(view).forward(request, response);
 			request.setAttribute("loc",loc);
+			request.setAttribute("msg", msg);
 		}else {
 			loc="/Dongle_Community_view/Community_main.jsp";
 			request.setAttribute("group", g);
+			request.setAttribute("loginMember", loginMember);
 			request.getRequestDispatcher(loc).forward(request, response);
 		}
 		

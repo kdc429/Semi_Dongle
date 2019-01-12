@@ -11,6 +11,7 @@ import java.util.List;
 import com.dongle.gallery.model.dao.GalleryDao;
 import com.dongle.gallery.model.vo.AlbumCategory;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GalleryService {
 	
@@ -64,5 +65,14 @@ public class GalleryService {
 		}
 		else {rollback(conn);}
 		return rs;
+	}
+	
+	public GroupMember groupMemberCheck(int groupNo,int memberNo)
+	{
+		Connection conn=getConnection();
+		GroupMember gm= new GalleryDao().groupMemberCheck(conn,groupNo,memberNo);
+		close(conn);
+		return gm;
+		
 	}
 }
