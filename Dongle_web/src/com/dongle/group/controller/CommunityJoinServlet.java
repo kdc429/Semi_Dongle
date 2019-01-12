@@ -34,7 +34,7 @@ public class CommunityJoinServlet extends HttpServlet {
 
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
-		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
+		int gNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
 		System.out.println(gNo);
 		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
 		String view="/Dongle_view/msg.jsp";

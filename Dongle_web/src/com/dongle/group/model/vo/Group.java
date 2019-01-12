@@ -3,6 +3,8 @@ package com.dongle.group.model.vo;
 import java.sql.Date;
 
 public class Group {
+	
+	//(주소 카테고리 제외, 추가예정)
 	private int memberNo; //MEMBER_NO
 	private int groupNo; //GROUP_NO
 	private String groupName; //GROUP_NAME

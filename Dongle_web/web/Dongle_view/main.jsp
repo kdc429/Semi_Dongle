@@ -7,8 +7,9 @@
 <%@ include file="header.jsp"%>
 
 <%	
-	List<Group> list=new GroupService().selectGroup(loginMember.getMemberId());
-	List<EditPickGroup> editList=new GroupService().selectEditGr();
+	List<Group> list=(List)request.getAttribute("list");
+	List<EditPickGroup> editList=(List)request.getAttribute("editList");
+	List<Group> rankList=(List)request.getAttribute("rankList");
 %>
 	<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
@@ -18,8 +19,6 @@
 	<h2 class="item-logo">MY DONGLE</h2>
 	<!-- 가입한 동글 캐러셀 -->
 	<div class="carousel-back">
-		
-
 		<!-- 이전 버튼 -->
         <button class="left"><</button>
         <!--캐러셀 아이템   -->
@@ -31,15 +30,16 @@
                     <%}else{ 
                     	for(Group g:list){
                     %>
+                    	<!-- 가입한 동글 리스트 -->
                     	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>" name="join">
                     	<li class="dongle-icon">
                     		<div class="icon-back">
-                    			<button class="join-btn" type="submit" onclick="document.forms['join'].submit();"> 
-                    			<!-- onclick:form태그 사용 구문 -->
+                    			<button class="join-btn" type="submit"> 
+                    			
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
-                    				<input type="hidden" name="gNo" value="<%=g.getGroupNo()%>"/>
-									<input type="hidden" name="mNo" value="<%=loginMember.getMemberNo() %>"/>
+                    				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
+									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
                     		
                     		</div>
@@ -63,25 +63,30 @@
 		<h2 class="item-logo">Editor Pick's</h2>
 		<div id="carousel_section">
 			<ul>
-				<%for(EditPickGroup epg : editList){ %>
+				<%if(editList!=null){
+					for(EditPickGroup epg : editList){ %>
 				<li>
-					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" method="get" name=edit-pick">
-
+					<!-- 에디터 픽 선정 동글 리스트 -->
+					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" method="post" name="edit-pick">
+						<!-- 여기서 그룹 넘버 전송 -->
 						<div class="editor-img-back">
-							<div class="editor-img" onclick="document.forms['edit-pick'].submit();">
+							<div class="editor-img">
 								<button class="join-btn" >
 								<img class="eImg" src="<%=request.getContextPath() %><%=epg.getEditFilePath()%>">
-								<input type="hidden" name="gNo" value="<%=epg.getGroupNo()%>"/>
-								<input type="hidden" name="mNo" value="<%=loginMember.getMemberNo() %>"/>
+								<input type="hidden" name="groupNo" value="<%=epg.getGroupNo()%>"/>
+								<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
 								</button>
 							</div>
 						</div>
 					</form>
+					
 					<div class="editor-content">
-						<p class="content"><%=epg.getEditContent()%></p>
+					<!-- 에디터픽 소개 글 컨텐트 -->
+						<p class="eContent"><%=epg.getEditContent()%></p>
 					</div>
 				</li>
-				<%} %>
+				<%	} 
+				}%>
 			</ul>
 		</div>
 		
@@ -91,19 +96,34 @@
 	<div class="bar">BAR</div>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
 	<div class="dongle-rank">
-	
+		
+		<% if(rankList!=null) {
+			for(Group g :rankList){%>
 		<div class="dongle-ranker">
 			
 			<div class="ranker-img-back">
-				<div class="ranker-img">
-					<button class="join-btn">
-					<img class="rImg" src=""/>
-					
-					</button>
-				</div>
+				<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>">
+				<!-- 여기서 그룹 넘버 전송 -->
+					<div class="ranker-img"> 
+						<!-- 순위권 동글 리스트 -->
+						<button class="join-btn" type="submit">
+						<img class="rImg" src="<%=request.getContextPath()%>/images/group_images/back1.jpg"/>
+						<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
+						<input type="hidden" name="groupNo" value="<%=loginMember.getMemberNo()%>"/>
+						</button>
+					</div>
+				</form>
 			</div>
-			<div class="ranker-intro"></div>
+			<div class="ranker-intro">
+					<!-- 동글 소개 컨텐트 -->			
+					<p class="intro-content">
+						<%=g.getGroupName() %><br>
+						동글 소개:<%=g.getGroupIntro() %><br>
+					</p>
+			</div>
 		</div>
+		<%	}
+		}%>
 		
 	</div>
 	
