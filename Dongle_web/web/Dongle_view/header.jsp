@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>당신을 위한 맞춤형 동호회</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet"
@@ -30,20 +30,43 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif:700" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/css/icon.css" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+
+
+
 <body>
 	<header>
         <div class="headerBack">
-            <div class="bar"><%=loginMember.getMemberId()%>님, 환영합니다!</div>
-            <div class="logo">DONGLE
+            <div class="bar">
+            	<!-- 정보수정 및 로그 아웃 버튼! -->
+            	<div class="user-back">
+            		<button class="img-icon">
+            			<span><%=loginMember.getMemberName()%>님, 환영합니다!</span>&nbsp;&nbsp;
+            			<img class="user-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
+            		</button>
+            	</div>&nbsp;&nbsp;&nbsp;&nbsp;
+            	<div class="user-back">
+            		<button class="img-icon">
+            			<span>로그아웃</span>&nbsp;&nbsp;
+            			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
+            		</button>
+            	</div>
             </div>
-            <div class="bar">로고 BAR</div>
+            <div class="logo-back">
+            	<div style="font-family:'SunFlower'";><h4>당신을 위한 맞춤형 동호회</h4></div>
+            	<div class="logo">DONGLE</div>
+            	<div class="dongle-guide">
+            		<button style="width:190px; background-color: rgba(0,0,0,0);">동글 가이드</button>
+            	</div>
+            </div>
         </div>
     </header>
 </body>

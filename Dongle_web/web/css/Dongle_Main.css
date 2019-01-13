@@ -1,3 +1,8 @@
+@font-face { 
+	font-family: 'S-CoreDream-3Light'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); 
+	font-weight: normal; font-style: normal; 
+}
 .bar {
 	text-align: right;
 	box-shadow: 4px 4px rgba(112, 110, 110, 0.3);
@@ -51,11 +56,20 @@
 	
 }
 
-.dongle-icon>a {
+.join-btn{
+	background-color: rgb(255,255,255,0);
+	border:0;
+	outline:0;
+	position:relative;
+}
+.group-name{
+	opacity:0;
+	position:absolute;
+	text-align: center;
+	width:130px;
+	transform:translateY(50%);
+	font-family: 'S-CoreDream-3Light';
 	
-	width: 130px;
-	height: 130px;
-	text-decoration: none;
 }
 
 .icon:hover{
@@ -111,6 +125,31 @@
 	border-radius: 10px 10px 10px 10px;
 	font-size: 50px;
 }
+.cre-icon-back{
+	
+	display:flex;
+	justify-content:flex-end;
+	align-items:flex-end;
+	height:30px;
+	
+}
+
+.img-icon{
+	float:right;
+	height:35px;
+	border:0;
+	outline:0;
+	background-color: rgba(130, 238, 41);
+	border-radius:15px 15px;
+	
+}
+.create-img{
+	max-height:33px;
+	max-width:33px;
+	align-items:right;
+	width:auto;
+	height:auto;
+}
 /* 에디터픽 스타일 */
 .editorPick{
 	width: 1024px;
@@ -154,20 +193,16 @@
 	font-family: 'Bungee', cursive;
 	text-align: center;
 }
-.join-btn{
-	background-color: rgb(255,255,255,0);
-	border:0;
-	outline:0;
-}
+
 
 .editor-content{
-	font-family: 'Noto Serif', serif;
 	font-size:15px;
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	width:510px;
 	height:350px;
+	font-family: 'S-CoreDream-3Light';
 	border-radius:10px 10px;
 }
 .editor-img-back{
@@ -191,8 +226,24 @@
 }
 
 .eContent{
-	
 	font-size:20px;
+}
+
+.set-back{
+	
+	display:flex;
+	justify-content:flex-end;
+	align-items:flex-end;
+	height:30px;
+	
+}
+
+.set-img{
+	max-height:33px;
+	max-width:33px;
+	align-items:right;
+	width:auto;
+	height:auto;
 }
 
 /* 동글 랭킹 스타일 */
@@ -221,12 +272,12 @@
 	width: 300px;
 	height: 200px;
 	border-radius:10px 10px;
-	font-family: 'Noto Serif', serif;
 	font-size:15px;
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	border-radius:10px 10px;
+	font-family: 'S-CoreDream-3Light';
 	
 }
 

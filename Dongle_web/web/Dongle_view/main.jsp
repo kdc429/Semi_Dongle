@@ -16,6 +16,15 @@
 	
 
 <section>
+	<div class="bar">
+		<!-- 동글 개설하기 버튼! -->
+		<div class="cre-icon-back">
+			<button class="img-icon">
+				<span>동글 개설하기</span>&nbsp;&nbsp;
+				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
+			</button>
+		</div>
+	</div>
 	<h2 class="item-logo">MY DONGLE</h2>
 	<!-- 가입한 동글 캐러셀 -->
 	<div class="carousel-back">
@@ -37,6 +46,7 @@
                     			<button class="join-btn" type="submit"> 
                     			
                     			<!-- 여기서 그룹 넘버 전송 -->
+                    				<span class="group-name"><%=g.getGroupName() %></span>
                     				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
@@ -58,8 +68,18 @@
     </div>
 	<hr>
 	<!-- 에디터 픽 캐러셀 -->
+	<div class="bar">
+		<% if(loginMember.getMemberId().equals("admin")){ %>
+			<div class="set-back">
+				<button class="img-icon">
+					<span>설정</span>
+					<img class="set_img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
+				</button>
+			</div>
+		<%} %>
+	</div>
+	<h3 style="font-family:'YanoljaYacheR'; text-align:center;">당신을 위한 에디터의 추천!</h3>
 	<div class="editorPick">
-	<div class="bar">BAR</div>
 		<h2 class="item-logo">Editor Pick's</h2>
 		<div id="carousel_section">
 			<ul>
@@ -93,7 +113,8 @@
 	</div>
 	<hr>
 	<!-- 분야별 랭킹 컨텐츠 -->
-	<div class="bar">BAR</div>
+	<div class="bar"></div>
+	<h3 style="font-family:'YanoljaYacheR'; text-align:center";>당신을 위한 가장 인기있는 동글!</h3>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
 	<div class="dongle-rank">
 		
