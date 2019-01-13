@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.dongle.gallery.model.dao.GalleryDao;
 import com.dongle.gallery.model.vo.AlbumCategory;
+import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.GroupMember;
 
@@ -74,5 +75,21 @@ public class GalleryService {
 		close(conn);
 		return gm;
 		
+	}
+	public List<GalleryCommentJoin> selectGalCommentList(int groupNo,int galFileNo,int galNo)
+	{
+		Connection conn = getConnection();
+		List<GalleryCommentJoin> gclist=new GalleryDao().selectGalCommentList(conn,groupNo,galFileNo,galNo);
+		close(conn);
+		return gclist;
+		
+	}
+	
+	public List<GalleryPath> selectOneList(int groupNo,int galNo,int memberNo,int galFileNo)
+	{
+		Connection conn = getConnection();
+		List<GalleryPath> gplist = new GalleryDao().selectOneList(conn,groupNo,galNo,memberNo,galFileNo);
+		close(conn);
+		return gplist;
 	}
 }

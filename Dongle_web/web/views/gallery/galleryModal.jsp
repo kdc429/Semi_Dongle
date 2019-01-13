@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath" %>
+<%
+	List<GalleryPath> gplist=(List)request.getAttribute("gplist");
+	List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
+	Member loginMember = (Member)session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
      .close {
         color: #aaa;
@@ -18,6 +25,23 @@
         text-decoration: none;
         cursor: pointer;
     }
+/* 댓글테이블!! */
+table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; } 
+table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
+table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
+table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
+table#tbl-comment button.btn-reply{display:none;}
+table#tbl-comment button.btn-delete{display:none;}
+table#tbl-comment tr:hover {background:lightgray;}
+table#tbl-comment tr:hover button.btn-reply{display:inline;}
+table#tbl-comment tr:hover button.btn-delete{display:inline;}
+table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
+table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
+table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
+table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
+table#tbl-comment tr.level2 sub.comment-writer {color:black; font-size:14px;font-family: "a흑진주L";}
+table#tbl-comment tr.level2 sub.comment-date {color:rgb(80,80,80); font-size:10px;font-family: "a흑진주L";}
+
 </style>
 <script>
 $(function(){
@@ -41,10 +65,81 @@ $(function(){
 </head>
 <body>
 	<span class="close">&times;</span>
-		<div>
-			<hr>
-				<h2>안녕</h2>
-			<hr>
-		</div>
+	<div>
+		<hr>
+		<%for(GalleryPath g:gplist){ %>
+			<img src="<%=request.getContextPath()%>/images/gallery/<%=g.getGalFilePath()%>" style="width:200px; height:200px">
+		<%} %>
+		<hr>
+	</div>
+	<table id="tbl-comment">
+		<%if(gclist!=null){ %>
+			<%for(GalleryCommentJoin g:gclist){ %>
+				<%if(g.getgalCommentLevel()==1){ %>
+					<tr class='level1'>
+						<td>
+							<sub class='comment-writer'><%=g.getGroupMemberNickname()%></sub>
+							<sub class='comment-date'><%=g.getGalCommentDate() %></sub>
+							<br/>
+							<%=g.getGalCommentContent() %>
+						</td>
+						<td>
+							<button class='btn-reply' value='<%=g.getGalNo()%>'>답글</button>
+						</td>
+					</tr>
+				<%} 
+				else{%>
+					<tr class="level2">
+						<td>
+							<sub class="comment-writer"><%=g.getGroupMemberNickname() %></sub>
+							<sub class="comment-date"><%=g.getGalCommentDate() %></sub>
+							<br/>
+							<%=g.getGalCommentContent() %>
+						</td>
+						<td>
+						</td>
+					</tr>
+				<%} %>
+			<%} %>
+		<%} %>
+	</table>
+	<script>
+		<%-- $(function(){
+			$('.btn-reply').on('click',function(e){
+				<%if(loginMember!=null){%>
+					var tr=$("<tr></tr>");
+					var html="<td style='display:none;text-align:left;' colspan='2'>";
+					html+="<form action='<%=request.getContextPath()%>/gallery/commentInsert' method='post'>";
+					html+="<input type='hidden' name='galRef' value='<%=gplist.get[0].getGalNo()%>'/>";
+					html+="<input type='hidden' name='galCommentWriter' value='<%=loginMember.getMemberId()%>'/>";
+					html+="<input type='hidden' name='galCommentLevel' value='2'/>";
+					html+="<input type='hidden' name='galCommentRef' value='"+$(this).val()+"'/>";
+					html+="<textarea name='galCommentContent' style='resize: none' cols='60' rows='2'></textarea>";
+					html+="<button type='submit' class='btn-insert2'>등록</button>";
+					html+="</form></td>";
+					tr.html(html);
+					tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
+					/* 연결된 이벤트 삭제 */
+					$(this).off('click');
+					
+					tr.find('form').submit(function(e){
+						if(<%=loginMember==null%>)
+						{
+							fn_loginAlert();
+							e.preventDefault();
+							return;
+						}
+						var len=$(this).children('textarea').val().trim().length;
+						if(len==0)
+						{
+							e.preventDefault();
+						}
+					});
+					tr.find("textarea").focus();
+				<%}%>
+			});
+		}) --%>
+	</script>
+	
 </body>
 </html>

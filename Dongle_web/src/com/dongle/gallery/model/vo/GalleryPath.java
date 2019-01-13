@@ -9,10 +9,11 @@ public class GalleryPath {
 	private String galFilePath;
 	private int memberNo;
 	private Date galEnrollDate;
+	private int galNo;
 	
 	public GalleryPath() {}
 	public GalleryPath(int groupNo, String albumCode, int galFileNo, String galFilePath, int memberNo,
-			Date galEnrollDate) {
+			Date galEnrollDate, int galNo) {
 		super();
 		this.groupNo = groupNo;
 		this.albumCode = albumCode;
@@ -20,6 +21,8 @@ public class GalleryPath {
 		this.galFilePath = galFilePath;
 		this.memberNo = memberNo;
 		this.galEnrollDate = galEnrollDate;
+		this.galNo=galNo;
+		
 	}
 	public int getGroupNo() {
 		return groupNo;
@@ -57,10 +60,16 @@ public class GalleryPath {
 	public void setGalEnrollDate(Date galEnrollDate) {
 		this.galEnrollDate = galEnrollDate;
 	}
+	public int getGalNo() {
+		return galNo;
+	}
+	public void setGalNo(int galNo) {
+		this.galNo = galNo;
+	}
 	@Override
 	public String toString() {
 		return "동호회 번호: " + groupNo + " 앨범코드: " + albumCode + " 사진게시글 번호: " + galFileNo
-				+ " 사진 파일 경로: " + galFilePath + " 사진 등록자 번호: " + memberNo + " 등록일: " + galEnrollDate ;
+				+ " 사진 파일 경로: " + galFilePath + " 사진 등록자 번호: " + memberNo + " 등록일: " + galEnrollDate +"사진게시물등록번호: "+galNo;
 	}
 	
 
