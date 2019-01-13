@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.vo.GroupMember;
+import com.dongle.member.model.vo.Member;
 
 /**
  * Servlet implementation class GalleryGetServlet
@@ -34,15 +36,18 @@ public class GalleryGetServlet extends HttpServlet {
 		
 		String albumCode = request.getParameter("albumCode");
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-		String memberId=request.getParameter("memberId");
-		System.out.println(albumCode+" "+groupNo+" : "+memberId);
-/*		if(list.size()==0)
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		System.out.println(albumCode+" "+groupNo+" : "+loginMember.getMemberId());
+		//동호회 회원인지 아닌지 group_member_tab에서 확인
+		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
+		
+		if(loginMember.getMemberNo()==0||gm==null)
 		{
-			request.setAttribute("msg", "등록된 사진이 없습니다.");
-			request.setAttribute("loc", "/views/gallery/galleryView.jsp");
+			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
+			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}*/		
+		}		
 		
 		//페이징 처리하기
 		int cPage; //현재 페이지를 의미함 (너가 지금 뭘 보고있는지!)
@@ -84,7 +89,7 @@ public class GalleryGetServlet extends HttpServlet {
 		}
 		else
 		{
-			pageBar+="<li><a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&memberId="+memberId+"&cPage="+(pageNo-1)+"&numPerPage="+numPerPage+"'>＜ &nbsp;</a>";
+			pageBar+="<li><a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+(pageNo-1)+"&numPerPage="+numPerPage+"'>＜ &nbsp;</a>";
 		}
 		//선택페이지 만들기
 		while(!(pageNo>pageEnd||pageNo>totalPage))
@@ -95,7 +100,7 @@ public class GalleryGetServlet extends HttpServlet {
 			}
 			else
 			{
-				pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&memberId="+memberId+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+"&nbsp;"+pageNo+"&nbsp;"+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+"&nbsp;"+pageNo+"&nbsp;"+"</a>";
 			}
 			pageNo++;
 		}
@@ -105,16 +110,12 @@ public class GalleryGetServlet extends HttpServlet {
 			pageBar+="<span> &nbsp;＞</span>";
 		}
 		else {
-			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&memberId="+memberId+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
+			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("pageBar", pageBar);
-
-
-		
-		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 

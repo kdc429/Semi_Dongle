@@ -100,6 +100,9 @@
 		</div>
 	
     </div>
+	<div style="border:1px solid red;">
+		<button type="submit" name="list-bnt">목록으로</button>
+	</div>
 	<form name="galleryList" id="galleryList" onsubmit="return fn_gallery_validate();">
 		<table >
 			<%if(list.size()!=0){ %>
@@ -132,6 +135,7 @@
 				</div>
 			<%} %>
 		</table>
+
 	</form>
 	<br><br>
 	<table width="610px" text-align="center">

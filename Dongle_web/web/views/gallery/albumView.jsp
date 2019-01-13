@@ -30,6 +30,10 @@ function fn_validateFrm(){
 	return true;
 }
 function albumPlusClick(){
+	if(<%=list.size()%>==6){
+		alert('앨범은 최대 6개까지 만들 수 있습니다.');
+		return;
+	}
 	//팝업창에 대한 설정해주기@ : window.open(url,title,shape)로 열 수 있음
 	// 서블릿으로 넘겨줄 매핑주소
 	var url="<%=request.getContextPath()%>/albumPlus?groupNo=<%=groupNo%>&memberId<%=memberId%>"; 
@@ -54,7 +58,8 @@ function albumPlusClick(){
 			<td>
 				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>
 					<form action="" method="post" name="albumPlus" id="albumPlus" onsubmit="return fn_validateFrm()">
-						<input style="float:right;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가하기" onclick="albumPlusClick()"/>
+						<input style="float:right;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가" onclick="albumPlusClick()"/>
+						<input style="float:right;" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제" onclick="albumDeleteClick()"/>
 						<input type="hidden" name="memberId" id="memberId" value="<%=memberId%>"/>
 					</form>
 				<%} %>
