@@ -5,7 +5,6 @@
  	List<AlbumCategory> list = (List)request.getAttribute("list");
  	int groupNo=(int)request.getAttribute("groupNo");
  	Member loginMember = (Member)session.getAttribute("loginMember");
- 	String memberId=(String)request.getAttribute("memberId");
  	int count=1;
  %>
 <!DOCTYPE html>
@@ -13,19 +12,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <script>
-function galClick(obj){
-	var frm=$('#albumFolder');
-	var groupNo =$(obj).nextAll('#groupNo');
-	var albumCode = $(obj).nextAll('#albumCode');
-	var memberId = $(obj).nextAll('#memberId');
-	console.log(albumCode[0].value);
-	url="<%=request.getContextPath()%>/galleryGet?groupNo="+groupNo[0].value+"&albumCode="+albumCode[0].value+"&memberId="+memberId[0].value;
- 	/* location.href 는 입력된 url을 바로 띄워주는 것으로 galleryGet? 을 통해 서블릿과 연동됨 */
-	location.href=url;
-}
+//ajax이용하기여 앨범 불러오기
+$(function(){
+	$('.alImg').click(function(event){
+		var albumCode = $(event.target).nextAll("#albumCode")[0].value;
+		console.log(albumCode);
+		$.ajax({
+			url:"<%=request.getContextPath()%>/gallery/galleryGet?groupNo=<%=groupNo%>&albumCode="+albumCode,
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){
+			}
+		});
+	});
+})
 function fn_validateFrm(){
 	return true;
 }
@@ -36,7 +41,7 @@ function albumPlusClick(){
 	}
 	//팝업창에 대한 설정해주기@ : window.open(url,title,shape)로 열 수 있음
 	// 서블릿으로 넘겨줄 매핑주소
-	var url="<%=request.getContextPath()%>/albumPlus?groupNo=<%=groupNo%>&memberId<%=memberId%>"; 
+	var url="<%=request.getContextPath()%>/albumPlus?groupNo=<%=groupNo%>"; 
 	/* 내부에서 체크함 */
 	var title="albumPlus";
 	var shape="left=500px, top=300px, width=500px, height=200px";
@@ -51,8 +56,7 @@ function albumPlusClick(){
 
 </head>
 <body>
-<hr>
-<section id="album-container">
+<div id="album-container">
 	<table border="1" width="370px" id="albumPlus-tbl">
 		<tr>
 			<td>
@@ -60,7 +64,6 @@ function albumPlusClick(){
 					<form action="" method="post" name="albumPlus" id="albumPlus" onsubmit="return fn_validateFrm()">
 						<input style="float:right;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가" onclick="albumPlusClick()"/>
 						<input style="float:right;" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제" onclick="albumDeleteClick()"/>
-						<input type="hidden" name="memberId" id="memberId" value="<%=memberId%>"/>
 					</form>
 				<%} %>
 			</td>
@@ -74,21 +77,19 @@ function albumPlusClick(){
 						<tr>
 						</tr>
 						<td class="albumFolBox">
-							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png" onclick="galClick(this);">
+							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png">
 							<p>[&nbsp;<%=t.getAlbumName()%>&nbsp;]</p>
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=t.getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>
-							<input type="hidden" name="memberId" id="memberId" value="<%=memberId%>"/>
 						</td>
 						<%count++;%>
 					<%} 
 					else{%>
 						<td class="albumFolBox">
-							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png" onclick="galClick(this);">
+							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png">
 							<p>[&nbsp;<%=t.getAlbumName()%>&nbsp;]</p>
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=t.getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>
-							<input type="hidden" name="memberId" id="memberId" value="<%=memberId%>"/>
 						</td>
 						<%count++;%> 
 					<%} %>
@@ -101,6 +102,6 @@ function albumPlusClick(){
 			<%} %>
 		</table>
 	</form>
-</section>
+</div>
 </body>
 </html>
