@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.dongle.gallery.model.vo.GalleryPath,java.util.*"%>
+<%@page import="com.dongle.gallery.model.vo.GalleryPath,java.util.*,com.dongle.member.model.vo.Member"%>
 <%
 	List<GalleryPath> list = (List)request.getAttribute("list");
 	int numPerPage = (int)request.getAttribute("numPerPage");
 	String pageBar=(String)request.getAttribute("pageBar");
+ 	Member loginMember = (Member)session.getAttribute("loginMember");
+ 	int groupNo=(int)request.getAttribute("groupNo");
 	int count=1;
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,9 +103,6 @@
 		</div>
 	
     </div>
-	<div style="border:1px solid red;">
-		<button type="submit" name="list-bnt">목록으로</button>
-	</div>
 	<form name="galleryList" id="galleryList" onsubmit="return fn_gallery_validate();">
 		<table >
 			<%if(list.size()!=0){ %>
@@ -110,12 +110,12 @@
 						<%if(count%4==1){%>
 							<tr>
 							</tr>
-								<td class="galleryBox" >
-									<img class="galImg" src="<%=t.getGalFilePath() %>">
-									<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
-									<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
-									<input type="hidden" name="galFileNo" value="<%=t.getGalFileNo() %>"/>
-								</td>
+							<td class="galleryBox" >
+								<img class="galImg" src="<%=t.getGalFilePath() %>">
+								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
+								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
+								<input type="hidden" name="galFileNo" value="<%=t.getGalFileNo() %>"/>
+							</td>
 							<%count++; %>
 						<%} 
 						else{%>
@@ -135,7 +135,6 @@
 				</div>
 			<%} %>
 		</table>
-
 	</form>
 	<br><br>
 	<table width="610px" text-align="center">

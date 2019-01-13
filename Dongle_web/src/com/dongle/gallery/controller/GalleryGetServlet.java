@@ -17,7 +17,7 @@ import com.dongle.member.model.vo.Member;
 /**
  * Servlet implementation class GalleryGetServlet
  */
-@WebServlet("/galleryGet")
+@WebServlet("/gallery/galleryGet")
 public class GalleryGetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -116,6 +116,7 @@ public class GalleryGetServlet extends HttpServlet {
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("groupNo", groupNo);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 
