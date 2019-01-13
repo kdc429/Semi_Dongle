@@ -30,9 +30,9 @@
         <!-- 로고 헤더 -->
 
         <header>
-            <div class='logoback' style='width:1024px;height: auto'>
+            <div class='logoback' style='position:relative;width:1024px;height: auto'>
                 <!-- 로고 grid -->
-                <div class='logo' style='width:1024px; height: auto; background-color:rgba(0, 10, 40, 0.8)'>
+                <div class='logo' style='width:1024px; height: auto; background-color:rgba(0, 10, 40, 0.8);'>
                     <h2 style="color:rgb(250,237,125); font-family: 'Bungee', cursive; margin-left:15px;">DONGLE</h2>
                 </div>
             </div>
@@ -58,7 +58,7 @@
             <div class="sideback center">
                 <div class="sider" style='height:100vh; background-color:rgba(0, 10, 40, 0.8)'>
                     <!-- 메뉴 버튼 -->
-                    <button class='btn btn-primary'>HOME</button><br>
+                    <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary'>공지사항</button><br>
                     <button class='btn btn-primary'>피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
@@ -83,7 +83,12 @@ $(function(){
 			complate:function(){console.log("ok");}
 		})
 	})
-})
+});
+
+function communityHome(){
+	location.href="<%=request.getContextPath()%>/communityJoin?gNo=<%=g.getGroupNo()%>&mNo=<%=loginMember.getMemberId()%>";
+}
+
 </script>
 </body>
 

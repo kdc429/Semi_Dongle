@@ -117,6 +117,7 @@ public class GalleryGetServlet extends HttpServlet {
 		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("groupNo", groupNo);
+		request.setAttribute("albumCode", albumCode);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class GalleryAllListServlet
  */
-@WebServlet("/galleryAllList")
+@WebServlet("/gallery/galleryAllList")
 public class GalleryAllListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,6 +30,8 @@ public class GalleryAllListServlet extends HttpServlet {
 		String albumCode = request.getParameter("albumCode");
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
 		System.out.println(groupNo+" : "+albumCode+" : "+galFileNo);
+		
+		request.getRequestDispatcher("/views/gallery/galleryModal.jsp").forward(request, response);
 	
 	}
 

@@ -14,8 +14,7 @@
         .back {
             width: 1024px;
             height: 100vh;
-
-
+            position:relative;
         }
 
         /* 우측사이드 메뉴 스타일 */
@@ -35,7 +34,7 @@
         /* 게시판 스타일 */
         .main {
 
-
+			position:relative;
             display: flex;
             flex-direction: column;
             justify-content: center;

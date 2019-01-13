@@ -6,25 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	.dialog{
-		display:none;
-		position:fixed;
-		z-index:1;
-		left:0;
-		right:0;
-		width:100%;
-		height:100%;
-		overflow:auto;
-		background-color:rgb(0,0,0);
-		background-color:rgba(0,0,0,0.4);
-	}
-	.modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; 
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;                    
-    }
      .close {
         color: #aaa;
         float: right;
@@ -59,16 +40,11 @@ $(function(){
 </script>
 </head>
 <body>
-	<!-- ㅡmodal-container -->
-	<div class="dialog" id="modal-container">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<div>
-				<hr>
-					<h2>안녕</h2>
-				<hr>
-			</div>
+	<span class="close">&times;</span>
+		<div>
+			<hr>
+				<h2>안녕</h2>
+			<hr>
 		</div>
-    </div>
 </body>
 </html>
