@@ -24,6 +24,8 @@
 	href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
 <link href="https://fonts.googleapis.com/css?family=Bungee"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"

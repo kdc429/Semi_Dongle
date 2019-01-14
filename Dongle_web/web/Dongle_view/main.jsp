@@ -16,9 +16,11 @@
 	
 
 <section>
+
 	<div class="bar">
 		<!-- 동글 개설하기 버튼! -->
 		<div class="cre-icon-back">
+			<a href="<%=request.getContextPath() %>/admin/memberList">관리자 메뉴</a>
 			<button class="img-icon">
 				<span>동글 개설하기</span>&nbsp;&nbsp;
 				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
