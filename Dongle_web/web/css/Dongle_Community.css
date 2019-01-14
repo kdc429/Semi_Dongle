@@ -8,12 +8,14 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 컨테이너 스타일 */
 .back {
 	width: 1024px;
 	height: 100vh;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 우측사이드 메뉴 스타일 */
@@ -28,12 +30,14 @@ body {
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 게시판 스타일 */
 .main {
 	/* display: flex; */
 	/* flex-direction: column; */
+	font-family: '나눔스퀘어라운드 Regular';
 	justify-content: center;
 	align-items: center;
 	margin-left: 170px;
@@ -48,12 +52,14 @@ body {
 	position: absolute;
 	display: flex;
 	flex-direction: row;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 .sideback {
 	/* position: relative; */
 	/* display: flex; */
 	flex-direction: row;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 왼쪽 사이드 div
@@ -63,6 +69,7 @@ body {
 	height: auto;
 	position: fixed;
 	margin-top: 62.8px;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 오른쪽 사이드 div */
@@ -72,6 +79,7 @@ body {
 	position: fixed;
 	margin-top: 62.8px;
 	margin-left: 854px;
+	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 로고 div
@@ -80,13 +88,21 @@ body {
 .logo {
 	position: fixed;
 	z-index: 2;
+	font-family: '여기어때잘난서체';
 }
 
 /* 왼쪽 사이드 컨텐트 */
-.sideitem {
+.sideitem1 {
 	margin-left: 15px;
 	margin-right: 15px;
+	font-family: '나눔스퀘어라운드 Regular';
 }
+.sideitem2 {
+/* 	margin-left: 15px;
+	margin-right: 15px; */
+	font-family: '나눔스퀘어라운드 Regular';
+}
+
 
 .profile_img{
 	width: 140px;
@@ -94,10 +110,11 @@ body {
 	border-radius: 100px;
 }
 .dongle_name{
-	font-weight: bold;
+	/* font-weight: bold; */
 	color : darkslategray;
-	font-size: 15px;
+	font-size:21px;
 	text-align: center;
+	font-family: '나눔스퀘어라운드 ExtraBold';
 }
 .profile_btn{
 	height: 15px;
@@ -114,6 +131,14 @@ span{
 	width: 10px;
 	display: block;
 	position: relative;
+}
+#user_img{
+ 	width: 60px;
+ 	height: 60px;
+ 	border-radius: 50px;
+}
+.gm_info{
+	width: 50px;
 }
 .demoSpan1{
 	height: 5px;	
@@ -133,6 +158,10 @@ span{
 .user_info{
  	display: none;
  	text-align: center;
+ 	font-family: '나눔스퀘어라운드 Regular';
+ 	font-size : 11px;
+ 	position: relative;
+ 	padding: 1em;
  }
 #dongle_info
 {
@@ -142,4 +171,17 @@ span{
      right:10%;
      height: 150px;
  
+ }
+ .dongle_info
+ {
+ 	display : flex;
+ 	justify-content: center;
+ 	align-items: center;
+ }
+ #dongle_info_view
+ {
+	display:inline;
+	/* float: left; */
+
+
  }

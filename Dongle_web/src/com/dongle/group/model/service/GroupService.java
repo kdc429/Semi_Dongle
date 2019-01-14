@@ -9,6 +9,7 @@ import java.util.List;
 import com.dongle.group.model.dao.GroupDao;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GroupService {
 	
@@ -39,5 +40,32 @@ public class GroupService {
 		return editList;
 		
 	}
+	
+	public List<Group> selectRank(){
+		
+		Connection conn=getConnection();
+		List<Group> rankList=new GroupDao().selectRank(conn);
+		
+		close(conn);
+		return rankList;
+	}
+	
+	   public GroupMember selectGmInfo(int groupNo,int memberNo)
+	   {
+	      Connection conn = getConnection();
+	      GroupMember gm = new GroupDao().selectGmInfo(conn,groupNo,memberNo);
+	      close(conn);
+	      return gm;
+	   }
+	   
+	   public int countMember(int groupNo)
+		 {
+			 Connection conn = getConnection();
+			 int result = new GroupDao().countMember(conn,groupNo);
+			 close(conn);
+			 return result;
+		 }
+
+	
 
 }

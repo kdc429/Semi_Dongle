@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="com.dongle.member.model.vo.Member" %>
+
+<%@ page import="com.dongle.member.model.vo.Member" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <%
@@ -34,7 +36,7 @@
 			<div class='logo'
 				style='width: 1024px; height: auto; background-color: rgb(228, 228, 228)'>
 				<h2
-					style="color: darkcyan; font-family: 'Bungee', cursive; margin-left: 15px;">DONGLE</h2>
+					style="color: darkcyan; margin-left: 15px;">DONGLE</h2>
 			</div>
 		</div>
 	</header>
