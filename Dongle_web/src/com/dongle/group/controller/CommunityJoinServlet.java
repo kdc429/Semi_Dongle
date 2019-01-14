@@ -32,6 +32,7 @@ public class CommunityJoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		
 		//System.out.println(loginMember.getMemberNo());
 		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
 		System.out.println(gNo);

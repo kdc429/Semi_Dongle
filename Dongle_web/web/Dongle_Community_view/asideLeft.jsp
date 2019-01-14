@@ -32,8 +32,15 @@
 				</div>
 				<!-- 회원정보 -->
 				<div class="user_info">
-					<p><%=m.getMemberName() %></p><br/>
-					<img src="<%=request.getContextPath()%>/images/member_img/<%=m.getMemberImaPath()%>" width="50px" height="50px">
+					<table>
+						<tr>
+						<td style="width: 70px"><img src="<%=request.getContextPath()%>/images/member_img/<%=m.getMemberImaPath()%>" width="50px" height="50px"></td>						
+						<td><%=m.getMemberName() %></td>
+						</tr>
+					
+					</table>
+<%-- 					<p><%=m.getMemberName() %></p><br/>
+					<img src="<%=request.getContextPath()%>/images/member_img/<%=m.getMemberImaPath()%>" width="50px" height="50px"> --%>
 				</div>
 				</div>
 				<!-- 소개글 -->
