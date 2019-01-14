@@ -33,6 +33,18 @@
 				});
 			});
 		});
+		$(function(){
+			$('#board-btn').click(function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/boardListView",
+					type:"get",
+					dataType:"html",
+					success:function(data){
+						$('.main').html(data);
+					}
+				});
+			});
+		});
 	</script>
     <div class='back'>
         <!-- 로고 헤더 -->
@@ -76,7 +88,7 @@
                 <div class="sider" style='height:100vh; background-color:rgba(130, 238, 41, 0.8)'>
                     <!-- 메뉴 버튼 -->
                     <button class='btn btn-primary'>HOME</button><br>
-                    <button class='btn btn-primary'>공지사항</button><br>
+                    <button class='btn btn-primary' id="board-btn">공지사항</button><br>
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>

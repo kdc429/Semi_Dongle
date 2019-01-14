@@ -11,6 +11,7 @@
 <title>asideRight</title>
 </head>
 <script>
+<<<<<<< HEAD
 	var url;
 	var params;
 	var params2=[];
@@ -55,7 +56,7 @@
 				<!-- 메뉴 버튼 -->
 				<button class='btn btn-primary' value='1'>HOME</button>
 				<br>
-				<button class='btn btn-primary' value='2'>공지사항</button>
+				<button class='btn btn-primary' onclick="boardTag();">공지사항</button>
 				<br>
 				<button class='btn btn-primary' value='3'>피드</button>
 				<br>
