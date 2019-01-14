@@ -1,16 +1,19 @@
 package com.dongle.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.EditPickGroup;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.service.MemberService;
 import com.dongle.member.model.vo.Member;
 
@@ -38,12 +41,16 @@ public class LoginMember extends HttpServlet {
 		String id = request.getParameter("userId");//입력한 아이디	
 		String pw = request.getParameter("password");//입력한 패스워드
 		MemberService ms = new MemberService();
+		GroupService gs= new GroupService();
 		Member m = new Member();
 		m.setMemberId(id);
 		m.setMemberPwd(pw);
 		
 
 		Member data = ms.selectMember(m);
+		List<Group> joinList=gs.selectGroup(id);
+		List<EditPickGroup> editList=gs.selectEditGr();
+		List<Group> rankList=gs.selectRank();
 		String view = "";
 		String msg = "";
 		if (data == null) {
@@ -69,6 +76,9 @@ public class LoginMember extends HttpServlet {
 
 				HttpSession session = request.getSession();// 세션생성~!
 				session.setAttribute("loginMember", data);
+				request.setAttribute("list", joinList);
+				request.setAttribute("editList", editList);
+				request.setAttribute("rankList", rankList);
 				RequestDispatcher rd = request.getRequestDispatcher(view);
 				rd.forward(request, response);
 
