@@ -50,6 +50,7 @@ public class CommunityJoinServlet extends HttpServlet {
 		}else {
 			loc="/Dongle_Community_view/Community_main.jsp";
 			request.setAttribute("group", g);
+			request.setAttribute("loginMember", loginMember);
 			request.getRequestDispatcher(loc).forward(request, response);
 		}
 		

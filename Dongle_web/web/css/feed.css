@@ -1,0 +1,38 @@
+.logoback {
+	width: 1024px;
+	height: auto;
+}
+
+.logo {
+	width: 1024px;
+	height: auto;
+	font-family: 'Bungee', cursive;
+	margin-left: 15px;
+}
+
+.main {
+	width: 684px;
+	height: auto;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid black;
+}
+
+.newsfeed {
+	width: 684px;
+	height: auto;
+}
+
+.newsfeed>div {
+	width: 500px;
+	border: 1px solid gray;
+}
+
+.feed>div {
+	border: 1px solid gray;
+}
+
+.newsfeed {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

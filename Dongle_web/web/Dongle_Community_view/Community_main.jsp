@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.dongle.member.model.vo.*,com.dongle.group.model.vo.*" %>
+<%
+	Group g=(Group)request.getAttribute("group");
+	Member loginMember=(Member)request.getAttribute("loginMember");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +30,7 @@
 		$(function(){
 			$('#feed-btn').click(function(){
 				$.ajax({
-					url:"<%=request.getContextPath()%>/feed/feedListView",
+					url:"<%=request.getContextPath()%>/feed/feedListView?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
 					type:"get",
 					dataType:"html",
 					success:function(data){

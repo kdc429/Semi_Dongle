@@ -1,18 +1,20 @@
 package com.dongle.feed.model.vo;
 
+import java.sql.Date;
+
 public class Feed {
 	
 	private int feedNo; // FEED_NO
 	private int groupNo; //GROUP_NO
 	private int memberNo; //MEMBER_NO
 	private String feedContent; //FEED_CONTENT
-	private String feedWriteDate; //FEED_WRITE_DATE
+	private Date feedWriteDate; //FEED_WRITE_DATE
 	
 	public Feed() {
 		
 	}
 
-	public Feed(int feedNo, int groupNo, int memberNo, String feedContent, String feedWriteDate) {
+	public Feed(int feedNo, int groupNo, int memberNo, String feedContent, Date feedWriteDate) {
 		super();
 		this.feedNo = feedNo;
 		this.groupNo = groupNo;
@@ -53,11 +55,11 @@ public class Feed {
 		this.feedContent = feedContent;
 	}
 
-	public String getFeedWriteDate() {
+	public Date getFeedWriteDate() {
 		return feedWriteDate;
 	}
 
-	public void setFeedWriteDate(String feedWriteDate) {
+	public void setFeedWriteDate(Date feedWriteDate) {
 		this.feedWriteDate = feedWriteDate;
 	}
 
