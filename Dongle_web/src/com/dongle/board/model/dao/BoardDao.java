@@ -1,7 +1,7 @@
 package com.dongle.board.model.dao;
 
 import static common.JDBCTemplate.close;
-
+import com.dongle.board.model.vo.BoardPath;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -105,7 +105,7 @@ public class BoardDao {
 		return b;
 	}
 
-	/*public int insertBoard(Connection conn)
+	public int insertBoard(Connection conn, Board b,int boardNo, int groupNo)
 	{
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -114,13 +114,20 @@ public class BoardDao {
 		{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1,	b.getBoardNo());
-			pstmt.setString(2, b.getBoardTitle());
-			pstmt.setString(3,	b.getBoardWriter());
-			pstmt.setString(4,	b.getBoardContent());
-			pstmt.setInt(5,	b.getBoardViewCount());
-			pstmt.setInt(6,	b.getFilePath());
+			pstmt.setInt(2, b.getGroupNo());
+			pstmt.setString(3, b.getBoardTitle());
+			pstmt.setString(4, b.getBoardWriter());
+			pstmt.setString(5,	b.getBoardContent());
+			pstmt.setInt(6,	b.getBoardViewCount());
 		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
 	}
-	}
-*/
 }

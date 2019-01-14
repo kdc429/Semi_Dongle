@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
+    
     
 <!DOCTYPE html>
 <html>
@@ -41,6 +42,17 @@
 		vertical-align: right;
 	}
 </style>
+<script>
+		function validate(){
+			var content=$('[name=content]').val();
+			if(content.trim().length==0)
+			{
+				alert("내용을 입력하세요!");
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -54,23 +66,27 @@
 				<tbody>
 					<tr>
 						<th style="width: 20%;">글 제목</th>
-						<input type="text"  name='title' required="required"/>
+						<td>
+							<input type="text"  name='title' required="required"/>
+						</td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<input type="text" name='writer' <%-- value="<%=logginMember.getMemberId() %>" --%>readonly="readonly"/>
+						<td>
+							<input type="text" name='writer' value="admin" readonly="readonly"/>
+						</td>
 					</tr>					
 					<tr>
 						<th>첨부파일</th>
-						<td><%-- <%if(b.getFilePath()!=null){%>
-							<img alt="첨부파일" src="<%= request.getContextPath() %>/images/file.png"width='16px'>
-							<%} %> --%>	
+						<td>
+							<input type="file" name="upfile"/>
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<textarea rows="5" cols="50" name='content'>
-						</textarea>
+						<td>
+							<textarea rows="5" cols="50" name='content'></textarea>
+						</td>
 					</tr>
 					<tr>
 						<th colspan="2">

@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardFormServlet
+ * Servlet implementation class BoardFormEndServlet
  */
-@WebServlet("/board/boardForm")
-public class BoardFormServlet extends HttpServlet {
+@WebServlet("/board/boardFormEnd")
+public class BoardFormEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardFormServlet() {
+    public BoardFormEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class BoardFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect(request.getContextPath()+"/views/board/boardForm.jsp");
+		
 	}
 
 	/**

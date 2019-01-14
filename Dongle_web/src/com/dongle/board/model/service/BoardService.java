@@ -1,7 +1,6 @@
 package com.dongle.board.model.service;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 import com.dongle.board.model.dao.BoardDao;
@@ -24,11 +23,19 @@ public class BoardService {
 		return b;
 	}
 	
-	/*public int insertBoard(int boardNo, int groupNo)
+	public int insertBoard(Board b,int boardNo, int groupNo)
 	{
 		Connection conn=getConnection();
-		int result=new BoardDao().insertBoard(conn);
-		
-	}*/
-
+		int result=new BoardDao().insertBoard(conn,b,boardNo,groupNo);
+		if(result>0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

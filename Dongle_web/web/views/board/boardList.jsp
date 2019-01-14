@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,com.dongle.board.model.vo.Board"%>
+<%@ page import="java.util.*,com.dongle.board.model.vo.Board,com.dongle.board.model.vo.BoardPath"%>
 <%
 	List<Board> list=(List)request.getAttribute("list");
+	int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 %>
 <!DOCTYPE html>
 <html>
@@ -42,16 +43,16 @@
 <script>
 	function fn_add()
 	{
-		location.href="<%=request.getContextPath()%>/board/boardForm?";
+		location.href="<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>";
 	}
 </script>
 </head>
 <body>
 	<section id="notice-container">
 		<h2>공지사항</h2>
-		<%-- <% if(LoginMember!=null&&LoginMember.getMemberId().equals("admin")){%>
-			<input type="button" value="글쓰기" id="btn-add" onclick="fn_add()" />
-		<%} %>   --%>
+		<%-- <% if(LoginMember!=null&&LoginMember.getMemberId().equals("admin")){%> --%>
+			<input type="button" value="글쓰기" id="btn-add" onclick="fn_add()"/>
+		<%-- <%} %>  --%>  
 		<table class="table table-bordered">
 			<tr>
 				<th>번호</th>
@@ -67,7 +68,6 @@
 						<a href="<%=request.getContextPath() %>/board/boardView?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>">
 							<%=b.getBoardTitle()%>
 						</a>
-						
 					</td>
 					<td>
 						<%=b.getBoardWriter() %>

@@ -12,16 +12,16 @@ import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
 
 /**
- * Servlet implementation class BoardViewServlet
+ * Servlet implementation class BoardUpdate
  */
-@WebServlet("/board/boardView")
-public class BoardViewServlet extends HttpServlet {
+@WebServlet("/board/boardUpdate")
+public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardViewServlet() {
+    public BoardUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +30,21 @@ public class BoardViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
+		// TODO Auto-generated method stub
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-		System.out.println(boardNo+" : "+groupNo);
-		
+		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
 		Board b=new BoardService().selectOne(boardNo,groupNo);
-		System.out.println("b가 무엇? : "+b);
 		
+		request.setAttribute("board", b);
 		String view="";
 		if(b!=null)
 		{
-			request.setAttribute("board", b);
-			view="/views/board/boardView.jsp";
-			request.setAttribute("groupNo", groupNo);
+			view="views/board/boardUpdate.jsp";
 		}
 		else
 		{
-			request.setAttribute("msg", "조회한 공지사항이 존재하지 않습니다.");
-			request.setAttribute("loc", "/board/boardList?groupNo"+groupNo);
+			request.setAttribute("msg", "조회된 자료가 없습니다");
+			request.setAttribute("loc", "board/boardList?groupNo"+groupNo);
 			request.setAttribute("groupNo", groupNo);
 			view="/views/common/msg.jsp";
 		}
