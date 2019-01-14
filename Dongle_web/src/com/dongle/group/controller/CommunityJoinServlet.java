@@ -33,8 +33,8 @@ public class CommunityJoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
-		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
-		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
+		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
+		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";

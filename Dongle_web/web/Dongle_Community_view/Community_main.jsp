@@ -26,6 +26,20 @@
 </head>
 
 <body>
+	<script>
+		$(function(){
+			$('#feed-btn').click(function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/feed/feedListView",
+					type:"get",
+					dataType:"html",
+					success:function(data){
+						$('.main').html(data);
+					}
+				});
+			});
+		});
+	</script>
     <div class='back'>
         <!-- 로고 헤더 -->
 
@@ -60,7 +74,7 @@
                     <!-- 메뉴 버튼 -->
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary'>공지사항</button><br>
-                    <button class='btn btn-primary'>피드</button><br>
+                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
                 </div>
