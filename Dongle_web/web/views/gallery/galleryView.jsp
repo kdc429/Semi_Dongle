@@ -94,7 +94,7 @@
 							<tr>
 							</tr>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=request.getContextPath() %>/images/gallery/<%=t.getGalFilePath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
@@ -104,7 +104,7 @@
 						<%} 
 						else{%>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=request.getContextPath() %>/images/gallery/<%=t.getGalFilePath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>

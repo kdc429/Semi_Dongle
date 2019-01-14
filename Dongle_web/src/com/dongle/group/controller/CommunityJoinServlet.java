@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -35,6 +36,9 @@ public class CommunityJoinServlet extends HttpServlet {
 		System.out.println(loginMember.getMemberNo());
 		int gNo=Integer.parseInt(request.getParameter("gNo")); //그룹넘버
 		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
+		GroupMember gm = new GroupService().selectGmInfo(gNo,loginMember.getMemberNo());
+		System.out.println("여긴 커뮤:"+gm);
+		
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";

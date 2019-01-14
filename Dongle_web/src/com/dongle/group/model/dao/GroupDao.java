@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GroupDao {
 	
@@ -139,5 +140,40 @@ public class GroupDao {
 		}
 		return editList;
 	}
+	   
+	   public GroupMember selectGmInfo(Connection conn, int gNo,int memberNo)
+	   {
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      GroupMember gm = null;
+	      String sql=prop.getProperty("selectGmInfo");
+	      System.out.println("dao2: "+sql);
+	      try {
+	         pstmt=conn.prepareStatement(sql);
+	         System.out.println("dao"+sql);
+	         pstmt.setInt(1, gNo);
+	         pstmt.setInt(2, memberNo);
+	         
+	         rs=pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	            gm=new GroupMember();
+	            gm.setGroupNo(rs.getInt("group_no"));
+	            gm.setMemberNo(rs.getInt("member_no"));         
+	            gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
+	            gm.setGroupMemberImagePath(rs.getString("gruop_member_image_path"));
+	            gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
+	            gm.setBlackistYN(rs.getString("blacklist_yn"));
+	            gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+	         }
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }
+	      System.out.println("dao: "+gm);
+	      return gm;
+	   }
 
 }
