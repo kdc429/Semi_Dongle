@@ -71,7 +71,7 @@ $(function(){
 	<div id="modalImg-div">
 		<hr>
 		<%for(GalleryPath g:gplist){ %>
-			<img class="modalImg" src="<%=request.getContextPath()%>/<%=g.getGalFilePath()%>" >
+			<img class="modalImg" src="<%=request.getContextPath()%>/<%=g.getGalFileOldPath()%>" >
 		<%} %>
 		<hr>
 	</div>
