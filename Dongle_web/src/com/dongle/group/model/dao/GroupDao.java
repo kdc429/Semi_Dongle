@@ -30,7 +30,7 @@ public class GroupDao {
 		}
 	}
 	
-	public List<Group> selectGroup(Connection conn, String id){ //가입한 동글 리스트 데이터 dao
+	public List<Group> selectGroup(Connection conn, String id){ //가입한 동글 리스트 데이터 dao (주소 카테고리 제외, 추가예정)
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -71,7 +71,7 @@ public class GroupDao {
 		
 	}
 	
-	public Group selectGrInfo(Connection conn,int gNo) { // 동글정보 객체 dao
+	public Group selectGrInfo(Connection conn,int gNo) { // 동글정보 객체 dao (주소 카테고리 제외, 추가예정)
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -138,6 +138,45 @@ public class GroupDao {
 			close(pstmt);
 		}
 		return editList;
+	}
+	
+	public List<Group> selectRank(Connection conn){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Group g=null;
+		List<Group> rankList=new ArrayList();
+		String sql=prop.getProperty("selectRank");
+		
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				g=new Group();
+				g.setMemberNo(rs.getInt("member_no"));
+				g.setGroupNo(rs.getInt("group_no"));
+				g.setGroupName(rs.getString("group_name"));
+				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setGroupDateCtg(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupIntro(rs.getString("group_introduce"));
+				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				
+				rankList.add(g);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return rankList;
 	}
 
 }

@@ -152,18 +152,19 @@ i[class^=icon-chevron]{
         <br>
 
         
-        총 사용 금액 : <span id="cast2"></span> <input type="text" name="text" id="text2">
+        총 사용 금액 : <span id="cast2"></span> <input type="text" name="text" id="text2"> &nbsp; <button class="btn" onclick="input3()">입력</button>
         <br>
 
          ---------------------------------------------------------------------
          <br>
 
         남은 회비 : <span id="cast3"></span>
-        <button class="btn" onclick="input3()">입력</button>
         
-        <button  class="btn" onclick="rec()">영수증보기</button>
+        <div id='receipt_btn'>
+        	<button  class="btn" onclick="rec()">영수증보기</button>
+        </div>
         <div id="receipt">
-          <img src="http://image.kmib.co.kr/online_image/2018/0114/611211110012048428_1.jpg"></p>
+          <img src="http://image.kmib.co.kr/online_image/2018/0114/611211110012048428_1.jpg">
         </div>
 
 

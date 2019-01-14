@@ -10,7 +10,46 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<style>
+	.tex{
+		border-radius: 3px;
+		width: 280px;
+		height: 30px;
+		margin: 5px;
+	}
+
+	#emp{
+		
+		left: 30%;
+		width: 500px;
+		position: absolute;
+		left: 710px;
+		top: 300px;
+	}
+
+	.btn{
+		width: 100px;
+		margin-left: 130px;
+		padding-right: 80px;
+		display: inline-block;
+		margin-top: 30px;
+	}
+
+	.btn_s{
+		width: 65px;
+		height: 30px;
+	}
+	
+	.logo-text {
+	font-family: 'Sunflower';
+	font-size: 30px;
+	/* margin-left: 50px; */
+}
+</style>
 </head>
 <body>
 
@@ -75,14 +114,17 @@
 	</script>
 
 	<section id='enroll-container'>
+	
+	<div id="emp">
+	<div class="logo-text">회원가입</div>
 		<form name='memberEnrollFrm' action="<%=request.getContextPath()%>/memberEnrollEnd" 
 		method="post" onsubmit="return fn_enroll_validate();">
 			<table>
 				<tr>
 					<th>아이디</th>
 					<td>
-						<input type="text" placeholder="4글자이상" 
-						name="userId" id="userId_" required>
+						<input type="text"  class="tex" placeholder="4글자이상" 
+						name="userId" id="userId_"  class="tex" required>
 						<input type="button" value="중복검사" 
 						onclick="fn_checkduplicate();"/>
 						<input type='hidden' name="idValid" value="0"/> 
@@ -91,21 +133,21 @@
 				<tr>
 					<th>패스워드</th>
 					<td>
-						<input type="password"  
+						<input type="password" class="tex"  
 						name="password" id="password_" required>
 					</td>
 				</tr>
 				<tr>
 					<th>패스워드확인</th>
 					<td>
-						<input type="password"  
+						<input type="password" class="tex"  
 						id="password_2" required>
 					</td>
 				</tr>
 				<tr>
 					<th>이름</th>
 					<td>
-						<input type="text"  
+						<input type="text" class="tex"  
 						id="userName" name="userName" required>
 					</td>
 				</tr>
@@ -123,7 +165,7 @@
 				<tr>
 					<th>생년월일</th>
 					<td>
-						<input type="text"  
+						<input type="text"  class="tex" 
 						id="age" name="age" 
 						placeholder="931230" required>
 					</td>
@@ -140,14 +182,14 @@
 				<tr>
 					<th>주소</th>
 					<td>
-						<input type="text"  
+						<input type="text"  class="tex"
 						id="address" name="address" required>
 					</td>
 				</tr>
 				<tr>
 					<th>이메일</th>
 					<td>
-						<input type="email"  
+						<input type="email"   class="tex"
 						id="email" name="email" 
 						placeholder="db123@dfd.com" required>
 					</td>
@@ -178,10 +220,14 @@
 					</td>
 				</tr>	 -->														
 			</table>
-			<input type="submit" value="가입"/>
-			<input type="reset" value="취소"/>
+			
+			<div class="btn">
+				<input type="submit" class="btn_s" value="가입"/>
+			</div>
+			<input type="reset" class="btn_s" value="취소"/>
 
 		</form>
+		</div>
 		<form action="" name="checkIdDuplicateFrm">
 			<input type="hidden" name="userId"/>
 		</form>	

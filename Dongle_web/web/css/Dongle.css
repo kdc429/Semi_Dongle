@@ -1,5 +1,13 @@
+@font-face { 
+	font-family: 'YanoljaYacheR'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YanoljaYacheR.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
 body {
 	/* position: absolute; */
+	font-family: 'YanoljaYacheR';
 	display: flex;
 	flex-direction: column;
 	top: 0;
@@ -20,15 +28,55 @@ div {
 	height: auto;
 }
 
-.headerBack .logo {
+.logo-back{
+	
+	display:flex;
+	justify-content: space-between;
+}
+.logo{
 	font-size: 50px;
 	font-family: 'Bungee', cursive;
 	
 }
 
 .bar {
-	background-color: rgba(130, 238, 41, 0.8);
-	font-family: 'Open Sans', sans-serif;
+	background-color: rgba(130, 238, 41, 0.7);
+	font-family: 'YanoljaYacheR';
+	font-size:20px;
+	height:35px;
+	display:flex;
+	justify-content:flex-end;
+	align-items:flex-end;
+	
+}
+.intro{
+	float:left;
+	left:0;
+}
+
+.user-back{
+	
+	display:flex;
+	justify-content:flex-end;
+	align-items:flex-end;
+	height:30px;
+	
+}
+
+.img-icon{
+	background-color: rgba(130, 238, 41);
+	height:35px;
+	border:0;
+	outline:0;
+	/* background-color: rgba(0,0,0,0); */
+	
+}
+.user-img{
+	max-height:33px;
+	max-width:33px;
+	
+	width:auto;
+	height:auto;
 }
 
 section>.myDongle {
@@ -38,10 +86,10 @@ section>.myDongle {
 
 section>.editorPick {
 	width: 1024px;
-	height: 450px;
+	height: 420px;
 }
 
-section>.dongleRank {
+section>.dongle-rank {
 	width: 1024px;
 	height: 300px;
 }

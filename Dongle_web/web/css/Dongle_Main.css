@@ -1,17 +1,20 @@
+@font-face { 
+	font-family: 'S-CoreDream-3Light'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); 
+	font-weight: normal; font-style: normal; 
+}
 .bar {
 	text-align: right;
 	box-shadow: 4px 4px rgba(112, 110, 110, 0.3);
 }
-
+/* 가입한 동글 스타일 */
 .carousel-back {
 	display: flex;
 	justify-content: space-between;
+	border-radius:10px 10px;
 	background-color: rgba(195, 195, 195, 0.5);
 }
-.editorPick{
-	width: 1024px;
-	height: 400px;
-}
+
 .carousel-box {
 	
 	white-space: nowrap;
@@ -53,11 +56,20 @@
 	
 }
 
-.dongle-icon>a {
+.join-btn{
+	background-color: rgb(255,255,255,0);
+	border:0;
+	outline:0;
+	position:relative;
+}
+.group-name{
+	opacity:0;
+	position:absolute;
+	text-align: center;
+	width:130px;
+	transform:translateY(50%);
+	font-family: 'S-CoreDream-3Light';
 	
-	width: 130px;
-	height: 130px;
-	text-decoration: none;
 }
 
 .icon:hover{
@@ -113,8 +125,39 @@
 	border-radius: 10px 10px 10px 10px;
 	font-size: 50px;
 }
+.cre-icon-back{
+	
+	display:flex;
+	justify-content:flex-end;
+	align-items:flex-end;
+	height:30px;
+	
+}
 
+.img-icon{
+	float:right;
+	height:35px;
+	border:0;
+	outline:0;
+	background-color: rgba(130, 238, 41);
+	border-radius:15px 15px;
+	
+}
+.create-img{
+	max-height:33px;
+	max-width:33px;
+	align-items:right;
+	width:auto;
+	height:auto;
+}
+/* 에디터픽 스타일 */
+.editorPick{
+	width: 1024px;
+	height: 400px;
+	border-radius:10px 10px;
+}
 #carousel_section {
+	border-radius:10px 10px;
 	width: 1024px;
 	height: 350px;
 	background-color: rgba(195, 195, 195, 0.5);
@@ -150,20 +193,17 @@
 	font-family: 'Bungee', cursive;
 	text-align: center;
 }
-.join-btn{
-	background-color: rgb(255,255,255,0);
-	border:0;
-	outline:0;
-}
+
 
 .editor-content{
-	font-family: 'Noto Serif', serif;
 	font-size:15px;
 	display:flex;
 	justify-content:center;
 	align-items:center;
 	width:510px;
 	height:350px;
+	font-family: 'S-CoreDream-3Light';
+	border-radius:10px 10px;
 }
 .editor-img-back{
 	background-color:rgb(0,0,0,0.6);
@@ -173,7 +213,9 @@
 	display:flex;
 	justify-content:center;
 	align-items:center;
+	border-radius:10px 10px;
 }
+
 .eImg{
 	max-width:510px;
 	max-height:350px;
@@ -182,3 +224,71 @@
 	height:auto;
 	border-radius:10px 10px;
 }
+
+.eContent{
+	font-size:20px;
+}
+
+.set-back{
+	
+	display:flex;
+	justify-content:flex-end;
+	align-items:flex-end;
+	height:30px;
+	
+}
+
+.set-img{
+	max-height:33px;
+	max-width:33px;
+	align-items:right;
+	width:auto;
+	height:auto;
+}
+
+/* 동글 랭킹 스타일 */
+
+.dongle-ranker{
+	display:flex;
+	justify-content:space-between;
+	width: 1024px;
+	height: 200px;
+	border-radius:10px 10px;
+	background-color: rgba(195, 195, 195, 0.5);
+}
+
+.ranker-img-back{
+	width: 300px;
+	height: 200px;
+	background-color:rgb(0,0,0,0.6);
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border-radius:10px 10px;
+}
+
+.ranker-intro{
+	width: 300px;
+	height: 200px;
+	border-radius:10px 10px;
+	font-size:15px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border-radius:10px 10px;
+	font-family: 'S-CoreDream-3Light';
+	
+}
+
+.rImg{
+	max-width:510px;
+	max-height:150px;
+	align-items:center;
+	width:auto;
+	height:auto;
+	border-radius:10px 10px;
+}
+
+
+

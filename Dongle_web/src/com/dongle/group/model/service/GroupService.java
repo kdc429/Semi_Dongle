@@ -39,5 +39,14 @@ public class GroupService {
 		return editList;
 		
 	}
+	
+	public List<Group> selectRank(){
+		
+		Connection conn=getConnection();
+		List<Group> rankList=new GroupDao().selectRank(conn);
+		
+		close(conn);
+		return rankList;
+	}
 
 }
