@@ -34,7 +34,7 @@ div {
 	justify-content: space-between;
 }
 .logo{
-	font-size: 50px;
+	font-size: 80px;
 	font-family: 'Bungee', cursive;
 	
 }
@@ -57,24 +57,29 @@ div {
 .user-back{
 	
 	display:flex;
-	justify-content:flex-end;
-	align-items:flex-end;
-	height:30px;
+	justify-content:center;
+	align-items:center;
+	height:auto;
+	margin-top:100px;
 	
 }
-
 .img-icon{
-	background-color: rgba(130, 238, 41);
+	width:85px;
 	height:35px;
 	border:0;
 	outline:0;
-	/* background-color: rgba(0,0,0,0); */
-	
+	background-color: rgba(0, 0, 0,0);
+	border-radius:15px 15px;
+	position:relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index:1;
 }
 .user-img{
 	max-height:33px;
 	max-width:33px;
-	
+	position:absolute;
 	width:auto;
 	height:auto;
 }
@@ -96,4 +101,15 @@ section>.dongle-rank {
 
 .loginMember {
 	float: right;
+}
+.dongle-guide{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.guide-btn{
+	width:190px; 
+	background-color: rgba(0,0,0,0);
+	border-radius: 10px 10px;
 }

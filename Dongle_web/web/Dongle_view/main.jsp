@@ -20,9 +20,10 @@
 		<!-- 동글 개설하기 버튼! -->
 		<div class="cre-icon-back">
 			<button class="img-icon">
-				<span>동글 개설하기</span>&nbsp;&nbsp;
+				<span class="sub-icon">동글개설하기</span>
 				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
 			</button>
+			
 		</div>
 	</div>
 	<h2 class="item-logo">MY DONGLE</h2>
@@ -40,7 +41,7 @@
                     	for(Group g:list){
                     %>
                     	<!-- 가입한 동글 리스트 -->
-                    	<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>" name="join">
+                    	<form action="<%=request.getContextPath()%>/communityJoin" name="join">
                     	<li class="dongle-icon">
                     		<div class="icon-back">
                     			<button class="join-btn" type="submit"> 
@@ -51,7 +52,6 @@
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
-                    		
                     		</div>
                     	</li>
                     	</form>
@@ -72,9 +72,9 @@
 		<% if(loginMember.getMemberId().equals("admin")){ %>
 			<div class="set-back">
 				<button class="img-icon">
-					<span>설정</span>
-					<img class="set_img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
+					<img class="set-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
 				</button>
+				<span class="sub-icon">설정</span>
 			</div>
 		<%} %>
 	</div>
