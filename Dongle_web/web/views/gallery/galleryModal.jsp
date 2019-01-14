@@ -117,7 +117,7 @@ $(function(){
 		<%} %>
 	</table>
 	<script>
-		<%-- $(function(){
+		$(function(){
 			$('.btn-reply').on('click',function(e){
 				<%if(loginMember!=null){%>
 					var tr=$("<tr></tr>");
@@ -151,7 +151,7 @@ $(function(){
 					tr.find("textarea").focus();
 				<%}%>
 			});
-		}) --%>
+		});
 	</script>
 	
 </body>
