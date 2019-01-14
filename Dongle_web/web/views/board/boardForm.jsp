@@ -55,6 +55,7 @@
 	</script>
 </head>
 <body>
+<p>짚파일로 묶는다?<p>
 	<div class="container">
 		<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
