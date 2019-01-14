@@ -31,25 +31,24 @@ public class CommunityJoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
-		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
-		
-		
+		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버	
 		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";
 		
 		if(g==null) { //데이터 없을시 에러페이지 이동으로 변경예정
-			msg="접속실패!";
+			msg="접속실패! 다시 시도해주세요.";
 			loc="/login";
 			request.getRequestDispatcher(view).forward(request, response);
 			request.setAttribute("loc",loc);
+			request.setAttribute("msg", msg);
 		}else {
 			loc="/Dongle_Community_view/Community_main.jsp";
 			request.setAttribute("group", g);
+			request.setAttribute("loginMember", loginMember);
 			request.getRequestDispatcher(loc).forward(request, response);
 		}
 		

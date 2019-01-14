@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 /* albumView - 앨범화면 */
-section#album-container *{ 
+div#album-container *{ 
 padding: 0px;
 font-family:"a흑진주B";
 }
-section#album-container form#albumFolder> table tr td.albumFolBox{
+div#album-container form#albumFolder> table tr td.albumFolBox{
 	font-family:"a흑진주B";
 	border:1px solid red;
 	display:inline-block;
@@ -13,7 +13,7 @@ section#album-container form#albumFolder> table tr td.albumFolBox{
 	align-items: center;
 	padding:15px;
 }
-section#album-container form#albumFolder> table tr td.albumFolBox .alImg,p{
+div#album-container form#albumFolder> table tr td.albumFolBox .alImg,p{
 	display:block;
 	border: 1px solid orange;
 }
@@ -24,11 +24,14 @@ section#album-container form#albumFolder> table tr td.albumFolBox .alImg,p{
 }
 
 /* galleryView - 갤러리 사진(4x3) */
+section#gallery-container{position:relative;}
 section#gallery-container *{ 
+	position: relative;
 padding: 0px;
 font-family:"a흑진주B";
 }
-section#gallery-container form#galleryList> table tr td.galleryBox{
+/* section#gallery-container div#galleryList{position: relative;} */
+section#gallery-container div#galleryList> table tr td.galleryBox{
 	font-family:"a흑진주B";
 	border:1px solid red;
 	display:inline-block;
@@ -36,7 +39,7 @@ section#gallery-container form#galleryList> table tr td.galleryBox{
 	align-items: center;
 	padding:15px;
 }
-section#gallery-container form#galleryList> table tr td.galleryBox .galImg{
+section#gallery-container div#galleryList> table tr td.galleryBox .galImg{
 	display:block;
 	border: 1px solid orange;
 }
@@ -44,9 +47,10 @@ section#gallery-container form#galleryList> table tr td.galleryBox .galImg{
 	width:120px; height:120px;
 	border-radius: 3px;
 }
-section#gallery-container form#galleryList> table tr td.galleryBox .galImg:hover{
+section#gallery-container div#galleryList> table tr td.galleryBox .galImg:hover{
 	background-color:rgb(200,200,200);
 }
-section#gallery-container table tr td{border:1px solid red;}
-section#gallery-container table tr td ul.pagnation li{text-align:center; color:green;}
-section#gallery-container table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50)}
+section#gallery-container div#pag-div{position:relative;}
+section#gallery-container table tr td{border:1px solid red;align-items: center;}
+section#gallery-container table tr td ul.pagnation li{text-align:center; align-items: center;color:green;}
+section#gallery-container table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50);align-items: center;}

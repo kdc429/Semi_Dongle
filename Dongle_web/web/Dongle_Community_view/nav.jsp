@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%
-	
-	System.out.println(request.getRequestURL());
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@page import="com.dongle.group.model.vo.Group,com.dongle.member.model.vo.Member"%>
+	<%
+		Group gg = (Group)request.getAttribute("group");
+		Member loginMember2=(Member) request.getAttribute("loginMember");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,6 @@
 <title>asideRight</title>
 </head>
 <script>
-<<<<<<< HEAD
 	var url;
 	var params;
 	var params2=[];
@@ -37,13 +36,6 @@
 		console.log("<%=request.getContextPath()%>/albumGet?groupNo="+gNo+"&adminId="+mNo);
 		return gNo,mNo;
 		
-	function galleryTag(){
-		location.href="<%=request.getContextPath()%>/albumGet?groupNo="+gNo+"&adminId="+mNo;
-		console.log("<%=request.getContextPath()%>/albumGet?groupNo="+gNo+"&adminId="+mNo);
-	}
-	};
-
-
 
 
 </script>
@@ -60,7 +52,7 @@
 				<br>
 				<button class='btn btn-primary' value='3'>피드</button>
 				<br>
-				<button class='btn btn-primary' onclick="galleryTag();" >갤러리</button>
+				<button class='btn btn-primary' >갤러리</button>
 				<br>
 				<button class='btn btn-primary' value='5'>일정</button>
 				<br>

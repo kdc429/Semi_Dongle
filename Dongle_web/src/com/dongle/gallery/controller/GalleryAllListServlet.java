@@ -1,16 +1,23 @@
 package com.dongle.gallery.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.gallery.model.service.GalleryService;
+import com.dongle.gallery.model.vo.GalleryCommentJoin;
+import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.member.model.vo.Member;
+
 /**
  * Servlet implementation class GalleryAllListServlet
  */
-@WebServlet("/galleryAllList")
+@WebServlet("/gallery/galleryAllList")
 public class GalleryAllListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +36,20 @@ public class GalleryAllListServlet extends HttpServlet {
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		String albumCode = request.getParameter("albumCode");
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
+		int galNo=Integer.parseInt(request.getParameter("galNo"));
+		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
 		System.out.println(groupNo+" : "+albumCode+" : "+galFileNo);
+		
+		//해당 갤러리 리스트 뽑아오기
+		List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,loginMember.getMemberNo(),galFileNo);
+		System.out.println("gp: "+gplist.get(0).getGalFilePath());
+		//갤러리 해당 댓글 뽑아오기
+		List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
+		
+		request.setAttribute("gplist", gplist);
+		request.setAttribute("gclist", gclist);
+		request.setAttribute("groupNo", groupNo);
+		request.getRequestDispatcher("/views/gallery/galleryModal.jsp").forward(request, response);
 	
 	}
 

@@ -45,7 +45,7 @@ body {
         flex-direction: row; -> 가로로 정렬
          */
 .center {
-	position: absolute;
+	position: relative;
 	display: flex;
 	flex-direction: row;
 }

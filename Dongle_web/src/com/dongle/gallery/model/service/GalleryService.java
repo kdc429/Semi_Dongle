@@ -10,13 +10,15 @@ import java.util.List;
 
 import com.dongle.gallery.model.dao.GalleryDao;
 import com.dongle.gallery.model.vo.AlbumCategory;
+import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GalleryService {
 	
 	public GalleryService() {}
 	
-	public List<AlbumCategory> albumGet(String groupNo){
+	public List<AlbumCategory> albumGet(int groupNo){
 		Connection conn = getConnection();
 		List<AlbumCategory> list=new GalleryDao().albumGet(conn,groupNo);
 		if(list.size()!=0)
@@ -47,11 +49,47 @@ public class GalleryService {
 		return result;
 	}
 	
-	public AlbumCategory checkAlbumName(AlbumCategory ac)
+	public AlbumCategory checkAlbumName(AlbumCategory ac, int groupNo)
 	{
 		Connection conn = getConnection();
-		AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac);
+		AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac,groupNo);
 		close(conn);
 		return oldAc;
+	}
+	public int insertAlbum(String albumNameP,int groupNo)
+	{
+		Connection conn = getConnection();
+		int rs= new GalleryDao().inserAlbum(conn,albumNameP,groupNo);
+		if(rs!=0)
+		{
+			commit(conn);
+		}
+		else {rollback(conn);}
+		return rs;
+	}
+	
+	public GroupMember groupMemberCheck(int groupNo,int memberNo)
+	{
+		Connection conn=getConnection();
+		GroupMember gm= new GalleryDao().groupMemberCheck(conn,groupNo,memberNo);
+		close(conn);
+		return gm;
+		
+	}
+	public List<GalleryCommentJoin> selectGalCommentList(int groupNo,int galFileNo,int galNo)
+	{
+		Connection conn = getConnection();
+		List<GalleryCommentJoin> gclist=new GalleryDao().selectGalCommentList(conn,groupNo,galFileNo,galNo);
+		close(conn);
+		return gclist;
+		
+	}
+	
+	public List<GalleryPath> selectOneList(int groupNo,int galNo,int memberNo,int galFileNo)
+	{
+		Connection conn = getConnection();
+		List<GalleryPath> gplist = new GalleryDao().selectOneList(conn,groupNo,galNo,memberNo,galFileNo);
+		close(conn);
+		return gplist;
 	}
 }
