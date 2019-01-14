@@ -273,7 +273,6 @@ public class GalleryDao {
 			pstmt.setInt(1, groupNo);
 			pstmt.setInt(2, memberNo);
 			pstmt.setInt(3, galNo);
-			pstmt.setInt(4, galFileNo);
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
