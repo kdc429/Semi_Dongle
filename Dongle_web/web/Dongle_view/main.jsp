@@ -87,7 +87,7 @@
 					for(EditPickGroup epg : editList){ %>
 				<li>
 					<!-- 에디터 픽 선정 동글 리스트 -->
-					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" method="post" name="edit-pick">
+					<form action="<%=request.getContextPath()%>/communityJoin" method="post" name="edit-pick">
 						<!-- 여기서 그룹 넘버 전송 -->
 						<div class="editor-img-back">
 							<div class="editor-img">

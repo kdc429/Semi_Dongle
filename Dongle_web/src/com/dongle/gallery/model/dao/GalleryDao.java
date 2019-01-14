@@ -81,10 +81,12 @@ public class GalleryDao {
 						rs.getInt("group_no"),
 						rs.getString("album_code"),
 						rs.getInt("gal_file_no"),
-						rs.getString("gal_file_path"),
+						rs.getString("gal_file_old_path"),
 						rs.getInt("member_no"),
 						rs.getDate("gal_enroll_date"),
-						rs.getInt("gal_no")
+						rs.getInt("gal_no"),
+						rs.getString("gal_file_new_path"),
+						rs.getString("gal_file_content")
 						);
 				list.add(gp);
 			}
@@ -280,10 +282,12 @@ public class GalleryDao {
 						rs.getInt("group_no"),
 						rs.getString("album_code"),
 						rs.getInt("gal_file_no"),
-						rs.getString("gal_file_path"),
+						rs.getString("gal_file_old_path"),
 						rs.getInt("member_no"),
 						rs.getDate("gal_enroll_date"),
-						rs.getInt("gal_no")
+						rs.getInt("gal_no"),
+						rs.getString("gal_file_new_path"),
+						rs.getString("gal_file_content")
 						);
 				gplist.add(gp);
 			}
@@ -297,6 +301,58 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		return gplist;
-		
+	}
+	//gal_no수정필요
+	public int insertGallery(Connection conn, int groupNo,String albumCode,GalleryPath gp)
+	{
+		PreparedStatement pstmt=null;
+		int rs=0;
+		String sql = prop.getProperty("insertGallery");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setString(2, albumCode);
+			pstmt.setString(3, gp.getGalFileOldPath());
+			pstmt.setInt(4, gp.getMemberNo());
+			pstmt.setInt(5, gp.getGalNo()+1);
+			pstmt.setString(6, gp.getGalFileNewPath());
+			pstmt.setString(7, gp.getGalFileContent());
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return rs;
+	}
+	
+	public int maxGalNo(Connection conn,int groupNo, String albumCode)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet result=null;
+		int rs=0;
+		String sql=prop.getProperty("maxGalNo");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setString(2, albumCode);
+			result=pstmt.executeQuery();
+			while(result.next())
+			{
+				rs=result.getInt("gal_no_cnt");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(result);
+			close(pstmt);
+		}
+		return rs;
 	}
 }

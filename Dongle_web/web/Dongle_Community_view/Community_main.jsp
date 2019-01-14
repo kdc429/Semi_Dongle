@@ -47,7 +47,9 @@
             <div class='logoback' style='position:relative;width:1024px;height: auto'>
                 <!-- 로고 grid -->
                 <div class='logo' style='width:1024px; height: auto; background-color:rgba(0, 10, 40, 0.8);'>
-                    <h2 style="color:rgb(250,237,125); font-family: 'Bungee', cursive; margin-left:15px;">DONGLE</h2>
+                    <h2 onclick="logoCk()" style="color:rgb(250,237,125); font-family: 'Bungee', cursive; margin-left:15px; width:100px">
+                    	DONGLE
+                    </h2>
                 </div>
             </div>
         </header>
@@ -99,8 +101,11 @@ $(function(){
 	})
 });
 
-function communityHome(){
-	location.href="<%=request.getContextPath()%>/communityJoin?gNo=<%=g.getGroupNo()%>&mNo=<%=loginMember.getMemberId()%>";
+function comunnityHome(){
+	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+}
+function logoCk(){
+	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 
 </script>

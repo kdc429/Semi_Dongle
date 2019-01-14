@@ -62,7 +62,22 @@
 		});
 	});
 	$(function(){
-		
+		//사진 추가하기 form
+		$('.insert-bnt').click(function(){
+			console.log("tt");
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/insertGallery?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#gallery-container').html(data);
+				},
+				error: function(){console.log("gg");}
+			});
+		});
+	});
+	$(function(){
+		//모달띄우기
 		$('.galImg').click(function(event){
 			var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
 			var galNo = $(event.target).nextAll('#galNo')[0].value;
@@ -77,6 +92,7 @@
 				
 			});	
 		});
+		
 	});
 </script>
 <title>Insert title here</title>
@@ -85,8 +101,8 @@
 <section id="gallery-container">
 	<div id="btn-div" style="position:relative;width:610px;">
 		<hr>
-		<span><button id="list-bnt" name="list-bnt">목록으로</button></span>
-		<span><button id="insert-bnt" name="inisert-bnt">사진 추가하기</button></span>
+		<span><button type="submit" id="list-bnt" name="list-bnt">목록으로</button></span>
+		<button class="insert-bnt" name="insert-bnt" >사진 추가하기</button>
 	</div>
 	<br>
 	<div id="galleryList">
@@ -97,7 +113,7 @@
 							<tr>
 							</tr>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=t.getGalFileOldPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
@@ -107,7 +123,7 @@
 						<%} 
 						else{%>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=t.getGalFileOldPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>

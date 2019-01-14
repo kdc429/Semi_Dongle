@@ -37,10 +37,12 @@ section#gallery-container div#galleryList> table tr td.galleryBox{
 	display:inline-block;
 	text-align: center;
 	align-items: center;
-	padding:15px;
+	padding:5px;
 }
 section#gallery-container div#galleryList> table tr td.galleryBox .galImg{
+	
 	display:block;
+	margin-left:20px;
 	/* border: 1px solid orange; */
 }
 .galImg{
