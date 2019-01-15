@@ -28,6 +28,7 @@
 </head>
 
 <style>
+
 	tbl{
 		margin-top: 20px;
 	}
@@ -43,6 +44,7 @@
 		font-weight: bold;
 		font-size: 30px;
 	}
+	section div#mem_list_div table#tbl>tr th,td{text-align:center;}
 
 </style>
 
@@ -147,7 +149,7 @@
             	<span id="header" style='text-align: center;'></span>
             	<br/><br/>
 
-	            <div id="mem_list_div" style="padding: 0 0 0 30%;"></div>
+            	<div id="mem_list_div" style="padding: 0 0 0 30%;"></div>
            </div>
            
             
