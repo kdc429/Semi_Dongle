@@ -61,18 +61,18 @@ public class MemberDao {
 			
 			if(rs.next()) {//일단 아이디 패스워드만 받음 추후 수정할 예정
 				data=new Member();
-				data.setMemberNo(rs.getInt("MEMBER_NO"));
-				data.setMemberId(rs.getString("MEMBER_ID"));
-				data.setMemberPwd(rs.getString("MEMBER_PWD"));
-				data.setMemberName(rs.getString("MEMBER_NAME"));
-				data.setGender(rs.getString("MEMBER_GEN"));
-				data.setSsn(rs.getString("MEMBER_SSN"));
-				data.setPhone(rs.getString("MEMBER_PHONE"));
-				data.setAddress(rs.getString("MEMBER_ADDRESS"));
-				data.setEmail(rs.getString("MEMBER_EMAIL"));
-				data.setEnrollDate(rs.getDate("MEMBER_ENROLL_DATE"));
-				data.setBlackList(rs.getInt("BLACKLIST_YN"));
-				data.setReportCount(rs.getInt("REPORT_MEMBER_COUNT"));
+				data.setMemberNo(rs.getInt("member_no"));
+				data.setMemberId(rs.getString("member_id"));
+				data.setMemberPwd(rs.getString("member_pwd"));
+				data.setMemberName(rs.getString("member_name"));
+				data.setGender(rs.getString("member_gen"));
+				data.setSsn(rs.getString("member_ssn"));
+				data.setEmail(rs.getString("member_email"));
+				data.setPhone(rs.getString("member_phone"));
+				data.setAddress(rs.getString("member_address"));
+				data.setEnrollDate(rs.getDate("member_enroll_date"));
+				data.setBlackList(rs.getString("blacklist_yn"));
+				data.setReportCount(rs.getInt("report_member_count"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
