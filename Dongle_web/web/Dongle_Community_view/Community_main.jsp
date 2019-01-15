@@ -27,6 +27,25 @@
  
 </head>
 
+<style>
+	tbl{
+		margin-top: 20px;
+	}
+	th{
+		border : 1px solid darkgray;
+	}
+	td
+	{
+		border: 1px solid lightgray;
+	}
+	caption{
+		font-family: '나눔스퀘어라운드 Regular';
+		font-weight: bold;
+		font-size: 30px;
+	}
+
+</style>
+
 <body>
 	<script>
 		$(function(){
@@ -80,20 +99,22 @@
 				</div>
 				<!-- 회원정보 -->
 				<div class="user_info">
-					<table border="1px solid black">
+					<table id="user_info_tb" style="width:138px" border="1px solid black">
 						<tr>
-						<td rowspan="2"><img id="user_img" src="<%=request.getContextPath()%>/images/member_img/<%=m.getMemberImaPath()%>"></td>						
-							<td class="gm_info">이름 : <%=m.getMemberName() %></td>
+						<td style="width:65px" rowspan="2">
+							<img id="user_img" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImagePath()%>" style="width:60px">
+						</td>						
+							<td class="gm_info">닉네임 : <%=gm.getGroupMemberNickname()%></td>
 						</tr>
 						<tr>
 							<td class="gm_info" style="font-size: 9px">가입일 : <%=gm.getGroupMemberEnrollDate() %></td>
 						</tr>
 						<tr> 							
-							<td colspan="2" class="gm_info">닉네임 : <%=gm.getGroupMemberNickname()%></td>
+							<td colspan="2" class="gm_info">작성글 수 : </td>
 						</tr>					
 					</table>
 
-				</div>
+				</div><br>
 				<!-- 소개글 -->
 				<div class="sideitem2"
 					style='border: 1px solid rgba(255,0,0,0.1);  right: 10%; height: 150px'>
@@ -122,18 +143,81 @@
 	</aside>
         <!-- 게시판 -->
         <section>
-            <div class="main center" style='width:684px;height:auto; background-color:white; border:1px solid black;'>
-                <br><br>
-                651651651651
+            <div class="main center" id="main_center" style='width:684px;height:auto; background-color:white; align-content: center;'>
+            	<span id="header" style='text-align: center;'></span>
+            	<br/><br/>
+
+	            <div id="mem_list_div" style="padding: 0 0 0 30%;"></div>
+           </div>
+           
             
-
-
-
-                
-
-            </div>
-
-        </section>
+       </section>
+       
+       <script> 		
+       <%--        	$('#dongle_mem_btn').click(function(){
+              		$.ajax({
+              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+              			type:"get",
+              			dataType:"json",
+              			success:function(data){
+              				var thead="<br/><caption><%=g.getGroupName()%>의 멤버보기</caption><tr><th id='tbl_nav'>닉네임</th><th id='tbl_nav'>가입일</th></tr>";
+              		 		var thtml="";
+              			     for(var i = 0; i < data.length; i++)
+              		            {
+              			    	 	var tbody= "<tr><td>"+data[i]['groupMemberNickname']+"</td>";
+              			    	 	
+              			    	 	thtml+=tbody;
+              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td><tr>"
+              			    	 	
+              		            }
+              			     
+              			     thead += thtml;
+              			     console.log(thtml);
+              			     $('#tbl').html(thead);
+              			     
+              			}
+              		});   		
+              	}); --%>
+              	
+                 	$('#dongle_mem_btn').click(function(){
+              		$.ajax({
+              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+              			type:"get",
+              			dataType:"json",
+              			success:function(data){
+              				$('#content-div').html(data);
+              				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+              				//var h2_main = $('<h2></h2>');
+              				var tbl = $('<table id="tbl"></table>');
+              				var thead="<br/><tr><th>닉네임</th><th>가입일</th></tr>";
+              				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
+              		 		var thtml="";
+              			     for(var i = 0; i < data.length; i++)
+              		            {
+              			    	 	/* var tbody= "<tr>"; */
+              			    	 	thtml+="<tr>";
+              			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
+              			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+              			    	 	/* thtml+=tbody; */
+              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+              			    	 	thtml+="</tr>";
+              			    	 	data[i]['groupMemberNickname']
+              		            }
+              			   thead += thtml;
+              			   tbl.append(thtml);
+              			   
+              			     
+              			   console.log(thtml);
+              			   console.log(tbl);
+              			   console.log(h);
+              			 	$('#header').html(h);         			   
+              			    $('#mem_list_div').append(tbl);
+              				
+              			     
+              			}
+              		});   		
+              	});       
+       </script>
         <!-- 오른쪽 사이드 -->
         <aside>
             <div class="sideback center" style="background-color: rgb(228, 228, 228)">

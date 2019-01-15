@@ -66,6 +66,13 @@ public class GroupService {
 			 return result;
 		 }
 
+	public List<GroupMember> selectMemberList(int groupNo) {
+		Connection conn=getConnection();
+		List<GroupMember> list=new GroupDao().selectMemberList(conn, groupNo);
+		close(conn);
+		return list;
+	}
+
 	
 
 }

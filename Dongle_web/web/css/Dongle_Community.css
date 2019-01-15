@@ -8,7 +8,6 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 컨테이너 스타일 */
@@ -37,7 +36,7 @@ body {
 .main {
 	/* display: flex; */
 	/* flex-direction: column; */
-	font-family: '나눔스퀘어라운드 Regular';
+	/*font-family: '나눔스퀘어라운드 Regular';*/
 	justify-content: center;
 	align-items: center;
 	margin-left: 170px;
@@ -50,14 +49,14 @@ body {
          */
 .center {
 	position: absolute;
-	display: flex;
+	/* display: flex; */
 	flex-direction: row;
 	font-family: '나눔스퀘어라운드 Regular';
 }
 
 .sideback {
 	/* position: relative; */
-	/* display: flex; */
+	/*display: flex;*/
 	flex-direction: row;
 	font-family: '나눔스퀘어라운드 Regular';
 }
@@ -65,13 +64,12 @@ body {
 /* 왼쪽 사이드 div
          */
 .sidel {
-	width: 170px;
-	height: auto;
+	 width: 170px;
+	/*height: auto;*/
 	position: fixed;
 	margin-top: 62.8px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
-
 /* 오른쪽 사이드 div */
 .sider {
 	width: 170px;
@@ -93,7 +91,7 @@ body {
 
 /* 왼쪽 사이드 컨텐트 */
 .sideitem1 {
-	margin-left: 15px;
+	margin-left: 15x;
 	margin-right: 15px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
@@ -102,7 +100,6 @@ body {
 	margin-right: 15px; */
 	font-family: '나눔스퀘어라운드 Regular';
 }
-
 
 .profile_img{
 	width: 140px;
@@ -126,22 +123,17 @@ body {
 	cursor: pointer;
 }
 /* 동글 회원 프로필 단추 */
-span{
+/* span{
 	height: 10px;
 	width: 10px;
 	display: block;
 	position: relative;
-}
-#user_img{
- 	width: 60px;
- 	height: 60px;
- 	border-radius: 50px;
-}
-.gm_info{
-	width: 50px;
-}
+} */
 .demoSpan1{
-	height: 5px;	
+	height: 10px;
+	width: 10px;
+	display: block;
+	position: relative;	
 }
 .demoSpan1:before{
 	content: '';
@@ -155,13 +147,24 @@ span{
 	top:0px;
 	left:0px;
 }
+#user_img{
+ 	width: 60px;
+ 	height: 60px;
+ 	border-radius: 50px;
+}
+.gm_info{
+	width: 50px;
+}
 .user_info{
  	display: none;
  	text-align: center;
  	font-family: '나눔스퀘어라운드 Regular';
  	font-size : 11px;
  	position: relative;
- 	padding: 1em;
+ 	/*padding: 1em;*/
+ }
+.user_info_tb{
+	width: 138px;
  }
 #dongle_info
 {
@@ -183,5 +186,7 @@ span{
 	display:inline;
 	/* float: left; */
 
-
  }
+ .tbl{
+ 	left: 45%;
+}

@@ -241,4 +241,38 @@ public class GroupDao {
 		 System.out.println("카운트"+result);
 		 return result;
 	}
+
+	public List<GroupMember> selectMemberList(Connection conn, int groupNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<GroupMember> list=new ArrayList<GroupMember>();
+		String sql=prop.getProperty("selectMemberList");
+
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				GroupMember gm = new GroupMember();
+				gm.setGroupNo(rs.getInt("group_no"));
+				gm.setMemberNo(rs.getInt("member_no"));
+				gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
+				gm.setGroupMemberImagePath(rs.getString("group_member_image_path"));
+				gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
+				gm.setBlacklistYN(rs.getString("blacklist_yn"));
+				gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+				
+				list.add(gm);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 }
