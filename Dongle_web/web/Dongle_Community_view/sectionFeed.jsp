@@ -5,6 +5,7 @@
 	List<Feed> feedList=(List)request.getAttribute("feedList");
 	Group g=(Group)request.getAttribute("group");
 	Member loginMember=(Member)request.getAttribute("loginMember");
+	List<GroupMember> memberList=(List)request.getAttribute("memberList");
 	
 %>
 <!DOCTYPE html>
@@ -109,20 +110,35 @@
             <% if(feedList!=null){ 
             	for(Feed f:feedList){
             %>       <!-- 피드 한칸 -->
-			<div class="feed" style=" height:auto; left:10%; right:10%;">
-			feed
-				<div class="feed-header">
-					<span><%=f.getMemberNo()%></span>
-					<span><%=f.getFeedWriteDate() %></span>
-                </div>
-                <div class="feed-body">
-				<p><%=f.getFeedContent() %></p>
-				</div>
-				<div class="feed-footer">
-                    <a class="comment">∥댓글달기</a>
-                    <a class="repleview">∥댓글보기</a>
-				</div>
-			</div>
+        		<div class="feed" style=" height:auto; left:10%; right:10%;">
+            	feed
+            		<div class="feed-header">
+                		<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
+                		<a><%=f.getMemberNo() %></a>
+                		<span class="write-date"><%=f.getFeedWriteDate() %></span>
+            		</div>
+            	<div class="feed-body">
+                	<textarea type="text" cols="60" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
+                	<button class="file-download">파일명</button>    
+                	<div class="feed-pics">
+                    	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
+                    	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
+                    	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
+                    	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
+                	</div>
+            	</div>
+            	<div class="feed-footer">
+                	<textarea name="" id="" cols="70" rows="1"></textarea>
+                	<button class="comment">∥댓글달기</a>
+                	<button class="repleview">∥댓글보기</a>
+            	</div>
+            	<div class="reple">
+                	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
+                	<a>멤버네임</a>
+                	<div class="reple-content">asljdhfasgfkajsgdfkajsgdvkjasgdvkjsgadkvjsga<br>dkjhgasdfasdfasdfasdfasdfasdfasdfasdfas</div>
+            	</div>
+        	
+			
 			<hr>
 			<%	}
             }	%>

@@ -24,6 +24,7 @@
  <!--    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet"> -->
 	<!-- <link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet"> -->
 	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
 
  
 </head>
@@ -105,7 +106,7 @@
 					<table id="user_info_tb" style="width:138px" border="1px solid black">
 						<tr>
 						<td style="width:65px" rowspan="2">
-							<img id="user_img" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImagePath()%>" style="width:60px">
+							<%-- <img id="user_img" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImagePath()%>" style="width:60px"> --%>
 						</td>						
 							<td class="gm_info">닉네임 : <%=gm.getGroupMemberNickname()%></td>
 						</tr>

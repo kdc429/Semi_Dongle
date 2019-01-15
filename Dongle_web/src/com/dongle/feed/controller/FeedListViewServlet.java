@@ -13,6 +13,7 @@ import com.dongle.feed.model.service.FeedService;
 import com.dongle.feed.model.vo.Feed;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 import com.google.gson.Gson;
 
@@ -52,6 +53,8 @@ public class FeedListViewServlet extends HttpServlet {
 		
 		Group g=new GroupService().selectGrInfo(groupNo);
 		List<Feed> feedList=new FeedService().selectFeed(groupNo,startFeedNo,endFeedNo);
+		List<GroupMember> memberlist = new GroupService().selectMemberList(groupNo);
+		request.setAttribute("memberList",memberlist);
 		request.setAttribute("feedList", feedList);
 		request.setAttribute("group", g);
 		
