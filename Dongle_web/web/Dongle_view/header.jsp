@@ -47,18 +47,21 @@
         <div class="headerBack">
             <div class="bar">
             	<!-- 정보수정 및 로그 아웃 버튼! -->
+            	
             	<div class="user-back">
             		<button class="img-icon">
-            			<span><%=loginMember.getMemberName()%>님, 환영합니다!</span>&nbsp;&nbsp;
+            			<span onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>'"/><%=loginMember.getMemberName()%>님, 환영합니다!</span>&nbsp;&nbsp;
             			<img class="user-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
             		</button>
             	</div>&nbsp;&nbsp;&nbsp;&nbsp;
+            	
             	<div class="user-back">
             		<button class="img-icon">
-            			<span>로그아웃</span>&nbsp;&nbsp;
+            			<span onclick="location.href='<%=request.getContextPath()%>/member/logout'">로그아웃</span>&nbsp;&nbsp;
             			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
             		</button>
             	</div>
+            	
             </div>
             <div class="logo-back">
             	<div style="font-family:'SunFlower'";><h4>당신을 위한 맞춤형 동호회</h4></div>
