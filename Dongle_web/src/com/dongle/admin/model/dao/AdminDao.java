@@ -1,5 +1,7 @@
 package com.dongle.admin.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,9 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
-
-import static common.JDBCTemplate.close;
 
 
 public class AdminDao {
@@ -30,7 +31,7 @@ public class AdminDao {
 		}
 		
 	}
-	
+	/* 멤버리스트 dao */
 	public List<Member> selectMemberList(Connection conn)
 	{
 		PreparedStatement pstmt=null;
@@ -70,7 +71,7 @@ public class AdminDao {
 		}
 		return memberList;
 	}
-	
+	/* 멤버리스트 검색 */
 	public List<Member> selectMemberId(Connection conn, String searchKeyword)
 	{
 		PreparedStatement pstmt=null;
@@ -235,6 +236,7 @@ public class AdminDao {
 		return memberList;
 	}
 	
+	/* 멤버리스트 정렬 */
 	public List<Member> sortId(Connection conn, String searchType, String searchKeyword, String flag)
 	{
 		PreparedStatement pstmt=null;
@@ -1223,5 +1225,198 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return memberList;
+	}
+	
+	/* 동글리스트 dao */
+	public List<ListGroup> selectDongleList(Connection conn)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ListGroup> dongleList=new ArrayList();
+		String sql=prop.getProperty("selectDongleList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ListGroup g = new ListGroup();
+				g.setDongleName(rs.getString("group_name"));
+				g.setManagerId(rs.getString("member_id"));
+				g.setTopic(rs.getString("topic_ctg_name"));
+				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setActiveDate(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportCnt(rs.getInt("report_group_count"));
+				
+				dongleList.add(g);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return dongleList;
+	}
+	
+	/* 동글리스트 검색 */
+	public List<ListGroup> selectDongleName(Connection conn, String searchKeyword)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ListGroup> dongleList=new ArrayList();
+		String sql=prop.getProperty("selectDongleName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ListGroup g = new ListGroup();
+				g.setDongleName(rs.getString("group_name"));
+				g.setManagerId(rs.getString("member_id"));
+				g.setTopic(rs.getString("topic_ctg_name"));
+				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setActiveDate(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportCnt(rs.getInt("report_group_count"));
+				dongleList.add(g);	
+				System.out.println(g);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return dongleList;
+	}
+	
+	public List<ListGroup> selectManagerId(Connection conn, String searchKeyword)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ListGroup> dongleList=new ArrayList();
+		String sql=prop.getProperty("selectManagerId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ListGroup g = new ListGroup();
+				g.setDongleName(rs.getString("group_name"));
+				g.setManagerId(rs.getString("member_id"));
+				g.setTopic(rs.getString("topic_ctg_name"));
+				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setActiveDate(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportCnt(rs.getInt("report_group_count"));
+				dongleList.add(g);			
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return dongleList;
+	}
+	
+	public List<ListGroup> selectDongleEnDate(Connection conn, String searchKeyword)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ListGroup> dongleList=new ArrayList();
+		String sql=prop.getProperty("selectDongleEnDate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ListGroup g = new ListGroup();
+				g.setDongleName(rs.getString("group_name"));
+				g.setManagerId(rs.getString("member_id"));
+				g.setTopic(rs.getString("topic_ctg_name"));
+				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setActiveDate(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportCnt(rs.getInt("report_group_count"));
+				dongleList.add(g);			
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return dongleList;
+	}
+	
+	public List<ListGroup> selectReportCnt(Connection conn, String searchKeyword)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ListGroup> dongleList=new ArrayList();
+		String sql=prop.getProperty("selectReportCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ListGroup g = new ListGroup();
+				g.setDongleName(rs.getString("group_name"));
+				g.setManagerId(rs.getString("member_id"));
+				g.setTopic(rs.getString("topic_ctg_name"));
+				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setActiveDate(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportCnt(rs.getInt("report_group_count"));
+				dongleList.add(g);			
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return dongleList;
 	}
 }

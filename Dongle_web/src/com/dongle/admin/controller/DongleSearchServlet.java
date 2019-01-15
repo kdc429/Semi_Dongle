@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.admin.service.AdminService;
+import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
-
 /**
- * Servlet implementation class MemberListServlet
+ * Servlet implementation class DongleSearchServlet
  */
-@WebServlet("/admin/memberList")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/admin/dongleSearch")
+public class DongleSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServlet() {
+    public DongleSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,11 +42,21 @@ public class MemberListServlet extends HttpServlet {
 			return;
 		}
 		
-		List<Member> memberList = new AdminService().selectMemberList();
-//		System.out.println(memberList);
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberList.jsp").forward(request, response);
+		String searchType=request.getParameter("dongle-searchType");
+		String searchKeyword=request.getParameter("searchKeyword");
 		
+		List<ListGroup> dongleList=null;
+		switch(searchType)
+		{
+			case "dongleName" : dongleList=new AdminService().selectDongleName(searchKeyword);break;
+			case "managerId" : dongleList=new AdminService().selectManagerId(searchKeyword);break;
+			case "dongleEnDate" :dongleList=new AdminService().selectDongleEnDate(searchKeyword);break;
+			case "reportCnt" : dongleList=new AdminService().selectReportCnt(searchKeyword);break;
+			
+		}
+		System.out.println(dongleList);
+		request.setAttribute("dongleList", dongleList);
+		request.getRequestDispatcher("/Dongle_view/admin_dongleSearch.jsp").forward(request, response);
 	}
 
 	/**

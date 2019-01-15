@@ -42,8 +42,8 @@
 <section>
 	<div class="bar"></div>
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px">
-    	<li class="active"><a href="#">회원 리스트 관리</a></li>
-    	<li><a href="#">동글 리스트 관리</a></li>
+    	<li class="active"><a href="<%=request.getContextPath()%>/admin/memberList">회원 리스트 관리</a></li>
+    	<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
     	<li><a href="#">메인 관리</a></li>
    		<li><a href="#">블랙 리스트 관리</a></li>
  	</ul>
@@ -97,34 +97,34 @@
 		<table id="tbl-member">
 			<thead>
 				<tr>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("memberId")&&flag.equals("true")?"false":"true"%>&rowValue=memberId'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("memberId")&&flag.equals("true")?"false":"true"%>&rowValue=memberId'">
 						아이디				
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("memberName")&&flag.equals("true")?"false":"true"%>&rowValue=memberName'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("memberName")&&flag.equals("true")?"false":"true"%>&rowValue=memberName'">
 						이름
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("gender")&&flag.equals("true")?"false":"true"%>&rowValue=gender'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("gender")&&flag.equals("true")?"false":"true"%>&rowValue=gender'">
 						성별
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("ssn")&&flag.equals("true")?"false":"true"%>&rowValue=ssn'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("ssn")&&flag.equals("true")?"false":"true"%>&rowValue=ssn'">
 						생년월일
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("phone")&&flag.equals("true")?"false":"true"%>&rowValue=phone'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("phone")&&flag.equals("true")?"false":"true"%>&rowValue=phone'">
 						전화번호
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("address")&&flag.equals("true")?"false":"true"%>&rowValue=address'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("address")&&flag.equals("true")?"false":"true"%>&rowValue=address'">
 						주소
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("email")&&flag.equals("true")?"false":"true"%>&rowValue=email'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("email")&&flag.equals("true")?"false":"true"%>&rowValue=email'">
 						이메일
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("enrollDate")&&flag.equals("true")?"false":"true"%>&rowValue=enrollDate'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("enrollDate")&&flag.equals("true")?"false":"true"%>&rowValue=enrollDate'">
 						가입일
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("blackList")&&flag.equals("true")?"false":"true"%>&rowValue=blackList'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("blackList")&&flag.equals("true")?"false":"true"%>&rowValue=blackList'">
 						블랙 여부
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortList?flag=<%=rowValue.equals("reportCount")&&flag.equals("true")?"false":"true"%>&rowValue=reportCount'">
+					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortMemberList?flag=<%=rowValue.equals("reportCount")&&flag.equals("true")?"false":"true"%>&rowValue=reportCount'">
 						신고 횟수
 					</th>
 				</tr>

@@ -84,14 +84,11 @@ div#search-blackList {
 }
 
 #tbl-member th:nth-of-type(9), #tbl-member td:nth-of-type(9) {
-	width: 50px
+	width: 60px
 }
 
-#tbl-member th:nth-of-type(10) {
-	width: 50px
+#tbl-member th:nth-of-type(10), #tbl-member td:nth-of-type(10) {
+	width: 60px
 }
 
-#tbl-member td:nth-of-type(10) {
-	width: calc(50px)
-}
 

@@ -7,9 +7,11 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.dongle.admin.model.dao.AdminDao;
+import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
 public class AdminService {
+	/* 멤버리스트 서비스 */
 	public List<Member> selectMemberList()
 	{
 		Connection conn = getConnection();
@@ -19,6 +21,7 @@ public class AdminService {
 		return memberList;
 	}
 	
+	/* 멤버 검색 */
 	public List<Member> selectMemberId(String searchKeyword)
 	{
 		Connection conn = getConnection();
@@ -55,6 +58,7 @@ public class AdminService {
 		return memberList;
 	}
 	
+	/* 멤버리스트 정렬 */
 	public List<Member> sortId(String searchType, String searchKeyword, String flag)
 	{
 		Connection conn = getConnection();
@@ -144,4 +148,53 @@ public class AdminService {
 		close(conn);
 		return memberList;
 	}
+	
+	/* 동글리스트 서비스 */
+	public List<ListGroup> selectDongleList() 
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().selectDongleList(conn);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	/* 동글 검색 */
+	public List<ListGroup> selectDongleName(String searchKeyword)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().selectDongleName(conn, searchKeyword);
+		
+		close(conn);
+		return dongleList;
+	}
+
+	public List<ListGroup> selectManagerId(String searchKeyword)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().selectManagerId(conn, searchKeyword);
+		
+		close(conn);
+		return dongleList;
+	}
+
+	public List<ListGroup> selectDongleEnDate(String searchKeyword)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().selectDongleEnDate(conn, searchKeyword);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> selectReportCnt(String searchKeyword)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().selectReportCnt(conn, searchKeyword);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	
 }
