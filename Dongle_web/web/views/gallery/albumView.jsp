@@ -57,20 +57,21 @@ function albumPlusClick(){
 </head>
 <body>
 <div id="album-container">
-	<table border="1" width="370px" id="albumPlus-tbl">
+	<table width="370px" id="albumPlus-tbl">
 		<tr>
 			<td>
 				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>
+				<div><br></div>
 					<form action="" method="post" name="albumPlus" id="albumPlus" onsubmit="return fn_validateFrm()">
-						<input style="float:right;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가" onclick="albumPlusClick()"/>
-						<input style="float:right;" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제" onclick="albumDeleteClick()"/>
+						<input style="float:right; border:none; background-color:rgb(0,0,0,0); margin-left:10px;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가" onclick="albumPlusClick()"/>
+						<input style="float:right; border:none; background-color:rgb(0,0,0,0);" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제" onclick="albumDeleteClick()"/>
 					</form>
 				<%} %>
 			</td>
 		</tr>
 	</table>
 	<form name="albumFolder" id="albumFolder">
-		<table border='1'>
+		<table >
 			<%if(list.size()!=0){ %>
 				<%for(AlbumCategory t : list){ %>
 					<%if(count%2==1){%>

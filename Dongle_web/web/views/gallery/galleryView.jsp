@@ -32,8 +32,8 @@
 		display:none;
 		position:fixed;
 		margin-top:-400px;
-		z-index:10;
-		left:0;
+		/* z-index:10; */
+		left:0;																																	
 		right:0;
 		width:100%;
 		height:100%;
@@ -42,14 +42,15 @@
 		background-color:rgba(0,0,0,0.4);
 	}
 	.modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; 
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;  
-                              
+        background-color: #fefefe;
+        margin: 15% auto; 
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;  
+        border-radius: 5px;
     }
-    
+    div#btn-div span button#list-btn{float:left;}
+    div#btn-div span button#insert-btn{float:right;}
 </style>
 <script>
 	$(function(){
@@ -61,7 +62,22 @@
 		});
 	});
 	$(function(){
-		
+		//사진 추가하기 form
+		$('.insert-bnt').click(function(){
+			console.log("tt");
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/insertGallery?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#gallery-container').html(data);
+				},
+				error: function(){console.log("gg");}
+			});
+		});
+	});
+	$(function(){
+		//모달띄우기
 		$('.galImg').click(function(event){
 			var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
 			var galNo = $(event.target).nextAll('#galNo')[0].value;
@@ -76,14 +92,17 @@
 				
 			});	
 		});
+		
 	});
 </script>
 <title>Insert title here</title>
 </head>
 <body>
 <section id="gallery-container">
-	<div style="position:relative;">
+	<div id="btn-div" style="position:relative;width:610px;">
 		<hr>
+		<span><button type="submit" id="list-bnt" name="list-bnt">목록으로</button></span>
+		<button class="insert-bnt" name="insert-bnt" >사진 추가하기</button>
 	</div>
 	<br>
 	<div id="galleryList">
@@ -94,7 +113,7 @@
 							<tr>
 							</tr>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=request.getContextPath() %>/images/gallery/<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=request.getContextPath() %>/images/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
@@ -104,7 +123,7 @@
 						<%} 
 						else{%>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=request.getContextPath() %>/images/gallery/<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=request.getContextPath() %>/images/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>
@@ -138,11 +157,12 @@
 	<br><br>
 </section>
 <!-- ㅡmodal-container -->
-	<div class="modal-div">
+	
+</body>
+<div class="modal-div">
 		<div class="dialog" id="modal-container">
 			<div class="modal-content">
 			</div>
 	    </div>
     </div>
-</body>
 </html>

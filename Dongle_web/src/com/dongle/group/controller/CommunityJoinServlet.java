@@ -40,7 +40,6 @@ public class CommunityJoinServlet extends HttpServlet {
 		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
 		GroupMember gm = new GroupService().selectGmInfo(gNo,loginMember.getMemberNo());
 		System.out.println("여긴 커뮤:"+gm);
-		
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";

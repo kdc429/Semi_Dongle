@@ -47,7 +47,7 @@ body {
 .center {
 	position: relative;
 	display: flex;
-	flex-direction: row;
+	flex-direction: row; bv0
 }
 
 .sideback {
@@ -81,7 +81,7 @@ body {
 	position: fixed;
 	z-index: 2;
 }
-
+div.logo h2 a{text-decoration: none;}
 /* 왼쪽 사이드 컨텐트 */
 .sideitem {
 	margin-left: 15px;

@@ -92,4 +92,26 @@ public class GalleryService {
 		close(conn);
 		return gplist;
 	}
+	
+	public int insertGallery(int groupNo,String albumCode,GalleryPath gp)
+	{
+		Connection conn = getConnection();
+		int rs = new GalleryDao().insertGallery(conn,groupNo,albumCode,gp);
+		if(rs!=0)
+		{
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		return rs;
+	}
+	//다중의로 데이터 받을 경우 gal_no가 동일하게 들어가야하므로 그 그룹의 해당 앨범에서 가장 높은 gal_no를 뽑아오는 것
+	public int maxGalNo(int groupNo, String albumCode)
+	{
+		Connection conn=getConnection();
+		int rs = new GalleryDao().maxGalNo(conn, groupNo,albumCode);
+		close(conn);
+		return rs;
+	}
 }

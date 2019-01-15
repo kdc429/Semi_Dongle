@@ -45,6 +45,9 @@ table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
 table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
 table#tbl-comment tr.level2 sub.comment-writer {color:black; font-size:14px;font-family: "a흑진주L";}
 table#tbl-comment tr.level2 sub.comment-date {color:rgb(80,80,80); font-size:10px;font-family: "a흑진주L";}
+/* modalImg 스타일 */
+div#modalImg-div{align-items: center;justify-content: center;display:inline-block;}
+div#modalImg-div img.modalImg{align-content: center; display: block; width:300px;height:300px;}
 
 </style>
 <script>
@@ -69,6 +72,7 @@ $(function(){
 </head>
 <body>
 	<span class="close">&times;</span>
+<<<<<<< HEAD
 		<div class="container">
 	  <h2>Carousel Example</h2>  
 	  <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -89,12 +93,12 @@ $(function(){
    			<%for(int i=0;i<gplist.size();i++){ %>
    				<%if(i==0){ %>
 					<div class="item active">
-			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFilePath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
+			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
 			      	</div>
 		      	<%}
    				else{ %>
 		      		<div class="item">
-			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFilePath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
+			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
 			      	</div>
 		      	<%} %>
 			<%} %>
@@ -114,12 +118,21 @@ $(function(){
 	
 	
 	
-	<div>
-		<hr>
+	<div id="modalImg-div">
 		<%-- <%for(GalleryPath g:gplist){ %>
 			<img src="<%=request.getContextPath()%>/images/gallery/<%=g.getGalFilePath()%>" style="width:200px; height:200px">
 		<%} %> --%>
 		<hr>
+	</div>
+	<div class="comment-editor">
+		<form action="<%=request.getContextPath()%>/gallery/galleryInsert" name="galleryCommentFrm" method="post">
+			<input type="hidden" name="galCommentNo" value="<%=gclist %>"/>
+			<input type="hidden" name="galCommentWriter" value="<%=loginMember.getMemberNo() %>"/>
+			<input type="hidden" name="galCommentLevel" value="1"/>
+			<input type="hidden" name="galCommentRef" value="0"/>
+			<textarea cols='50' rows='3' style='resize:none;' name="galCommentContent"></textarea>
+			<button type="submit" id='btn-insert'>둥록</button>
+		</form>
 	</div>
 	<table id="tbl-comment">
 		<%if(gclist!=null){ %>
@@ -159,7 +172,7 @@ $(function(){
 					var tr=$("<tr></tr>");
 					var html="<td style='display:none;text-align:left;' colspan='2'>";
 					html+="<form action='<%=request.getContextPath()%>/gallery/commentInsert' method='post'>";
-					html+="<input type='hidden' name='galRef' value='<%=gplist.get[0].getGalNo()%>'/>";
+					html+="<input type='hidden' name='galNo' value='<%=gplist.get[0].getGalNo()%>'/>";
 					html+="<input type='hidden' name='galCommentWriter' value='<%=loginMember.getMemberId()%>'/>";
 					html+="<input type='hidden' name='galCommentLevel' value='2'/>";
 					html+="<input type='hidden' name='galCommentRef' value='"+$(this).val()+"'/>";

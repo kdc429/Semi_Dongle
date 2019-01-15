@@ -42,7 +42,7 @@ public class GalleryAllListServlet extends HttpServlet {
 		
 		//해당 갤러리 리스트 뽑아오기
 		List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,loginMember.getMemberNo(),galFileNo);
-		System.out.println("gp: "+gplist.get(0).getGalFilePath());
+
 		//갤러리 해당 댓글 뽑아오기
 		List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
 		
