@@ -1,6 +1,8 @@
 package com.dongle.group.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,22 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class CommunityJoinServlet
+ * Servlet implementation class MemberListServlet
  */
-@WebServlet("/communityJoin")
-public class CommunityJoinServlet extends HttpServlet {
+@WebServlet("/memberList")
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityJoinServlet() {
+    public MemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,35 +38,32 @@ public class CommunityJoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
-		System.out.println(loginMember.getMemberNo());
+		
 		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버		
+		
 		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
-		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
-		int result = new GroupService().countMember(groupNo); //이렇게 해야 넘어감
+		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기	
+		
+		List<GroupMember> list = new GroupService().selectMemberList(groupNo);
 		
 		
-		String view="/Dongle_view/msg.jsp";
-		String msg="";
-		String loc="";
+		JSONArray jobjArr=new JSONArray();		
 		
-		if(g==null) { //데이터 없을시 에러페이지 이동으로 변경예정
-			msg="접속실패!";
-			loc="/login";
-			request.getRequestDispatcher(view).forward(request, response);
-			request.setAttribute("loc",loc);
-		}else {
-			loc="/Dongle_Community_view/Community_main.jsp";
-			request.setAttribute("group", g);
-			request.setAttribute("groupMember", gm);
-			request.setAttribute("loc",loc);
-			request.setAttribute("loginMember", loginMember);
-			request.setAttribute("result",result);
-			request.getRequestDispatcher(loc).forward(request, response);
+		for(GroupMember gm_list : list) {
+			JSONObject obj=new JSONObject();
+			obj.put("groupMemberImagePath", gm_list.getGroupMemberImagePath());
+			obj.put("groupMemberNickname", gm_list.getGroupMemberNickname());
+			obj.put("groupMemberEnrollData", gm_list.getGroupMemberEnrollDate());
+			jobjArr.add(obj);	
 		}
 		
-		
+		System.out.println(jobjArr.size());
+		response.setContentType("application/json;charset=UTF-8");
+		new Gson().toJson(jobjArr,response.getWriter());
 		
 	}
 

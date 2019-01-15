@@ -51,7 +51,7 @@
 		<div class="sideback center">
 
 			<div class="sider"
-				style='height: 100vh; background-color: rgba(130, 238, 41, 0.8);'>
+				style='height: 100vh; background-color: rgb(228, 228, 228);'>
 				<!-- 메뉴 버튼 -->
 				<button class='btn btn-primary' value='1'>HOME</button>
 				<br>

@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GroupDao {
 	
@@ -145,8 +146,9 @@ public class GroupDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Group g=null;
-		List<Group> rankList=new ArrayList();
-		String sql=prop.getProperty("selectRank");
+		List<Group> rankList=new ArrayList<Group>();
+		String sql="SELECT * FROM GROUP_TAB JOIN(SELECT GROUP_NO,COUNT(MEMBER_NO) FROM GROUP_MEMBER_TAB GROUP BY GROUP_NO) USING(GROUP_NO) WHERE ROWNUM BETWEEN 1 AND 5";
+		System.out.println("gg"+sql);
 		
 		try {
 			
@@ -179,5 +181,98 @@ public class GroupDao {
 		return rankList;
 	}
 	
+	 public GroupMember selectGmInfo(Connection conn, int groupNo,int memberNo)
+     {
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        GroupMember gm = null;
+        String sql=prop.getProperty("selectGmInfo");
+        System.out.println("dao2: "+sql);
+        try {
+           pstmt=conn.prepareStatement(sql);
+           System.out.println("dao"+sql);
+           pstmt.setInt(1, groupNo);
+           pstmt.setInt(2, memberNo);
+           
+           rs=pstmt.executeQuery();
+           
+           if(rs.next()) {
+              gm=new GroupMember();
+              gm.setGroupNo(rs.getInt("group_no"));
+              gm.setMemberNo(rs.getInt("member_no"));         
+              gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
+              gm.setGroupMemberImagePath(rs.getString("group_member_image_path"));
+              gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
+              gm.setBlacklistYN(rs.getString("blacklist_yn"));
+              gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+           }
+        }catch(SQLException e) {
+           e.printStackTrace();
+        }finally {
+           close(rs);
+           close(pstmt);
+        }
+        System.out.println("dao: "+gm);
+        return gm;
+     }
+	 
+	 public int countMember(Connection conn, int groupNo)
+	 {
+		 PreparedStatement pstmt = null;
+		 ResultSet rs = null;
+		 int result = 0;
+		 String sql = prop.getProperty("countMember");
+		 try {
+			 pstmt=conn.prepareStatement(sql);
+			 pstmt.setInt(1,groupNo);
+			 rs=pstmt.executeQuery();
+			 if(rs.next())
+			 {
+				 result = rs.getInt("member_cnt");
+			 }
+		 }
+		 catch(SQLException e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally {
+			 close(pstmt);
+		 }
+		 System.out.println("카운트"+result);
+		 return result;
+	}
 
+	public List<GroupMember> selectMemberList(Connection conn, int groupNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<GroupMember> list=new ArrayList<GroupMember>();
+		String sql=prop.getProperty("selectMemberList");
+
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				GroupMember gm = new GroupMember();
+				gm.setGroupNo(rs.getInt("group_no"));
+				gm.setMemberNo(rs.getInt("member_no"));
+				gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
+				gm.setGroupMemberImagePath(rs.getString("group_member_image_path"));
+				gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
+				gm.setBlacklistYN(rs.getString("blacklist_yn"));
+				gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+				
+				list.add(gm);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 }
