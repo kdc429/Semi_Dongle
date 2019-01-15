@@ -21,7 +21,8 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
  
 </head>
 
@@ -63,7 +64,7 @@
         </aside>
         <!-- 게시판 -->
         <section>
-            <div class="main center" style='width:684px;height:auto; background-color:rgb(255, 255, 255); border:1px solid black;'>
+            <div class="main center" style='width:684px;height:auto; background-color:rgb(255, 255, 255);'>
                 <br><br>
                 651651651651
             

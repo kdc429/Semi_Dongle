@@ -11,9 +11,9 @@ import com.dongle.feed.model.vo.Feed;
 
 public class FeedService {
 	
-	public List<Feed> selectFeed(int groupNo){
+	public List<Feed> selectFeed(int groupNo,int startFeedNo,int endFeedNo){
 		Connection conn=getConnection();
-		List<Feed> feedList=new FeedDao().selectFeed(conn,groupNo);
+		List<Feed> feedList=new FeedDao().selectFeed(conn,groupNo,startFeedNo,endFeedNo);
 		close(conn);
 		return feedList;
 	}

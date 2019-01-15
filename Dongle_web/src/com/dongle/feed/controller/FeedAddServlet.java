@@ -17,16 +17,16 @@ import com.dongle.member.model.vo.Member;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class FeedListViewServlet
+ * Servlet implementation class FeedAddServlet
  */
-@WebServlet("/feed/feedListView")
-public class FeedListViewServlet extends HttpServlet {
+@WebServlet("/feed/feedAdd")
+public class FeedAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FeedListViewServlet() {
+    public FeedAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,6 @@ public class FeedListViewServlet extends HttpServlet {
 		
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-
 		int currentFeed;
 		try {
 			currentFeed=Integer.parseInt(request.getParameter("currentFeed"));
@@ -49,13 +48,14 @@ public class FeedListViewServlet extends HttpServlet {
 		int pageFeed=10;
 		int startFeedNo=(currentFeed/pageFeed)*pageFeed+1;
 		int endFeedNo=currentFeed+pageFeed;
+		System.out.println(startFeedNo);
+		System.out.println(endFeedNo);
 		
 		Group g=new GroupService().selectGrInfo(groupNo);
 		List<Feed> feedList=new FeedService().selectFeed(groupNo,startFeedNo,endFeedNo);
-		request.setAttribute("feedList", feedList);
-		request.setAttribute("group", g);
-		
-		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);;
+		feedList.get(0);
+		response.setContentType("application/json;charset=UTF-8");
+		new Gson().toJson(feedList,response.getWriter());
 	}
 
 	/**

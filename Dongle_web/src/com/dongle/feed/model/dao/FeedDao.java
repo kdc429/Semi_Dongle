@@ -25,7 +25,7 @@ public class FeedDao {
 		}
 	}
 	
-	public List<Feed> selectFeed(Connection conn,int groupNo){
+	public List<Feed> selectFeed(Connection conn,int groupNo,int startFeedNo,int endFeedNo){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Feed> feedList=new ArrayList();
@@ -35,6 +35,8 @@ public class FeedDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, startFeedNo);
+			pstmt.setInt(3, endFeedNo);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -54,6 +56,7 @@ public class FeedDao {
 			close(pstmt);
 			
 		}
+		
 		return feedList;
 	}
 
