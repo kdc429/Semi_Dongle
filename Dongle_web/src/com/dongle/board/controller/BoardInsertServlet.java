@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class BoardFormServlet
  */
 @WebServlet("/board/boardForm")
-public class BoardFormServlet extends HttpServlet {
+public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardFormServlet() {
+    public BoardInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,8 @@ public class BoardFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect(request.getContextPath()+"/views/board/boardForm.jsp");
+		/*response.sendRedirect(request.getContextPath()+"/views/board/boardForm.jsp");*/
+		request.getRequestDispatcher("/views/board/boardForm.jsp").forward(request, response);
 	}
 
 	/**

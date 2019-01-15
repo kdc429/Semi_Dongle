@@ -5,16 +5,18 @@ public class BoardPath {
 	private int boardNo;
 	private int groupNo;
 	private int boardFileNo;
-	private String boardFilePath;
+	private String boardFileOldPath;
+	private String boardFileNewPath;
 	
 	public BoardPath() {}
 
-	public BoardPath(int boardNo, int groupNo, int boardFileNo, String boardFilePath) {
+	public BoardPath(int boardNo, int groupNo, int boardFileNo, String boardFileOldPath, String boardFileNewPath) {
 		super();
 		this.boardNo = boardNo;
 		this.groupNo = groupNo;
 		this.boardFileNo = boardFileNo;
-		this.boardFilePath = boardFilePath;
+		this.boardFileOldPath = boardFileOldPath;
+		this.boardFileNewPath = boardFileNewPath;
 	}
 
 	public int getBoardNo() {
@@ -41,18 +43,26 @@ public class BoardPath {
 		this.boardFileNo = boardFileNo;
 	}
 
-	public String getBoardFilePath() {
-		return boardFilePath;
+	public String getBoardFileOldPath() {
+		return boardFileOldPath;
 	}
 
-	public void setBoardFilePath(String boardFilePath) {
-		this.boardFilePath = boardFilePath;
+	public void setBoardFileOldPath(String boardFileOldPath) {
+		this.boardFileOldPath = boardFileOldPath;
+	}
+
+	public String getBoardFileNewPath() {
+		return boardFileNewPath;
+	}
+
+	public void setBoardFileNewPath(String boardFileNewPath) {
+		this.boardFileNewPath = boardFileNewPath;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardPath [boardNo=" + boardNo + ", groupNo=" + groupNo + ", boardFileNo=" + boardFileNo
-				+ ", boardFilePath=" + boardFilePath + "]";
+				+ ", boardFileOldPath=" + boardFileOldPath + ", boardFileNewPath=" + boardFileNewPath + "]";
 	}
 	
 	

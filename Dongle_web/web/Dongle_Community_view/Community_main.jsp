@@ -81,7 +81,7 @@ $(function(){
 			type:"get",
 			dataType:"html",
 			success:function(data){
-				$('.main').html(data);
+				$('#content-div').html(data);
 			}
 		});
 	});
@@ -90,11 +90,11 @@ $(function(){
 $(function(){
 	$('#board-btn').click(function(){
 		$.ajax({
-			url:"<%=request.getContextPath()%>/board/boardListView",
-			type:"get",
+			url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
 			dataType:"html",
 			success:function(data){
-				$('.main').html(data);
+				$('#content-div').html(data);
 			}
 		});
 	});

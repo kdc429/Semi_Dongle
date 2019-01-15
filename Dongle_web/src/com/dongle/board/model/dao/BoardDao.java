@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dongle.board.model.vo.Board;
+import com.dongle.board.model.vo.BoardComment;
 
 public class BoardDao {
 	private Properties prop=new Properties();
@@ -104,8 +105,8 @@ public class BoardDao {
 		}
 		return b;
 	}
-
-	public int insertBoard(Connection conn, Board b,int boardNo, int groupNo)
+	//게시판 글쓰기
+	public int insertBoard(Connection conn, Board b,BoardPath bp,int groupNo)
 	{
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -119,6 +120,8 @@ public class BoardDao {
 			pstmt.setString(4, b.getBoardWriter());
 			pstmt.setString(5,	b.getBoardContent());
 			pstmt.setInt(6,	b.getBoardViewCount());
+			pstmt.setString(7, bp.getBoardFileOldPath());
+			pstmt.setString(8, bp.getBoardFileOldPath());
 		}
 		catch(SQLException e)
 		{
@@ -129,5 +132,30 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	//게시판 댓글쓰기
+	public int insertComment(Connection conn, BoardComment bc)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertComment");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bc.getBoCommentLevel());
+			pstmt.setString(3, bc.getBoCommentContent());
+			pstmt.setInt(4,bc.getBoarNo());
+			pstmt.setString(5,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
+			//pstmt.setInt(5,bc.getBoardCommentRef());
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 }

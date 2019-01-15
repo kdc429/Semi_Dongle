@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
     
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>동글</title>
-	<script src='js/jquery-3.3.1.js'></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -16,50 +10,51 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 <style>
 	.table
 	{
-		text-align : center;
-		boder : 1px solid #dddddd;
+ 		text-align : center;
+		border : 1px solid #dddddd;
 	}
 	.table thead th
 	{
 		background-color : #F2CB61;
-		text-align: center;
+ 		text-align: center; 
 	}
 	.table tbody tr th 
 	{
 		background-color : #EAEAEA;
+ 		text-align : center; 
+	}
+	.table tbody td
+	{
+		text-align: left;
+	} 
+	#board-add
+	{
 		text-align : center;
-	}
-	.table td
-	{
-		min-height : 200px;
-		text-align : left;
-	}
-	.table input
-	{
-		vertical-align: right;
 	}
 </style>
 <script>
-		function validate(){
-			var content=$('[name=content]').val();
-			if(content.trim().length==0)
-			{
-				alert("내용을 입력하세요!");
-				return false;
-			}
-			return true;
+	function validate(){
+		var content=$('[name=content]').val();
+		if(content.trim().length==0)
+		{
+			alert("내용을 입력하세요!");
+			return false;
 		}
-	</script>
+		return true;
+	}
+	
+</script>
 </head>
 <body>
-<p>짚파일로 묶는다?<p>
-	<div class="container">
+	<div class="board-container">
 		<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<thead>
+					<br><br>
 					<tr>
 						<th colspan="3">공지사항</th>
 					</tr>
@@ -67,13 +62,13 @@
 				<tbody>
 					<tr>
 						<th style="width: 20%;">글 제목</th>
-						<td>
-							<input type="text"  name='title' required="required"/>
+						<td id="title">
+							<input type="text" name='title' required="required"/>
 						</td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td>
+						<td id="writer" >
 							<input type="text" name='writer' value="admin" readonly="readonly"/>
 						</td>
 					</tr>					
@@ -89,16 +84,13 @@
 							<textarea rows="5" cols="50" name='content'></textarea>
 						</td>
 					</tr>
-					<tr>
-						<th colspan="2">
-							<input type="submit" value="등록하기" 
-							onclick="return validate();"/>
-						</th>
-					</tr>			
 				</tbody> 
+					<tr>
+						<td colspan="2" id="board-add">
+							<input type="button" value="등록하기" onclick="return validate();"/>
+						</td>
+					</tr>			
 			</table>
 		</form>
 	</div>
-</body>
-</html>
 		
