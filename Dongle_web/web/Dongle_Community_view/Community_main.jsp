@@ -30,7 +30,7 @@
 		$(function(){
 			$('#feed-btn').click(function(){
 				$.ajax({
-					url:"<%=request.getContextPath()%>/feed/feedListView",
+					url:"<%=request.getContextPath()%>/feed/feedListView?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
 					type:"get",
 					dataType:"html",
 					success:function(data){
