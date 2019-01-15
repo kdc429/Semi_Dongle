@@ -7,11 +7,7 @@
  	Member loginMember = (Member)session.getAttribute("loginMember");
  	int count=1;
  %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <script>
@@ -54,8 +50,6 @@ function albumPlusClick(){
 }
 </script>
 
-</head>
-<body>
 <div id="album-container">
 	<table width="370px" id="albumPlus-tbl">
 		<tr>
@@ -104,5 +98,3 @@ function albumPlusClick(){
 		</table>
 	</form>
 </div>
-</body>
-</html>

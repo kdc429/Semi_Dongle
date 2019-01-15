@@ -14,14 +14,14 @@ public class GalleryCommentJoin {
 	//join문 이용하여 뽑을 내용
 	private String groupMemberNickname;
 	private String albumCode;
-	private String galFilePath;
+	private String galFileNewPath;
 	private int galNo;
 	
 	public GalleryCommentJoin() {}
 
 	public GalleryCommentJoin(int groupNo, int galFileNo, int galCommentNo, int galCommentLevel, int memberNo,
 			String galCommentContent, Date galCommentDate, int galCommentRef, String groupMemberNickname,
-			String albumCode, String galFilePath,int galNo) {
+			String albumCode, String galFileNewPath,int galNo) {
 		super();
 		this.groupNo = groupNo;
 		this.galFileNo = galFileNo;
@@ -33,7 +33,7 @@ public class GalleryCommentJoin {
 		this.galCommentRef = galCommentRef;
 		this.groupMemberNickname = groupMemberNickname;
 		this.albumCode = albumCode;
-		this.galFilePath = galFilePath;
+		this.galFileNewPath = galFileNewPath;
 		this.galNo=galNo;
 	}
 
@@ -61,11 +61,11 @@ public class GalleryCommentJoin {
 		this.galCommentNo = galCommentNo;
 	}
 
-	public int getgalCommentLevel() {
+	public int getGalCommentLevel() {
 		return galCommentLevel;
 	}
 
-	public void setgalCommentLevel(int galCommentLevel) {
+	public void setGalCommentLevel(int galCommentLevel) {
 		this.galCommentLevel = galCommentLevel;
 	}
 
@@ -117,12 +117,12 @@ public class GalleryCommentJoin {
 		this.albumCode = albumCode;
 	}
 
-	public String getGalFilePath() {
-		return galFilePath;
+	public String getGalFileNewPath() {
+		return galFileNewPath;
 	}
 
-	public void setGalFilePath(String galFilePath) {
-		this.galFilePath = galFilePath;
+	public void setGalFileNewPath(String galFileNewPath) {
+		this.galFileNewPath = galFileNewPath;
 	}
 	
 	public int getGalNo() {
@@ -139,7 +139,7 @@ public class GalleryCommentJoin {
 		return "GalleryComment테이블 Join함 [groupNo=" + groupNo + ", galFileNo=" + galFileNo + ", galCommentNo=" + galCommentNo
 				+ ", galCommentLevel=" + galCommentLevel + ", memberNo=" + memberNo + ", galCommentContent=" + galCommentContent
 				+ ", galCommentDate=" + galCommentDate + ", galCommentRef=" + galCommentRef + ", groupMemberNickname="
-				+ groupMemberNickname + ", albumCode=" + albumCode + ", galFilePath=" + galFilePath + "galNo= "+galNo+"]";
+				+ groupMemberNickname + ", albumCode=" + albumCode + ", galFileNewPath=" + galFileNewPath + "galNo= "+galNo+"]";
 	}
 
 	

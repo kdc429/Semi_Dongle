@@ -11,10 +11,6 @@
 	int count=1;
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 부트스트랩 -->
     <!-- Latest compiled and minified CSS -->
@@ -95,9 +91,6 @@
 		
 	});
 </script>
-<title>Insert title here</title>
-</head>
-<body>
 <section id="gallery-container">
 	<div id="btn-div" style="position:relative;width:610px;">
 		<hr>
@@ -113,7 +106,7 @@
 							<tr>
 							</tr>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFileOldPath() %>">
+								<img class="galImg" src="<%=request.getContextPath()%>/images/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
@@ -123,7 +116,7 @@
 						<%} 
 						else{%>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFileOldPath() %>">
+								<img class="galImg" src="<%=request.getContextPath()%>/images/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>
@@ -158,11 +151,9 @@
 </section>
 <!-- ㅡmodal-container -->
 	
-</body>
 <div class="modal-div">
 		<div class="dialog" id="modal-container">
 			<div class="modal-content">
 			</div>
 	    </div>
     </div>
-</html>
