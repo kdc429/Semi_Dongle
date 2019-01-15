@@ -22,7 +22,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <!--    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet"> -->
-	<link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet">
+	<!-- <link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet"> -->
 	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
  
 </head>
@@ -189,7 +189,7 @@
               				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
               				//var h2_main = $('<h2></h2>');
               				var tbl = $('<table id="tbl"></table>');
-              				var thead="<br/><tr><th>닉네임</th><th>가입일</th></tr>";
+              				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
               				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
               		 		var thtml="";
               			     for(var i = 0; i < data.length; i++)
@@ -201,13 +201,13 @@
               			    	 	/* thtml+=tbody; */
               			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
               			    	 	thtml+="</tr>";
-              			    	 	data[i]['groupMemberNickname']
-              		            }
+              			   }
+              			     console.log(thtml);
               			   thead += thtml;
-              			   tbl.append(thtml);
+              			   tbl.append(thead);
               			   
               			     
-              			   console.log(thtml);
+              			   console.log(thead);
               			   console.log(tbl);
               			   console.log(h);
               			 	$('#header').html(h);         			   
