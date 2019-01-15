@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.member.model.vo.Member"%>
+
 <%
 
     	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -12,7 +13,6 @@
     				cookieValue = c.getValue();
     			}
     		}
-
     	}
 %>
 <!DOCTYPE html>
@@ -65,7 +65,6 @@
             			<span class="sub-icon">로그아웃</span>
             			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
             		</button>
-            		
             	</div>
             </div>
             <div class="logo-back">
