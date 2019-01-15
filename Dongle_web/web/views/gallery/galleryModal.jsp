@@ -11,6 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
      .close {
@@ -65,11 +69,56 @@ $(function(){
 </head>
 <body>
 	<span class="close">&times;</span>
+		<div class="container">
+	  <h2>Carousel Example</h2>  
+	  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	    <!-- Indicators -->
+	    <ol class="carousel-indicators">
+    		<%for(int i=0;i<gplist.size();i++){ %>
+    			<%if(i==0){ %>
+					<li data-target="#myCarousel" data-slide-to=<%=i %> class="active"></li>
+				<%}
+    			else{%>
+					<li data-target="#myCarousel" data-slide-to=<%=i %>></li>
+				<%}%>
+			<%} %>
+	    </ol>
+	
+	    <!-- Wrapper for slides -->
+	    <div class="carousel-inner">
+   			<%for(int i=0;i<gplist.size();i++){ %>
+   				<%if(i==0){ %>
+					<div class="item active">
+			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFilePath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
+			      	</div>
+		      	<%}
+   				else{ %>
+		      		<div class="item">
+			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFilePath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
+			      	</div>
+		      	<%} %>
+			<%} %>
+	    </div>
+	
+	    <!-- Left and right controls -->
+	    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+	      <span class="glyphicon glyphicon-chevron-left"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+	      <span class="glyphicon glyphicon-chevron-right"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
+	  </div>
+	</div>
+	
+	
+	
 	<div>
 		<hr>
-		<%for(GalleryPath g:gplist){ %>
+		<%-- <%for(GalleryPath g:gplist){ %>
 			<img src="<%=request.getContextPath()%>/images/gallery/<%=g.getGalFilePath()%>" style="width:200px; height:200px">
-		<%} %>
+		<%} %> --%>
 		<hr>
 	</div>
 	<table id="tbl-comment">

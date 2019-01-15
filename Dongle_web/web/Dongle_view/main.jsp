@@ -73,7 +73,7 @@
 			<div class="set-back">
 				<button class="img-icon">
 					<span>설정</span>
-					<img class="set_img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
+					<img class="set-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
 				</button>
 			</div>
 		<%} %>
