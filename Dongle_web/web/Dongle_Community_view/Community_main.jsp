@@ -20,9 +20,8 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-	<link href="<%=request.getContextPath() %>/css/Test.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
- 
+	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,33 +45,26 @@
         <header>
             <div class='logoback' style='position:relative;width:1024px;height: auto'>
                 <!-- 로고 grid -->
-                <div class='logo' style='width:1024px; height: auto; background-color:rgba(0, 10, 40, 0.8);'>
-                    <h2 onclick="logoCk()" style="color:rgb(250,237,125); font-family: 'Bungee', cursive; margin-left:15px; width:100px">
-                    	DONGLE
-                    </h2>
+                <div class='logo' style='width:1024px; height: auto; background-color:rgb(20,150,200);'>
+                    <h2 style="color:rgb(250,237,125); font-family: 'Bungee', cursive; margin-left:15px;">DONGLE</h2>
                 </div>
             </div>
         </header>
         <aside>
-            <div class="sideback center">
+            <!-- <div class="sideback center"> -->
+            <div class="center">
                 <!-- 왼쪽 사이드 -->
-                <div class="sidel" style='height:100vh; background-color:rgba(0, 10, 40, 0.8)'>
+                <div class="sidel" style='height:100vh; background-color:rgba(240,240,240)'>
                     <div class="sideitem" style="border:1px solid red; left:10%; right:10%; height:250px;">프로필</div>
                     <div class="sideitem" style='border:1px solid red; left:10%; right:10%; height:150px'>소개글</div>
                 </div>
             </div>
 
         </aside>
-        <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255); border:1px solid black;'>
-
-            </div>
-        </section>
-        <!-- 오른쪽 사이드 -->
-        <aside>
-            <div class="sideback center">
-                <div class="sider" style='height:100vh; background-color:rgba(0, 10, 40, 0.8)'>
+         <aside>
+            <!-- <div class="sideback center"> -->
+            <div class="center">
+                <div class="sider" style='height:100vh; background-color:rgba(240,240,240); clear: left;'>
                     <!-- 메뉴 버튼 -->
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary'>공지사항</button><br>
@@ -82,6 +74,14 @@
                 </div>
             </div>
         </aside>
+        <!-- 게시판 -->
+        <section>
+            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255); clear: left;'>
+
+            </div>
+        </section>
+        <!-- 오른쪽 사이드 -->
+
     </div>
 
 <script>

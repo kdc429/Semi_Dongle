@@ -43,15 +43,15 @@ public class AlbumGetServlet extends HttpServlet {
 		JSONObject jobj=new JSONObject();*/
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
+		System.out.println("서블릿: "+gm);
 		
-		
-		if(loginMember.getMemberNo()==0||gm==null)
+/*		if(loginMember.getMemberNo()==0||gm==null||!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?gNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}
+		}*/
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("list", list);

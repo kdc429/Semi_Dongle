@@ -12,7 +12,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
      .close {
         color: #aaa;
@@ -45,7 +44,9 @@ table#tbl-comment tr.level2 sub.comment-date {color:rgb(80,80,80); font-size:10p
 /* modalImg 스타일 */
 div#modalImg-div{align-items: center;justify-content: center;display:inline-block;}
 div#modalImg-div img.modalImg{align-content: center; display: block; width:300px;height:300px;}
-
+*{box-sizing: border-box;}
+div.modal-div div.dialog div.modal-div div.container div#myCarousel a.left carousel-control{text-shadow: 0 0 0 0;}
+div.modal-div div.dialog div.modal-div div.container div#myCarousel a.right carousel-control{text-shadow: 0 0 0 0;}
 </style>
 <script>
 $(function(){
@@ -67,8 +68,10 @@ $(function(){
 });
 </script>
 	<span class="close">&times;</span>
+	
+	
 	<!-- 모달로 이미지 받기.. 부트스트랩 ㅂㄷㅂㄷ... -->
-<%-- 	<div class="container">
+	<div class="container">
      <h2>Carousel Example</h2>  
      <div id="myCarousel" class="carousel slide" data-ride="carousel" style='text-shadow: none;width:50%;'>
        <!-- Indicators -->
@@ -100,7 +103,7 @@ $(function(){
        </div>
    
        <!-- Left and right controls -->
-       <a class="left carousel-control" href="#myCarousel" data-slide="prev" style='text-shadow: none;'>
+       <a class="left carousel-control" href="#myCarousel" data-slide="prev" style='text-shadow: 0 0 0 0;'>
          <span class="glyphicon glyphicon-chevron-left" style='text-shadow: none;'></span>
          <span class="sr-only" style='text-shadow: none;'>Previous</span>
        </a>
@@ -109,13 +112,12 @@ $(function(){
          <span class="sr-only" style='text-shadow: none;'>Next</span>
        </a>
      </div>
-   </div> --%>
+   </div>
    
 	
 	<div id="modalImg-div">
-		<hr>
 		<%for(GalleryPath g:gplist){ %>
-			<img class="modalImg" src="<%=request.getContextPath()%>/images/gallery/<%=g.getGalFileNewPath()%>" >
+			<img src="<%=request.getContextPath()%>/images/gallery/<%=g.getGalFileNewPath()%>" style="width:200px; height:200px">
 		<%} %>
 		<hr>
 	</div>
@@ -137,7 +139,7 @@ $(function(){
 				<input type="hidden" name="galCommentRef" value="0"/>
 				<input type="hidden" name="albumCode" value="<%=gplist.get(0).getAlbumCode()%>"/>
 				<input type="hidden" name="galFileNo" value="<%=gplist.get(0).getGalFileNo()%>"/>
-			<textarea cols='50' rows='3' style='resize:none;' name="galCommentContent"></textarea>
+			<textarea cols='100' rows='3' style='resize:none;' name="galCommentContent"></textarea>
 			<button type="submit" id='btn-insert'>등록</button>
 		</form>
 	</div>

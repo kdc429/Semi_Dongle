@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 
 public class GroupDao {
 	
@@ -52,7 +53,8 @@ public class GroupDao {
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
-				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_new_path"));
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
@@ -92,7 +94,8 @@ public class GroupDao {
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
-				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_New_path"));
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
@@ -139,6 +142,42 @@ public class GroupDao {
 		}
 		return editList;
 	}
+	   
+	   public GroupMember selectGmInfo(Connection conn, int gNo,int memberNo)
+	   {
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      GroupMember gm = null;
+	      String sql=prop.getProperty("selectGmInfo");
+	      System.out.println("dao2: "+sql);
+	      try {
+	         pstmt=conn.prepareStatement(sql);
+	         System.out.println("dao"+sql);
+	         pstmt.setInt(1, gNo);
+	         pstmt.setInt(2, memberNo);
+	         
+	         rs=pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	            gm=new GroupMember();
+	            gm.setGroupNo(rs.getInt("group_no"));
+	            gm.setMemberNo(rs.getInt("member_no"));         
+	            gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
+	            gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
+	            gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
+	            gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
+	            gm.setBlackistYN(rs.getString("blacklist_yn"));
+	            gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+	         }
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }
+	      System.out.println("dao: "+gm);
+	      return gm;
+	   }
 	
 	public List<Group> selectRank(Connection conn){
 		
@@ -162,7 +201,8 @@ public class GroupDao {
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
-				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_New_path"));
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));

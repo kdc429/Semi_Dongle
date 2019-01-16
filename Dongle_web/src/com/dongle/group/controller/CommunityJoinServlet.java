@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -33,8 +34,12 @@ public class CommunityJoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
-		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
-		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+		int gNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
+		System.out.println(gNo);
+		
+		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
+		GroupMember gm = new GroupService().selectGmInfo(gNo,loginMember.getMemberNo());
+		System.out.println("여긴 커뮤:"+gm);
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";
