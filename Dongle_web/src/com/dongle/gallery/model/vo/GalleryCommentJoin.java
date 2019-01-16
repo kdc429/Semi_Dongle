@@ -13,6 +13,7 @@ public class GalleryCommentJoin {
 	private int galCommentRef; //사진 댓글 참조번호
 	//join문 이용하여 뽑을 내용
 	private String groupMemberNickname;
+	private String groupMemberImageNewPath;// GROUP_MEMBER_IMAGE_NEW_PATH
 	private String albumCode;
 	private String galFileNewPath;
 	private int galNo;
@@ -21,7 +22,7 @@ public class GalleryCommentJoin {
 
 	public GalleryCommentJoin(int groupNo, int galFileNo, int galCommentNo, int galCommentLevel, int memberNo,
 			String galCommentContent, Date galCommentDate, int galCommentRef, String groupMemberNickname,
-			String albumCode, String galFileNewPath,int galNo) {
+			String groupMemberImageNewPath, String albumCode, String galFileNewPath, int galNo) {
 		super();
 		this.groupNo = groupNo;
 		this.galFileNo = galFileNo;
@@ -32,9 +33,10 @@ public class GalleryCommentJoin {
 		this.galCommentDate = galCommentDate;
 		this.galCommentRef = galCommentRef;
 		this.groupMemberNickname = groupMemberNickname;
+		this.groupMemberImageNewPath = groupMemberImageNewPath;
 		this.albumCode = albumCode;
 		this.galFileNewPath = galFileNewPath;
-		this.galNo=galNo;
+		this.galNo = galNo;
 	}
 
 	public int getGroupNo() {
@@ -109,6 +111,14 @@ public class GalleryCommentJoin {
 		this.groupMemberNickname = groupMemberNickname;
 	}
 
+	public String getGroupMemberImageNewPath() {
+		return groupMemberImageNewPath;
+	}
+
+	public void setGroupMemberImageNewPath(String groupMemberImageNewPath) {
+		this.groupMemberImageNewPath = groupMemberImageNewPath;
+	}
+
 	public String getAlbumCode() {
 		return albumCode;
 	}
@@ -124,7 +134,7 @@ public class GalleryCommentJoin {
 	public void setGalFileNewPath(String galFileNewPath) {
 		this.galFileNewPath = galFileNewPath;
 	}
-	
+
 	public int getGalNo() {
 		return galNo;
 	}
@@ -133,14 +143,16 @@ public class GalleryCommentJoin {
 		this.galNo = galNo;
 	}
 
-
 	@Override
 	public String toString() {
-		return "GalleryComment테이블 Join함 [groupNo=" + groupNo + ", galFileNo=" + galFileNo + ", galCommentNo=" + galCommentNo
-				+ ", galCommentLevel=" + galCommentLevel + ", memberNo=" + memberNo + ", galCommentContent=" + galCommentContent
-				+ ", galCommentDate=" + galCommentDate + ", galCommentRef=" + galCommentRef + ", groupMemberNickname="
-				+ groupMemberNickname + ", albumCode=" + albumCode + ", galFileNewPath=" + galFileNewPath + "galNo= "+galNo+"]";
+		return "GalleryCommentJoin테이블 조인함 [groupNo=" + groupNo + ", galFileNo=" + galFileNo + ", galCommentNo=" + galCommentNo
+				+ ", galCommentLevel=" + galCommentLevel + ", memberNo=" + memberNo + ", galCommentContent="
+				+ galCommentContent + ", galCommentDate=" + galCommentDate + ", galCommentRef=" + galCommentRef
+				+ ", groupMemberNickname=" + groupMemberNickname + ", groupMemberImageNewPath="
+				+ groupMemberImageNewPath + ", albumCode=" + albumCode + ", galFileNewPath=" + galFileNewPath
+				+ ", galNo=" + galNo + "]";
 	}
+
 
 	
 

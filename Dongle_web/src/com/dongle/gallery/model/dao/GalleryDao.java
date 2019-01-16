@@ -246,6 +246,7 @@ public class GalleryDao {
 						rs.getDate("gal_comment_date"),
 						rs.getInt("gal_comment_ref"),
 						rs.getString("group_member_nickname"),
+						rs.getString("group_member_image_new_path"),
 						rs.getString("album_code"),
 						rs.getString("gal_file_new_path"),
 						rs.getInt("gal_no")

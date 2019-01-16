@@ -25,28 +25,50 @@
         text-decoration: none;
         cursor: pointer;
     }
-/* 댓글테이블!! */
-table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; } 
-table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
-table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
-table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
-table#tbl-comment button.btn-reply{display:none;}
-table#tbl-comment button.btn-delete{display:none;}
-table#tbl-comment tr:hover {background:lightgray;}
-table#tbl-comment tr:hover button.btn-reply{display:inline;}
-table#tbl-comment tr:hover button.btn-delete{display:inline;}
-table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
-table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
-table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
-table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
-table#tbl-comment tr.level2 sub.comment-writer {color:black; font-size:14px;font-family: "a흑진주L";}
-table#tbl-comment tr.level2 sub.comment-date {color:rgb(80,80,80); font-size:10px;font-family: "a흑진주L";}
+#recomment_form{display:none;}
 /* modalImg 스타일 */
-div#modalImg-div{align-items: center;justify-content: center;display:inline-block;}
-div#modalImg-div img.modalImg{align-content: center; display: block; width:300px;height:300px;}
 *{box-sizing: border-box;}
-div.modal-div div.dialog div.modal-div div.container div#myCarousel a.left carousel-control{text-shadow: 0 0 0 0;}
-div.modal-div div.dialog div.modal-div div.container div#myCarousel a.right carousel-control{text-shadow: 0 0 0 0;}
+/* 댓글창 스타일 */
+div.comment-editor fieldset.modal_comment{
+padding:8px 10px 10px;
+border-bottom:1px solid #efefef;
+font-family:'a흑진주L';
+border-top:1px solid #e8e8e8;
+background-color:rgb(240,240,240);
+position:relative;
+margin-top:2px;
+}
+.screen_out{overfloa:hidden;width:0;height:0;line-height:0;text-indent:-9999px;}
+.lab_write{top:8px;left:14px;}
+/* 댓글테이블!! */
+div.comment-editor{border-top: 1px solid rgb(240,240,240);margin-top:5%;}
+div.comment-ediotr ul{list-style:none;}
+div.comment-ediotr ul li{list-style:none;}
+.ico_skin{display:block;overflow:hidden;font-size:0;line-height: 0;text-indent:-9999px;}
+.thumb_profile{
+   width: 33px;
+   height: 33px;
+   margin-right: 11px;
+   margin-top: 2px;
+   background-position: -120px -20px;
+   float:left;
+   border-radius:48px;
+}
+img.img_profile{display:block;width:100%;height:100%;border-radius:48px;}
+
+.comment_box{margin-top:4px;overflow:hidden;display:block;}
+div.comment_box ul{}
+li{padding:0;}
+.comment_writer{float:left;overflow:hidden;color:rgb(250,250,250);text-overflow: ellipsis;white-space: nowrap;font-size:14px;margin-right:5px;max-width:120px;}
+.comment_date{float:left;font-size:12px;color:#a7a7a7;margin-top:3px;}
+.comment_content{display:block;font-size:13px;color:#5c5c5c;clear:both;line-height: 19px;padding-top:2px;}
+div.tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; box-sizing: border-box;} 
+li button.btn-reply{display:none; background-color:white;float:right;border:none;height:10px;}
+li button.btn-delete{display:none;}
+/* li:hover {background:lightgray;} */
+li:hover button.btn-reply{display:inline;}
+li:hover button.btn-delete{display:inline;}
+li.level2{padding-left:50px;}
 </style>
 <script>
 $(function(){
@@ -67,60 +89,180 @@ $(function(){
 	}
 });
 </script>
+
+<!-- 이미지 슬라이드 스타일 -->
+<style>
+/* 메인 슬라이드 Slideshow container */
+
+/* Slideshow container */
+
+* {box-sizing:border-box}
+
+body {font-family: 'a흑진주L';margin:0}
+
+/* Slideshow container */
+
+.slideshow-container {
+
+width: 100%;
+height: 100%;
+position: static;
+background-size: cover;
+margin: auto;
+margin-top: 50px;
+
+}
+
+.main_slideImg{
+width: 100%; 
+height: 100%; 
+top : 100px;
+}
+
+/* Next & previous buttons */
+
+.slideshow-container a.prev, a.next {
+  cursor: pointer;
+  position: absolute;
+  text-align : center;
+  top: 50%;
+  width: 9%;
+  padding: 14px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  text-decoration: none;
+  z-index: 100;
+}
+.slideshow-container a{text-decoration: none;}
+/* Position the "next button" to the right */
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+
+.dot {
+  cursor:pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+
+.fade2 {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 0.5s;
+  animation-name: fade;
+  animation-duration: 5s;
+}
+
+@-webkit-keyframes fade2 {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade2 {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+
+@media only screen and (max-width: 300px) {
+  .slprev, .slnext,.text {font-size: 11px}
+}
+</style>
+<script>
+/* 이미지 슬라이드 스크립드 */
+ //슬라이드 스크립
+var slideIndex = 1;
+showSlides(slideIndex);
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+var i;
+var slides = document.getElementsByClassName("mySlides");
+var dots = document.getElementsByClassName("dot");
+if (n > slides.length) {slideIndex = 1}
+if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+</script>
 	<span class="close">&times;</span>
-	
-	
-	<!-- 모달로 이미지 받기.. 부트스트랩 ㅂㄷㅂㄷ... -->
-	<div class="container">
-     <h2>Carousel Example</h2>  
-     <div id="myCarousel" class="carousel slide" data-ride="carousel" style='text-shadow: none;width:50%;'>
-       <!-- Indicators -->
-       <ol class="carousel-indicators">
-          <%for(int i=0;i<gplist.size();i++){ %>
-             <%if(i==0){ %>
-               <li data-target="#myCarousel" data-slide-to=<%=i %> class="active" style='text-shadow: none;'></li>
-            <%}
-             else{%>
-               <li data-target="#myCarousel" data-slide-to=<%=i %> style='text-shadow: none;'></li>
-            <%}%>
-         <%} %>
-       </ol>
-   
-       <!-- Wrapper for slides -->
-       <div class="carousel-inner">
-            <%for(int i=0;i<gplist.size();i++){ %>
-               <%if(i==0){ %>
-               <div class="item active">
-                    <img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" >
-                  </div>
-               <%}
-               else{ %>
-                  <div class="item">
-                    <img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" >
-                  </div>
-               <%} %>
-         <%} %>
-       </div>
-   
-       <!-- Left and right controls -->
-       <a class="left carousel-control" href="#myCarousel" data-slide="prev" style='text-shadow: 0 0 0 0;'>
-         <span class="glyphicon glyphicon-chevron-left" style='text-shadow: none;'></span>
-         <span class="sr-only" style='text-shadow: none;'>Previous</span>
-       </a>
-       <a class="right carousel-control" href="#myCarousel" data-slide="next" style='text-shadow: none;'>
-         <span class="glyphicon glyphicon-chevron-right" style='text-shadow: none;'></span>
-         <span class="sr-only" style='text-shadow: none;'>Next</span>
-       </a>
-     </div>
-   </div>
-   
-	
-	<div id="modalImg-div">
-		<%for(GalleryPath g:gplist){ %>
-			<img src="<%=request.getContextPath()%>/images/gallery/<%=g.getGalFileNewPath()%>" style="width:200px; height:200px">
+	<!-- 이미지 슬라이드 -->
+	<!-- 메인 슬라이드 -->
+	<div class="slideshow-container">
+	 	<%for(int i=0;i<gplist.size();i++){ %>
+			<div class="mySlides fade2">
+				<img class="main_slideImg" src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>">
+				<div class="text">Caption Text</div>
+			</div>
 		<%} %>
-		<hr>
-	</div>
+		<a class="prev" onclick="plusSlides(-1)">❮</a>
+		<a class="next"onclick="plusSlides(1)">❯</a>
+		</div>
+		<br>
+		<div style="text-align: center">
+			<%for(int i=0;i<gplist.size();i++){ %>
+				<span class="dot" onclick="currentSlide(<%=i%>)"></span> 
+			<%} %>
+		</div>
 	<div id="gal-content">
 		<table>
 			<tr>
@@ -130,92 +272,142 @@ $(function(){
 			</tr>
 		</table>
 	</div>
+	<!-- 댓글창 시작 -->
 	<div class="comment-editor">
+		<ul>
+			<%if(gclist!=null){ %>
+				<%for(GalleryCommentJoin g:gclist){ %>
+					<%if(g.getGalCommentLevel()==1){ %>
+						<li class='level1' style="list-style:none;">
+							<span class='ico_skin thumb_profile'>
+								<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupMemberImageNewPath() %>'>
+							</span>
+							<span class='comment_box'>
+								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
+								<span class='comment-date'>
+									<%=g.getGalCommentDate() %>
+									<a href='*' >신고</a>
+								</span>
+								<br/>
+								<span class='comment_content'>
+									<%=g.getGalCommentContent() %>
+									<button class='btn-reply' value='<%=g.getGalNo()%>'>답글</button>
+								</span>
+							</span>
+							<div class='recomment_content'>
+								<fieldset class='modal_comment' id='recomment_form'>
+									<legend class='screen_out'>대댓글쓰기 폼</legend>
+									<div class='comment_write'>
+										<label for='comment' class='lab_write screen_out'>내용</label>
+										<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
+									</div>
+									<div class='comment_btn'>
+										<button type="submit" id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>
+									</div>
+								</fieldset>
+							</div>
+						</li>
+					<%} 
+					else{%>
+						<li class="level2" style="list-style:none;">
+							<span class='ico_skin thumb_profile'>
+								<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupMemberImageNewPath() %>'>
+							</span>
+							<span class='comment_box'>
+								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
+								<span class='comment-date'>
+									<%=g.getGalCommentDate() %>
+									<a href='*' >신고</a>
+								</span>
+								<br/>
+								<span class='comment_content'>
+									<%=g.getGalCommentContent() %>
+								</span>
+							</span>
+						</li>
+					<%} %>
+				<%} %>
+			<%}%> 
+		</ul>
 		<form action="<%=request.getContextPath()%>/gallery/commentInsert" name="galleryCommentFrm" method="post">
-				<input type="hidden" name="groupNo" value="<%=gplist.get(0).getGroupNo() %>"/>
-				<input type="hidden" name="galNo" value="<%=gplist.get(0).getGalNo() %>"/>
-				<input type="hidden" name="galCommentWriterNo" value="<%=loginMember.getMemberNo() %>"/>
-				<input type="hidden" name="galCommentLevel" value="1"/>
-				<input type="hidden" name="galCommentRef" value="0"/>
-				<input type="hidden" name="albumCode" value="<%=gplist.get(0).getAlbumCode()%>"/>
-				<input type="hidden" name="galFileNo" value="<%=gplist.get(0).getGalFileNo()%>"/>
-			<textarea cols='100' rows='3' style='resize:none;' name="galCommentContent"></textarea>
-			<button type="submit" id='btn-insert'>등록</button>
+			<input type="hidden" name="groupNo" value="<%=gplist.get(0).getGroupNo() %>"/>
+			<input type="hidden" name="galNo" value="<%=gplist.get(0).getGalNo() %>"/>
+			<input type="hidden" name="galCommentWriterNo" value="<%=loginMember.getMemberNo() %>"/>
+			<input type="hidden" name="galCommentLevel" value="1"/>
+			<input type="hidden" name="galCommentRef" value="0"/>
+			<input type="hidden" name="albumCode" value="<%=gplist.get(0).getAlbumCode()%>"/>
+			<input type="hidden" name="galFileNo" value="<%=gplist.get(0).getGalFileNo()%>"/>
+			<fieldset class='modal_comment'>
+				<legend class='screen_out'>댓글쓰기 폼</legend>
+				<div class='comment_write'>
+					<label for='comment' class='lab_write screen_out'>내용</label>
+					<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
+				</div>
+				<div class='comment_btn'>
+					<button type="submit" id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>
+				</div>
+			</fieldset>
 		</form>
 	</div>
-	<table id="tbl-comment">
-		<%if(gclist!=null){ %>
-			<%for(GalleryCommentJoin g:gclist){ %>
-				<%if(g.getGalCommentLevel()==1){ %>
-					<tr class='level1'>
-						<td>
-							<sub class='comment-writer'><%=g.getGroupMemberNickname()%></sub>
-							<sub class='comment-date'><%=g.getGalCommentDate() %></sub>
-							<br/>
-							<%=g.getGalCommentContent() %>
-						</td>
-						<td>
-							<button class='btn-reply' value='<%=g.getGalNo()%>'>답글</button>
-						</td>
-					</tr>
-				<%} 
-				else{%>
-					<tr class="level2">
-						<td>
-							<sub class="comment-writer"><%=g.getGroupMemberNickname() %></sub>
-							<sub class="comment-date"><%=g.getGalCommentDate() %></sub>
-							<br/>
-							<%=g.getGalCommentContent() %>
-						</td>
-						<td>
-						</td>
-					</tr>
-				<%} %>
-			<%} %>
-		<%} 
-		else{%>
-			<tr>
-				<td colspan='2'></td>
-			</tr>
-		<%} %>
-	</table>
-	<script>
-		<%-- $(function(){
-			$('.btn-reply').on('click',function(e){
-				<%if(loginMember!=null){%>
-					var tr=$("<tr></tr>");
-					var html="<td style='display:none;text-align:left;' colspan='2'>";
-					html+="<form action='<%=request.getContextPath()%>/gallery/commentInsert' method='post'>";
-					html+="<input type='hidden' name='groupNo' value='<%=groupNo %>'/>"
-					html+="<input type='hidden' name='galNo' value='<%=gplist.get(0).getGalNo()%>'/>";
-					html+="<input type='hidden' name='galCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
-					html+="<input type='hidden' name='galCommentLevel' value='2'/>";
-					html+="<input type='hidden' name='albumCode' value='<%=gplist.get(0).getAlbumCode()%>'/>";
-					html+="<input type='hidden' name='galFileNo' value='<%=gplist.get(0).getGalFileNo()%>'/>";
-					html+="<input type='hidden' name='galCommentRef' value='"+$(this).val()+"'/>";
-					html+="<textarea name='galCommentContent' style='resize: none' cols='60' rows='2'></textarea>";
-					html+="<button type='submit' class='btn-insert2'>등록</button>";
-					html+="</form></td>";
-					tr.html(html);
-					tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
-					/* 연결된 이벤트 삭제 */
-					$(this).off('click');
-					
-					tr.find('form').submit(function(e){
-						if(<%=loginMember==null%>)
-						{
-							fn_loginAlert();
-							e.preventDefault();
-							return;
-						}
-						var len=$(this).children('textarea').val().trim().length;
-						if(len==0)
-						{
-							e.preventDefault();
-						}
-					});
-					tr.find("textarea").focus();
-				<%}%>
-			});
-		}); --%>
-	</script>
+<!-- 대댓글 쓰기 함수 -->
+<script>
+	$(function(){
+		var eventflag;
+		$('.btn-reply').on('click',function(e){
+			<%if(loginMember!=null){%>
+				eventflag=true;
+				var div=$("<div class='recomment_content'></div>");
+				var html="<form action='<%=request.getContextPath()%>/gallery/commentInsert' method='post'>";
+				html+="<input type='hidden' name='groupNo' value='<%=groupNo %>'/>"
+				html+="<input type='hidden' name='galNo' value='<%=gplist.get(0).getGalNo()%>'/>";
+				html+="<input type='hidden' name='galCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
+				html+="<input type='hidden' name='galCommentLevel' value='2'/>";
+				html+="<input type='hidden' name='albumCode' value='<%=gplist.get(0).getAlbumCode()%>'/>";
+				html+="<input type='hidden' name='galFileNo' value='<%=gplist.get(0).getGalFileNo()%>'/>";
+				html+="<input type='hidden' name='galCommentRef' value='"+$(this).val()+"'/>";
+				html+="<fieldset class='modal_comment'>";
+				html+="<div class='comment_write'>";
+				html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
+				html+="</div>";
+				html+="<div class='comment_btn'>";
+				html+="<button type='submit' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
+				html+="</div>"
+				html+="</fieldset>"
+				html+="</form>";
+				div.html(html);
+				div.insertAfter($(this).parent().parent().parent()).children("span").slideDown(800);
+				/* 연결된 이벤트 삭제 */
+				$(this).off('click');
+				/* 빈공간 누르면 display바뀌는 것 */
+/* 				$('.recomment_content').click(function(){
+					if(eventflag)
+					{
+						$(this).css('display','none');
+						eventflag=false;
+						return;
+					}
+				}) */
+				
+				div.find('form').submit(function(e){
+					if(<%=loginMember==null%>)
+					{
+					 	fn_loginAlert();
+						e.preventDefault();
+						return;
+					}
+					var len=$(this).children('textarea').val().trim().length;
+					if(len==0)
+					{
+						e.preventDefault();
+					}
+				});
+				div.find("textarea").focus();
+			<%}%>
+		});
+		function fn_loginAlert()
+		{
+			alert('로그인 후 이용할 수 있습니다.');
+		}
+
+	});
+</script>
