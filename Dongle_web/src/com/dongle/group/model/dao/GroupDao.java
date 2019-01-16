@@ -163,8 +163,8 @@ public class GroupDao {
 	            gm.setGroupNo(rs.getInt("group_no"));
 	            gm.setMemberNo(rs.getInt("member_no"));         
 	            gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
-	            gm.setGroupMemberImageOldPath(rs.getString("gruop_member_image_old_path"));
-	            gm.setGroupMemberImageNewPath(rs.getString("gruop_member_image_new_path"));
+	            gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
+	            gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
 	            gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
 	            gm.setBlackistYN(rs.getString("blacklist_yn"));
 	            gm.setReportDongleCount(rs.getInt("report_dongle_count"));

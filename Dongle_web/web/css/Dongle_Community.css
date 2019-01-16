@@ -29,6 +29,15 @@ body {
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
 }
+button.btn button.btn-primary{
+    background-color: rgb(253, 253, 253);
+    width: 100px;
+    color: rgb(41, 41, 41);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
 
 /* 게시판 스타일 */
 .main {
@@ -79,7 +88,6 @@ body {
          */
 .logo {
 	position: fixed;
-	z-index: 2;
 }
 div.logo h2 a{text-decoration: none;}
 /* 왼쪽 사이드 컨텐트 */

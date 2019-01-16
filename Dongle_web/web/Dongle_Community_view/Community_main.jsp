@@ -20,8 +20,8 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-	<link href="<%=request.getContextPath() %>/css/Test.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +51,8 @@
             </div>
         </header>
         <aside>
-            <div class="sideback center">
+            <!-- <div class="sideback center"> -->
+            <div class="center">
                 <!-- 왼쪽 사이드 -->
                 <div class="sidel" style='height:100vh; background-color:rgba(240,240,240)'>
                     <div class="sideitem" style="border:1px solid red; left:10%; right:10%; height:250px;">프로필</div>
@@ -60,16 +61,10 @@
             </div>
 
         </aside>
-        <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255);'>
-
-            </div>
-        </section>
-        <!-- 오른쪽 사이드 -->
-        <aside>
-            <div class="sideback center">
-                <div class="sider" style='height:100vh; background-color:rgba(240,240,240)'>
+         <aside>
+            <!-- <div class="sideback center"> -->
+            <div class="center">
+                <div class="sider" style='height:100vh; background-color:rgba(240,240,240); clear: left;'>
                     <!-- 메뉴 버튼 -->
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary'>공지사항</button><br>
@@ -79,6 +74,14 @@
                 </div>
             </div>
         </aside>
+        <!-- 게시판 -->
+        <section>
+            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255); clear: left;'>
+
+            </div>
+        </section>
+        <!-- 오른쪽 사이드 -->
+
     </div>
 
 <script>
