@@ -85,10 +85,10 @@ public class GalleryService {
 		
 	}
 	
-	public List<GalleryPath> selectOneList(int groupNo,int galNo,int memberNo,int galFileNo)
+	public List<GalleryPath> selectOneList(int groupNo,int galNo,int memberNo,String albumCode)
 	{
 		Connection conn = getConnection();
-		List<GalleryPath> gplist = new GalleryDao().selectOneList(conn,groupNo,galNo,memberNo,galFileNo);
+		List<GalleryPath> gplist = new GalleryDao().selectOneList(conn,groupNo,galNo,memberNo,albumCode);
 		close(conn);
 		return gplist;
 	}
@@ -112,6 +112,20 @@ public class GalleryService {
 		Connection conn=getConnection();
 		int rs = new GalleryDao().maxGalNo(conn, groupNo,albumCode);
 		close(conn);
+		return rs;
+	}
+	//갤러리 코멘트 등록하기
+	public int insertGalComment(GalleryCommentJoin gcj)
+	{
+		Connection conn = getConnection();
+		int rs = new GalleryDao().insertGalComment(conn, gcj);
+		if(rs!=0)
+		{
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
 		return rs;
 	}
 }

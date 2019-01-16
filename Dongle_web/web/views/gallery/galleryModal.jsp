@@ -4,8 +4,10 @@
 <%
 	List<GalleryPath> gplist=(List)request.getAttribute("gplist");
 	List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
+	int groupNo = (int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 %>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+=======
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+>>>>>>> branch 'SJH' of https://github.com/kdc429/Semi_Dongle.git
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
      .close {
@@ -69,54 +78,53 @@ $(function(){
 	}
 });
 </script>
-</head>
-<body>
 	<span class="close">&times;</span>
-<<<<<<< HEAD
-		<div class="container">
-	  <h2>Carousel Example</h2>  
-	  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	    <!-- Indicators -->
-	    <ol class="carousel-indicators">
-    		<%for(int i=0;i<gplist.size();i++){ %>
-    			<%if(i==0){ %>
-					<li data-target="#myCarousel" data-slide-to=<%=i %> class="active"></li>
-				<%}
-    			else{%>
-					<li data-target="#myCarousel" data-slide-to=<%=i %>></li>
-				<%}%>
-			<%} %>
-	    </ol>
-	
-	    <!-- Wrapper for slides -->
-	    <div class="carousel-inner">
-   			<%for(int i=0;i<gplist.size();i++){ %>
-   				<%if(i==0){ %>
-					<div class="item active">
-			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
-			      	</div>
-		      	<%}
-   				else{ %>
-		      		<div class="item">
-			        	<img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" style="width:100%;">
-			      	</div>
-		      	<%} %>
-			<%} %>
-	    </div>
-	
-	    <!-- Left and right controls -->
-	    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-	      <span class="glyphicon glyphicon-chevron-left"></span>
-	      <span class="sr-only">Previous</span>
-	    </a>
-	    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-	      <span class="glyphicon glyphicon-chevron-right"></span>
-	      <span class="sr-only">Next</span>
-	    </a>
-	  </div>
-	</div>
 	
 	
+	<!-- 모달로 이미지 받기.. 부트스트랩 ㅂㄷㅂㄷ... -->
+<%-- 	<div class="container">
+     <h2>Carousel Example</h2>  
+     <div id="myCarousel" class="carousel slide" data-ride="carousel" style='text-shadow: none;width:50%;'>
+       <!-- Indicators -->
+       <ol class="carousel-indicators">
+          <%for(int i=0;i<gplist.size();i++){ %>
+             <%if(i==0){ %>
+               <li data-target="#myCarousel" data-slide-to=<%=i %> class="active" style='text-shadow: none;'></li>
+            <%}
+             else{%>
+               <li data-target="#myCarousel" data-slide-to=<%=i %> style='text-shadow: none;'></li>
+            <%}%>
+         <%} %>
+       </ol>
+   
+       <!-- Wrapper for slides -->
+       <div class="carousel-inner">
+            <%for(int i=0;i<gplist.size();i++){ %>
+               <%if(i==0){ %>
+               <div class="item active">
+                    <img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" >
+                  </div>
+               <%}
+               else{ %>
+                  <div class="item">
+                    <img src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>" alt="<%=gplist.get(i).getGalFileNo() %>" >
+                  </div>
+               <%} %>
+         <%} %>
+       </div>
+   
+       <!-- Left and right controls -->
+       <a class="left carousel-control" href="#myCarousel" data-slide="prev" style='text-shadow: none;'>
+         <span class="glyphicon glyphicon-chevron-left" style='text-shadow: none;'></span>
+         <span class="sr-only" style='text-shadow: none;'>Previous</span>
+       </a>
+       <a class="right carousel-control" href="#myCarousel" data-slide="next" style='text-shadow: none;'>
+         <span class="glyphicon glyphicon-chevron-right" style='text-shadow: none;'></span>
+         <span class="sr-only" style='text-shadow: none;'>Next</span>
+       </a>
+     </div>
+   </div> --%>
+   
 	
 	<div id="modalImg-div">
 		<%-- <%for(GalleryPath g:gplist){ %>
@@ -124,20 +132,32 @@ $(function(){
 		<%} %> --%>
 		<hr>
 	</div>
+	<div id="gal-content">
+		<table>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;</td>
+				<td><%=gplist.get(0).getGalFileContent()%></td>
+				<td style='float:right;'><%=gplist.get(0).getGalEnrollDate() %></td>
+			</tr>
+		</table>
+	</div>
 	<div class="comment-editor">
-		<form action="<%=request.getContextPath()%>/gallery/galleryInsert" name="galleryCommentFrm" method="post">
-			<input type="hidden" name="galCommentNo" value="<%=gclist %>"/>
-			<input type="hidden" name="galCommentWriter" value="<%=loginMember.getMemberNo() %>"/>
-			<input type="hidden" name="galCommentLevel" value="1"/>
-			<input type="hidden" name="galCommentRef" value="0"/>
+		<form action="<%=request.getContextPath()%>/gallery/commentInsert" name="galleryCommentFrm" method="post">
+				<input type="hidden" name="groupNo" value="<%=gplist.get(0).getGroupNo() %>"/>
+				<input type="hidden" name="galNo" value="<%=gplist.get(0).getGalNo() %>"/>
+				<input type="hidden" name="galCommentWriterNo" value="<%=loginMember.getMemberNo() %>"/>
+				<input type="hidden" name="galCommentLevel" value="1"/>
+				<input type="hidden" name="galCommentRef" value="0"/>
+				<input type="hidden" name="albumCode" value="<%=gplist.get(0).getAlbumCode()%>"/>
+				<input type="hidden" name="galFileNo" value="<%=gplist.get(0).getGalFileNo()%>"/>
 			<textarea cols='50' rows='3' style='resize:none;' name="galCommentContent"></textarea>
-			<button type="submit" id='btn-insert'>둥록</button>
+			<button type="submit" id='btn-insert'>등록</button>
 		</form>
 	</div>
 	<table id="tbl-comment">
 		<%if(gclist!=null){ %>
 			<%for(GalleryCommentJoin g:gclist){ %>
-				<%if(g.getgalCommentLevel()==1){ %>
+				<%if(g.getGalCommentLevel()==1){ %>
 					<tr class='level1'>
 						<td>
 							<sub class='comment-writer'><%=g.getGroupMemberNickname()%></sub>
@@ -163,6 +183,11 @@ $(function(){
 					</tr>
 				<%} %>
 			<%} %>
+		<%} 
+		else{%>
+			<tr>
+				<td colspan='2'></td>
+			</tr>
 		<%} %>
 	</table>
 	<script>
@@ -172,9 +197,12 @@ $(function(){
 					var tr=$("<tr></tr>");
 					var html="<td style='display:none;text-align:left;' colspan='2'>";
 					html+="<form action='<%=request.getContextPath()%>/gallery/commentInsert' method='post'>";
-					html+="<input type='hidden' name='galNo' value='<%=gplist.get[0].getGalNo()%>'/>";
-					html+="<input type='hidden' name='galCommentWriter' value='<%=loginMember.getMemberId()%>'/>";
+					html+="<input type='hidden' name='groupNo' value='<%=groupNo %>'/>"
+					html+="<input type='hidden' name='galNo' value='<%=gplist.get(0).getGalNo()%>'/>";
+					html+="<input type='hidden' name='galCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
 					html+="<input type='hidden' name='galCommentLevel' value='2'/>";
+					html+="<input type='hidden' name='albumCode' value='<%=gplist.get(0).getAlbumCode()%>'/>";
+					html+="<input type='hidden' name='galFileNo' value='<%=gplist.get(0).getGalFileNo()%>'/>";
 					html+="<input type='hidden' name='galCommentRef' value='"+$(this).val()+"'/>";
 					html+="<textarea name='galCommentContent' style='resize: none' cols='60' rows='2'></textarea>";
 					html+="<button type='submit' class='btn-insert2'>등록</button>";
@@ -200,8 +228,5 @@ $(function(){
 					tr.find("textarea").focus();
 				<%}%>
 			});
-		}) --%>
+		}); --%>
 	</script>
-	
-</body>
-</html>

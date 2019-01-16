@@ -60,7 +60,7 @@ body {
          */
 .sidel {
 	width: 170px;
-	height: auto;
+	height:100vh;
 	position: fixed;
 	margin-top: 62.8px;
 }
@@ -68,7 +68,7 @@ body {
 /* 오른쪽 사이드 div */
 .sider {
 	width: 170px;
-	height: auto;
+	height:100vh;
 	position: fixed;
 	margin-top: 62.8px;
 	margin-left: 854px;

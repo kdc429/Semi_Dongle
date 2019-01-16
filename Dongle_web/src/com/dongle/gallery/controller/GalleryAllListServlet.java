@@ -38,13 +38,16 @@ public class GalleryAllListServlet extends HttpServlet {
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
 		int galNo=Integer.parseInt(request.getParameter("galNo"));
 		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
-		System.out.println(groupNo+" : "+albumCode+" : "+galFileNo);
+		System.out.println(groupNo+" : "+albumCode+" : "+galFileNo+" : "+galNo);
 		
 		//해당 갤러리 리스트 뽑아오기
-		List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,loginMember.getMemberNo(),galFileNo);
+		List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,loginMember.getMemberNo(),albumCode);
 
 		//갤러리 해당 댓글 뽑아오기
 		List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
+		
+		System.out.println("gplist: "+gplist.get(0));
+		System.out.println("gclist: "+gclist);
 		
 		request.setAttribute("gplist", gplist);
 		request.setAttribute("gclist", gclist);
