@@ -25,10 +25,10 @@ public class BoardService {
 		return b;
 	}
 	
-	public int insertBoard(Board b, BoardPath bp, int groupNo)
+	public int insertBoard(BoardPath bp)
 	{
 		Connection conn=getConnection();
-		int result=new BoardDao().insertBoard(conn, b, bp, groupNo);
+		int result=new BoardDao().insertBoard(conn,bp);
 		if(result>0)
 		{
 			commit(conn);
@@ -50,6 +50,18 @@ public class BoardService {
 		close(conn);
 		return result;
 		
+	}
+	public int insertBoardFile(BoardPath bp,Board bo)
+	{
+		Connection conn=getConnection();
+		int rs=new BoardDao().insertBoardFile(conn,bp,bo);
+		if(rs!=0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		return rs;
 	}
 	
 }

@@ -4,6 +4,7 @@
     
 <% 
 	Board b=(Board)request.getAttribute("board");
+	BoardPath bp=(BoardPath)request.getAttribute("boardPath");
 	List<BoardComment> bclist=(List)request.getAttribute("bclist");
 	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 %>
@@ -19,7 +20,7 @@
 	}
 	.table th
 	{
-		background-color: #F2CB61;
+		background-color: #EAEAEA;
 		text-align : center;
 		height: 10px;
 	}
@@ -31,6 +32,10 @@
 	{
 		text-align : center;
 	}
+	#title
+	{
+		background-color: #F2CB61;
+	}
 	
 	
 </style>
@@ -39,7 +44,7 @@
 			<thead>
 				<br><br>
 				<tr>
-					<th colspan="3">공지사항</th>
+					<th colspan="3" id="title">공지사항</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,9 +66,9 @@
 				</tr>
 				<tr>
 					<th>첨부파일</th>
-					<td><%-- <%if(b.getFilePath()!=null){%>
+					<td><%if(bp.getBoardFileNewPath!=null){%>
 						<img alt="첨부파일" src="<%= request.getContextPath() %>/images/file.png"width='16px'>
-						<%} %> --%>	
+						<%} %> 
 					</td>
 				</tr>
 				<tr>

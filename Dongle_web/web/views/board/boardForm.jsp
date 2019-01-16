@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
-    
+<%@ page import="com.dongle.board.model.vo.Board"%>
+<%
+	int groupNo = (int)request.getAttribute("groupNo");
+%>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -87,7 +90,8 @@
 				</tbody> 
 					<tr>
 						<td colspan="2" id="board-add">
-							<input type="button" value="등록하기" onclick="return validate();"/>
+							<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
+							<input type="submit" value="등록하기" onclick="return validate();"/>
 						</td>
 					</tr>			
 			</table>

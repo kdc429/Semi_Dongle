@@ -11,6 +11,7 @@ public class BoardFileRenamePolicy implements FileRenamePolicy {
 
 	@Override
 	public File rename(File oldFile) {
+		System.out.println("파일들어옴");
 		File newFile=null;
 		do {
 			long currentTime=System.currentTimeMillis();//현재시간

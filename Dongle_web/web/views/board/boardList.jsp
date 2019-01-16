@@ -101,7 +101,7 @@
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
 			$.ajax({
-				url:"<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>"+num,
+				url:"<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>",
 				type:"get",
 				dataType:"html",
 				success:function(data){
