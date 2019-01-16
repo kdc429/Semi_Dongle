@@ -31,7 +31,7 @@ public class GalleryInsertServlet extends HttpServlet {
 		System.out.println("GalleryInsertServlet: "+groupNo+":"+"albumCode");
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("albumCode", albumCode);
-		request.getRequestDispatcher("/views/gallery/galleryForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/gallery/galleryInsertForm.jsp").forward(request, response);
 	}
 
 	/**

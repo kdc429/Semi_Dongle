@@ -53,7 +53,8 @@ public class GroupDao {
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
-				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_new_path"));
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
@@ -93,7 +94,8 @@ public class GroupDao {
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
-				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_New_path"));
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
@@ -161,7 +163,8 @@ public class GroupDao {
 	            gm.setGroupNo(rs.getInt("group_no"));
 	            gm.setMemberNo(rs.getInt("member_no"));         
 	            gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
-	            gm.setGroupMemberImagePath(rs.getString("gruop_member_image_path"));
+	            gm.setGroupMemberImageOldPath(rs.getString("gruop_member_image_old_path"));
+	            gm.setGroupMemberImageNewPath(rs.getString("gruop_member_image_new_path"));
 	            gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
 	            gm.setBlackistYN(rs.getString("blacklist_yn"));
 	            gm.setReportDongleCount(rs.getInt("report_dongle_count"));
@@ -198,7 +201,8 @@ public class GroupDao {
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
-				g.setImgPath(rs.getString("group_image_path"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_New_path"));
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));

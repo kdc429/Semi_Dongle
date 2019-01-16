@@ -92,7 +92,6 @@
 			<ul>
 				<%if(editList!=null){
 					for(EditPickGroup epg : editList){ %>
-<<<<<<< HEAD
 					<li>
 						<!-- 에디터 픽 선정 동글 리스트 -->
 						<form action="<%=request.getContextPath()%>/communityJoin" method="post" name="edit-pick">
@@ -100,24 +99,11 @@
 							<div class="editor-img-back">
 								<div class="editor-img">
 									<button class="join-btn" >
-									<img class="eImg" src="<%=request.getContextPath() %><%=epg.getEditFilePath()%>">
+									<img class="eImg" src="<%=request.getContextPath() %>/images/editor_images/<%=epg.getEditFilePath()%>">
 									<input type="hidden" name="groupNo" value="<%=epg.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
 									</button>
 								</div>
-=======
-				<li>
-					<!-- 에디터 픽 선정 동글 리스트 -->
-					<form action="<%=request.getContextPath()%>/communityJoin" method="post" name="edit-pick">
-						<!-- 여기서 그룹 넘버 전송 -->
-						<div class="editor-img-back">
-							<div class="editor-img">
-								<button class="join-btn" >
-								<img class="eImg" src="<%=request.getContextPath() %><%=epg.getEditFilePath()%>">
-								<input type="hidden" name="groupNo" value="<%=epg.getGroupNo()%>"/>
-								<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
-								</button>
->>>>>>> branch 'SJH' of https://github.com/kdc429/Semi_Dongle.git
 							</div>
 						</form>
 						
