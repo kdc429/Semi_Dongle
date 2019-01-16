@@ -29,20 +29,15 @@
 
 <style>
 
-	tbl{
+	section div#mem_list_div table#tbl{
 		margin-top: 20px;
 	}
-	th{
+	section div#mem_list_div table#tbl>th{>
 		border : 1px solid darkgray;
 	}
-	td
+	section div#mem_list_div table#tbl>td
 	{
 		border: 1px solid lightgray;
-	}
-	caption{
-		font-family: '나눔스퀘어라운드 Regular';
-		font-weight: bold;
-		font-size: 30px;
 	}
 	section div#mem_list_div table#tbl>tr th,td{text-align:center;}
 
@@ -82,7 +77,7 @@
 				<div class="sideitem1"
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
-					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>" width="100px" height="100px">
+					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImgNewPath()%>" width="100px" height="100px">
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -104,7 +99,7 @@
 					<table id="user_info_tb" style="width:138px" border="1px solid black">
 						<tr>
 						<td style="width:65px" rowspan="2">
-							<img id="user_img" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImagePath()%>" style="width:60px">
+							<img id="user_img" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImgNewPath()%>" style="width:60px">
 						</td>						
 							<td class="gm_info">닉네임 : <%=gm.getGroupMemberNickname()%></td>
 						</tr>
@@ -155,70 +150,43 @@
             
        </section>
        
-       <script> 		
-       <%--        	$('#dongle_mem_btn').click(function(){
-              		$.ajax({
-              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-              			type:"get",
-              			dataType:"json",
-              			success:function(data){
-              				var thead="<br/><caption><%=g.getGroupName()%>의 멤버보기</caption><tr><th id='tbl_nav'>닉네임</th><th id='tbl_nav'>가입일</th></tr>";
-              		 		var thtml="";
-              			     for(var i = 0; i < data.length; i++)
-              		            {
-              			    	 	var tbody= "<tr><td>"+data[i]['groupMemberNickname']+"</td>";
-              			    	 	
-              			    	 	thtml+=tbody;
-              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td><tr>"
-              			    	 	
-              		            }
-              			     
-              			     thead += thtml;
-              			     console.log(thtml);
-              			     $('#tbl').html(thead);
-              			     
-              			}
-              		});   		
-              	}); --%>
-              	
-                 	$('#dongle_mem_btn').click(function(){
-              		$.ajax({
-              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-              			type:"get",
-              			dataType:"json",
-              			success:function(data){
-              				$('#content-div').html(data);
-              				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-              				//var h2_main = $('<h2></h2>');
-              				var tbl = $('<table id="tbl"></table>');
-              				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
-              				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
-              		 		var thtml="";
-              			     for(var i = 0; i < data.length; i++)
-              		            {
-              			    	 	/* var tbody= "<tr>"; */
-              			    	 	thtml+="<tr>";
-              			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
-              			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
-              			    	 	/* thtml+=tbody; */
-              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
-              			    	 	thtml+="</tr>";
-              			   }
-              			     console.log(thtml);
-              			   thead += thtml;
-              			   tbl.append(thead);
-              			   
-              			     
-              			   console.log(thead);
-              			   console.log(tbl);
-              			   console.log(h);
-              			 	$('#header').html(h);         			   
-              			    $('#mem_list_div').append(tbl);
-              				
-              			     
-              			}
-              		});   		
-              	});       
+<script> 		
+      	
+   	$('#dongle_mem_btn').click(function(){
+   		$.ajax({
+			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+     		type:"get",
+     		dataType:"json",
+     		success:function(data){
+     			
+     			  console.log(data);
+     			
+     			$('#content-div').html(data);
+     			var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+     				var tbl = $('<table id="tbl"></table>');
+     				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
+     				var thtml="";
+     			    for(var i = 0; i < data.length; i++)
+     		            {
+     			    	 	thtml+="<tr>";
+     			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImgNewPath']+"'/></td>";
+     			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+     			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+     			    	 	thtml+="</tr>";
+     			 		 }
+     			   console.log(thtml);
+     			   thead += thtml;
+     			   tbl.append(thead);
+     			   
+     			   console.log(thead);
+     			   console.log(tbl);
+     			   console.log(h);
+     			   $('#header').html(h); 
+     			   $('#mem_list_div').append(tbl);
+     
+     			}
+     		});   		
+     	});       
        </script>
         <!-- 오른쪽 사이드 -->
         <aside>

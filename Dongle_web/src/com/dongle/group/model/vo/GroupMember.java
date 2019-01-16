@@ -7,7 +7,8 @@ public class GroupMember {
 	private int groupNo;
 	private int memberNo;
 	private String groupMemberNickname;
-	private String groupMemberImagePath;
+	private String groupMemberImgOldPath;
+	private String groupMemberImgNewPath;
 	private Date groupMemberEnrollDate;
 	private String blacklistYN;
 	private int reportDongleCount;
@@ -16,13 +17,14 @@ public class GroupMember {
 		super();
 	}
 
-	public GroupMember(int groupNo, int memberNo, String groupMemberNickname, String groupMemberImagePath,
-			Date groupMemberEnrollDate, String blacklistYN, int reportDongleCount) {
+	public GroupMember(int groupNo, int memberNo, String groupMemberNickname, String groupMemberImgOldPath,
+			String groupMemberImgNewPath, Date groupMemberEnrollDate, String blacklistYN, int reportDongleCount) {
 		super();
 		this.groupNo = groupNo;
 		this.memberNo = memberNo;
 		this.groupMemberNickname = groupMemberNickname;
-		this.groupMemberImagePath = groupMemberImagePath;
+		this.groupMemberImgOldPath = groupMemberImgOldPath;
+		this.groupMemberImgNewPath = groupMemberImgNewPath;
 		this.groupMemberEnrollDate = groupMemberEnrollDate;
 		this.blacklistYN = blacklistYN;
 		this.reportDongleCount = reportDongleCount;
@@ -52,12 +54,20 @@ public class GroupMember {
 		this.groupMemberNickname = groupMemberNickname;
 	}
 
-	public String getGroupMemberImagePath() {
-		return groupMemberImagePath;
+	public String getGroupMemberImgOldPath() {
+		return groupMemberImgOldPath;
 	}
 
-	public void setGroupMemberImagePath(String groupMemberImagePath) {
-		this.groupMemberImagePath = groupMemberImagePath;
+	public void setGroupMemberImgOldPath(String groupMemberImgOldPath) {
+		this.groupMemberImgOldPath = groupMemberImgOldPath;
+	}
+
+	public String getGroupMemberImgNewPath() {
+		return groupMemberImgNewPath;
+	}
+
+	public void setGroupMemberImgNewPath(String groupMemberImgNewPath) {
+		this.groupMemberImgNewPath = groupMemberImgNewPath;
 	}
 
 	public Date getGroupMemberEnrollDate() {
@@ -87,12 +97,11 @@ public class GroupMember {
 	@Override
 	public String toString() {
 		return "GroupMember [groupNo=" + groupNo + ", memberNo=" + memberNo + ", groupMemberNickname="
-				+ groupMemberNickname + ", groupMemberImagePath=" + groupMemberImagePath + ", groupMemberEnrollDate="
-				+ groupMemberEnrollDate + ", blacklistYN=" + blacklistYN + ", reportDongleCount=" + reportDongleCount
-				+ "]";
+				+ groupMemberNickname + ", groupMemberImgOldPath=" + groupMemberImgOldPath + ", groupMemberImgNewPath="
+				+ groupMemberImgNewPath + ", groupMemberEnrollDate=" + groupMemberEnrollDate + ", blacklistYN="
+				+ blacklistYN + ", reportDongleCount=" + reportDongleCount + "]";
 	}
 	
 	
 	
-
 }

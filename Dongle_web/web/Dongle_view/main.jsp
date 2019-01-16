@@ -48,7 +48,7 @@
                     			
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<span class="group-name"><%=g.getGroupName() %></span>
-                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getGroupImgNewPath()%>"/>
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>

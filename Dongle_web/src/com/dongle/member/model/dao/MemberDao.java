@@ -51,7 +51,6 @@ public class MemberDao {
 				data.setEnrollDate(rs.getDate("member_enroll_date"));
 				data.setBlackList(rs.getInt("blacklist_yn"));
 				data.setReportCount(rs.getInt("report_member_count"));
-				data.setMemberImaPath(rs.getString("member_img_path"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

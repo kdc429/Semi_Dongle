@@ -9,10 +9,12 @@ public class Group {
 	private int groupNo; //GROUP_NO
 	private String groupName; //GROUP_NAME
 	private String topicCode; //TOPIC_CTG_CODE
+	private String locCtgCode; //LOC_CTG_CODE
 	private String groupDateCtg; //GROUP_DATE_CTG
 	private int minAge; //MIN_AGE
 	private int maxAge; //MAX_AGE
-	private String imgPath; //GROUP_IMAGE_PATH
+	private String groupImgOldPath; //GROUP_IMAGE_OLD_PATH
+	private String groupImgNewPath; //GROUP_IMAGE_NEW_PATH
 	private String groupIntro; //GROUP_INTRODUCE
 	private Date groupEnrollDate; //GROUP_ENROLL_DATE
 	private int reportGroupCnt; //REPORT_GROUP_COUNT
@@ -21,17 +23,20 @@ public class Group {
 		
 	}
 
-	public Group(int memberNo, int groupNo, String groupName, String topicCode, String groupDateCtg, int minAge,
-			int maxAge, String imgPath, String groupIntro, Date groupEnrollDate, int reportGroupCnt) {
+	public Group(int memberNo, int groupNo, String groupName, String topicCode, String locCtgCode, String groupDateCtg,
+			int minAge, int maxAge, String groupImgOldPath, String groupImgNewPath, String groupIntro,
+			Date groupEnrollDate, int reportGroupCnt) {
 		super();
 		this.memberNo = memberNo;
 		this.groupNo = groupNo;
 		this.groupName = groupName;
 		this.topicCode = topicCode;
+		this.locCtgCode = locCtgCode;
 		this.groupDateCtg = groupDateCtg;
 		this.minAge = minAge;
 		this.maxAge = maxAge;
-		this.imgPath = imgPath;
+		this.groupImgOldPath = groupImgOldPath;
+		this.groupImgNewPath = groupImgNewPath;
 		this.groupIntro = groupIntro;
 		this.groupEnrollDate = groupEnrollDate;
 		this.reportGroupCnt = reportGroupCnt;
@@ -69,6 +74,14 @@ public class Group {
 		this.topicCode = topicCode;
 	}
 
+	public String getLocCtgCode() {
+		return locCtgCode;
+	}
+
+	public void setLocCtgCode(String locCtgCode) {
+		this.locCtgCode = locCtgCode;
+	}
+
 	public String getGroupDateCtg() {
 		return groupDateCtg;
 	}
@@ -93,12 +106,20 @@ public class Group {
 		this.maxAge = maxAge;
 	}
 
-	public String getImgPath() {
-		return imgPath;
+	public String getGroupImgOldPath() {
+		return groupImgOldPath;
 	}
 
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+	public void setGroupImgOldPath(String groupImgOldPath) {
+		this.groupImgOldPath = groupImgOldPath;
+	}
+
+	public String getGroupImgNewPath() {
+		return groupImgNewPath;
+	}
+
+	public void setGroupImgNewPath(String groupImgNewPath) {
+		this.groupImgNewPath = groupImgNewPath;
 	}
 
 	public String getGroupIntro() {
@@ -128,12 +149,11 @@ public class Group {
 	@Override
 	public String toString() {
 		return "Group [memberNo=" + memberNo + ", groupNo=" + groupNo + ", groupName=" + groupName + ", topicCode="
-				+ topicCode + ", groupDateCtg=" + groupDateCtg + ", minAge=" + minAge + ", maxAge=" + maxAge
-				+ ", imgPath=" + imgPath + ", groupIntro=" + groupIntro + ", groupEnrollDate=" + groupEnrollDate
-				+ ", reportGroupCnt=" + reportGroupCnt + "]";
+				+ topicCode + ", locCtgCode=" + locCtgCode + ", groupDateCtg=" + groupDateCtg + ", minAge=" + minAge
+				+ ", maxAge=" + maxAge + ", groupImgOldPath=" + groupImgOldPath + ", groupImgNewPath=" + groupImgNewPath
+				+ ", groupIntro=" + groupIntro + ", groupEnrollDate=" + groupEnrollDate + ", reportGroupCnt="
+				+ reportGroupCnt + "]";
 	}
-	
-	
 	
 	
 	
