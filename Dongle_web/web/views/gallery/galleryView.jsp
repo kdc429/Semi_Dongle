@@ -78,7 +78,7 @@
 			var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
 			var galNo = $(event.target).nextAll('#galNo')[0].value;
 			$.ajax({
-				url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo,
+				url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo+"&dataNum="+1,
 				type:"post",
 				dataType:"html",
 				success:function(data){

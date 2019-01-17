@@ -293,7 +293,7 @@ if (n < 1) {slideIndex = slides.length}
 								<br/>
 								<span class='comment_content'>
 									<%=g.getGalCommentContent() %>
-									<button class='btn-reply' value=''>답글</button>
+									<button class='btn-reply' value='<%=g.getGalCommentNo()%>'>답글</button>
 								</span>
 							</span>
 						</li>
@@ -339,36 +339,7 @@ if (n < 1) {slideIndex = slides.length}
 	</div>
 
 <script>
-/*  */
-	$(function(){
-		$('.btn-reply').click(function(){
-			$.ajax({
-				url:"<%=request.getContextPath()%>/gallery/commentInsert",
-				data:{"groupNo":$('#groupNo').val(),
-					"galNo":$('#galNo').val(),
-					"galCommentWriterNo":$('#galCommentWriterNo').val(),
-					"galCommentLevel":$('#galCommentLevel').val(),
-					"galCommentRef":$('#galCommentRef').val(),
-					"albumCode":$('#albumCode').val(),
-					"galFileNo":$('#galFileNo').val(),
-					"galCommentContent":$('#galCommentContent').val(),
-				},
-				type:"post",
-				success:function(data){
-					if(data!=null)
-					{	
-						alert('댓글 등록 완료!');
-						$('.comment-editor').html(data);
-					}
-					else
-					{
-						alert('댓글 등록에 실패하였습니다');
-					}
-				},
-				error:function(request){console.log(request);}
-			})					
-		})
-	});
+
 	/* 대댓글 쓰기 함수*/
 	$(function(){
 		var eventflag;
@@ -384,13 +355,13 @@ if (n < 1) {slideIndex = slides.length}
 				html+="<input type='hidden' name='galCommentLevel' value='2'/>";
 				html+="<input type='hidden' name='albumCode' value='<%=gplist.get(0).getAlbumCode()%>'/>";
 				html+="<input type='hidden' name='galFileNo' value='<%=gplist.get(0).getGalFileNo()%>'/>";
-				html+="<input type='hidden' name='galCommentRef' value='"+$(this).val()+"'/>";
+				html+="<input type='hidden' name='galCommentRef2' value='"+$(this).val()+"'/>";
 				html+="<fieldset class='modal_comment'>";
 				html+="<div class='comment_write'>";
 				html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 				html+="</div>";
 				html+="<div class='comment_btn'>";
-				html+="<button type='submit' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
+				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
 				html+="</div>"
 				html+="</fieldset>"
 				div.html(html);
@@ -407,18 +378,43 @@ if (n < 1) {slideIndex = slides.length}
 					}
 				}) */
 				
-				div.find('form').submit(function(e){
+				div.find('#btn-insert').click(function(e){
 					if(<%=loginMember==null%>)
 					{
 					 	fn_loginAlert();
 						e.preventDefault();
 						return;
 					}
-					var len=$(this).children('textarea').val().trim().length;
+					/* var len=($(this).parent().find()).siblings('textarea').val().trim().length;
 					if(len==0)
 					{
 						e.preventDefault();
-					}
+					} */
+					$.ajax({
+						url:"<%=request.getContextPath()%>/gallery/commentInsert",
+						data:{"groupNo":$('#groupNo').val(),
+							"galNo":$('#galNo').val(),
+							"galCommentWriterNo":$('#galCommentWriterNo').val(),
+							"galCommentLevel":2,
+							"galCommentRef":$(this).val(),
+							"albumCode":$('#albumCode').val(),
+							"galFileNo":$('#galFileNo').val(),
+							"galCommentContent":$('#galCommentContent').val(),
+						},
+						type:"post",
+						success:function(data){
+							if(data!=null)
+							{	
+								alert('댓글 등록 완료!');
+								$('.comment-editor').html(data);
+							}
+							else
+							{
+								alert('댓글 등록에 실패하였습니다');
+							}
+						},
+						error:function(request){console.log(request);}
+					})
 				});
 				div.find("textarea").focus();
 			<%}%>
@@ -428,5 +424,37 @@ if (n < 1) {slideIndex = slides.length}
 			alert('로그인 후 이용할 수 있습니다.');
 		}
 
+		
+		/* 댓글 등록 */
+		$(function(){
+			$('#btn-insert').click(function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/gallery/commentInsert",
+					data:{"groupNo":$('#groupNo').val(),
+						"galNo":$('#galNo').val(),
+						"galCommentWriterNo":$('#galCommentWriterNo').val(),
+						"galCommentLevel":$('#galCommentWriterNo').val(),
+						"galCommentRef":$('#galCommentLevel').val(),
+						"albumCode":$('#albumCode').val(),
+						"galFileNo":$('#galFileNo').val(),
+						"galCommentContent":$('#galCommentContent').val(),
+						"dataNum":2
+					},
+					type:"post",
+					success:function(data){
+						if(data!=null)
+						{	
+							alert('댓글 등록 완료!');
+							$('.comment-editor').html(data);
+						}
+						else
+						{
+							alert('댓글 등록에 실패하였습니다');
+						}
+					},
+					error:function(request){console.log(request);}
+				});					
+			});
+		});
 	});
 </script>

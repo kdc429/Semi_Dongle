@@ -85,10 +85,10 @@ public class GalleryService {
 		
 	}
 	
-	public List<GalleryPath> selectOneList(int groupNo,int galNo,int memberNo,String albumCode)
+	public List<GalleryPath> selectOneList(int groupNo,int galNo,String albumCode)
 	{
 		Connection conn = getConnection();
-		List<GalleryPath> gplist = new GalleryDao().selectOneList(conn,groupNo,galNo,memberNo,albumCode);
+		List<GalleryPath> gplist = new GalleryDao().selectOneList(conn,groupNo,galNo,albumCode);
 		close(conn);
 		return gplist;
 	}
@@ -127,5 +127,13 @@ public class GalleryService {
 			rollback(conn);
 		}
 		return rs;
+	}
+	//gal_no만 가지고 있는 아이 뽑으러 갑니다
+	public List distictGalNoList(String albumCode,int groupNo)
+	{
+		Connection conn = getConnection();
+		List galNoList = new GalleryDao().distictGalNoList(conn,albumCode,groupNo);
+		close(conn);
+		return galNoList;
 	}
 }

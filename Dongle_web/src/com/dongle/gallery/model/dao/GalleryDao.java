@@ -265,7 +265,7 @@ public class GalleryDao {
 		return gclist;
 	}
 	
-	public List<GalleryPath> selectOneList(Connection conn,  int groupNo,int galNo,int memberNo,String albumCode)
+	public List<GalleryPath> selectOneList(Connection conn,  int groupNo,int galNo,String albumCode)
 	{
 		PreparedStatement pstmt= null;
 		ResultSet rs=null;
@@ -276,9 +276,8 @@ public class GalleryDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, groupNo);
-			pstmt.setInt(2, memberNo);
-			pstmt.setInt(3, galNo);
-			pstmt.setString(4, albumCode);
+			pstmt.setInt(2, galNo);
+			pstmt.setString(3, albumCode);
 			System.out.println(sql);
 			rs=pstmt.executeQuery();
 			while(rs.next())
@@ -386,4 +385,35 @@ public class GalleryDao {
 		
 		return rs;
 	}
+	
+	//galNoList 뽑아오는거 테스트 중입니다
+	public List distictGalNoList(Connection conn, String albumCode,int groupNo)
+	{
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("distinctGalNoList");
+		List galNoList = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setString(2, albumCode);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+
+				String galNo=rs.getString("gal_no_dis");
+				galNoList.add(galNo);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return galNoList;
+	}
+	
 }
