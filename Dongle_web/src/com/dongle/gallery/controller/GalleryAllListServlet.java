@@ -49,6 +49,8 @@ public class GalleryAllListServlet extends HttpServlet {
 			List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
 			if(gclist!=null) {
 				request.setAttribute("gclist", gclist);
+				System.out.println("gplst: "+gplist);
+				System.out.println("gclst: "+gclist);
 			}
 			request.setAttribute("gplist", gplist);
 			request.setAttribute("groupNo", groupNo);

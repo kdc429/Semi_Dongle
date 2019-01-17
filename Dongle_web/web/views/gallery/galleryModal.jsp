@@ -121,13 +121,13 @@ top : 100px;
 
 /* Next & previous buttons */
 
-.slideshow-container a.prev, a.next {
+.slideshow-container a.prev, a.next{
   cursor: pointer;
   position: absolute;
   text-align : center;
-  top: 50%;
-  width: 9%;
-  padding: 14px;
+  top: 30%;
+  width:30px;
+  padding-right: 20px;
   margin-top: -22px;
   color: white;
   font-weight: bold;
@@ -136,6 +136,7 @@ top : 100px;
   border-radius: 0 3px 3px 0;
   text-decoration: none;
   z-index: 100;
+  box-sizing: border-box;
 }
 .slideshow-container a{text-decoration: none;}
 /* Position the "next button" to the right */
@@ -291,7 +292,7 @@ if (n < 1) {slideIndex = slides.length}
 								<br/>
 								<span class='comment_content'>
 									<%=g.getGalCommentContent() %>
-									<button class='btn-reply' value='<%=g.getGalNo()%>'>답글</button>
+									<button class='btn-reply' value=''>답글</button>
 								</span>
 							</span>
 							<div class='recomment_content'>
@@ -354,6 +355,7 @@ if (n < 1) {slideIndex = slides.length}
 	$(function(){
 		var eventflag;
 		$('.btn-reply').on('click',function(e){
+			console.log($(this));
 			<%if(loginMember!=null){%>
 				eventflag=true;
 				var div=$("<div class='recomment_content'></div>");
