@@ -49,7 +49,6 @@
 		}
 		return true;
 	}
-	
 </script>
 </head>
 <body>
@@ -64,25 +63,25 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th style="width: 20%;">글 제목</th>
+						<th style="vertical-align:middle" style="width: 20%;">글 제목</th>
 						<td id="title">
 							<input type="text" name='title' required="required"/>
 						</td>
 					</tr>
 					<tr>
-						<th>작성자</th>
+						<th style="vertical-align:middle">작성자</th>
 						<td id="writer" >
-							<input type="text" name='writer' value="admin" readonly="readonly"/>
+							<input style="background-color:#EAEAEA"type="text" name='writer' value="admin" readonly="readonly"/>
 						</td>
 					</tr>					
 					<tr>
-						<th>첨부파일</th>
+						<th style="vertical-align:middle">첨부파일</th>
 						<td>
 							<input type="file" name="upfile"/>
 						</td>
 					</tr>
 					<tr>
-						<th>내용</th>
+						<th style="vertical-align:middle">내용</th>
 						<td>
 							<textarea rows="5" cols="50" name='content'></textarea>
 						</td>

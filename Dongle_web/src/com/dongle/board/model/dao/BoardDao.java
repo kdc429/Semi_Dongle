@@ -157,6 +157,7 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
 	public int insertBoardFile(Connection conn, BoardPath bp,Board bo)
 	{
 		PreparedStatement pstmt=null;
@@ -179,4 +180,45 @@ public class BoardDao {
 		}
 		return rs;
 	}
-}
+	
+	public BoardPath selectBoardPath(Connection conn,int boardNo,int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		BoardPath bp=null;
+		String sql=prop.getProperty("selectBoardPath");
+		System.out.println("DAO입니다: "+sql);
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, boardNo);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				bp=new BoardPath();
+				bp.setBoardNo(rs.getInt("board_no"));
+				bp.setGroupNo(rs.getInt("group_no"));
+				bp.setBoardTitle(rs.getString("board_title"));
+				bp.setBoardContent(rs.getString("board_content"));
+				bp.setBoardWriter(rs.getString("board_writer"));
+				bp.setBoardWriteDate(rs.getDate("board_write_date"));
+				bp.setBoardViewCount(rs.getInt("board_view_count"));
+				bp.setBoardStatus(rs.getString("board_status"));
+				bp.setBoardFileNo(rs.getInt("bo_file_no"));
+				bp.setBoardFileOldPath(rs.getString("bo_file_old_path"));
+				bp.setBoardFileNewPath(rs.getString("bo_file_new_path"));
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return bp;		
+		}	
+	}

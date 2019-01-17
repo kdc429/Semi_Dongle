@@ -43,6 +43,7 @@ public class BoardViewServlet extends HttpServlet {
 			request.setAttribute("board", b);
 			view="/views/board/boardView.jsp";
 			request.setAttribute("groupNo", groupNo);
+			/*request.setAttribute("boardNo", boardNo);*/
 		}
 		else
 		{

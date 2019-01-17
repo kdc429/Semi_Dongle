@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardPath;
@@ -34,20 +33,23 @@ public class BoardUpdateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
-		Board b=new BoardService().selectOne(boardNo,groupNo);
+		Board b=new BoardService().	selectOne(boardNo,groupNo);
+		//bp를 받아와라라라라라라
+		BoardPath bp=new BoardService().selectBoardPath(boardNo,groupNo);
+		System.out.println("들어옴"+boardNo+" : "+groupNo+" : "+bp);
 		
-		request.setAttribute("board", b);
 		String view="";
 		if(b!=null)
 		{
-			view="views/board/boardUpdate.jsp";
+			view="/views/board/boardUpdate.jsp";
 			request.setAttribute("groupNo", groupNo);
+			request.setAttribute("boardPath", bp);
+
 		}
 		else
 		{
 			request.setAttribute("msg", "조회된 자료가 없습니다");
-			request.setAttribute("loc", "board/boardList?groupNo"+groupNo);
-			request.setAttribute("groupNo", groupNo);
+			request.setAttribute("loc", "/board/boardList?groupNo"+groupNo);
 			view="/views/common/msg.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);

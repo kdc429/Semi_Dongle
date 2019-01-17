@@ -64,4 +64,12 @@ public class BoardService {
 		return rs;
 	}
 	
+	public BoardPath selectBoardPath(int boardNo,int groupNo)
+	{
+		Connection conn=getConnection();
+		BoardPath bp=new BoardDao().selectBoardPath(conn, boardNo, groupNo);
+		close(conn);
+		return bp;
+	}
+	
 }

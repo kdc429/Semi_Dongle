@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.dongle.board.model.vo.Board" %>
+<%@ page import="com.dongle.board.model.vo.Board,com.dongle.board.model.vo.BoardPath"%>
     
 <% 
 	Board b=(Board)request.getAttribute("board");
-	System.out.println(b);
+	BoardPath bp=(BoardPath)request.getAttribute("boardPath");
+	int groupNo = (int)request.getAttribute("groupNo");
+	
 %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>동글</title>
-	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -45,54 +43,90 @@
 	{
 		text-align : center;
 	}
+	.add-btn
+	{
+		text-align : center;
+	}
 </style>
-</head>
-<body>
-	<div class="container">
+<script>
+	function validate(){
+		var content=$('[name=content]').val();
+		if(content.trim().length==0)
+		{
+			alert("내용을 입력하세요!");
+			return false;
+		}
+		return true;
+	}
+</script>
+	<div class="board-container">
 		<table class="table table-bordered">
 			<thead>
+				<br><br>
 				<tr>
 					<th colspan="3">공지사항</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th style="width: 20%;">글 제목</th>
-					<td colspan="2"><%=b.getBoardTitle()%></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td colspan="2"><%=b.getBoardWriter() %></td>
-				</tr>					
-				<tr>
-					<th>작성일자</th>
-					<td colspan="2"><%=b.getBoardWriteDate()%></td>
-				</tr>					
-				<tr>
-					<th>조회수</th>
-					<td colspan="2"><%=b.getBoardViewCount() %></td>
-				</tr>
-				<tr>
-					<th>첨부파일</th>
-					<td><%-- <%if(b.getFilePath()!=null){%>
-						<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'>
-						<%} %> --%>	
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
+					<th style="vertical-align:middle">번호</th>
 					<td>
-						<textarea rows="5" cols="50" name="content"><%=b.getBoardContent() %></textarea>
+						<input style="background-color:#EAEAEA" type="text" name="no" value="<%=bp.getBoardNo()%>" readonly="readonly"/>
 					</td>
 				</tr>
-				
 				<tr>
-					<td colspan='2' id="inputbutton">
-						<input type="submit" value="등록하기" onclick="return validate();">
+					<th style="vertical-align:middle" style="width:20%;">글 제목</th>
+					<td id="title">
+						<input type="text" name='title' value="<%=bp.getBoardTitle()%>" required="required"/>
+					</td>
+				</tr>
+				<tr>
+					<th style="vertical-align:middle">작성자</th>
+					<td id="writer" >
+						<input  style="background-color:#EAEAEA" type="text" name='writer' value="<%=bp.getBoardWriter() %>" readonly="readonly"/>
+					</td>
+				</tr>					
+				<tr>
+					<th style="vertical-align:middle">첨부파일</th>
+					<td>
+						<%if(bp.getBoardFileOldPath()!=null){%>
+							<input type="file" name="upfile" value="<%=bp.getBoardFileNewPath()%>"/>
+							<span id="fname"><%=bp.getBoardFileOldPath()%></span>
+							<input type="hidden" name="old_file"value="<%=bp.getBoardFileOldPath()%>"/>
+						<%} else {%>
+							<input type="file" name="upfile"/>
+						<%} %>
+					</td>
+				</tr>
+				<tr>
+					<th style="vertical-align:middle">내용</th>
+					<td>
+						<textarea rows="5" cols="50" name='content'><%=bp.getBoardContent()%></textarea>
 					</td>
 				</tr>
 			</tbody> 
+				<tr>
+					<td colspan="2" id="board-add">
+						<input type="hidden" value="<%=groupNo%>" name="groupNo" />
+						<input type="button" value="등록하기" class="add-btn" onclick="return validate();"/>
+					</td>
+				</tr>			
 		</table>
-	</div>
-
+	</div> 
+<script>
+$(function(){
+	$('.add-btn').click(function(){
+		console.log($(this).children('input').val());
+		var num=$(this).children('input').val();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>",
+			type:"get",
+			dataType:"html",
+			success:function(data){
+				$('#board-container').html(data);
+			}
+		});
+	});
+});
+</script>
 		

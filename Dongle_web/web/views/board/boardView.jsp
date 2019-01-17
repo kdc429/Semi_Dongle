@@ -250,13 +250,12 @@
 	$(function(){
 		$('#btn-update').click(function(){
 			$.ajax({
-				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>",
+				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>&boardNo=<%=b.getBoardNo()%>",
 				type:"post",
 				dataType:"html",
 				success:function(data){
 					$('#board-container').html(data);
-				},
-				error:function(error,msg){console.log("---"+error+msg);}
+				}
 			});
 		});
 	});

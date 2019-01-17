@@ -76,10 +76,6 @@
 		
 	</section>
 <script>
-	<%-- function fn_add()
-	{
-		location.href="<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>";
-	} --%>
 	$(function(){
 		$('.boardView-btn').click(function(){
 			console.log($(this).children('input').val());
