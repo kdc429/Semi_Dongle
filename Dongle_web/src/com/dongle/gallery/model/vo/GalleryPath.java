@@ -5,62 +5,129 @@ import java.util.Date;
 public class GalleryPath {
 	private int groupNo;
 	private String albumCode;
-	private int galFileNo;
-	private String galFilePath;
 	private int memberNo;
+	private int galNo;
+	private int galFileNo;
+	private String galFileOldPath;
+	private String galFileNewPath;
+	private String galFileContent;
 	private Date galEnrollDate;
+
+
 	
 	public GalleryPath() {}
-	public GalleryPath(int groupNo, String albumCode, int galFileNo, String galFilePath, int memberNo,
-			Date galEnrollDate) {
+	
+	
+	public GalleryPath(int groupNo, String albumCode, int memberNo, int galNo, int galFileNo, String galFileOldPath,
+			String galFileNewPath, String galFileContent, Date galEnrollDate) {
 		super();
 		this.groupNo = groupNo;
 		this.albumCode = albumCode;
-		this.galFileNo = galFileNo;
-		this.galFilePath = galFilePath;
 		this.memberNo = memberNo;
+		this.galNo = galNo;
+		this.galFileNo = galFileNo;
+		this.galFileOldPath = galFileOldPath;
+		this.galFileNewPath = galFileNewPath;
+		this.galFileContent = galFileContent;
 		this.galEnrollDate = galEnrollDate;
 	}
+
+	
+	
 	public int getGroupNo() {
 		return groupNo;
 	}
+
+
 	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;
 	}
+
+
 	public String getAlbumCode() {
 		return albumCode;
 	}
+
+
 	public void setAlbumCode(String albumCode) {
 		this.albumCode = albumCode;
 	}
-	public int getGalFileNo() {
-		return galFileNo;
-	}
-	public void setGalFileNo(int galFileNo) {
-		this.galFileNo = galFileNo;
-	}
-	public String getGalFilePath() {
-		return galFilePath;
-	}
-	public void setGalFilePath(String galFilePath) {
-		this.galFilePath = galFilePath;
-	}
+
+
 	public int getMemberNo() {
 		return memberNo;
 	}
+
+
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+
+
+	public int getGalNo() {
+		return galNo;
+	}
+
+
+	public void setGalNo(int galNo) {
+		this.galNo = galNo;
+	}
+
+
+	public int getGalFileNo() {
+		return galFileNo;
+	}
+
+
+	public void setGalFileNo(int galFileNo) {
+		this.galFileNo = galFileNo;
+	}
+
+
+	public String getGalFileOldPath() {
+		return galFileOldPath;
+	}
+
+
+	public void setGalFileOldPath(String galFileOldPath) {
+		this.galFileOldPath = galFileOldPath;
+	}
+
+
+	public String getGalFileNewPath() {
+		return galFileNewPath;
+	}
+
+
+	public void setGalFileNewPath(String galFileNewPath) {
+		this.galFileNewPath = galFileNewPath;
+	}
+
+
+	public String getGalFileContent() {
+		return galFileContent;
+	}
+
+
+	public void setGalFileContent(String galFileContent) {
+		this.galFileContent = galFileContent;
+	}
+
+
 	public Date getGalEnrollDate() {
 		return galEnrollDate;
 	}
+
+
 	public void setGalEnrollDate(Date galEnrollDate) {
 		this.galEnrollDate = galEnrollDate;
 	}
+
+
 	@Override
 	public String toString() {
 		return "동호회 번호: " + groupNo + " 앨범코드: " + albumCode + " 사진게시글 번호: " + galFileNo
-				+ " 사진 파일 경로: " + galFilePath + " 사진 등록자 번호: " + memberNo + " 등록일: " + galEnrollDate ;
+				+ " 사진 파일 Old경로: " + galFileOldPath + "사진 파일New경로: "+galFileNewPath+" 사진 등록자 번호: " + memberNo + " 등록일: " + galEnrollDate +"사진게시물등록번호: "+galNo+" 사진게시물 내용: "+galFileContent;
 	}
 	
 

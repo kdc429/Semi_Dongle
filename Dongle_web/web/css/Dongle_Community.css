@@ -32,6 +32,15 @@ body {
 	border-bottom-left-radius: 0px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
+button.btn button.btn-primary{
+    background-color: rgb(253, 253, 253);
+    width: 100px;
+    color: rgb(41, 41, 41);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
 
 /* 게시판 스타일 */
 .main {
@@ -64,6 +73,7 @@ body {
 	/* display: flex; */
 	flex-direction: row;
 	font-family: '나눔스퀘어라운드 Regular';
+
 }
 
 .sideback {
@@ -96,10 +106,11 @@ body {
          */
 .logo {
 	position: fixed;
-	z-index: 2;
+	/* z-index: 2; */
 	font-family: '여기어때잘난서체';
-}
 
+}
+div.logo h2 a{text-decoration: none;}
 /* 왼쪽 사이드 컨텐트 */
 .sideitem1 {
 	margin-left: 15x;

@@ -7,6 +7,7 @@
 	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
 	int result = (int)request.getAttribute("result");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +21,7 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
+<<<<<<< HEAD
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <!--    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet"> -->
 	<!-- <link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet"> -->
@@ -27,6 +29,12 @@
 	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
 
  
+=======
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
+>>>>>>> refs/remotes/origin/SJH
 </head>
 
 <style>
@@ -69,10 +77,10 @@
         <!-- 로고 헤더 -->
 
         <header>
-            <div class='logoback' style='width:1024px;height: auto'>
+            <div class='logoback' style='position:relative;width:1024px;height: auto'>
                 <!-- 로고 grid -->
-                <div class='logo' style='width:1024px; height: auto; background-color:rgb(228, 228, 228)'>
-                    <h2 style="color:darkcyan; margin-left:15px;">DONGLE</h2>
+                <div class='logo' style='width:1024px; height: auto; background-color:rgb(20,150,200)'>
+                    <h2 style="color:rgb(250,237,125); margin-left:15px;">DONGLE</h2>
                 </div>
             </div>
         </header>
@@ -84,7 +92,7 @@
 				<div class="sideitem1"
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
-					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getImgPath()%>" width="100px" height="100px">
+					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>" width="100px" height="100px">
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -226,22 +234,51 @@
             <div class="sideback center" style="background-color: rgb(228, 228, 228)">
 
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
+
                     <!-- 메뉴 버튼 -->
-                    <button class='btn btn-primary'>HOME</button><br>
+                    <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary'>공지사항</button><br>
-                    <button class='btn btn-primary' id="feed-btn">피드</button><br>
-                    <button class='btn btn-primary'>갤러리</button><br>
+                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
+                    <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
                 </div>
             </div>
         </aside>
+        <!-- 게시판 -->
+        <section>
+            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255); clear: left;'>
 
-
+            </div>
+        </section>
+        <!-- 오른쪽 사이드 -->
 
     </div>
 
+<script>
+/* 갤러리 클릭시 매핑함수 */
+$(function(){
+	$("#gallery-btn").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/gallery/albumGet?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
 
+function comunnityHome(){
+	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+}
+function logoCk(){
+	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+}
 
+</script>
 </body>
 
 </html>

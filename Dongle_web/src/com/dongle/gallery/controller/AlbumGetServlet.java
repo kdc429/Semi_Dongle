@@ -9,13 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.AlbumCategory;
+import com.dongle.group.model.vo.GroupMember;
+import com.dongle.member.model.vo.Member;
 
 /**
  * Servlet implementation class AlbumGetServlet
  */
-@WebServlet("/albumGet")
+@WebServlet("/gallery/albumGet")
 public class AlbumGetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,12 +35,25 @@ public class AlbumGetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupNo=request.getParameter("groupNo");
-		String memberId=request.getParameter("adminId");
-		System.out.println(memberId); //테스트를 위해 adminId가 박혀있음
+		//동글그룹번호와 들어온 멤버번호 받기
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		System.out.println("album서블릿: "+groupNo+ " 와 "+loginMember.getMemberNo());
+/*		//json객체 받기
+		JSONObject jobj=new JSONObject();*/
+		//동호회 회원인지 아닌지 group_member_tab에서 확인
+		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
+		System.out.println("서블릿: "+gm);
+		
+/*		if(loginMember.getMemberNo()==0||gm==null||!loginMember.getMemberId().equals("admin"))
+		{
+			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
+			request.setAttribute("loc", "/communityJoin?gNo="+groupNo);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}*/
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
 		request.setAttribute("groupNo", groupNo);
-		request.setAttribute("memberId", memberId);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/gallery/albumView.jsp").forward(request, response);
 	}
