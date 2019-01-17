@@ -13,5 +13,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

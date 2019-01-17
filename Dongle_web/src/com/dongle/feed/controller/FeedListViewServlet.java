@@ -52,13 +52,16 @@ public class FeedListViewServlet extends HttpServlet {
 		int endFeedNo=currentFeed+pageFeed;
 		
 		Group g=new GroupService().selectGrInfo(groupNo);
+		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
 		List<Feed> feedList=new FeedService().selectFeed(groupNo,startFeedNo,endFeedNo);
 		List<GroupMember> memberlist = new GroupService().selectMemberList(groupNo);
+		request.setAttribute("loginMember", loginMember);
 		request.setAttribute("memberList",memberlist);
 		request.setAttribute("feedList", feedList);
 		request.setAttribute("group", g);
+		request.setAttribute("groupMember", gm);
 		
-		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);;
+		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);
 	}
 
 	/**

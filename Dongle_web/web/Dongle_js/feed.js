@@ -1,12 +1,3 @@
-var feed = $('.feed:last-child').after('<div>new feed</div>').css({
-	'width' : '750px',
-	'height' : '300px',
-	'border' : '1px solid red'
-}).attr('class', 'feed');
-
-
-
-
 $(document).ready(
 		function() {
 			$('#more').click(

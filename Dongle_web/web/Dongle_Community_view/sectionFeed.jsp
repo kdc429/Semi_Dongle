@@ -6,6 +6,8 @@
 	Group g=(Group)request.getAttribute("group");
 	Member loginMember=(Member)request.getAttribute("loginMember");
 	List<GroupMember> memberList=(List)request.getAttribute("memberList");
+	GroupMember groupMember=(GroupMember)request.getAttribute("groupMember");
+			
 	
 %>
 <!DOCTYPE html>
@@ -20,7 +22,7 @@
 		// 스크롤 발생 이벤트 처리
 		$(document).scroll(function() {
 			
-			var lengthFeed=$('.feed').length;
+			var lengthFeed=$('.feed').length; //현재 피드 개수
 			var scrollT = $(document).scrollTop(); // 스크롤바의 상단위치
 			var scrollH = $(document).height();
 			var maxHeight = $('.main').height(); // 스크롤을 갖는 태그의 최하단
@@ -62,13 +64,17 @@
 								
 								
 							}
-								feedHtml+="<div class='feed'>feed<div class='feed-header'><span>"+memberNo+"</span><span>"+feedWriteDate+"</span></div>";
-								feedHtml+="<div class='feed-body'><p>"+feedContent+"</p></div>";
-								feedHtml+="<div class='feed-footer'><a class='comment'>댓글달기</a><a class='repleview'>댓글보기</a></div></div><hr>";
-							
+								feedHtml+="<div class='feed'>feed<div class='feed-header'><img src='<%=request.getContextPath()%>/images/feed-images/한효주.png' class='member-profile'><a>"
+								feedHtml+=memberNo+"</a><span class='write-date'>"+feedWriteDate+"</span></div>";
+								feedHtml+="<div class='feed-body'><textarea type='text' cols='60' class='feed-content' readonly>"+feedContent+"</textarea><button class='file-download'>파일명</button>";
+								feedHtml+="<div class='feed-pics'><img src='<%=request.getContextPath()%>/images/feed-images/한효주.png' class='feed-pic'><img src='<%=request.getContextPath()%>/images/feed-images/한효주.png' class='feed-pic'><br>";
+								feedHtml+="<img src='<%=request.getContextPath()%>/images/feed-images/한효주.png' class='feed-pic'><img src='<%=request.getContextPath()%>/images/feed-images/한효주.png' class='feed-pic'></div></div>";
+								feedHtml+="<div class='feed-footer'><textarea name='' id='' cols='70' rows='1'></textarea><button class='comment'>댓글달기</button><button class='repleview'>댓글보기</button></div>";
+								feedHtml+="<div class='reple'><img src='<%=request.getContextPath()%>/images/feed-images/한효주.png' class='member-profile'><a>멤버네임</a><div class='reple-content'>asdfsdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfaasf</div>";
+								feedHtml+="</div></div><hr>";
 						}
 						
-						$('.newsfeed').append(feedHtml);
+						$('.news').append(feedHtml);
 						console.log(lengthFeed);
 						
 					}
@@ -85,32 +91,106 @@
 		});
 	});
 	
+	$('#pic-up-btn').click(function(){
+		$('#feed-pic-up').click()
+		
+	});
+	$('#video-up-btn').click(function(){
+		$('#feed-video-up').click()
+		
+	});
+	$('#file-up-btn').click(function(){
+		$('#feed-file-up').click()
+		
+	});
+	
+	$('#feedup').click(function(){
+		
+		var fd=new FormData();
+		var imgBtn=$('#feed-pic-up'); //이미지파일 추가 버튼
+		var videoBtn=$('#feed-video-up'); //영상 파일 추가 버튼
+		var fileBtn=$('#feed-file-up'); //일반 텍스트 파일 추가 버튼
+		var feedContentUp=document.feedFrm.feedContentUp.value; //입력받은 피드 컨텐트 내용
+		var groupNo=<%=g.getGroupNo()%>;
+		var memberNo=<%=loginMember.getMemberNo()%>;
+		var resultFeedNo=0;
+	    
+	    console.log(typeof(feedData));
+	    
+	    var feedFd=new FormData();
+		feedFd.append('groupNo',groupNo);
+		feedFd.append('memberNo',memberNo);
+	    
+	    
+	    if(document.feedFrm.feedContentUp.value){
+	    	feedFd.append('content',feedContentUp);
+	    }
+	    
+		if(document.feedFrm.feedPicUp.value){
+			for(var i=0;i<document.feedFrm.feedPicUp.files.length;i++){
+				feedFd.append('image'+i,feedFrm.feedPicUp.files[i]);
+			}
+		}
+		if(document.feedFrm.feedVideoUp.value){
+			for(var i=0;i<feedFrm.feedVideoUp.files.length;i++){
+				feedFd.append('video'+i,feedFrm.feedPicUp.files[i]);
+			}
+		}
+		if(document.feedFrm.feedFileUp.value){
+			for(var i=0;i<feedFrm.feedFileUp.files.length;i++){
+				feedFd.append('files'+i,feedFrm.feedPicUp.files[i]);
+			}
+		}
+		/* strFeedFd= JSON.stringify(feedFd);
+		jQuery.ajaxSettings.traditional = true;
+ 		*/		
+ 		$.ajax({
+			url:"<%=request.getContextPath()%>/feed/feedContentUpload",
+			data:feedFd,
+			type:"post",
+			processData:false,
+			contentType:false,
+			success:function(data){ //컨텐트 업로드 성공시 파일 업로드로 넘어감
+				if(data>0){
+					alert('성공');
+				}else{
+					alert('실패');
+				}
+				
+			}
+			
+		});
+		
+		
+	})
 	</script>
 	<div class="newsfeed">
 		<br><br>
 		<div class="news">
 			<div class="feednew">
 				<div class="feednew-logo">NEWSFEED</div>
-				<div>
-					<form>
-						<label>
-							<textarea name="feedup" cols='55' rows="6"></textarea>
-							<button class="filecup" >사진업로드</button>
-							<button class="filecup" >동영상업로드</button>
-							<button class="filecup" >문서업로드</button>
-						</label>
-					</form>
+					<div>
+						<form name="feedFrm" id="feedFrm" method="post" enctype="multipart/form-data">
+							<textarea name="feedContentUp" id="feed-content-up" cols='70' rows="6"></textarea>
+							<button type="button" class="up-btn" id="pic-up-btn">사진업</button>
+							<button type="button" class="up-btn" id="video-up-btn">영상업</button>
+							<button type="button" class="up-btn" id="file-up-btn">텍스트업</button>
+							<input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept="image/*"/>
+							<input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept="video/*" style='display: none;'/>
+							<input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
+                    		
+                    		<div class="fileup" >
+                       			<button type="button" id="feedup">등록</button>
+                    		</div>
+						</form>
 				
-                    <div class="fileup" >
-                       	<button>등록</button>
-                    </div>
                 </div>
 			</div>
 			<hr>
             <% if(feedList!=null){ 
             	for(Feed f:feedList){
             %>       <!-- 피드 한칸 -->
-        		<div class="feed" style=" height:auto; left:10%; right:10%;">
+        		<div class="feed">
             	feed
             		<div class="feed-header">
                 		<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
@@ -122,7 +202,7 @@
                 	<button class="file-download">파일명</button>    
                 	<div class="feed-pics">
                     	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
-                    	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
+                    	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic"><br>
                     	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
                     	<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="feed-pic">
                 	</div>
@@ -137,11 +217,13 @@
                 	<a>멤버네임</a>
                 	<div class="reple-content">asljdhfasgfkajsgdfkajsgdvkjasgdvkjsgadkvjsga<br>dkjhgasdfasdfasdfasdfasdfasdfasdfasdfas</div>
             	</div>
-        	
-			
-			<hr>
+            </div>
+            <hr>
 			<%	}
             }	%>
+			
+		</div>
+			<hr>
             <div id="fountainG">
 				<div id="fountainG_1" class="fountainG"></div>
 				<div id="fountainG_2" class="fountainG"></div>

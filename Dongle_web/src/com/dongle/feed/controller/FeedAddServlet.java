@@ -48,12 +48,9 @@ public class FeedAddServlet extends HttpServlet {
 		int pageFeed=10;
 		int startFeedNo=(currentFeed/pageFeed)*pageFeed+1;
 		int endFeedNo=currentFeed+pageFeed;
-		System.out.println(startFeedNo);
-		System.out.println(endFeedNo);
 		
 		Group g=new GroupService().selectGrInfo(groupNo);
 		List<Feed> feedList=new FeedService().selectFeed(groupNo,startFeedNo,endFeedNo);
-		feedList.get(0);
 		response.setContentType("application/json;charset=UTF-8");
 		new Gson().toJson(feedList,response.getWriter());
 	}
