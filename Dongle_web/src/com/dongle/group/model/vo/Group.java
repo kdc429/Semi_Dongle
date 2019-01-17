@@ -18,6 +18,8 @@ public class Group {
 	private String groupIntro; //GROUP_INTRODUCE
 	private Date groupEnrollDate; //GROUP_ENROLL_DATE
 	private int reportGroupCnt; //REPORT_GROUP_COUNT
+	private String groupMainOldImgPath; //GROUP_MAIN_IMG_OLD_PATH
+	private String groupMainNewImgPath; //GROUP_MAIN_IMG_NEW_PATH
 	
 	public Group() {
 		
@@ -25,7 +27,7 @@ public class Group {
 
 	public Group(int memberNo, int groupNo, String groupName, String topicCode, String locCtgCode, String groupDateCtg,
 			int minAge, int maxAge, String groupImgOldPath, String groupImgNewPath, String groupIntro,
-			Date groupEnrollDate, int reportGroupCnt) {
+			Date groupEnrollDate, int reportGroupCnt, String groupMainOldImgPath, String groupMainNewImgPath) {
 		super();
 		this.memberNo = memberNo;
 		this.groupNo = groupNo;
@@ -40,6 +42,8 @@ public class Group {
 		this.groupIntro = groupIntro;
 		this.groupEnrollDate = groupEnrollDate;
 		this.reportGroupCnt = reportGroupCnt;
+		this.groupMainOldImgPath = groupMainOldImgPath;
+		this.groupMainNewImgPath = groupMainNewImgPath;
 	}
 
 	public int getMemberNo() {
@@ -146,15 +150,22 @@ public class Group {
 		this.reportGroupCnt = reportGroupCnt;
 	}
 
-	@Override
-	public String toString() {
-		return "Group [memberNo=" + memberNo + ", groupNo=" + groupNo + ", groupName=" + groupName + ", topicCode="
-				+ topicCode + ", locCtgCode=" + locCtgCode + ", groupDateCtg=" + groupDateCtg + ", minAge=" + minAge
-				+ ", maxAge=" + maxAge + ", groupImgOldPath=" + groupImgOldPath + ", groupImgNewPath=" + groupImgNewPath
-				+ ", groupIntro=" + groupIntro + ", groupEnrollDate=" + groupEnrollDate + ", reportGroupCnt="
-				+ reportGroupCnt + "]";
+	public String getGroupMainOldImgPath() {
+		return groupMainOldImgPath;
+	}
+
+	public void setGroupMainOldImgPath(String groupMainOldImgPath) {
+		this.groupMainOldImgPath = groupMainOldImgPath;
+	}
+
+	public String getGroupMainNewImgPath() {
+		return groupMainNewImgPath;
+	}
+
+	public void setGroupMainNewImgPath(String groupMainNewImgPath) {
+		this.groupMainNewImgPath = groupMainNewImgPath;
 	}
 	
 	
-	
+
 }

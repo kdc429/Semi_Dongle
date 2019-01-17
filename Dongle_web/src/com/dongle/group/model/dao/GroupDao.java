@@ -59,6 +59,8 @@ public class GroupDao {
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
 				
 				list.add(g);
 			}
@@ -101,6 +103,8 @@ public class GroupDao {
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
 				
 				
 			}
@@ -174,6 +178,8 @@ public class GroupDao {
 				g.setGroupIntro(rs.getString("group_introduce"));
 				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
 				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
 				
 				rankList.add(g);
 			}

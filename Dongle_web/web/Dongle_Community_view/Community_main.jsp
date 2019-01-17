@@ -40,7 +40,39 @@
 		border: 1px solid lightgray;
 	}
 	section div#mem_list_div table#tbl>tr th,td{text-align:center;}
-
+	
+	section div#dongle_main_img {
+	
+	/*border: 1px solid black*/ 
+	width:500px; 
+	height: 250px; 
+	background-color: lightgray; 
+	align-content: center;
+	float: left;
+	margin-left: 250px;
+	margin-top: 150px;
+	
+	}
+	section div#mini_board{
+	border:1px solid blue; 
+	width: 230px; 
+	height: 150px; 
+	position:relative;
+	display:inline-block;
+	margin-top: 150px;
+	
+	}
+	
+	section div#mini_feed{
+	
+	border: 1px solid blue;  
+	width: 230px; 
+	height: 150px; 
+	margin-left:35px; 
+	display:inline-block;
+	margin-top: 150px;
+	
+	}
 </style>
 
 <body>
@@ -70,14 +102,14 @@
             </div>
         </header>
 	<aside>
-		<div class="sideback center">
+		<div class="center">
 			<!-- 왼쪽 사이드 -->
 			<div class="sidel"
 				style='height: 100vh; background-color: rgb(228, 228, 228)'>
 				<div class="sideitem1"
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
-					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImgNewPath()%>" width="100px" height="100px">
+					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImgNewPath()%>">
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -138,14 +170,39 @@
 		</script>
 
 	</aside>
+	        <!-- 오른쪽 사이드 -->
+        <aside>
+            <div class="center" style="background-color: rgb(228, 228, 228)">
+
+                <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
+                    <!-- 메뉴 버튼 -->
+                    <button class='btn btn-primary'>HOME</button><br>
+                    <button class='btn btn-primary'>공지사항</button><br>
+                    <button class='btn btn-primary' id="feed-btn">피드</button><br>
+                    <button class='btn btn-primary'>갤러리</button><br>
+                    <button class='btn btn-primary'>일정</button><br>
+                </div>
+            </div>
+        </aside>
+	
         <!-- 게시판 -->
         <section>
-            <div class="main center" id="main_center" style='width:684px;height:auto; background-color:white; align-content: center;'>
+            <div class="main center" id="main_center" style='width:684px; height:auto; background-color:white; align-content: center;'>
             	<span id="header" style='text-align: center;'></span>
             	<br/><br/>
 
             	<div id="mem_list_div" style="padding: 0 0 0 30%;"></div>
            </div>
+           <!-- 동글메인이미지 -->
+           <div id='dongle_main_img'>
+           		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+	           	           
+	           <div id='mini_board'>
+	           </div>
+	           <div id='mini_feed'>
+	           </div>
+           </div>
+
            
             
        </section>
@@ -188,20 +245,6 @@
      		});   		
      	});       
        </script>
-        <!-- 오른쪽 사이드 -->
-        <aside>
-            <div class="sideback center" style="background-color: rgb(228, 228, 228)">
-
-                <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
-                    <!-- 메뉴 버튼 -->
-                    <button class='btn btn-primary'>HOME</button><br>
-                    <button class='btn btn-primary'>공지사항</button><br>
-                    <button class='btn btn-primary' id="feed-btn">피드</button><br>
-                    <button class='btn btn-primary'>갤러리</button><br>
-                    <button class='btn btn-primary'>일정</button><br>
-                </div>
-            </div>
-        </aside>
 
 
 
