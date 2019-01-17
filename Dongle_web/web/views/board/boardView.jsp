@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.dongle.board.model.vo.*,java.util.*,com.dongle.member.model.vo.Member"%>
+<%@ page import="com.dongle.board.model.vo.*,java.util.*,com.dongle.member.model.vo.Member,com.dongle.group.model.vo.Group"%>
     
 <% 
 	Board b=(Board)request.getAttribute("board");
+	Group g = (Group)request.getAttribute("group");
 	BoardPath bp=(BoardPath)request.getAttribute("boardPath");
 	List<BoardComment> bclist=(List)request.getAttribute("bclist");
 	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+	int groupNo=(int)request.getAttribute("groupNo");
 %>
     
 <style>
@@ -66,9 +68,13 @@
 				</tr>
 				<tr>
 					<th>첨부파일</th>
-					<td><%if(bp.getBoardFileNewPath!=null){%>
-						<img alt="첨부파일" src="<%= request.getContextPath() %>/images/file.png"width='16px'>
-						<%} %> 
+					<td>
+						<%-- <%if(bp.getBoardFileNewPath()!=null){%>
+							<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');">
+							<img alt="첨부파일" src="<%= request.getContextPath() %>/images/file.png"width='16px'/>
+							</a>
+								<%=bp.getBoardFileOldPath() %>						
+						<%} %>  --%>
 					</td>
 				</tr>
 				<tr>
@@ -78,9 +84,11 @@
 				
 				<tr>
 					<td colspan='2' id="inputbutton">
-						<input type="button" value="목록으로" onclick="fn_boardList()">
-						<input type="button" value="수정하기" onclick="fn_updateBoard()">
+						<button id='btn-list'>목록으로</button>
+						<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
+						<button id='btn-update'>수정하기</button>
 						<input type="button" value="삭제하기" onclick="fn_deleteBoard()">
+						<%} %>
 					</td>
 				</tr>
 			</tbody> 
@@ -217,10 +225,42 @@
 			
 			</script>
 	<script>
-	function fn_boardList()
+	//다운로드하자!
+	function fn_fileDownLoad(rName, oName)
 	{
-		location.href="<%=request.getContextPath()%>/board/boardList";
+		var url="<%=request.getContextPath()%>/board/boardFileDownLoad";
+		oName=encodeURIComponent(oName);
+		loaction.href=url+"?oName="+oName+"&rName="+rName;
 	}
+	
+	$(function(){
+		$('#btn-list').click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/board/boardList?groupNo=<%=groupNo%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#board-container').html(data);
+				},
+				error:function(error,msg){console.log("---"+error+msg);}
+			});
+		});
+	});
+	
+	$(function(){
+		$('#btn-update').click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#board-container').html(data);
+				},
+				error:function(error,msg){console.log("---"+error+msg);}
+			});
+		});
+	});
+	
 	function fn_deleteBoard()
 	{
 		if(!confirm('정말로 삭제하시겠습니까?'))

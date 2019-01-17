@@ -52,14 +52,13 @@
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
+			<%if(!list.isEmpty()) { %>
 			<%for(Board b : list) {%>
 				<tr>
 					<td><%=b.getBoardNo() %></td>
 					<td class="boardView-btn">
-						<%-- <a id="boardView-btn" href ="<%=request.getContextPath() %>/board/boardView?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>"> --%>
 							<%=b.getBoardTitle()%>
 							<input type="hidden" name="boardNo" id="boardNo" value="<%=b.getBoardNo() %>"/>
-						<!-- </a> -->
 					</td>
 					<td>
 						<%=b.getBoardWriter() %>
@@ -71,7 +70,8 @@
 						<%=b.getBoardViewCount() %>
 					</td>
 				</tr>
-				<%} %>
+				<%} 
+			}%>
 		</table>
 		
 	</section>

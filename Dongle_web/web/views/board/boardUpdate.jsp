@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>동글</title>
-	<script src='js/jquery-3.3.1.js'></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -70,14 +70,12 @@
 				</tr>					
 				<tr>
 					<th>조회수</th>
-					<td>
-						
-					</td>
+					<td colspan="2"><%=b.getBoardViewCount() %></td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
 					<td><%-- <%if(b.getFilePath()!=null){%>
-						<img alt="첨부파일" src="<%= request.getContextPath() %>/images/file.png"width='16px'>
+						<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'>
 						<%} %> --%>	
 					</td>
 				</tr>
@@ -96,6 +94,5 @@
 			</tbody> 
 		</table>
 	</div>
-</body>
-</html>
+
 		

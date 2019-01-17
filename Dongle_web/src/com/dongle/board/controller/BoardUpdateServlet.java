@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
+import com.dongle.board.model.vo.BoardPath;
 
 /**
  * Servlet implementation class BoardUpdate
@@ -40,6 +41,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		if(b!=null)
 		{
 			view="views/board/boardUpdate.jsp";
+			request.setAttribute("groupNo", groupNo);
 		}
 		else
 		{

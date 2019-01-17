@@ -47,7 +47,6 @@ public class BoardInsertEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		System.out.println("END들어옴");
 		
 		//파일 기본경로
 		String root=getServletContext().getRealPath("/");
