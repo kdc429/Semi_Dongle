@@ -1,7 +1,6 @@
 package com.dongle.admin.controller;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,16 +14,16 @@ import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class DongleSearchServlet
+ * Servlet implementation class BlackListServlet
  */
-@WebServlet("/admin/dongleSearch")
-public class DongleSearchServlet extends HttpServlet {
+@WebServlet("/admin/blackList")
+public class BlackListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DongleSearchServlet() {
+    public BlackListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,22 +42,12 @@ public class DongleSearchServlet extends HttpServlet {
 			return;
 		}
 		
-		String searchType=request.getParameter("dongle-searchType");
-		
-		String searchKeyword=request.getParameter("searchKeyword");
-		System.out.println(searchKeyword);
-		List<ListGroup> dongleList=null;
-		switch(searchType)
-		{
-			case "dongleName" : dongleList=new AdminService().selectDongleName(searchKeyword);break;
-			case "managerId" : dongleList=new AdminService().selectManagerId(searchKeyword);break;
-			case "dongleEnDate" : System.out.println("여기1");dongleList=new AdminService().selectDongleEnDate(searchKeyword);break;
-			case "metro" : dongleList=new AdminService().selectMetro(searchKeyword);break;
-			
-		}
-		System.out.println(dongleList);
-		request.setAttribute("dongleList", dongleList);
-		request.getRequestDispatcher("/Dongle_view/admin_dongleSearch.jsp").forward(request, response);
+		List<Member> blackList = new AdminService().selectBlackMemberList("1");
+		List<Member> nonBlackList = new AdminService().selectBlackMemberList("0");
+
+		request.setAttribute("blackList", blackList);
+		request.setAttribute("nonBlackList", nonBlackList);
+		request.getRequestDispatcher("/Dongle_view/admin_memberBlackList.jsp").forward(request, response);
 	}
 
 	/**

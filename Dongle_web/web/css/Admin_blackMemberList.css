@@ -1,0 +1,27 @@
+#tbl-member {
+	
+	
+	border-collapse: collapse;
+	border: 0px solid black;
+}
+#tbl-member-black th {
+	border: 1px solid black;
+	background-color: gray;
+	text-align: center;
+	padding: 8px;
+	border-collapse: collapse;
+}
+
+#tbl-member-black td {
+	border: 1px solid black;
+	border-top: 0px;
+	text-align: left;
+	padding: 8px;
+	border-collapse: collapse;
+}
+
+#tbl-member-black tbody {
+	
+	height: 200px;
+	overflow: auto;
+}

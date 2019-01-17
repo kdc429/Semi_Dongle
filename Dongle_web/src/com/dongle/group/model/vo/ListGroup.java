@@ -7,7 +7,7 @@ public class ListGroup {
 	private String dongleName; //GROUP_NAME
 	private String managerId; //MEMBER_ID
 	private String topic; //TOPIC_CTG_NAME
-	private String address; //LOC_METRO_NAME
+	private String address; //LOC_METRO_NAME + LOC_AREA_NAME + LOC_TOWN_NAME
 	private String activeDate; //GROUP_DATE_CTG
 	private int minAge; //MIN_AGE
 	private int maxAge; //MAX_AGE

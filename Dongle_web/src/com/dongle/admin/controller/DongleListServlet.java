@@ -43,7 +43,7 @@ public class DongleListServlet extends HttpServlet {
 		}
 		
 		List<ListGroup> dongleList = new AdminService().selectDongleList();
-//		System.out.println(memberList);
+
 		request.setAttribute("dongleList", dongleList);
 		request.getRequestDispatcher("/Dongle_view/admin_dongleList.jsp").forward(request, response);
 	}

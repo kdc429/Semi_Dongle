@@ -24,7 +24,7 @@
 		var sname=document.querySelector("#search-memberName");
 		var sphone=document.querySelector("#search-phone");
 		var semail=document.querySelector("#search-email");
-		var sblack=document.querySelector("#search-blackList");
+		
 		
 		var searchType=document.querySelector("#member-searchType");
 		searchType.addEventListener("change",function(){
@@ -32,7 +32,7 @@
 			sname.style.display="none";
 			sphone.style.display="none";
 			semail.style.display="none";
-			sblack.style.display="none";
+			
 			
 			document.querySelector("#search-"+this.value)
 			.style.display="inline-block";
@@ -45,7 +45,7 @@
     	<li class="active"><a href="<%=request.getContextPath()%>/admin/memberList">회원 리스트 관리</a></li>
     	<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
     	<li><a href="#">메인 관리</a></li>
-   		<li><a href="#">블랙 리스트 관리</a></li>
+   		<li><a href="<%=request.getContextPath()%>/Dongle_view/admin_memberBlackList.jsp">블랙 리스트 관리</a></li>
  	</ul>
 	<h2>회원 리스트 관리</h2>
 	<div id="member-list-container">
@@ -55,7 +55,7 @@
 				<option value="memberName">회원 이름</option>
 				<option value="phone">전화번호</option>
 				<option value="email">이메일</option>
-				<option value="blackList">블랙 여부</option>
+			
 			</select>
 			<div id="search-memberId">
 				<form action="<%=request.getContextPath() %>/admin/memberSearch">
@@ -85,13 +85,7 @@
 					<button type="submit">검색</button>
 				</form>
 			</div>
-			<div id="search-blackList">
-				<form action="<%=request.getContextPath() %>/admin/memberSearch">
-					<input type="hidden" name="member-searchType" value="memberId"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."/>
-					<button type="submit">검색</button>
-				</form>
-			</div>
+			
 		</div>
 		<br>
 		<table id="tbl-member">

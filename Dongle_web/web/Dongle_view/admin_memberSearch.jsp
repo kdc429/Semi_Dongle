@@ -24,7 +24,7 @@
 	    div#search-memberName{display:<%="memberName".equals(searchType)?"inline-block":"none"%>;}
 	    div#search-phone{display:<%="phone".equals(searchType)?"inline-block":"none"%>;}
 	    div#search-email{display:<%="email".equals(searchType)?"inline-block":"none"%>;}
-	    div#search-blackList{display:<%="blackList".equals(searchType)?"inline-block":"none"%>;}
+	    
 	   	
 </style>
 
@@ -34,8 +34,6 @@
 		var sname=document.querySelector("#search-memberName");
 		var sphone=document.querySelector("#search-phone");
 		var semail=document.querySelector("#search-email");
-		var sblack=document.querySelector("#search-blackList");
-		
 		
 		
 		var searchType=document.querySelector("#member-searchType");
@@ -45,7 +43,7 @@
 			sname.style.display="none";
 			sphone.style.display="none";
 			semail.style.display="none";
-			sblack.style.display="none";
+			
 			
 			document.querySelector("#search-"+this.value)
 			.style.display="inline-block";
@@ -101,14 +99,7 @@
 					<button type="submit">검색</button>
 				</form>
 			</div>
-			<div id="search-blackList">
-				<form action="<%=request.getContextPath() %>/admin/memberSearch">
-					<input type="hidden" name="member-searchType" value="blackList"/>
-						<input type="radio" name="member-searchKeyword" value="" />
-						<input type="radio" name="member-searchKeyword" value="F" />여
-						<button type="submit">검색</button>	
-				</form>
-			</div>
+			
 		</div>
 		<br>
 		<table id="tbl-member">

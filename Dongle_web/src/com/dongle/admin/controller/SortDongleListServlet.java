@@ -16,13 +16,13 @@ import com.dongle.group.model.vo.ListGroup;
  * Servlet implementation class SortDongleList
  */
 @WebServlet("/admin/sortDongleList")
-public class SortDongleList extends HttpServlet {
+public class SortDongleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortDongleList() {
+    public SortDongleListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,7 @@ public class SortDongleList extends HttpServlet {
 		List<ListGroup> dongleList = null;
 		String flag = request.getParameter("flag");
 		String rowValue = request.getParameter("rowValue");
-		String searchType=request.getParameter("member-searchType");
+		String searchType=request.getParameter("dongle-searchType");
 		String searchKeyword=request.getParameter("searchKeyword");
 		
 		if(searchType == null)
@@ -61,6 +61,7 @@ public class SortDongleList extends HttpServlet {
 		}
 		
 		request.setAttribute("dongleList", dongleList);
+		System.out.println("서치타입 : " + searchType);
 		if(searchType.equals(""))
 			request.getRequestDispatcher("/Dongle_view/admin_dongleList.jsp").forward(request, response);
 		else

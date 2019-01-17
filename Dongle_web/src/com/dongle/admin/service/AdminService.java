@@ -181,20 +181,113 @@ public class AdminService {
 	public List<ListGroup> selectDongleEnDate(String searchKeyword)
 	{
 		Connection conn = getConnection();
+		System.out.println("여기2");
 		List<ListGroup> dongleList = new AdminDao().selectDongleEnDate(conn, searchKeyword);
 		
 		close(conn);
 		return dongleList;
 	}
 	
-	public List<ListGroup> selectReportCnt(String searchKeyword)
+	public List<ListGroup> selectMetro(String searchKeyword)
 	{
 		Connection conn = getConnection();
-		List<ListGroup> dongleList = new AdminDao().selectReportCnt(conn, searchKeyword);
+		List<ListGroup> dongleList = new AdminDao().selectMetro(conn, searchKeyword);
 		
 		close(conn);
 		return dongleList;
 	}
 	
+	
+	/* 동글리스트 정렬 */
+	public List<ListGroup> sortDongleName(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortDongleName(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortManagerId(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortManagerId(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortTopic(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortTopic(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortMetro(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortMetro(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortDate(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortDate(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortMinAge(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortMinAge(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortMaxAge(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortMaxAge(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortDongleEnrollDate(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortDongleEnrollDate(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	public List<ListGroup> sortDongleReportCnt(String searchType, String searchKeyword, String flag)
+	{
+		Connection conn = getConnection();
+		List<ListGroup> dongleList = new AdminDao().sortDongleReportCnt(conn, searchType, searchKeyword, flag);
+		
+		close(conn);
+		return dongleList;
+	}
+	
+	/*블랙멤버리스트 서비스*/
+	public List<Member> selectBlackMemberList(String isBlack)
+	{
+		Connection conn = getConnection();
+		List<Member> memberList = new AdminDao().selectBlackMemberList(conn, isBlack);
+		
+		close(conn);
+		return memberList;
+	}
 	
 }

@@ -14,14 +14,12 @@ div#search-dongleEnDate {
 	display: none;
 }
 
-div#search-reportCnt {
+div#search-metro {
 	display: none;
 }
 
 
-#tbl-dongle {
-	display: block;
-	width: 1000px;
+#tbl-dongle {	
 	border-collapse: collapse;
 	border: 0px solid black;
 }
@@ -43,7 +41,6 @@ div#search-reportCnt {
 }
 
 #tbl-dongle tbody {
-	display: block;
 	height: 500px;
 	overflow: auto;
 }

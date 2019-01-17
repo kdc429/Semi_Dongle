@@ -22,7 +22,7 @@
 		var smanagerId=document.querySelector("#search-managerId");
 		var sname=document.querySelector("#search-dongleName");
 		var senDate=document.querySelector("#search-dongleEnDate");
-		var sreportCnt=document.querySelector("#search-reportCnt");
+		var smetro=document.querySelector("#search-metro");
 		
 		
 		var searchType=document.querySelector("#dongle-searchType");
@@ -31,7 +31,7 @@
 			smanagerId.style.display="none";
 			sname.style.display="none";
 			senDate.style.display="none";
-			sreportCnt.style.display="none";
+			smetro.style.display="none";
 			
 			document.querySelector("#search-"+this.value)
 			.style.display="inline-block";
@@ -53,8 +53,9 @@
 			<select id="dongle-searchType">
 				<option value="dongleName">동글명</option>
 				<option value="managerId">매니저 아이디</option>
+				<option value="metro">지역</option>
 				<option value="dongleEnDate">생성일</option>
-				<option value="reportCnt">신고 횟수</option>
+				
 			</select>
 			<div id="search-dongleName">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
@@ -70,20 +71,21 @@
 					<button type="submit">검색</button>
 				</form>
 			</div>
+			<div id="search-metro">
+				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
+					<input type="hidden" name="dongle-searchType" value="metro"/>
+					<input type="text" name="searchKeyword" size="25" placeholder="검색할 지역을 입력하세요."/>
+					<button type="submit">검색</button>
+				</form>
+			</div>
 			<div id="search-dongleEnDate">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
-					<input type="hidden" name="dongle-searchType" value="dongleEndate"/>
+					<input type="hidden" name="dongle-searchType" value="dongleEnDate"/>
 					<input type="date" name="searchKeyword"/>
 					<button type="submit">검색</button>
 				</form>
 			</div>
-			<div id="search-reportCnt">
-				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
-					<input type="hidden" name="dongle-searchType" value="reportCnt"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 이메일을 입력하세요."/>
-					<button type="submit">검색</button>
-				</form>
-			</div>
+			
 		</div>
 		<br>
 		<table id="tbl-dongle">
