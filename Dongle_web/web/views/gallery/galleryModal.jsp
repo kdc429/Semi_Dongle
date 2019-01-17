@@ -13,89 +13,20 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-     .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-#recomment_form{display:none;}
-/* modalImg 스타일 */
-*{box-sizing: border-box;}
-/* 댓글창 스타일 */
-div.comment-editor fieldset.modal_comment{
-padding:8px 10px 10px;
-border-bottom:1px solid #efefef;
-font-family:'a흑진주L';
-border-top:1px solid #e8e8e8;
-background-color:rgb(240,240,240);
-position:relative;
-margin-top:2px;
+/* 모달창  */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
-.screen_out{overfloa:hidden;width:0;height:0;line-height:0;text-indent:-9999px;}
-.lab_write{top:8px;left:14px;}
-/* 댓글테이블!! */
-div.comment-editor{border-top: 1px solid rgb(240,240,240);margin-top:5%;}
-div.comment-ediotr ul{list-style:none;}
-div.comment-ediotr ul li{list-style:none;}
-.ico_skin{display:block;overflow:hidden;font-size:0;line-height: 0;text-indent:-9999px;}
-.thumb_profile{
-   width: 33px;
-   height: 33px;
-   margin-right: 11px;
-   margin-top: 2px;
-   background-position: -120px -20px;
-   float:left;
-   border-radius:48px;
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
-img.img_profile{display:block;width:100%;height:100%;border-radius:48px;}
-
-.comment_box{margin-top:4px;overflow:hidden;display:block;}
-div.comment_box ul{}
-li{padding:0;}
-.comment_writer{float:left;overflow:hidden;color:rgb(250,250,250);text-overflow: ellipsis;white-space: nowrap;font-size:14px;margin-right:5px;max-width:120px;}
-.comment_date{float:left;font-size:12px;color:#a7a7a7;margin-top:3px;}
-.comment_content{display:block;font-size:13px;color:#5c5c5c;clear:both;line-height: 19px;padding-top:2px;}
-div.tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; box-sizing: border-box;} 
-li button.btn-reply{display:none; background-color:white;float:right;border:none;height:10px;}
-li button.btn-delete{display:none;}
-/* li:hover {background:lightgray;} */
-li:hover button.btn-reply{display:inline;}
-li:hover button.btn-delete{display:inline;}
-li.level2{padding-left:50px;}
-</style>
-<script>
-$(function(){
-	//선택한 이미지로 모달띄우기
-	var modal = document.getElementById('modal-container');
-	$('.galleryBox').click(function(obj){
-		console.log(obj);
-		modal.style.display="block";
-	});
-	$('.close').click(function(){
-		modal.style.display="none";
-	});
-	window.onclick = function(event){
-		if(event.target==modal)
-		{
-			modal.style.display="none";
-		}
-	}
-});
-</script>
-
-<!-- 이미지 슬라이드 스타일 -->
-<style>
-/* 메인 슬라이드 Slideshow container */
-
-/* Slideshow container */
-
+/* 모달창에 있는 이미지 슬라이드  */
 * {box-sizing:border-box}
 
 body {font-family: 'a흑진주L';margin:0}
@@ -216,8 +147,76 @@ top : 100px;
 @media only screen and (max-width: 300px) {
   .slprev, .slnext,.text {font-size: 11px}
 }
+
+/* modalImg 스타일 */
+*{box-sizing: border-box;}
+
+/* 댓글창 스타일 */
+div.comment-editor fieldset.modal_comment{
+padding:8px 10px 10px;
+border-bottom:1px solid #efefef;
+font-family:'a흑진주L';
+border-top:1px solid #e8e8e8;
+background-color:rgb(240,240,240);
+position:relative;
+margin-top:2px;
+}
+.screen_out{overfloa:hidden;width:0;height:0;line-height:0;text-indent:-9999px;}
+.lab_write{top:8px;left:14px;}
+/* 댓글테이블!! */
+div.comment-editor{border-top: 1px solid rgb(240,240,240);margin-top:5%;}
+div.comment-ediotr ul{list-style:none;}
+div.comment-ediotr ul li{list-style:none;}
+.ico_skin{display:block;overflow:hidden;font-size:0;line-height: 0;text-indent:-9999px;}
+.thumb_profile{
+   width: 33px;
+   height: 33px;
+   margin-right: 11px;
+   margin-top: 2px;
+   background-position: -120px -20px;
+   float:left;
+   border-radius:48px;
+}
+img.img_profile{display:block;width:100%;height:100%;border-radius:48px;}
+
+.comment_box{margin-top:4px;overflow:hidden;display:block;}
+div.comment_box ul{}
+li{padding:0;}
+.comment_writer{float:left;overflow:hidden;color:rgb(250,250,250);text-overflow: ellipsis;white-space: nowrap;font-size:14px;margin-right:5px;max-width:120px;}
+.comment_date{float:left;font-size:12px;color:#a7a7a7;margin-top:3px;}
+.comment_content{display:block;font-size:13px;color:#5c5c5c;clear:both;line-height: 19px;padding-top:2px;}
+div.tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; box-sizing: border-box;} 
+li button.btn-reply{display:none; background-color:white;float:right;border:none;height:10px;}
+li button.btn-delete{display:none;}
+/* li:hover {background:lightgray;} */
+li:hover button.btn-reply{display:inline;}
+li:hover button.btn-delete{display:inline;}
+li.level2{padding-left:50px;}
+div.comment-editor fieldset.modal_comment div.comment-btn button#btn-insert{
+float:right;
+width:65px;height:28px;
+font-size:14px;
+line-height:15px;
+border-radius: 20px;
+border:none;
+background-color:white;
+}
+
 </style>
 <script>
+$(function(){
+	//선택한 이미지로 모달띄우기 이벤트
+	var modal = document.getElementById('modal-container');
+	$('.close').click(function(){
+		modal.style.display="none";
+	});
+	window.onclick = function(event){
+		if(event.target==modal)
+		{
+			modal.style.display="none";
+		}
+	}
+});
 /* 이미지 슬라이드 스크립드 */
  //슬라이드 스크립
 var slideIndex = 1;
@@ -244,6 +243,8 @@ if (n < 1) {slideIndex = slides.length}
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
 }
+
+
 </script>
 	<span class="close">&times;</span>
 	<!-- 이미지 슬라이드 -->
@@ -295,18 +296,6 @@ if (n < 1) {slideIndex = slides.length}
 									<button class='btn-reply' value=''>답글</button>
 								</span>
 							</span>
-							<div class='recomment_content'>
-								<fieldset class='modal_comment' id='recomment_form'>
-									<legend class='screen_out'>대댓글쓰기 폼</legend>
-									<div class='comment_write'>
-										<label for='comment' class='lab_write screen_out'>내용</label>
-										<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
-									</div>
-									<div class='comment_btn'>
-										<button type="submit" id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>
-									</div>
-								</fieldset>
-							</div>
 						</li>
 					<%} 
 					else{%>
@@ -330,28 +319,57 @@ if (n < 1) {slideIndex = slides.length}
 				<%} %>
 			<%}%> 
 		</ul>
-		<form action="<%=request.getContextPath()%>/gallery/commentInsert" name="galleryCommentFrm" method="post">
-			<input type="hidden" name="groupNo" value="<%=gplist.get(0).getGroupNo() %>"/>
-			<input type="hidden" name="galNo" value="<%=gplist.get(0).getGalNo() %>"/>
-			<input type="hidden" name="galCommentWriterNo" value="<%=loginMember.getMemberNo() %>"/>
-			<input type="hidden" name="galCommentLevel" value="1"/>
-			<input type="hidden" name="galCommentRef" value="0"/>
-			<input type="hidden" name="albumCode" value="<%=gplist.get(0).getAlbumCode()%>"/>
-			<input type="hidden" name="galFileNo" value="<%=gplist.get(0).getGalFileNo()%>"/>
-			<fieldset class='modal_comment'>
-				<legend class='screen_out'>댓글쓰기 폼</legend>
-				<div class='comment_write'>
-					<label for='comment' class='lab_write screen_out'>내용</label>
-					<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
-				</div>
-				<div class='comment_btn'>
-					<button type="submit" id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>
-				</div>
-			</fieldset>
-		</form>
+		<input type="hidden" name="groupNo" id='groupNo' value="<%=gplist.get(0).getGroupNo() %>"/>
+		<input type="hidden" name="galNo" id="galNo" value="<%=gplist.get(0).getGalNo() %>"/>
+		<input type="hidden" name="galCommentWriterNo" id='galCommentWriterNo' value="<%=loginMember.getMemberNo() %>"/>
+		<input type="hidden" name="galCommentLevel" id='galCommentLevel' value="1"/>
+		<input type="hidden" name="galCommentRef" id='galCommentRef' value="0"/>
+		<input type="hidden" name="albumCode" id='albumCode' value="<%=gplist.get(0).getAlbumCode()%>"/>
+		<input type="hidden" name="galFileNo" id='galFileNo' value="<%=gplist.get(0).getGalFileNo()%>"/>
+		<fieldset class='modal_comment'>
+			<legend class='screen_out'>댓글쓰기 폼</legend>
+			<div class='comment_write'>
+				<label for='comment' class='lab_write screen_out'>내용</label>
+				<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
+			</div>
+			<div class='comment_btn'>
+				<button type="button" id='btn-insert'>입력</button>
+			</div>
+		</fieldset>
 	</div>
-<!-- 대댓글 쓰기 함수 -->
+
 <script>
+/*  */
+	$(function(){
+		$('.btn-reply').click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/commentInsert",
+				data:{"groupNo":$('#groupNo').val(),
+					"galNo":$('#galNo').val(),
+					"galCommentWriterNo":$('#galCommentWriterNo').val(),
+					"galCommentLevel":$('#galCommentLevel').val(),
+					"galCommentRef":$('#galCommentRef').val(),
+					"albumCode":$('#albumCode').val(),
+					"galFileNo":$('#galFileNo').val(),
+					"galCommentContent":$('#galCommentContent').val(),
+				},
+				type:"post",
+				success:function(data){
+					if(data!=null)
+					{	
+						alert('댓글 등록 완료!');
+						$('.comment-editor').html(data);
+					}
+					else
+					{
+						alert('댓글 등록에 실패하였습니다');
+					}
+				},
+				error:function(request){console.log(request);}
+			})					
+		})
+	});
+	/* 대댓글 쓰기 함수*/
 	$(function(){
 		var eventflag;
 		$('.btn-reply').on('click',function(e){
@@ -359,7 +377,7 @@ if (n < 1) {slideIndex = slides.length}
 			<%if(loginMember!=null){%>
 				eventflag=true;
 				var div=$("<div class='recomment_content'></div>");
-				var html="<form action='<%=request.getContextPath()%>/gallery/commentInsert' method='post'>";
+				var html="";
 				html+="<input type='hidden' name='groupNo' value='<%=groupNo %>'/>"
 				html+="<input type='hidden' name='galNo' value='<%=gplist.get(0).getGalNo()%>'/>";
 				html+="<input type='hidden' name='galCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
@@ -375,7 +393,6 @@ if (n < 1) {slideIndex = slides.length}
 				html+="<button type='submit' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
 				html+="</div>"
 				html+="</fieldset>"
-				html+="</form>";
 				div.html(html);
 				div.insertAfter($(this).parent().parent().parent()).children("span").slideDown(800);
 				/* 연결된 이벤트 삭제 */

@@ -1,6 +1,8 @@
 package com.dongle.gallery.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class GalleryCommentInsertServlet
@@ -48,22 +51,12 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 		gcj.setGalCommentRef(galCommentRef);
 		
 		int rs=new GalleryService().insertGalComment(gcj);
-		
-		String msg="";
-		String loc="";
-		String view="/views/common/msg.jsp";
 		if(rs!=0)
 		{
-			msg="댓글을 등록하였습니다.";
-			loc="/gallery/galleryAllList?groupNo="+groupNo+"&albumCode="+albumCode+"&galNo="+galNo+"&galFileNo="+galFileNo;
+			List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
+			response.setContentType("application/json;charset=UTF-8");
+			new Gson().toJson(gclist,response.getWriter());
 		}
-		else {
-			msg="댓글 등록에 실패하였습니다. 다시 시도해주세요.";
-			loc="/gallery/galleryAllList?groupNo="+groupNo+"&albumCode="+albumCode+"&galNo="+galNo+"&galFileNo="+galFileNo;
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher(view).forward(request, response);
 		
 	}
 

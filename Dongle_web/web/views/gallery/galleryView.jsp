@@ -83,8 +83,9 @@
 				dataType:"html",
 				success:function(data){
 					$('.modal-content').html(data);
+					$('#modal-container').css('display','block');
 				},
-				error:function(){}
+				error:function(request,m,e){console.log(request);}
 				
 			});	
 		});
