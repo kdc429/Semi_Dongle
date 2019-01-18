@@ -69,10 +69,10 @@
 				<tr>
 					<th>첨부파일</th>
 					<td>
-						<%-- <%if(bp.getBoardFileNewPath()!=null){%>
-							<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');">
-							<img alt="첨부파일" src="<%= request.getContextPath() %>/images/file.png"width='16px'/>
-							</a>
+						<%-- <%if(bp.getBoardFileNewPath()!=null){%> 
+							<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
+							<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'/>
+							</a> 
 								<%=bp.getBoardFileOldPath() %>						
 						<%} %>  --%>
 					</td>
@@ -262,11 +262,14 @@
 	
 	function fn_deleteBoard()
 	{
-		if(!confirm('정말로 삭제하시겠습니까?'))
+		if(confirm('정말로 삭제하시겠습니까?')==true)
 		{
-			return;
+			location.href="<%=request.getContextPath()%>/board/boardDelete?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>"
 		}
-		$('[name=boardDelFrm]').submit();
+		else
+		{
+			return false;		
+		}
 	}
 	<%-- function fn_updateBoard()
 	{

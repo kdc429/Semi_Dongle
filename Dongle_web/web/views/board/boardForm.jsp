@@ -89,6 +89,7 @@
 				</tbody> 
 					<tr>
 						<td colspan="2" id="board-add">
+							<button id='Form-btn-list'>목록으로</button>
 							<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
 							<input type="submit" value="등록하기" onclick="return validate();"/>
 						</td>
@@ -96,4 +97,19 @@
 			</table>
 		</form>
 	</div>
+<script>
+$(function(){
+	$('#Form-btn-list').click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath() %>/board/boardList?groupNo=<%=groupNo%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#board-container').html(data);
+			},
+			error:function(error,msg){console.log("---"+error+msg);}
+		});
+	});
+});
+</script>
 		

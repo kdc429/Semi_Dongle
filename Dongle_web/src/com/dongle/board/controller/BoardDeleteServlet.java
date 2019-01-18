@@ -1,27 +1,26 @@
 package com.dongle.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
-import com.dongle.board.model.vo.BoardPath;
 
 /**
- * Servlet implementation class BoardUpdate
+ * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/board/boardUpdate")
-public class BoardUpdateServlet extends HttpServlet {
+@WebServlet("/board/boardDelete")
+public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateServlet() {
+    public BoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +30,26 @@ public class BoardUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
-		//bp를 받아와라라라라라라
-		BoardPath bp=new BoardService().selectBoardPath(boardNo,groupNo);
-		System.out.println("들어옴"+boardNo+" : "+groupNo+" : "+bp);
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		System.out.println("들어오냐"+boardNo+groupNo);
+		int rs=new BoardService().deleteBoard(boardNo,groupNo);
+		if(rs!=0)
+		{
+			request.setAttribute("msg", "삭제를 완료하였습니다.");
+			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
+		else {
+			request.setAttribute("msg", "삭제에 실패하였습니다. 다시 시도해주세요.");
+			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 		
-		String view="";
-		if(bp!=null)
-		{
-			view="/views/board/boardUpdate.jsp";
-			request.setAttribute("groupNo", groupNo);
-			request.setAttribute("boardPath", bp);
-
-		}
-		else
-		{
-			request.setAttribute("msg", "조회된 자료가 없습니다");
-			request.setAttribute("loc", "/board/boardList?groupNo"+groupNo);
-			view="/views/common/msg.jsp";
-		}
-		request.getRequestDispatcher(view).forward(request, response);
+		
+		
+		
+		
 	}
 
 	/**

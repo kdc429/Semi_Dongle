@@ -43,7 +43,11 @@
 	{
 		text-align : center;
 	}
-	.add-btn
+	#update-add-btn
+	{
+		text-align : center;
+	}
+	#update-add
 	{
 		text-align : center;
 	}
@@ -101,25 +105,40 @@
 				<tr>
 					<th style="vertical-align:middle">내용</th>
 					<td>
-						<textarea rows="5" cols="50" name='content'><%=bp.getBoardContent()%></textarea>
+						<textarea rows="5" cols="50" name='content' id='content'><%=bp.getBoardContent()%></textarea>
 					</td>
 				</tr>
 			</tbody> 
 				<tr>
-					<td colspan="2" id="board-add">
+					<td colspan="2" id="update-add">
+						<button id='update-btn-list'>목록으로</button>
 						<input type="hidden" value="<%=groupNo%>" name="groupNo" />
-						<input type="button" value="등록하기" class="add-btn" onclick="return validate();"/>
+						<input type="button" value="등록하기" id="update-add-btn" onclick="return validate();"/>
 					</td>
 				</tr>			
 		</table>
 	</div> 
 <script>
 $(function(){
-	$('.add-btn').click(function(){
+	$('#update-btn-list').click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath() %>/board/boardList?groupNo=<%=groupNo%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#board-container').html(data);
+			},
+			error:function(error,msg){console.log("---"+error+msg);}
+		});
+	});
+});
+
+$(function(){
+	$('#update-add-btn').click(function(){
 		console.log($(this).children('input').val());
 		var num=$(this).children('input').val();
 		$.ajax({
-			url:"<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>",
+			url:"<%=request.getContextPath()%>/board/boardUpdateEnd?groupNo=<%=groupNo%>",
 			type:"get",
 			dataType:"html",
 			success:function(data){

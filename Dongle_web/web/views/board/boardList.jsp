@@ -32,17 +32,16 @@
 		text-align: center;
 		
 	}
-	input.add-btn
+	#add-btn
 	{
 		float:right;
 		margin:0 0 15px;
-		background-color:#F2CB61;
 	}
 </style>
 	<section id="board-container">
 		<h2>공지사항</h2>
 		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
-			<input type="button" value="글쓰기" class="add-btn"/>
+			<input type="button" value="글쓰기" id="add-btn"/>
 		 <%} %>  
 		<table class="table table-bordered">
 			<tr>
@@ -93,7 +92,7 @@
 	});
 	
 	$(function(){
-		$('.add-btn').click(function(){
+		$('#add-btn').click(function(){
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
 			$.ajax({

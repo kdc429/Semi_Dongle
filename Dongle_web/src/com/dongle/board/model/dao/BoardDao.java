@@ -220,5 +220,54 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return bp;		
-		}	
+		}
+	
+	public int updateBoard(Connection conn, BoardPath bp)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateBoard");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bp.getBoardNo());
+			pstmt.setInt(2, bp.getGroupNo());
+			pstmt.setString(3, bp.getBoardTitle());
+			pstmt.setString(4, bp.getBoardContent());
+			pstmt.setString(5, bp.getBoardFileNewPath());
+			result=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
 	}
+	
+	public int deleteBoard(Connection conn, int boardNo, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteBoard");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, groupNo);
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;		
+		}
+}
