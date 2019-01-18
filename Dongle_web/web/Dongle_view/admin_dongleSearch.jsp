@@ -56,7 +56,7 @@
     	<li><a href="<%=request.getContextPath() %>/admin/memberList">회원 리스트 관리</a></li>
     	<li class="active"><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
     	<li><a href="#">메인 관리</a></li>
-   		<li><a href="#">블랙 리스트 관리</a></li>
+   		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
  	</ul>
 	<h2>동글 리스트 관리</h2>
 	<div id="dongle-list-container">
@@ -134,7 +134,7 @@
 			<tbody>
 				<% if(dongleList==null || dongleList.isEmpty()) {%>
 				<tr>
-					<td colspan="10" align="center">
+					<td colspan="9" align="center">
 						검색결과가 없습니다.
 					</td>
 				</tr>

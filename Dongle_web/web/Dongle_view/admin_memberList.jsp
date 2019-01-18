@@ -45,7 +45,7 @@
     	<li class="active"><a href="<%=request.getContextPath()%>/admin/memberList">회원 리스트 관리</a></li>
     	<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
     	<li><a href="#">메인 관리</a></li>
-   		<li><a href="<%=request.getContextPath()%>/Dongle_view/admin_memberBlackList.jsp">블랙 리스트 관리</a></li>
+   		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
  	</ul>
 	<h2>회원 리스트 관리</h2>
 	<div id="member-list-container">

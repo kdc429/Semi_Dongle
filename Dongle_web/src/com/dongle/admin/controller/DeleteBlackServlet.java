@@ -1,8 +1,6 @@
 package com.dongle.admin.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.admin.service.AdminService;
-import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class BlackListServlet
+ * Servlet implementation class DeleteBlackServlet
  */
-@WebServlet("/admin/blackMemberList")
-public class BlackListServlet extends HttpServlet {
+@WebServlet("/admin/deleteBlack")
+public class DeleteBlackServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BlackListServlet() {
+    public DeleteBlackServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,17 +34,26 @@ public class BlackListServlet extends HttpServlet {
 		if(loginMember==null||!loginMember.getMemberId().equals("admin")) 
 		{
 			request.setAttribute("msg", "잘못된 경로로 접속하셨습니다");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/Dongle_view/main.jsp");
 			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
 			return;
 		}
 		
-		List<Member> blackList = new AdminService().selectBlackMemberList("1");
-		List<Member> nonBlackList = new AdminService().selectBlackMemberList("0");
-
-		request.setAttribute("blackList", blackList);
-		request.setAttribute("nonBlackList", nonBlackList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberBlackList.jsp").forward(request, response);
+		String memberNo[] = request.getParameterValues("member-black");
+		int result = new AdminService().deleteBlack(memberNo);
+		
+		if(result > 0)
+		{
+			request.setAttribute("msg", "블랙리스트에 추가되었습니다");
+			request.setAttribute("loc", "/admin/blackMemberList");
+			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
+		}
+		else
+		{
+			request.setAttribute("msg", "블랙리스트 추가를 실패하셨습니다");
+			request.setAttribute("loc", "/admin/blackMemberList");
+			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

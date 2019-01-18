@@ -1,7 +1,9 @@
 package com.dongle.admin.service;
 
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -181,7 +183,6 @@ public class AdminService {
 	public List<ListGroup> selectDongleEnDate(String searchKeyword)
 	{
 		Connection conn = getConnection();
-		System.out.println("여기2");
 		List<ListGroup> dongleList = new AdminDao().selectDongleEnDate(conn, searchKeyword);
 		
 		close(conn);
@@ -288,6 +289,51 @@ public class AdminService {
 		
 		close(conn);
 		return memberList;
+	}
+	
+	/*블랙 추가*/
+	public int addBlack(String memberNo[])
+	{
+		Connection conn = getConnection();
+		int result = new AdminDao().addBlack(conn, memberNo);
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	/*블랙 제외*/
+	public int deleteBlack(String memberNo[])
+	{
+		Connection conn = getConnection();
+		int result = new AdminDao().deleteBlack(conn, memberNo);
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public List<Member> searchBlack(String searchBlack)
+	{
+		Connection conn = getConnection();
+		List<Member> blackList = new AdminDao().searchBlack(conn, searchBlack);
+		
+		close(conn);
+		return blackList;
 	}
 	
 }

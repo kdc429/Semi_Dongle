@@ -1350,7 +1350,8 @@ public class AdminDao {
 		ResultSet rs=null;
 		ArrayList<ListGroup> dongleList=new ArrayList();
 		String sql=prop.getProperty("selectDongleEnDate");
-		System.out.println(searchKeyword);
+		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchKeyword);
@@ -2343,11 +2344,29 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<Member> memberList=new ArrayList();
-		String sql=prop.getProperty("selectBlackMemberList");
+		String sql="";
+		if(isBlack.equals("1"))
+		{
+			sql=prop.getProperty("selectBlackMemberList");
+		}
+		else if(isBlack.equals("0"))
+		{
+			sql=prop.getProperty("selectNonBlackMemberList");
+		}
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, isBlack);
+			if(isBlack.equals("1"))
+			{
+				pstmt.setString(1, isBlack);
+			}
+			else if(isBlack.equals("0"))
+			{
+				pstmt.setString(1, isBlack);
+				pstmt.setInt(2, 3);
+			}
+			
 			rs = pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -2377,5 +2396,99 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return memberList;
+	}
+	
+	/*블랙 추가*/
+	public int addBlack(Connection conn, String memberNo[])
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("addBlack");
+		try {
+			for(int i = 0; i < memberNo.length; i++)
+			{
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(memberNo[i]));
+			
+				result = pstmt.executeUpdate();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/*블랙 제외*/
+	public int deleteBlack(Connection conn, String memberNo[])
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteBlack");
+		try {
+			for(int i = 0; i < memberNo.length; i++)
+			{
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(memberNo[i]));
+			
+				result = pstmt.executeUpdate();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/*블랙리스트 검색*/
+	public List<Member> searchBlack(Connection conn, String searchBlack)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Member> blackList=new ArrayList();
+		String sql=prop.getProperty("searchBlack");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchBlack + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				Member m = new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setGender(rs.getString("member_gen"));
+				m.setSsn(rs.getString("member_ssn"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setAddress(rs.getString("member_address"));
+				m.setEmail(rs.getString("member_email"));
+				m.setEnrollDate(rs.getDate("member_enroll_date"));
+				m.setBlackList(rs.getString("blacklist_yn"));
+				m.setReportCount(rs.getInt("report_member_count"));
+				blackList.add(m);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return blackList;
 	}
 }

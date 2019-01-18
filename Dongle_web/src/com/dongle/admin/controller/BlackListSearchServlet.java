@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.admin.service.AdminService;
-import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class BlackListServlet
+ * Servlet implementation class BlackListSearch
  */
-@WebServlet("/admin/blackMemberList")
-public class BlackListServlet extends HttpServlet {
+@WebServlet("/admin/searchBlack")
+public class BlackListSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BlackListServlet() {
+    public BlackListSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,12 +41,11 @@ public class BlackListServlet extends HttpServlet {
 			return;
 		}
 		
-		List<Member> blackList = new AdminService().selectBlackMemberList("1");
-		List<Member> nonBlackList = new AdminService().selectBlackMemberList("0");
-
+		String searchBlack=request.getParameter("search-black");
+		List<Member> blackList = new AdminService().searchBlack(searchBlack);
+		
 		request.setAttribute("blackList", blackList);
-		request.setAttribute("nonBlackList", nonBlackList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberBlackList.jsp").forward(request, response);
+		request.getRequestDispatcher("/Dongle_view/admin_memberBlackSearch.jsp").forward(request, response);
 	}
 
 	/**

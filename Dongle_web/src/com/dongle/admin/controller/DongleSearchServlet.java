@@ -46,17 +46,17 @@ public class DongleSearchServlet extends HttpServlet {
 		String searchType=request.getParameter("dongle-searchType");
 		
 		String searchKeyword=request.getParameter("searchKeyword");
-		System.out.println(searchKeyword);
+		
 		List<ListGroup> dongleList=null;
 		switch(searchType)
 		{
 			case "dongleName" : dongleList=new AdminService().selectDongleName(searchKeyword);break;
 			case "managerId" : dongleList=new AdminService().selectManagerId(searchKeyword);break;
-			case "dongleEnDate" : System.out.println("여기1");dongleList=new AdminService().selectDongleEnDate(searchKeyword);break;
+			case "dongleEnDate" : dongleList=new AdminService().selectDongleEnDate(searchKeyword);break;
 			case "metro" : dongleList=new AdminService().selectMetro(searchKeyword);break;
 			
 		}
-		System.out.println(dongleList);
+		
 		request.setAttribute("dongleList", dongleList);
 		request.getRequestDispatcher("/Dongle_view/admin_dongleSearch.jsp").forward(request, response);
 	}
