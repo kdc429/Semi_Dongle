@@ -259,7 +259,7 @@
 			}
 			$.ajax({
 				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>&boardNo=<%=b.getBoardNo()%>",
-				data:{"title":title},{"content":content},
+				data:{"title":title,"content":content},
 				type:"post",
 				dataType:"html",
 				success:function(data){

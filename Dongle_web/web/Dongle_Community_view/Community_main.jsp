@@ -39,11 +39,11 @@
 	{
 		border: 1px solid lightgray;
 	}
-	caption{
+/* 	caption{
 		font-family: '나눔스퀘어라운드 Regular';
 		font-weight: bold;
 		font-size: 30px;
-	}
+	} */
 	section div#mem_list_div table#tbl>tr th,td{text-align:center;}
 
 </style>

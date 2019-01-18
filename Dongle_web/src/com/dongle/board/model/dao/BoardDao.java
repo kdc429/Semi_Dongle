@@ -158,6 +158,28 @@ public class BoardDao {
 		return result;
 	}
 	
+	public int updateCount(Connection conn, int boardNo)
+	{
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateCount");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int insertBoardFile(Connection conn, BoardPath bp,Board bo)
 	{
 		PreparedStatement pstmt=null;

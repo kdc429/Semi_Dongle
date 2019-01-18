@@ -17,10 +17,22 @@ public class BoardService {
 		close(conn);
 		return list;
 	}
-	public Board selectOne(int boardNo,int groupNo)
+	public Board selectOne(int boardNo,int groupNo, boolean hasRead)
 	{
 		Connection conn=getConnection();
 		Board b =new BoardDao().selectOne(conn,boardNo,groupNo);
+		if(!hasRead)
+		{
+			int result=new BoardDao().updateCount(conn,boardNo);
+			if(result>0)
+			{
+				commit(conn);
+			}
+			else
+			{
+				rollback(conn);
+			}
+		}
 		close(conn);
 		return b;
 	}
