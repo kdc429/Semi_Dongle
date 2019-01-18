@@ -13,7 +13,9 @@ import com.dongle.feed.model.service.FeedService;
 import com.dongle.feed.model.vo.Feed;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class FeedListViewServlet
@@ -37,11 +39,29 @@ public class FeedListViewServlet extends HttpServlet {
 		
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+
+		int currentFeed;
+		try {
+			currentFeed=Integer.parseInt(request.getParameter("currentFeed"));
+		}catch(NumberFormatException e) {
+			currentFeed=0;
+		}
+		
+		int pageFeed=10;
+		int startFeedNo=(currentFeed/pageFeed)*pageFeed+1;
+		int endFeedNo=currentFeed+pageFeed;
+		
 		Group g=new GroupService().selectGrInfo(groupNo);
-		List<Feed> feedList=new FeedService().selectFeed(groupNo);
+		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
+		List<Feed> feedList=new FeedService().selectFeed(groupNo,startFeedNo,endFeedNo);
+		List<GroupMember> memberlist = new GroupService().selectMemberList(groupNo);
+		request.setAttribute("loginMember", loginMember);
+		request.setAttribute("memberList",memberlist);
 		request.setAttribute("feedList", feedList);
 		request.setAttribute("group", g);
-		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request,response);
+		request.setAttribute("groupMember", gm);
+		
+		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);
 	}
 
 	/**

@@ -73,6 +73,7 @@ public class MemberDao {
 				data.setEnrollDate(rs.getDate("member_enroll_date"));
 				data.setBlackList(rs.getString("blacklist_yn"));
 				data.setReportCount(rs.getInt("report_member_count"));
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

@@ -4,8 +4,8 @@ public class FeedFile {
 	
 	private int feedNo;
 	private int groupNo;
-	private String feedFileNo;
-	private String feedFilePath;
+	private String feedFileNo; //FEED_FILE_NO
+	private String feedFilePath; //FEED_FILE_PATH
 	
 	public FeedFile() {
 		

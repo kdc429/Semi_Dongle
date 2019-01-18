@@ -43,11 +43,9 @@
                     	for(Group g:list){
                     %>
                     	<!-- 가입한 동글 리스트 -->
-<<<<<<< HEAD
-                    	<form action="<%=request.getContextPath()%>/communityJoin" name="join">
-=======
+
                     	<form action="<%=request.getContextPath()%>/communityJoin" name="join" method='post'>
->>>>>>> branch 'SJH' of https://github.com/kdc429/Semi_Dongle.git
+
                     	<li class="dongle-icon">
                     		<div class="icon-back">
                     			<button class="join-btn" type="submit"> 

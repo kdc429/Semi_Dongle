@@ -15,6 +15,7 @@ public class Member {
 	private Date enrollDate; //MEMBER_ENROLL_DATE
 	private String blackList; //BLACKLIST_YN
 	private int reportCount;
+	private String memberImaPath; //MEMBER_IMG_PATH
 	
 	public Member() {
 		
@@ -23,6 +24,7 @@ public class Member {
 
 	public Member(int memberNo, String memberId, String memberPwd, String gender, String ssn, String phone,
 			String address, String email, Date enrollDate, String blackList, int reportCount) {
+
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -35,6 +37,7 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.blackList = blackList;
 		this.reportCount = reportCount;
+		this.memberImaPath = memberImaPath;
 	}
 
 
@@ -133,5 +136,15 @@ public class Member {
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
+	
+	public String getMemberImaPath()
+	{
+		return memberImaPath;
+	}
+	
+	public void setMemberImaPath(String memberImaPath) {
+		this.memberImaPath = memberImaPath;
+	}
+	
 	
 }

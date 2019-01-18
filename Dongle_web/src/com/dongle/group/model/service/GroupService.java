@@ -56,6 +56,21 @@ public class GroupService {
 		close(conn);
 		return rankList;
 	}
+	   
+	public int countMember(int groupNo){
+		Connection conn = getConnection();
+		int result = new GroupDao().countMember(conn,groupNo);
+		close(conn);
+		return result;
+	}
+
+	public List<GroupMember> selectMemberList(int groupNo) {
+		Connection conn=getConnection();
+		List<GroupMember> list=new GroupDao().selectMemberList(conn, groupNo);
+		close(conn);
+		return list;
+	}
+
 	
 
 }
