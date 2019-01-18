@@ -55,8 +55,8 @@ button.btn button.btn-primary{
          */
 .center {
 	position: relative;
-	display: flex;
-	flex-direction: row; bv0
+	/* display: flex; */
+	flex-direction: row;
 }
 
 .sideback {

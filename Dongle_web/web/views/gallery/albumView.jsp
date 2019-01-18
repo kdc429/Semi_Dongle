@@ -51,7 +51,7 @@ function albumPlusClick(){
 </script>
 
 <div id="album-container">
-	<table width="370px" id="albumPlus-tbl">
+	<table width="370px" id="albumPlus-tbl" style='margin-left:25%;'>
 		<tr>
 			<td>
 				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>
@@ -65,7 +65,7 @@ function albumPlusClick(){
 		</tr>
 	</table>
 	<form name="albumFolder" id="albumFolder">
-		<table >
+		<table  style='margin-left:25%;'>
 			<%if(list.size()!=0){ %>
 				<%for(AlbumCategory t : list){ %>
 					<%if(count%2==1){%>
