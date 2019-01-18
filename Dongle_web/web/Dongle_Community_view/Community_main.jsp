@@ -33,7 +33,7 @@
 					type:"get",
 					dataType:"html",
 					success:function(data){
-						$('.main').html(data);
+						$('#content-div').html(data);
 					}
 				});
 			});
