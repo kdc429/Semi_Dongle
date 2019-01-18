@@ -16,3 +16,24 @@
 	</div>
 	<a href='javascript:' onclick='submitAction();' class='up_btn'>업로드</a>
 </div>
+
+<script type='text/javascript'>
+	//이미지 정보들을 담을 배열 선언
+	var sel_files = [];
+	
+	$(document).ready(function(){
+		$('#input_imgs').on('change', handleImgFileSelect);
+	});
+	
+	function fuleUploadAction(){
+		console.log('fileUploadAction');
+		$('#input_imgs').trigger('click');
+	}
+	
+	function handleImgFileSelect(e){
+		
+	}
+	
+
+
+</script>

@@ -87,6 +87,7 @@ public class GalleryDao {
 				gp.setGalFileNewPath(rs.getString("gal_file_new_path"));
 				gp.setGalFileContent(rs.getString("gal_file_content"));
 				gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
+				gp.setGalMultiStatus(rs.getString("gal_multi_status"));
 				
 				list.add(gp);
 			}
@@ -249,7 +250,8 @@ public class GalleryDao {
 						rs.getString("group_member_image_new_path"),
 						rs.getString("album_code"),
 						rs.getString("gal_file_new_path"),
-						rs.getInt("gal_no")
+						rs.getInt("gal_no"),
+						rs.getString("gal_multi_status")
 						);
 				gclist.add(gcj);
 			}
@@ -292,6 +294,7 @@ public class GalleryDao {
 				gp.setGalFileNewPath(rs.getString("gal_file_new_path"));
 				gp.setGalFileContent(rs.getString("gal_file_content"));
 				gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
+				gp.setGalMultiStatus(rs.getString("gal_multi_status"));
 				
 				gplist.add(gp);
 			}
