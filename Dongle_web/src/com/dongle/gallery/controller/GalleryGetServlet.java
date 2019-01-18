@@ -70,7 +70,11 @@ public class GalleryGetServlet extends HttpServlet {
 		}
 		//페이지 수 만큼 데이터를 불러오기
 		List<GalleryPath> list = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함
-		
+/*		for(int i=0; i<list.size();i++)
+		{
+			System.out.println("나 list: "+list.get(i));
+		}*/
+		System.out.println("나 list: "+list+" 사이즈 "+list.size());
 		//##테스트 중입니다.
 		//gal_no만 distinct된 dao에 갔다오기
 		List galNoList = new GalleryService().distictGalNoList(albumCode,groupNo);
@@ -91,11 +95,11 @@ public class GalleryGetServlet extends HttpServlet {
 			allList.add(gp);
 		}
 		
-		for(int i=0; i<allList.size();i++)
+/*		for(int i=0; i<allList.size();i++)
 		{
-			System.out.println(allList.get(i));
-		}
-		
+			System.out.println("나 allList:"+allList.get(i));
+		}*/
+		System.out.println("나 allList:"+allList);
 		
 		//실질적인 페이지를 구성해보자
 		//전체 자료 수 확인하기
@@ -140,6 +144,7 @@ public class GalleryGetServlet extends HttpServlet {
 		else {
 			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
 		}
+		request.setAttribute("allList", allList);
 		request.setAttribute("list", list);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);

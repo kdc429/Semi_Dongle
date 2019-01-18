@@ -45,6 +45,7 @@
         width: 50%;  
         border-radius: 5px;
     }
+    div#btn-div{margin-left:60px;}
     div#btn-div span button#list-btn{float:left;}
     div#btn-div span button#insert-btn{float:right;}
 </style>
@@ -93,14 +94,14 @@
 	});
 </script>
 <section id="gallery-container">
-	<div id="btn-div" style="position:relative;width:610px;">
+	<div id="btn-div" style="position:relative;width:550px;">
 		<hr>
 		<span><button type="submit" id="list-bnt" name="list-bnt">목록으로</button></span>
 		<button class="insert-bnt" name="insert-bnt" >사진 추가하기</button>
 	</div>
 	<br>
 	<div id="galleryList">
-		<table >
+		<table style='margin-left:60px;'>
 			<%if(list.size()!=0){%>
 					<%for(GalleryPath t : list){ %>
 						<%if(count%4==1){%>
@@ -137,7 +138,7 @@
 	</div>
 	<br><br>
 	<div id="pag-div">
-		<table width="610px" text-align="center">
+		<table width="610px" text-align="center" style='margin-left:40%;'>
 			<tr>
 	   			<td>
 	        		<ul class="pagination" id="paging">
