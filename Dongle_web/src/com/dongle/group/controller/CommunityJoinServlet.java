@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -33,8 +34,15 @@ public class CommunityJoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
-		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버	
-		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+
+		int gNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
+		int result = new GroupService().countMember(gNo); //이렇게 해야 넘어감
+		System.out.println(gNo);
+		
+		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
+		GroupMember gm = new GroupService().selectGmInfo(gNo,loginMember.getMemberNo());
+		System.out.println("여긴 커뮤:"+gm);
+
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";
@@ -48,7 +56,10 @@ public class CommunityJoinServlet extends HttpServlet {
 		}else {
 			loc="/Dongle_Community_view/Community_main.jsp";
 			request.setAttribute("group", g);
+			request.setAttribute("groupMember", gm);
+			request.setAttribute("loc",loc);
 			request.setAttribute("loginMember", loginMember);
+			request.setAttribute("result",result);
 			request.getRequestDispatcher(loc).forward(request, response);
 		}
 		

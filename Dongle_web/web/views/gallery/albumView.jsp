@@ -7,11 +7,7 @@
  	Member loginMember = (Member)session.getAttribute("loginMember");
  	int count=1;
  %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <script>
@@ -54,23 +50,22 @@ function albumPlusClick(){
 }
 </script>
 
-</head>
-<body>
 <div id="album-container">
-	<table border="1" width="370px" id="albumPlus-tbl">
+	<table width="370px" id="albumPlus-tbl">
 		<tr>
 			<td>
 				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>
+				<div><br></div>
 					<form action="" method="post" name="albumPlus" id="albumPlus" onsubmit="return fn_validateFrm()">
-						<input style="float:right;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가" onclick="albumPlusClick()"/>
-						<input style="float:right;" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제" onclick="albumDeleteClick()"/>
+						<input style="float:right; border:none; background-color:rgb(0,0,0,0); margin-left:10px;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가" onclick="albumPlusClick()"/>
+						<input style="float:right; border:none; background-color:rgb(0,0,0,0);" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제" onclick="albumDeleteClick()"/>
 					</form>
 				<%} %>
 			</td>
 		</tr>
 	</table>
 	<form name="albumFolder" id="albumFolder">
-		<table border='1'>
+		<table >
 			<%if(list.size()!=0){ %>
 				<%for(AlbumCategory t : list){ %>
 					<%if(count%2==1){%>
@@ -103,5 +98,3 @@ function albumPlusClick(){
 		</table>
 	</form>
 </div>
-</body>
-</html>

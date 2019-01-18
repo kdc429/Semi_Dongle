@@ -13,8 +13,9 @@ public class Member {
 	private String address; //MEMBER_ADDRESS
 	private String email; //MEMBER_EMAIL
 	private Date enrollDate; //MEMBER_ENROLL_DATE
-	private int blackList; //BLACKLIST_YN
+	private String blackList; //BLACKLIST_YN
 	private int reportCount;
+	private String memberImaPath; //MEMBER_IMG_PATH
 	
 	public Member() {
 		
@@ -22,7 +23,8 @@ public class Member {
 	
 
 	public Member(int memberNo, String memberId, String memberPwd, String gender, String ssn, String phone,
-			String address, String email, Date enrollDate, int blackList, int reportCount) {
+			String address, String email, Date enrollDate, String blackList, int reportCount) {
+
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -35,6 +37,7 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.blackList = blackList;
 		this.reportCount = reportCount;
+		this.memberImaPath = memberImaPath;
 	}
 
 
@@ -118,11 +121,11 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
-	public int getBlackList() {
+	public String getBlackList() {
 		return blackList;
 	}
 
-	public void setBlackList(int blackList) {
+	public void setBlackList(String blackList) {
 		this.blackList = blackList;
 	}
 
@@ -133,5 +136,15 @@ public class Member {
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
+	
+	public String getMemberImaPath()
+	{
+		return memberImaPath;
+	}
+	
+	public void setMemberImaPath(String memberImaPath) {
+		this.memberImaPath = memberImaPath;
+	}
+	
 	
 }

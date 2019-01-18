@@ -249,8 +249,17 @@
 	
 	$(function(){
 		$('#btn-update').click(function(){
+			
+			var fd=new FormData();
+			console.log(ajaxFile.ajaxFileTest.files[0])
+			console.log(ajaxFile.ajaxFileTest.files[1])
+			for(var i=0;i<ajaxFile.ajaxFileTest.files.length;i++)
+			{
+				fd.append('test'+i,ajaxFile.ajaxFileTest.files[i]);	
+			}
 			$.ajax({
 				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>&boardNo=<%=b.getBoardNo()%>",
+				data:{"title":title},{"content":content},
 				type:"post",
 				dataType:"html",
 				success:function(data){

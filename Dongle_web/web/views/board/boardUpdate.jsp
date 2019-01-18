@@ -43,7 +43,7 @@
 	{
 		text-align : center;
 	}
-	#update-add-btn
+	#update-btn-add
 	{
 		text-align : center;
 	}
@@ -113,7 +113,7 @@
 					<td colspan="2" id="update-add">
 						<button id='update-btn-list'>목록으로</button>
 						<input type="hidden" value="<%=groupNo%>" name="groupNo" />
-						<input type="button" value="등록하기" id="update-add-btn" onclick="return validate();"/>
+						<input type="button" value="등록하기" id="update-btn-add" onclick="return validate();"/>
 					</td>
 				</tr>			
 		</table>
@@ -134,7 +134,7 @@ $(function(){
 });
 
 $(function(){
-	$('#update-add-btn').click(function(){
+	$('#update-btn-add').click(function(){
 		console.log($(this).children('input').val());
 		var num=$(this).children('input').val();
 		$.ajax({
