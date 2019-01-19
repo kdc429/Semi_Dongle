@@ -309,7 +309,7 @@ public class GalleryDao {
 		}
 		return gplist;
 	}
-	//gal_no수정필요
+	
 	public int insertGallery(Connection conn, GalleryPath gp,List oldFileName, List newFileName, int imageCount)
 	{
 		PreparedStatement pstmt=null;
@@ -394,12 +394,12 @@ public class GalleryDao {
 	}
 	
 	//galNoList 뽑아오는거 테스트 중입니다
-	public List distictGalNoList(Connection conn, String albumCode,int groupNo)
+	public List<Integer> distictGalNoList(Connection conn, String albumCode,int groupNo)
 	{
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("distinctGalNoList");
-		List galNoList = new ArrayList();
+		List<Integer> galNoList = new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, groupNo);
@@ -407,9 +407,8 @@ public class GalleryDao {
 			rs=pstmt.executeQuery();
 			while(rs.next())
 			{
-
 				String galNo=rs.getString("gal_no_dis");
-				galNoList.add(galNo);
+				galNoList.add(Integer.parseInt(galNo));
 			}
 		}
 		catch(Exception e)
@@ -421,6 +420,45 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		return galNoList;
+	}
+	//갤러리 전체 뽑아보자
+	public List<GalleryPath> getAllList(Connection conn,String albumCode, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("getAllList");
+		List<GalleryPath> list = new ArrayList<GalleryPath>();
+		GalleryPath gp =null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setString(2, albumCode);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				gp=new GalleryPath();
+				gp.setGroupNo(rs.getInt("group_no"));
+				gp.setAlbumCode(rs.getString("album_code"));
+				gp.setMemberNo(rs.getInt("member_no"));
+				gp.setGalNo(rs.getInt("gal_no"));
+				gp.setGalFileNo(rs.getInt("gal_file_no"));
+				gp.setGalFileOldPath(rs.getString("gal_file_old_path"));
+				gp.setGalFileNewPath(rs.getString("gal_file_new_path"));
+				gp.setGalFileContent(rs.getString("gal_file_content"));
+				gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
+				gp.setGalMultiStatus(rs.getString("gal_multi_status"));
+				list.add(gp);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 }

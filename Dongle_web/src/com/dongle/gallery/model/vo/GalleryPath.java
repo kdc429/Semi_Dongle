@@ -158,7 +158,7 @@ public class GalleryPath {
 	public String toString() {
 		return " [동호회 번호: " + groupNo + " 앨범코드: " + albumCode + " 사진게시글 번호: " + galFileNo
 				+ " 사진 파일 Old경로: " + galFileOldPath + "사진 파일New경로: "+galFileNewPath+" 사진 등록자 번호: " + memberNo + " 등록일: " + galEnrollDate 
-				+"사진게시물등록번호: "+galNo+" 사진게시물 내용: "+galFileContent+" 다중파일 여부: "+galMultiStatus+"] ";
+				+" *사진게시물등록번호: "+galNo+" 사진게시물 내용: "+galFileContent+" 다중파일 여부: "+galMultiStatus+"] ";
 	}
 	
 

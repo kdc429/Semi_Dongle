@@ -91,7 +91,7 @@ function albumPlusClick(){
 				<%} %>
 			<%}
 			else{%>
-				<div>
+				<div style='padding-left:90px;'>
 					<h3>등록된 앨범이 없습니다.</h3>
 				</div>
 			<%} %>

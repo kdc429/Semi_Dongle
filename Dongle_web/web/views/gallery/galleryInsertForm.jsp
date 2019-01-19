@@ -14,17 +14,17 @@ div.all-div div.back-div a.list_btn img.back_icon{width:10px;height:10px;}
 img.selProductFile{width:10%; height:10%;}
 img.selProductFile:hover{background-color:rgb(200,200,200);}
 div.all-div div.input_wrap{padding-left:50px;padding-top:20px;}
-div.imgs_wrap{padding-left:50px;padding-bottom:30px;}
+div.imgs_wrap{padding-left:50px;padding-bottom:30px;padding-right:50px;}
 div h5{padding-left:50px;}
-div.imgs_textarea{background-color:rgb(230,230,230);margin-top:10px;height:120px;border-top:1px solid rgb(200,200,200);}
+div.imgs_textarea{background-color:rgb(228,228,228);margin-top:10px;height:120px;border-top:1px solid rgb(200,200,200);}
 div.imgs_textarea textarea#galFileContent{margin-left:50px;margin-top:15px;resize:none;box-sizing: border-box;width:80%;height:80;border:1px solid #fff;}
 div.imgs_textarea a.my_button{float:right;padding-right:50px;}
-div.all-div span#fname{position:absolute;margin-left:79px;margin-top:-19px;background-color:white;width:40%;}
+div.all-div span#fname{position:absolute;margin-left:128px;margin-top:-20px;background-color:white;width:40%;}
 </style>
 <div>
 	<div class='all-div'>
 		<div class='back-div'>
-			<a href='javascript:' onclick='listBack();' class='list_btn'>
+			<a href='javascript:' class='list_btn'>
 				<img class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
 			</a>
 		</div>
@@ -71,14 +71,21 @@ div.all-div span#fname{position:absolute;margin-left:79px;margin-top:-19px;backg
 		var filesArr=Array.prototype.slice.call(files);
 		
 		var index = 0;
+		console.log(filesArr.length);
+		if(filesArr.length>=10)
+		{
+			alert('이미지는 10개까지 등록 가능합니다.');
+			$("#fname").remove();
+			fname="<span id='fname'>등록된 파일이 없습니다.</span>";
+			$(".all-div ").append(fname);
+			return false;
+		}
 		filesArr.forEach(function(f){
 			if(!f.type.match("image.*")){
 				alert('확장자는 이미지 확장자만 가능합니다.');
 				return;
 			}
-			
 			sel_files.push(f);
-			
 			var reader = new FileReader();
 			reader.onload=function(e){
 				var html = "<a href='javascript:void(0);' onclick='deleteImageAction("+index+")' id='img_id_"+index+"'><img src='"+e.target.result+"' data-file='"+f.name+"' class='selProductFile' name='selProductFile' title='클릭해서 삭제하기'></a>";
@@ -101,24 +108,23 @@ function deleteImageAction(index){
 	//아래는 a태그 id값을 받아서 삭제하는 것
 	var img_id = "#img_id_"+index;
 	$(img_id).remove();
-	console.log(sel_files);
-	console.log("index2: "+index);
-	console.log($('.imgs_wrap').children().length);
+	console.log(sel_files.length);
 	
 	if((index+1)!=$('.imgs_wrap').children().length)
 	{
 		var fname="";
 		$("#fname").remove();
-		if(sel_files.length==0)
+		if(sel_files.length==0||sel_files.length>=10)
 		{
-			var fname="<span id='fname'>등록된 파일이 없습니다.</span>";
+			fname="<span id='fname'>등록된 파일이 없습니다.</span>";
 		}
 		else
 		{
-			var fname="<span id='fname'>파일 "+sel_files.length+"개</span>";
+			fname="<span id='fname'>파일 "+sel_files.length+"개</span>";
 		}
 		$(".all-div ").append(fname);
 	}
+	
 }
 </script>
 
@@ -172,8 +178,22 @@ function submitAction(){
 			});
 		}
 	});
-}
+};
+
+</script>
+<script>
 $(function(){
-	
+	$(".back_icon").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/gallery/albumGet?groupNo=<%=groupNo%>&memberNo=<%=loginMember.getMemberNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		});
+	});
 });
 </script>

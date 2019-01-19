@@ -69,37 +69,37 @@ public class GalleryGetServlet extends HttpServlet {
 			numPerPage=12;
 		}
 		//페이지 수 만큼 데이터를 불러오기
-		List<GalleryPath> list = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함
-/*		for(int i=0; i<list.size();i++)
-		{
-			System.out.println("나 list: "+list.get(i));
-		}*/
+		List<GalleryPath> allList = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함
+		
+		
+		//test : gal_no만 distinct된 dao에 갔다오기
+		List<Integer> galNoList = new GalleryService().distictGalNoList(albumCode,groupNo); //7,6,5,4,3,2,1
+		System.out.println(galNoList);
+		//test : 전체 list뽑아오기
+		List<GalleryPath> list =new GalleryService().getAllList(albumCode,groupNo);
 		System.out.println("나 list: "+list+" 사이즈 "+list.size());
 		//##테스트 중입니다.
-		//gal_no만 distinct된 dao에 갔다오기
-		List galNoList = new GalleryService().distictGalNoList(albumCode,groupNo);
-		List<GalleryPath> allList = new ArrayList<GalleryPath>();
+		List<GalleryPath> tList= new ArrayList<GalleryPath>();
 		GalleryPath gp = null;
-		for(int i=0; i<galNoList.size();i++)
+		for(int i=0; i<galNoList.size();i++) //7회 (인덱스는 0부터 6)
 		{
-			for(int j=0;j<list.size();j++)
+			for(int j=0;j<list.size();j++) //36 (인덱스는 0부터 35)
 			{
-				if(Integer.parseInt((String) galNoList.get(i))==list.get(j).getGalNo())
+				if(galNoList.get(i)==list.get(j).getGalNo())
 				{
-					gp = list.get(i);
+					System.out.print(list.get(j).getGalNo());
+					gp = list.get(j);
+					System.out.println(gp);
 				}
-				else {
+				else
+				{
 					continue;
 				}
+				tList.add(gp);
+				System.out.println(tList);
 			}
-			allList.add(gp);
 		}
-		
-/*		for(int i=0; i<allList.size();i++)
-		{
-			System.out.println("나 allList:"+allList.get(i));
-		}*/
-		System.out.println("나 allList:"+allList);
+		System.out.println("나 tList:"+tList+" 사이즈: "+tList.size());
 		
 		//실질적인 페이지를 구성해보자
 		//전체 자료 수 확인하기
@@ -151,6 +151,7 @@ public class GalleryGetServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("albumCode", albumCode);
+		request.setAttribute("groupMember", gm);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 

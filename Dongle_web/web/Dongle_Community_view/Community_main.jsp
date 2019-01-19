@@ -266,7 +266,7 @@ function comunnityHome(){
 	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 function logoCk(){
-	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+	location.href="<%=request.getContextPath()%>/login?memberNo=<%=loginMember.getMemberNo()%>";
 }
 
 </script>

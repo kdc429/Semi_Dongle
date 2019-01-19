@@ -40,7 +40,6 @@ public class GalleryInsertEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("들어옵니다");
 		
 		if(!ServletFileUpload.isMultipartContent(request))
 		{
@@ -75,8 +74,8 @@ public class GalleryInsertEndServlet extends HttpServlet {
 		gp.setAlbumCode(albumCode);
 		gp.setGalNo(galNo);
 		gp.setGalFileContent(galFileContent);
-		if(imageCount==1){gp.setGalMultiStatus("Y");}
-		else {gp.setGalMultiStatus("N");}
+		if(imageCount==1){gp.setGalMultiStatus("N");}
+		else {gp.setGalMultiStatus("Y");}
 		
 		ArrayList<String> oldFileName = new ArrayList<String>();
 		ArrayList<String> newFileName = new ArrayList<String>();

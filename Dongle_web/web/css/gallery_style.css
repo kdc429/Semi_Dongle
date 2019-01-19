@@ -47,8 +47,4 @@ section#gallery-container div#galleryList> table tr td.galleryBox .galImg{
 section#gallery-container div#galleryList> table tr td.galleryBox .galImg:hover{
 	background-color:rgb(200,200,200);
 }
-section#gallery-container div#pag-div{position:relative;}
-section#gallery-container table tr td{align-items: center;}
-section#gallery-container table tr td ul.pagnation li{text-align:center; align-items: center;color:green;}
-section#gallery-container table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50);align-items: center;}
 

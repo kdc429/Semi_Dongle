@@ -129,11 +129,19 @@ public class GalleryService {
 		return rs;
 	}
 	//gal_no만 가지고 있는 아이 뽑으러 갑니다
-	public List distictGalNoList(String albumCode,int groupNo)
+	public List<Integer> distictGalNoList(String albumCode,int groupNo)
 	{
 		Connection conn = getConnection();
-		List galNoList = new GalleryDao().distictGalNoList(conn,albumCode,groupNo);
+		List<Integer> galNoList = new GalleryDao().distictGalNoList(conn,albumCode,groupNo);
 		close(conn);
 		return galNoList;
+	}
+	//일단 전체 갤러리 뽑아봅시다
+	public List<GalleryPath> getAllList(String albumCode,int groupNo)
+	{
+		Connection conn=getConnection();
+		List<GalleryPath> list = new GalleryDao().getAllList(conn,albumCode,groupNo);
+		close(conn);
+		return list;
 	}
 }
