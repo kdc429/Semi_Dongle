@@ -213,7 +213,7 @@
               			   console.log(tbl);
               			   console.log(h);
               			 	$('#header').html(h);         			   
-              			    $('#mem_list_div').append(tbl);
+              			    $('#content-div').append(tbl);
               				
               			     
               			}

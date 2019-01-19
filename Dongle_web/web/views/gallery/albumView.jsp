@@ -72,7 +72,7 @@ function albumPlusClick(){
 						<tr>
 						</tr>
 						<td class="albumFolBox">
-							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png">
+							<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/defaultimg.png">
 							<p>[&nbsp;<%=t.getAlbumName()%>&nbsp;]</p>
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=t.getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>
@@ -81,7 +81,7 @@ function albumPlusClick(){
 					<%} 
 					else{%>
 						<td class="albumFolBox">
-							<img class="alImg" src="<%=request.getContextPath() %>/images/gallery/defaultimg.png">
+							<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/defaultimg.png">
 							<p>[&nbsp;<%=t.getAlbumName()%>&nbsp;]</p>
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=t.getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=t.getAlbumCode()%>"/>

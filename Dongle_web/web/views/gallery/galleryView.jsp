@@ -27,7 +27,7 @@
 	.dialog{
 		display:none;
 		position:fixed;
-		margin-top:-400px;
+		margin-top:-700px;
 		/* z-index:10; */
 		left:0;																																	
 		right:0;
@@ -108,7 +108,7 @@
 							<tr>
 							</tr>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=request.getContextPath()%>/images/gallery/<%=t.getGalFileNewPath() %>">
+								<img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
@@ -118,7 +118,7 @@
 						<%} 
 						else{%>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=request.getContextPath()%>/images/gallery/<%=t.getGalFileNewPath() %>">
+								<img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>

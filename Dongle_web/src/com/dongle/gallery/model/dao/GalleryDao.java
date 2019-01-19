@@ -310,21 +310,25 @@ public class GalleryDao {
 		return gplist;
 	}
 	//gal_no수정필요
-	public int insertGallery(Connection conn, int groupNo,String albumCode,GalleryPath gp)
+	public int insertGallery(Connection conn, GalleryPath gp,List oldFileName, List newFileName, int imageCount)
 	{
 		PreparedStatement pstmt=null;
 		int rs=0;
 		String sql = prop.getProperty("insertGallery");
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, groupNo);
-			pstmt.setString(2, albumCode);
-			pstmt.setInt(3, gp.getMemberNo());
-			pstmt.setInt(4, gp.getGalNo()+1);
-			pstmt.setString(5, gp.getGalFileOldPath());
-			pstmt.setString(6, gp.getGalFileNewPath());
-			pstmt.setString(7, gp.getGalFileContent());
-			rs=pstmt.executeUpdate();
+			for(int i=0;i<imageCount;i++) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, gp.getGroupNo());
+				pstmt.setString(2, gp.getAlbumCode());
+				pstmt.setInt(3, gp.getMemberNo());
+				pstmt.setInt(4, gp.getGalNo());
+				pstmt.setString(5,(String) oldFileName.get(i));
+				pstmt.setString(6,(String) newFileName.get(i));
+				pstmt.setString(7, gp.getGalFileContent());
+				pstmt.setString(8, gp.getGalMultiStatus());
+				rs+=pstmt.executeUpdate();
+			}
+			
 		}
 		catch(Exception e)
 		{

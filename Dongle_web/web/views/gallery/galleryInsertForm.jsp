@@ -1,24 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@page import="com.dongle.member.model.vo.Member" %>
 <%
 	int groupNo=(int)request.getAttribute("groupNo");
 	String albumCode = (String)request.getAttribute("albumCode");
+	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 %>
 <meta charset="EUC-KR">
+<style>
+div.all-div div.back-div{padding-left:50px;padding-top:50px;}
+div.all-div div.back-div a.list_btn{text-decoration:none;}
+div.all-div div.back-div a.list_btn img.back_icon{width:10px;height:10px;}
+img.selProductFile{width:10%; height:10%;}
+img.selProductFile:hover{background-color:rgb(200,200,200);}
+div.all-div div.input_wrap{padding-left:50px;padding-top:20px;}
+div.imgs_wrap{padding-left:50px;padding-bottom:30px;}
+div h5{padding-left:50px;}
+div.imgs_textarea{background-color:rgb(230,230,230);margin-top:10px;height:120px;border-top:1px solid rgb(200,200,200);}
+div.imgs_textarea textarea#galFileContent{margin-left:50px;margin-top:15px;resize:none;box-sizing: border-box;width:80%;height:80;border:1px solid #fff;}
+div.imgs_textarea a.my_button{float:right;padding-right:50px;}
+div.all-div span#fname{position:absolute;margin-left:79px;margin-top:-19px;background-color:white;width:40%;}
+</style>
 <div>
-	<div>
-		<h2>이미지 미리보기</h2>
+	<div class='all-div'>
+		<div class='back-div'>
+			<a href='javascript:' onclick='listBack();' class='list_btn'>
+				<img class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
+			</a>
+		</div>
 		<div class='input_wrap'>
-			<a href='javascript:' onclick='fileUploadAction();' class='up_btn'>파일 업로드</a>
-			<input type='file' id='input_img' multiple/>
+			<br>
+			<a href='javascript:' onclick='fileUploadAction();' class='my_button'>사진 업로드</a>
+			<input type='file' id='input_imgs' name='input_imgs' multiple/>
+			
 		</div>
 	</div>
 	<div>
+		<hr style='width:85%'>
+		<h5>미리보기</h5>
 		<div class='imgs_wrap'>
-			<img id='img'>
+			<img id='img'/>
 		</div>
 	</div>
-	<a href='javascript:' onclick='submitAction();' class='up_btn'>업로드</a>
+	<div class='imgs_textarea'>
+		<textarea name="galFileContent" id='galFileContent' placeholder="내용을 입력해주세요." tabindex='3'></textarea>
+		<br><br>
+		<a href='javascript:' onclick='submitAction();' class='my_button'>사진 올리기</a>
+	</div>
+	
 </div>
 
 <script type='text/javascript'>
@@ -29,7 +58,7 @@
 		$('#input_imgs').on('change', handleImgFileSelect);
 	});
 	
-	function fuleUploadAction(){
+	function fileUploadAction(){
 		console.log('fileUploadAction');
 		$('#input_imgs').trigger('click');
 	}
@@ -52,11 +81,13 @@
 			
 			var reader = new FileReader();
 			reader.onload=function(e){
-				var html = "<a href='javascript:void(0);' onclick='deleteImageAction("+index+")' id='img_id_"+index+"'><img src='"+e.target.result+"' data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+				var html = "<a href='javascript:void(0);' onclick='deleteImageAction("+index+")' id='img_id_"+index+"'><img src='"+e.target.result+"' data-file='"+f.name+"' class='selProductFile' name='selProductFile' title='클릭해서 삭제하기'></a>";
 				$(".imgs_wrap").append(html);
 				index++;
 			}
 			reader.readAsDataURL(f);
+			
+			
 		})
 	}
 </script>
@@ -65,10 +96,29 @@
 //다중 파일 미리보기에서 특정 이미지만 삭제하기
 function deleteImageAction(index){
 	console.log("index: "+index);
-	sel_files(index,1);
+	//splice(start,count) : start부터 count개를 추출하는 것
+	sel_files.splice(index,1);
+	//아래는 a태그 id값을 받아서 삭제하는 것
 	var img_id = "#img_id_"+index;
 	$(img_id).remove();
-	console.log(sel.files);
+	console.log(sel_files);
+	console.log("index2: "+index);
+	console.log($('.imgs_wrap').children().length);
+	
+	if((index+1)!=$('.imgs_wrap').children().length)
+	{
+		var fname="";
+		$("#fname").remove();
+		if(sel_files.length==0)
+		{
+			var fname="<span id='fname'>등록된 파일이 없습니다.</span>";
+		}
+		else
+		{
+			var fname="<span id='fname'>파일 "+sel_files.length+"개</span>";
+		}
+		$(".all-div ").append(fname);
+	}
 }
 </script>
 
@@ -76,25 +126,54 @@ function deleteImageAction(index){
 //다중 파일 POST전송
 // 선택된 이미지들을 서버로 업로드하기
 function submitAction(){
+	var content = $('[name=galFileContent]').val();
+	if(sel_files.length==0)
+	{
+		//입력된 사진이 0이면 경고
+		alert('업로드 파일이 없습니다.');
+		return false;
+	}
+	if(content.trim().length==0)
+	{
+		//내용없으면 입력해달라는 경고!
+		alert('내용을 입력하세요.');
+		return false;
+	}
+	
+	//파일 받기 위한 객체
 	var data = new FormData();
+	data.append('groupNo',<%=groupNo%>);
+	data.append('memberNo',<%=loginMember.getMemberNo()%>);
+	data.append('albumCode','<%=albumCode%>');
+	data.append('galFileContent',$('#galFileContent').val());
+	
 	for(var i=0, len=sel_files.length; i<len; i++){
 		var name = "image_"+i;
 		data.append(name, sel_files[i]);
 	}
 	data.append("image_count",sel_files.length);
-	
-	var xhr=new XMLHttpRequest();
-	xhr.open("POST","<%=request.getContextPath()%>/gallery/insertGalleryEnd",true);
-	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xhr.onload=function(e){
-		if(this.status==200)
+	$.ajax({
+		url:"<%=request.getContextPath()%>/gallery/insertGalleryEnd",
+		data:data,
+		type:'post',
+		processData:false,
+		contentType:false,
+		success:function(data)
 		{
-			console.log("Result : "+e.currentTarget.responseText);
+			alert('Message: '+data);
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/galleryGet?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
+				dataType:"html",
+				success:function(data){
+					$('#content-div').html(data);
+				},
+				error:function(request){
+				}
+			});
 		}
-	}
-	var param="groupNo=<%=groupNo%>&albumCode=<%=albumCode%>";
-	xhr.send(data);
+	});
 }
-
-
+$(function(){
+	
+});
 </script>

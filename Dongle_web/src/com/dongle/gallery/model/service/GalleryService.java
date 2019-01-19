@@ -93,10 +93,10 @@ public class GalleryService {
 		return gplist;
 	}
 	
-	public int insertGallery(int groupNo,String albumCode,GalleryPath gp)
+	public int insertGallery(GalleryPath gp,List oldFileName, List newFileName, int imageCount)
 	{
 		Connection conn = getConnection();
-		int rs = new GalleryDao().insertGallery(conn,groupNo,albumCode,gp);
+		int rs = new GalleryDao().insertGallery(conn,gp,oldFileName,newFileName,imageCount);
 		if(rs!=0)
 		{
 			commit(conn);
