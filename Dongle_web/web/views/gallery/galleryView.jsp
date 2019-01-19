@@ -5,10 +5,11 @@ com.dongle.group.model.vo.GroupMember"
 
 %>
 <%
-	List<GalleryPath> list = (List)request.getAttribute("list");
+/* 	List<GalleryPath> list = (List)request.getAttribute("list");
 
-	List<GalleryPath> allList = (List)request.getAttribute("allList");
+	List<GalleryPath> allList = (List)request.getAttribute("allList"); */
 	
+	List<GalleryPath> tList = (List)request.getAttribute("tList");
 	int numPerPage = (int)request.getAttribute("numPerPage");
 	String pageBar=(String)request.getAttribute("pageBar");
  	Member loginMember = (Member)session.getAttribute("loginMember");
@@ -33,14 +34,14 @@ com.dongle.group.model.vo.GroupMember"
 <style>
 .dialog{
 	display:none;
-	position:fixed;
-	margin-top:-700px;
-	/* z-index:10; */
+	position:absolute;
+	margin-top:-1000px;
+	z-index:10;
 	left:0;																																	
 	right:0;
 	width:100%;
-	height:100%;
-	overflow:auto;
+	height:auto;
+	overflow:hidden;
 	background-color:rgb(0,0,0);
 	background-color:rgba(0,0,0,0.4);
 }
@@ -49,7 +50,7 @@ com.dongle.group.model.vo.GroupMember"
        margin: 15% auto; 
        padding: 20px;
        border: 1px solid #888;
-       width: 50%;  
+       width: 40%;  
        border-radius: 5px;
    }
 div.back-div{padding-left:90px;padding-top:50px;}
@@ -135,13 +136,15 @@ section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{te
 	<br>
 	<div id="galleryList">
 		<table style='margin-left:80px;'>
-			<%if(allList.size()!=0){%>
-					<%for(GalleryPath t : allList){ %>
+			<%if(tList.size()!=0){%>
+					<%for(GalleryPath t :tList){ %>
 						<%if(count%4==1){%>
 							<tr>
 							</tr>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
+								<%-- <%if(t.getGalMultiStatus().equals("Y")){ %> --%>
+									<img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
+								<%-- <%} %> --%>
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
 								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
@@ -185,10 +188,10 @@ section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{te
 	<br><br>
 </section>
 
-<!-- modal-container 모달 들어갈 곳-->
-<div class="modal-div">
+<!-- modal-container 모달 들어갈 곳->>(메인으로 이동함!)-->
+<!-- <div class="modal-div">
 	<div class="dialog" id="modal-container">
 		<div class="modal-content">
 		</div>
    	</div>
-</div>
+</div> -->

@@ -244,7 +244,13 @@
         <!-- 오른쪽 사이드 -->
 
     </div>
-
+<!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) -->
+<div class="modal-div">
+	<div class="dialog" id="modal-container">
+		<div class="modal-content">
+		</div>
+   	</div>
+</div>
 <script>
 /* 갤러리 클릭시 매핑함수 */
 $(function(){

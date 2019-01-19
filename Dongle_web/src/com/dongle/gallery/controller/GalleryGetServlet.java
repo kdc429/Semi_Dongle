@@ -42,13 +42,13 @@ public class GalleryGetServlet extends HttpServlet {
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
 		System.out.println(gm);
-/*		if(gm.getMemberNo()==0||!loginMember.getMemberId().equals("admin"))
+		if(gm.getMemberNo()==0||!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
-			request.setAttribute("loc", "/communityJoin?gNo="+groupNo);
+			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}		*/
+		}		
 		
 		//페이징 처리하기
 		int cPage; //현재 페이지를 의미함 (너가 지금 뭘 보고있는지!)
@@ -60,52 +60,41 @@ public class GalleryGetServlet extends HttpServlet {
 			//예외처리하기 (null이거나 문자가 들어온 경우 1로 초기화한다)
 			cPage=1;
 		}
-		int numPerPage; //페이지당 보여줄 자료 수 
-		try {
-			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
-		}
-		catch(NumberFormatException e)
-		{
-			numPerPage=12;
-		}
-		//페이지 수 만큼 데이터를 불러오기
-		List<GalleryPath> allList = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함
-		
-		
+		int numPerPage=12; //페이지당 보여줄 자료 수 
+
 		//test : gal_no만 distinct된 dao에 갔다오기
 		List<Integer> galNoList = new GalleryService().distictGalNoList(albumCode,groupNo); //7,6,5,4,3,2,1
 		System.out.println(galNoList);
 		//test : 전체 list뽑아오기
 		List<GalleryPath> list =new GalleryService().getAllList(albumCode,groupNo);
-		System.out.println("나 list: "+list+" 사이즈 "+list.size());
 		//##테스트 중입니다.
-		List<GalleryPath> tList= new ArrayList<GalleryPath>();
-		GalleryPath gp = null;
+		ArrayList<GalleryPath> tList= new ArrayList<GalleryPath>();
+		//같은 galNo끼리 저장된 ArrayList tList뽑아내기
 		for(int i=0; i<galNoList.size();i++) //7회 (인덱스는 0부터 6)
 		{
+			List<GalleryPath> t2List= new ArrayList<GalleryPath>();
 			for(int j=0;j<list.size();j++) //36 (인덱스는 0부터 35)
 			{
 				if(galNoList.get(i)==list.get(j).getGalNo())
 				{
-					System.out.print(list.get(j).getGalNo());
-					gp = list.get(j);
-					System.out.println(gp);
+					
+					t2List.add(list.get(j));
 				}
-				else
-				{
-					continue;
-				}
-				tList.add(gp);
-				System.out.println(tList);
+				
 			}
+			tList.add(i, t2List.get(0));
 		}
-		System.out.println("나 tList:"+tList+" 사이즈: "+tList.size());
+		//tList의 length가 totalMember와 같음
 		
+		
+		//페이지 수 만큼 데이터를 불러오기
+		List<GalleryPath> allList = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함
 		//실질적인 페이지를 구성해보자
 		//전체 자료 수 확인하기
-		int totalMember = new GalleryService().selectGalleryCount(albumCode,groupNo);
+		int totalMember = new GalleryService().selectGalleryCount(albumCode,groupNo);//tList랑 같음
 		//전체 페이지 수 
-		int totalPage=(int)Math.ceil((double) totalMember/numPerPage); // 한페이지가 다 차지 않는 나머지 자료들도 보여져야하기 때문에 무조건 올림해야함
+		/*int totalPage=(int)Math.ceil((double) totalMember/numPerPage); // 한페이지가 다 차지 않는 나머지 자료들도 보여져야하기 때문에 무조건 올림해야함*/
+		int totalPage=(int)Math.ceil((double) tList.size()/numPerPage);
 		//페이지바 html코드 누적변수(버튼을 구현하는 것-> 코드를 작성해주고 그 텍스트를 그대로 넘겨줄 것)
 		String pageBar=" ";
 		//페이지바 길이(숫자 몇개까지 보일 것인지)
@@ -144,8 +133,9 @@ public class GalleryGetServlet extends HttpServlet {
 		else {
 			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
 		}
-		request.setAttribute("allList", allList);
-		request.setAttribute("list", list);
+/*		request.setAttribute("allList", allList);
+		request.setAttribute("list", list);*/
+		request.setAttribute("tList", tList);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("pageBar", pageBar);

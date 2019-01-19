@@ -40,9 +40,6 @@ public class GalleryAllListServlet extends HttpServlet {
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
 		int galNo=Integer.parseInt(request.getParameter("galNo"));
 		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
-		int dataNum=Integer.parseInt(request.getParameter("dataNum"));
-		System.out.println("dataNum: "+dataNum);
-		System.out.println(groupNo+" : "+albumCode+" : "+galFileNo+" : "+galNo);
 		
 		//해당 갤러리 리스트 뽑아오기
 		List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
