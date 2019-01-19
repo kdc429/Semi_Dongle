@@ -135,11 +135,13 @@ $(function(){
 
 $(function(){
 	$('#update-btn-add').click(function(){
-		console.log($(this).children('input').val());
-		var num=$(this).children('input').val();
+		var formData = $("form").serialize();
+		
 		$.ajax({
 			url:"<%=request.getContextPath()%>/board/boardUpdateEnd?groupNo=<%=groupNo%>",
-			type:"get",
+			type:"post",
+			contentType: undefined,
+			data: formData,
 			dataType:"html",
 			success:function(data){
 				$('#board-container').html(data);

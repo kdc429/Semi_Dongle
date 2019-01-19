@@ -69,12 +69,13 @@
 				<tr>
 					<th>첨부파일</th>
 					<td>
-						<%-- <%if(bp.getBoardFileNewPath()!=null){%> 
+						<%
+						if(bp.getBoardFileNewPath()!=null){%> 
 							<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
 							<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'/>
 							</a> 
 								<%=bp.getBoardFileOldPath() %>						
-						<%} %>  --%>
+						<%} %> 
 					</td>
 				</tr>
 				<tr>
@@ -191,7 +192,7 @@
 					<%}%>
 					
 				}); --%>
-				
+				<%-- 
 				$(function(){
 					$('[name=boardCommentContent]').focus(function(){
 						if(<%=loginMember.getMemberId()==null%>)
@@ -215,7 +216,7 @@
 						}
 					})
 				});	
-			
+			 --%>
 				function fn_loginAlert()
 				{
 					alert("로그인 후 이용할 수 있습니다.");
@@ -230,7 +231,7 @@
 	{
 		var url="<%=request.getContextPath()%>/board/boardFileDownLoad";
 		oName=encodeURIComponent(oName);
-		loaction.href=url+"?oName="+oName+"&rName="+rName;
+		location.href=url+"?oName="+oName+"&rName="+rName;
 	}
 	
 	$(function(){
@@ -250,16 +251,16 @@
 	$(function(){
 		$('#btn-update').click(function(){
 			
-			var fd=new FormData();
+		/* 	var fd=new FormData();
 			console.log(ajaxFile.ajaxFileTest.files[0])
 			console.log(ajaxFile.ajaxFileTest.files[1])
 			for(var i=0;i<ajaxFile.ajaxFileTest.files.length;i++)
 			{
 				fd.append('test'+i,ajaxFile.ajaxFileTest.files[i]);	
-			}
+			} */
 			$.ajax({
 				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>&boardNo=<%=b.getBoardNo()%>",
-				data:{"title":title,"content":content},
+				/* data:{"title":title,"content":content}, */
 				type:"post",
 				dataType:"html",
 				success:function(data){

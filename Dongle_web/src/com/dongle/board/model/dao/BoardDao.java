@@ -167,7 +167,7 @@ public class BoardDao {
 		{
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e)
 		{

@@ -26,10 +26,12 @@ public class BoardService {
 			int result=new BoardDao().updateCount(conn,boardNo);
 			if(result>0)
 			{
+				System.out.println("커밋");
 				commit(conn);
 			}
 			else
 			{
+				System.out.println("롤");
 				rollback(conn);
 			}
 		}

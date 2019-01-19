@@ -62,7 +62,7 @@ public class BoardDownLoadServlet extends HttpServlet {
 		}
 		
 		response.setContentType("application/octect-stream");
-		response.setHeader("Content-Disposition", "attachment);filename="+resFileName);
+		response.setHeader("Content-Disposition", "attachment;filename="+resFileName);
 		
 		int read=-1;
 		while((read=bis.read())!=-1)
