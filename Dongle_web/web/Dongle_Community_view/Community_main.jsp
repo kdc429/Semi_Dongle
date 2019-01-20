@@ -329,7 +329,7 @@ com.dongle.board.model.vo.Board" %>
      			sp+="<br/>"+"<br/>";
      			sp+="<div id='mem_list_div' style='padding:0 0 0 30%';>"+"</div>";
      			var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-     			var tbl = $('<table id="tbl"></table>');
+     			var tbl = $('<table id="tbl" style="margin-left:200px;"></table>');
      			var thead="<tr style='font-size:18px; background-color: #E1E1E1;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
      			var thtml="";
      			for(var i = 0; i < data.length; i++)
@@ -347,7 +347,7 @@ com.dongle.board.model.vo.Board" %>
 				console.log(h);
 				$('#content-div').html(sp);
 				$('#header').html(h); 
-				$('#mem_list_div').append(tbl);
+				$('#content-div').append(tbl);
 				}
      		});   		
      	});
