@@ -67,7 +67,7 @@ body {
 	 width: 170px;
 	/*height: auto;*/
 	position: fixed;
-	margin-top: 62.8px;
+	margin-top: 62px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
 /* 오른쪽 사이드 div */
@@ -75,7 +75,7 @@ body {
 	width: 170px;
 	height: auto;
 	position: fixed;
-	margin-top: 62.8px;
+	margin-top: 62px;
 	margin-left: 854px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
