@@ -34,21 +34,16 @@ public class BoardDeleteServlet extends HttpServlet {
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		System.out.println("들어오냐"+boardNo+groupNo);
 		int rs=new BoardService().deleteBoard(boardNo,groupNo);
+		
 		if(rs!=0)
 		{
-			request.setAttribute("msg", "삭제를 완료하였습니다.");
-			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 삭제 성공");
 		}
 		else {
-			request.setAttribute("msg", "삭제에 실패하였습니다. 다시 시도해주세요.");
-			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 삭제 실패");
 		}
-		
-		
-		
-		
 		
 	}
 

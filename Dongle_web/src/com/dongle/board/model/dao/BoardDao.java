@@ -244,32 +244,6 @@ public class BoardDao {
 		return bp;		
 		}
 	
-	public int updateBoard(Connection conn, BoardPath bp)
-	{
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("updateBoard");
-		try
-		{
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bp.getBoardNo());
-			pstmt.setInt(2, bp.getGroupNo());
-			pstmt.setString(3, bp.getBoardTitle());
-			pstmt.setString(4, bp.getBoardContent());
-			pstmt.setString(5, bp.getBoardFileNewPath());
-			result=pstmt.executeUpdate();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			close(pstmt);
-		}
-		return result;
-	}
-	
 	public int deleteBoard(Connection conn, int boardNo, int groupNo)
 	{
 		PreparedStatement pstmt=null;
@@ -292,4 +266,54 @@ public class BoardDao {
 		}
 		return result;		
 		}
+	
+	public int updateBoardPath(Connection conn, BoardPath bp)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateBoardPath");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, bp.getBoardFileOldPath());
+			pstmt.setString(2, bp.getBoardFileNewPath());
+			pstmt.setInt(3, bp.getBoardNo());
+			pstmt.setInt(4, bp.getGroupNo());
+			result=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateBoard(Connection conn,Board b)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateBoard");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setInt(3, b.getBoardNo());
+			pstmt.setInt(4, b.getGroupNo());
+			result = pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
 }

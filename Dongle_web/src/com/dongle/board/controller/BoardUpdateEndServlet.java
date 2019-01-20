@@ -40,7 +40,7 @@ public class BoardUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("들어옴>>>???");
 		if(!ServletFileUpload.isMultipartContent(request))
 		{
 			request.setAttribute("mag", "공지사항작성오류");
@@ -53,60 +53,50 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		String saveDir=root+"upload/board";
 		
 		MultipartRequest mr=new MultipartRequest(request, saveDir,maxSize,"UTF-8",new BoardFileRenamePolicy());
-		
-		BoardPath bp=new BoardPath();
-		bp.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
-		bp.setBoardTitle(mr.getParameter("title"));
-		bp.setBoardWriter(mr.getParameter("writer"));
-		bp.setBoardContent(mr.getParameter("content"));
-		bp.setBoardFileOldPath(mr.getOriginalFileName("upfile"));
-		bp.setBoardFileNewPath(mr.getFilesystemName("upfile"));
-		
-	
-		
+		//이전파일 불러옴
+		String oldFile=mr.getParameter("oldfile");
+		//저장할 파일 불러옴
+		String newFile=mr.getFilesystemName("upfile");
+		System.out.println(oldFile+" : "+newFile);
 		File f=mr.getFile("upfile");
-		
-		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		
-		int result=new BoardService().updateBoard(bp);
-		
-		String msg="";
-		String loc="";
-		String view="/views/common/msg.jsp";
-		if(result!=0)
+		if(f!=null&&f.length()>0)
 		{
-			List<Board> blist = new BoardService().selectList(bp.getGroupNo(), loginMember.getMemberId());
-			if(blist!=null) {
-				System.out.println(blist);
-				Board bo = blist.get(0);
-				System.out.println(bo);
-				int rs = new BoardService().insertBoardFile(bp,bo);
-
-				if(rs!=0)
-				{
-					msg="게시판 수정성공";
-					loc="/board/boardList";
-				}
-				else 
-				{
-					msg="게시판 수정 실패";
-					loc="/board/boardUpdate";
-				}
-			}
-			else
-			{
-				msg="게시판 수정 실패";
-				loc="/board/boardUpdate";
-			}
+			File deleteFile=new File(saveDir+"/"+oldFile);
+			boolean bool=deleteFile.delete();
+			System.out.println(bool?"파일삭제 성공":"파일삭제 실패");
 		}
 		else
 		{
-			msg="게시판 수정 실패";
-			loc="/board/boardUpdate";
+			newFile=oldFile;
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher(view).forward(request, response);
+		//파일 삭제하고 새로운 파일 업로드!
+		
+		BoardPath bp=new BoardPath();
+		bp.setBoardNo(Integer.parseInt(mr.getParameter("boardNo")));
+		bp.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
+		bp.setBoardFileOldPath(mr.getOriginalFileName("upfile"));
+		bp.setBoardFileNewPath(mr.getFilesystemName("upfile"));
+		
+		int result=new BoardService().updateBoardPath(bp);
+		
+		Board b=new Board();
+		b.setBoardNo(Integer.parseInt(mr.getParameter("boardNo")));
+		b.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
+		b.setBoardTitle(mr.getParameter("title"));
+		b.setBoardWriter(mr.getParameter("writer"));
+		b.setBoardContent(mr.getParameter("content"));
+		
+		int rs=new BoardService().updateBoard(b);
+		if(result!=0&&rs!=0)
+		{
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 수정 성공");
+		}
+		else 
+		{
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 수정 실패");
+		}
 	}
 
 	

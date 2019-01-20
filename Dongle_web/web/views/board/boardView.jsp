@@ -30,7 +30,7 @@
 	{
 		text-align : left;
 	}
-	#inputbutton
+	.view-btn
 	{
 		text-align : center;
 	}
@@ -42,58 +42,71 @@
 	
 </style>
 	<section id="board-container">
-		<table class="table table-bordered">
-			<thead>
-				<br><br>
-				<tr>
-					<th colspan="3" id="title">공지사항</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th style="width: 20%;">글 제목</th>
-					<td colspan="2"><%=b.getBoardTitle()%></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td colspan="2"><%=b.getBoardWriter() %></td>
-				</tr>					
-				<tr>
-					<th>작성일자</th>
-					<td colspan="2"><%=b.getBoardWriteDate()%></td>
-				</tr>					
-				<tr>
-					<th>조회수</th>
-					<td colspan="2"><%=b.getBoardViewCount()%></td>
-				</tr>
-				<tr>
-					<th>첨부파일</th>
-					<td>
-						<%
-						if(bp.getBoardFileNewPath()!=null){%> 
-							<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
-							<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'/>
-							</a> 
-								<%=bp.getBoardFileOldPath() %>						
-						<%} %> 
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td colspan="2"><%=b.getBoardContent()%></td>
-				</tr>
-				
-				<tr>
-					<td colspan='2' id="inputbutton">
-						<button id='btn-list'>목록으로</button>
-						<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
-						<button id='btn-update'>수정하기</button>
-						<input type="button" value="삭제하기" onclick="fn_deleteBoard()">
-						<%} %>
-					</td>
-				</tr>
-			</tbody> 
-		</table>
+		<form name="deleteFrm" method="post" enctype="multipart/form-data">
+			<table class="table table-bordered">
+				<thead>
+					<br><br>
+					<tr>
+						<th colspan="3" id="title">공지사항</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th style="width: 20%;">글 제목</th>
+						<td colspan="2"><%=b.getBoardTitle()%></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td colspan="2"><%=b.getBoardWriter() %></td>
+					</tr>					
+					<tr>
+						<th>작성일자</th>
+						<td colspan="2"><%=b.getBoardWriteDate()%></td>
+					</tr>					
+					<tr>
+						<th>조회수</th>
+						<td colspan="2"><%=b.getBoardViewCount()%></td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td>
+							<%
+							if(bp.getBoardFileNewPath()!=null){%> 
+								<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
+								<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'/>
+								</a> 
+									<%=bp.getBoardFileOldPath() %>						
+							<%} %> 
+						</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td colspan="2"><%=b.getBoardContent()%></td>
+					</tr>
+					
+					<%-- <tr>
+						<td colspan='2' id="inputbutton">
+							<button id='view-list-btn'>목록으로</button>
+							<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
+							<button id='view-update-btn'>수정하기</button>
+							<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
+							<input type="button" id="view-delete-btn" value="삭제하기" />
+							<%} %>
+						</td>
+					</tr> --%>
+				</tbody> 
+			</table>
+		</form>
+		<div class="view-btn">
+			<button id='view-list-btn'>목록으로</button>
+			<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
+			<button id='view-update-btn'>수정하기</button>
+			<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
+			<input type="button" id="view-delete-btn" value="삭제하기" />
+			<%} %>
+		</div>
+		<br><br>
+		
 		<div class="comment-editor">
 				<form action="<%=request.getContextPath() %>/board/commentInsert" name="boardCommentFrm" 
 				method="post">
@@ -130,8 +143,7 @@
 								<%if(loginMember.getMemberId()!=null&&
 								(loginMember.getMemberId().equals(c.getMemberNo())
 								||loginMember.getMemberId().equals("admin"))){%>
-								<button class="btn-delete" 
-								value="<%=c.getBoCommentNo() %>">삭제</button>
+								<button class="btn-delete" value="<%=c.getBoCommentNo() %>">삭제</button>
 								<%} %>
 							</td>
 						</tr>		
@@ -235,7 +247,7 @@
 	}
 	
 	$(function(){
-		$('#btn-list').click(function(){
+		$('#view-list-btn').click(function(){
 			$.ajax({
 				url:"<%=request.getContextPath() %>/board/boardList?groupNo=<%=groupNo%>",
 				type:"post",
@@ -249,18 +261,9 @@
 	});
 	
 	$(function(){
-		$('#btn-update').click(function(){
-			
-		/* 	var fd=new FormData();
-			console.log(ajaxFile.ajaxFileTest.files[0])
-			console.log(ajaxFile.ajaxFileTest.files[1])
-			for(var i=0;i<ajaxFile.ajaxFileTest.files.length;i++)
-			{
-				fd.append('test'+i,ajaxFile.ajaxFileTest.files[i]);	
-			} */
+		$('#view-update-btn').click(function(){		
 			$.ajax({
 				url:"<%=request.getContextPath() %>/board/boardUpdate?groupNo=<%=groupNo%>&boardNo=<%=b.getBoardNo()%>",
-				/* data:{"title":title,"content":content}, */
 				type:"post",
 				dataType:"html",
 				success:function(data){
@@ -270,7 +273,38 @@
 		});
 	});
 	
-	function fn_deleteBoard()
+	$(function(){
+		$('#view-delete-btn').click(function(){
+			if(confirm('정말로 삭제하시겠습니까?')==true)
+			{
+				$.ajax({
+					url:"<%=request.getContextPath() %>/board/boardDelete?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>",
+					type:"post",
+					dataType:"html",
+					processData:false,
+					contentType:false,
+					success:function(data){
+						alert(data);
+						$.ajax({
+							url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=groupNo%>",
+							type:"post",
+							dataType:"html",
+							success:function(data){
+								$('#board-container').html(data);
+							}
+						});
+					}
+				});
+			}
+			else
+			{
+				return;
+			}
+			
+		});
+	});
+	
+	<%-- function fn_deleteBoard()
 	{
 		if(confirm('정말로 삭제하시겠습니까?')==true)
 		{
@@ -280,7 +314,8 @@
 		{
 			return false;		
 		}
-	}
+	} --%>
+	
 	<%-- function fn_updateBoard()
 	{
 		location.href="<%=request.getContextPath()%>"/board/boardUpdate?no=<%=b.getBoardNo()%>";

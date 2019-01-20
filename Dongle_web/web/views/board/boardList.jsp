@@ -24,6 +24,7 @@
 	{
 		text-align: center;
 		boder: 1px solid #dddddd;
+		padding : 10px;
 		
 	}
 	.table th
@@ -37,8 +38,13 @@
 		float:right;
 		margin:0 0 15px;
 	}
+	#board-container
+	{
+		padding: 25px;
+	}
+	
 </style>
-	<section id="board-container">
+	<section id="board-container" >
 		<h2>공지사항</h2>
 		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
 			<input type="button" value="글쓰기" id="add-btn"/>

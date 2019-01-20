@@ -43,6 +43,7 @@ public class BoardUpdateServlet extends HttpServlet {
 			view="/views/board/boardUpdate.jsp";
 			request.setAttribute("groupNo", groupNo);
 			request.setAttribute("boardPath", bp);
+			/*request.setAttribute("board", b);*/
 		}
 		else
 		{
