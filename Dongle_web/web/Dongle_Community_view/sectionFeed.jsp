@@ -9,6 +9,7 @@
 	GroupMember groupMember=(GroupMember)request.getAttribute("groupMember");
 	List<FeedFile> feedFileList=(List)request.getAttribute("feedFileList");
 	List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
+	List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCommentList");
 	
 %>
 
@@ -140,21 +141,28 @@
 		$(document).on('click','.btn-insert',function(event){
 			
 			
-			var groupNo=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.groupNo').val();
-			var feedNo=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedNo').val();
+			var groupNo=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.groupNo').val();//그룹넘버
+			var feedNo=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedNo').val();//피드넘버
 			var feedCommentWriterNo=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentWriterNo').val();
+			//피드 작성자 넘버
 			var feedCommentLevel=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentLevel').val();
+			//피드 댓글 레벨
 			var feedCommentRef=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentRef').val();
-			
+			//피드 댓글 참조 변수
 			var feedCommentContent=$(this).parent('.comment_btn').siblings('.comment_write').children('.feedCommentContent').val();
+			//피드 댓글 내용
 			var commentLevel1=$(this).parent().parent().siblings('ul');
+			//댓글 레벨 1 태그
 			var commentLevel2=$(this).parent().parent().parent().parent();
-			console.log("1"+feedCommentRef);
-			if(feedCommentContent==null){
+			//댓글 레벨 2 태그
+			var commentRepleTag=$(this).parent().parent().parent('.recomment_content');
+			console.log(commentLevel2);
+			if(feedCommentContent==""){
 				alert("댓글 내용을 입력해주세요!");
 				return;
 			}
 			if(feedCommentLevel==1){
+				//일반 댓글 입력시
 				$.ajax({
 					
 					url:"<%=request.getContextPath()%>/feed/feedInsertComment",
@@ -172,10 +180,12 @@
 					success:function(data){
 						
 						commentLevel1.append(data);
+						
 							
 					}
 				})
 			}else if(feedCommentLevel==2){
+				//댓글 밑 댓글 입력시
 				console.log(feedCommentRef);
 				$.ajax({
 					
@@ -192,8 +202,9 @@
 					dataType:"html",
 					contentType: "application/x-www-form-urlencoded",
 					success:function(data){
-						console.log(data);
+						
 						commentLevel2.after(data);
+						commentRepleTag.remove();
 					}
 				})
 			}
@@ -389,19 +400,20 @@
                 					
                 					}
                 				}
-                					List<FeedComment> level2FeedCommentList=new FeedService().selectLevel2FeedCommentList(fc.getFeCommentNo());
+                					
     									%> 
                 			</li>
-                			<%for(FeedComment fcl2:level2FeedCommentList) {
-                				if(fcl2.getFeCommentLevel()==2&&fc.getFeCommentNo()==fcl2.getFeCommentRef()){
-                				GroupMember commentGroupMember= new GroupService().selectGmInfo(g.getGroupNo(),fcl2.getMemberNo());
+                			<%for(FeedComment fcl2:feedLevel2CommentList) {
+                				for(GroupMember gm:memberList){
+                				if(fcl2.getMemberNo()==gm.getMemberNo()&&fc.getFeCommentNo()==fcl2.getFeCommentRef()){
+                				
                 			%>
                 			<li class="level2" style="list-style:none;">
                     			<span class="profile-back">
-                        			<img class="profile" src="<%=request.getContextPath()%>/images/member_img/<%=commentGroupMember.getGroupMemberImageNewPath()%>">
+                        			<img class="profile" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImageNewPath()%>">
                     			</span>
                     			<span class="comment-info">
-                        			<span class="comment-writer"><%=commentGroupMember.getGroupMemberNickname() %></span>
+                        			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
                         			<button class="report-button">신고</button>
                         			
@@ -411,7 +423,8 @@
                         			
                     			</span>
                 			</li>
-                			<%	}	
+                			<%	}
+                				}
                 				}%>
             				
             			<%			

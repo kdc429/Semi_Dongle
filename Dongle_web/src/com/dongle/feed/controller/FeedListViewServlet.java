@@ -59,6 +59,7 @@ public class FeedListViewServlet extends HttpServlet {
 		List<GroupMember> memberlist = new GroupService().selectMemberList(groupNo);
 		List<FeedFile> feedFileList=new FeedService().selectFeedFileList(groupNo);
 		List<FeedComment> feedCommentList=new FeedService().selectFeedCommentList(groupNo);
+		List<FeedComment> level2FeedCommentList=new FeedService().selectLevel2FeedCommentList();
 		request.setAttribute("loginMember", loginMember);
 		request.setAttribute("memberList",memberlist);
 		request.setAttribute("feedList", feedList);
@@ -66,6 +67,7 @@ public class FeedListViewServlet extends HttpServlet {
 		request.setAttribute("groupMember", gm);
 		request.setAttribute("feedFileList", feedFileList);
 		request.setAttribute("feedCommentList", feedCommentList);
+		request.setAttribute("level2FeedCommentList", level2FeedCommentList);
 		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);
 	}
 

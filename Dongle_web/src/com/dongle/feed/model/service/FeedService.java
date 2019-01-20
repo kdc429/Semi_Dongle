@@ -101,9 +101,9 @@ public class FeedService {
 		
 	}
 	
-	public List<FeedComment> selectLevel2FeedCommentList(int feCommentNo){
+	public List<FeedComment> selectLevel2FeedCommentList(){
 		Connection conn=getConnection();
-		List<FeedComment> feedLevel2CommentList=new FeedDao().selectLevel2FeedCommentList(conn,feCommentNo);
+		List<FeedComment> feedLevel2CommentList=new FeedDao().selectLevel2FeedCommentList(conn);
 		
 		close(conn);
 		return feedLevel2CommentList;

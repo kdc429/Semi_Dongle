@@ -284,7 +284,7 @@ public class FeedDao {
 		return feedCommentList;
 	}
 	
-	public List<FeedComment> selectLevel2FeedCommentList(Connection conn,int feCommentNo){
+	public List<FeedComment> selectLevel2FeedCommentList(Connection conn){
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -294,7 +294,7 @@ public class FeedDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, feCommentNo);
+			
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
