@@ -56,8 +56,8 @@ public class MemberListServlet extends HttpServlet {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy년 MM월 dd일");
 		for(GroupMember gm_list : list) {
 			JSONObject obj=new JSONObject();
-			obj.put("groupMemberImgOldPath", gm_list.getGroupMemberImgOldPath());
-			obj.put("groupMemberImgNewPath", gm_list.getGroupMemberImgNewPath());
+			obj.put("groupMemberImageOldPath", gm_list.getGroupMemberImageOldPath());
+			obj.put("groupMemberImageNewPath", gm_list.getGroupMemberImageNewPath());
 			obj.put("groupMemberNickname", gm_list.getGroupMemberNickname());
 			obj.put("groupMemberEnrollData", sdf.format(gm_list.getGroupMemberEnrollDate()));
 			jobjArr.add(obj);	

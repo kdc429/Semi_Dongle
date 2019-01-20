@@ -7,8 +7,8 @@ public class GroupMember {
 	private int groupNo;
 	private int memberNo;
 	private String groupMemberNickname;
-	private String groupMemberImgOldPath;
-	private String groupMemberImgNewPath;
+	private String groupMemberImageOldPath;
+	private String groupMemberImageNewPath;
 	private Date groupMemberEnrollDate;
 	private String blacklistYN;
 	private int reportDongleCount;
@@ -17,14 +17,14 @@ public class GroupMember {
 		super();
 	}
 
-	public GroupMember(int groupNo, int memberNo, String groupMemberNickname, String groupMemberImgOldPath,
-			String groupMemberImgNewPath, Date groupMemberEnrollDate, String blacklistYN, int reportDongleCount) {
+	public GroupMember(int groupNo, int memberNo, String groupMemberNickname, String groupMemberImageOldPath,
+			String groupMemberImageNewPath, Date groupMemberEnrollDate, String blacklistYN, int reportDongleCount) {
 		super();
 		this.groupNo = groupNo;
 		this.memberNo = memberNo;
 		this.groupMemberNickname = groupMemberNickname;
-		this.groupMemberImgOldPath = groupMemberImgOldPath;
-		this.groupMemberImgNewPath = groupMemberImgNewPath;
+		this.groupMemberImageOldPath = groupMemberImageOldPath;
+		this.groupMemberImageNewPath = groupMemberImageNewPath;
 		this.groupMemberEnrollDate = groupMemberEnrollDate;
 		this.blacklistYN = blacklistYN;
 		this.reportDongleCount = reportDongleCount;
@@ -54,20 +54,20 @@ public class GroupMember {
 		this.groupMemberNickname = groupMemberNickname;
 	}
 
-	public String getGroupMemberImgOldPath() {
-		return groupMemberImgOldPath;
+	public String getGroupMemberImageOldPath() {
+		return groupMemberImageOldPath;
 	}
 
-	public void setGroupMemberImgOldPath(String groupMemberImgOldPath) {
-		this.groupMemberImgOldPath = groupMemberImgOldPath;
+	public void setGroupMemberImageOldPath(String groupMemberImageOldPath) {
+		this.groupMemberImageOldPath = groupMemberImageOldPath;
 	}
 
-	public String getGroupMemberImgNewPath() {
-		return groupMemberImgNewPath;
+	public String getGroupMemberImageNewPath() {
+		return groupMemberImageNewPath;
 	}
 
-	public void setGroupMemberImgNewPath(String groupMemberImgNewPath) {
-		this.groupMemberImgNewPath = groupMemberImgNewPath;
+	public void setGroupMemberImageNewPath(String groupMemberImageNewPath) {
+		this.groupMemberImageNewPath = groupMemberImageNewPath;
 	}
 
 	public Date getGroupMemberEnrollDate() {
@@ -97,11 +97,10 @@ public class GroupMember {
 	@Override
 	public String toString() {
 		return "GroupMember [groupNo=" + groupNo + ", memberNo=" + memberNo + ", groupMemberNickname="
-				+ groupMemberNickname + ", groupMemberImgOldPath=" + groupMemberImgOldPath + ", groupMemberImgNewPath="
-				+ groupMemberImgNewPath + ", groupMemberEnrollDate=" + groupMemberEnrollDate + ", blacklistYN="
-				+ blacklistYN + ", reportDongleCount=" + reportDongleCount + "]";
+				+ groupMemberNickname + ", groupMemberImageOldPath=" + groupMemberImageOldPath
+				+ ", groupMemberImageNewPath=" + groupMemberImageNewPath + ", groupMemberEnrollDate="
+				+ groupMemberEnrollDate + ", blacklistYN=" + blacklistYN + ", reportDongleCount=" + reportDongleCount
+				+ "]";
 	}
-	
-	
-	
+
 }

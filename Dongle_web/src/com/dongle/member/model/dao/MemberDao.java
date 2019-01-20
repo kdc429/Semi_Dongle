@@ -49,7 +49,7 @@ public class MemberDao {
 				data.setPhone(rs.getString("member_phone"));
 				data.setAddress(rs.getString("member_address"));
 				data.setEnrollDate(rs.getDate("member_enroll_date"));
-				data.setBlackList(rs.getInt("blacklist_yn"));
+				data.setBlackList(rs.getString("blacklist_yn"));
 				data.setReportCount(rs.getInt("report_member_count"));
 			}
 		}catch(SQLException e) {

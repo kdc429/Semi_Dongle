@@ -13,8 +13,8 @@ public class Group {
 	private String groupDateCtg; //GROUP_DATE_CTG
 	private int minAge; //MIN_AGE
 	private int maxAge; //MAX_AGE
-	private String groupImgOldPath; //GROUP_IMAGE_OLD_PATH
-	private String groupImgNewPath; //GROUP_IMAGE_NEW_PATH
+	private String groupImageOldPath; //GROUP_IMAGE_OLD_PATH
+	private String groupImageNewPath; //GROUP_IMAGE_NEW_PATH
 	private String groupIntro; //GROUP_INTRODUCE
 	private Date groupEnrollDate; //GROUP_ENROLL_DATE
 	private int reportGroupCnt; //REPORT_GROUP_COUNT
@@ -37,8 +37,8 @@ public class Group {
 		this.groupDateCtg = groupDateCtg;
 		this.minAge = minAge;
 		this.maxAge = maxAge;
-		this.groupImgOldPath = groupImgOldPath;
-		this.groupImgNewPath = groupImgNewPath;
+		this.groupImageOldPath = groupImageOldPath;
+		this.groupImageNewPath = groupImageNewPath;
 		this.groupIntro = groupIntro;
 		this.groupEnrollDate = groupEnrollDate;
 		this.reportGroupCnt = reportGroupCnt;
@@ -110,20 +110,20 @@ public class Group {
 		this.maxAge = maxAge;
 	}
 
-	public String getGroupImgOldPath() {
-		return groupImgOldPath;
+	public String getGroupImageOldPath() {
+		return groupImageOldPath;
 	}
 
-	public void setGroupImgOldPath(String groupImgOldPath) {
-		this.groupImgOldPath = groupImgOldPath;
+	public void setGroupImageOldPath(String groupImageOldPath) {
+		this.groupImageOldPath = groupImageOldPath;
 	}
 
-	public String getGroupImgNewPath() {
-		return groupImgNewPath;
+	public String getGroupImageNewPath() {
+		return groupImageNewPath;
 	}
 
-	public void setGroupImgNewPath(String groupImgNewPath) {
-		this.groupImgNewPath = groupImgNewPath;
+	public void setGroupImageNewPath(String groupImageNewPath) {
+		this.groupImageNewPath = groupImageNewPath;
 	}
 
 	public String getGroupIntro() {
@@ -165,7 +165,17 @@ public class Group {
 	public void setGroupMainNewImgPath(String groupMainNewImgPath) {
 		this.groupMainNewImgPath = groupMainNewImgPath;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Group [memberNo=" + memberNo + ", groupNo=" + groupNo + ", groupName=" + groupName + ", topicCode="
+				+ topicCode + ", locCtgCode=" + locCtgCode + ", groupDateCtg=" + groupDateCtg + ", minAge=" + minAge
+				+ ", maxAge=" + maxAge + ", groupImageOldPath=" + groupImageOldPath + ", groupImageNewPath="
+				+ groupImageNewPath + ", groupIntro=" + groupIntro + ", groupEnrollDate=" + groupEnrollDate
+				+ ", reportGroupCnt=" + reportGroupCnt + ", groupMainOldImgPath=" + groupMainOldImgPath
+				+ ", groupMainNewImgPath=" + groupMainNewImgPath + "]";
+	}
+
+
 
 }
