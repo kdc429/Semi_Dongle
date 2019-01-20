@@ -1,15 +1,17 @@
 package com.dongle.feed.model.service;
 
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
-import static common.JDBCTemplate.commit;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.dongle.feed.model.dao.FeedDao;
 import com.dongle.feed.model.vo.Feed;
+import com.dongle.feed.model.vo.FeedComment;
+import com.dongle.feed.model.vo.FeedFile;
 import com.dongle.feed.model.vo.FeedNoResult;
 import com.dongle.feed.model.vo.FileList;
 
@@ -44,6 +46,7 @@ public class FeedService {
 		int delResult=0;
 		int delFileResult=0;
 		result=new FeedDao().insertFeedFile(conn,groupNo, uploadFileList);
+		System.out.println("insert?");
 		if(result>0) {
 			commit(conn);
 		}else {
@@ -61,6 +64,38 @@ public class FeedService {
 		
 		close(conn);
 		return result;
+		
+	}
+	
+	public List<FeedFile> selectFeedFileList(int groupNo){
+		Connection conn=getConnection();
+		List<FeedFile> feedFileList=new FeedDao().selectFeedFileList(conn,groupNo);
+		
+		close(conn);
+		return feedFileList;
+	}
+	
+	public int insertFeedComment(FeedComment feedComment) {
+		
+		Connection conn=getConnection();
+		int result=0;
+		result=new FeedDao().insertFeedComment(conn,feedComment);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+	
+	public List<FeedComment> selectFeedCommentList(int groupNo){
+		
+		Connection conn=getConnection();
+		List<FeedComment> feedCommentList=new FeedDao().selectFeedCommentList(conn,groupNo);
+		
+		close(conn);
+		return feedCommentList;
 		
 	}
 

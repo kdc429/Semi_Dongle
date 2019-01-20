@@ -55,7 +55,7 @@ public class MemberListServlet extends HttpServlet {
 		
 		for(GroupMember gm_list : list) {
 			JSONObject obj=new JSONObject();
-			obj.put("groupMemberImagePath", gm_list.getGroupMemberImagePath());
+			obj.put("groupMemberImagePath", gm_list.getGroupMemberImageNewPath());
 			obj.put("groupMemberNickname", gm_list.getGroupMemberNickname());
 			obj.put("groupMemberEnrollData", gm_list.getGroupMemberEnrollDate());
 			jobjArr.add(obj);	

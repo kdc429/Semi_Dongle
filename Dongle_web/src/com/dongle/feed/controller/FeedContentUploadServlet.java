@@ -60,7 +60,7 @@ public class FeedContentUploadServlet extends HttpServlet {
 		//DB 연결할 파라미터 값
 		int memberNo = Integer.parseInt(mr.getParameter("memberNo"));
 		int groupNo = Integer.parseInt(mr.getParameter("groupNo"));
-		String feedContent=(String)mr.getParameter("feedContent");
+		String feedContent=(String)mr.getParameter("content");
 		FeedNoResult fnr=null;
 		
 		//DB에 저장할 데이터 리스트 
@@ -74,28 +74,38 @@ public class FeedContentUploadServlet extends HttpServlet {
 		int feedNo=fnr.getFeedNo();
 		//feed_file_tab 에 입력할 데이터 리스트에 입력
 		int i=0;
-		while(files.hasMoreElements()){
+		if(!files.hasMoreElements()) {
 			
-			fl=new FileList();
-			fl.setFeedNo(feedNo);
-            fl.setFeedOriFilePath((String)files.nextElement()); 
-            fl.setFeedRenameFilePath(mr.getFilesystemName("image"+i));                      
-            uploadFileList.add(fl);
-            i++;
-        }
+			result=fnr.getFeedResult();
+			new Gson().toJson(result,response.getWriter());
+			return;
+		}else {
+			while(files.hasMoreElements()){
+				System.out.println("??");
+				fl=new FileList();
+				fl.setFeedNo(feedNo);
+				fl.setFeedOriFilePath((String)files.nextElement()); 
+				fl.setFeedRenameFilePath(mr.getFilesystemName("image"+i));                      
+				uploadFileList.add(fl);
+				i++;
+				
+				if(fnr.getFeedResult()>0) {
+					
+					result=new FeedService().insertFeedFile(feedNo,groupNo, uploadFileList);
+					
+					response.setContentType("application/json;charset=UTF-8");
+					new Gson().toJson(result,response.getWriter());
+					
+				}else {
+					//실패하면 종료
+					new Gson().toJson(result,response.getWriter());
+				}
+	        }
+		}
+		
 		
 		//컨텐트 입력성공 하면 파일 정보 입력
-		if(fnr.getFeedResult()>0) {
-			
-			result=new FeedService().insertFeedFile(feedNo,groupNo, uploadFileList);
-			
-			response.setContentType("application/json;charset=UTF-8");
-			new Gson().toJson(result,response.getWriter());
-			
-		}else {
-			//실패하면 종료
-			new Gson().toJson(result,response.getWriter());
-		}
+		
 		
 			
 	}
