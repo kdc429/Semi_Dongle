@@ -379,7 +379,8 @@ public class GalleryDao {
 			pstmt.setInt(3, gcj.getGalCommentLevel());
 			pstmt.setInt(4, gcj.getMemberNo());
 			pstmt.setString(5, gcj.getGalCommentContent());
-			pstmt.setInt(6, gcj.getGalCommentRef());
+			if(gcj.getGalCommentRef()==1) {pstmt.setInt(6, Integer.parseInt(null));}
+			else {pstmt.setInt(6, gcj.getGalCommentRef());}
 			rs=pstmt.executeUpdate();
 		}
 		catch(Exception e)

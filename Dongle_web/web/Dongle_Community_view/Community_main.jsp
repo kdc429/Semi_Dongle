@@ -156,69 +156,44 @@
        </section>
        
        <script> 		
-       <%--        	$('#dongle_mem_btn').click(function(){
-              		$.ajax({
-              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-              			type:"get",
-              			dataType:"json",
-              			success:function(data){
-              				var thead="<br/><caption><%=g.getGroupName()%>의 멤버보기</caption><tr><th id='tbl_nav'>닉네임</th><th id='tbl_nav'>가입일</th></tr>";
-              		 		var thtml="";
-              			     for(var i = 0; i < data.length; i++)
-              		            {
-              			    	 	var tbody= "<tr><td>"+data[i]['groupMemberNickname']+"</td>";
-              			    	 	
-              			    	 	thtml+=tbody;
-              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td><tr>"
-              			    	 	
-              		            }
-              			     
-              			     thead += thtml;
-              			     console.log(thtml);
-              			     $('#tbl').html(thead);
-              			     
-              			}
-              		});   		
-              	}); --%>
-              	
-                 	$('#dongle_mem_btn').click(function(){
-              		$.ajax({
-              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-              			type:"get",
-              			dataType:"json",
-              			success:function(data){
-              				$('#content-div').html(data);
-              				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-              				//var h2_main = $('<h2></h2>');
-              				var tbl = $('<table id="tbl"></table>');
-              				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
-              				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
-              		 		var thtml="";
-              			     for(var i = 0; i < data.length; i++)
-              		            {
-              			    	 	/* var tbody= "<tr>"; */
-              			    	 	thtml+="<tr>";
-              			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
-              			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
-              			    	 	/* thtml+=tbody; */
-              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
-              			    	 	thtml+="</tr>";
-              			   }
-              			     console.log(thtml);
-              			   thead += thtml;
-              			   tbl.append(thead);
-              			   
-              			     
-              			   console.log(thead);
-              			   console.log(tbl);
-              			   console.log(h);
-              			 	$('#header').html(h);         			   
-              			    $('#content-div').append(tbl);
-              				
-              			     
-              			}
-              		});   		
-              	});       
+             	$('#dongle_mem_btn').click(function(){
+          		$.ajax({
+          			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+          			type:"get",
+          			dataType:"json",
+          			success:function(data){
+          				$('#content-div').html(data);
+          				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+          				//var h2_main = $('<h2></h2>');
+          				var tbl = $('<table id="tbl"></table>');
+          				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
+          				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
+          		 		var thtml="";
+          			     for(var i = 0; i < data.length; i++)
+          		            {
+          			    	 	/* var tbody= "<tr>"; */
+          			    	 	thtml+="<tr>";
+          			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
+          			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+          			    	 	/* thtml+=tbody; */
+          			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+          			    	 	thtml+="</tr>";
+          			   }
+          			     console.log(thtml);
+          			   thead += thtml;
+          			   tbl.append(thead);
+          			   
+          			     
+          			   console.log(thead);
+          			   console.log(tbl);
+          			   console.log(h);
+          			 	$('#header').html(h);         			   
+          			    $('#content-div').append(tbl);
+          				
+          			     
+          			}
+          		});   		
+          	});       
        </script>
         <!-- 오른쪽 사이드 -->
         <aside>

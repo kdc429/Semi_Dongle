@@ -361,7 +361,7 @@ if (n < 1) {slideIndex = slides.length}
 				html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 				html+="</div>";
 				html+="<div class='comment_btn'>";
-				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
+				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
 				html+="</div>"
 				html+="</fieldset>"
 				div.html(html);
@@ -433,8 +433,8 @@ if (n < 1) {slideIndex = slides.length}
 					data:{"groupNo":$('#groupNo').val(),
 						"galNo":$('#galNo').val(),
 						"galCommentWriterNo":$('#galCommentWriterNo').val(),
-						"galCommentLevel":$('#galCommentWriterNo').val(),
-						"galCommentRef":$('#galCommentLevel').val(),
+						"galCommentLevel":$('#galCommentLevel').val(),
+						"galCommentRef":$('#galCommentRef').val(),
 						"albumCode":$('#albumCode').val(),
 						"galFileNo":$('#galFileNo').val(),
 						"galCommentContent":$('#galCommentContent').val(),

@@ -164,7 +164,7 @@ section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{te
 					<%} %>
 			<%}
 			else{%>
-				<div>
+				<div style='margin-left:100px;'>
 					<h3>등록된 사진이 없습니다.</h3>
 				</div>
 			<%} %>

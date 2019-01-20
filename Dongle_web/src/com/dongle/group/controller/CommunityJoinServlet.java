@@ -35,18 +35,17 @@ public class CommunityJoinServlet extends HttpServlet {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
 
-		int gNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
-		int result = new GroupService().countMember(gNo); //이렇게 해야 넘어감
-		System.out.println(gNo);
+		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
+		int result = new GroupService().countMember(groupNo); //이렇게 해야 넘어감
 		
-		Group g=new GroupService().selectGrInfo(gNo); //그룹정보 받아오기
-		GroupMember gm = new GroupService().selectGmInfo(gNo,loginMember.getMemberNo());
+		Group group=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
 		System.out.println("여긴 커뮤:"+gm);
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";
 		
-		if(g==null) { //데이터 없을시 에러페이지 이동으로 변경예정
+		if(group==null) { //데이터 없을시 에러페이지 이동으로 변경예정
 			msg="접속실패! 다시 시도해주세요.";
 			loc="/login";
 			request.getRequestDispatcher(view).forward(request, response);
@@ -54,7 +53,7 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 		}else {
 			loc="/Dongle_Community_view/Community_main.jsp";
-			request.setAttribute("group", g);
+			request.setAttribute("group", group);
 			request.setAttribute("groupMember", gm);
 			request.setAttribute("loc",loc);
 			request.setAttribute("loginMember", loginMember);

@@ -84,7 +84,7 @@ public class GalleryGetServlet extends HttpServlet {
 			tList.add(i, t2List.get(0));
 		}
 		//tList의 length가 totalMember와 같음
-		
+		System.out.println(tList);
 		
 		//페이지 수 만큼 데이터를 불러오기
 		List<GalleryPath> allList = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함

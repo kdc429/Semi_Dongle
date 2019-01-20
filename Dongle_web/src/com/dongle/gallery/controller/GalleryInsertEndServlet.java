@@ -64,7 +64,12 @@ public class GalleryInsertEndServlet extends HttpServlet {
 		String albumCode = mr.getParameter("albumCode");
 		int imageCount = Integer.parseInt(mr.getParameter("image_count"));
 		List galNoList= new GalleryService().distictGalNoList(albumCode, groupNo);
-		int galNo = Integer.parseInt(galNoList.get(0).toString())+1;
+		System.out.println(galNoList);
+		int galNo=0;
+		if(galNoList.size()==0) {galNo=1;}
+		else if(galNoList.size()!=0){
+			galNo = Integer.parseInt(galNoList.get(0).toString())+1;
+		}
 		String galFileContent = mr.getParameter("galFileContent");
 		System.out.println(groupNo+" : "+memberNo+" : "+albumCode+" : "+imageCount+" : "+galNo);
 		
