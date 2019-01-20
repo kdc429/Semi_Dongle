@@ -43,8 +43,10 @@ public class BlackListSearchServlet extends HttpServlet {
 		
 		String searchBlack=request.getParameter("search-black");
 		List<Member> blackList = new AdminService().searchBlack(searchBlack);
+		List<Member> nonBlackList = new AdminService().selectBlackMemberList("0");
 		
 		request.setAttribute("blackList", blackList);
+		request.setAttribute("nonBlackList", nonBlackList);
 		request.getRequestDispatcher("/Dongle_view/admin_memberBlackSearch.jsp").forward(request, response);
 	}
 
