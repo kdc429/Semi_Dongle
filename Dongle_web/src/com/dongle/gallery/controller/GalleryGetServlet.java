@@ -80,7 +80,6 @@ public class GalleryGetServlet extends HttpServlet {
 					
 					t2List.add(list.get(j));
 				}
-				
 			}
 			tList.add(i, t2List.get(0));
 		}

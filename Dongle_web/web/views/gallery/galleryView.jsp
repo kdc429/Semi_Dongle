@@ -76,7 +76,6 @@ section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{te
 	$(function(){
 		//사진 추가하기 form
 		$('.insert-bnt').click(function(){
-			console.log("tt");
 			$.ajax({
 				url:"<%=request.getContextPath()%>/gallery/insertGallery?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
 				type:"post",
