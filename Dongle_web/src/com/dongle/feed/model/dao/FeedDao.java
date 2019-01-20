@@ -99,8 +99,9 @@ public class FeedDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-
+			
 			close(pstmt);
+			
 			
 		}
 		return fnr;
@@ -205,7 +206,10 @@ public class FeedDao {
 	public int insertFeedComment(Connection conn,FeedComment feedComment) {//피드 댓글 작성
 		int result=0;
 		PreparedStatement pstmt=null;
+		Statement stmt=null;
+		ResultSet rs=null;
 		String sql=prop.getProperty("insertFeedComment");
+		int feedCommentNo=0;
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -216,13 +220,32 @@ public class FeedDao {
 			pstmt.setString(5, feedComment.getFeCommentContent());
 			pstmt.setInt(6, feedComment.getFeCommentRef());
 			result=pstmt.executeUpdate();
+			
+			if(result>0) {
+				
+				String sql2="SELECT SEQ_FE_COMMENT_NO.CURRVAL AS NO FROM DUAL";
+				stmt=conn.createStatement();
+				rs=stmt.executeQuery(sql2);
+				
+				if(rs.next()) {
+					feedCommentNo=rs.getInt("no");
+				}
+				
+				
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			
+			
 			close(pstmt);
 		}
+		if(result>0) {
+			return feedCommentNo;
+		}else {
+			return result;
+		}
 		
-		return result;
 	}
 	
 	public List<FeedComment> selectFeedCommentList(Connection conn,int groupNo){
@@ -259,6 +282,75 @@ public class FeedDao {
 			close(pstmt);
 		}
 		return feedCommentList;
+	}
+	
+	public List<FeedComment> selectLevel2FeedCommentList(Connection conn,int feCommentNo){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<FeedComment> feedLevel2CommentList=new ArrayList();
+		FeedComment feedComment=null;
+		String sql=prop.getProperty("selectLevel2FeedCommentList");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feCommentNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				feedComment=new FeedComment();
+				feedComment.setGroupNo(rs.getInt("group_no"));
+				feedComment.setFeedNo(rs.getInt("feed_no"));
+				feedComment.setFeCommentNo(rs.getInt("fe_comment_no"));
+				feedComment.setFeCommentLevel(rs.getInt("fe_comment_level"));
+				feedComment.setMemberNo(rs.getInt("member_no"));
+				feedComment.setFeCommentContent(rs.getString("fe_comment_content"));
+				feedComment.setFeCommentDate(rs.getDate("fe_comment_date"));
+				feedComment.setFeCommentRef(rs.getInt("fe_comment_ref"));
+				
+				feedLevel2CommentList.add(feedComment);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return feedLevel2CommentList;
+	}
+	
+	public FeedComment selectFeedComment(Connection conn,int feedCommentNo) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectFeedComment");
+		FeedComment fc=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feedCommentNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				fc=new FeedComment();
+				fc.setGroupNo(rs.getInt("group_no"));
+				fc.setFeedNo(rs.getInt("feed_no"));
+				fc.setFeCommentNo(rs.getInt("fe_comment_no"));
+				fc.setFeCommentLevel(rs.getInt("fe_comment_level"));
+				fc.setMemberNo(rs.getInt("member_no"));
+				fc.setFeCommentContent(rs.getString("fe_comment_content"));
+				fc.setFeCommentDate(rs.getDate("fe_comment_date"));
+				fc.setFeCommentRef(rs.getInt("fe_comment_ref"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return fc;
 	}
 	
 

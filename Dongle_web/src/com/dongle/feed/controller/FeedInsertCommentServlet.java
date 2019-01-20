@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.parser.ParseException;
-
 import com.dongle.feed.model.service.FeedService;
 import com.dongle.feed.model.vo.FeedComment;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.GroupMember;
 import com.google.gson.Gson;
 
 /**
@@ -52,9 +52,19 @@ public class FeedInsertCommentServlet extends HttpServlet {
 		feedComment.setFeCommentContent(feedCommentContent);
 		feedComment.setFeCommentRef(feedCommentRef);
 		int result=0;
-		result=new FeedService().insertFeedComment(feedComment);
+		System.out.println(feedCommentRef);
+		FeedComment fc=new FeedService().insertFeedComment(feedComment);
+		GroupMember gm=new GroupService().selectGmInfo(fc.getGroupNo(),fc.getMemberNo());
 		
-		new Gson().toJson(result,response.getWriter());
+		request.setAttribute("feedComment", fc);
+		request.setAttribute("groupMember", gm);
+		
+		if(fc.getFeCommentLevel()==1) {
+			request.getRequestDispatcher("/views/feed/addFeedComment.jsp").forward(request, response);
+		}else if(fc.getFeCommentLevel()==2) {
+			
+			request.getRequestDispatcher("/views/feed/addFeedCommentLevel2.jsp").forward(request, response);
+		}
 		
 		
 	}

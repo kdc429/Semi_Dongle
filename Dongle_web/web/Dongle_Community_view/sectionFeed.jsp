@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.dongle.feed.model.vo.*,com.dongle.group.model.vo.*,com.dongle.member.model.vo.*" %>
+<%@ page import="java.util.List,com.dongle.feed.model.vo.*,com.dongle.group.model.vo.*,com.dongle.member.model.vo.*,com.dongle.feed.model.service.*,com.dongle.group.model.service.*" %>
 <%
 	List<Feed> feedList=(List)request.getAttribute("feedList");
 	Group g=(Group)request.getAttribute("group");
@@ -145,63 +145,84 @@
 			var feedCommentWriterNo=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentWriterNo').val();
 			var feedCommentLevel=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentLevel').val();
 			var feedCommentRef=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentRef').val();
-			var feedCommentContent=$(this).parent('.comment_btn').siblings('.comment_write').children('.feedCommentContent').val();
-			console.log(groupNo);
-			console.log(feedNo);
-			console.log(feedCommentWriterNo);
-			console.log(feedCommentLevel);
-			console.log($(this).parent('.comment_btn').siblings('.comment_write').children('.feedCommentContent').val());
 			
+			var feedCommentContent=$(this).parent('.comment_btn').siblings('.comment_write').children('.feedCommentContent').val();
+			var commentLevel1=$(this).parent().parent().siblings('ul');
+			var commentLevel2=$(this).parent().parent().parent().parent();
+			console.log("1"+feedCommentRef);
 			if(feedCommentContent==null){
 				alert("댓글 내용을 입력해주세요!");
 				return;
 			}
-			
-			$.ajax({
-				
-				url:"<%=request.getContextPath()%>/feed/feedInsertComment",
-				type:"post",
-				data:{
-						"groupNo":groupNo,
-						"feedNo":feedNo,
-						"feedCommentWriterNo":feedCommentWriterNo,
-						"feedCommentLevel":feedCommentLevel,
-						"feedCommentContent":feedCommentContent,
-						"feedCommentRef":feedCommentRef
-					},
-				contentType: "application/x-www-form-urlencoded",
-				success:function(data){
-					console.log(data);
-					if(data>0){
-						alert('성공');
-					}else{
-						alert('실패');
+			if(feedCommentLevel==1){
+				$.ajax({
+					
+					url:"<%=request.getContextPath()%>/feed/feedInsertComment",
+					type:"post",
+					data:{
+							"groupNo":groupNo,
+							"feedNo":feedNo,
+							"feedCommentWriterNo":feedCommentWriterNo,
+							"feedCommentLevel":feedCommentLevel,
+							"feedCommentContent":feedCommentContent,
+							"feedCommentRef":feedCommentRef
+						},
+					dataType:"html",
+					contentType: "application/x-www-form-urlencoded",
+					success:function(data){
+						
+						commentLevel1.append(data);
+							
 					}
-				}
-			})
+				})
+			}else if(feedCommentLevel==2){
+				console.log(feedCommentRef);
+				$.ajax({
+					
+					url:"<%=request.getContextPath()%>/feed/feedInsertComment",
+					type:"post",
+					data:{
+							"groupNo":groupNo,
+							"feedNo":feedNo,
+							"feedCommentWriterNo":feedCommentWriterNo,
+							"feedCommentLevel":feedCommentLevel,
+							"feedCommentContent":feedCommentContent,
+							"feedCommentRef":feedCommentRef
+						},
+					dataType:"html",
+					contentType: "application/x-www-form-urlencoded",
+					success:function(data){
+						console.log(data);
+						commentLevel2.after(data);
+					}
+				})
+			}
+			
 		});
 	})
 	
 	
 	$(function(){
 		var eventflag;
-		$('.comment-reple').on('click',function(e){
-			console.log($(this));
+		$(document).on('click','.comment-reple',function(e){
+			var feedNoReple=$(this).parent().parent().children('.feedCommentNo').val();
+			var feedNo=$(this).parent().parent().parent().siblings('.feedNo').val();
+			console.log(feedNo);
 			<%if(loginMember!=null){%>
 				eventflag=true;
 				var div=$("<div class='recomment_content'></div>");
 				var html="";
-				html+="<input type='hidden' class='groupNo' value='1'/>"
-				html+="<input type='hidden' class='feedNo' value='21'/>";
-				html+="<input type='hidden' class='feedCommentWriterNo' value='1'/>";
+				html+="<input type='hidden' class='groupNo' value='<%=g.getGroupNo()%>'/>"
+				html+="<input type='hidden' class='feedNo' value='"+feedNo+"'/>";
+				html+="<input type='hidden' class='feedCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
 				html+="<input type='hidden' class='feedCommentLevel' value='2'/>";
-				html+="<input type='hidden' class='feedCommentRef' value='1'/>";
+				html+="<input type='hidden' class='feedCommentRef' value='"+feedNoReple+"'/>";
 				html+="<fieldset class='modal_comment'>";
 				html+="<div class='comment_write'>";
 				html+="<textarea name='feedCommentContent' class='feedCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 				html+="</div>";
 				html+="<div class='comment_btn'>";
-				html+="<button type='button' class='btn-insert' value='25'> Send</button>";
+				html+="<button type='button' class='btn-insert'> Send</button>";
 				html+="</div>"
 				html+="</fieldset>"
 				div.html(html);
@@ -340,22 +361,14 @@
         		</div><hr>
             	
             	<div class="feed-footer">
-            		<% for(FeedComment fc:feedCommentList){
-            				if(fc.getFeedNo()==f.getFeedNo()){
-            			
-            			%>
-            			
-            				<div class="comment-back">
-            					<ul>
-            			<% 		
-            					break;
-            				}
-            			}%>
+            		<div class="comment-back">
+            			<ul>
+
             			
             			<%for(FeedComment fc:feedCommentList){
             				if(fc.getFeedNo()==f.getFeedNo()){ %>
                 			<li class='level1' style="list-style:none;">
-                		
+                				<input type="hidden" class="feedCommentNo" value="<%=fc.getFeCommentNo() %>"/>
                 				<%for(GroupMember gm:memberList){
     									if(gm.getMemberNo()==fc.getMemberNo()&&fc.getFeCommentRef()==0){            					
                 					%>
@@ -373,41 +386,43 @@
                         			
                     			</span>
                 			<%			
-                					break;
+                					
                 					}
                 				}
+                					List<FeedComment> level2FeedCommentList=new FeedService().selectLevel2FeedCommentList(fc.getFeCommentNo());
     									%> 
                 			</li>
-                			<%for(GroupMember gm:memberList) {
-                				if(gm.getMemberNo()==fc.getMemberNo()&&fc.getFeCommentNo()==fc.getFeCommentRef()){
+                			<%for(FeedComment fcl2:level2FeedCommentList) {
+                				if(fcl2.getFeCommentLevel()==2&&fc.getFeCommentNo()==fcl2.getFeCommentRef()){
+                				GroupMember commentGroupMember= new GroupService().selectGmInfo(g.getGroupNo(),fcl2.getMemberNo());
                 			%>
                 			<li class="level2" style="list-style:none;">
                     			<span class="profile-back">
-                        			<img class="profile" src="<%=request.getContextPath()%>/images/member_img/<%=gm.getGroupMemberImageNewPath()%>">
+                        			<img class="profile" src="<%=request.getContextPath()%>/images/member_img/<%=commentGroupMember.getGroupMemberImageNewPath()%>">
                     			</span>
                     			<span class="comment-info">
-                        			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
-                        			<span class="comment-date"><%=fc.getFeCommentDate() %></span>
+                        			<span class="comment-writer"><%=commentGroupMember.getGroupMemberNickname() %></span>
+                        			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
                         			<button class="report-button">신고</button>
                         			
                     			</span>
                     			<span class="comment-content-back">
-                        			<span class="comment-content"><%=fc.getFeCommentDate() %></span>
+                        			<span class="comment-content"><%=fcl2.getFeCommentContent() %></span>
                         			
                     			</span>
                 			</li>
-                			<%		}
+                			<%	}	
                 				}%>
-            			</ul>
+            				
             			<%			
-                					break;
+                					
                 					}
                 				}
-    									%> 
-            			
-            			<input type="hidden" name="groupNo" class='groupNo' value="1"/>
-            			<input type="hidden" name="feedNo" class="feedNo" value="22"/>
-            			<input type="hidden" name="feedCommentWriterNo" class='feedCommentWriterNo' value="1"/>
+            					%> 
+            			</ul>
+            			<input type="hidden" name="groupNo" class='groupNo' value="<%=g.getGroupNo()%>"/>
+            			<input type="hidden" name="feedNo" class="feedNo" value="<%=f.getFeedNo() %>"/>
+            			<input type="hidden" name="feedCommentWriterNo" class='feedCommentWriterNo' value="<%=loginMember.getMemberNo() %>"/>
             			<input type="hidden" name="feedCommentLevel" class='feedCommentLevel' value="1"/>
             			<input type="hidden" name="feedCommentRef" class='feedCommentRef' value="0"/>
             			<fieldset class='modal_comment'>
@@ -425,13 +440,13 @@
             				if(fc.getFeedNo()==f.getFeedNo()){
             			
             			%>
-            				</div>
+            				
             				
             			<% 		
             					break;
             				}
             			}%>
-        			
+        			</div>
             	</div>
             </div>
             <hr>

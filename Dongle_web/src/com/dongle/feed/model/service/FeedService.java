@@ -75,7 +75,7 @@ public class FeedService {
 		return feedFileList;
 	}
 	
-	public int insertFeedComment(FeedComment feedComment) {
+	public FeedComment insertFeedComment(FeedComment feedComment) {
 		
 		Connection conn=getConnection();
 		int result=0;
@@ -86,7 +86,9 @@ public class FeedService {
 		}else {
 			rollback(conn);
 		}
-		return result;
+		FeedComment fc=new FeedDao().selectFeedComment(conn, result);
+		close(conn);
+		return fc;
 	}
 	
 	public List<FeedComment> selectFeedCommentList(int groupNo){
@@ -97,6 +99,15 @@ public class FeedService {
 		close(conn);
 		return feedCommentList;
 		
+	}
+	
+	public List<FeedComment> selectLevel2FeedCommentList(int feCommentNo){
+		Connection conn=getConnection();
+		List<FeedComment> feedLevel2CommentList=new FeedDao().selectLevel2FeedCommentList(conn,feCommentNo);
+		
+		close(conn);
+		return feedLevel2CommentList;
+
 	}
 
 }
