@@ -6,20 +6,24 @@ padding: 0px;
 font-family:"a흑진주B";
 }
 div#album-container form#albumFolder> table tr td.albumFolBox{
+	width:185px;
 	font-family:"a흑진주B";
 	/* border:1px solid red; */
 	display:inline-block;
 	text-align: center;
 	align-items: center;
 	padding:15px;
+	height:202px;
 }
-div#album-container form#albumFolder> table tr td.albumFolBox .alImg,p{
+div#album-container form#albumFolder> table tr td.albumFolBox p{
 	display:block;
 	/* border: 1px solid orange; */
 }
-.alImg{
+div#album-container form#albumFolder> table tr td.albumFolBox .alImg{
 	/* border: 1px solid orange; */
-	width:150px; height:150px;
+	width:70px; height:70px;
+	padding:2px;
+	display:inline-block;
 	border-radius: 2px;
 }
 
@@ -42,7 +46,7 @@ section#gallery-container div#galleryList> table tr td.galleryBox .galImg{
 }
 .galImg{
 	width:120px; height:120px;
-	border-radius: 3px;
+	border-radius: 10px;
 }
 section#gallery-container div#galleryList> table tr td.galleryBox .galImg:hover{
 	background-color:rgb(200,200,200);

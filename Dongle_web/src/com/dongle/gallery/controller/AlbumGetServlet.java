@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.AlbumCategory;
+import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
@@ -41,15 +40,42 @@ public class AlbumGetServlet extends HttpServlet {
 		
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
-		
-		if(loginMember.getMemberNo()==0||gm==null||!loginMember.getMemberId().equals("admin"))
+		System.out.println("동호회 회원이니?" + gm);
+		if((gm.getMemberNo()!=loginMember.getMemberNo()))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
-			request.setAttribute("loc", "/communityJoin?gNo="+groupNo);
+			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
+		//그룹의 앨범 뽑아오기
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
+		//메인 이미지로 띄우기 위한 해당 앨범의 갤러리 뽑아오기
+		List<GalleryPath> galList = new GalleryService().albumAndGalList(groupNo);
+		System.out.println("albumGetServlst의 "+list.size()+list);
+		System.out.println("albumGetServlst의 "+galList.size()+galList);
+		int count=0;
+/*		for(int i=0;i<list.size();i++)
+		{
+			count=0;
+			for(int j=0;j<galList.size();j++) {
+				if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())) {
+					if(count<=4) {
+						System.out.println(list.get(i).getAlbumCode());
+						System.out.println(galList.get(j).getAlbumCode());
+						System.out.println(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode()));
+						count++;
+					}
+					else {continue;}
+				}
+				else {
+					System.out.println("안됨");
+					continue;
+				}
+			}
+		}*/
+		
+		request.setAttribute("galList", galList);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/gallery/albumView.jsp").forward(request, response);

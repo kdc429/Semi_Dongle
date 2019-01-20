@@ -16,7 +16,7 @@ import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.GroupMember;
 
 public class GalleryDao {
-	
+	//selectOneList getAllList 두개 쿼리문 확인
 	Properties prop= new Properties();
 	public GalleryDao() {
 		String fileName=GalleryDao.class.getResource("./galleryquery.properties").getPath();
@@ -460,6 +460,44 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	//그룹의 앨범/갤러리 다뽑기
+	public List<GalleryPath> albumAndGalList(Connection conn, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		String sql = prop.getProperty("albumAndGalList");
+		List<GalleryPath> galList = new ArrayList<GalleryPath>();
+		GalleryPath gp =null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				gp=new GalleryPath();
+				gp.setGroupNo(rs.getInt("group_no"));
+				gp.setAlbumCode(rs.getString("album_code"));
+				gp.setMemberNo(rs.getInt("member_no"));
+				gp.setGalNo(rs.getInt("gal_no"));
+				gp.setGalFileNo(rs.getInt("gal_file_no"));
+				gp.setGalFileOldPath(rs.getString("gal_file_old_path"));
+				gp.setGalFileNewPath(rs.getString("gal_file_new_path"));
+				gp.setGalFileContent(rs.getString("gal_file_content"));
+				gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
+				gp.setGalMultiStatus(rs.getString("gal_multi_status"));
+				galList.add(gp);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return galList;
 	}
 	
 }

@@ -136,12 +136,20 @@ public class GalleryService {
 		close(conn);
 		return galNoList;
 	}
-	//일단 전체 갤러리 뽑아봅시다
+	//일단 그 그룹 그 앨범 전체 갤러리 뽑아봅시다
 	public List<GalleryPath> getAllList(String albumCode,int groupNo)
 	{
 		Connection conn=getConnection();
 		List<GalleryPath> list = new GalleryDao().getAllList(conn,albumCode,groupNo);
 		close(conn);
 		return list;
+	}
+	//그룹에 있는 모든 앨범 /사진 다뽑기
+	public List<GalleryPath> albumAndGalList(int groupNo)
+	{
+		Connection conn = getConnection();
+		List<GalleryPath> galList = new GalleryDao().albumAndGalList(conn, groupNo);
+		close(conn);
+		return galList;
 	}
 }
