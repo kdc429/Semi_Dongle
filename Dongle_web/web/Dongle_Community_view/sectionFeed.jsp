@@ -215,7 +215,7 @@
 	
 	$(function(){
 		var eventflag;
-		$(document).on('click','.comment-reple',function(e){
+		$(document).off().on('click','.comment-reple',function(e){
 			var feedNoReple=$(this).parent().parent().children('.feedCommentNo').val();
 			var feedNo=$(this).parent().parent().parent().siblings('.feedNo').val();
 			console.log(feedNo);
@@ -239,7 +239,9 @@
 				div.html(html);
 				div.insertAfter($(this).parent().siblings('.comment-content-back')).slideDown(800);
 				/* 연결된 이벤트 삭제 */
-				$(this).off('click');
+				$(this).off();
+				e.stopPropagation();
+				console.log($(this));
 				
 				
 				div.find('.btn-insert').click(function(e){

@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import common.MyFileRenamePolicy;
+import common.FeedFileRenamePolicy;
 
 /**
  * Servlet implementation class FeedContentUpServlet
@@ -56,7 +56,7 @@ public class FeedContentUploadServlet extends HttpServlet {
 		int maxSize=1024*1024*1024;
 		//파일 업로드 객체 생성
 		//filename rename
-		MultipartRequest mr=new MultipartRequest(request,dir,maxSize,"UTF-8",new MyFileRenamePolicy());
+		MultipartRequest mr=new MultipartRequest(request,dir,maxSize,"UTF-8",new FeedFileRenamePolicy());
 		//DB 연결할 파라미터 값
 		int memberNo = Integer.parseInt(mr.getParameter("memberNo"));
 		int groupNo = Integer.parseInt(mr.getParameter("groupNo"));
