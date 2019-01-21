@@ -85,7 +85,7 @@
 			<!-- 왼쪽 사이드 -->
 			<div class="sidel"
 				style='height: 100vh; background-color: rgb(228, 228, 228)'>
-				<a href="<%=request.getContextPath()%>/Dongle_Community_view/manager_main.jsp">asdf</a>
+				
 				<div class="sideitem1"
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
@@ -266,10 +266,15 @@ $(function(){
 });
 /*고쳐야되애애애애애애애애앵*/
 $(function(){
-	$("#gallery-btn").click(function(){
+	$("#manager-menu-btn").click(function(){
+		var managerNo=<%=g.getMemberNo()%>;
+		console.log(<%=g.getMemberNo()%>);
 		$.ajax({
-			url:"<%=request.getContextPath()%>/manager/?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
+			url:"<%=request.getContextPath()%>/manager/managerView?groupNo=<%=g.getGroupNo()%>",
 			type:"post",
+			data:{
+				"managerNo":managerNo
+			},
 			dataType:"html",
 			success:function(data){
 				$('#content-div').html(data);
