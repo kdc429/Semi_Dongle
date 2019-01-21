@@ -77,6 +77,7 @@
 	max-width:450px;
 	width: auto;
 	height: auto;
+	border-radius:10px 10px;
 }
 
 .media-carousel {
@@ -106,6 +107,7 @@
 	/* text-align: center; */
 	height: 300px;
 	position: absolute;
+	background-color:white;
 }
 
 .feed-pics>ul>li>img {
@@ -191,9 +193,18 @@
 	height: 40px;
 	background-color: rgb(58, 58, 58);
 }
+.file-download{
+	list-style:none;
+	
+	
+	white-space:nowrap;
+}
 
 .picup {
 	bottom: 0;
+}
+.delete-btn{
+	float:right;
 }
 
 /* loading animiation */
