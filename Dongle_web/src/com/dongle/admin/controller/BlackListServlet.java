@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.admin.service.AdminService;
+import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
-
 /**
- * Servlet implementation class MemberListServlet
+ * Servlet implementation class BlackListServlet
  */
-@WebServlet("/admin/memberList")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/admin/blackMemberList")
+public class BlackListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServlet() {
+    public BlackListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,11 +42,12 @@ public class MemberListServlet extends HttpServlet {
 			return;
 		}
 		
-		List<Member> memberList = new AdminService().selectMemberList();
-//		System.out.println(memberList);
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberList.jsp").forward(request, response);
-		
+		List<Member> blackList = new AdminService().selectBlackMemberList("1");
+		List<Member> nonBlackList = new AdminService().selectBlackMemberList("0");
+
+		request.setAttribute("blackList", blackList);
+		request.setAttribute("nonBlackList", nonBlackList);
+		request.getRequestDispatcher("/Dongle_view/admin_memberBlackList.jsp").forward(request, response);
 	}
 
 	/**

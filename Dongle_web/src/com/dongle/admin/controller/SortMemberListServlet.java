@@ -15,14 +15,14 @@ import com.dongle.member.model.vo.Member;
 /**
  * Servlet implementation class SortListServlet
  */
-@WebServlet("/admin/sortList")
-public class SortListServlet extends HttpServlet {
+@WebServlet("/admin/sortMemberList")
+public class SortMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortListServlet() {
+    public SortMemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

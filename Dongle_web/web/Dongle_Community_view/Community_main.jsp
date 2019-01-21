@@ -21,11 +21,18 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
+<<<<<<< HEAD
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <!--    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet"> -->
 	<!-- <link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet"> -->
 	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
+=======
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
+ 
+>>>>>>> refs/remotes/origin/JCH
 </head>
 
 <style>
@@ -125,6 +132,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 		<script>
 			$(function() {
 				var flag = true;
@@ -142,7 +150,6 @@
 				
 			});
 		</script>
-
 	</aside>
         <!-- 게시판 -->
         <section>
