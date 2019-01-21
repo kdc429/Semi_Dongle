@@ -44,12 +44,11 @@ public class AlbumNameCheckServlet extends HttpServlet {
 		
 		String msg="";
 		String loc="";
-		String script="self.close();";
 		String view="/views/common/msg.jsp";
 		if(oldAc!=null)
 		{
 			msg="같은 앨범명이 존재합니다. 다시 시도해 주세요.";
-			loc="/albumGet?groupNo="+groupNo+"&adminId="+memberId;
+			loc="/communityJoin?groupNo="+groupNo;
 		}
 		else
 		{
@@ -57,10 +56,9 @@ public class AlbumNameCheckServlet extends HttpServlet {
 			if(rs!=0)
 			{
 				msg="앨범 등록에 성공하였습니다.";
-				loc="/albumGet?groupNo="+groupNo+"&adminId="+memberId;
+				loc="/communityJoin?groupNo="+groupNo;
 			}
 		}
-		request.setAttribute("script", script);
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);

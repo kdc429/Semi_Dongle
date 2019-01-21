@@ -146,7 +146,7 @@
 	</aside>
         <!-- 게시판 -->
         <section>
-            <div class="main center" id="main_center" style='width:684px;height:auto; background-color:white; align-content: center;'>
+            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:white; align-content: center;'>
             	<span id="header" style='text-align: center;'></span>
             	<br/><br/>
 
@@ -210,14 +210,6 @@
                 </div>
             </div>
         </aside>
-        <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255); clear: left;'>
-
-            </div>
-        </section>
-        <!-- 오른쪽 사이드 -->
-
     </div>
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) -->
 <div class="modal-div">

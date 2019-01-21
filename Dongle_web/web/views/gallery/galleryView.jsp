@@ -35,7 +35,7 @@ com.dongle.group.model.vo.GroupMember"
 .dialog{
 	display:none;
 	position:absolute;
-	margin-top:-1000px;
+	margin-top:-700px;
 	z-index:10;
 	left:0;																																	
 	right:0;
@@ -57,11 +57,11 @@ div.back-div{padding-left:90px;padding-top:50px;}
 div.back-div a.list_btn{text-decoration:none;}
 div.back-div a.list_btn img.back_icon{width:10px;height:10px;}
 div.back-div button.insert-bnt{float:right; border:none;background-color:rgb(0,0,0,0);margin-right:90px;}
-section#gallery-container div#pag-div{position:relative; border:none;}
-section#gallery-container div#pag-div>table.pag_table{width:100%; text-align:center;}
-section#gallery-container div#pag-div>table.pag_table tr td{align-items: center;}
-section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li{text-align:center; align-items: center;color:green;}
-section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50);align-items: center;}
+div#gallery-container div#pag-div{position:relative; border:none;}
+div#gallery-container div#pag-div>table.pag_table{width:100%; text-align:center;}
+div#gallery-container div#pag-div>table.pag_table tr td{align-items: center;}
+div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li{text-align:center; align-items: center;color:green;}
+div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50);align-items: center;}
 
 </style>
 <script>
@@ -122,7 +122,7 @@ section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{te
 		});
 	});
 </script>
-<section id="gallery-container">
+<div id="gallery-container">
 	<div class='back-div'>
 		<a href='javascript:' class='list_btn'>
 			<img class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
@@ -185,7 +185,7 @@ section#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{te
 	</div>
 	
 	<br><br>
-</section>
+</div>
 
 <!-- modal-container 모달 들어갈 곳->>(메인으로 이동함!)-->
 <!-- <div class="modal-div">

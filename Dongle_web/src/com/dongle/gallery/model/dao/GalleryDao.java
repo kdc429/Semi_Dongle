@@ -500,4 +500,25 @@ public class GalleryDao {
 		return galList;
 	}
 	
+	public int deleteAlbum(Connection conn, int groupNo, String albumCode)
+	{
+		PreparedStatement pstmt=null;
+		int rs =0;
+		String sql = prop.getProperty("deleteAlbum");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setString(2, albumCode);
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return rs;
+	}
+	
 }

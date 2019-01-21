@@ -152,4 +152,16 @@ public class GalleryService {
 		close(conn);
 		return galList;
 	}
+	
+	//앨범 삭제하기
+	public int deleteAlbum(int groupNo, String albumCode)
+	{
+		Connection conn = getConnection();
+		int rs = new GalleryDao().deleteAlbum(conn,groupNo,albumCode);
+		if(rs!=0) {commit(conn);}
+		else {rollback(conn);}
+		return rs;
+			
+				
+	}
 }

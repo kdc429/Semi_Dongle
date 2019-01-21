@@ -54,26 +54,6 @@ public class AlbumGetServlet extends HttpServlet {
 		List<GalleryPath> galList = new GalleryService().albumAndGalList(groupNo);
 		System.out.println("albumGetServlst의 "+list.size()+list);
 		System.out.println("albumGetServlst의 "+galList.size()+galList);
-		int count=0;
-/*		for(int i=0;i<list.size();i++)
-		{
-			count=0;
-			for(int j=0;j<galList.size();j++) {
-				if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())) {
-					if(count<=4) {
-						System.out.println(list.get(i).getAlbumCode());
-						System.out.println(galList.get(j).getAlbumCode());
-						System.out.println(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode()));
-						count++;
-					}
-					else {continue;}
-				}
-				else {
-					System.out.println("안됨");
-					continue;
-				}
-			}
-		}*/
 		
 		request.setAttribute("galList", galList);
 		request.setAttribute("groupNo", groupNo);

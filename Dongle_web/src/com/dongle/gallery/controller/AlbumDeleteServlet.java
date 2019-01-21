@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.gallery.model.service.GalleryService;
+
 /**
  * Servlet implementation class AlbumDeleteServlet
  */
@@ -26,8 +28,21 @@ public class AlbumDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String albumName = request.getParameter("albumName");
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+		String albumCode = request.getParameter("albumCode");
+		System.out.println(albumName);
+		
+		int rs = new GalleryService().deleteAlbum(groupNo,albumCode);
+		if(rs!=0)
+		{
+			response.setContentType("text/csv;charset=UTF-8");
+			response.getWriter().println("앨범을 삭제하였습니다.");
+		}
+		else {
+			response.setContentType("text/csv;charset=UTF-8");
+			response.getWriter().println("앨범을 삭제하지 못했습니다. 다시 시도해주세요.");
+		}
 	}
 
 	/**

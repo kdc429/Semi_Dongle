@@ -10,9 +10,9 @@
 <meta charset="UTF-8">
 <title>앨범 추가하기</title>
 <style>
-section#albumPlus-container{padding:0 auto;margin-left:120px; margin-top:30px;}
-section#albumPlus-container input{font-size:18px;font-family:'a흑진주L';}
-section#albumPlus-container button{color:gray;border:none;font-family:'a흑진주L';}
+div#albumPlus-container{padding:0 auto;margin-left:120px; margin-top:30px;}
+div#albumPlus-container input{font-size:18px;font-family:'a흑진주L';}
+div#albumPlus-container button{color:gray;border:none;font-family:'a흑진주L';}
 </style>
 </head>
 <script>
@@ -24,7 +24,7 @@ section#albumPlus-container button{color:gray;border:none;font-family:'a흑진�
 	}
 </script>
 <body>
-	<section id="albumPlus-container">
+	<div id="albumPlus-container">
 		<form action="<%=request.getContextPath()%>/albumNameCheck" name="albumPlusFrm" method="post" onsubmit="return fn_albumPlusFrm">
 			<table>
 				<tr>
@@ -37,6 +37,6 @@ section#albumPlus-container button{color:gray;border:none;font-family:'a흑진�
 				</tr>
 			</table>
 		</form>
-	</section>
+	</div>
 </body>
 </html>

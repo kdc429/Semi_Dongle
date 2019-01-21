@@ -30,7 +30,21 @@ $(function(){
 		});
 	});
 });
-
+$(function(){
+	$('.alname').click(function(event){
+		var albumCode = $(event.target).nextAll("#albumCode")[0].value;
+		console.log(albumCode);
+		$.ajax({
+			url:"<%=request.getContextPath()%>/gallery/galleryGet?groupNo=<%=groupNo%>&albumCode="+albumCode,
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){
+			}
+		});
+	});
+});
 $(function(){
 	//앨범추가
 	$('#albumPlusBtn').click(function(){
@@ -47,21 +61,25 @@ $(function(){
 	//앨범삭제
 	$('#albumDeleteBtn').click(function(e){
 		var m,t1,t2;
-		if(!confirm('앨범을 삭제하겠습니까?'))
-		{return;}
-		else{
-			$('.delcheck').removeAttr('hidden');
-			$('.delsubmit').removeAttr('hidden');
-			
-			$('.delcheck').click(function(e){
-				m=$(this).val();
-				t1=$('.delcheck').siblings('#groupNo').val();
-				t2=$(this).siblings('#albumCode').val();
-				console.log(m);
-				console.log(t1+t2);
-			})
-			
-			$('.delsubmit').click(function(){
+
+		$('.delcheck').removeAttr('hidden');
+		$('.delsubmit').removeAttr('hidden');
+		
+		$('.delcheck').click(function(e){
+			m=$(this).val();
+			t1=$('.delcheck').siblings('#groupNo').val();
+			t2=$(this).siblings('#albumCode').val();
+			console.log(m);
+			console.log(t1+t2);
+		})
+		
+		$('.delsubmit').click(function(){
+			if(!confirm('앨범을 삭제하겠습니까?'))
+			{return;}
+			else{
+				$('.delcheck').attr('hidden');
+				$('.delsubmit').attr('hidden');
+
 				$.ajax({
 					url:"<%=request.getContextPath()%>/gallery/albumDelete",
 					data:{'groupNo':t1,
@@ -71,11 +89,22 @@ $(function(){
 					dataType:"html",
 					type:"post",
 					success:function(data){
-						$('#album-container').html(data);
+						alert('Message: '+data);
+						$.ajax({
+							url:"<%=request.getContextPath()%>/gallery/albumGet",
+							data:{'groupNo':t1,
+							},
+							dataType:"html",
+							type:"post",
+							success:function(data){
+								$('#album-container').html(data);
+							}
+						});
 					}
 				});
-			});
-		}
+			}
+		});
+
 	});
 });
 
@@ -92,6 +121,8 @@ $(function(){
 						<input style="float:right; border:none; background-color:rgb(0,0,0,0);" type="button" id="albumDeleteBtn" name="albumDeleteBtn" value="앨범 삭제"/>
 					</div>
 				<%} %>
+				<hr>
+				
 			</td>
 		</tr>
 	</table>
@@ -103,7 +134,7 @@ $(function(){
 						<tr>
 						</tr>
 						<%albumCount=0; %>
-						<td class="albumFolBox">
+						<td class="albumFolBox" style='width:185px; height:202px;'>
 							<%for(int j=0;j<galList.size();j++){ %>
 								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())){ %>
 									<%if(albumCount<4){ %>
@@ -119,7 +150,7 @@ $(function(){
 								<%}else{continue;} %>
 							<%} %>
 							<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
-							<p>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
+							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=list.get(i).getAlbumCode()%>"/>
@@ -127,7 +158,7 @@ $(function(){
 						<%count++;%>
 					<%} 
 					else{%>
-						<td class="albumFolBox" >
+						<td class="albumFolBox"  style='width:185px; height:202px;'>
 							<%albumCount=0; %>
 							<%for(int j=0;j<galList.size();j++){ %>
 								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())){ %>
@@ -144,7 +175,7 @@ $(function(){
 								<%}else{continue;} %>
 							<%} %>
 							<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
-							<p>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
+							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=list.get(i).getAlbumCode()%>"/>
