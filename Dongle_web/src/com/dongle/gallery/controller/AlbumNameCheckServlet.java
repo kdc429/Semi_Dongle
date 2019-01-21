@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.AlbumCategory;
+import com.dongle.member.model.vo.Member;
 
 /**
  * Servlet implementation class AlbumNameCheckServlet
@@ -31,27 +32,35 @@ public class AlbumNameCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String albumNameP = request.getParameter("albumNameP");
-		/*int groupNo=Integer.parseInt(request.getParameter("groupNo"));*/
-		String groupNo=request.getParameter("groupNo");
-		System.out.println(groupNo);
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		String memberId=request.getParameter("memberId");
+		System.out.println("여기 albumcheck서블릿: "+groupNo+" : "+memberId);
 		AlbumCategory ac = new AlbumCategory();
 		ac.setAlbumName(albumNameP);
 		/*ac.setGroupNo(groupNo);*/
-		AlbumCategory oldAc = new GalleryService().checkAlbumName(ac);
+		AlbumCategory oldAc = new GalleryService().checkAlbumName(ac,groupNo);
+		System.out.println(oldAc);
 		
 		String msg="";
 		String loc="";
+		String script="self.close();";
 		String view="/views/common/msg.jsp";
 		if(oldAc!=null)
 		{
 			msg="같은 앨범명이 존재합니다. 다시 시도해 주세요.";
-			loc="/albumGet?groupNo="+groupNo+"&adminId=admin";
+			loc="/albumGet?groupNo="+groupNo+"&adminId="+memberId;
 		}
 		else
 		{
-			msg="앨범 등록에 성공하였습니다.";
-			loc="/albumGet?groupNo"+groupNo+"&adminId=admin";
+			int rs=new GalleryService().insertAlbum(albumNameP,groupNo);
+			if(rs!=0)
+			{
+				msg="앨범 등록에 성공하였습니다.";
+				loc="/albumGet?groupNo="+groupNo+"&adminId="+memberId;
+			}
 		}
+		request.setAttribute("script", script);
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);

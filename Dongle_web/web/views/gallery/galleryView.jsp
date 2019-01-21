@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.dongle.gallery.model.vo.GalleryPath,java.util.*"%>
+<%@page import="com.dongle.gallery.model.vo.GalleryPath,java.util.*,com.dongle.member.model.vo.Member"%>
 <%
 	List<GalleryPath> list = (List)request.getAttribute("list");
 	int numPerPage = (int)request.getAttribute("numPerPage");
 	String pageBar=(String)request.getAttribute("pageBar");
+ 	Member loginMember = (Member)session.getAttribute("loginMember");
+ 	int groupNo=(int)request.getAttribute("groupNo");
+ 	String albumCode=(String) request.getAttribute("albumCode");
 	int count=1;
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 부트스트랩 -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,8 +27,9 @@
 	.dialog{
 		display:none;
 		position:fixed;
-		z-index:1;
-		left:0;
+		margin-top:-400px;
+		/* z-index:10; */
+		left:0;																																	
 		right:0;
 		width:100%;
 		height:100%;
@@ -37,90 +38,90 @@
 		background-color:rgba(0,0,0,0.4);
 	}
 	.modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; 
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;                    
+        background-color: #fefefe;
+        margin: 15% auto; 
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;  
+        border-radius: 5px;
     }
-     .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
+    div#btn-div span button#list-btn{float:left;}
+    div#btn-div span button#insert-btn{float:right;}
 </style>
 <script>
-	function fn_gallery_validate(){
-		return true;
-	}
 	$(function(){
 		$('.galImg').mouseover(function(){
 			$(this).fadeTo(100,0.4);
 		});
 		$('.galImg').mouseleave(function(){
 			$(this).fadeTo(100,1);
-		})
+		});
+	});
+	$(function(){
+		//사진 추가하기 form
+		$('.insert-bnt').click(function(){
+			console.log("tt");
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/insertGallery?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#gallery-container').html(data);
+				},
+				error: function(){console.log("gg");}
+			});
+		});
+	});
+	$(function(){
+		//모달띄우기
+		$('.galImg').click(function(event){
+			var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
+			var galNo = $(event.target).nextAll('#galNo')[0].value;
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo+"&dataNum="+1,
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('.modal-content').html(data);
+					$('#modal-container').css('display','block');
+				},
+				error:function(request,m,e){console.log(request);}
+				
+			});	
+		});
 		
-		var modal = document.getElementById('modal-container');
-		$('.galleryBox').click(function(obj){
-			console.log(obj);
-			modal.style.display="block";
-		});
-		$('.close').click(function(){
-			modal.style.display="none";
-		});
-		window.onclick = function(event){
-			if(event.target==modal)
-			{
-				modal.style.display="none";
-			}
-		}
 	});
 </script>
-<title>Insert title here</title>
-</head>
-<body>
 <section id="gallery-container">
-	<!-- ㅡmodal-container -->
-	<div class="dialog" id="modal-container">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<div>
-				<hr>
-				<%-- <img class="modalImg" src=<%=list.get(3).getGalFilePath()%> width="150px" height="150px"> --%>
-				<hr>
-			</div>
-		</div>
-	
-    </div>
-	<form name="galleryList" id="galleryList" onsubmit="return fn_gallery_validate();">
+	<div id="btn-div" style="position:relative;width:610px;">
+		<hr>
+		<span><button type="submit" id="list-bnt" name="list-bnt">목록으로</button></span>
+		<button class="insert-bnt" name="insert-bnt" >사진 추가하기</button>
+	</div>
+	<br>
+	<div id="galleryList">
 		<table >
-			<%if(list.size()!=0){ %>
+			<%if(list.size()!=0){%>
 					<%for(GalleryPath t : list){ %>
 						<%if(count%4==1){%>
 							<tr>
 							</tr>
-								<td class="galleryBox" >
-									<img class="galImg" src="<%=t.getGalFilePath() %>">
-									<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
-									<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
-									<input type="hidden" name="galFileNo" value="<%=t.getGalFileNo() %>"/>
-								</td>
+							<td class="galleryBox" >
+								<img class="galImg" src="<%=request.getContextPath()%>/images/gallery/<%=t.getGalFileNewPath() %>">
+								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
+								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
+								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
+								<input type="hidden" name="galNo" id="galNo" value="<%=t.getGalNo() %>"/>
+							</td>
 							<%count++; %>
 						<%} 
 						else{%>
 							<td class="galleryBox" >
-								<img class="galImg" src="<%=t.getGalFilePath() %>">
+								<img class="galImg" src="<%=request.getContextPath()%>/images/gallery/<%=t.getGalFileNewPath() %>">
 								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
 								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
-								<input type="hidden" name="galFileNo" value="<%=t.getGalFileNo()%>"/>
+								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>
+								<input type="hidden" name="galNo" id="galNo" value="<%=t.getGalNo() %>"/>
 							</td>
 							<%count++; %>
 						<%} %>
@@ -132,18 +133,28 @@
 				</div>
 			<%} %>
 		</table>
-	</form>
+<!-- 	</form> -->
+	</div>
 	<br><br>
-	<table width="610px" text-align="center">
-		<tr>
-   			<td>
-        		<ul class="pagination" id="paging">
-	   				<%=pageBar %>
-        		</ul>
-       		</td>
-		</tr>
-	</table>
+	<div id="pag-div">
+		<table width="610px" text-align="center">
+			<tr>
+	   			<td>
+	        		<ul class="pagination" id="paging">
+		   				<%=pageBar %>
+	        		</ul>
+	       		</td>
+			</tr>
+		</table>
+	</div>
+	
 	<br><br>
 </section>
-</body>
-</html>
+<!-- ㅡmodal-container -->
+	
+<div class="modal-div">
+		<div class="dialog" id="modal-container">
+			<div class="modal-content">
+			</div>
+	    </div>
+    </div>

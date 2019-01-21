@@ -1,102 +1,213 @@
-// var feed=$('.feed:last-child').after('<div>new feed</div>').css({
-//     'width':'750px',
-//     'height':'300px',
-//     'border':'1px solid red'
-// }).attr('class','feed');
-// $(document).ready(function () {
-//     //스크롤 발생 이벤트 처리
-//     $('.newsfeed').scroll(function () {
-//         console.log('df');
-//         var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
-//         var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
-//         var contentH = $('.news').height(); //문서 전체 내용을 갖는 div의 높이
-//         if (scrollT + scrollH >= contentH) { // 스크롤바가 맨 아래에 위치할 때
-//             $('.news').append($('<div>new feed</div>').css({
-//                 'width':'750',
-//                 'height':'300',
-//                 'border':'1px solid red'
-//             }));
-//         }
-//     });
-// });
+var time; // 슬라이드 넘어가는 시간
+        var feedPicLi;
+        var feedPicCount; // 캐러셀 사진 갯수
+        var currentIndex; // 현재 보여지는 슬라이드 인덱스 값
+        var indiIndex; //인디케이터 인덱스
+        var imgWidth; // 사진 한장의 너비
+        currentIndex = 0;
 
-$(document).ready(
-		function() {
-			$('#more').click(
-					function() {
+        $(document).on('click','.feed-pic-indi',function () {
 
-						for (var i = 0; i < 3; i++) {
+            console.log($($(this).parent('ul').children('li')).index(this));
+            feedPicLi=$(this).parent('ul').parent('div').siblings('.feed-pics').children('.media-carousel').children('li');
+            indiIndex = $($(this).parent('ul').children('li')).index(this);
+            feedPicCount = feedPicLi.length;
+            
+            
+            if (indiIndex == currentIndex) {
+                return false;
+                //같은 인덱스의 인디케이터를 눌렀을때 이벤트 작동 안함
+            } else if (indiIndex > currentIndex) {
+                
+                imgWidth = feedPicLi.width(); // 사진 한장의 너비	
+                // 이미지 위치 조정
+                
+                
+                // 이미지 위치 조정
+                for (var i = 0; i < feedPicCount; i++) {
+                    if (i == currentIndex) {
+                        feedPicLi.eq(i).css("left", 0);
+                    } else {
+                        feedPicLi.eq(i).css("left", imgWidth);
+                    }
+                }
+            
+                for (var i = 0; i < feedPicCount; i++) {
+                    if (i == currentIndex) {
+                        feedPicLi.eq(i).css("left", 0);
+                    } else {
+                        feedPicLi.eq(i).css("left", imgWidth);
+                    }
+                }
+                
+                console.log(feedPicLi.eq(currentIndex));
+                var left = -imgWidth;
+                //현재 슬라이드를 왼쪽으로 이동 ( 마이너스 지점 )
+                feedPicLi.eq(currentIndex).animate({
+                    left: left
+                },function () {
+                
+                    feedPicLi.eq(currentIndex-1).css("left", imgWidth);
+                });
+                //선택화면 넘어옴
+                for (var i = 0; i < feedPicCount; i++) {
+                    if (i == indiIndex) {
+                        feedPicLi.eq(indiIndex).animate({
+                            left: 0
+                        });
+                    } else {
+                        feedPicLi.eq(i).css({
+                            left: imgWidth
+                        });
+                    }
+                }
+                //현재 인덱스 저장
+                currentIndex = indiIndex;
+                return currentIndex;
 
-							$('.news').append($('<hr>'));
-							$('.news').append($('<div>new feed</div>').css({
-								'width' : '500',
-								'height' : 'auto',
-								'border' : '1px solid grey'
-							}).attr('class', 'feed'));
-							$('.feed:last-child').append(
-									$('<div>new feed 작성자, 작성 시간</div>').css({
-										'border' : '1px solid grey',
-										'width' : '500px',
-										'height' : '40px'
-									}).attr('class', 'storyH'));
-							$('.feed:last-child').append(
-									$('<div>new feed 작성 내용</div>').css({
-										'border' : '1px solid grey',
-										'width' : '500px',
-										'height' : '200px'
-									}).attr('class', 'storyB'));
-							$('.feed:last-child').append(
-									$('<div></div>').css({
-										'border' : '1px solid grey',
-										'width' : '500px',
-										'height' : '40px'
-									}).attr('class', 'storyF').append(
-											$('<a>∥댓글달기</a>').attr('class',
-													'comment')).append(
-											$('<a>∥댓글보기</a>').attr('class',
-													'repleview')));
+            } else if (indiIndex < currentIndex) {
+                imgWidth = feedPicLi.width(); // 사진 한장의 너비	
+                // 이미지 위치 조정
+                for (var i = 0; i < feedPicCount; i++) {
+                    if (i == currentIndex) {
+                        feedPicLi.eq(i).css("left", 0);
+                    } else {
+                        feedPicLi.eq(i).css("left", -imgWidth);
+                    }
+                }
+                
+                var left = imgWidth;
 
-						}
-						// $('#more').remove();
-						console.log($('.news:last-child'));
-						$('.news:last-child').append($('#more'));
+                //현재 슬라이드를 오른쪽으로 이동 ( 마이너스 지점 )
+                feedPicLi.eq(currentIndex).animate({
+                    left: left
+                },function () {
+                
+                    feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
+                });
 
-					});
-		});
-$(document).ready(
-		function() {
+                //선택화면 넘어옴
+                for (var i = 0; i < feedPicCount; i++) {
+                    if (i == indiIndex) {
+                        feedPicLi.eq(indiIndex).animate({
+                            left: 0
+                        });
+                    } else {
+                        feedPicLi.eq(i).css({
+                            left: -imgWidth
+                        });
+                    }
+                }
+                //현재 화면 인덱스 저장
+                currentIndex = indiIndex;
+                return currentIndex;
+            }
 
-			$(document).on(
-					'click',
-					'.comment',
-					function() {
+        });
 
-						// console.log($(this).parent().parent());
-						$(this).parent().parent().css('height', '300px');
-						$(this).parent().css('height', '40px').append(
-								'<form></form>');
-						$(this).next().append('<label>댓글 입력</label>');
-						$(this).next().children().append(
-								'<input type="text" size="40"/>').css({
-							'type' : 'text',
-							'size' : '200'
-						});
-						$(this).next().append('<button>등록</button>');
-						// $(this).parent().siblings('#comment').next;
-						console.log($(this).next().children());
-						$(this).remove();
-					});
-		});
-$(document).ready(function() {
+        $(document).on('click','.next',function() {
+            // carousel_setImgPosition();
+            feedPicLi=$(this).siblings('.media-carousel').children('li');
+            imgWidth = feedPicLi.width();
+            feedPicCount = feedPicLi.length;
+            
+                
+                // 이미지 위치 조정
+            for (var i = 0; i < feedPicCount; i++) {
+                if (i == currentIndex) {
+                    feedPicLi.eq(i).css("left", 0);
+                } else {
+                    
+                    feedPicLi.eq(i).css("left", imgWidth);
+                }
+            }
+            
 
-	$(document).on('click', '.repleview', function() {
-		var reple = [ '댓글1', '댓글2', '댓글3', '댓글4', '댓글5' ];
-		console.log($(this).parent().next());
-		for ( var r in reple) {
-			$(this).parent().after('<div>' + reple[r] + '</div>');
-		}
-		$(this).parent().after('<button>접기</button>');
-		$(this).remove();
+            
+            var left = -imgWidth;
+            feedPicLi.eq(currentIndex).animate({
+                left: left
+            }, function () {
+                
+                feedPicLi.eq(currentIndex-1).css("left", imgWidth);
+            });
+            
+            feedPicLi.eq(currentIndex).css({
+                "left": imgWidth
+            });
+            // 다음 슬라이드 화면으로
+            if (currentIndex == (feedPicCount - 1)) {
+                //마지막 슬라이드 화면일때 초기화
+                
+                currentIndex = 0;
+            } else {
+                
+                currentIndex++;
+            }
+            for (var i = 0; i < feedPicCount; i++) {
+                if (i == currentIndex) {
+                    //다음 화면 넘기기
+                    feedPicLi.eq(currentIndex).animate({
+                        left: 0
+                    });
+                } else {
+                    feedPicLi.eq(i).css({
+                        left: imgWidth
+                    });
+                }
+            }
 
-	});
-});
+
+            //현재 화면 인덱스 저장
+            return currentIndex;
+        });
+
+        $(document).on('click','.prev',function() {
+            feedPicLi=$(this).siblings('.media-carousel').children('li');
+            imgWidth = feedPicLi.width();
+            feedPicCount = feedPicLi.length;
+            
+            for (var i = 0; i < feedPicCount; i++) {
+                if (i == currentIndex) {
+                    feedPicLi.eq(i).css("left", 0);
+                } else {
+                    console.log('태그이동');
+                    feedPicLi.eq(i).css("left", -imgWidth);
+                }
+            }
+
+            // carousel_setImgPositionL();
+            
+            var left = imgWidth;
+            console.log(left);
+            feedPicLi.eq(currentIndex).animate({
+                left: left
+                
+            },function () {
+                
+                feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
+            });
+            console.log("태그이동!");
+            // 다음 슬라이드 화면으로
+            if (currentIndex == 0) {
+                //마지막 슬라이드 화면일때 초기화
+                currentIndex = feedPicCount - 1;
+                console.log(currentIndex);
+            } else {
+                currentIndex--;
+            }
+            for (var i = 0; i < feedPicCount; i++) {
+                if (i == currentIndex) {
+                    //다음 화면 넘기기
+                    feedPicLi.eq(currentIndex).animate({
+                        left: 0
+                    });
+                } else {
+                    feedPicLi.eq(i).css({
+                        left: -imgWidth
+                    });
+                }
+            }
+            //현재 화면 인덱스 저장
+            return currentIndex;
+        });
