@@ -133,38 +133,6 @@ public class GalleryDao {
 		return result;
 	}
 	
-	public AlbumCategory checkAlbumName(Connection conn, AlbumCategory ac,int groupNo)
-	{
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql =prop.getProperty("checkAlbumName");
-		AlbumCategory checkAc=null;
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, ac.getAlbumName());
-			pstmt.setInt(2, groupNo);
-			rs=pstmt.executeQuery();
-			while(rs.next())
-			{
-				checkAc=new AlbumCategory(
-						rs.getInt("group_no"),
-						rs.getString("album_code"),
-						rs.getString("album_name")
-						);
-			}
-			
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally {
-			close(rs);
-			close(pstmt);
-		}
-		return checkAc;
-	}
-	
 	public int inserAlbum(Connection conn,String albumNameP,int groupNo)
 	{
 		PreparedStatement pstmt=null;

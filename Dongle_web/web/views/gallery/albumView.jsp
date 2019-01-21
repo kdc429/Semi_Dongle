@@ -49,7 +49,7 @@ $(function(){
 	//앨범추가
 	$('#albumPlusBtn').click(function(){
 		$.ajax({
-			url:"<%=request.getContextPath()%>/albumPlus?groupNo=<%=groupNo%>",
+			url:"<%=request.getContextPath()%>/gallery/albumPlus?groupNo=<%=groupNo%>",
 			dataType:"html",
 			type:"post",
 			success:function(data){
@@ -130,10 +130,11 @@ $(function(){
 		<table  style='margin-left:25%;'>
 			<%if(list.size()!=0){ %>
 				<%for(int i=0;i<list.size();i++){ %>
+					
 					<%if(count%2==1){%>
 						<tr>
 						</tr>
-						<%albumCount=0; %>
+						<%albumCount=0; empty=0;%>
 						<td class="albumFolBox" style='width:185px; height:202px;'>
 							<%for(int j=0;j<galList.size();j++){ %>
 								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())){ %>
@@ -149,7 +150,9 @@ $(function(){
 									<%}else{continue;} %>
 								<%}else{continue;} %>
 							<%} %>
-							<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
+			 				<%for(int j=0;j<4;j++){ %>
+								<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
+							<%} %>
 							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
@@ -159,7 +162,7 @@ $(function(){
 					<%} 
 					else{%>
 						<td class="albumFolBox"  style='width:185px; height:202px;'>
-							<%albumCount=0; %>
+							<%albumCount=0;  empty=0;%>
 							<%for(int j=0;j<galList.size();j++){ %>
 								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())){ %>
 									<%if(albumCount<4){ %>
@@ -174,7 +177,9 @@ $(function(){
 									<%}else{continue;} %>
 								<%}else{continue;} %>
 							<%} %>
-							<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
+							<%for(int j=0;j<4;j++){ %>
+								<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
+							<%} %>
 							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>

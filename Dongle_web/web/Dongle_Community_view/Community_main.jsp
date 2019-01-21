@@ -71,10 +71,9 @@
             <div class='logoback' style='position:relative;width:1024px;height: auto'>
                 <!-- 로고 grid -->
                 <div class='logo' style='width:1024px; height: auto; background-color:rgb(20,150,200)'>
-                    <h2 style="color:rgb(250,237,125); margin-left:15px;">DONGLE</h2>
+                    <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2>
                 </div>
             </div>
-
         </header>
 	<aside>
 		<div class="sideback center">
@@ -139,13 +138,9 @@
 						$(this).next().slideUp();
 						flag=true;
 					}
-					
-			})
-				
+				});
 			});
 		</script>
-
-
 	</aside>
         <!-- 게시판 -->
         <section>
@@ -260,7 +255,7 @@ function comunnityHome(){
 	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 function logoCk(){
-	location.href="<%=request.getContextPath()%>/login?memberNo=<%=loginMember.getMemberNo()%>";
+	location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>$password=<%=loginMember.getMemberPwd()%>";
 }
 
 </script>

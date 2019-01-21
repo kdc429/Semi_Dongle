@@ -48,14 +48,6 @@ public class GalleryService {
 		close(conn);
 		return result;
 	}
-	
-	public AlbumCategory checkAlbumName(AlbumCategory ac, int groupNo)
-	{
-		Connection conn = getConnection();
-		AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac,groupNo);
-		close(conn);
-		return oldAc;
-	}
 	public int insertAlbum(String albumNameP,int groupNo)
 	{
 		Connection conn = getConnection();
