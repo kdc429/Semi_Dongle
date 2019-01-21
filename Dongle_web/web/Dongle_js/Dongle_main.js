@@ -145,19 +145,23 @@ function carousel() {
 var btn=$('.join-btn');
 var icon=$('.img-icon');
 btn.hover(function(){
-	$(this).fadeTo(100,0.5);
+	$(this).find('img').fadeTo(100,0.5);
 	$(this).find('span.group-name').fadeTo(100,1);
+	
+	
 });
 
 btn.mouseleave(function(){
-	$(this).fadeTo(100,1);
+	$(this).find('img').fadeTo(100,1);
 	$(this).find('span.group-name').fadeTo(100,0);
 });	
 
 icon.hover(function(){
-	$(this).fadeTo(100,0.3);
+	$(this).find('img').fadeTo(100,0.5);
+	$(this).find('span.sub-icon').fadeTo(100,1);
 });
 
 icon.mouseleave(function(){
-	$(this).fadeTo(100,1);
+	$(this).find('img').fadeTo(100,1);
+	$(this).find('span.sub-icon').fadeTo(100,0);
 });

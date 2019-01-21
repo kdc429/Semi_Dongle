@@ -1,6 +1,7 @@
 package com.dongle.gallery.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.vo.GroupMember;
+import com.dongle.member.model.vo.Member;
 
 /**
  * Servlet implementation class GalleryGetServlet
  */
-@WebServlet("/galleryGet")
+@WebServlet("/gallery/galleryGet")
 public class GalleryGetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,15 +37,18 @@ public class GalleryGetServlet extends HttpServlet {
 		
 		String albumCode = request.getParameter("albumCode");
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-		String memberId=request.getParameter("memberId");
-		System.out.println(albumCode+" "+groupNo+" : "+memberId);
-/*		if(list.size()==0)
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+/*		System.out.println(albumCode+" "+groupNo+" : "+loginMember.getMemberId());*/
+		//동호회 회원인지 아닌지 group_member_tab에서 확인
+		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
+		System.out.println(gm);
+/*		if(gm.getMemberNo()==0||!loginMember.getMemberId().equals("admin"))
 		{
-			request.setAttribute("msg", "등록된 사진이 없습니다.");
-			request.setAttribute("loc", "/views/gallery/galleryView.jsp");
+			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
+			request.setAttribute("loc", "/communityJoin?gNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}*/		
+		}		*/
 		
 		//페이징 처리하기
 		int cPage; //현재 페이지를 의미함 (너가 지금 뭘 보고있는지!)
@@ -64,6 +70,33 @@ public class GalleryGetServlet extends HttpServlet {
 		}
 		//페이지 수 만큼 데이터를 불러오기
 		List<GalleryPath> list = new GalleryService().galleryGet(albumCode,groupNo,cPage,numPerPage); //cPage와 numPerPage가 있으면 공식에 의해서 페이징 처리가 가능함
+		
+		//##테스트 중입니다.
+		//gal_no만 distinct된 dao에 갔다오기
+		List galNoList = new GalleryService().distictGalNoList(albumCode,groupNo);
+		List<GalleryPath> allList = new ArrayList<GalleryPath>();
+		GalleryPath gp = null;
+		for(int i=0; i<galNoList.size();i++)
+		{
+			for(int j=0;j<list.size();j++)
+			{
+				if(Integer.parseInt((String) galNoList.get(i))==list.get(j).getGalNo())
+				{
+					gp = list.get(i);
+				}
+				else {
+					continue;
+				}
+			}
+			allList.add(gp);
+		}
+		
+		for(int i=0; i<allList.size();i++)
+		{
+			System.out.println(allList.get(i));
+		}
+		
+		
 		//실질적인 페이지를 구성해보자
 		//전체 자료 수 확인하기
 		int totalMember = new GalleryService().selectGalleryCount(albumCode,groupNo);
@@ -84,7 +117,7 @@ public class GalleryGetServlet extends HttpServlet {
 		}
 		else
 		{
-			pageBar+="<li><a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&memberId="+memberId+"&cPage="+(pageNo-1)+"&numPerPage="+numPerPage+"'>＜ &nbsp;</a>";
+			pageBar+="<li><a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+(pageNo-1)+"&numPerPage="+numPerPage+"'>＜ &nbsp;</a>";
 		}
 		//선택페이지 만들기
 		while(!(pageNo>pageEnd||pageNo>totalPage))
@@ -95,7 +128,7 @@ public class GalleryGetServlet extends HttpServlet {
 			}
 			else
 			{
-				pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&memberId="+memberId+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+"&nbsp;"+pageNo+"&nbsp;"+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+"&nbsp;"+pageNo+"&nbsp;"+"</a>";
 			}
 			pageNo++;
 		}
@@ -105,16 +138,14 @@ public class GalleryGetServlet extends HttpServlet {
 			pageBar+="<span> &nbsp;＞</span>";
 		}
 		else {
-			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&memberId="+memberId+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
+			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
 		}
 		request.setAttribute("list", list);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);
 		request.setAttribute("pageBar", pageBar);
-
-
-		
-		request.setAttribute("list", list);
+		request.setAttribute("groupNo", groupNo);
+		request.setAttribute("albumCode", albumCode);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 

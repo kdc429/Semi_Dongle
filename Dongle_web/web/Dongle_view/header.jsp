@@ -24,6 +24,8 @@
 	href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
 <link href="https://fonts.googleapis.com/css?family=Bungee"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
@@ -49,25 +51,48 @@
             	<!-- 정보수정 및 로그 아웃 버튼! -->
             	
             	<div class="user-back">
+            		<span><%=loginMember.getMemberName()%>님, 환영합니다!</span>
+            	</div>&nbsp;&nbsp;
+            	<div class="user-back">
+            	<!-- 마이페이지 버튼 -->
             		<button class="img-icon">
+<<<<<<< HEAD
             			<span onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>'"/><%=loginMember.getMemberName()%>님, 환영합니다!</span>&nbsp;&nbsp;
+=======
+            			<span class="sub-icon">마이페이지</span>
+>>>>>>> refs/remotes/origin/workTest
             			<img class="user-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
             		</button>
+<<<<<<< HEAD
             	</div>&nbsp;&nbsp;&nbsp;&nbsp;
             	
+=======
+            		
+            		
+            	</div>
+>>>>>>> refs/remotes/origin/workTest
             	<div class="user-back">
+            	<!-- 로그 아웃 버튼 -->
             		<button class="img-icon">
+<<<<<<< HEAD
             			<span onclick="location.href='<%=request.getContextPath()%>/member/logout'">로그아웃</span>&nbsp;&nbsp;
+=======
+            			<span class="sub-icon">로그아웃</span>
+>>>>>>> refs/remotes/origin/workTest
             			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
             		</button>
             	</div>
+<<<<<<< HEAD
             	
+=======
+>>>>>>> refs/remotes/origin/workTest
             </div>
             <div class="logo-back">
             	<div style="font-family:'SunFlower'";><h4>당신을 위한 맞춤형 동호회</h4></div>
             	<div class="logo">DONGLE</div>
             	<div class="dongle-guide">
-            		<button style="width:190px; background-color: rgba(0,0,0,0);">동글 가이드</button>
+            	<!-- 동글 가이드 버튼 -->
+            		<button class="guide-btn" style="width:190px; background-color: rgba(0,0,0,0);">동글 가이드</button>
             	</div>
             </div>
         </div>
