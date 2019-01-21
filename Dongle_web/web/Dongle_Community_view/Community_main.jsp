@@ -81,7 +81,7 @@
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
-                    
+                    <%if(loginMember.get) %>
                 </div>
             </div>
         </aside>
