@@ -150,6 +150,11 @@ $(function(){
 								<%}else{continue;} %>
 							<%} %>
 							<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
+							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
+							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
+							<input type="hidden" name="albumCode" id="albumCode" value="<%=list.get(i).getAlbumCode()%>"/>
+						</td>
+						<td style='display:block;'>
 							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
@@ -175,12 +180,17 @@ $(function(){
 								<%}else{continue;} %>
 							<%} %>
 							<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
-							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
 							<input type="hidden" name="albumCode" id="albumCode" value="<%=list.get(i).getAlbumCode()%>"/>
 						</td>
 						<%count++;%> 
+						<td style='display:block;'>
+							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
+							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
+							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
+							<input type="hidden" name="albumCode" id="albumCode" value="<%=list.get(i).getAlbumCode()%>"/>
+						</td>
 					<%} %>
 				<%} %>
 			<%}
