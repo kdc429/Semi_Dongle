@@ -15,7 +15,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
  
 </head>
 
@@ -49,6 +49,7 @@
             <div class="sideback center">
                 <!-- 왼쪽 사이드 -->
                 <div class="sidel" style='height:100vh; background-color:rgba(130, 238, 41, 0.8)'>
+                	<a href="<%=request.getContextPath()%>/Dongle_Community_view/manager_main.jsp">asdf</a>
                     <div class="sideitem" style="border:1px solid red; left:10%; right:10%; height:250px;">프로필</div>
                     <div class="sideitem" style='border:1px solid red; left:10%; right:10%; height:150px'>소개글</div>
                 </div>
@@ -80,6 +81,7 @@
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
+                    
                 </div>
             </div>
         </aside>

@@ -38,7 +38,7 @@ body {
 	align-items: center;
 	margin-left: 170px;
 	margin-top: 62.8px;
-	z-index: 1;
+	
 }
 
 /* 행 스타일 적용
@@ -46,8 +46,8 @@ body {
          */
 .center {
 	position: absolute;
-	display: flex;
-	flex-direction: row;
+	/* display: flex;
+	flex-direction: row; */
 }
 
 .sideback {
@@ -79,7 +79,7 @@ body {
          */
 .logo {
 	position: fixed;
-	z-index: 2;
+	
 }
 
 /* 왼쪽 사이드 컨텐트 */

@@ -2357,15 +2357,7 @@ public class AdminDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			if(isBlack.equals("1"))
-			{
-				pstmt.setString(1, isBlack);
-			}
-			else if(isBlack.equals("0"))
-			{
-				pstmt.setString(1, isBlack);
-				pstmt.setInt(2, 3);
-			}
+			pstmt.setString(1, isBlack);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next())
@@ -2450,13 +2442,22 @@ public class AdminDao {
 		return result;
 	}
 	
-	/*블랙리스트 검색*/
-	public List<Member> searchBlack(Connection conn, String searchBlack)
+	/*블랙/논블랙 검색*/
+	public List<Member> searchBlack(Connection conn, String searchBlack, String isBlack)
 	{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<Member> blackList=new ArrayList();
-		String sql=prop.getProperty("searchBlack");
+		String sql;
+		if(isBlack.equals("1"))
+		{
+			sql=prop.getProperty("searchBlack");
+		}
+		else
+		{
+			sql=prop.getProperty("searchNonBlack");
+		}
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

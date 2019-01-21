@@ -9,14 +9,29 @@
 	List<Group> list = (List) request.getAttribute("list");
 	List<Member> blackList = (List) request.getAttribute("blackList");
 	List<Member> nonBlackList = (List) request.getAttribute("nonBlackList");
-
-	String flag = "false";
-	String rowValue = "";
-	if (request.getParameter("flag") != null && request.getParameter("rowValue") != null) {
-		flag = request.getParameter("flag");
-		rowValue = request.getParameter("rowValue");
-
+	
+	String searchBlack;
+	if((String)request.getAttribute("search-black") == null)
+	{
+		searchBlack = "";
 	}
+	else
+	{
+		searchBlack = (String)request.getAttribute("search-black");
+	}
+	
+	String searchNonBlack;
+	if( (String)request.getAttribute("search-nonblack") == null)
+	{
+		searchNonBlack = "";
+	}
+	else
+	{
+		searchNonBlack = (String)request.getAttribute("search-nonblack");
+	}
+	
+	
+	
 %>
 <script>
 	function validate1(){
@@ -47,11 +62,11 @@
 	</ul>
 	<h2>블랙 리스트 관리</h2>
 	<div id="blackSearch-container">
-		<form id="nonblack-search-frm" action="<%=request.getContextPath() %>/admin/searchNonBlack">
+		<form id="nonblack-search-frm" method="post" action="<%=request.getContextPath() %>/admin/searchBlack?search-black=<%=searchBlack%>">
 			아이디 : <input type="text" name="search-nonblack" size="15"/>
 			<input type="submit" value="검색">
 		</form>
-		<form id="black-search-frm" action="<%=request.getContextPath() %>/admin/searchBlack">
+		<form id="black-search-frm" method="post" action="<%=request.getContextPath() %>/admin/searchBlack?search-nonblack=<%=searchNonBlack%>">
 			아이디 : <input type="text" name="search-black" size="15"/>
 			<input type="submit" value="검색">
 		</form>

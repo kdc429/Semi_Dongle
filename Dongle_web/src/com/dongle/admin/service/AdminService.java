@@ -327,10 +327,11 @@ public class AdminService {
 		return result;
 	}
 	
-	public List<Member> searchBlack(String searchBlack)
+	/*블랙/논블랙 검색*/
+	public List<Member> searchBlack(String searchBlack, String isBlack)
 	{
 		Connection conn = getConnection();
-		List<Member> blackList = new AdminDao().searchBlack(conn, searchBlack);
+		List<Member> blackList = new AdminDao().searchBlack(conn, searchBlack, isBlack);
 		
 		close(conn);
 		return blackList;
