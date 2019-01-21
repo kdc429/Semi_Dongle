@@ -55,7 +55,7 @@
 					</h3>
 				</div>
 				<div class="modal-body" style="padding: 40px 50px;">
-					<form role="form">
+					<form >
 						<div class="form-group">
 							<label for="donglename">동호회 이름</label> <input type="text"
 								class="form-control" id="donglename"> <br> <label
