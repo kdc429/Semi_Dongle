@@ -55,16 +55,6 @@ public class BoardService {
 		return result;
 	}
 	
-	public int insertComment(BoardComment bc)
-	{
-		Connection conn=getConnection();
-		int result=new BoardDao().insertComment(conn,bc);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
-		return result;
-		
-	}
 	public int insertBoardFile(BoardPath bp,Board bo)
 	{
 		Connection conn=getConnection();
@@ -132,6 +122,31 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public int insertBoComment(BoardComment bc)
+	{
+		Connection conn=getConnection();
+		int result=new BoardDao().insertBoComment(conn,bc);
+		if(result>0) 
+		{
+			commit(conn);
+		}
+		else 
+		{
+		rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
+	
+	public List<BoardComment> selectCommentList(int boardNo,int groupNo)
+	{
+		Connection conn=getConnection();
+		List<BoardComment> list=new BoardDao().selectBoCommentList(conn, boardNo, groupNo);
+		close(conn);
+		return list;
 	}
 }
 	

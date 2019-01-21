@@ -1,6 +1,7 @@
 package com.dongle.board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
+import com.dongle.board.model.vo.BoardComment;
 import com.dongle.board.model.vo.BoardPath;
 import com.dongle.member.model.vo.Member;
 
@@ -36,7 +38,7 @@ public class BoardViewServlet extends HttpServlet {
 		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		BoardPath bp=new BoardService().selectBoardPath(boardNo,groupNo);
-		System.out.println(boardNo+" : "+groupNo);
+		System.out.println("게시글번호"+boardNo+" : "+"그룹번호"+groupNo);
 		
 		Cookie[] cookies=request.getCookies();
 		String boardCookieVal="";
@@ -58,12 +60,13 @@ public class BoardViewServlet extends HttpServlet {
 						if(value.contains("|"+boardNo+"|"))
 						{
 							hasRead=true;
+
 						}
 						break outer;	
 					}
 				}
 		}
-		
+
 		System.out.println("hasRead: "+hasRead);
 		if(!hasRead)
 		{
@@ -79,17 +82,18 @@ public class BoardViewServlet extends HttpServlet {
 		String view="";
 		if(b!=null)
 		{
+			List<BoardComment> bclist=new BoardService().selectCommentList(boardNo,groupNo);
+			
 			request.setAttribute("board", b);
 			view="/views/board/boardView.jsp";
 			request.setAttribute("groupNo", groupNo);
 			request.setAttribute("boardPath", bp);
-			/*request.setAttribute("boardNo", boardNo);*/
+			request.setAttribute("bclist", bclist);
 		}
 		else
 		{
 			request.setAttribute("msg", "조회한 공지사항이 존재하지 않습니다.");
-			request.setAttribute("loc", "/board/boardList?groupNo"+groupNo);
-			request.setAttribute("groupNo", groupNo);
+			request.setAttribute("loc", "/board/boardList?groupNo="+groupNo);
 			view="/views/common/msg.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);

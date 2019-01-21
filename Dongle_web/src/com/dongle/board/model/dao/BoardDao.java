@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardComment;
 
@@ -127,32 +126,6 @@ public class BoardDao {
 		}
 		finally
 		{
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	
-	//게시판 댓글쓰기
-	public int insertComment(Connection conn, BoardComment bc)
-	{
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("insertComment");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bc.getBoCommentLevel());
-			pstmt.setString(3, bc.getBoCommentContent());
-			pstmt.setInt(4,bc.getBoarNo());
-			pstmt.setString(5,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
-			//pstmt.setInt(5,bc.getBoardCommentRef());
-			result=pstmt.executeUpdate();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		finally {
 			close(pstmt);
 		}
 		return result;
@@ -316,4 +289,71 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	//게시판 댓글쓰기
+		public int insertBoComment(Connection conn, BoardComment bc)
+		{
+			System.out.println("코멘트: "+bc);
+			PreparedStatement pstmt=null;
+			int result=0;
+			String sql=prop.getProperty("insertBoComment");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, bc.getGroupNo());
+				pstmt.setInt(2, bc.getBoardNo());
+				pstmt.setInt(3,bc.getMemberNo());
+				pstmt.setString(4,bc.getBoCommentContent());
+				pstmt.setInt(5,bc.getBoCommentLevel());
+				pstmt.setString(6,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
+				result=pstmt.executeUpdate();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		public List<BoardComment> selectBoCommentList(Connection conn, int boardNo, int groupNo)
+		{
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<BoardComment> list=new ArrayList();
+			String sql=prop.getProperty("selectBoCommentList");
+			try
+			{
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, groupNo);
+				pstmt.setInt(2, boardNo);
+				rs=pstmt.executeQuery();
+				while(rs.next())
+				{
+					BoardComment bc=new BoardComment();
+					bc.setGroupNo(rs.getInt("group_no"));
+					bc.setBoardNo(rs.getInt("board_no"));
+					bc.setBoCommentNo(rs.getInt("bo_comment_no"));
+					bc.setMemberNo(rs.getInt("member_no"));
+					bc.setBoCommentContent(rs.getString("bo_comment_content"));
+					bc.setBoCommentDate(rs.getDate("bo_comment_date"));
+					bc.setBoCommentLevel(rs.getInt("bo_comment_level"));
+					bc.setBoCommentRef(rs.getInt("bo_comment_ref"));
+					bc.setGroupMemberNickname(rs.getString("group_member_nickname"));
+					list.add(bc);
+					System.out.println("들어오?? : "+bc);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				close(rs);
+				close(pstmt);
+			}
+			return list;
+		}
 }

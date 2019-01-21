@@ -6,9 +6,9 @@
 	Board b=(Board)request.getAttribute("board");
 	Group g = (Group)request.getAttribute("group");
 	BoardPath bp=(BoardPath)request.getAttribute("boardPath");
-	List<BoardComment> bclist=(List)request.getAttribute("bclist");
 	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 	int groupNo=(int)request.getAttribute("groupNo");
+	List<BoardComment> bclist=(List)request.getAttribute("bclist");
 %>
     
 <style>
@@ -83,17 +83,6 @@
 						<th>내용</th>
 						<td colspan="2"><%=b.getBoardContent()%></td>
 					</tr>
-					
-					<%-- <tr>
-						<td colspan='2' id="inputbutton">
-							<button id='view-list-btn'>목록으로</button>
-							<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
-							<button id='view-update-btn'>수정하기</button>
-							<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-							<input type="button" id="view-delete-btn" value="삭제하기" />
-							<%} %>
-						</td>
-					</tr> --%>
 				</tbody> 
 			</table>
 		</form>
@@ -108,19 +97,16 @@
 		<br><br>
 		
 		<div class="comment-editor">
-				<form action="<%=request.getContextPath() %>/board/commentInsert" name="boardCommentFrm" 
-				method="post">
-					<input type="hidden" name="boardRef" 
+					<input type="hidden" name="boardNo" id="boardNo" 
 					value="<%=b.getBoardNo() %>"/>
-					<input type="hidden" name="boardCommentWriter"
-					value="<%=b.getBoardWriter()%>"/>
-					<input type="hidden" name="boardCommentLevel"
+					<input type="hidden" name="boardCommentWriter" id="boardCommentWriter"
+					value="<%=loginMember.getMemberId() %>"/>
+					<input type="hidden" name="boardCommentLevel" id="boardCommentLevel"
 					value="1"/>
-					<input type="hidden" name="boardCommentRef"
+					<input type="hidden" name="boardCommentRef" id="boardCommentRef"
 					value="0"/>
-					<textarea cols='70' rows='2' name="boardCommentContent"></textarea>
-					<button type="submit" id="btn-insert">등록</button>
-				</form>
+					<textarea cols='75' rows='3' name="boardCommentContent" id="boardCommentContent"></textarea>
+					<button id="comment-insert-btn">등록</button>
 			</div>
 			<!-- 댓글목록 테이블 -->
 			<table id="tbl-comment">
@@ -131,27 +117,27 @@
 						<tr class='level1'>
 							<td>
 								<sub class="comment-writer">
-								<%=loginMember.getMemberId()%></sub>
+								<%=c.getMemberNo()%></sub>
 								<sub class="comment-date">
 								<%=c.getBoCommentDate()%></sub>
 								<br/>
 								<%=c.getBoCommentContent() %>
 							</td>
-							<td>
+							<%-- <td>
 								<button class="btn-reply" 
 								value="<%=c.getBoCommentNo() %>">답글</button>
 								<%if(loginMember.getMemberId()!=null&&
-								(loginMember.getMemberId().equals(c.getMemberNo())
-								||loginMember.getMemberId().equals("admin"))){%>
-								<button class="btn-delete" value="<%=c.getBoCommentNo() %>">삭제</button>
+								(loginMember.getMemberId().equals(c.getMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
+								<button class="btn-delete" 
+								value="<%=c.getBoCommentNo() %>">삭제</button>
 								<%} %>
-							</td>
+							</td> --%>
 						</tr>		
 						<%} else {%>
 						<tr class='level2'>
 							<td>
 								<sub class="comment-writer">
-								<%=c.getGroupMemberNickname()%></sub>
+								<%=c.getMemberNo()%></sub>
 								<sub class="comment-date">
 								<%=c.getBoCommentDate()%></sub>
 								<br/>
@@ -165,80 +151,106 @@
 					} 
 				}%>
 			</table>
-			
 </section>
-			
-			<script>
-				<%-- $('.btn-reply').on('click',function(e){
-					<%if(loginMember!=null){%>
-						var tr=$("<tr></tr>");
-						var html="<td style='display:none;text-align:left;' colspan='2'>";
-						html+="<form action='<%=request.getContextPath()%>/board/commentInsert' method='post'>";
-						html+="<input type='hidden' name='boardRef'value='<%=b.getBoardNo()%>'/>";
-						html+="<input type='hidden' name='boardCommentWriter' value='<%=c.getGroupMemberNickname()%>'/>";
-						html+="<input type='hidden' name='boardCommentLevel' value='2'/>";
-						html+="<input type='hidden' name='boardCommentRef' value='"+$(this).val()+"'/>";
-						html+="<textarea name='boardCommentContent' cols='60'rows='1'></textarea>";
-						html+="<button type='submit' class='btn-insert2'>등록</button>";
-						html+="</form></td>";
-						tr.html(html);
-						tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
-						$(this).off('click');
-						
-						tr.find('form').submit(function(e){
-							if(<%=loginMember==null%>)
-							{
-								fn_loginAlert();
-								
-								e.preventDefault();
-								return;
-							}
-							var len=$(this).children('textarea').val().trim().length;
-							if(len==0)
-							{
-								e.preventDefault();
-							}
-							});
-							tr.find("textarea").focus();
-						
-					<%}%>
-					
-				}); --%>
-				<%-- 
-				$(function(){
-					$('[name=boardCommentContent]').focus(function(){
-						if(<%=loginMember.getMemberId()==null%>)
-						{
-							fn_loginAlert();
-						}
-					});
-					$('[name=boardCommentFrm]').submit(function(e){
-						if(<%=loginMember.getMemberId()==null%>)
-						{
-							fn_loginAlert();
-							e.preventDefault();
-							return;
-						}
-						var len=$('textarea[name=boardCommentContent]').val().trim().length;
-						if(len==0)
-						{
-							alert('내용을 입력하세요~!');
-							$('textarea[name=boardCommentContent]').focus();
-							e.preventDefault();	
-						}
-					})
-				});	
-			 --%>
-				function fn_loginAlert()
-				{
-					alert("로그인 후 이용할 수 있습니다.");
-					$('#userId').focus();
-				}
+		
+<script>
+$(function(){
+	$('#comment-insert-btn').click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/board/commentInsert?groupNo=<%=groupNo%>",
+			data:{"boardNo":$('#boardNo').val(),
+				"boardCommentContent":$('#boardCommentContent').val(),
+				"boardCommentLevel":$('#boardCommentLevel').val(),
+				"boardCommentRef":$('#boardCommentRef').val(),
+			},
+			type:"post",
+			success:function(data){
+				console.log(data);
+				alert('Message: '+data);
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/boardView?groupNo=<%=b.getGroupNo()%>&boardNo=<%=b.getBoardNo()%>",
+					type:"post",
+					dataType:"html",
+					success:function(data){
+						$('#board-container').html(data);
+					}
+				});
+			}
+		});
+	});
+});
 				
+	<%-- $('.btn-reply').on('click',function(e){
+		<%if(loginMember!=null){%>
+			var tr=$("<tr></tr>");
+			var html="<td style='display:none;text-align:left;' colspan='2'>";
+			html+="<form action='<%=request.getContextPath()%>/board/commentInsert' method='post'>";
+			html+="<input type='hidden' name='boardRef'value='<%=b.getBoardNo()%>'/>";
+			html+="<input type='hidden' name='boardCommentWriter' value='<%=c.getGroupMemberNickname()%>'/>";
+			html+="<input type='hidden' name='boardCommentLevel' value='2'/>";
+			html+="<input type='hidden' name='boardCommentRef' value='"+$(this).val()+"'/>";
+			html+="<textarea name='boardCommentContent' cols='60'rows='1'></textarea>";
+			html+="<button type='submit' class='btn-insert2'>등록</button>";
+			html+="</form></td>";
+			tr.html(html);
+			tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
+			$(this).off('click');
 			
-			</script>
-	<script>
-	//다운로드하자!
+			tr.find('form').submit(function(e){
+				if(<%=loginMember==null%>)
+				{
+					fn_loginAlert();
+					
+					e.preventDefault();
+					return;
+				}
+				var len=$(this).children('textarea').val().trim().length;
+				if(len==0)
+				{
+					e.preventDefault();
+				}
+				});
+				tr.find("textarea").focus();
+			
+		<%}%>
+		
+	}); --%>
+	
+	
+	<%-- $(function(){
+		$('[name=boardCommentContent]').focus(function(){
+			if(<%=loginMember.getMemberId()==null%>)
+			{
+				fn_loginAlert();
+			}
+		});
+		$('[name=boardCommentFrm]').submit(function(e){
+			if(<%=loginMember.getMemberId()==null%>)
+			{
+				fn_loginAlert();
+				e.preventDefault();
+				return;
+			}
+			var len=$('textarea[name=boardCommentContent]').val().trim().length;
+			if(len==0)
+			{
+				alert('내용을 입력하세요~!');
+				$('textarea[name=boardCommentContent]').focus();
+				e.preventDefault();	
+			}
+		})
+	});	 --%>
+
+	function fn_loginAlert()
+	{
+		alert("로그인 후 이용할 수 있습니다.");
+		$('#userId').focus();
+	}
+	
+
+</script>
+<script>
+	//다운로드!
 	function fn_fileDownLoad(rName, oName)
 	{
 		var url="<%=request.getContextPath()%>/board/boardFileDownLoad";
@@ -304,22 +316,7 @@
 		});
 	});
 	
-	<%-- function fn_deleteBoard()
-	{
-		if(confirm('정말로 삭제하시겠습니까?')==true)
-		{
-			location.href="<%=request.getContextPath()%>/board/boardDelete?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>"
-		}
-		else
-		{
-			return false;		
-		}
-	} --%>
-	
-	<%-- function fn_updateBoard()
-	{
-		location.href="<%=request.getContextPath()%>"/board/boardUpdate?no=<%=b.getBoardNo()%>";
-	}  --%>
+
 	
 </script>
 

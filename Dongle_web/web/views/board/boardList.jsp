@@ -82,11 +82,15 @@
 	</section>
 <script>
 	$(function(){
-		$('.boardView-btn').click(function(){
+		$('.boardView-btn').click(function(e){
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
+			var groupNo=<%=groupNo%>;
+			console.log(groupNo);
+			console.log(num);
 			$.ajax({
-				url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>&boardNo="+num,
+				url:"<%=request.getContextPath() %>/board/boardView",
+				data:{"groupNo":groupNo,"boardNo":num},
 				type:"post",
 				dataType:"html",
 				success:function(data){

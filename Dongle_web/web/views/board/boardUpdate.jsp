@@ -40,10 +40,6 @@
 		min-height : 200px;
 		text-align : left;
 	}
-/* 	#inputbutton
-	{
-		text-align : center;
-	} */
 	.update-btn
 	{
 		text-align : center;
@@ -55,7 +51,19 @@
     	top:234px;
     	width: 440px;
     	background : white;
+    }
+    #update-no
+    {
+    	width : 250px;
+    }
+    #update-title
+    {
+    	width : 250px;
     }    
+    #update-writer
+    {
+    	width : 250px;
+    }
 </style>
 	<div class="board-container">
 		<form name="updateFrm" method="post" enctype="multipart/form-data">
@@ -70,7 +78,7 @@
 					<tr>
 						<th style="vertical-align:middle">번호</th>
 						<td>
-							<input style="background-color:#EAEAEA" type="text" name="no" value="<%=bp.getBoardNo()%>" readonly="readonly"/>
+							<input style="background-color:#EAEAEA" type="text" name="no" id='update-no' value="<%=bp.getBoardNo()%>" readonly="readonly"/>
 						</td>
 					</tr>
 					<tr>
@@ -100,7 +108,7 @@
 					<tr>
 						<th style="vertical-align:middle">내용</th>
 						<td>
-							<textarea rows="5" cols="50" name='content' id='update-content'><%=bp.getBoardContent()%></textarea>
+							<textarea style="width: 540px" rows="5" cols="50" name='content' id='update-content'><%=bp.getBoardContent()%></textarea>
 						</td>
 					</tr>
 				</tbody> 

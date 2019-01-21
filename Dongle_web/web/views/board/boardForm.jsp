@@ -39,6 +39,14 @@
 	{
 		text-align : center;
 	}
+	#form-writer
+	{
+		width : 250px;
+	}
+	#form-title
+	{
+		width : 250px;
+	}
 </style>
 </head>
 <body>
@@ -53,7 +61,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th style="vertical-align:middle" style="width: 20%;">글 제목</th>
+						<th style="vertical-align:middle" style="width: 20%">글 제목</th>
 						<td id="title">
 							<input type="text" name='title' id='form-title' required="required"/>
 						</td>
@@ -61,7 +69,7 @@
 					<tr>
 						<th style="vertical-align:middle">작성자</th>
 						<td id="writer" >
-							<input style="background-color:#EAEAEA"type="text" name='writer' id='form-writer' value="admin" readonly="readonly"/>
+							<input style="background-color:#EAEAEA" type="text" name='writer' id='form-writer' value="admin" readonly="readonly"/>
 						</td>
 					</tr>					
 					<tr>
@@ -73,7 +81,7 @@
 					<tr>
 						<th style="vertical-align:middle">내용</th>
 						<td>
-							<textarea rows="5" cols="50" id='form-content' name='content'></textarea>
+							<textarea style="width: 540px" rows="5" cols="50" id='form-content' name='content'></textarea>
 						</td>
 					</tr>
 				</tbody> 
