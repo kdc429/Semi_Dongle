@@ -4,6 +4,9 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <style>
         /* body{
@@ -15,8 +18,6 @@
             margin-top: 10%;
             width: 650px !important;
             font-family: 'Lato', sans-serif;
-
-
         }
 
         #calendar_weekdays div {
@@ -31,7 +32,7 @@
             width: 650px !important;
             overflow: hidden;
             float: left;
-            z-index: 10;
+            /* z-index: 10; */
 
         }
 
@@ -122,18 +123,15 @@
         }
     </style>
 
-
     <meta charset="UTF-8">
     <title>Insert title here</title>
 
     <!-- 캘린더 관련 스크립트(외부 데이터 포함) -->
 
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="js/index.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
-    <link rel="stylesheet" href="css/style.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -143,11 +141,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 
-
 </head>
-
+	<style>
+		.myModal{z-index:10;}
+	</style>
 <body>
+
     <section>
+    
+
         <div class="main center" style='width: 684px; height: 1000px; background-color: rgb(255, 255, 255); border: 1px solid black;'>
 
             <div id="calendar">
@@ -156,87 +158,19 @@
                 </div>
                 <div id="calendar_weekdays"></div>
 
-                <form action="" id="calenderfrm" method="get">
-                    <div id="calendar_content" type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal"></div>
+                <div id="calendar_content" type="button"
+                  class="btn btn-lg" data-target="#myModal"></div>
                     <br><br><br><br><br><br>
-                </form>
 
-                <!-- Modal -->
-
-
-              <form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" enctype="multipart/form-data">
-
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3><span id="modal_result" class="modal-title"></span></h3>
-                            </div>
-
-
-                            <div class="modal-body">
-
-                                <h4>*회비 내역</h4>
-                                <span id="before_total"></span>
-                                <br>
-                                모은 총 회비 : <span id="cast1"></span>
-                                <br>
-                                총 사용 금액 : <span id="cast2"></span>
-                                <br>
-                                남은 회비 : <span id="cast3"></span> 
-                                <br>
-                                <h4>*일정 내용입니다.</h4>
-                                <br>
-                                <span id="cal_content_list"></span>
-                                <br>
-                                <button class="btn_show" onclick="rec()">영수증보기</button>
-                                <div id="receipt">
-                                    <img src="http://image.kmib.co.kr/online_image/2018/0114/611211110012048428_1.jpg">
-                                </div>
-                                
-                                
-
-
-                                <!-- manager 권한 -->
-                                <div id="manager">
-                                    <hr>
-
-                                    modal-title : <input type="text" id="caltitle" name="caltitle">
-                                    <br>
-                                    모은 총 회비 : <input type="text" name="text" id="text1">
-                                    <br>
-                                    총 사용 금액 : <input type="text" name="text" id="text2">
-                                    <br>
-                                    <input type="date" name="today1" min="2019-01-01"/><input type="time" name="today2">
-                                    <br>
-                                   일정에 대한 내용 입력 하십시오.
-                                    <br>
-                                    <textarea name="calcontent" id="calcontent" cols="30" rows="10"></textarea>
-                                    <br>
-                                    <input type="file" id="upfile" class="upfile" name="upfile">
-                                </div>
-
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <input type="submit" value="등록하기" onclick="return validate();" />
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-               </form> 
-            </div>
-
-            <!-- 모달 창에 뜨는 스크립트 -->
+          </div>
+         </div>
     </section>
+        <div class="modal-div">
+         <div class="dialog" id="modal-container">
+            <div class="modal-content">
+            </div>
+            </div>
+      </div>
 
     <script>
 
@@ -273,6 +207,8 @@
             var content = $('[name=content]').val();
         }
     </script>
+   
+
 
 
     <!-- 달력에 대한 스크립트 -->
@@ -313,37 +249,58 @@
                     var months = "";
 
                     if (ymArr[0] == ('JANUARY')) {
-                        months = 1;
+                        months = '01';
                     } else if (ymArr[0] == ('FEBRUARY')) {
-                        months = 2;
+                        months = '02';
                     } else if (ymArr[0] == ('MARCH')) {
-                        months = 3;
+                        months = '03';
                     } else if (ymArr[0] == ('APRIL')) {
-                        months = 4;
+                        months = '04';
                     } else if (ymArr[0] == ('MAY')) {
-                        months = 5;
+                        months = '05';
                     } else if (ymArr[0] == ('JUNE')) {
-                        months = 6;
+                        months = '06';
                     } else if (ymArr[0] == ('JULY')) {
-                        months = 7;
+                        months = '07';
                     } else if (ymArr[0] == ('AUGUST')) {
-                        months = 8;
+                        months = '08';
                     } else if (ymArr[0] == ('SEPTEMBER')) {
-                        months = 9;
+                        months = '09';
                     } else if (ymArr[0] == ('OCTOBER')) {
-                        months = 10;
+                        months = '10';
                     } else if (ymArr[0] == ('NOVEMBER')) {
-                        months = 11;
+                        months = '11';
                     } else if (ymArr[0] == ('DECEMBER')) {
-                        months = 12;
+                        months = '12';
                     };
-
-                    console.log(ymArr[1] + "년  " + months + "월  " + day_text);
-
+            
+                 
+               
                     if (!$('.blank')) {
-                        url = "<%=request.getContextPath()%>/calender/loadcontent?date=";
-                        return day_text;
+<%--url = "<%=request.getContextPath()%>/calender/loadcontent?date="; --%>
+                  return day_text;
                     }
+                    
+                    if(day_text<10)
+                    {
+                       day_text = "0"+day_text;
+                    }
+               
+                    console.log(ymArr[1] + "년  " + months + "월  " + day_text);
+               all_date=ymArr[1]+months+day_text;
+               console.log(all_date);
+               
+         
+                  $.ajax({
+                     url:'<%=request.getContextPath()%>/calendar/calendarModal?groupNo=1&allDate='+all_date,
+                     type:'post',
+                     dataType:'html',
+                     success:function(data){
+                        $('.modal-content').html(data);
+                     }
+                     
+                  })
+                        
                 });
 
                 //------------------------------------------- 
@@ -421,8 +378,11 @@
                 if (e.attr("class").indexOf("left") != -1) {
                     r("previous")
                 } else { r("next") }
-            })
-        })
+               });
+            
+            
+           
+        });
 
     </script>
 </body>

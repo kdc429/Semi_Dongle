@@ -2,7 +2,7 @@ package com.dongle.calender.model.vo;
 
 import java.util.Date;
 
-public class Board {
+public class Calendar {
 
 	
 	private int calno;
@@ -18,13 +18,13 @@ public class Board {
 	private String refile;
 
 	
-	public Board() {
+	public Calendar() {
 		// TODO Auto-generated constructor stub
 	}
 
 	
 
-	public Board(int calno, int groupno, Date caldate, String calcontent, String caltitle, int remaincost,
+	public Calendar(int calno, int groupno, Date caldate, String calcontent, String caltitle, int remaincost,
 			int totalcost, int usecost, String caldate_d, String calorfile, String refile) {
 		super();
 		this.calno = calno;

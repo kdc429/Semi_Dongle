@@ -231,7 +231,6 @@
 		<form action="" name="checkIdDuplicateFrm">
 			<input type="hidden" name="userId"/>
 		</form>	
-	
 	</section>
 
 </body>

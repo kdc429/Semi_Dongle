@@ -1,4 +1,4 @@
-package com.dongle.calender.model.service;
+package com.dongle.dongleMemberJoin.service;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
@@ -6,34 +6,20 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.List;
 
-import com.dongle.calender.model.dao.BoardDao;
-import com.dongle.calender.model.vo.Board;
+import com.dongle.dongleMemberJoin.model.dao.DongleMemberJoinDao;
+import com.dongle.dongleMemberJoin.model.vo.DongleMember;
 
-
-
-public class BoardService {
-
+public class DongleMemberJoinService {
 	
-	public int insertBoard(Board b)
+	public int insertdonglejoin(DongleMember b)
 	{
 		Connection conn=getConnection();
-		int result=new BoardDao().insertBoard(conn,b);
+		int result=new DongleMemberJoinDao().insertdonglejoin(conn,b);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	};
 
-	
-	
-	
-	
-	
-	
 }
-
-
-
-

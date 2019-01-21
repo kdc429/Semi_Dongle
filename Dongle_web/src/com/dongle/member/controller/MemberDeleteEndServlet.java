@@ -51,7 +51,7 @@ public class MemberDeleteEndServlet extends HttpServlet {
 		else 
 		{
 			msg="회원탈퇴을 실패하였습니다.";
-			loc="/Dongle_view/memberView.jsp";
+			loc="/Dongle_view/memberVie.jsp";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
