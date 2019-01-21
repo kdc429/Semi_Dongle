@@ -18,14 +18,18 @@
 <section>
 
 	<div class="bar">
+		<%if(loginMember.getMemberId().equals("admin")) {%>
+		<button class="img-icon" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'">
+				<span class="sub-icon">관리자 메뉴</span>
+				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/editSetting2.png">		
+		</button>
+		<%} %>
 		<!-- 동글 개설하기 버튼! -->
 		<div class="cre-icon-back">
-			<a href="<%=request.getContextPath() %>/admin/memberList">관리자 메뉴</a>
 			<button class="img-icon">
 				<span class="sub-icon">동글개설하기</span>
 				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
 			</button>
-			
 		</div>
 	</div>
 	<h2 class="item-logo">MY DONGLE</h2>
@@ -52,7 +56,7 @@
                     			
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<span class="group-name"><%=g.getGroupName() %></span>
-                    				<img class="icon" src="<%=request.getContextPath()%>/images/group_images/<%=g.getGroupImageNewPath()%>"/>
+                    				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
@@ -133,7 +137,7 @@
 					<div class="ranker-img"> 
 						<!-- 순위권 동글 리스트 -->
 						<button class="join-btn" type="submit">
-						<img class="rImg" src="<%=request.getContextPath()%>/images/group_images/back1.jpg"/>
+						<img class="rImg" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
 						<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 						<input type="hidden" name="groupNo" value="<%=loginMember.getMemberNo()%>"/>
 						</button>

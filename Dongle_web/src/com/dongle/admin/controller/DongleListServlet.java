@@ -1,8 +1,6 @@
-package com.dongle.feed.controller;
+package com.dongle.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,23 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.dongle.feed.model.vo.FileList;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.dongle.admin.service.AdminService;
+import com.dongle.group.model.vo.ListGroup;
+import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class FeedFileUploadServlet
+ * Servlet implementation class GroupListServlet
  */
-@WebServlet("/feed/feedFileUpload")
-public class FeedFileUploadServlet extends HttpServlet {
+@WebServlet("/admin/dongleList")
+public class DongleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FeedFileUploadServlet() {
+    public DongleListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,26 +32,20 @@ public class FeedFileUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!ServletFileUpload.isMultipartContent(request)) {
-			response.sendRedirect("/feed/feedListView");
+		// TODO Auto-generated method stub
+		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
+		if(loginMember==null||!loginMember.getMemberId().equals("admin")) 
+		{
+			request.setAttribute("msg", "잘못된 경로로 접속하셨습니다");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
+			return;
 		}
 		
-		
-		String dir=getServletContext().getRealPath("/images/feed-images");
-		int maxSize=1024*1024*1024;
-		MultipartRequest mr=new MultipartRequest(request,dir,maxSize,"UTF-8",new DefaultFileRenamePolicy());
-		
-		List<FileList> uploadFileList =new ArrayList();
-		FileList fl=new FileList();
-		Enumeration<String> files=mr.getFileNames();
-		
+		List<ListGroup> dongleList = new AdminService().selectDongleList();
 
-
-
-
-			
-
-		
+		request.setAttribute("dongleList", dongleList);
+		request.getRequestDispatcher("/Dongle_view/admin_dongleList.jsp").forward(request, response);
 	}
 
 	/**

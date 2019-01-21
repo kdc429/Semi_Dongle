@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.feed.model.service.FeedService;
 import com.dongle.feed.model.vo.Feed;
+import com.dongle.feed.model.vo.FeedComment;
+import com.dongle.feed.model.vo.FeedFile;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 import com.google.gson.Gson;
 
@@ -50,9 +53,19 @@ public class FeedAddServlet extends HttpServlet {
 		int endFeedNo=currentFeed+pageFeed;
 		
 		Group g=new GroupService().selectGrInfo(groupNo);
+		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
 		List<Feed> feedList=new FeedService().selectFeed(groupNo,startFeedNo,endFeedNo);
-		response.setContentType("application/json;charset=UTF-8");
-		new Gson().toJson(feedList,response.getWriter());
+		List<GroupMember> memberlist = new GroupService().selectMemberList(groupNo);
+		List<FeedFile> feedFileList=new FeedService().selectFeedFileList(groupNo);
+		List<FeedComment> feedCommentList=new FeedService().selectFeedCommentList(groupNo);
+		request.setAttribute("loginMember", loginMember);
+		request.setAttribute("memberList",memberlist);
+		request.setAttribute("feedList", feedList);
+		request.setAttribute("group", g);
+		request.setAttribute("groupMember", gm);
+		request.setAttribute("feedFileList", feedFileList);
+		request.setAttribute("feedCommentList", feedCommentList);
+		request.getRequestDispatcher("/views/feed/addFeed.jsp").forward(request, response);
 	}
 
 	/**
