@@ -3,7 +3,7 @@
 <%
 	//true면 사용할 수 있다. false면 사용할 수 없다.
 	boolean isAble=(boolean)request.getAttribute("isAble");
-	String userId=(String)request.getAttribute("userId");
+	String nickname=(String)request.getAttribute("nickname");
 %>    
     
 
@@ -17,40 +17,41 @@
 <body>
 	<div id="checkid-container">
 		<%if(isAble) { %>
-			<h1 style="color:black;">[<%=userId %>]는 사용가능합니다.</h1>
+			<h1 style="color:black;">사용가능합니다.</h1>
 			<br><br>
-			<button type="button" onclick="setUserId('<%=userId%>');">닫기</button>
+			<button type="button" onclick="setnickname('<%=nickname%>');">닫기</button>
 		<%}
 		  else {
 		%>
-			<h1 style="color:red;">[<%=userId %>]는 사용할 수 없습니다.</h1>
+			<h1 style="color:red;">사용할 수 없습니다.</h1>
 			<br><br>
-			<form action="<%= request.getContextPath()%>/checkIdDuplicate"
+			<form action="<%= request.getContextPath()%>/checkdongleDuplicate"
 				name="checkDuplicateFrm" method="post">
-				<input type="text" name="userId" id="userId" 
+				<input type="text" name="nickname" id="nickname" 
 				placeholder="4글자이상 입력하세요"/>
-				<button type="button" onclick="fn_checkIdDuplicate();">
+				<button type="button" onclick="fn_checkdongleDuplicate();">
 				중복검사</button>		
 			</form>
 		<%} %>
 	</div>
 	<script>
-		function fn_checkIdDuplicate(){
-			var userId=$('#userId').val().trim();
-			if(!userId||userId.length<4)
+		function fn_checkdongleDuplicate(){
+			var nickname=$('#nickname').val().trim();
+			if(!nickname||nickname.length<4)
 			{
 				alert("아이디를 4자이상 입력하세요!");
-				$("#userId").val("");
-				$("#userId").focus();
+				$("#nickname").val("");
+				$("#nickname").focus();
 				return;
 			}
 			checkDuplicateFrm.submit();
 		}
-		function setUserId(userId)
+		
+		function setnickname(nickname)
 		{
 			var frm=opener.document.memberEnrollFrm;//부모창을 호출
 			console.log(frm.isValid);
-			frm.userId.value=userId;
+			frm.nickname.value=nickname;
 			frm.idValid.value='1';
 			frm.password.focus();
 			

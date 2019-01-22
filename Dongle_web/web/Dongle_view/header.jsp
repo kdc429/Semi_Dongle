@@ -59,7 +59,7 @@
             	<div class="user-back">
             	<!-- 마이페이지 버튼 -->
             		<button class="img-icon">
-            			<span class="sub-icon">마이페이지</span>
+            			<span class="sub-icon" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>'"/>마이페이지</span>
             			<img class="user-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
             		</button>
             		
@@ -68,7 +68,7 @@
             	<div class="user-back">
             	<!-- 로그 아웃 버튼 -->
             		<button class="img-icon">
-            			<span class="sub-icon">로그아웃</span>
+            			<span class="sub-icon" onclick="location.href='<%=request.getContextPath()%>/member/logout'"/>로그아웃</span>
             			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
             		</button>
             	</div>
