@@ -353,5 +353,69 @@ public class FeedDao {
 		return fc;
 	}
 	
+	public Feed selectFeedOne(Connection conn, int feedNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectFeedOne");
+		Feed f=null;
+		
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feedNo);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				f=new Feed();
+				f.setFeedNo(rs.getInt("feed_no"));
+				f.setGroupNo(rs.getInt("group_no"));
+				f.setMemberNo(rs.getInt("member_no"));
+				f.setFeedContent(rs.getString("feed_content"));
+				f.setFeedWriteDate(rs.getDate("feed_write_date"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return f;
+		
+	}
+	
+	public List<FeedFile> selectFeedFileListOne(Connection conn,int feedNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectFeedFileListOne");
+		FeedFile fl=null;
+		List<FeedFile> feedFile=new ArrayList();
+		
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feedNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				fl=new FeedFile();
+				fl.setFeedNo(rs.getInt("feed_no"));
+				fl.setGroupNo(rs.getInt("group_no"));
+				fl.setFeedFileNo(rs.getInt("feed_file_no"));
+				fl.setFeedOldFilePath(rs.getString("feed_old_file_path"));
+				fl.setFeedNewFilePath(rs.getString("feed_new_file_path"));
+				feedFile.add(fl);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return feedFile;
+		
+	}
+	
 
 }

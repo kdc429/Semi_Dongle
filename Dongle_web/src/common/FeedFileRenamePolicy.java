@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-public class MyFileRenamePolicy implements FileRenamePolicy {
+public class FeedFileRenamePolicy implements FileRenamePolicy {
 
 	@Override
 	public File rename(File oldFile) {

@@ -31,8 +31,23 @@ List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
                 		<span class="write-date"><%=f.getFeedWriteDate() %></span>
             		</div>
             	<div class="feed-body">
+            		<div>
+            			<button class="delete-btn">삭제</button>
+            			<button class="delete-btn">수정</button>
+            		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
-            		<button class="file-download">파일명</button>
+            		<% if(feedFileList!=null){%>
+ 
+            		<ul class="file-download">
+            		<%
+            		for(FeedFile ff:feedFileList){
+            			if(ff.getFeedNo()==f.getFeedNo()){ %>
+            		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+            		<%}
+            			}%>
+            			
+            		</ul>
+            		<% }%>
             		<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()){%>
     						<div class="feed-pics">

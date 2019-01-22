@@ -109,5 +109,21 @@ public class FeedService {
 		return feedLevel2CommentList;
 
 	}
+	
+	public Feed selectFeedOne(int feedNo) {
+		Connection conn=getConnection();
+		Feed f=new FeedDao().selectFeedOne(conn,feedNo);
+		
+		close(conn);
+		return f;
+	}
+	
+	public List<FeedFile> selectFeedFileListOne(int feedNo){
+		Connection conn=getConnection();
+		List<FeedFile> feedFile=new FeedDao().selectFeedFileListOne(conn,feedNo);
+		
+		close(conn);
+		return feedFile;
+	}
 
 }

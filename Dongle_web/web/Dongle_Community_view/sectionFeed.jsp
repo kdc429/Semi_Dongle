@@ -87,7 +87,15 @@
 		var groupNo=<%=g.getGroupNo()%>;
 		var memberNo=<%=loginMember.getMemberNo()%>;
 		var resultFeedNo=0;
-	   
+		var newFeed=$('.feednew');
+		var filesLength=document.feedFrm.feedPicUp.files+feedFrm.feedVideoUp.files+feedFrm.feedFileUp.files.length;
+		if(feedContentUp==""){
+			alert("피드 내용을 입력해주세요!");
+			console.log($('.feednew'));
+			return;
+		}
+		
+		
 	    
 	    var feedFd=new FormData();
 		feedFd.append('groupNo',groupNo);
@@ -98,38 +106,75 @@
 	    	feedFd.append('content',feedContentUp);
 	    }
 	    
+	   
+	    
+	    
 		if(document.feedFrm.feedPicUp.value){
 			console.log('zxc');
-			for(var i=0;i<document.feedFrm.feedPicUp.files.length;i++){
-				feedFd.append('image'+i,feedFrm.feedPicUp.files[i]);
+			
+			var imageExt = document.feedFrm.feedPicUp.value; //파일을 추가한 input 박스의 값
+
+			imageExt = imageExt.slice(imageExt.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+
+			if(imageExt != "jpg" && imageExt != "png" &&  imageExt != "gif"){ //확장자를 확인합니다.
+
+				alert('사진 파일은 이미지 파일(jpg, png, gif)만 등록 가능합니다.');
+
+				return;
+
+			}else{
+				
+				for(var i=0;i<document.feedFrm.feedPicUp.files.length;i++){
+					feedFd.append('image'+i,document.feedFrm.feedPicUp.files[i]);
+				}
 			}
 		}
 		if(document.feedFrm.feedVideoUp.value){
-			for(var i=0;i<feedFrm.feedVideoUp.files.length;i++){
-				feedFd.append('video'+i,feedFrm.feedPicUp.files[i]);
+			
+			var videoExt = document.feedFrm.feedVideoUp.value;
+			console.log(videoExt);
+			//파일을 추가한 input 박스의 값
+
+			videoExt = videoExt.slice(videoExt.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+
+			if(videoExt != "mp4" && videoExt != "ogg"){ //확장자를 확인합니다.
+
+				alert('영상 파일은 (jpg, png, gif) 만 등록 가능합니다.');
+
+				return;
+
+			}else{
+				
+				for(var i=0;i<document.feedFrm.feedVideoUp.files.length;i++){
+					feedFd.append('video'+i,document.feedFrm.feedVideoUp.files[i]);
+					console.log(feedFrm.feedVideoUp.files[i]);
+					console.log(feedFd);
+				}
 			}
+			
 		}
 		if(document.feedFrm.feedFileUp.value){
+			
 			for(var i=0;i<feedFrm.feedFileUp.files.length;i++){
-				feedFd.append('files'+i,feedFrm.feedPicUp.files[i]);
+				feedFd.append('files'+i,feedFrm.feedFileUp.files[i]);
 			}
 		}
 		/* strFeedFd= JSON.stringify(feedFd);
 		jQuery.ajaxSettings.traditional = true;
  		*/		
+ 		
  		$.ajax({
 			url:"<%=request.getContextPath()%>/feed/feedContentUpload",
 			data:feedFd,
 			type:"post",
+			dataType:"html",
 			processData:false,
 			contentType:false,
-			success:function(data){ //컨텐트 업로드 성공시 파일 업로드로 넘어감
-				if(data>0){
-					alert('성공');
-				}else{
-					alert('실패');
-				}
-				
+			success:function(data){ 
+				console.log(data);
+					newFeed.next().after(data);
+					
+
 			}
 			
 		});
@@ -239,7 +284,9 @@
 				div.html(html);
 				div.insertAfter($(this).parent().siblings('.comment-content-back')).slideDown(800);
 				/* 연결된 이벤트 삭제 */
-				$(this).off('click');
+				$(this).remove();
+				e.stopPropagation();
+				console.log($(this));
 				
 				
 				div.find('.btn-insert').click(function(e){
@@ -277,11 +324,10 @@
 							<textarea name="feedContentUp" id="feed-content-up" cols='70' rows="6"></textarea>
 							<button type="button" class="up-btn" id="pic-up-btn">사진업</button>
 							<button type="button" class="up-btn" id="video-up-btn">영상업</button>
-							<button type="button" class="up-btn" id="file-up-btn">텍스트업</button>
-							<input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept="image/*" style='display: none;'/>
-							<input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept="video/*" style='display: none;'/>
-							<input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
-                    		
+							<button type="button" class="up-btn" id="file-up-btn">파일업</button>
+							<input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept=".gif, .jpg, .png" style='display: none;'/>
+							<input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept=".mp4,.ogg" style='display: none;'/>
+                    		<input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
                     		<div class="fileup" >
                        			<button type="button" id="feedup">등록</button>
                     		</div>
@@ -310,8 +356,25 @@
                 		<span class="write-date"><%=f.getFeedWriteDate() %></span>
             		</div>
             	<div class="feed-body">
+            		<div>
+            			<button class="delete-btn">삭제</button>
+            			<button class="delete-btn">수정</button>
+            		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
-            		<button class="file-download">파일명</button>
+            		<% if(feedFileList!=null){%>
+ 
+            		<ul class="file-download">
+            		<%
+            		for(FeedFile ff:feedFileList){
+            			if(ff.getFeedNo()==f.getFeedNo()){ %>
+            		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+            		<%}
+            			}%>
+            			
+            		</ul>
+            		<% }%>
+            		
+            		
             		<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()){%>
     						<div class="feed-pics">
@@ -324,14 +387,23 @@
             			%>
             			
             			<% for(FeedFile ff:feedFileList){ 
-            				if(ff.getFeedNo()==f.getFeedNo()){%>
-            			
+            				if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null){
+            					if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
+            					%>
             			
                     		<li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
                     	
-                    	<%	}
+                    	<%		
+                    			}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
+                    			
+                    			<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
+                    	<%	}else{%>
+                    		
+                    	<%}
+                    		}
+            					
             			}	%>
-            			
+            				
             			<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()){%>	
                 				</ul>
