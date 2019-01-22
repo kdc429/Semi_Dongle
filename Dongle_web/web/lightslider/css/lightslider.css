@@ -26,6 +26,7 @@
 }
 .lSSlideWrapper > .lightSlider:after {
     clear: both;
+
 }
 .lSSlideWrapper .lSSlide {
     -webkit-transform: translate(0px, 0px);
@@ -227,6 +228,7 @@
 .lSSlideOuter .lightSlider, .lSSlideOuter .lSPager {
     padding-left: 0;
     list-style: none outside none;
+    /* height: 170px; */
 }
 .lSSlideOuter.lSrtl .lightSlider, .lSSlideOuter.lSrtl .lSPager {
     padding-right: 0;

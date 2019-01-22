@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*, com.dongle.member.model.vo.Member,
-com.dongle.board.model.vo.Board" %>
+com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
+<!DOCTYPE html>
 <%
 	Group g = (Group)request.getAttribute("group");
 	Member loginMember = (Member)request.getAttribute("loginMember");
 	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
 	int result = (int)request.getAttribute("result");
 	int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+	List<GalleryPath> galList = (List)request.getAttribute("galList");
 	//List<Board> list=(List)request.getAttribute("list");
 %>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,7 +28,6 @@ com.dongle.board.model.vo.Board" %>
  <!--    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet"> -->
 	<!-- <link href="<%=request.getContextPath()%>/css/Test.css" rel="stylesheet"> -->
 	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
 	<!-- image slide -->
 	<link rel="stylesheet"  href="./lightslider/css/lightslider.css"/>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -48,26 +48,40 @@ com.dongle.board.model.vo.Board" %>
 	section div#mem_list_div table#tbl>tr th,td{text-align:center;}
 	
 	section div#dongle_main_img {
-	
 		/*border: 1px solid black*/ 
 		width:500px; 
 		height: 250px; 
-		background-color: lightgray; 
+		/* background-color: lightgray;  */
 		align-content: center;
 		float: left;
 		margin-left: 100px;
+		margin-top: 30px;
 	
 	}
 	section div#mini_board{
 		border:1px solid rgba(178,204,255,0.3); 
 		width: 300px; 
-		height: 250px; 
+		height: 250px;
+		margin-top: 100px;
+		margin-left: 30px;
 		position:relative;
 		display:inline-block;
-		margin-top: 150px;
-		margin-left: 35px;
-	
+		left : 0px;
+		top : 0px;
+		float: left;	
 	}
+	
+	section div#mini_feed{
+	border:1px solid rgba(178,204,255,0.3); 
+	width: 300px; 
+	height: 250px; 
+	position:relative;
+	display:inline-block;
+	margin-top: 100px;
+	margin-left: 10px;
+	float: left;
+	
+	}	
 	
 	section div#mini_gallery{
 	
@@ -106,27 +120,19 @@ com.dongle.board.model.vo.Board" %>
 </style>
 
 <body>
-<script>	
-	$(document).ready(function() {
-		$("#content-slider").lightSlider({
-	        loop:true,
-	        keyPress:true
-	    });
-	});
-	 
-	$(function(){
-		$.ajax({
-			url:"<%=request.getContextPath()%>/community/boardList",
-			data:{groupNo:<%=g.getGroupNo()%>},
-			dataType:"html",
-			success:function(data){
-				$('#mini_board').html(data);
-			}
-		});
-	});
+	<script>
+		$(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/community/boardList",
+				data:{groupNo:<%=g.getGroupNo()%>},
+				dataType:"html",
+				success:function(data){
+					$('#mini_board').html(data);
+				}
+			});
 			
 			
-<%-- 	
+	
 			$('#feed-btn').click(function(){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/feed/feedListView",
@@ -134,19 +140,6 @@ com.dongle.board.model.vo.Board" %>
 					dataType:"html",
 					success:function(data){
 						$('.main').html(data);
-					}
-				});
-			});
-		}); --%>
-		
-	$(function(){
-		$('#feed-btn').click(function(){
-			$.ajax({
-					url:"<%=request.getContextPath()%>/feed/feedlistview?groupno=<%=g.getGroupNo()%>&memberno=<%=loginMember.getMemberNo()%>",
-					type:"get",
-					datatype:"html",
-					success:function(data){
-						$('#content-div').html(data);
 					}
 				});
 			});
@@ -167,12 +160,17 @@ com.dongle.board.model.vo.Board" %>
 				});
 			});
 		});
-
+		
+		 $(document).ready(function() {
+				$("#content-slider").lightSlider({
+	                loop:true,
+	                keyPress:true
+	            });
+			});
 		 
 </script>
     <div class='back'>
         <!-- 로고 헤더 -->
-
         <header>
             <div class='logoback' style='width:1024px;height: auto'>
                 <!-- 로고 grid -->
@@ -243,7 +241,9 @@ com.dongle.board.model.vo.Board" %>
 						$(this).next().slideUp();
 						flag=true;
 					}
-				});				
+					
+			})
+				
 			});
 		</script>
 
@@ -257,7 +257,7 @@ com.dongle.board.model.vo.Board" %>
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary' id="board-btn">공지사항</button><br>
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
-                    <button class='btn btn-primary' id="gallery-btn" >갤러리</button><br>
+                    <button class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
                 </div>
             </div>
@@ -281,9 +281,11 @@ com.dongle.board.model.vo.Board" %>
             	<div class="demo" style="margin-top: 50px; padding-left: 50px;">      
 			       	 <div class="item">
 			            <ul id="content-slider" class="content-slider">
+			           
 			                <li>
 			                    <img src="./images/member_img/user01.png">
 			                </li>
+			             
 			                <li>
 			                    <img src="./images/member_img/user02.png"> 
 			                </li>
@@ -354,7 +356,7 @@ com.dongle.board.model.vo.Board" %>
      		});   		
      	});
    	
-<%--    	$(function(){
+   	$(function(){
    		$('#feed-btn').click(function(){
    			$.ajax({
    				url:"<%=request.getContextPath()%>/feed/feedListView",
@@ -365,7 +367,7 @@ com.dongle.board.model.vo.Board" %>
    				}
    			});
    		});
-   	}); --%>
+   	});
 
    	$(function(){
    		$('#board-btn').click(function(){
@@ -380,34 +382,16 @@ com.dongle.board.model.vo.Board" %>
    			});
    		});
    	});
-   	
-   	$(function(){
-   		$("#gallery-btn").click(function(){
-   			$.ajax({
-   				url:"<%=request.getContextPath()%>/gallery/albumGet?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
-   				type:"post",
-   				dataType:"html",
-   				success:function(data){
-   					$('#content-div').html(data);
-   				},
-   				error:function(request){},
-   				complate:function(){console.log("ok");}
-   			})
-   		})
-   	});
 
    	
    	function comunnityHome(){
    	   location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
    	}
-   	function logoCk(){
-   		location.href="<%=request.getContextPath()%>/login?memberNo=<%=loginMember.getMemberNo()%>";
-   	}
     </script>
 
 
 
-    </div>
+</div>
 
 
 

@@ -1,4 +1,4 @@
-package com.dongle.main.controller;
+package com.dongle.main;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class CommunityGalleryListServlet
+ * Servlet implementation class mainSearchServlet
  */
-@WebServlet("/community/mainGallery")
-public class CommunityGalleryListServlet extends HttpServlet {
+@WebServlet("/main/searchPage")
+public class mainSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityGalleryListServlet() {
+    public mainSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,20 @@ public class CommunityGalleryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
-		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-/*		String albumCode = request.getParameter("albumCode");
-		int galNo=Integer.parseInt(request.getParameter("galNo"));
-		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));*/
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		/*int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+		Group g = new GroupService().selectGrInfo(groupNo);*/
+		List<Group> groupList = new GroupService().selectAllGroupList();
 		
-		List<GalleryPath> galList = new GroupService().selectAllGallery(groupNo);
-		request.setAttribute("groupNo",groupNo);
-		request.setAttribute("galList",galList);
-		System.out.println("갤러리 : "+galList);
-		request.getRequestDispatcher("/views/comunityMain/MainMiniGallery.jsp").forward(request, response);
+		String loc="";
+		loc="/Dongle_view/search.jsp";
+		/*request.setAttribute("group", g);
+		request.setAttribute("groupNo",groupNo);*/
+		request.setAttribute("loginMember",loginMember);
+		request.setAttribute("groupList",groupList);
+		System.out.println("dd");
+		request.getRequestDispatcher(loc).forward(request, response);
+		
 		
 		
 	}
