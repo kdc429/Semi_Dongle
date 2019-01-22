@@ -4,20 +4,19 @@
 com.dongle.group.model.vo.GroupMember"
 
 %>
-
 <%
-/*    List<GalleryPath> list = (List)request.getAttribute("list");
+/* 	List<GalleryPath> list = (List)request.getAttribute("list");
 
-   List<GalleryPath> allList = (List)request.getAttribute("allList"); */
-   
-   List<GalleryPath> tList = (List)request.getAttribute("tList");
-   int numPerPage = (int)request.getAttribute("numPerPage");
-   String pageBar=(String)request.getAttribute("pageBar");
-    Member loginMember = (Member)session.getAttribute("loginMember");
-    int groupNo=(int)request.getAttribute("groupNo");
-    String albumCode=(String) request.getAttribute("albumCode");
-    GroupMember gm = (GroupMember)request.getAttribute("groupMember");
-   int count=1;
+	List<GalleryPath> allList = (List)request.getAttribute("allList"); */
+	
+	List<GalleryPath> tList = (List)request.getAttribute("tList");
+	int numPerPage = (int)request.getAttribute("numPerPage");
+	String pageBar=(String)request.getAttribute("pageBar");
+ 	Member loginMember = (Member)session.getAttribute("loginMember");
+ 	int groupNo=(int)request.getAttribute("groupNo");
+ 	String albumCode=(String) request.getAttribute("albumCode");
+ 	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
+	int count=1;
 %>
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -33,19 +32,18 @@ com.dongle.group.model.vo.GroupMember"
     
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <style>
-
 .dialog{
-   display:none;
-   position:absolute;
-   margin-top:-700px;
-   z-index:10;
-   left:0;                                                                                                   
-   right:0;
-   width:100%;
-   height:auto;
-   overflow:hidden;
-   background-color:rgb(0,0,0);
-   background-color:rgba(0,0,0,0.4);
+	display:none;
+	position:absolute;
+	margin-top:-700px;
+	z-index:10;
+	left:0;																																	
+	right:0;
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	background-color:rgb(0,0,0);
+	background-color:rgba(0,0,0,0.4);
 }
 .modal-content {
        background-color: #fefefe;
@@ -67,134 +65,132 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
 
 </style>
 <script>
-
-   $(function(){
-      $('.galImg').mouseover(function(){
-         $(this).fadeTo(100,0.4);
-      });
-      $('.galImg').mouseleave(function(){
-         $(this).fadeTo(100,1);
-      });
-   });
-   $(function(){
-      //사진 추가하기 form
-      $('.insert-bnt').click(function(){
-         $.ajax({
-            url:"<%=request.getContextPath()%>/gallery/insertGallery?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
-            type:"post",
-            dataType:"html",
-            success:function(data){
-               $('#gallery-container').html(data);
-            },
-            error: function(){console.log("gg");}
-         });
-      });
-   });
-   $(function(){
-      //모달띄우기
-      $('.galImg').click(function(event){
-         var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
-         var galNo = $(event.target).nextAll('#galNo')[0].value;
-         $.ajax({
-            url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo+"&dataNum="+1,
-            type:"post",
-            dataType:"html",
-            success:function(data){
-               $('.modal-content').html(data);
-               $('#modal-container').css('display','block');
-            },
-            error:function(request,m,e){console.log(request);}
-            
-         });   
-      });
-      
-   });
-   //돌아가기(목록으로)
-   $(function(){
-      $(".back_icon").click(function(){
-         $.ajax({
-            url:"<%=request.getContextPath()%>/gallery/albumGet?groupNo=<%=groupNo%>&memberNo=<%=loginMember.getMemberNo()%>",
-            type:"post",
-            dataType:"html",
-            success:function(data){
-               $('#content-div').html(data);
-            },
-            error:function(request){},
-            complate:function(){console.log("ok");}
-         });
-      });
-   });
+	$(function(){
+		$('.galImg').mouseover(function(){
+			$(this).fadeTo(100,0.4);
+		});
+		$('.galImg').mouseleave(function(){
+			$(this).fadeTo(100,1);
+		});
+	});
+	$(function(){
+		//사진 추가하기 form
+		$('.insert-bnt').click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/insertGallery?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#gallery-container').html(data);
+				},
+				error: function(){console.log("gg");}
+			});
+		});
+	});
+	$(function(){
+		//모달띄우기
+		$('.galImg').click(function(event){
+			var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
+			var galNo = $(event.target).nextAll('#galNo')[0].value;
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo+"&dataNum="+1,
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('.modal-content').html(data);
+					$('#modal-container').css('display','block');
+				},
+				error:function(request,m,e){console.log(request);}
+				
+			});	
+		});
+		
+	});
+	//돌아가기(목록으로)
+	$(function(){
+		$(".back_icon").click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/albumGet?groupNo=<%=groupNo%>&memberNo=<%=loginMember.getMemberNo()%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#content-div').html(data);
+				},
+				error:function(request){},
+				complate:function(){console.log("ok");}
+			});
+		});
+	});
 </script>
 <div id="gallery-container">
-   <div class='back-div'>
-      <a href='javascript:' class='list_btn'>
-         <img class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
-      </a>
-      <%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals("admin")||loginMember.getMemberNo()==gm.getMemberNo())){ %>
-         <button class="insert-bnt" name="insert-bnt" >사진 추가하기</button>
-      <%} %>
-   </div>
-   <hr style='width:78%'>
-   <br>
-   <div id="galleryList">
-      <table style='margin-left:80px;'>
-         <%if(tList.size()!=0){%>
-               <%for(GalleryPath t :tList){ %>
-                  <%if(count%4==1){%>
-                     <tr>
-                     </tr>
-                     <td class="galleryBox" >
-                        <%-- <%if(t.getGalMultiStatus().equals("Y")){ %> --%>
-                           <img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
-                        <%-- <%} %> --%>
-                        <input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
-                        <input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
-                        <input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
-                        <input type="hidden" name="galNo" id="galNo" value="<%=t.getGalNo() %>"/>
-                     </td>
-                     <%count++; %>
-                  <%} 
-                  else{%>
-                     <td class="galleryBox" >
-                        <img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
-                        <input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
-                        <input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
-                        <input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>
-                        <input type="hidden" name="galNo" id="galNo" value="<%=t.getGalNo() %>"/>
-                     </td>
-                     <%count++; %>
-                  <%} %>
-               <%} %>
-         <%}
-         else{%>
-            <div style='margin-left:100px;'>
-               <h3>등록된 사진이 없습니다.</h3>
-            </div>
-         <%} %>
-      </table>
-<!--    </form> -->
-   </div>
-   <br><br>
-   <div id="pag-div">
-      <table class='pag_table'>
-         <tr>
-               <td>
-                 <ul class="pagination" id="paging">
-                     <%=pageBar %>
-                 </ul>
-                </td>
-         </tr>
-      </table>
-   </div>
-   
-   <br><br>
+	<div class='back-div'>
+		<a href='javascript:' class='list_btn'>
+			<img class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
+		</a>
+		<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals("admin")||loginMember.getMemberNo()==gm.getMemberNo())){ %>
+			<button class="insert-bnt" name="insert-bnt" >사진 추가하기</button>
+		<%} %>
+	</div>
+	<hr style='width:78%'>
+	<br>
+	<div id="galleryList">
+		<table style='margin-left:80px;'>
+			<%if(tList.size()!=0){%>
+					<%for(GalleryPath t :tList){ %>
+						<%if(count%4==1){%>
+							<tr>
+							</tr>
+							<td class="galleryBox" >
+								<%-- <%if(t.getGalMultiStatus().equals("Y")){ %> --%>
+									<img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
+								<%-- <%} %> --%>
+								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
+								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
+								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>
+								<input type="hidden" name="galNo" id="galNo" value="<%=t.getGalNo() %>"/>
+							</td>
+							<%count++; %>
+						<%} 
+						else{%>
+							<td class="galleryBox" >
+								<img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
+								<input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
+								<input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
+								<input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo()%>"/>
+								<input type="hidden" name="galNo" id="galNo" value="<%=t.getGalNo() %>"/>
+							</td>
+							<%count++; %>
+						<%} %>
+					<%} %>
+			<%}
+			else{%>
+				<div style='margin-left:100px;'>
+					<h3>등록된 사진이 없습니다.</h3>
+				</div>
+			<%} %>
+		</table>
+<!-- 	</form> -->
+	</div>
+	<br><br>
+	<div id="pag-div">
+		<table class='pag_table'>
+			<tr>
+	   			<td>
+	        		<ul class="pagination" id="paging">
+		   				<%=pageBar %>
+	        		</ul>
+	       		</td>
+			</tr>
+		</table>
+	</div>
+	
+	<br><br>
 </div>
 
 <!-- modal-container 모달 들어갈 곳->>(메인으로 이동함!)-->
 <!-- <div class="modal-div">
-   <div class="dialog" id="modal-container">
-      <div class="modal-content">
-      </div>
-      </div>
+	<div class="dialog" id="modal-container">
+		<div class="modal-content">
+		</div>
+   	</div>
 </div> -->
-

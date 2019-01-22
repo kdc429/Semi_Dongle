@@ -57,15 +57,16 @@ top : 100px;
   position: absolute;
   text-align : center;
   top: 30%;
-  width:30px;
+  width:29px;
   padding-right: 20px;
   margin-top: -22px;
   color: white;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 10px;
   text-decoration: none;
+  background-color:rgba(250,250,250,0);
   z-index: 100;
   box-sizing: border-box;
 }
@@ -74,12 +75,14 @@ top : 100px;
 
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 10px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-
-.prev:hover, .next:hover {
+.prev:hover{
+ background-color: rgba(0,0,0,0.8);
+}
+.next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
@@ -244,8 +247,54 @@ if (n < 1) {slideIndex = slides.length}
   dots[slideIndex-1].className += " active";
 }
 
+//사진 삭제
+$('#deleteGallery').click(function(e){
+	if(!confirm('사진을 삭제하겠습니까?'))
+	{return;}
+	else{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/gallery/galleryDelete",
+			data:{'groupNo':<%=groupNo%>,
+				'albumCode':'<%=gplist.get(0).getAlbumCode()%>',
+				'galNo':<%=gplist.get(0).getGalNo()%>
+			},
+			dataType:"html",
+			type:"post",
+			success:function(data){
+				alert('Message: '+data);
+				$('#modal-container').css('display','none');
+				$.ajax({
+					url:"<%=request.getContextPath()%>/gallery/galleryGet",
+					data:{'groupNo':<%=groupNo%>,
+						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
+					},
+					dataType:"html",
+					type:"post",
+					success:function(data){
+						
+						$('#content-div').html(data);
+					}
+				});
+			}
+		});
+	}
+
+});
 
 </script>
+	<li class="level2" style="list-style:none;">
+		<span class='ico_skin thumb_profile'>
+			<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=gplist.get(0).getGroupMemberImageNewPath() %>'>
+		</span>
+		<span class='comment_box'>
+			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
+			<a href='*' style='float:right;' >신고</a>
+			<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+				<a id='deleteGallery' style='float:right;' >삭제</a>
+			<%} %>
+			<br/>
+		</span>
+	</li>
 	<span class="close">&times;</span>
 	<!-- 이미지 슬라이드 -->
 	<!-- 메인 슬라이드 -->
@@ -361,7 +410,7 @@ if (n < 1) {slideIndex = slides.length}
 				html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 				html+="</div>";
 				html+="<div class='comment_btn'>";
-				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
+				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
 				html+="</div>"
 				html+="</fieldset>"
 				div.html(html);
@@ -433,8 +482,8 @@ if (n < 1) {slideIndex = slides.length}
 					data:{"groupNo":$('#groupNo').val(),
 						"galNo":$('#galNo').val(),
 						"galCommentWriterNo":$('#galCommentWriterNo').val(),
-						"galCommentLevel":$('#galCommentWriterNo').val(),
-						"galCommentRef":$('#galCommentLevel').val(),
+						"galCommentLevel":$('#galCommentLevel').val(),
+						"galCommentRef":$('#galCommentRef').val(),
 						"albumCode":$('#albumCode').val(),
 						"galFileNo":$('#galFileNo').val(),
 						"galCommentContent":$('#galCommentContent').val(),
