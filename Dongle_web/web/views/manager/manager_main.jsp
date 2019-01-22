@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dongle.member.model.vo.Member" %>
+<%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group" %>
 
 <%
 	int groupNo=(int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	Group g = (Group)request.getAttribute("group");
+	
+	String address = g.getLocMetroName() + " " + g.getLocAreaName() + (g.getLocTownName()!=null?" " +g.getLocTownName():"");
 %>
 <meta charset="UTF-8">
 
@@ -29,6 +32,9 @@
 		modelFrm.submit();
 	}
 </script>
+<style>
+	input#address{display:"inline-block"}
+</style>
 <div class="manager-container">
 	
 	<h2 id="set-head">동글 관리자 페이지</h2>
@@ -81,7 +87,8 @@
 								<option value="게임/오락">게임/오락</option>
 							</select> <br> 
 							<label for="address">지역</label><br> 
-								<input type="text" class="form-control" id="address" value="<%= %>" readonly>
+								<input type="text" class="form-control" id="address"  value="<%=address %>" readonly>
+								<button type="button" class="btn btn-info">검색</button><br>
 							
 							<!-- <select	class="form-control" id="area">
 								<option value="경기도">경기도</option>

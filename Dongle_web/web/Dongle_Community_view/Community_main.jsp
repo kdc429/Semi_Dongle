@@ -268,14 +268,13 @@ $(function(){
 $(function(){
 	$("#manager-menu-btn").click(function(){
 		var managerNo=<%=g.getMemberNo()%>;
-		var myGroup = <%=g%>
+		
 		console.log(<%=g.getMemberNo()%>);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/manager/managerView?groupNo=<%=g.getGroupNo()%>",
 			type:"post",
 			data:{
 				"managerNo":managerNo
-				"myGroup":myGroup
 			},
 			dataType:"html",
 			success:function(data){

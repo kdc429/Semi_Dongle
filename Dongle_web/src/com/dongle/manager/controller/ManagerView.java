@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
@@ -34,8 +35,8 @@ public class ManagerView extends HttpServlet {
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		int managerNo = Integer.parseInt(request.getParameter("managerNo"));
-		Group g = (Group)request.getParameter("myGroup");
-		System.out.print(managerNo);
+		Group g = new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+	
 		
 		if(loginMember==null||loginMember.getMemberNo() != managerNo) 
 		{
@@ -47,6 +48,7 @@ public class ManagerView extends HttpServlet {
 		
 		
 		request.setAttribute("groupNo", groupNo);
+		request.setAttribute("group", g);
 	
 		request.getRequestDispatcher("/views/manager/manager_main.jsp").forward(request, response);
 	}
