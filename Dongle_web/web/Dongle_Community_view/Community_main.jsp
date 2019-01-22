@@ -25,6 +25,8 @@
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
+
 </head>
 
 <style>
@@ -57,7 +59,7 @@
 					type:"get",
 					dataType:"html",
 					success:function(data){
-						$('.main').html(data);
+						$('#content-div').html(data);
 					}
 				});
 			});
@@ -145,7 +147,7 @@
 	</aside>
         <!-- 게시판 -->
         <section>
-            <div class="main center" id="main_center" style='width:684px;height:auto; background-color:white; align-content: center;'>
+            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:white; align-content: center;'>
             	<span id="header" style='text-align: center;'></span>
             	<br/><br/>
 
@@ -234,13 +236,6 @@
                 </div>
             </div>
         </aside>
-        <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:rgb(255, 255, 255); clear: left;'>
-
-            </div>
-        </section>
-        <!-- 오른쪽 사이드 -->
 
     </div>
 
