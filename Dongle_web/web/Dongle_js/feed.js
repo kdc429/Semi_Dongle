@@ -4,14 +4,29 @@ var time; // 슬라이드 넘어가는 시간
         var currentIndex; // 현재 보여지는 슬라이드 인덱스 값
         var indiIndex; //인디케이터 인덱스
         var imgWidth; // 사진 한장의 너비
+        var indicator;// 캐러셀 인디케이터
         currentIndex = 0;
-
+        $(function set_Position(){
+       	 	for (var i = 0; i < feedPicCount; i++) {
+       	 		if (i == currentIndex) {
+       	 			feedPicLi.eq(i).css("left", 0);
+       	 			
+       	 		} else {
+                 
+       	 			feedPicLi.eq(i).css("left", imgWidth);
+       	 		}
+       	 	}
+        });
+        
+        
+        
         $(document).on('click','.feed-pic-indi',function () {
 
             console.log($($(this).parent('ul').children('li')).index(this));
             feedPicLi=$(this).parent('ul').parent('div').siblings('.feed-pics').children('.media-carousel').children('li');
             indiIndex = $($(this).parent('ul').children('li')).index(this);
             feedPicCount = feedPicLi.length;
+            indicator=$(this);
             
             
             if (indiIndex == currentIndex) {
@@ -27,18 +42,12 @@ var time; // 슬라이드 넘어가는 시간
                 for (var i = 0; i < feedPicCount; i++) {
                     if (i == currentIndex) {
                         feedPicLi.eq(i).css("left", 0);
+                        
                     } else {
                         feedPicLi.eq(i).css("left", imgWidth);
                     }
                 }
             
-                for (var i = 0; i < feedPicCount; i++) {
-                    if (i == currentIndex) {
-                        feedPicLi.eq(i).css("left", 0);
-                    } else {
-                        feedPicLi.eq(i).css("left", imgWidth);
-                    }
-                }
                 
                 console.log(feedPicLi.eq(currentIndex));
                 var left = -imgWidth;
@@ -46,7 +55,7 @@ var time; // 슬라이드 넘어가는 시간
                 feedPicLi.eq(currentIndex).animate({
                     left: left
                 },function () {
-                
+                	
                     feedPicLi.eq(currentIndex-1).css("left", imgWidth);
                 });
                 //선택화면 넘어옴
@@ -55,6 +64,7 @@ var time; // 슬라이드 넘어가는 시간
                         feedPicLi.eq(indiIndex).animate({
                             left: 0
                         });
+                        
                     } else {
                         feedPicLi.eq(i).css({
                             left: imgWidth
@@ -71,6 +81,7 @@ var time; // 슬라이드 넘어가는 시간
                 for (var i = 0; i < feedPicCount; i++) {
                     if (i == currentIndex) {
                         feedPicLi.eq(i).css("left", 0);
+                        
                     } else {
                         feedPicLi.eq(i).css("left", -imgWidth);
                     }
@@ -82,7 +93,7 @@ var time; // 슬라이드 넘어가는 시간
                 feedPicLi.eq(currentIndex).animate({
                     left: left
                 },function () {
-                
+                	
                     feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
                 });
 
@@ -92,6 +103,7 @@ var time; // 슬라이드 넘어가는 시간
                         feedPicLi.eq(indiIndex).animate({
                             left: 0
                         });
+                        
                     } else {
                         feedPicLi.eq(i).css({
                             left: -imgWidth
@@ -110,12 +122,13 @@ var time; // 슬라이드 넘어가는 시간
             feedPicLi=$(this).siblings('.media-carousel').children('li');
             imgWidth = feedPicLi.width();
             feedPicCount = feedPicLi.length;
-            
+            indicator=$(this);
                 
                 // 이미지 위치 조정
             for (var i = 0; i < feedPicCount; i++) {
                 if (i == currentIndex) {
                     feedPicLi.eq(i).css("left", 0);
+                    
                 } else {
                     
                     feedPicLi.eq(i).css("left", imgWidth);
@@ -128,7 +141,7 @@ var time; // 슬라이드 넘어가는 시간
             feedPicLi.eq(currentIndex).animate({
                 left: left
             }, function () {
-                
+            	
                 feedPicLi.eq(currentIndex-1).css("left", imgWidth);
             });
             
@@ -150,6 +163,7 @@ var time; // 슬라이드 넘어가는 시간
                     feedPicLi.eq(currentIndex).animate({
                         left: 0
                     });
+                    
                 } else {
                     feedPicLi.eq(i).css({
                         left: imgWidth
@@ -166,7 +180,7 @@ var time; // 슬라이드 넘어가는 시간
             feedPicLi=$(this).siblings('.media-carousel').children('li');
             imgWidth = feedPicLi.width();
             feedPicCount = feedPicLi.length;
-            
+            indicator=$(this);
             for (var i = 0; i < feedPicCount; i++) {
                 if (i == currentIndex) {
                     feedPicLi.eq(i).css("left", 0);
@@ -184,7 +198,7 @@ var time; // 슬라이드 넘어가는 시간
                 left: left
                 
             },function () {
-                
+            	
                 feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
             });
             console.log("태그이동!");
@@ -202,6 +216,7 @@ var time; // 슬라이드 넘어가는 시간
                     feedPicLi.eq(currentIndex).animate({
                         left: 0
                     });
+                   
                 } else {
                     feedPicLi.eq(i).css({
                         left: -imgWidth
