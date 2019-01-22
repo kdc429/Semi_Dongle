@@ -63,8 +63,8 @@ button.btn button.btn-primary{
          */
 .center {
 	position: absolute;
-	/* display: flex; */
-	flex-direction: row;
+	/* display: flex;
+	flex-direction: row; */
 	font-family: '나눔스퀘어라운드 Regular';
 }
 
@@ -115,6 +115,7 @@ div.logo h2 a{text-decoration: none;}
 	font-family: '나눔스퀘어라운드 Regular';
 }
 
+}
 .profile_img{
 	width: 140px;
 	height: 150px;

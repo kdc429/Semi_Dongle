@@ -4,20 +4,26 @@ public class FeedFile {
 	
 	private int feedNo;
 	private int groupNo;
-	private String feedFileNo; //FEED_FILE_NO
-	private String feedFilePath; //FEED_FILE_PATH
+	private int feedFileNo; //FEED_FILE_NO
+	private String feedOldFilePath; //FEED_OLD_FILE_PATH
+	private String feedNewFilePath; //FEED_NEW_FILE_PATH
 	
 	public FeedFile() {
 		
 	}
 
-	public FeedFile(int feedNo, int groupNo, String feedFileNo, String feedFilePath) {
+	
+
+	public FeedFile(int feedNo, int groupNo, int feedFileNo, String feedOldFilePath, String feedNewFilePath) {
 		super();
 		this.feedNo = feedNo;
 		this.groupNo = groupNo;
 		this.feedFileNo = feedFileNo;
-		this.feedFilePath = feedFilePath;
+		this.feedOldFilePath = feedOldFilePath;
+		this.feedNewFilePath = feedNewFilePath;
 	}
+
+
 
 	public int getFeedNo() {
 		return feedNo;
@@ -35,27 +41,53 @@ public class FeedFile {
 		this.groupNo = groupNo;
 	}
 
-	public String getFeedFileNo() {
+
+
+	public int getFeedFileNo() {
 		return feedFileNo;
 	}
 
-	public void setFeedFileNo(String feedFileNo) {
+
+
+	public void setFeedFileNo(int feedFileNo) {
 		this.feedFileNo = feedFileNo;
 	}
 
-	public String getFeedFilePath() {
-		return feedFilePath;
+
+
+	public String getFeedOldFilePath() {
+		return feedOldFilePath;
 	}
 
-	public void setFeedFilePath(String feedFilePath) {
-		this.feedFilePath = feedFilePath;
+
+
+	public void setFeedOldFilePath(String feedOldFilePath) {
+		this.feedOldFilePath = feedOldFilePath;
 	}
+
+
+
+	public String getFeedNewFilePath() {
+		return feedNewFilePath;
+	}
+
+
+
+	public void setFeedNewFilePath(String feedNewFilePath) {
+		this.feedNewFilePath = feedNewFilePath;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "FeedFile [feedNo=" + feedNo + ", groupNo=" + groupNo + ", feedFileNo=" + feedFileNo + ", feedFilePath="
-				+ feedFilePath + "]";
+		return "FeedFile [feedNo=" + feedNo + ", groupNo=" + groupNo + ", feedFileNo=" + feedFileNo
+				+ ", feedOldFilePath=" + feedOldFilePath + ", feedNewFilePath=" + feedNewFilePath + "]";
 	}
+
+	
+	
+	
 	
 	
 }

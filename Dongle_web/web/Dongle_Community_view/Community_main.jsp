@@ -22,12 +22,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/css/Dongle_Community.css" rel="stylesheet">
- 
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
 </head>
 
 <style>
@@ -82,6 +80,7 @@
 			<!-- 왼쪽 사이드 -->
 			<div class="sidel"
 				style='height: 100vh; background-color: rgb(228, 228, 228)'>
+				<a href="<%=request.getContextPath()%>/Dongle_Community_view/manager_main.jsp">asdf</a>
 				<div class="sideitem1"
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
@@ -140,9 +139,7 @@
 						$(this).next().slideUp();
 						flag=true;
 					}
-					
-			})
-				
+				});
 			});
 		</script>
 	</aside>
@@ -209,6 +206,9 @@
                      <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
                     <button class='btn btn-primary'>일정</button><br>
+                    <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
+                    <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
+                    <%} %>
                 </div>
             </div>
         </aside>
@@ -232,7 +232,22 @@ $(function(){
 				$('#content-div').html(data);
 			},
 			error:function(request){},
-			complate:function(){console.log("ok");}
+			complete:function(){console.log("ok");}
+		})
+	})
+});
+/*고쳐야되애애애애애애애애앵*/
+$(function(){
+	$("#gallery-btn").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/manager/?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complete:function(){console.log("ok");}
 		})
 	})
 });

@@ -57,15 +57,16 @@ top : 100px;
   position: absolute;
   text-align : center;
   top: 30%;
-  width:30px;
+  width:29px;
   padding-right: 20px;
   margin-top: -22px;
   color: white;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 10px;
   text-decoration: none;
+  background-color:rgba(250,250,250,0);
   z-index: 100;
   box-sizing: border-box;
 }
@@ -74,12 +75,14 @@ top : 100px;
 
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 10px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-
-.prev:hover, .next:hover {
+.prev:hover{
+ background-color: rgba(0,0,0,0.8);
+}
+.next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
