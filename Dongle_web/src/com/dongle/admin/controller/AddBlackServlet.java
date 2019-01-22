@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dongle.admin.service.AdminService;
+import com.dongle.admin.model.service.AdminService;
 import com.dongle.member.model.vo.Member;
 
 /**

@@ -1,4 +1,4 @@
-package com.dongle.admin.service;
+package com.dongle.admin.model.service;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;

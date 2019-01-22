@@ -264,16 +264,18 @@ $(function(){
 		})
 	})
 });
-/*고쳐야되애애애애애애애애앵*/
+/* 동글 관리 클릭시 매핑함수 */
 $(function(){
 	$("#manager-menu-btn").click(function(){
 		var managerNo=<%=g.getMemberNo()%>;
+		var myGroup = <%=g%>
 		console.log(<%=g.getMemberNo()%>);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/manager/managerView?groupNo=<%=g.getGroupNo()%>",
 			type:"post",
 			data:{
 				"managerNo":managerNo
+				"myGroup":myGroup
 			},
 			dataType:"html",
 			success:function(data){

@@ -91,6 +91,11 @@ public class GroupDao {
 				g.setGroupNo(rs.getInt("group_no"));
 				g.setGroupName(rs.getString("group_name"));
 				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setTopicName(rs.getString("topic_ctg_name"));
+				g.setLocMetroName(rs.getString("loc_metro_name"));
+				g.setLocAreaName(rs.getString("loc_area_name"));
+				g.setLocTownName(rs.getString("loc_town_name"));
+				g.setLocCtgCode(rs.getString("loc_ctg_code"));
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -102,6 +107,7 @@ public class GroupDao {
 				
 				
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

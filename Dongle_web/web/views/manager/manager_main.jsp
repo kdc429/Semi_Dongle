@@ -18,7 +18,17 @@
 <!-- Latest compiled JavaScript -->
 <!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-
+<script>
+	function validate(){
+		console.log($("#checkPwd").val()+" : <%=loginMember.getMemberPwd()%>");
+		if($("#checkPwd").val() != '<%=loginMember.getMemberPwd()%>')
+		{
+			alert("비밀번호가 일치하지 않습니다.");
+			return;	
+		}
+		modelFrm.submit();
+	}
+</script>
 <div class="manager-container">
 	
 	<h2 id="set-head">동글 관리자 페이지</h2>
@@ -57,10 +67,10 @@
 				<div class="modal-body" style="padding: 40px 50px;">
 					<form >
 						<div class="form-group">
-							<label for="donglename">동호회 이름</label> <input type="text"
-								class="form-control" id="donglename"> <br> <label
-								for="topic">주제 카테고리</label><br> <select
-								class="form-control" id="topic">
+							<label for="donglename">동호회 이름</label> 
+								<input type="text" class="form-control" id="donglename"> <br>
+							<label for="topic">주제</label><br> 
+							<select	class="form-control" id="topic">
 								<option value="인문/과학">인문/과학</option>
 								<option value="스포츠/레저">스포츠/레저</option>
 								<option value="여행/캠핑">여행/캠핑</option>
@@ -69,8 +79,11 @@
 								<option value="외국어/어학">외국어/어학</option>
 								<option value="건강/다이어트">건강/다이어트</option>
 								<option value="게임/오락">게임/오락</option>
-							</select> <br> <label for="area">지역 카테고리</label><br> <select
-								class="form-control" id="area">
+							</select> <br> 
+							<label for="address">지역</label><br> 
+								<input type="text" class="form-control" id="address" value="<%= %>" readonly>
+							
+							<!-- <select	class="form-control" id="area">
 								<option value="경기도">경기도</option>
 								<option value="서울">서울</option>
 								<option value="강원도">강원도</option>
@@ -79,33 +92,40 @@
 								<option value="전라북도">전라북도</option>
 								<option value="전라남도">전라남도</option>
 								<option value="제주도">제주도</option>
-							</select> <br> <label>성별</label><br>
+							</select> <br>  -->
+							<label>성별</label><br>
 							<div class="radio">
-								<label class="radio-inline"><input type="radio"
-									name="gender" value="남자" checked>남자</label> <label
-									class="radio-inline"><input type="radio" name="gender"
-									value="여자">여자</label> <label class="radio-inline"><input
-									type="radio" name="gender" value="무관">무관</label>
+								<label class="radio-inline">
+									<input type="radio" name="gender" value="남자" checked>남자
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="gender" value="여자">여자
+								</label> 
+								<label class="radio-inline">
+									<input type="radio" name="gender" value="무관">무관
+								</label>
 							</div>
-							<br> <label>활동 시간대</label><br>
+							<br> 
+							<label>활동 시간대</label><br>
 							<div class="radio">
-								<label class="radio-inline"><input type="radio"
-									name="activetime" value="주중" checked>주중</label> <label
-									class="radio-inline"><input type="radio"
-									name="activetime" value="주말">주말</label> <label
-									class="radio-inline"><input type="radio"
-									name="activetime" value="무관">무관</label>
+								<label class="radio-inline">
+									<input type="radio" name="activetime" value="주중" checked>주중
+								</label> 
+								<label class="radio-inline">
+									<input type="radio" name="activetime" value="주말">주말
+								</label> 
+								<label class="radio-inline">
+									<input type="radio" name="activetime" value="무관">무관
+								</label>
 							</div>
 
 							<label for="">연령대</label><br>
 							<div class="col-sm-3">
-								<input type="number" class="form-control" min="1" max="100"
-									placeholder="최소">
+								<input type="number" class="form-control" min="1" max="100" placeholder="최소">
 							</div>
 							<div class="col-sm-1">~</div>
 							<div class="col-sm-3">
-								<input type="number" class="form-control" min="1" max="100"
-									placeholder="최대">
+								<input type="number" class="form-control" min="1" max="100" placeholder="최대">
 							</div>
 						</div>
 
@@ -138,9 +158,34 @@
 					<br>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">예</button>
+					<button type="button" class="btn btn-default"  data-toggle="modal" data-target="#check-modal"data-dismiss="modal">예</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">아니오</button>
 				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 매니저 비밀번호 확인창(modal) -->
+	<div class="modal fade" id="check-modal" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">비밀번호 확인</h4>
+				</div>
+				<form name='modelFrm' action="<%=request.getContextPath() %>/manager/deleteDongle" method="post">
+					<div class="modal-body">
+						<label for="checkPwd">비밀번호 입력</label><br>
+						<input type="password" class="form-control" name="checkPwd" id="checkPwd">
+						
+						<input type="hidden" name="groupNo" value="<%=groupNo%>"/>
+						<input type="hidden" name="memberPwd" value="<%=loginMember.getMemberPwd() %>"/>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" onclick="validate()">예</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">아니오</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
