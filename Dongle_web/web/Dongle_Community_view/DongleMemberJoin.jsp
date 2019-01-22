@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
+
+<%@ page import="com.dongle.member.model.vo.Member" %>
+
+<%
+   int groupNo=(int)request.getAttribute("groupNo");
+   Member loginMember = (Member)session.getAttribute("loginMember");
+%>
 
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 
     <style>
-
-        #dongle_join{
+#dongle_join{
             border: 20px solid rgb(144, 202, 135);
             width: 500px;
-            height: 400px;
-            margin-left: 700px;
-            margin-top: 50px;  
+            height: 500px;
+            margin-left: 90px;
+
         }
         
        .image_p{
@@ -23,7 +26,7 @@
             width: 150px;
             height: 150px;
             border-radius: 40px;
-            margin-left: 175px;
+            margin-left: 155px;
             margin-top: 50px;
         }
 
@@ -40,19 +43,18 @@
 
         .subm{
            position: absolute;
-           left: 950px;
-           top: 650px;
+           left: 315px;
+           top: 500px;
         }
         
         #upfile{
-            padding-left: 215px;
+            padding-left: 190px;
             padding-top: 10px;
         }
         
         #dongle_title{
         	font-size: 70px;
-        	margin-left: 820px;
-        	margin-top: 150px;
+            margin-left: 190px;
         }
         /* 등러가는 이미지 style 클래스명 */
         .selProductFile{
@@ -61,10 +63,64 @@
             border-radius: 40px;
             padding:3px;
         }
+        
+        #nickbox{
+        	display: inline-block;
+        }
+        
+  
     </style>
     
-</head>
-<body>
+
+	<script>
+		function fn_enroll_validate(){
+			
+			if($('input[name=idValid]')[0].value=='0')
+			{
+				alert('아이디 중복체크를 해주세요!');
+				return false;	
+			}
+			var userId=$("#dongle_nickname");
+			if(userId.val().length<4)
+			{
+				alert("최소 4자리 이상 입력하세요!");
+				userId.focus();
+				return false;
+			}
+			return true;			
+		};
+		
+		
+		//아이디 중복검사하기 : 팝업창을 띄워서 해보자~! 
+		function fn_checkduplicate(){
+			var userId=$("#dongle_nickname").val().trim();
+			if(!userId || userId.length<4)
+			{
+				alert("아이디를 4글자 이상 입력하세요~!");
+				return;	
+			}
+			//팝업창에 대한 설정해주기!@
+			var url="<%=request.getContextPath()%>/NicknameCheck";
+			var title="checkdongleDuplicate";
+			var shape="left=200px, top=100px, width=300px, height=200px";
+			
+			var popup=open("",title,shape);
+			
+			//현재페이지에 있는값을 새창으로 옮기는 작업~!
+			checkdongleDuplicateFrm.dongle_nickname.value=userId;
+			//popup창에서 이 폼을 작동시키게 하는 구문!
+			checkdongleDuplicateFrm.target=title;
+			checkdongleDuplicateFrm.action=url;
+			checkdongleDuplicateFrm.method="post";
+			checkdongleDuplicateFrm.submit();		
+			
+			//window.open(url,"명칭/여는방식",shape)
+			
+
+		}
+		
+	
+	</script>
 
 
 <div id="dongle_title">동글 가입</div>
@@ -75,11 +131,15 @@
 	            <div class="image_p"></div>
 	            <input type="file" id="upfile" class="upfile" name="upfile" >
 	            <div class="list">
-	                <table>
+	                <table id="nickbox">
 	                    <tr>
-	                        <th>닉네임 &nbsp;&nbsp;&nbsp;&nbsp; </th>
+	                        <th>닉네임 &nbsp;&nbsp;&nbsp;</th>
 	                        <td>
 	                            <input type="text" name="dongle_nickname" id="dongle_nickname" required/>
+	                            <input type="button" value="중복검사" onclick="fn_checkduplicate();"/>
+	                            <input type='hidden' name="idValid" value="0"/> 
+	                            <input type='hidden' name="groupNo" value="<%=groupNo%>"/> 
+	                            <input type='hidden' name="memberNo" value="<%=loginMember.getMemberNo()%>"/> 
 	                        </td>
 	                    </tr>
 	                    <tr class="subm">
@@ -93,7 +153,9 @@
 	    </div>
 		</section>
 	</form>
-	
+	<form action="" name="checkdongleDuplicateFrm">
+			<input type="hidden" name="dongle_nickname"/>
+		</form>	
 	
 	
 <%-- 	<script>
@@ -109,7 +171,7 @@
 				"upfile":upfile,
 				},
 			dataType:"html",
-			success:function(data){
+			success:function(data){																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
 				$('#image_p').html(data);
 			}
 			})
@@ -157,6 +219,3 @@
 	   }
 
 	</Script>
-
-</body>
-</html>

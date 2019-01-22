@@ -94,6 +94,9 @@
 						<div id="dongle_info_view" style="font-size: 11px;">회원수 : <%=result %> 명 &nbsp;</div>
 						<div id="dongle_info_view">
 							<button id="dongle_mem_btn">멤버보기</button>
+						<%if(gm==null){ %>
+							<button id="dongle_mem_join">가입하기</button>
+							<%} %>
 						</div>
 					</div>
 					<br/>
@@ -103,6 +106,7 @@
 					<span class="demoSpan1"></span>
 				</div>
 				<!-- 회원정보 -->
+				<%if(gm!=null){ %>
 				<div class="user_info">
 					<table id="user_info_tb" style="width:138px" border="1px solid black">
 						<tr>
@@ -120,6 +124,8 @@
 					</table>
 
 				</div><br>
+				<%} %>
+				
 				<!-- 소개글 -->
 				<div class="sideitem2"
 					style='border: 1px solid rgba(255,0,0,0.1);  right: 10%; height: 150px'>
@@ -256,6 +262,22 @@ $(function(){
 		})
 	})
 });
+
+$(function(){
+	$("#dongle_mem_join").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/dongleJoinView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
+
 
 function comunnityHome(){
 	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";

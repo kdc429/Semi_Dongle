@@ -46,7 +46,8 @@
 	
 	.logo-text {
 	font-family: 'Sunflower';
-	font-size: 30px;
+	font-size: 70px;
+	margin-left: 80px;
 	/* margin-left: 50px; */
 }
 </style>
@@ -174,7 +175,7 @@
 				<tr>
 					<th>휴대폰</th>
 					<td>
-						<input type="tel"  
+						<input type="tel" class="tex" 
 						id="phone" name="phone" maxlength="11"
 						placeholder="(-없이)01012345678" required>
 					</td>

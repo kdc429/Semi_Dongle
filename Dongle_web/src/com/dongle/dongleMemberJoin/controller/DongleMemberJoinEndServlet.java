@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.dongle.dongleMemberJoin.model.vo.DongleMember;
 import com.dongle.dongleMemberJoin.service.DongleMemberJoinService;
+import com.dongle.group.model.vo.GroupMember;
 import com.oreilly.servlet.MultipartRequest;
-
 import common.MyFileRenamePolicy;
 
 /**
@@ -66,11 +64,13 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 //		String nickname = request.getParameter("nickname");
 //		String upfile =  request.getParameter("upfile");
 		
-		DongleMember m = new DongleMember();
+		GroupMember m = new GroupMember();
 		
-		m.setNickname(mr.getParameter("dongle_nickname"));
-		m.setCalorfile(mr.getOriginalFileName("upfile"));
-		m.setRefile(mr.getFilesystemName("upfile"));
+		m.setGroupMemberNickname(mr.getParameter("dongle_nickname"));
+		m.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
+		m.setMemberNo(Integer.parseInt(mr.getParameter("memberNo")));
+		m.setGroupMemberImageNewPath(mr.getOriginalFileName("upfile"));
+		m.setGroupMemberImageOldPath(mr.getFilesystemName("upfile"));
 		
 		int result = new DongleMemberJoinService().insertdonglejoin(m);
 		
@@ -80,9 +80,9 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		String view="/Dongle_view/msg.jsp";
 		
 		if(result>0)
-		{
-			msg="동글 등록성공";
-			loc="/board/boardList";
+		{	
+			loc="/communityJoin?groupNo="+mr.getParameter("groupNo");
+			msg="동글 등록 성공";
 		}
 		else 
 		{

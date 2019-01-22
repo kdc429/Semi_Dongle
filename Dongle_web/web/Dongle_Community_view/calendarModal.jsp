@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -88,46 +88,7 @@ $(function(){
               
               </div>
               
-    <script type='text/javascript'>
-	   //이미지 정보들을 담을 배열 선언
-	   var sel_files = [];
-	   
-	   $(document).ready(function(){
-	      $('#insert-btn').on('change', handleImgFileSelect);
-	   });
-	   
-	   function fileUploadAction(){
-	      console.log('fileUploadAction');
-	      $('#insert-btn').trigger('click');
-	   }
-	   
-	   function handleImgFileSelect(e){
-	      //이미지 정보들을 초기화
-	   sel_files = [];
-	      $('.receipt').empty();
-	      var files=e.target.files;
-	      var filesArr=Array.prototype.slice.call(files);
-	      
-	      var index = 0;
-	      filesArr.forEach(function(f){
-	         if(!f.type.match("image.*")){
-	            alert('확장자는 이미지 확장자만 가능합니다.');
-	            return;
-	         }
-	         sel_files.push(f);
-	         var reader = new FileReader();
-	         reader.onload=function(e){
-	            var html = "<img src='"+e.target.result+"' data-file='"+f.name+"' class='selProductFile' name='selProductFile' title='프로필이미지'>";
-	            $(".receipt").append(html);
-	            index++;
-	         }
-	         reader.readAsDataURL(f);
-	         
-	         
-	      })
-	   }
 
-	</Script>
                                 
          <!-- <img src="http://image.kmib.co.kr/online_image/2018/0114/611211110012048428_1.jpg"> -->
 
@@ -143,7 +104,7 @@ $(function(){
                 모은 총 회비 : <input type="text" name="totalcost" id="totalcost">
                 <br>
                총 사용 금액 : <input type="text" name="usecost" id="usecost">
-                <br>
+                <br>   
                 <input type="date" id="today1" name="today1" min="2019-01-01"/>
                 <input type="time" id="today2" name="today2">
                 <br>
@@ -157,7 +118,7 @@ $(function(){
          <div class="modal-footer">
             <input type="submit" id="insert-btn" value="등록하기" onclick="return validate();" />
             <input type="hidden" name="groupNo" value=1/> <!-- //groupNo받아오기 -->
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
          </div>
 	<script>
 			
@@ -187,48 +148,54 @@ $(function(){
 	        //영수증 보기
 	        function rec() {
 	            $('#receipt').slideToggle();
+	            
+	            
+	            
 	        }
 	
 	        //영수증 업로드
-	        function validate() {
+	        /* function validate() {
 	            var content = $('[name=content]').val();
 	        }
-	        
+	         */
 	        
 	        
 	        
 	        //form대신 ajax로 보내기! 
-	        $('#insert-btn').click(function(){
-	        	var caltitle = $('#caltitle').val();
-	        	console.log(caltitle);
-				var today1 = $('#today1').val();
-				var today2 = $('#today2').val();
-				var calcontent = $('#calcontent').val();
-				var upfile = $('#upfile').val();
-				var totalcost = $('#totalcost').val();
-				var usecost = $('#usecost').val();
-	        	
-	        	
-	        	$.ajax({
-	        		url:"<%=request.getContextPath()%>/CalendarFormEnd",
-	        		type:"post",
-	        		data:{
-	        			"caltitle":caltitle,
-	        			"today1":today1,
-	        			"today2":today2,
-	        			"calcontent":calcontent,
-	        			"upfile":upfile,
-	        			"totalcost":totalcost,
-	        			"usecost":usecost
-	        			},
-	        		dataType:"html",
-	        		success:function(data){
-	        			$('#cast1').html(data);
-	        		}
-	        		
-	        	})
-	        });
 	        
+	        $(document).ready(function(){
+	        	
+	        	 $('#insert-btn').click(function(){
+	 	        	var caltitle = $('#caltitle').val();
+	 	        	console.log(caltitle);
+	 				var today1 = $('#today1').val();
+	 				var today2 = $('#today2').val();
+	 				var calcontent = $('#calcontent').val();
+	 				var upfile = $('#upfile').val();
+	 				var totalcost = $('#totalcost').val();
+	 				var usecost = $('#usecost').val();
+	 	        	
+	 	        	
+	 	        	$.ajax({
+	 	        		url:"<%=request.getContextPath()%>/calendar/calendarFormEnd",
+	 	        		type:"post",
+	 	        		data:{
+	 	        			"caltitle":caltitle,
+	 	        			"today2":today2,
+	 	        			"calcontent":calcontent,
+	 	        			"upfile":upfile,
+	 	        			"totalcost":totalcost,
+	 	        			"usecost":usecost
+	 	        			},
+	 	        		dataType:"html",
+	 	        		success:function(data){
+	 	        			console.log(data);
+	 	        		}
+	 	        	})
+	 	        }); 
+	        })
+	       
+	         
 	        
 <%-- 	        $.ajax({
 	        		url:"<%=request.getContextPath()%>/calendar/calendarFormEnd",
@@ -241,6 +208,6 @@ $(function(){
 	        			$('#cast1').html(data);
 	        		}
 	        		})
-	        }) --%>
+	        })  --%>
 	        
 	</script>
