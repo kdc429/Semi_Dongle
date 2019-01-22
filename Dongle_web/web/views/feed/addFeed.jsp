@@ -17,10 +17,11 @@ List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
         		<div class="feed">
             	feed
             		<div class="feed-header">
-                		<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
+                		
                 		<% for(GroupMember gm:memberList){
                 				
                 				if(gm.getMemberNo()==f.getMemberNo()){%>
+                					<img src="<%=request.getContextPath() %>/images/member_img/<%=gm.getGroupMemberImageNewPath() %>" class="member-profile">
                 					<a><%=gm.getGroupMemberNickname() %></a>
                 			<%		break;
                 			 	}
