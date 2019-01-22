@@ -35,7 +35,9 @@ public class AlbumInsertServlet extends HttpServlet {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		
-		int rs = new GalleryService().insertAlbum(albumNameP, groupNo);
+		int albumNo = new GalleryService().selectAlbumNo(groupNo);
+		
+		int rs = new GalleryService().insertAlbum(albumNameP, groupNo,albumNo);
 		if(rs!=0)
 		{
 			response.setContentType("text/csv;charset=UTF-8");

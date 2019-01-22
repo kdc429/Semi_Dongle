@@ -35,7 +35,7 @@ com.dongle.group.model.vo.GroupMember"
 .dialog{
 	display:none;
 	position:absolute;
-	margin-top:-700px;
+	margin-top:-100px;
 	z-index:10;
 	left:0;																																	
 	right:0;

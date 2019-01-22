@@ -45,7 +45,8 @@ public class GalleryDao {
 				ac=new AlbumCategory(
 						rs.getInt("group_no"),
 						rs.getString("album_code"),
-						rs.getString("album_name")
+						rs.getString("album_name"),
+						rs.getInt("album_no")
 						);
 				list.add(ac);
 			}
@@ -61,6 +62,32 @@ public class GalleryDao {
 		
 		return list;
 	}
+	//앨범번호 불러오기
+	 public int selectAlbumNo(Connection conn, int groupNo)
+	 {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		String sql=prop.getProperty("selectAlbumNo");
+		int albumNo=0;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) 
+			{
+				albumNo = rs.getInt("album_no");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return albumNo;
+	 }	 
 	
 	public List<GalleryPath> galleryGet(String albumCode, int groupNo,Connection conn,int cPage,int numPerPage){
 		PreparedStatement pstmt=null;
@@ -133,7 +160,7 @@ public class GalleryDao {
 		return result;
 	}
 	
-	public int inserAlbum(Connection conn,String albumNameP,int groupNo)
+	public int inserAlbum(Connection conn,String albumNameP,int groupNo,int albumNo)
 	{
 		PreparedStatement pstmt=null;
 		int rs=0;
@@ -142,6 +169,7 @@ public class GalleryDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, groupNo);
 			pstmt.setString(2, albumNameP);
+			pstmt.setInt(3, albumNo+1);
 			rs=pstmt.executeUpdate();
 		}
 		catch(Exception e)

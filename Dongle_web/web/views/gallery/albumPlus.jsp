@@ -30,16 +30,16 @@ $(function(){
 			alert('앨범명을 입력해주세요.');
 			return;
 		}
-<%-- 		for(var i=0;i< <%=list.size()%>; i++)
+		for(var i=0;i< <%=list.size()%>; i++)
 		{
 			console.log('Message'+'<%=list.get(0).getAlbumName()%>'+'<%=list.get(1).getAlbumName()%>');
-			if($('#albumNameP').val()=='<%=list.get(i).getAlbumName()%>')
+			if($('#albumNameP').val()=='<%=list.get(count).getAlbumName()%>')
 			{
 				alert('이미 존재하는 앨범입니다. 다시 입력해주세요.');
 				return;
 			}
 			<%count++;%>
-		} --%>
+		}
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallery/albumInsert",
 			data:{'albumNameP':$('#albumNameP').val(),

@@ -32,6 +32,14 @@ public class GalleryService {
 		
 		return list;
 	}
+	//앨범번호중 마지막꺼 불러오기
+	public int selectAlbumNo(int groupNo) {
+		Connection conn = getConnection();
+		int albumNo = new GalleryDao().selectAlbumNo(conn, groupNo);
+		close(conn);
+		return albumNo;
+	}
+	
 	
 	public List<GalleryPath> galleryGet(String albumCode, int groupNo,int cPage,int numPerPage)
 	{
@@ -48,10 +56,10 @@ public class GalleryService {
 		close(conn);
 		return result;
 	}
-	public int insertAlbum(String albumNameP,int groupNo)
+	public int insertAlbum(String albumNameP,int groupNo, int albumNo)
 	{
 		Connection conn = getConnection();
-		int rs= new GalleryDao().inserAlbum(conn,albumNameP,groupNo);
+		int rs= new GalleryDao().inserAlbum(conn,albumNameP,groupNo,albumNo);
 		if(rs!=0)
 		{
 			commit(conn);
