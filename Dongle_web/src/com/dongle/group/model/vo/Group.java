@@ -4,11 +4,16 @@ import java.sql.Date;
 
 public class Group {
 	
-	//(주소 카테고리 제외, 추가예정)
+	
 	private int memberNo; //MEMBER_NO
 	private int groupNo; //GROUP_NO
 	private String groupName; //GROUP_NAME
 	private String topicCode; //TOPIC_CTG_CODE
+	private String topicName; //TOPIC_CTG_NAME	
+	private String locMetroName; //LOC_METRO_NAME
+	private String locAreaName; //LOC_AREA_NAME
+	private String locTownName; //LOC_TOWN_NAME
+	private String locCtgCode; //LOC_CTG_CODE
 	private String groupDateCtg; //GROUP_DATE_CTG
 	private int minAge; //MIN_AGE
 	private int maxAge; //MAX_AGE
@@ -22,14 +27,20 @@ public class Group {
 		
 	}
 
-	public Group(int memberNo, int groupNo, String groupName, String topicCode, String groupDateCtg, int minAge,
-			int maxAge, String groupImageOldPath, String groupImageNewPath, String groupIntro, Date groupEnrollDate,
+	public Group(int memberNo, int groupNo, String groupName, String topicCode, String topicName, String locMetroName,
+			String locAreaName, String locTownName, String locCtgCode, String groupDateCtg, int minAge, int maxAge,
+			String groupImageOldPath, String groupImageNewPath, String groupIntro, Date groupEnrollDate,
 			int reportGroupCnt) {
 		super();
 		this.memberNo = memberNo;
 		this.groupNo = groupNo;
 		this.groupName = groupName;
 		this.topicCode = topicCode;
+		this.topicName = topicName;
+		this.locMetroName = locMetroName;
+		this.locAreaName = locAreaName;
+		this.locTownName = locTownName;
+		this.locCtgCode = locCtgCode;
 		this.groupDateCtg = groupDateCtg;
 		this.minAge = minAge;
 		this.maxAge = maxAge;
@@ -70,6 +81,46 @@ public class Group {
 
 	public void setTopicCode(String topicCode) {
 		this.topicCode = topicCode;
+	}
+
+	public String getTopicName() {
+		return topicName;
+	}
+
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
+	}
+
+	public String getLocMetroName() {
+		return locMetroName;
+	}
+
+	public void setLocMetroName(String locMetroName) {
+		this.locMetroName = locMetroName;
+	}
+
+	public String getLocAreaName() {
+		return locAreaName;
+	}
+
+	public void setLocAreaName(String locAreaName) {
+		this.locAreaName = locAreaName;
+	}
+
+	public String getLocTownName() {
+		return locTownName;
+	}
+
+	public void setLocTownName(String locTownName) {
+		this.locTownName = locTownName;
+	}
+
+	public String getLocCtgCode() {
+		return locCtgCode;
+	}
+
+	public void setLocCtgCode(String locCtgCode) {
+		this.locCtgCode = locCtgCode;
 	}
 
 	public String getGroupDateCtg() {
@@ -139,10 +190,11 @@ public class Group {
 	@Override
 	public String toString() {
 		return "Group [memberNo=" + memberNo + ", groupNo=" + groupNo + ", groupName=" + groupName + ", topicCode="
-				+ topicCode + ", groupDateCtg=" + groupDateCtg + ", minAge=" + minAge + ", maxAge=" + maxAge
-				+ ", groupImageOldPath=" + groupImageOldPath + ", groupImageNewPath=" + groupImageNewPath
-				+ ", groupIntro=" + groupIntro + ", groupEnrollDate=" + groupEnrollDate + ", reportGroupCnt="
-				+ reportGroupCnt + "]";
+				+ topicCode + ", topicName=" + topicName + ", locMetroName=" + locMetroName + ", locAreaName="
+				+ locAreaName + ", locTownName=" + locTownName + ", locCtgCode=" + locCtgCode + ", groupDateCtg="
+				+ groupDateCtg + ", minAge=" + minAge + ", maxAge=" + maxAge + ", groupImageOldPath="
+				+ groupImageOldPath + ", groupImageNewPath=" + groupImageNewPath + ", groupIntro=" + groupIntro
+				+ ", groupEnrollDate=" + groupEnrollDate + ", reportGroupCnt=" + reportGroupCnt + "]";
 	}
-
+	
 }

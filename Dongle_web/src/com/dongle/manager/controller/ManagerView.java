@@ -1,7 +1,6 @@
-package com.dongle.admin.controller;
+package com.dongle.manager.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dongle.admin.model.service.AdminService;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberSearchServlet
+ * Servlet implementation class ManagerView
  */
-@WebServlet("/admin/memberSearch")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/manager/managerView")
+public class ManagerView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public ManagerView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,12 @@ public class MemberSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
-		if(loginMember==null||!loginMember.getMemberId().equals("admin")) 
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+		int managerNo = Integer.parseInt(request.getParameter("managerNo"));
+		Group g = new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+	
+		
+		if(loginMember==null||loginMember.getMemberNo() != managerNo) 
 		{
 			request.setAttribute("msg", "잘못된 경로로 접속하셨습니다");
 			request.setAttribute("loc", "/");
@@ -41,22 +46,11 @@ public class MemberSearchServlet extends HttpServlet {
 			return;
 		}
 		
-		String searchType=request.getParameter("member-searchType");
-		String searchKeyword=request.getParameter("searchKeyword");
 		
-		List<Member> memberList=null;
-		switch(searchType)
-		{
-			case "memberId" : memberList=new AdminService().selectMemberId(searchKeyword);break;
-			case "memberName" : memberList=new AdminService().selectMemberName(searchKeyword);break;
-			case "phone" :memberList=new AdminService().selectPhone(searchKeyword);break;
-			case "email" : memberList=new AdminService().selectEmail(searchKeyword);break;
-			
-		}
-		
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberSearch.jsp").forward(request, response);
-		
+		request.setAttribute("groupNo", groupNo);
+		request.setAttribute("group", g);
+	
+		request.getRequestDispatcher("/views/manager/manager_main.jsp").forward(request, response);
 	}
 
 	/**

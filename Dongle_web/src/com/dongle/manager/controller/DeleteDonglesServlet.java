@@ -1,7 +1,6 @@
-package com.dongle.admin.controller;
+package com.dongle.manager.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dongle.admin.model.service.AdminService;
-import com.dongle.member.model.vo.Member;
-
+import com.dongle.manager.model.service.ManagerService;
 
 /**
- * Servlet implementation class MemberListServlet
+ * Servlet implementation class DeleteDonglesServlet
  */
-@WebServlet("/admin/memberList")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/manager/deleteDongle")
+public class DeleteDonglesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServlet() {
+    public DeleteDonglesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +30,24 @@ public class MemberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Member loginMember=(Member)request.getSession().getAttribute("loginMember");
-		if(loginMember==null||!loginMember.getMemberId().equals("admin")) 
+		String checkPwd = request.getParameter("checkPwd");
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+		String memeberPwd = request.getParameter("memberPwd");
+		System.out.println("groupNo : " + groupNo);
+		int result = new ManagerService().deleteDongle(groupNo);
+		
+		if(result > 0)
 		{
-			request.setAttribute("msg", "잘못된 경로로 접속하셨습니다");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
-			return;
+			request.setAttribute("loc", "/Dongle_view/main.jsp");
+			request.setAttribute("msg", "동글 삭제를 성공하였습니다.");
+			
 		}
-		
-		List<Member> memberList = new AdminService().selectMemberList();
-//		System.out.println(memberList);
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberList.jsp").forward(request, response);
-		
+		else
+		{
+			request.setAttribute("loc", "/Dongle_view/main.jsp");
+			request.setAttribute("msg", "동글 삭제를 실패하였습니다.");
+		}
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

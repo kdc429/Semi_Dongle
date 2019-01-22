@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.admin.model.service.AdminService;
+import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberSearchServlet
+ * Servlet implementation class BlackListServlet
  */
-@WebServlet("/admin/memberSearch")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/admin/blackMemberList")
+public class BlackListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public BlackListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,22 +42,12 @@ public class MemberSearchServlet extends HttpServlet {
 			return;
 		}
 		
-		String searchType=request.getParameter("member-searchType");
-		String searchKeyword=request.getParameter("searchKeyword");
-		
-		List<Member> memberList=null;
-		switch(searchType)
-		{
-			case "memberId" : memberList=new AdminService().selectMemberId(searchKeyword);break;
-			case "memberName" : memberList=new AdminService().selectMemberName(searchKeyword);break;
-			case "phone" :memberList=new AdminService().selectPhone(searchKeyword);break;
-			case "email" : memberList=new AdminService().selectEmail(searchKeyword);break;
-			
-		}
-		
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberSearch.jsp").forward(request, response);
-		
+		List<Member> blackList = new AdminService().selectBlackMemberList("1");
+		List<Member> nonBlackList = new AdminService().selectBlackMemberList("0");
+
+		request.setAttribute("blackList", blackList);
+		request.setAttribute("nonBlackList", nonBlackList);
+		request.getRequestDispatcher("/Dongle_view/admin_memberBlackList.jsp").forward(request, response);
 	}
 
 	/**

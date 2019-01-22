@@ -1,7 +1,6 @@
 package com.dongle.admin.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.dongle.admin.model.service.AdminService;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberSearchServlet
+ * Servlet implementation class AddBlackServlet
  */
-@WebServlet("/admin/memberSearch")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/admin/addBlack")
+public class AddBlackServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public AddBlackServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,27 +35,26 @@ public class MemberSearchServlet extends HttpServlet {
 		if(loginMember==null||!loginMember.getMemberId().equals("admin")) 
 		{
 			request.setAttribute("msg", "잘못된 경로로 접속하셨습니다");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/Dongle_view/main.jsp");
 			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
 			return;
 		}
 		
-		String searchType=request.getParameter("member-searchType");
-		String searchKeyword=request.getParameter("searchKeyword");
+		String memberNo[] = request.getParameterValues("member-nonblack");
+		int result = new AdminService().addBlack(memberNo);
 		
-		List<Member> memberList=null;
-		switch(searchType)
+		if(result > 0)
 		{
-			case "memberId" : memberList=new AdminService().selectMemberId(searchKeyword);break;
-			case "memberName" : memberList=new AdminService().selectMemberName(searchKeyword);break;
-			case "phone" :memberList=new AdminService().selectPhone(searchKeyword);break;
-			case "email" : memberList=new AdminService().selectEmail(searchKeyword);break;
-			
+			request.setAttribute("msg", "블랙리스트에 추가되었습니다");
+			request.setAttribute("loc", "/admin/blackMemberList");
+			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
 		}
-		
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberSearch.jsp").forward(request, response);
-		
+		else
+		{
+			request.setAttribute("msg", "블랙리스트 추가를 실패하셨습니다");
+			request.setAttribute("loc", "/admin/blackMemberList");
+			request.getRequestDispatcher("/Dongle_view/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

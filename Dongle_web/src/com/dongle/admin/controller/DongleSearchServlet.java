@@ -1,6 +1,7 @@
 package com.dongle.admin.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.admin.model.service.AdminService;
+import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberSearchServlet
+ * Servlet implementation class DongleSearchServlet
  */
-@WebServlet("/admin/memberSearch")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/admin/dongleSearch")
+public class DongleSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchServlet() {
+    public DongleSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,22 +43,22 @@ public class MemberSearchServlet extends HttpServlet {
 			return;
 		}
 		
-		String searchType=request.getParameter("member-searchType");
+		String searchType=request.getParameter("dongle-searchType");
+		
 		String searchKeyword=request.getParameter("searchKeyword");
 		
-		List<Member> memberList=null;
+		List<ListGroup> dongleList=null;
 		switch(searchType)
 		{
-			case "memberId" : memberList=new AdminService().selectMemberId(searchKeyword);break;
-			case "memberName" : memberList=new AdminService().selectMemberName(searchKeyword);break;
-			case "phone" :memberList=new AdminService().selectPhone(searchKeyword);break;
-			case "email" : memberList=new AdminService().selectEmail(searchKeyword);break;
+			case "dongleName" : dongleList=new AdminService().selectDongleName(searchKeyword);break;
+			case "managerId" : dongleList=new AdminService().selectManagerId(searchKeyword);break;
+			case "dongleEnDate" : dongleList=new AdminService().selectDongleEnDate(searchKeyword);break;
+			case "metro" : dongleList=new AdminService().selectMetro(searchKeyword);break;
 			
 		}
 		
-		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberSearch.jsp").forward(request, response);
-		
+		request.setAttribute("dongleList", dongleList);
+		request.getRequestDispatcher("/Dongle_view/admin_dongleSearch.jsp").forward(request, response);
 	}
 
 	/**
