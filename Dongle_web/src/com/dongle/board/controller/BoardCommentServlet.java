@@ -32,31 +32,31 @@ public class BoardCommentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
 		String boardCommentContent=request.getParameter("boardCommentContent");
+		int boCommentWriter=loginMember.getMemberNo();
 		int boardCommentLevel=Integer.parseInt(request.getParameter("boardCommentLevel"));
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		int boardCommentRef=Integer.parseInt(request.getParameter("boardCommentRef"));
-		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-/*		int groupNo = Integer.parseInt(request.getParameter("groupNo"));*/
-		int groupNo=1;
+		
 		System.out.println(groupNo+" : "+boardNo+boardCommentContent+boardCommentLevel+boardCommentRef);
 		
 		BoardComment bc=new BoardComment();
 		
 		bc.setGroupNo(groupNo);
-		bc.setMemberNo(loginMember.getMemberNo());
+		bc.setMemberNo(boCommentWriter);
 		bc.setBoardNo(boardNo);
 		bc.setBoCommentContent(boardCommentContent);
 		bc.setBoCommentLevel(boardCommentLevel);
 		bc.setBoCommentRef(boardCommentRef);
+		System.out.println("bc찍은 것"+bc);
 		
 		int result=new BoardService().insertBoComment(bc);
 		
 		if(result>0)
 		{
 			response.setContentType("text/html;charset=UTF-8");
-			
 			response.getWriter().println("댓글 등록 성공");
 		}
 		else

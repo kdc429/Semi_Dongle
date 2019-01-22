@@ -321,7 +321,7 @@ public class BoardDao {
 		{
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
-			List<BoardComment> list=new ArrayList();
+			List<BoardComment> bclist=new ArrayList();
 			String sql=prop.getProperty("selectBoCommentList");
 			try
 			{
@@ -341,7 +341,7 @@ public class BoardDao {
 					bc.setBoCommentLevel(rs.getInt("bo_comment_level"));
 					bc.setBoCommentRef(rs.getInt("bo_comment_ref"));
 					bc.setGroupMemberNickname(rs.getString("group_member_nickname"));
-					list.add(bc);
+					bclist.add(bc);
 					System.out.println("들어오?? : "+bc);
 				}
 			}
@@ -354,6 +354,6 @@ public class BoardDao {
 				close(rs);
 				close(pstmt);
 			}
-			return list;
+			return bclist;
 		}
 }

@@ -144,9 +144,9 @@ public class BoardService {
 	public List<BoardComment> selectCommentList(int boardNo,int groupNo)
 	{
 		Connection conn=getConnection();
-		List<BoardComment> list=new BoardDao().selectBoCommentList(conn, boardNo, groupNo);
+		List<BoardComment> bclist=new BoardDao().selectBoCommentList(conn, boardNo, groupNo);
 		close(conn);
-		return list;
+		return bclist;
 	}
 }
 	
