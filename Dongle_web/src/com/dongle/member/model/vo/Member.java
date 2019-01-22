@@ -15,20 +15,22 @@ public class Member {
 	private Date enrollDate; //MEMBER_ENROLL_DATE
 	private String blackList; //BLACKLIST_YN
 	private int reportCount;
-	private String memberImaPath; //MEMBER_IMG_PATH
+	private String pwdHintList;
+	private String pwdHintAnswer;
 	
 	public Member() {
 		
 	}
-	
 
-	public Member(int memberNo, String memberId, String memberPwd, String gender, String ssn, String phone,
-			String address, String email, Date enrollDate, String blackList, int reportCount) {
+	public Member(int memberNo, String memberId, String memberPwd, String memberName, String gender, String ssn,
+			String phone, String address, String email, Date enrollDate, String blackList, int reportCount,
+			String pwdHintList, String pwdHintAnswer) {
 
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
+		this.memberName = memberName;
 		this.gender = gender;
 		this.ssn = ssn;
 		this.phone = phone;
@@ -37,9 +39,9 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.blackList = blackList;
 		this.reportCount = reportCount;
-		this.memberImaPath = memberImaPath;
+		this.pwdHintList = pwdHintList;
+		this.pwdHintAnswer = pwdHintAnswer;
 	}
-
 
 	public int getMemberNo() {
 		return memberNo;
@@ -64,7 +66,7 @@ public class Member {
 	public void setMemberPwd(String memberPwd) {
 		this.memberPwd = memberPwd;
 	}
-	
+
 	public String getMemberName() {
 		return memberName;
 	}
@@ -136,15 +138,32 @@ public class Member {
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
-	
-	public String getMemberImaPath()
-	{
-		return memberImaPath;
+
+	public String getPwdHintList() {
+		return pwdHintList;
+	}
+
+	public void setPwdHintList(String pwdHintList) {
+		this.pwdHintList = pwdHintList;
+	}
+
+	public String getPwdHintAnswer() {
+		return pwdHintAnswer;
+	}
+
+	public void setPwdHintAnswer(String pwdHintAnswer) {
+		this.pwdHintAnswer = pwdHintAnswer;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
+				+ memberName + ", gender=" + gender + ", ssn=" + ssn + ", phone=" + phone + ", address=" + address
+				+ ", email=" + email + ", enrollDate=" + enrollDate + ", blackList=" + blackList + ", reportCount="
+				+ reportCount + ", pwdHintList=" + pwdHintList + ", pwdHintAnswer=" + pwdHintAnswer + "]";
 	}
 	
-	public void setMemberImaPath(String memberImaPath) {
-		this.memberImaPath = memberImaPath;
-	}
 	
+
 	
 }

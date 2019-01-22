@@ -54,36 +54,22 @@ public class DongleMemberJoinDao {
 		return result;
 	}
 	
-	public GroupMember selectMember(Connection conn, String nickname) {
+	public GroupMember selectMember(Connection conn, GroupMember m) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String sql=prop.getProperty("NickCheck");
-		System.out.println("sql : " + sql);
 		GroupMember data=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, nickname);
-			
+			pstmt.setString(1, m.getGroupMemberNickname());
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				data = new GroupMember();
-				System.out.println("fdsaf" + rs.getString("GROUP_MEMBER_NICKNAME"));
-			data.setGroupMemberNickname(rs.getString("GROUP_MEMBER_NICKNAME"));
-			data.setGroupNo(1);
-			data.setMemberNo(rs.getInt("MEMBER_NO"));
-			data.setGroupMemberImageNewPath(rs.getString("GROUP_MEMBER_IMAGE_OLD_PATH"));
-			data.setGroupMemberImageOldPath(rs.getString("GROUP_MEMBER_IMAGE_NEW_PATH"));
-			data.setGroupMemberEnrollDate(rs.getDate("GROUP_MEMBER_ENROLL_DATE"));
-			data.setBlackListYN(rs.getString("BLACKLIST_YN"));
-			data.setReportDongleCount(rs.getInt("REPORT_DONGLE_COUNT"));
-			}
-			System.out.println("ddd" + data);
+				
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		close(rs);
 		close(pstmt);
-		
+		close(rs);
 		
 		return data;
 	}

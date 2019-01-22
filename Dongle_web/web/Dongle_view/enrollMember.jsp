@@ -46,8 +46,7 @@
 	
 	.logo-text {
 	font-family: 'Sunflower';
-	font-size: 70px;
-	margin-left: 80px;
+	font-size: 30px;
 	/* margin-left: 50px; */
 }
 </style>
@@ -146,6 +145,25 @@
 					</td>
 				</tr>
 				<tr>
+				<th>비밀번호 힌트&nbsp;</th>
+				<td>
+					<select id='pwdHint' name='pwdHint' required/>
+						<option value='나의 고향은?'>나의 고향은?</option>
+						<option value="나의 보물1호는?">나의 보물1호는?</option>
+						<option value='나의 어머니 이름은?'>나의 어머니 이름은?</option>
+						<option value="나의 아버지 이름은?">나의 아버지 이름은?</option>
+						<option value='어릴 적 친했던 친구는?'>어릴 적 친했던 친구는?</option>
+						<option value="가장 좋아했던 캐릭터는?">가장 좋아했던 캐릭터는?</option>
+					</select>
+				</td>
+				</tr>
+				<tr>
+				<th>힌트 답변&nbsp;</th>
+				<td>
+					<input type="text" class="tet" id="hintAnswer" name='hintAnswer' required/>
+				</td>
+				</tr>
+				<tr>
 					<th>이름</th>
 					<td>
 						<input type="text" class="tex"  
@@ -175,7 +193,8 @@
 				<tr>
 					<th>휴대폰</th>
 					<td>
-						<input type="tel" class="tex" 
+						<input type="tel"  
+>>>>>>> refs/remotes/origin/KYN
 						id="phone" name="phone" maxlength="11"
 						placeholder="(-없이)01012345678" required>
 					</td>

@@ -18,6 +18,7 @@ public class GroupMember {
 	public GroupMember(int groupNo, int memberNo, String groupMemberNickname,
 			String groupMemberImageOldPath, String groupMemberImageNewPath, Date groupMemberEnrollDate,
 			String blackListYN, int reportDongleCount) {
+
 		super();
 		this.groupNo = groupNo;
 		this.memberNo = memberNo;
@@ -52,7 +53,6 @@ public class GroupMember {
 	public void setGroupMemberNickname(String groupMemberNickname) {
 		this.groupMemberNickname = groupMemberNickname;
 	}
-
 
 	public String getGroupMemberImageOldPath() {
 		return groupMemberImageOldPath;
@@ -101,7 +101,7 @@ public class GroupMember {
 				+ groupMemberImageOldPath + ", groupMemberImageNewPath=" + groupMemberImageNewPath
 				+ ", groupMemberEnrollDate=" + groupMemberEnrollDate + ", blackistYN=" + blackListYN
 				+ ", reportDongleCount=" + reportDongleCount + "]";
+
 	}
-	
 
 }

@@ -8,9 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.dongle.member.model.vo.Member;
-import com.dongle.member.service.MemberService;
+import com.dongle.member.model.service.MemberService;
 
 
 /**
@@ -42,6 +41,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		String userId=request.getParameter("userId");
 		String password=request.getParameter("password");
+		String passwordHint = request.getParameter("pwdHint");
+		String passwordAnswer = request.getParameter("hintAnswer");
 		String userName=request.getParameter("userName");	
 		String gender=request.getParameter("gender");
 		String ssn=request.getParameter("age");
@@ -49,7 +50,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String address=request.getParameter("address");
 		String email=request.getParameter("email");
 		
-		System.out.println(userId+password+userName+ssn+gender+phone+address+email);
+		System.out.println(userId+password+passwordHint+passwordAnswer+userName+ssn+gender+phone+address+email);
 		
 		Member m=new Member();
 		m.setMemberId(userId);
@@ -60,6 +61,8 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		m.setSsn(ssn);
 		m.setEmail(email);
 		m.setPhone(phone);
+		m.setPwdHintList(passwordHint);
+		m.setPwdHintAnswer(passwordAnswer);
 		
 		int result=new MemberService().insertMember(m);
 		

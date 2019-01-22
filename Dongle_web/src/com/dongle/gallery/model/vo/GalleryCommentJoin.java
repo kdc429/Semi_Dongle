@@ -17,12 +17,14 @@ public class GalleryCommentJoin {
 	private String albumCode;
 	private String galFileNewPath;
 	private int galNo;
+
+	private String galMultiStatus;
 	
 	public GalleryCommentJoin() {}
 
 	public GalleryCommentJoin(int groupNo, int galFileNo, int galCommentNo, int galCommentLevel, int memberNo,
 			String galCommentContent, Date galCommentDate, int galCommentRef, String groupMemberNickname,
-			String groupMemberImageNewPath, String albumCode, String galFileNewPath, int galNo) {
+			String groupMemberImageNewPath, String albumCode, String galFileNewPath, int galNo, String galMultiStatus) {
 		super();
 		this.groupNo = groupNo;
 		this.galFileNo = galFileNo;
@@ -37,111 +39,149 @@ public class GalleryCommentJoin {
 		this.albumCode = albumCode;
 		this.galFileNewPath = galFileNewPath;
 		this.galNo = galNo;
+		this.galMultiStatus = galMultiStatus;
 	}
+
 
 	public int getGroupNo() {
 		return groupNo;
 	}
 
+
 	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;
 	}
+
 
 	public int getGalFileNo() {
 		return galFileNo;
 	}
 
+
 	public void setGalFileNo(int galFileNo) {
 		this.galFileNo = galFileNo;
 	}
+
 
 	public int getGalCommentNo() {
 		return galCommentNo;
 	}
 
+
 	public void setGalCommentNo(int galCommentNo) {
 		this.galCommentNo = galCommentNo;
 	}
+
 
 	public int getGalCommentLevel() {
 		return galCommentLevel;
 	}
 
+
 	public void setGalCommentLevel(int galCommentLevel) {
 		this.galCommentLevel = galCommentLevel;
 	}
+
 
 	public int getMemberNo() {
 		return memberNo;
 	}
 
+
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+
 
 	public String getGalCommentContent() {
 		return galCommentContent;
 	}
 
+
 	public void setGalCommentContent(String galCommentContent) {
 		this.galCommentContent = galCommentContent;
 	}
+
 
 	public Date getGalCommentDate() {
 		return galCommentDate;
 	}
 
+
 	public void setGalCommentDate(Date galCommentDate) {
 		this.galCommentDate = galCommentDate;
 	}
+
 
 	public int getGalCommentRef() {
 		return galCommentRef;
 	}
 
+
 	public void setGalCommentRef(int galCommentRef) {
 		this.galCommentRef = galCommentRef;
 	}
+
 
 	public String getGroupMemberNickname() {
 		return groupMemberNickname;
 	}
 
+
 	public void setGroupMemberNickname(String groupMemberNickname) {
 		this.groupMemberNickname = groupMemberNickname;
 	}
+
 
 	public String getGroupMemberImageNewPath() {
 		return groupMemberImageNewPath;
 	}
 
+
 	public void setGroupMemberImageNewPath(String groupMemberImageNewPath) {
 		this.groupMemberImageNewPath = groupMemberImageNewPath;
 	}
+
 
 	public String getAlbumCode() {
 		return albumCode;
 	}
 
+
 	public void setAlbumCode(String albumCode) {
 		this.albumCode = albumCode;
 	}
+
 
 	public String getGalFileNewPath() {
 		return galFileNewPath;
 	}
 
+
 	public void setGalFileNewPath(String galFileNewPath) {
 		this.galFileNewPath = galFileNewPath;
 	}
+
 
 	public int getGalNo() {
 		return galNo;
 	}
 
+
 	public void setGalNo(int galNo) {
 		this.galNo = galNo;
 	}
+
+
+	public String getGalMultiStatus() {
+		return galMultiStatus;
+	}
+
+
+	public void setGalMultiStatus(String galMultiStatus) {
+		this.galMultiStatus = galMultiStatus;
+	}
+
 
 	@Override
 	public String toString() {
@@ -149,8 +189,8 @@ public class GalleryCommentJoin {
 				+ ", galCommentLevel=" + galCommentLevel + ", memberNo=" + memberNo + ", galCommentContent="
 				+ galCommentContent + ", galCommentDate=" + galCommentDate + ", galCommentRef=" + galCommentRef
 				+ ", groupMemberNickname=" + groupMemberNickname + ", groupMemberImageNewPath="
-				+ groupMemberImageNewPath + ", albumCode=" + albumCode + ", galFileNewPath=" + galFileNewPath
-				+ ", galNo=" + galNo + "]";
+				+ groupMemberImageNewPath + ", albumCode=" + albumCode + ", galFileNewPath=" + galFileNewPath 
+				+ ", galNo=" + galNo + " galMultiStatus= "+galMultiStatus+"]";
 	}
 
 

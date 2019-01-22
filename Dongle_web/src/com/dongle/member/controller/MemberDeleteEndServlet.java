@@ -6,9 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.dongle.member.model.vo.Member;
-import com.dongle.member.service.MemberService;
+import com.dongle.member.model.service.MemberService;
+
 
 /**
  * Servlet implementation class MemberDeleteEndServlet

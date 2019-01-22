@@ -6,6 +6,9 @@ import java.util.List;
 import com.dongle.board.model.dao.BoardDao;
 import com.dongle.board.model.vo.Board;
 
+import com.dongle.board.model.vo.BoardComment;
+import com.dongle.board.model.vo.BoardPath;
+
 public class BoardService {
 	
 	public List<Board> selectList(int groupNo, String memberId)
@@ -23,10 +26,10 @@ public class BoardService {
 		return b;
 	}
 	
-	public int insertBoard(Board b,int boardNo, int groupNo)
+	public int insertBoard(BoardPath bp)
 	{
 		Connection conn=getConnection();
-		int result=new BoardDao().insertBoard(conn,b,boardNo,groupNo);
+		int result=new BoardDao().insertBoard(conn,bp);
 		if(result>0)
 		{
 			commit(conn);
@@ -37,5 +40,28 @@ public class BoardService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public int insertComment(BoardComment bc)
+	{
+		Connection conn=getConnection();
+		int result=new BoardDao().insertComment(conn,bc);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	public int insertBoardFile(BoardPath bp,Board bo)
+	{
+		Connection conn=getConnection();
+		int rs=new BoardDao().insertBoardFile(conn,bp,bo);
+		if(rs!=0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		return rs;
 	}
 }

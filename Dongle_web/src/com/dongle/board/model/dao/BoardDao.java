@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.dongle.board.model.vo.Board;
+import com.dongle.board.model.vo.BoardComment;
 
 public class BoardDao {
 	private Properties prop=new Properties();
@@ -104,8 +105,8 @@ public class BoardDao {
 		}
 		return b;
 	}
-
-	public int insertBoard(Connection conn, Board b,int boardNo, int groupNo)
+	//게시판 글쓰기
+	public int insertBoard(Connection conn,BoardPath bp)
 	{
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -113,12 +114,12 @@ public class BoardDao {
 		try
 		{
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1,	b.getBoardNo());
-			pstmt.setInt(2, b.getGroupNo());
-			pstmt.setString(3, b.getBoardTitle());
-			pstmt.setString(4, b.getBoardWriter());
-			pstmt.setString(5,	b.getBoardContent());
-			pstmt.setInt(6,	b.getBoardViewCount());
+			pstmt.setInt(1, bp.getGroupNo());
+			pstmt.setString(2, bp.getBoardTitle());
+			pstmt.setString(3, bp.getBoardWriter());
+			pstmt.setString(4,	bp.getBoardContent());
+			pstmt.setInt(5,	0);
+			result=pstmt.executeUpdate();			
 		}
 		catch(SQLException e)
 		{
@@ -129,5 +130,54 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	
+	//게시판 댓글쓰기
+	public int insertComment(Connection conn, BoardComment bc)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertComment");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bc.getBoCommentLevel());
+			pstmt.setString(3, bc.getBoCommentContent());
+			pstmt.setInt(4,bc.getBoarNo());
+			pstmt.setString(5,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
+			//pstmt.setInt(5,bc.getBoardCommentRef());
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int insertBoardFile(Connection conn, BoardPath bp,Board bo)
+	{
+		PreparedStatement pstmt=null;
+		int rs=0;
+		String sql=prop.getProperty("insertBoardFile");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bo.getBoardNo());
+			pstmt.setInt(2, bp.getGroupNo());
+			pstmt.setString(3, bp.getBoardFileOldPath());
+			pstmt.setString(4, bp.getBoardFileNewPath());
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return rs;
+
 	}
 }

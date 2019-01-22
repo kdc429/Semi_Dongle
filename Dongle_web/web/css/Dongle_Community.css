@@ -89,7 +89,7 @@ button.btn button.btn-primary{
 .sidel {
 	width: 170px;
 	position: fixed;
-	margin-top: 62.8px;
+	margin-top: 62px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
 /* 오른쪽 사이드 div */
@@ -97,7 +97,7 @@ button.btn button.btn-primary{
 	width: 170px;
 	height:100vh;
 	position: fixed;
-	margin-top: 62.8px;
+	margin-top: 62px;
 	margin-left: 854px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
@@ -126,8 +126,6 @@ div.logo h2 a{text-decoration: none;}
 
 }
 .profile_img{
-	width: 140px;
-	height: 150px;
 	border-radius: 100px;
 }
 .dongle_name{
