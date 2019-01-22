@@ -20,7 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 
 import common.BoardFileRenamePolicy;
 
-@WebServlet("/board/boardFormEnd")
+@WebServlet("/board/boardInsertFormEnd")
 public class BoardInsertEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

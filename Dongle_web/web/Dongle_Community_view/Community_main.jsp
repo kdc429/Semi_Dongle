@@ -34,8 +34,8 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
-	<script src="./lightslider/js/lightslider.js"></script> 
 
+	<script src="./lightslider/js/lightslider.js"></script> 
 	<!-- image slide -->
 	<link rel="stylesheet"  href="./lightslider/css/lightslider.css"/>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -141,17 +141,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			});
 			
 			
-	
-			$('#feed-btn').click(function(){
-				$.ajax({
-					url:"<%=request.getContextPath()%>/feed/feedListView?groupNo=<%=g.getGroupNo()%>&memberNo=<%=loginMember.getMemberNo()%>",
-					type:"get",
-					dataType:"html",
-					success:function(data){
-						$('#content-div').html(data);
-					}
-				});
-			});
 		});
 		
 		$(function(){
@@ -170,12 +159,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			});
 		});
 		
-		 $(document).ready(function() {
+		/*  $(document).ready(function() {
 				$("#content-slider").lightSlider({
 	                loop:true,
 	                keyPress:true
 	            });
-			});
+			}); */
 		 
 </script>
     <div class='back'>
@@ -242,7 +231,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 				</div><br>
 				<%} %>
-				
+				</div>
 				<!-- 소개글 -->
 				<div class="sideitem2"
 					style='border: 1px solid rgba(255,0,0,0.1);  right: 10%; height: 150px'>
@@ -458,18 +447,24 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
      		});   		
      	});
    	
-   	$(function(){
-   		$('#feed-btn').click(function(){
-   			$.ajax({
-   				url:"<%=request.getContextPath()%>/feed/feedListView",
-   				type:"get",
-   				dataType:"html",
-   				success:function(data){
-   					$('#content-div').html(data);
-   				}
-   			});
-   		});
-   	});
+   	$('#feed-btn').click(function(){
+		var groupNo=<%=groupNo%>;
+		var memberNo=<%=loginMember.getMemberNo()%>;
+		console.log(groupNo);
+		$.ajax({
+			url:"<%=request.getContextPath()%>/feed/feedListView",
+			type:"post",
+			data:{
+				"groupNo":groupNo,
+				"memberNo":memberNo	
+			},
+			
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			}
+		});
+	});
 
    	$(function(){
    		$('#board-btn').click(function(){

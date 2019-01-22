@@ -432,7 +432,6 @@
                        			<button type="button" id="feedup">등록</button>
                     		</div>
 						</form>
-				
                 </div>
 			</div>
 			<hr>

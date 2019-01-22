@@ -40,7 +40,7 @@
         <!--캐러셀 아이템   -->
         <div class="carousel-box">
                 <ol class="item">
-                    <% if(list==null||list.isEmpty()||loginMember.getMemberId().equals("admin")){%>
+                    <% if(list.size()==0||list.isEmpty()||loginMember.getMemberId().equals("admin")){%>
                     	<!-- 동글에 가입하지 않았을 경우 혹은 관리자 일 경우-->
                     	<li>DONGLE 에 가입하세요!</li>
                     <%}else{ 
@@ -55,13 +55,9 @@
                     			<button class="join-btn" type="submit"> 
                     			
                     			<!-- 여기서 그룹 넘버 전송 -->
-<<<<<<< HEAD
                     				<span class="group-name"><%=g.getGroupName() %></span>
                     				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
-=======
-                    				<span class="group-name"><%=g.getGroupName() %></span>
-                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getGroupImageNewPath()%>"/>
->>>>>>> refs/remotes/origin/KYN
+
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>

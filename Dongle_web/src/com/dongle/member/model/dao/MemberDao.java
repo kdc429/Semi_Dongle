@@ -51,8 +51,8 @@ public class MemberDao {
 				data.setEnrollDate(rs.getDate("member_enroll_date"));
 				data.setBlackList(rs.getString("blacklist_yn"));
 				data.setReportCount(rs.getInt("report_member_count"));
-				data.setPwdHintList(rs.getString("pwd_hint_list"));
-				data.setPwdHintAnswer(rs.getString("pwd_hint_answer"));
+//				data.setPwdHintList(rs.getString("pwd_hint_list"));
+//				data.setPwdHintAnswer(rs.getString("pwd_hint_answer"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
