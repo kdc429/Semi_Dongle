@@ -372,4 +372,6 @@ public class GroupDao {
 		}
 		return galList;
 	}
+	
+	
 }

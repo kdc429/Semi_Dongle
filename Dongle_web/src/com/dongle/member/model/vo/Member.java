@@ -15,15 +15,16 @@ public class Member {
 	private Date enrollDate; //MEMBER_ENROLL_DATE
 	private String blackList; //BLACKLIST_YN
 	private int reportCount;
-
+	private String pwdHintList;
+	private String pwdHintAnswer;
 	
 	public Member() {
 		
 	}
 
-
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, String gender, String ssn,
-			String phone, String address, String email, Date enrollDate, String blackList, int reportCount) {
+			String phone, String address, String email, Date enrollDate, String blackList, int reportCount,
+			String pwdHintList, String pwdHintAnswer) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -37,138 +38,131 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.blackList = blackList;
 		this.reportCount = reportCount;
+		this.pwdHintList = pwdHintList;
+		this.pwdHintAnswer = pwdHintAnswer;
 	}
-
 
 	public int getMemberNo() {
 		return memberNo;
 	}
 
-
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-
 
 	public String getMemberId() {
 		return memberId;
 	}
 
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 
 	public String getMemberPwd() {
 		return memberPwd;
 	}
 
-
 	public void setMemberPwd(String memberPwd) {
 		this.memberPwd = memberPwd;
 	}
-
 
 	public String getMemberName() {
 		return memberName;
 	}
 
-
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-
 
 	public String getGender() {
 		return gender;
 	}
 
-
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
 
 	public String getSsn() {
 		return ssn;
 	}
 
-
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
-
 
 	public String getPhone() {
 		return phone;
 	}
 
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 
 	public String getAddress() {
 		return address;
 	}
 
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
 
-
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-
 
 	public String getBlackList() {
 		return blackList;
 	}
 
-
 	public void setBlackList(String blackList) {
 		this.blackList = blackList;
 	}
-
 
 	public int getReportCount() {
 		return reportCount;
 	}
 
-
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
 
+	public String getPwdHintList() {
+		return pwdHintList;
+	}
+
+	public void setPwdHintList(String pwdHintList) {
+		this.pwdHintList = pwdHintList;
+	}
+
+	public String getPwdHintAnswer() {
+		return pwdHintAnswer;
+	}
+
+	public void setPwdHintAnswer(String pwdHintAnswer) {
+		this.pwdHintAnswer = pwdHintAnswer;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
 				+ memberName + ", gender=" + gender + ", ssn=" + ssn + ", phone=" + phone + ", address=" + address
 				+ ", email=" + email + ", enrollDate=" + enrollDate + ", blackList=" + blackList + ", reportCount="
-				+ reportCount + "]";
+				+ reportCount + ", pwdHintList=" + pwdHintList + ", pwdHintAnswer=" + pwdHintAnswer + "]";
 	}
 	
-
 	
+
 	
 }

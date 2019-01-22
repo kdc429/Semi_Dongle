@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
-<%@ page import="java.util.*,com.dongle.group.model.vo.*" %>
+<%@ page import="java.util.*,com.dongle.group.model.vo.*,com.dongle.main.model.vo.*" %>
 <!DOCTYPE html>
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
+	List<LocationCategory>metroCodeList = (List)request.getAttribute("metroCodeList");
 	
 %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동글 검색/찾기</title>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -99,6 +99,10 @@
     	height : 250px;
     	font-family: '나눔스퀘어라운드 Regular';
     }
+     .location-container>h3{
+		font-family: '나눔스퀘어라운드 Regular';
+		font-weight: bold;
+     }
     .tab-content>time
     {
     	width:50px;
@@ -166,7 +170,7 @@
 		<div class="location-container">
 			<h3>지역검색설정</h3>
 				<ul class="tabs">
-				    <li class="tab-link current" data-tab="tab-1">서울</li>
+					<li class="tab-link current" data-tab="tab-1">서울</li>
 				    <li class="tab-link" data-tab="tab-2">경기</li>
 				    <li class="tab-link" data-tab="tab-3">인천</li>
 				    <li class="tab-link" data-tab="tab-4">강원</li>
@@ -183,7 +187,7 @@
 				    <li class="tab-link" data-tab="tab-15">전남</li>
 				    <li class="tab-link" data-tab="tab-16">전북</li>
 				    <li class="tab-link" data-tab="tab-17">제주</li>
-				    <li class="tab-link" data-tab="tab-18">전국</li>
+				    <li class="tab-link" data-tab="tab-18">전국</li> 
 				</ul>
 				<div id="tab-1" class="tab-content current">
 					<label><input type="checkbox" id="time1"/>서울전체</label>
@@ -197,7 +201,7 @@
 					<label><input type="checkbox" id="time" name="time"/>금천구</label>
 					<label><input type="checkbox" id="time" name="time"/>노원구</label>
 					<label><input type="checkbox" id="time" name="time"/>도봉구</label>
-					<label><input type="checkbox" id="time" name="time"/>동대문구</label><br>
+					<label><input type="checkbox" id="time" name="time"/>동대문구</label>
 					<label><input type="checkbox" id="time" name="time"/>동작구</label>
 					<label><input type="checkbox" id="time" name="time"/>마포구</label>
 					<label><input type="checkbox" id="time" name="time"/>서대문구</label>
@@ -209,12 +213,13 @@
 					<label><input type="checkbox" id="time" name="time"/>영등포구</label>
 					<label><input type="checkbox" id="time" name="time"/>용산구</label>
 					<label><input type="checkbox" id="time" name="time"/>은평구</label>
-					<label><input type="checkbox" id="time" name="time"/>종로구</label><br>
+					<label><input type="checkbox" id="time" name="time"/>종로구</label>
 					<label><input type="checkbox" id="time" name="time"/>중구</label>
 					<label><input type="checkbox" id="time" name="time"/>중랑구</label>
 				
 					<div id="tab-2" class="tab-content">
-						---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ---- ---- ---- ----
+					
+						
 					</div>
 					<div id="tab-3" class="tab-content">
 						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
@@ -308,8 +313,10 @@ $(document).ready(function(){
 	 
 	    $(this).addClass('current');
 	    $("#"+tab_id).addClass('current');
-	  })
+	  });
 	 
-	})
+});
+
+
 </script>
 </html>
