@@ -259,16 +259,64 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 
 	</aside>
-        <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:white; align-content: center;'>
-            	<span id="header" style='text-align: center;'></span>
-            	<br/><br/>
+       
+       <section>
+            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
+            	<!-- <span id="header" style='text-align: center;'></span> -->
+            	<!-- <br/><br/> -->
 
-            	<div id="mem_list_div" style="padding: 0 0 0 30%;"></div>
-           </div>
+            	<!-- <div id="mem_list_div" style="padding: 0 0 0 30%;"></div> -->
+            	
+            	<!-- 동글메인이미지 -->
+            	<div id='dongle_main_img'>
+            		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+            	</div>
+            	<div id='mini_board'></div>
+            	<div id='mini_gallery'>갤 러 리</div>
+            	
+            	<div class="demo" style="margin-top: 50px; padding-left: 50px;">      
+			       	 <div class="item">
+			            <ul id="content-slider" class="content-slider">
+			           
+			                <li>
+			                    <img src="./images/member_img/user01.png">
+			                </li>
+			             
+			                <li>
+			                    <img src="./images/member_img/user02.png"> 
+			                </li>
+			                <li>
+			                 	<img src="./images/member_img/user03.png"> 
+			                </li>
+			                <li>
+			                    <h3>4</h3>
+			                </li>
+			                <li>
+			                    <h3>5</h3>
+			                </li>
+			                <li>
+			                    <h3>6</h3>
+			                </li>
+			                <li>
+			                    <h3>7</h3>
+			                </li>
+			                <li>
+			                    <h3>8</h3>
+			                </li>
+			                <li>>
+			                    <h3>9</h3>
+			                </li>
+			                <li>
+			                    <h3>10</h3>
+			                </li>
+			                
+			            </ul>
+			        </div>
+			     </div>	
 
-       </section>
+             </div>
+        </section>
+        
        
        <script> 		
        <%--        	$('#dongle_mem_btn').click(function(){
@@ -355,62 +403,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
         </aside>
 	
         <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
-            	<!-- <span id="header" style='text-align: center;'></span> -->
-            	<!-- <br/><br/> -->
-
-            	<!-- <div id="mem_list_div" style="padding: 0 0 0 30%;"></div> -->
-            	
-            	<!-- 동글메인이미지 -->
-            	<div id='dongle_main_img'>
-            		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
-            	</div>
-            	<div id='mini_board'></div>
-            	<div id='mini_gallery'>갤 러 리</div>
-            	
-            	<div class="demo" style="margin-top: 50px; padding-left: 50px;">      
-			       	 <div class="item">
-			            <ul id="content-slider" class="content-slider">
-			           
-			                <li>
-			                    <img src="./images/member_img/user01.png">
-			                </li>
-			             
-			                <li>
-			                    <img src="./images/member_img/user02.png"> 
-			                </li>
-			                <li>
-			                 	<img src="./images/member_img/user03.png"> 
-			                </li>
-			                <li>
-			                    <h3>4</h3>
-			                </li>
-			                <li>
-			                    <h3>5</h3>
-			                </li>
-			                <li>
-			                    <h3>6</h3>
-			                </li>
-			                <li>
-			                    <h3>7</h3>
-			                </li>
-			                <li>
-			                    <h3>8</h3>
-			                </li>
-			                <li>>
-			                    <h3>9</h3>
-			                </li>
-			                <li>
-			                    <h3>10</h3>
-			                </li>
-			                
-			            </ul>
-			        </div>
-			     </div>	
-
-             </div>
-        </section>
+        
        
 <script>
 

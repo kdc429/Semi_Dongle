@@ -17,7 +17,7 @@
 
 <meta charset="UTF-8">
 
-	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet"/>
 	<script>
 	$(document).ready(function() {
 		// 스크롤 발생 이벤트 처리
@@ -46,24 +46,19 @@
 						console.log(lengthFeed);
 						if(lengthFeed%10==0){
 
-							$('.newsfeed').append($('#fountainG'));
+							$('.newsfeed').append($('#fountainG'));//로딩 div 뒤로 넘기기
 						}else{
 							console.log("sdj");
-							$('#fountainG').remove();
+							$('#fountainG').remove(); //로딩 div 지우기
 						}
 						
 					}
 					
 				});
-			}
-			//var refreshFeedLength=$('.feed').length;
-				
-			
-			
-			
+			}						
 		});
 	});
-	
+	//버튼 누르면 file input버튼 click되는 이벤트
 	$('#pic-up-btn').click(function(){
 		$('#feed-pic-up').click()
 		
@@ -75,7 +70,9 @@
 	$('#file-up-btn').click(function(){
 		$('#feed-file-up').click()
 	});
-	var sel_files=[];	
+	
+	//수정할때 지우는 파일 이벤트
+	var sel_files=[];
 	$(document).ready(function(){
 		$("#feed-pic-up").on("change",feedImgsFileSelect);
 	});
@@ -102,7 +99,7 @@
 		})
 	}
 	
-	
+	//피드 업로드
 	$('#feedup').click(function(){
 		
 		var fd=new FormData();
@@ -116,27 +113,21 @@
 		var newFeed=$('.feednew');
 		var filesLength=document.feedFrm.feedPicUp.files+feedFrm.feedVideoUp.files+feedFrm.feedFileUp.files.length;
 		if(feedContentUp==""){
+			//피드 내용 없을시 예외처리
 			alert("피드 내용을 입력해주세요!");
 			console.log($('.feednew'));
 			return;
 		}
-		
-		
-	    
+		//formdata에 내용 추가
 	    var feedFd=new FormData();
 		feedFd.append('groupNo',groupNo);
 		feedFd.append('memberNo',memberNo);
-	    
-	    
+  
 	    if(document.feedFrm.feedContentUp.value){
 	    	feedFd.append('content',feedContentUp);
 	    }
 	    
-	   
-	    
-	    
 		if(document.feedFrm.feedPicUp.value){
-			console.log('zxc');
 			
 			var imageExt = document.feedFrm.feedPicUp.value; //파일을 추가한 input 박스의 값
 
@@ -185,10 +176,7 @@
 				feedFd.append('files'+i,feedFrm.feedFileUp.files[i]);
 			}
 		}
-		/* strFeedFd= JSON.stringify(feedFd);
-		jQuery.ajaxSettings.traditional = true;
- 		*/		
- 		
+ 		//피드 업로드 ajax
  		$.ajax({
 			url:"<%=request.getContextPath()%>/feed/feedContentUpload",
 			data:feedFd,
@@ -199,8 +187,6 @@
 			success:function(data){ 
 				console.log(data);
 					newFeed.next().after(data);
-					
-
 			}
 			
 		});
