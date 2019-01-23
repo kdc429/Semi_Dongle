@@ -147,7 +147,7 @@
 				<tr>
 				<th>비밀번호 힌트&nbsp;</th>
 				<td>
-					<select id='pwdHint' name='pwdHint' required/>
+					<select id='pwdHint' name='pwdHint' class='tex' required/>
 						<option value='나의 고향은?'>나의 고향은?</option>
 						<option value="나의 보물1호는?">나의 보물1호는?</option>
 						<option value='나의 어머니 이름은?'>나의 어머니 이름은?</option>
@@ -160,7 +160,7 @@
 				<tr>
 				<th>힌트 답변&nbsp;</th>
 				<td>
-					<input type="text" class="tet" id="hintAnswer" name='hintAnswer' required/>
+					<input type="text" class="tex" id="hintAnswer" name='hintAnswer' required/>
 				</td>
 				</tr>
 				<tr>
@@ -193,7 +193,7 @@
 				<tr>
 					<th>휴대폰</th>
 					<td>
-						<input type="tel"  
+						<input type="tel" class='tex'
 						id="phone" name="phone" maxlength="11"
 						placeholder="(-없이)01012345678" required>
 					</td>

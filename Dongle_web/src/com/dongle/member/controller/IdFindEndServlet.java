@@ -56,8 +56,10 @@ public class IdFindEndServlet extends HttpServlet {
 				if(checkMember.getMemberName().equals(userName) && checkMember.getEmail().equals(userEmail))
 				{
 					request.setAttribute("msg","찾으시는 아이디는 "+checkMember.getMemberId()+"입니다");			
+					view="views/common/msg.jsp";
 					String script = "self.close()";
 					request.setAttribute("script", script);
+					request.setAttribute("loc","/");
 				}
 				else if(!checkMember.getEmail().equals(userEmail)){
 					
@@ -67,10 +69,6 @@ public class IdFindEndServlet extends HttpServlet {
 				}
 			}
 
-		
-			
-			request.setAttribute("msg",msg);
-			request.setAttribute("loc",loc);
 			request.getRequestDispatcher(view).forward(request, response);
 		
 		}
