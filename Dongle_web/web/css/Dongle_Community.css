@@ -108,7 +108,7 @@ button.btn button.btn-primary{
 .logo {
 
 	position: fixed;
-	/* z-index: 2; */
+	z-index: 2;
 	font-family: '여기어때잘난서체';
 
 }

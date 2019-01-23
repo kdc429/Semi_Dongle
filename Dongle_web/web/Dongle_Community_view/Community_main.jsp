@@ -130,6 +130,8 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 <body>
 	<script>
+	
+	
 		$(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/community/boardList",
