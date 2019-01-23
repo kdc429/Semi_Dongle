@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<meta charset="UTF-8">
 <%@ page import="com.dongle.board.model.vo.*,java.util.*,com.dongle.member.model.vo.Member,com.dongle.group.model.vo.Group"%>
+    
     
 <% 
 	Board b=(Board)request.getAttribute("board");
@@ -81,14 +83,14 @@
 		color:gray; 
     	font-size: 14px;
     }
-    table#tbl-comment sub.board-comment-writer 
+    table#tbl-comment sub.comment-writer 
     {
     	color:navy; 
     	font-size:14px;
     }
-    table#tbl-comment sub.board-comment-date 
+    table#tbl-comment sub.comment-date 
     {
-		color:tomato; 
+		color:red; 
     	font-size:10px;
     }
     table#tbl-comment tr.level2 td:first-of-type
@@ -112,74 +114,7 @@
 	
 	
 </style>
-	<section id="board-container">
-		<form name="deleteFrm" method="post" enctype="multipart/form-data">
-			<table class="table table-bordered">
-				<thead>
-					<br><br>
-					<tr>
-						<th colspan="3" id="title">공지사항</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th style="width: 20%;">글 제목</th>
-						<td colspan="2"><%=b.getBoardTitle()%></td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td colspan="2"><%=b.getBoardWriter() %></td>
-					</tr>					
-					<tr>
-						<th>작성일자</th>
-						<td colspan="2"><%=b.getBoardWriteDate()%></td>
-					</tr>					
-					<tr>
-						<th>조회수</th>
-						<td colspan="2"><%=b.getBoardViewCount()%></td>
-					</tr>
-					<tr>
-						<th>첨부파일</th>
-						<td>
-							<%
-							if(bp.getBoardFileNewPath()!=null){%> 
-								<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
-								<img alt="첨부파일" src="<%= request.getContextPath() %>/images/board_images/file.png"width='16px'/>
-								</a> 
-									<%=bp.getBoardFileOldPath() %>						
-							<%} %> 
-						</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td colspan="2"><%=b.getBoardContent()%></td>
-					</tr>
-				</tbody> 
-			</table>
-		</form>
-		<div class="view-btn">
-			<button id='view-list-btn'>목록으로</button>
-			<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
-			<button id='view-update-btn'>수정하기</button>
-			<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-			<input type="button" id="view-delete-btn" value="삭제하기" />
-			<%} %>
-		</div>
-		<br><br>
-		
-		
-		<div class="comment-editor">
-			<input type="hidden" name="boardNo" id="boardNo" 
-			value="<%=b.getBoardNo() %>"/>
-			<input type="hidden" name="boardCommentWriter" id="boardCommentWriter"
-			value="<%=loginMember.getMemberId() %>"/>
-			<input type="hidden" name="boardCommentLevel" id="boardCommentLevel"
-			value="1"/>
-			<input type="hidden" name="boardCommentRef" id="boardCommentRef"
-			value="0"/>
-			<textarea cols='75' rows='3' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
-			<button id="comment-insert-btn">등록</button>
-		</div>
+
 		<!-- 댓글목록 테이블 -->
 		<table id="tbl-comment">
 			<%if(bclist!=null) {
@@ -188,16 +123,15 @@
 			%>
 					<tr class='level1'>
 						<td>
-							<sub class="board-comment-writer">
+							<sub class="comment-writer">
 							<%=c.getGroupMemberNickname()%></sub>
-							<sub class="board-comment-date">
+							<sub class="comment-date">
 							<%=c.getBoCommentDate()%></sub>
-							<br/><br/>
 							<%=c.getBoCommentContent() %>
 							<a id="report" href='*' >신고</a>
 						</td>
 						 <td>
-							<button class="comment-reply-btn" value="<%=c.getBoCommentNo()%>">답글</button>
+							<button class="comment-reply-btn" value="<%=c.getBoCommentNo() %>">답글</button>
 							<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
 							<button class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
 							<%} %>
@@ -206,17 +140,16 @@
 					<%} else {%>
 					<tr class='level2'>
 						<td>
-							<sub class="board-comment-writer">
+							<sub class="comment-writer">
 							<%=c.getGroupMemberNickname()%></sub>
-							<sub class="board-comment-date">
+							<sub class="comment-date">
 							<%=c.getBoCommentDate()%></sub>
-							<br/></br>
+							<br/><br/>
 							<%=c.getBoCommentContent() %>
+							<a id="report" href='*' >신고</a>
 						</td>
 						<td>
-							<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
-							<button class="reply-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
-							<%} %>
+							
 						</td>
 					</tr>
 					<%}	
@@ -253,16 +186,15 @@ $(function(){
 });
 				
 	 $('.comment-reply-btn').on('click',function(e){
-		 console.log($(this).val());
 		<%if(loginMember!=null){%>
 			var tr=$("<tr></tr>");
 			var html="<td style='display:none;text-align:left;' colspan='2'>";
-			html+="<div>";
-			html+="<input type='hidden' name='boardNo' id='boardNo' value='<%=b.getBoardNo()%>'/>";
-			html+="<input type='hidden' name='boardCommentLevel' id='boardCommentLevel' value='2'/>";
-			html+="<input type='hidden' name='boardCommentRef' id='boardCommentRef2' value='"+$(this).val()+"'/>";
-			html+="<textarea name='boardCommentContent' id='boardCommentContent2' cols='60' rows='1'></textarea>";
-			html+="<button value='"+$(this).val()+"' id='comment-insert-btn' style='height:20px'>등록</button>";
+			html+="<input type='hidden' name='boardNo'value='<%=b.getBoardNo()%>'/>";
+			html+="<input type='hidden' name='boCommentWriter' value='<%=c.getMemberNo()%>'/>";
+			html+="<input type='hidden' name='boardCommentLevel' value='2'/>";
+			html+="<input type='hidden' name='boardCommentRef' value='"+$(this).val()+"'/>";
+			html+="<textarea name='boardCommentContent' cols='60'rows='1'></textarea>";
+			html+="<button class='btn-insert2'>등록</button>";
 			html+="</div></td>";
 			tr.html(html);
 			tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
@@ -282,16 +214,18 @@ $(function(){
 					e.preventDefault();
 				}
 				$.ajax({
-					url:"<%=request.getContextPath()%>/board/commentInsert",
+					url:"<%=request.getContextPath()%>/gallery/commentInsert",
 					data:{"groupNo":<%=groupNo%>,
 						"boardNo":$('#boardNo').val(),
+						"boCommentWriter":$('#boCommentWriter').val(),
 						"boardCommentLevel":2,
-						"boardCommentContent":$('#boardCommentContent2').val(),
-						"boardCommentRef":$('#boardCommentRef2').val()
+						"boardCommentRef":$(this).val(),
+						"boardCommentContent":$('#boardCommentContent').val(),
 					},
 					type:"post",
 					success:function(data){
-						alert("Message: "+data);
+						console.log(data);
+						alert(data);
 						$.ajax({
 							url:"<%=request.getContextPath()%>/board/boardView?groupNo=<%=b.getGroupNo()%>&boardNo=<%=b.getBoardNo()%>",
 							type:"post",
@@ -344,20 +278,6 @@ $(function(){
 		alert("로그인 후 이용할 수 있습니다.");
 		$('#userId').focus();
 	}
-	//댓글 삭제
-	$(function(){
-		$('.reply-delete-btn').click(function(){
-			$.ajax({
-				url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>",
-				type:"post",
-				dataType:"html",
-				success:function(data){
-					$('#board-container').html(data);
-				},
-				error:function(error,msg){console.log("---"+error+msg);}
-			});
-		});
-	});
 	
 
 </script>
@@ -462,4 +382,4 @@ $(function(){
 	 --%>
 
 	
-</script>		
+</script>
