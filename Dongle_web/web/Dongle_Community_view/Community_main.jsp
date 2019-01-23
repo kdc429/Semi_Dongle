@@ -239,11 +239,18 @@
                     <button class='btn btn-primary'>공지사항</button><br>
                      <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button class='btn btn-primary'>일정</button><br>
+                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
                 </div>
             </div>
         </aside>
 
+    </div>
+   	<div class="modal-div">
+       <div class="dialog" id="modal-container">
+          <div class="modal-content">
+          
+          </div>
+       </div>
     </div>
 
 <script>
@@ -277,6 +284,22 @@ $(function(){
 		})
 	})
 });
+
+$(function(){
+	$("#calendarview").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/calendarMainView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
+
 
 
 function comunnityHome(){
