@@ -33,7 +33,7 @@ public class CommunityBoardViewServlet extends HttpServlet {
 			int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 			System.out.println(boardNo+" : "+groupNo);
 			
-			Board b = new BoardService().selectOne(boardNo,groupNo);
+			Board b = new BoardService().selectOne(boardNo,groupNo, false);
 			System.out.println("b가 무엇? : "+b);
 			
 			String view="";
