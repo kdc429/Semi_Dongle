@@ -17,10 +17,10 @@ public class GalleryCommentJoin {
 	private String albumCode;
 	private String galFileNewPath;
 	private int galNo;
-
 	private String galMultiStatus;
 	
 	public GalleryCommentJoin() {}
+
 
 	public GalleryCommentJoin(int groupNo, int galFileNo, int galCommentNo, int galCommentLevel, int memberNo,
 			String galCommentContent, Date galCommentDate, int galCommentRef, String groupMemberNickname,

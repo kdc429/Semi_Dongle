@@ -194,7 +194,6 @@
 					<th>휴대폰</th>
 					<td>
 						<input type="tel"  
->>>>>>> refs/remotes/origin/KYN
 						id="phone" name="phone" maxlength="11"
 						placeholder="(-없이)01012345678" required>
 					</td>
