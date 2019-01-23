@@ -124,6 +124,8 @@
         #cal_content {
             resize: none;
         }
+        
+
     </style>
 
     <meta charset="UTF-8">
@@ -155,7 +157,7 @@
     <section>
     
 
-        <div class="main center" style='width: 684px; height: 1000px; background-color: rgb(255, 255, 255); border: 1px solid black;'>
+       
 
             <div id="calendar">
                 <div id="calendar_header"><i class="icon-chevron-left"></i>
@@ -168,14 +170,9 @@
                     <br><br><br><br><br><br>
 
           </div>
-         </div>
+        
     </section>
-        <div class="modal-div">
-         <div class="dialog" id="modal-container">
-            <div class="modal-content">
-            </div>
-            </div>
-      </div>
+ 
 
     <script>
 
@@ -302,6 +299,7 @@
                      dataType:'html',
                      success:function(data){
                         $('.modal-content').html(data);
+                        $('#modal-containert').css('display','block');
                      }
                      
                   })

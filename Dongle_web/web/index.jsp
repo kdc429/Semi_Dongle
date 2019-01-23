@@ -35,6 +35,7 @@
                     <label for="">
                         <input type="checkbox" name="saveId" id="saveId">아이디 저장
                     </label><br>
+
                     <button id="btn_login" onclick='login()'>로그인</button><br>
                     <input type="button" value="회원가입"  
                      onclick="location.href='<%=request.getContextPath() %>/memberEnroll'"/>
