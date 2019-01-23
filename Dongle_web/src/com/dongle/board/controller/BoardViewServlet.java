@@ -77,8 +77,6 @@ public class BoardViewServlet extends HttpServlet {
 		}
 		Board b=new BoardService().selectOne(boardNo,groupNo,hasRead);
 		
-		System.out.println("b가 무엇? : "+b);
-		
 		String view="";
 		if(b!=null)
 		{

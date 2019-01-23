@@ -182,7 +182,6 @@ public class BoardDao {
 		ResultSet rs=null;
 		BoardPath bp=null;
 		String sql=prop.getProperty("selectBoardPath");
-		System.out.println("DAO입니다: "+sql);
 		try
 		{
 			pstmt=conn.prepareStatement(sql);
@@ -293,7 +292,6 @@ public class BoardDao {
 	//게시판 댓글쓰기
 		public int insertBoComment(Connection conn, BoardComment bc)
 		{
-			System.out.println("코멘트: "+bc);
 			PreparedStatement pstmt=null;
 			int result=0;
 			String sql=prop.getProperty("insertBoComment");
@@ -342,7 +340,6 @@ public class BoardDao {
 					bc.setBoCommentRef(rs.getInt("bo_comment_ref"));
 					bc.setGroupMemberNickname(rs.getString("group_member_nickname"));
 					bclist.add(bc);
-					System.out.println("들어오?? : "+bc);
 				}
 			}
 			catch(SQLException e)

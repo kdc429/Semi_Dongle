@@ -61,8 +61,8 @@
     }
     table#tbl-comment tr td:last-of-type 
     {
-    	text-align:right; 
-    	width: 100px;
+    	text-align:center; 
+    	width: 60px;
     }
     table#tbl-comment button.btn-reply
     {
@@ -81,15 +81,15 @@
 		color:gray; 
     	font-size: 14px;
     }
-    table#tbl-comment sub.comment-writer 
+    table#tbl-comment sub.board-comment-writer 
     {
     	color:navy; 
-    	font-size:14px
+    	font-size:14px;
     }
-    table#tbl-comment sub.comment-date 
+    table#tbl-comment sub.board-comment-date 
     {
 		color:tomato; 
-    	font-size:10px
+    	font-size:10px;
     }
     table#tbl-comment tr.level2 td:first-of-type
     {
@@ -188,9 +188,9 @@
 			%>
 					<tr class='level1'>
 						<td>
-							<sub class="comment-writer">
+							<sub class="board-comment-writer">
 							<%=c.getGroupMemberNickname()%></sub>
-							<sub class="comment-date">
+							<sub class="board-comment-date">
 							<%=c.getBoCommentDate()%></sub>
 							<br/><br/>
 							<%=c.getBoCommentContent() %>
@@ -206,15 +206,17 @@
 					<%} else {%>
 					<tr class='level2'>
 						<td>
-							<sub class="comment-writer">
-							<%=c.getMemberNo()%></sub>
-							<sub class="comment-date">
+							<sub class="board-comment-writer">
+							<%=c.getGroupMemberNickname()%></sub>
+							<sub class="board-comment-date">
 							<%=c.getBoCommentDate()%></sub>
-							<br/>
+							<br/></br>
 							<%=c.getBoCommentContent() %>
 						</td>
 						<td>
-							
+							<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
+							<button class="reply-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
+							<%} %>
 						</td>
 					</tr>
 					<%}	
@@ -260,7 +262,7 @@ $(function(){
 			html+="<input type='hidden' name='boardCommentLevel' id='boardCommentLevel' value='2'/>";
 			html+="<input type='hidden' name='boardCommentRef' id='boardCommentRef2' value='"+$(this).val()+"'/>";
 			html+="<textarea name='boardCommentContent' id='boardCommentContent2' cols='60' rows='1'></textarea>";
-			html+="<button value='"+$(this).val()+"' id='comment-insert-btn'>등록</button>";
+			html+="<button value='"+$(this).val()+"' id='comment-insert-btn' style='height:20px'>등록</button>";
 			html+="</div></td>";
 			tr.html(html);
 			tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
@@ -342,6 +344,20 @@ $(function(){
 		alert("로그인 후 이용할 수 있습니다.");
 		$('#userId').focus();
 	}
+	//댓글 삭제
+	$(function(){
+		$('.reply-delete-btn').click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>",
+				type:"post",
+				dataType:"html",
+				success:function(data){
+					$('#board-container').html(data);
+				},
+				error:function(error,msg){console.log("---"+error+msg);}
+			});
+		});
+	});
 	
 
 </script>

@@ -50,7 +50,6 @@ public class BoardCommentServlet extends HttpServlet {
 		bc.setBoCommentContent(boardCommentContent);
 		bc.setBoCommentLevel(boardCommentLevel);
 		bc.setBoCommentRef(boardCommentRef);
-		System.out.println("bc찍은 것"+bc);
 		
 		int result=new BoardService().insertBoComment(bc);
 		

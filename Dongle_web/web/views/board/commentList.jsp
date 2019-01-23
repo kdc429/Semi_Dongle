@@ -63,8 +63,8 @@
     }
     table#tbl-comment tr td:last-of-type 
     {
-    	text-align:right; 
-    	width: 100px;
+    	text-align:center; 
+    	width: 60px;
     }
     table#tbl-comment button.btn-reply
     {
@@ -86,12 +86,12 @@
     table#tbl-comment sub.comment-writer 
     {
     	color:navy; 
-    	font-size:14px
+    	font-size:14px;
     }
     table#tbl-comment sub.comment-date 
     {
-		color:tomato; 
-    	font-size:10px
+		color:red; 
+    	font-size:10px;
     }
     table#tbl-comment tr.level2 td:first-of-type
     {
@@ -127,7 +127,6 @@
 							<%=c.getGroupMemberNickname()%></sub>
 							<sub class="comment-date">
 							<%=c.getBoCommentDate()%></sub>
-							<br/><br/>
 							<%=c.getBoCommentContent() %>
 							<a id="report" href='*' >신고</a>
 						</td>
@@ -142,11 +141,12 @@
 					<tr class='level2'>
 						<td>
 							<sub class="comment-writer">
-							<%=c.getMemberNo()%></sub>
+							<%=c.getGroupMemberNickname()%></sub>
 							<sub class="comment-date">
 							<%=c.getBoCommentDate()%></sub>
-							<br/>
+							<br/><br/>
 							<%=c.getBoCommentContent() %>
+							<a id="report" href='*' >신고</a>
 						</td>
 						<td>
 							
