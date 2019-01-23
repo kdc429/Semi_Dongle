@@ -391,22 +391,15 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
 
                     <!-- 메뉴 버튼 -->
-<<<<<<< HEAD
+
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary' id="board-btn">공지사항</button><br>
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button class='btn btn-primary'>일정</button><br>
+                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
                     <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
                     <%} %>
-=======
-                    <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
-                    <button class='btn btn-primary'>공지사항</button><br>
-                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
-                    <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
->>>>>>> refs/remotes/origin/KCM2
                 </div>
             </div>
         </aside>

@@ -132,8 +132,6 @@ public class GalleryGetServlet extends HttpServlet {
 		else {
 			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
 		}
-/*		request.setAttribute("allList", allList);
-		request.setAttribute("list", list);*/
 		request.setAttribute("tList", tList);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);
