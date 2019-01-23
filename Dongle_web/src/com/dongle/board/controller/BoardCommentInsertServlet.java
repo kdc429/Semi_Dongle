@@ -14,14 +14,14 @@ import com.dongle.member.model.vo.Member;
 /**
  * Servlet implementation class BoardCommentServlet
  */
-@WebServlet("/board/commentInsert")
-public class BoardCommentServlet extends HttpServlet {
+@WebServlet("/board/boardCommentInsert")
+public class BoardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardCommentServlet() {
+    public BoardCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
