@@ -25,6 +25,7 @@ public class Member {
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, String gender, String ssn,
 			String phone, String address, String email, Date enrollDate, String blackList, int reportCount,
 			String pwdHintList, String pwdHintAnswer) {
+
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;

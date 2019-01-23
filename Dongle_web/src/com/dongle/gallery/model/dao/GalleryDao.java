@@ -133,38 +133,6 @@ public class GalleryDao {
       return result;
    }
    
-   public AlbumCategory checkAlbumName(Connection conn, AlbumCategory ac,int groupNo)
-   {
-      PreparedStatement pstmt=null;
-      ResultSet rs=null;
-      String sql =prop.getProperty("checkAlbumName");
-      AlbumCategory checkAc=null;
-      try {
-         pstmt=conn.prepareStatement(sql);
-         pstmt.setString(1, ac.getAlbumName());
-         pstmt.setInt(2, groupNo);
-         rs=pstmt.executeQuery();
-         while(rs.next())
-         {
-            checkAc=new AlbumCategory(
-                  rs.getInt("group_no"),
-                  rs.getString("album_code"),
-                  rs.getString("album_name")
-                  );
-         }
-         
-      }
-      catch(Exception e)
-      {
-         e.printStackTrace();
-      }
-      finally {
-         close(rs);
-         close(pstmt);
-      }
-      return checkAc;
-   }
-   
    public int inserAlbum(Connection conn,String albumNameP,int groupNo)
    {
       PreparedStatement pstmt=null;
@@ -272,7 +240,6 @@ public class GalleryDao {
       PreparedStatement pstmt= null;
       ResultSet rs=null;
       String sql=prop.getProperty("selectOneList");
-      GalleryPath gp=null;
       
       List<GalleryPath> gplist=new ArrayList<GalleryPath>();
       try {
@@ -280,11 +247,10 @@ public class GalleryDao {
          pstmt.setInt(1, groupNo);
          pstmt.setInt(2, galNo);
          pstmt.setString(3, albumCode);
-         System.out.println(sql);
          rs=pstmt.executeQuery();
          while(rs.next())
          {
-            gp=new GalleryPath();
+            GalleryPath gp=new GalleryPath();
             gp.setGroupNo(rs.getInt("group_no"));
             gp.setAlbumCode(rs.getString("album_code"));
             gp.setMemberNo(rs.getInt("member_no"));
@@ -295,9 +261,12 @@ public class GalleryDao {
             gp.setGalFileContent(rs.getString("gal_file_content"));
             gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
             gp.setGalMultiStatus(rs.getString("gal_multi_status"));
+            gp.setGroupMemberNickname(rs.getString("group_member_nickname"));
+            gp.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
             
             gplist.add(gp);
          }
+         System.out.println("갤러리: "+gplist);
       }
       catch(Exception e)
       {
@@ -521,4 +490,27 @@ public class GalleryDao {
       return rs;
    }
    
+   
+   public int galleryDelete(Connection conn, int groupNo, String albumCode, int galNo)
+   {
+      PreparedStatement pstmt = null;
+      int rs = 0;
+      String sql= prop.getProperty("galleryDelete");
+
+      try {
+         pstmt=conn.prepareStatement(sql);
+         pstmt.setInt(1, groupNo);
+         pstmt.setString(2, albumCode);
+         pstmt.setInt(3, galNo);
+         rs=pstmt.executeUpdate();
+      }
+      catch(Exception e)
+      {
+         e.printStackTrace();
+      }
+      finally {
+         close(pstmt);
+      }
+      return rs;
+   }
 }

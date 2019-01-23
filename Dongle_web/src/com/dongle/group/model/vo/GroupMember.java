@@ -3,22 +3,22 @@ package com.dongle.group.model.vo;
 import java.util.Date;
 
 public class GroupMember {
-	
+
 	private int groupNo;
 	private int memberNo;
 	private String groupMemberNickname;
-	private String groupMemberImageOldPath;
-	private String groupMemberImageNewPath;
+	private String groupMemberImageOldPath;//GROUP_MEMBER_IMAGE_OLD_PATH VARCHAR2(100),
+	private String groupMemberImageNewPath;//GROUP_MEMBER_IMAGE_NEW_PATH VARCHAR2(100),
 	private Date groupMemberEnrollDate;
-	private String blacklistYN;
+	private String blackListYN;
 	private int reportDongleCount;
 	
-	public GroupMember() {
-		super();
-	}
+	public GroupMember() {}
 
-	public GroupMember(int groupNo, int memberNo, String groupMemberNickname, String groupMemberImageOldPath,
-			String groupMemberImageNewPath, Date groupMemberEnrollDate, String blacklistYN, int reportDongleCount) {
+	public GroupMember(int groupNo, int memberNo, String groupMemberNickname,
+			String groupMemberImageOldPath, String groupMemberImageNewPath, Date groupMemberEnrollDate,
+			String blackListYN, int reportDongleCount) {
+
 		super();
 		this.groupNo = groupNo;
 		this.memberNo = memberNo;
@@ -26,7 +26,7 @@ public class GroupMember {
 		this.groupMemberImageOldPath = groupMemberImageOldPath;
 		this.groupMemberImageNewPath = groupMemberImageNewPath;
 		this.groupMemberEnrollDate = groupMemberEnrollDate;
-		this.blacklistYN = blacklistYN;
+		this.blackListYN = blackListYN;
 		this.reportDongleCount = reportDongleCount;
 	}
 
@@ -78,12 +78,12 @@ public class GroupMember {
 		this.groupMemberEnrollDate = groupMemberEnrollDate;
 	}
 
-	public String getBlacklistYN() {
-		return blacklistYN;
+	public String getBlackListYN() {
+		return blackListYN;
 	}
 
-	public void setBlacklistYN(String blacklistYN) {
-		this.blacklistYN = blacklistYN;
+	public void setBlackListYN(String blackistYN) {
+		this.blackListYN = blackistYN;
 	}
 
 	public int getReportDongleCount() {
@@ -97,10 +97,11 @@ public class GroupMember {
 	@Override
 	public String toString() {
 		return "GroupMember [groupNo=" + groupNo + ", memberNo=" + memberNo + ", groupMemberNickname="
-				+ groupMemberNickname + ", groupMemberImageOldPath=" + groupMemberImageOldPath
-				+ ", groupMemberImageNewPath=" + groupMemberImageNewPath + ", groupMemberEnrollDate="
-				+ groupMemberEnrollDate + ", blacklistYN=" + blacklistYN + ", reportDongleCount=" + reportDongleCount
-				+ "]";
+				+ groupMemberNickname + ", groupMemberImageOldPath="
+				+ groupMemberImageOldPath + ", groupMemberImageNewPath=" + groupMemberImageNewPath
+				+ ", groupMemberEnrollDate=" + groupMemberEnrollDate + ", blackistYN=" + blackListYN
+				+ ", reportDongleCount=" + reportDongleCount + "]";
+
 	}
 
 }

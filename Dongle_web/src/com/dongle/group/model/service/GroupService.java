@@ -57,6 +57,13 @@ public class GroupService {
 		return editList;
 		
 	}
+	public GroupMember selectGmInfo(int gNo,int memberNo)
+	{
+		Connection conn = getConnection();
+		GroupMember gm = new GroupDao().selectGmInfo(conn,gNo,memberNo);
+		close(conn);
+		return gm;
+	}
 	
 	public List<Group> selectRank(){
 		
@@ -66,22 +73,13 @@ public class GroupService {
 		close(conn);
 		return rankList;
 	}
-	
-	   public GroupMember selectGmInfo(int groupNo,int memberNo)
-	   {
-	      Connection conn = getConnection();
-	      GroupMember gm = new GroupDao().selectGmInfo(conn,groupNo,memberNo);
-	      close(conn);
-	      return gm;
-	   }
 	   
-	   public int countMember(int groupNo)
-		 {
-			 Connection conn = getConnection();
-			 int result = new GroupDao().countMember(conn,groupNo);
-			 close(conn);
-			 return result;
-		 }
+	public int countMember(int groupNo){
+		Connection conn = getConnection();
+		int result = new GroupDao().countMember(conn,groupNo);
+		close(conn);
+		return result;
+	}
 
 	public List<GroupMember> selectMemberList(int groupNo) {
 		Connection conn=getConnection();
@@ -89,6 +87,7 @@ public class GroupService {
 		close(conn);
 		return list;
 	}
+	
 
 	
 

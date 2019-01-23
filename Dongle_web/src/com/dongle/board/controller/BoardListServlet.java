@@ -30,10 +30,11 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int groupNo=1;
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println(loginMember.getMemberId());
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		List<Board> list=new BoardService().selectList(groupNo,loginMember.getMemberId());
+		
+		System.out.println("여기확인해주세요: "+groupNo+" : "+list);
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);;

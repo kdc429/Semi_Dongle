@@ -44,6 +44,7 @@ public class CheckdongleDuplicateServlet extends HttpServlet {
 				
 				RequestDispatcher rd=request.getRequestDispatcher("/Dongle_Community_view/dongleDuplicate.jsp");
 				rd.forward(request, response);
+
 	}
 
 	/**

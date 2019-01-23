@@ -83,6 +83,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		{
 			msg="동글 등록성공";
 			loc="/board/boardList";
+
 		}
 		else 
 		{

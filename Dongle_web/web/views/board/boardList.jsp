@@ -24,6 +24,7 @@
 	{
 		text-align: center;
 		boder: 1px solid #dddddd;
+		padding : 10px;
 		
 	}
 	.table th
@@ -32,17 +33,21 @@
 		text-align: center;
 		
 	}
-	input.add-btn
+	#add-btn
 	{
 		float:right;
 		margin:0 0 15px;
-		background-color:#F2CB61;
 	}
+	#board-container
+	{
+		padding: 25px;
+	}
+	
 </style>
-	<section id="board-container">
+	<section id="board-container" >
 		<h2>공지사항</h2>
 		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
-			<input type="button" value="글쓰기" class="add-btn"/>
+			<input type="button" value="글쓰기" id="add-btn"/>
 		 <%} %>  
 		<table class="table table-bordered">
 			<tr>
@@ -52,14 +57,13 @@
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
+			<%if(!list.isEmpty()) { %>
 			<%for(Board b : list) {%>
 				<tr>
 					<td><%=b.getBoardNo() %></td>
 					<td class="boardView-btn">
-						<%-- <a id="boardView-btn" href ="<%=request.getContextPath() %>/board/boardView?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>"> --%>
 							<%=b.getBoardTitle()%>
 							<input type="hidden" name="boardNo" id="boardNo" value="<%=b.getBoardNo() %>"/>
-						<!-- </a> -->
 					</td>
 					<td>
 						<%=b.getBoardWriter() %>
@@ -71,21 +75,22 @@
 						<%=b.getBoardViewCount() %>
 					</td>
 				</tr>
-				<%} %>
+				<%} 
+			}%>
 		</table>
 		
 	</section>
 <script>
-	<%-- function fn_add()
-	{
-		location.href="<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>";
-	} --%>
 	$(function(){
-		$('.boardView-btn').click(function(){
+		$('.boardView-btn').click(function(e){
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
+			var groupNo=<%=groupNo%>;
+			console.log(groupNo);
+			console.log(num);
 			$.ajax({
-				url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>&boardNo="+num,
+				url:"<%=request.getContextPath() %>/board/boardView",
+				data:{"groupNo":groupNo,"boardNo":num},
 				type:"post",
 				dataType:"html",
 				success:function(data){
@@ -97,7 +102,7 @@
 	});
 	
 	$(function(){
-		$('.add-btn').click(function(){
+		$('#add-btn').click(function(){
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
 			$.ajax({

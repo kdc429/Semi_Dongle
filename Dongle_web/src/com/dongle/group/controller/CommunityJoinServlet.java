@@ -35,29 +35,31 @@ public class CommunityJoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");// 세션에서 받아온 로그인 멤버 객체
 		System.out.println(loginMember.getMemberNo());
-		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버		
-		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
-		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+
+		int groupNo=Integer.parseInt(request.getParameter("groupNo")); //그룹넘버
 		int result = new GroupService().countMember(groupNo); //이렇게 해야 넘어감
 		
+
+		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
+		System.out.println("여긴 커뮤:"+gm);
 		List<GalleryPath> galList = new GroupService().selectAllGallery(groupNo);
 		request.setAttribute("groupNo",groupNo);
 		request.setAttribute("galList",galList);
 		System.out.println("갤러리 : "+galList);
-		
-		
+
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
 		String loc="";
 		
 		if(g==null) { //데이터 없을시 에러페이지 이동으로 변경예정
-			msg="접속실패!";
+			msg="접속실패! 다시 시도해주세요.";
 			loc="/login";
 			request.getRequestDispatcher(view).forward(request, response);
 			request.setAttribute("loc",loc);
+			request.setAttribute("msg", msg);
 		}else {
 			//List<GalleryPath>galList = new GalleryService().albumAndGalList(groupNo);
 			//System.out.println("CommunityJoinServlet의 갤러리"+galList);

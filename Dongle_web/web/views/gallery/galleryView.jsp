@@ -35,7 +35,7 @@ com.dongle.group.model.vo.GroupMember"
 .dialog{
    display:none;
    position:absolute;
-   margin-top:-700px;
+   margin-top:-100px;
    z-index:10;
    left:0;                                                                                                   
    right:0;
@@ -177,7 +177,7 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
          <tr>
                <td>
                  <ul class="pagination" id="paging">
-                     <%=pageBar %>
+                     <%-- <%=pageBar %> --%>
                  </ul>
                 </td>
          </tr>

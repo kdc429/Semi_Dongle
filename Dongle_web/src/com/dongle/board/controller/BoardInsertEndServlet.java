@@ -20,6 +20,9 @@ import com.oreilly.servlet.MultipartRequest;
 
 import common.BoardFileRenamePolicy;
 
+/**
+ * Servlet implementation class BoardFormEndServlet
+ */
 @WebServlet("/board/boardFormEnd")
 public class BoardInsertEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -44,7 +47,6 @@ public class BoardInsertEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		System.out.println("END들어옴");
 		
 		//파일 기본경로
 		String root=getServletContext().getRealPath("/");
@@ -65,18 +67,18 @@ public class BoardInsertEndServlet extends HttpServlet {
 		bp.setBoardContent(mr.getParameter("content"));
 		bp.setBoardFileOldPath(mr.getOriginalFileName("upfile"));
 		bp.setBoardFileNewPath(mr.getFilesystemName("upfile"));
-		
-		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		String memberId=mr.getParameter("loginMember");
 		
 		
 		System.out.println(bp);
 		int result=new BoardService().insertBoard(bp);
-		String msg="";
+		
+	/*	String msg="";
 		String loc="";
-		String view="/views/common/msg.jsp";
+		String view="/views/common/msg.jsp";*/
 		if(result!=0)
 		{
-			List<Board> blist = new BoardService().selectList(bp.getGroupNo(), loginMember.getMemberId());
+			List<Board> blist = new BoardService().selectList(bp.getGroupNo(), memberId);
 			if(blist!=null) {
 				System.out.println(blist);
 				Board bo = blist.get(0);
@@ -85,29 +87,27 @@ public class BoardInsertEndServlet extends HttpServlet {
 
 				if(rs!=0)
 				{
-					msg="게시판 등록성공";
-					loc="/board/boardList";
+					response.setContentType("text/html;charset=UTF-8");
+					response.getWriter().println("게시글 등록 성공");
 				}
 				else 
 				{
-					msg="게시판 등록 실패";
-					loc="/board/boardInsert";
+					response.setContentType("text/html;charset=UTF-8");
+					response.getWriter().println("게시글 등록 실패. 다시 시도해주세요.");
 				}
 			}
 			else
 			{
-				msg="게시판 등록 실패";
-				loc="/board/boardInsert";
+				response.setContentType("text/html;charset=UTF-8");
+				response.getWriter().println("게시글 등록 실패. 다시 시도해주세요.");
 			}
 		}
 		else
 		{
-			msg="게시판 등록 실패";
-			loc="/board/boardInsert";
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 등록 실패. 다시 시도해주세요.");
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher(view).forward(request, response);
+		
 	}
 
 	/**

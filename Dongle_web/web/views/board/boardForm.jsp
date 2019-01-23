@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
-<%@ page import="com.dongle.board.model.vo.Board"%>
+<%@ page import="com.dongle.board.model.vo.Board,com.dongle.member.model.vo.Member"%>
 <%
 	int groupNo = (int)request.getAttribute("groupNo");
+	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 %>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -34,27 +35,23 @@
 	{
 		text-align: left;
 	} 
-	#board-add
+	.form-btn
 	{
 		text-align : center;
 	}
-</style>
-<script>
-	function validate(){
-		var content=$('[name=content]').val();
-		if(content.trim().length==0)
-		{
-			alert("내용을 입력하세요!");
-			return false;
-		}
-		return true;
+	#form-writer
+	{
+		width : 250px;
 	}
-	
-</script>
+	#form-title
+	{
+		width : 250px;
+	}
+</style>
 </head>
 <body>
 	<div class="board-container">
-		<form action="<%=request.getContextPath() %>/board/boardFormEnd" method="post" enctype="multipart/form-data">
+		<form name="insertFrm" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<thead>
 					<br><br>
@@ -64,37 +61,97 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th style="width: 20%;">글 제목</th>
+						<th style="vertical-align:middle" style="width: 20%">글 제목</th>
 						<td id="title">
-							<input type="text" name='title' required="required"/>
+							<input type="text" name='title' id='form-title' required="required"/>
 						</td>
 					</tr>
 					<tr>
-						<th>작성자</th>
+						<th style="vertical-align:middle">작성자</th>
 						<td id="writer" >
-							<input type="text" name='writer' value="admin" readonly="readonly"/>
+							<input style="background-color:#EAEAEA" type="text" name='writer' id='form-writer' value="admin" readonly="readonly"/>
 						</td>
 					</tr>					
 					<tr>
-						<th>첨부파일</th>
+						<th style="vertical-align:middle">첨부파일</th>
 						<td>
 							<input type="file" name="upfile"/>
 						</td>
 					</tr>
 					<tr>
-						<th>내용</th>
+						<th style="vertical-align:middle">내용</th>
 						<td>
-							<textarea rows="5" cols="50" name='content'></textarea>
+							<textarea style="width: 540px" rows="5" cols="50" id='form-content' name='content'></textarea>
 						</td>
 					</tr>
 				</tbody> 
-					<tr>
+				<%-- 	<tr>
 						<td colspan="2" id="board-add">
+							<button id='form-list-btn'>목록으로</button>
 							<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-							<input type="submit" value="등록하기" onclick="return validate();"/>
+							<input type="button" id='form-submit-btn' value="등록하기" />
 						</td>
-					</tr>			
+					</tr>	 --%>		
 			</table>
 		</form>
+		<div class="form-btn">
+		<button id='form-list-btn'>목록으로</button>
+		<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
+		<input type="button" id='form-submit-btn' value="등록하기" />
+		</div>
 	</div>
+<script>
+$(function(){
+	$('#form-list-btn').click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath() %>/board/boardList?groupNo=<%=groupNo%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#board-container').html(data);
+			},
+			error:function(error,msg){console.log("---"+error+msg);}
+		});
+	});
+});
+
+$(function(){
+	$('#form-submit-btn').click(function(){
+		var content=$('[name=content]').val();
+		if(content.trim().length==0)
+		{
+			alert("내용을 입력하세요!");
+			return false;
+		}
+		var data = new FormData();
+		data.append('upfile',insertFrm.upfile.files[0]);
+		data.append('groupNo',<%=groupNo%>);
+		data.append('writer',$('#form-writer').val());
+		data.append('content',$('#form-content').val());
+		data.append('title',$('#form-title').val());
+		data.append('loginMember','<%=loginMember.getMemberId()%>');
+		$.ajax({
+			url:"<%=request.getContextPath() %>/board/boardFormEnd",
+			data:data,
+			type:"post",
+			dataType:"html",
+			processData:false,
+			contentType:false,
+			success:function(data){
+				alert(data);
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=groupNo%>",
+					type:"post",
+					dataType:"html",
+					success:function(data){
+						$('#content-div').html(data);
+					}
+				});
+			}
+		});
+	});
+});
+
+
+</script>
 		

@@ -30,9 +30,9 @@ public class DongleJoinViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+
 	    int groupNo = Integer.parseInt(request.getParameter("groupNo"));     
-	      
-	      
+
 	      request.setAttribute("groupNo", groupNo);
 	      
 	      request.getRequestDispatcher("/Dongle_Community_view/DongleMemberJoin.jsp").forward(request, response);

@@ -138,6 +138,10 @@ public class GroupDao {
 				g.setGroupNo(rs.getInt("group_no"));
 				g.setGroupName(rs.getString("group_name"));
 				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setTopicName(rs.getString("topic_ctg_name"));
+				g.setLocMetroName(rs.getString("loc_metro_name"));
+				g.setLocAreaName(rs.getString("loc_area_name"));
+				g.setLocTownName(rs.getString("loc_town_name"));
 				g.setLocCtgCode(rs.getString("loc_ctg_code"));
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
@@ -152,6 +156,7 @@ public class GroupDao {
 				
 				
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -260,7 +265,7 @@ public class GroupDao {
               gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
               gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
               gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
-              gm.setBlacklistYN(rs.getString("blacklist_yn"));
+              gm.setBlackListYN(rs.getString("blacklist_yn"));
               gm.setReportDongleCount(rs.getInt("report_dongle_count"));
            }
         }catch(SQLException e) {
@@ -313,14 +318,16 @@ public class GroupDao {
 			
 			while(rs.next()) {
 				GroupMember gm = new GroupMember();
+
 	              gm.setGroupNo(rs.getInt("group_no"));
 	              gm.setMemberNo(rs.getInt("member_no"));         
 	              gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
 	              gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
 	              gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
 	              gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
-	              gm.setBlacklistYN(rs.getString("blacklist_yn"));
+	              gm.setBlackListYN(rs.getString("blacklist_yn"));
 	              gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+
 				
 				list.add(gm);
 			}
@@ -333,7 +340,7 @@ public class GroupDao {
 		}
 		return list;
 	}
-	
+
 	public List<GalleryPath> selectAllGallery(Connection conn, int groupNo){
 		
 		PreparedStatement pstmt=null;
@@ -372,6 +379,5 @@ public class GroupDao {
 		}
 		return galList;
 	}
-	
-	
+
 }

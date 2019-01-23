@@ -160,7 +160,7 @@
 				<tr>
 				<th>힌트 답변&nbsp;</th>
 				<td>
-					<input type="text" class="tex" id="hintAnswer" name='hintAnswer' required/>
+					<input type="text" class="tex" id="hintAnswer" name='hintAnswer' class='tex' required/>
 				</td>
 				</tr>
 				<tr>
@@ -194,6 +194,7 @@
 					<th>휴대폰</th>
 					<td>
 						<input type="tel" class='tex'
+
 						id="phone" name="phone" maxlength="11"
 						placeholder="(-없이)01012345678" required>
 					</td>

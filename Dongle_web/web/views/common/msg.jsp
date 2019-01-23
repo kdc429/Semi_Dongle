@@ -13,6 +13,7 @@
 
 <script>
 	alert('<%=msg%>');
+	<%=script!=null?script:""%>
 	location.href='<%=request.getContextPath()+loc%>';
 </script>
 </head>

@@ -28,7 +28,6 @@ public class BoardInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*response.sendRedirect(request.getContextPath()+"/views/board/boardForm.jsp");*/
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-		System.out.println("여기"+groupNo);
 		request.setAttribute("groupNo", groupNo);
 		request.getRequestDispatcher("/views/board/boardForm.jsp").forward(request, response);
 	}

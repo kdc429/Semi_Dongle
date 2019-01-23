@@ -48,14 +48,6 @@ public class GalleryService {
       close(conn);
       return result;
    }
-   
-   public AlbumCategory checkAlbumName(AlbumCategory ac, int groupNo)
-   {
-      Connection conn = getConnection();
-      AlbumCategory oldAc = new GalleryDao().checkAlbumName(conn,ac,groupNo);
-      close(conn);
-      return oldAc;
-   }
    public int insertAlbum(String albumNameP,int groupNo)
    {
       Connection conn = getConnection();
@@ -161,7 +153,14 @@ public class GalleryService {
       if(rs!=0) {commit(conn);}
       else {rollback(conn);}
       return rs;
-         
-            
+   }
+   //사진 삭제하기
+   public int galleryDelete(int groupNo,String albumCode, int galNo)
+   {
+      Connection conn = getConnection();
+      int rs = new GalleryDao().galleryDelete(conn, groupNo, albumCode, galNo);
+      if(rs!=0) {commit(conn);}
+      else {rollback(conn);}
+      return rs;
    }
 }

@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardComment;
 
@@ -132,31 +131,28 @@ public class BoardDao {
 		return result;
 	}
 	
-	
-	//게시판 댓글쓰기
-	public int insertComment(Connection conn, BoardComment bc)
+	public int updateCount(Connection conn, int boardNo)
 	{
-		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("insertComment");
-		try {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateCount");
+		try
+		{
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, bc.getBoCommentLevel());
-			pstmt.setString(3, bc.getBoCommentContent());
-			pstmt.setInt(4,bc.getBoarNo());
-			pstmt.setString(5,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
-			//pstmt.setInt(5,bc.getBoardCommentRef());
-			result=pstmt.executeUpdate();
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		finally {
+		finally
+		{
 			close(pstmt);
 		}
 		return result;
 	}
+	
 	public int insertBoardFile(Connection conn, BoardPath bp,Board bo)
 	{
 		PreparedStatement pstmt=null;
@@ -179,4 +175,182 @@ public class BoardDao {
 		}
 		return rs;
 	}
+	
+	public BoardPath selectBoardPath(Connection conn,int boardNo,int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		BoardPath bp=null;
+		String sql=prop.getProperty("selectBoardPath");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, boardNo);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				bp=new BoardPath();
+				bp.setBoardNo(rs.getInt("board_no"));
+				bp.setGroupNo(rs.getInt("group_no"));
+				bp.setBoardTitle(rs.getString("board_title"));
+				bp.setBoardContent(rs.getString("board_content"));
+				bp.setBoardWriter(rs.getString("board_writer"));
+				bp.setBoardWriteDate(rs.getDate("board_write_date"));
+				bp.setBoardViewCount(rs.getInt("board_view_count"));
+				bp.setBoardStatus(rs.getString("board_status"));
+				bp.setBoardFileNo(rs.getInt("bo_file_no"));
+				bp.setBoardFileOldPath(rs.getString("bo_file_old_path"));
+				bp.setBoardFileNewPath(rs.getString("bo_file_new_path"));
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return bp;		
+		}
+	
+	public int deleteBoard(Connection conn, int boardNo, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteBoard");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, groupNo);
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;		
+		}
+	
+	public int updateBoardPath(Connection conn, BoardPath bp)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateBoardPath");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, bp.getBoardFileOldPath());
+			pstmt.setString(2, bp.getBoardFileNewPath());
+			pstmt.setInt(3, bp.getBoardNo());
+			pstmt.setInt(4, bp.getGroupNo());
+			result=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateBoard(Connection conn,Board b)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateBoard");
+		try
+		{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setInt(3, b.getBoardNo());
+			pstmt.setInt(4, b.getGroupNo());
+			result = pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//게시판 댓글쓰기
+		public int insertBoComment(Connection conn, BoardComment bc)
+		{
+			PreparedStatement pstmt=null;
+			int result=0;
+			String sql=prop.getProperty("insertBoComment");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, bc.getGroupNo());
+				pstmt.setInt(2, bc.getBoardNo());
+				pstmt.setInt(3,bc.getMemberNo());
+				pstmt.setString(4,bc.getBoCommentContent());
+				pstmt.setInt(5,bc.getBoCommentLevel());
+				pstmt.setString(6,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
+				result=pstmt.executeUpdate();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		public List<BoardComment> selectBoCommentList(Connection conn, int boardNo, int groupNo)
+		{
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<BoardComment> bclist=new ArrayList();
+			String sql=prop.getProperty("selectBoCommentList");
+			try
+			{
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, groupNo);
+				pstmt.setInt(2, boardNo);
+				rs=pstmt.executeQuery();
+				while(rs.next())
+				{
+					BoardComment bc=new BoardComment();
+					bc.setGroupNo(rs.getInt("group_no"));
+					bc.setBoardNo(rs.getInt("board_no"));
+					bc.setBoCommentNo(rs.getInt("bo_comment_no"));
+					bc.setMemberNo(rs.getInt("member_no"));
+					bc.setBoCommentContent(rs.getString("bo_comment_content"));
+					bc.setBoCommentDate(rs.getDate("bo_comment_date"));
+					bc.setBoCommentLevel(rs.getInt("bo_comment_level"));
+					bc.setBoCommentRef(rs.getInt("bo_comment_ref"));
+					bc.setGroupMemberNickname(rs.getString("group_member_nickname"));
+					bclist.add(bc);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				close(rs);
+				close(pstmt);
+			}
+			return bclist;
+		}
 }

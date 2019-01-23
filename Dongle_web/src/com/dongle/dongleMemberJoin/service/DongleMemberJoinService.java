@@ -23,6 +23,7 @@ public class DongleMemberJoinService {
 		return result;
 	};
 	
+
 	public GroupMember selectMember(GroupMember m)
 	{
 		//contrller가 전달한 정보와 DB접속정보를 DAO에게 전달
@@ -30,6 +31,7 @@ public class DongleMemberJoinService {
 		//insert,update,delete한 후 rollback, commit관리!
 		Connection conn=getConnection();
 		GroupMember data=new DongleMemberJoinDao().selectMember(conn,m);
+
 		close(conn);
 		return data;
 		
