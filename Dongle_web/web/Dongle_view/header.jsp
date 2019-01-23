@@ -26,6 +26,10 @@
 	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_dongleList.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_blackMemberList.css" />
 <link href="https://fonts.googleapis.com/css?family=Bungee"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
@@ -48,6 +52,9 @@
 	<header>
         <div class="headerBack">
             <div class="bar">
+            	<!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
+            		<a href="<%=request.getContextPath()%>/main/searchPage"><img src="<%=request.getContextPath()%>/images/button-images/search.png" style="width: 30px; height: 30px;" id='search-btn'></a>
+            	<!-- </button> -->
             	<!-- 정보수정 및 로그 아웃 버튼! -->
             	<div class="user-back">
             		<span><%=loginMember.getMemberName()%>님, 환영합니다!</span>
@@ -78,6 +85,8 @@
             	</div>
             </div>
         </div>
+        <script>
+        </script>
     </header>
 </body>
 </html>

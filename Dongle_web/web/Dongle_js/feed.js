@@ -21,7 +21,7 @@ var time; // 슬라이드 넘어가는 시간
         
         
         $(document).on('click','.feed-pic-indi',function () {
-
+        	
             console.log($($(this).parent('ul').children('li')).index(this));
             feedPicLi=$(this).parent('ul').parent('div').siblings('.feed-pics').children('.media-carousel').children('li');
             indiIndex = $($(this).parent('ul').children('li')).index(this);

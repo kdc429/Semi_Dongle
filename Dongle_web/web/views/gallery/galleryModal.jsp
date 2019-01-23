@@ -252,7 +252,7 @@ if (n < 1) {slideIndex = slides.length}
 	<div class="slideshow-container">
 	 	<%for(int i=0;i<gplist.size();i++){ %>
 			<div class="mySlides fade2">
-				<img class="main_slideImg" src="<%=request.getContextPath() %>/images/gallery/<%=gplist.get(i).getGalFileNewPath() %>">
+				<img class="main_slideImg" src="<%=request.getContextPath() %>/upload/gallery/<%=gplist.get(i).getGalFileNewPath() %>">
 				<div class="text">Caption Text</div>
 			</div>
 		<%} %>

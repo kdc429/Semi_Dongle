@@ -2,6 +2,7 @@ package com.dongle.group.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -52,12 +53,13 @@ public class MemberListServlet extends HttpServlet {
 		
 		
 		JSONArray jobjArr=new JSONArray();		
-		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy년 MM월 dd일");
 		for(GroupMember gm_list : list) {
 			JSONObject obj=new JSONObject();
-			obj.put("groupMemberImagePath", gm_list.getGroupMemberImageNewPath());
+			obj.put("groupMemberImageOldPath", gm_list.getGroupMemberImageOldPath());
+			obj.put("groupMemberImageNewPath", gm_list.getGroupMemberImageNewPath());
 			obj.put("groupMemberNickname", gm_list.getGroupMemberNickname());
-			obj.put("groupMemberEnrollData", gm_list.getGroupMemberEnrollDate());
+			obj.put("groupMemberEnrollData", sdf.format(gm_list.getGroupMemberEnrollDate()));
 			jobjArr.add(obj);	
 		}
 		

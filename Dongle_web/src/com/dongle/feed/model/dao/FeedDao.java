@@ -137,7 +137,7 @@ public class FeedDao {
 		
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("insertFeedFile");
+		String sql=prop.getProperty("deleteFeedContent");
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -414,6 +414,143 @@ public class FeedDao {
 		}
 		
 		return feedFile;
+		
+	}
+	
+	public int updateFeedContent(Connection conn,int feedNo,String content) {
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateFeedContent");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, content);
+			pstmt.setInt(2, feedNo);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int updateFeedFile(Connection conn,String[] fileNums) {
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateFeedFile");
+		try {
+			
+			for(int i=0;i<fileNums.length;i++) {
+				
+				try {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, Integer.parseInt(fileNums[i]));
+					result+=pstmt.executeUpdate();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<FileList> deleteFileList(Connection conn,String[] fileNums){//피드 업데이트 필요한 파일 정보 리스트
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("deleteFileList");
+		FileList fl=null;
+		List<FileList> fileList=new ArrayList();
+		
+		try {
+			
+			for(int i=0;i<fileNums.length;i++) {
+				try {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, Integer.parseInt(fileNums[i]));
+					rs=pstmt.executeQuery();
+					
+					if(rs.next()) {
+						fl=new FileList();
+						fl.setFeedNo(rs.getInt("feed_no"));
+						fl.setFeedOriFilePath(rs.getString("feed_old_file_path"));
+						fl.setFeedRenameFilePath(rs.getString("feed_new_file_path"));
+						fileList.add(fl);
+					}
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return fileList;
+		
+	}
+	
+	public int deleteFeedFile(Connection conn,int feedNo) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("deleteFeedFile");
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feedNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<FileList> deleteFileList2(Connection conn, int feedNo){//피드 업데이트 필요한 파일 정보 리스트
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("deleteFileList2");
+		FileList fl=null;
+		List<FileList> fileList=new ArrayList();
+		
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feedNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				fl=new FileList();
+				fl.setFeedNo(rs.getInt("feed_no"));
+				fl.setFeedOriFilePath(rs.getString("feed_old_file_path"));
+				fl.setFeedRenameFilePath(rs.getString("feed_new_file_path"));
+				fileList.add(fl);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return fileList;
 		
 	}
 	

@@ -1,16 +1,3 @@
-/* ::-webkit-scrollbar {
-	width: 12px;
-}
-
-::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-} */
 .main {
 	width: 684px;
 	height: auto;
@@ -38,6 +25,34 @@
 	right: 10%;
 	border: 0;
 }
+#imgPreview{
+	width:500px;
+	height:auto;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	
+	
+}
+#imgPreview>ul{
+	padding:0;
+	list-style:none;
+}
+#imgPreview>ul>li{
+	
+	max-height: 300px;
+	max-width:500px;
+	width: auto;
+	height: auto;
+}
+
+#imgPreview>ul>li>img{
+	padding: 10px 10px;
+	max-height: 300px;
+	max-width:450px;
+	width: auto;
+	height: auto;
+}
 
 .feed {
 	width: 500px;
@@ -46,7 +61,28 @@
 	right: 10%;
 }
 
-
+.delete-icon{
+	padding: 10px 10px;
+	max-height: 40px;
+	max-width:40px;
+	width: auto;
+	height: auto;
+}
+.update-icon{
+	padding: 10px 10px;
+	max-height: 40px;
+	max-width:40px;
+	width: auto;
+	height: auto;
+}
+.delete-btn{
+	border:0;
+	background-color:rgba(0,0,0,0);
+}
+.update-btn{
+	border:0;
+	background-color:rgba(0,0,0,0);;
+}
 .feed-header {
 	height: 40px;
 	background-color: rgb(240, 240, 240);
@@ -57,8 +93,8 @@
 }
 
 .member-profile {
-	max-height: 30px;
-	max-width: 30px;
+	max-height: 50px;
+	max-width: 50px;
 	width: auto;
 	height: auto;
 }
@@ -182,7 +218,7 @@
 
 .feednew-logo {
 	height: 40px;
-	background-color: rgb(58, 58, 58);
+	background-color: rgb(20,150,200);
 }
 
 .feedup {
@@ -191,7 +227,21 @@
 
 .fileup {
 	height: 40px;
-	background-color: rgb(58, 58, 58);
+	background-color: rgb(20,150,200);
+}
+.upbtn-icon{
+	padding: 10px 10px;
+	max-height: 50px;
+	max-width:50px;
+	width: auto;
+	height: auto;
+	
+}
+
+
+.up-btn{
+	background-color:rgba(0,0,0,0);
+	border:0;
 }
 .file-download{
 	list-style:none;
@@ -205,6 +255,47 @@
 }
 .delete-btn{
 	float:right;
+}
+.update-btn{
+	float:right;
+}
+#close-btn{
+	float:right;
+}
+#close{
+	width:683px;
+}
+#submit{
+	width:500px;
+}
+#feed-popup{
+	border:double;
+	width:684px;
+	height:auto;
+	visibility: hidden;
+	position:absolute;
+	display: none;
+	background-color:white;
+	flex-direction:column;
+	
+	align-items: center;
+}
+#popup-body>ul{
+	list-style:none;
+	padding:0;
+}
+#popup-header{
+	background-color:rgb(240, 240, 240);
+	width:500px;
+}
+#popup-body{
+	background-color:rgb(240, 240, 240);
+	width:500px;
+	text-align:center;
+}
+#popup-footer{
+	background-color:rgb(240, 240, 240);
+	width:500px;
 }
 
 /* loading animiation */

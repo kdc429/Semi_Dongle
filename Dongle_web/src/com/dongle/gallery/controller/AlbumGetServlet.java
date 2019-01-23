@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.AlbumCategory;
+import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
@@ -38,21 +37,25 @@ public class AlbumGetServlet extends HttpServlet {
 		//동글그룹번호와 들어온 멤버번호 받기
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println("album서블릿: "+groupNo+ " 와 "+loginMember.getMemberNo());
-/*		//json객체 받기
-		JSONObject jobj=new JSONObject();*/
+		
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
-		System.out.println("서블릿: "+gm);
-		
-/*		if(loginMember.getMemberNo()==0||gm==null||!loginMember.getMemberId().equals("admin"))
+		System.out.println("동호회 회원이니?" + gm);
+		/*if((gm.getMemberNo()!=loginMember.getMemberNo()))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
-			request.setAttribute("loc", "/communityJoin?gNo="+groupNo);
+			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}*/
+		//그룹의 앨범 뽑아오기
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
+		//메인 이미지로 띄우기 위한 해당 앨범의 갤러리 뽑아오기
+		List<GalleryPath> galList = new GalleryService().albumAndGalList(groupNo);
+		System.out.println("albumGetServlst의 "+list.size()+list);
+		System.out.println("albumGetServlst의 "+galList.size()+galList);
+		
+		request.setAttribute("galList", galList);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/gallery/albumView.jsp").forward(request, response);

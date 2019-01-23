@@ -17,10 +17,11 @@ List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
         		<div class="feed">
             	feed
             		<div class="feed-header">
-                		<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
+                		
                 		<% for(GroupMember gm:memberList){
                 				
                 				if(gm.getMemberNo()==f.getMemberNo()){%>
+                					<img src="<%=request.getContextPath() %>/images/member_img/<%=gm.getGroupMemberImageNewPath() %>" class="member-profile">
                 					<a><%=gm.getGroupMemberNickname() %></a>
                 			<%		break;
                 			 	}
@@ -32,8 +33,15 @@ List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
             		</div>
             	<div class="feed-body">
             		<div>
-            			<button class="delete-btn">삭제</button>
-            			<button class="delete-btn">수정</button>
+            		<%if(f.getMemberNo()==loginMember.getMemberNo()){ %>
+            			<input type="hidden" class="feed-no-update" value="<%=f.getFeedNo() %>"/>
+            			<button class="delete-btn">
+            				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
+            			</button>
+            			<button class="update-btn">
+            				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+            			</button>
+            		<%} %>
             		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
             		<% if(feedFileList!=null){%>

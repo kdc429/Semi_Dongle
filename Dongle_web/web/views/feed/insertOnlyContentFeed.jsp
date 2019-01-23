@@ -14,7 +14,7 @@ Feed feed=(Feed)request.getAttribute("feed");
 
 	<div class="feed">
             		<div class="feed-header">
-                		<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
+                		<img src="<%=request.getContextPath() %>/images/member_img/<%=groupMember.getGroupMemberImageNewPath() %>" class="member-profile">
                 		
                 					<a><%=groupMember.getGroupMemberNickname() %></a>
                 			

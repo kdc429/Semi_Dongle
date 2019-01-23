@@ -28,7 +28,6 @@ public class GalleryInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		String albumCode =request.getParameter("albumCode");
-		System.out.println("GalleryInsertServlet: "+groupNo+":"+"albumCode");
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("albumCode", albumCode);
 		request.getRequestDispatcher("/views/gallery/galleryInsertForm.jsp").forward(request, response);

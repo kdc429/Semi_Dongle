@@ -80,9 +80,10 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		String view="/Dongle_view/msg.jsp";
 		
 		if(result>0)
-		{	
-			loc="/communityJoin?groupNo="+mr.getParameter("groupNo");
-			msg="동글 등록 성공";
+		{
+			msg="동글 등록성공";
+			loc="/board/boardList";
+
 		}
 		else 
 		{

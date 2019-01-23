@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dongle.admin.service.AdminService;
+import com.dongle.admin.model.service.AdminService;
 import com.dongle.member.model.vo.Member;
 
 
@@ -45,7 +45,7 @@ public class MemberListServlet extends HttpServlet {
 		List<Member> memberList = new AdminService().selectMemberList();
 //		System.out.println(memberList);
 		request.setAttribute("memberList", memberList);
-		request.getRequestDispatcher("/Dongle_view/admin_memberList.jsp").forward(request, response);;
+		request.getRequestDispatcher("/Dongle_view/admin_memberList.jsp").forward(request, response);
 		
 	}
 
