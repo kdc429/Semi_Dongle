@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.member.model.vo.Member;
-import com.dongle.member.service.MemberService;
-
+import com.dongle.member.model.service.MemberService;
 
 
 /**
@@ -43,7 +42,7 @@ public class MemberViewServlet extends HttpServlet {
 		
 		request.setAttribute("member", data);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/memberView.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/memberView.jsp"); //화면에 띄울 화면을 여기 jsp로 이동!
 		rd.forward(request, response);
 	}
 

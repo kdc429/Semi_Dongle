@@ -104,14 +104,14 @@
 				/* 연결된 이벤트 삭제 */
 				$(this).off('click');
 				/* 빈공간 누르면 display바뀌는 것 */
-/* 				$('.recomment_content').click(function(){
+ 				$('.recomment_content').click(function(){
 					if(eventflag)
 					{
 						$(this).css('display','none');
 						eventflag=false;
 						return;
 					}
-				}) */
+				}) 
 				
 				div.find('#btn-insert').click(function(e){
 					if(<%=loginMember==null%>)
@@ -120,11 +120,11 @@
 						e.preventDefault();
 						return;
 					}
-					/* var len=($(this).parent().find()).siblings('textarea').val().trim().length;
+					var len=($(this).parent().find()).siblings('textarea').val().trim().length;
 					if(len==0)
 					{
 						e.preventDefault();
-					} */
+					} 
 					$.ajax({
 						url:"<%=request.getContextPath()%>/gallery/commentInsert",
 						data:{"groupNo":$('#groupNo').val(),

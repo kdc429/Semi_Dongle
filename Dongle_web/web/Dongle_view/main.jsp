@@ -27,8 +27,8 @@
 		<!-- 동글 개설하기 버튼! -->
 		<div class="cre-icon-back">
 			<button class="img-icon">
-				<span class="sub-icon">동글개설하기</span>
-				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
+				<span class="sub-icon" style="margin-bottom: 2px;">동글개설하기</span>
+				<img class="create-img" style="width: 30px; height: 28px;" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
 			</button>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
         <!--캐러셀 아이템   -->
         <div class="carousel-box">
                 <ol class="item">
-                    <% if(list==null||list.isEmpty()||loginMember.getMemberId().equals("admin")){%>
+                    <% if(list.size()==0||list.isEmpty()||loginMember.getMemberId().equals("admin")){%>
                     	<!-- 동글에 가입하지 않았을 경우 혹은 관리자 일 경우-->
                     	<li>DONGLE 에 가입하세요!</li>
                     <%}else{ 
@@ -57,6 +57,7 @@
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<span class="group-name"><%=g.getGroupName() %></span>
                     				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
+
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
@@ -87,7 +88,7 @@
 			</div>
 		<%} %>
 	</div>
-	<h3 style="font-family:'YanoljaYacheR'; text-align:center;">당신을 위한 에디터의 추천!</h3>
+	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 에디터의 추천!</h4>
 	<div class="editorPick">
 		<h2 class="item-logo">Editor Pick's</h2>
 		<div id="carousel_section">
@@ -123,7 +124,7 @@
 	<hr>
 	<!-- 분야별 랭킹 컨텐츠 -->
 	<div class="bar"></div>
-	<h3 style="font-family:'YanoljaYacheR'; text-align:center";>당신을 위한 가장 인기있는 동글!</h3>
+	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 가장 인기있는 동글!</h4>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
 	<div class="dongle-rank">
 		

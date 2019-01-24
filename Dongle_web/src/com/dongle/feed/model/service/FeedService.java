@@ -109,5 +109,88 @@ public class FeedService {
 		return feedLevel2CommentList;
 
 	}
+	
+	public Feed selectFeedOne(int feedNo) {
+		Connection conn=getConnection();
+		Feed f=new FeedDao().selectFeedOne(conn,feedNo);
+		
+		close(conn);
+		return f;
+	}
+	
+	public List<FeedFile> selectFeedFileListOne(int feedNo){
+		Connection conn=getConnection();
+		List<FeedFile> feedFile=new FeedDao().selectFeedFileListOne(conn,feedNo);
+		
+		close(conn);
+		return feedFile;
+	}
+	public int updateFeed(int feedNo,String content,String[] fileNums) {
+		Connection conn=getConnection();
+		int resultContent=0;
+		int resultFile=0;
+		int totalResult=0;
+		resultContent=new FeedDao().updateFeedContent(conn,feedNo,content);
+		List<FileList> fileList=new FeedDao().deleteFileList(conn,fileNums);
+		resultFile=new FeedDao().updateFeedFile(conn,fileNums);
+		if(resultContent>0&&resultFile>0) {
+			totalResult=new FeedDao().deleteFile(fileList);
+			
+			if(totalResult>0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return totalResult;
+
+		}
+		return totalResult;
+		
+	}
+	
+	public int updateFeedContent(int feedNo,String content) {
+		Connection conn=getConnection();
+		int resultContent=0;
+		resultContent=new FeedDao().updateFeedContent(conn,feedNo,content);
+		
+		if(resultContent>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return resultContent;
+	}
+	
+	public int deleteFeedContent(int feedNo) {
+		Connection conn=getConnection();
+		int result=0;
+		result=new FeedDao().deleteFeedContent(conn, feedNo);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteFeedFile(int feedNo) {
+		Connection conn=getConnection();
+		int result=0;
+		List<FileList> fileList=new FeedDao().deleteFileList2(conn, feedNo);
+		result=new FeedDao().deleteFeedFile(conn,feedNo);
+		
+		if(result>0) {
+			commit(conn);
+			result=new FeedDao().deleteFile(fileList);
+		
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
 }

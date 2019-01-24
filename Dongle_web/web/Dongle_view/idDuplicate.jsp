@@ -17,7 +17,7 @@
 <body>
 	<div id="checkid-container">
 		<%if(isAble) { %>
-			<h1 style="color:green;">[<%=userId %>]는 사용가능합니다.</h1>
+			<h1 style="color:black;">[<%=userId %>]는 사용가능합니다.</h1>
 			<br><br>
 			<button type="button" onclick="setUserId('<%=userId%>');">닫기</button>
 		<%}

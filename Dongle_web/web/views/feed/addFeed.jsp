@@ -17,10 +17,11 @@ List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
         		<div class="feed">
             	feed
             		<div class="feed-header">
-                		<img src="<%=request.getContextPath() %>/images/feed-images/한효주.png" class="member-profile">
+                		
                 		<% for(GroupMember gm:memberList){
                 				
                 				if(gm.getMemberNo()==f.getMemberNo()){%>
+                					<img src="<%=request.getContextPath() %>/images/member_img/<%=gm.getGroupMemberImageNewPath() %>" class="member-profile">
                 					<a><%=gm.getGroupMemberNickname() %></a>
                 			<%		break;
                 			 	}
@@ -31,8 +32,30 @@ List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
                 		<span class="write-date"><%=f.getFeedWriteDate() %></span>
             		</div>
             	<div class="feed-body">
+            		<div>
+            		<%if(f.getMemberNo()==loginMember.getMemberNo()){ %>
+            			<input type="hidden" class="feed-no-update" value="<%=f.getFeedNo() %>"/>
+            			<button class="delete-btn">
+            				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
+            			</button>
+            			<button class="update-btn">
+            				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+            			</button>
+            		<%} %>
+            		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
-            		<button class="file-download">파일명</button>
+            		<% if(feedFileList!=null){%>
+ 
+            		<ul class="file-download">
+            		<%
+            		for(FeedFile ff:feedFileList){
+            			if(ff.getFeedNo()==f.getFeedNo()){ %>
+            		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+            		<%}
+            			}%>
+            			
+            		</ul>
+            		<% }%>
             		<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()){%>
     						<div class="feed-pics">
