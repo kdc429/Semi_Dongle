@@ -326,6 +326,7 @@ file-down-list{
 }
 .update-btn{
 	float:right;
+	border:0;
 	background-color:rgba(0,0,0,0);
 }
 #close-btn{
@@ -371,6 +372,26 @@ file-down-list{
 .delete-file{
 	border:0;
 	background-color:rgba(255,255,255,0);
+}
+
+.report-button{
+	float:right;
+	border:0;
+	background-color:rgba(0,0,0,0);
+}
+.report-icon{
+	padding: 0;
+    max-height: 25px;
+    max-width: 20px;
+    width: auto;
+    height: auto;
+}
+.reple-icon{
+	padding: 0;
+    max-height: 20px;
+    max-width: 20px;
+    width: auto;
+    height: auto;
 }
 /* loading animiation */
 #fountainG {

@@ -466,11 +466,16 @@
                 	<div class="update-back">
             		<%if(f.getMemberNo()==loginMember.getMemberNo()){ %>
             			<input type="hidden" class="feed-no-update" value="<%=f.getFeedNo() %>"/>
+            			
             			<button class="delete-btn">
             				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
             			</button>
             			<button class="update-btn">
             				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+            			</button>
+            		<%}else{%>
+            			<button class="report-button">
+            				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
             			</button>
             		<%} %>
             		</div>
@@ -582,8 +587,12 @@
                     			<span class="comment-info">
                         			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fc.getFeCommentDate() %></span>
-                        			<button class="report-button">신고</button>
-                        			<button class="comment-reple">답글</button>
+                        			<button class="report-button">
+                        				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
+                        			</button>
+                        			<button class="comment-reple">
+                        				<img class="reple-icon" src="<%=request.getContextPath()%>/images/button-images/comment-solid.png">
+                        			</button>
                     			</span>
                     			<span class="comment-content-back">
                         			<span class="comment-content"><%=fc.getFeCommentContent() %></span>
@@ -606,7 +615,9 @@
                     			<span class="comment-info">
                         			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
-                        			<button class="report-button">신고</button>
+                        			<button class="report-button">
+                        				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
+                        			</button>
                         			
                     			</span>
                     			<span class="comment-content-back">

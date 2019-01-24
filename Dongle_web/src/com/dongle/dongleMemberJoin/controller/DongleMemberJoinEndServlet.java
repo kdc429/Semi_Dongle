@@ -45,7 +45,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		String root=getServletContext().getRealPath("/");
 		//파일경로를 설정할때 구분자!
 		/*String saveDir=root+"upload/board";*/
-		String saveDir=root+"upload"+File.separator+"board";
+		String saveDir=root+"images"+File.separator+"member_img";
 		
 		//파일 크기설정
 		int maxSize=1024*1024*10;//10MB
