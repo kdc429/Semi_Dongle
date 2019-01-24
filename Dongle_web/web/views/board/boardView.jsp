@@ -9,106 +9,63 @@
 	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 	int groupNo=(int)request.getAttribute("groupNo");
 	List<BoardComment> bclist=(List)request.getAttribute("bclist");
+	/* int boCommentNo=(int)request.getAttribute("boCommentNo"); */
 %>
     
 <style>
 	
-	.table
-	{
-		text-align: center;
-		boder: 1px solid #dddddd;
-		padding : 10px;
-		height: 200px;
-	}
-	.table th
-	{
-		background-color: #EAEAEA;
-		text-align : center;
-		height: 10px;
-	}
-	.table td
-	{
-		text-align : left;
-	}
-	.view-btn
-	{
-		text-align : center;
-	}
-	#title
-	{
-		background-color: #F2CB61;
-	}
-	/* 댓글테이블 */
-	table#tbl-comment
-	{
-		width:580px; 
-		margin:0 auto; 
-		border-collapse:collapse; 
-		clear:both;
-		background-color : #EAEAEA;
-	} 
-    table#tbl-comment tr td
-    {
-		border-bottom:1px solid; 
-		border-top:1px solid; 
-		padding:5px; 
-		text-align:left; 
-    	line-height:120%;
-    }
-    table#tbl-comment tr td:first-of-type
-    {
-    padding: 5px 5px 5px 50px;
-    }
-    table#tbl-comment tr td:last-of-type 
-    {
-    	text-align:center; 
-    	width: 60px;
-    }
-    table#tbl-comment button.btn-reply
-    {
-    	display:none;
-    }
-    table#tbl-comment button.btn-delete
-    {
-    	display:none;
-    }
-    table#tbl-comment tr.lebel1
-    {
-		background-color:gray;    
-    }
-    table#tbl-comment tr.level2
-    {
-		color:gray; 
-    	font-size: 14px;
-    }
-    table#tbl-comment sub.board-comment-writer 
-    {
-    	color:navy; 
-    	font-size:14px;
-    }
-    table#tbl-comment sub.board-comment-date 
-    {
-		color:tomato; 
-    	font-size:10px;
-    }
-    table#tbl-comment tr.level2 td:first-of-type
-    {
-    	padding-left:100px;
-    }
-    table#tbl-comment tr.level2 sub.comment-writer 
-    {
-    	color:#8e8eff; 
-    	font-size:14px
-    }
-    table#tbl-comment tr.level2 sub.comment-date 
-    {
-    	color:#ff9c8a; 
-    	font-size:10px
-    } 
-    #report
-    {
-    	float:right;
-    }
+/* 댓글창 스타일 */
+div.board-comment-editor fieldset.modal_comment{
+padding:8px 10px 10px;
+border-bottom:1px solid #efefef;
+font-family:'a흑진주L';
+border-top:1px solid #e8e8e8;
+background-color:rgb(240,240,240);
+position:relative;
+margin-top:2px;
+}
+.screen_out{overfloa:hidden;width:0;height:0;line-height:0;text-indent:-9999px;}
+.lab_write{top:8px;left:14px;}
+/* 댓글테이블!! */
+div.board-comment-editor{border-top: 1px solid rgb(240,240,240);margin-top:5%;}
+div.board-comment-ediotr ul{list-style:none;}
+div.board-comment-ediotr ul li{list-style:none;}
+.ico_skin{display:block;overflow:hidden;font-size:0;line-height: 0;text-indent:-9999px;}
+.thumb_profile{
+   width: 33px;
+   height: 33px;
+   margin-right: 11px;
+   margin-top: 2px;
+   background-position: -120px -20px;
+   float:left;
+   border-radius:48px;
+}
+img.img_profile{display:block;width:100%;height:100%;border-radius:48px;}
+
+.comment_box{margin-top:4px;overflow:hidden;display:block;}
+div.comment_box ul{}
+li{padding:0;}
+.comment_writer{float:left;overflow:hidden;color:rgb(250,250,250);text-overflow: ellipsis;white-space: nowrap;font-size:14px;margin-right:5px;max-width:120px;}
+.comment_date{float:left;font-size:12px;color:#a7a7a7;margin-top:3px;}
+.comment_content{display:block;font-size:13px;color:#5c5c5c;clear:both;line-height: 19px;padding-top:2px;}
+div.tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; box-sizing: border-box;} 
+li button.btn-reply{display:none; background-color:white;float:right;border:none;height:10px;}
+li button.btn-delete{display:none;}
+/* li:hover {background:lightgray;} */
+li:hover button.btn-reply{display:inline;}
+li:hover button.btn-delete{display:inline;}
+li.level2{padding-left:50px;}
+div.board-comment-editor fieldset.modal_comment div.comment-btn button#btn-insert{
+float:right;
+width:65px;height:28px;
+font-size:14px;
+line-height:15px;
+border-radius: 20px;
+border:none;
+background-color:white;
+}    
+    
+    
 	
 	
 </style>
@@ -168,68 +125,79 @@
 		<br><br>
 		
 		
-		<div class="comment-editor">
+		<div class="board-comment-editor">
 			<input type="hidden" name="boardNo" id="boardNo" 
 			value="<%=b.getBoardNo() %>"/>
 			<input type="hidden" name="boardCommentWriter" id="boardCommentWriter"
 			value="<%=loginMember.getMemberId() %>"/>
 			<input type="hidden" name="boardCommentLevel" id="boardCommentLevel"
 			value="1"/>
+		<%-- 	<input type="hidden" name="boCommentNo" id="boCommentNo"
+			value="<%=b.getBoCommentNo()%>"/> --%>
 			<input type="hidden" name="boardCommentRef" id="boardCommentRef"
 			value="0"/>
-			<textarea cols='75' rows='3' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
+			<textarea cols='70' rows='3' style='resize:none;' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
 			<button id="comment-insert-btn">등록</button>
 		</div>
 		<!-- 댓글목록 테이블 -->
-		<table id="tbl-comment">
+		<div class="board-comment-editor">
+			<ul style='background-color:rgb(242,242,242)'>
 			<%if(bclist!=null) {
 				for(BoardComment c : bclist){
 					if(c.getBoCommentLevel()==1){
 			%>
-					<tr class='level1'>
-						<td>
-							<sub class="board-comment-writer">
-							<%=c.getGroupMemberNickname()%></sub>
-							<sub class="board-comment-date">
-							<%=c.getBoCommentDate()%></sub>
-							<br/><br/>
-							<%=c.getBoCommentContent() %>
-							<a id="report" href='*' >신고</a>
-						</td>
-						 <td>
-							<button class="comment-reply-btn" value="<%=c.getBoCommentNo()%>">답글</button>
-							<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
-							<button class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
-							<%} %>
-						</td> 
-					</tr>		
+						<li class='level1' style="list-style:none;">
+							<span class='ico_skin thumb_profile'>
+								<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=c.getGroupMemberImageNewPath() %>'>
+							</span>
+							<span class='comment_box'>
+								<span class='board-comment-writer'><%=c.getGroupMemberNickname()%></span>
+								<span class='board-comment-date'>
+									<%=c.getBoCommentDate()%>
+									<a href='*' >신고</a>
+								</span>
+								<br/>
+								<span class='board_comment_content'>
+									<%=c.getBoCommentContent() %>
+									<button style='border:none;background-color:none;' class='comment-reply-btn' value='<%=c.getBoCommentNo()%>'>답글</button>
+									<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
+										<button style='border:none;background-color:none;float:right;' class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
+									<%} %>
+								</span>
+							</span>
+						</li>
 					<%} else {%>
-					<tr class='level2'>
-						<td>
-							<sub class="board-comment-writer">
-							<%=c.getGroupMemberNickname()%></sub>
-							<sub class="board-comment-date">
-							<%=c.getBoCommentDate()%></sub>
-							<br/></br>
-							<%=c.getBoCommentContent() %>
-						</td>
-						<td>
-							<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
-							<button class="reply-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
-							<%} %>
-						</td>
-					</tr>
+					<li class="level2" style="list-style:none;">
+						<span class='ico_skin thumb_profile'>
+							<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=c.getGroupMemberImageNewPath() %>'>
+						</span>
+						<span class='comment_box'>
+							<span class="board-comment-writer"><%=c.getGroupMemberNickname()%></span>
+							<span class="board-comment-date">
+								<%=c.getBoCommentDate()%>
+								<a href='*' >신고</a>
+								<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
+									<button style='border:none;background-color:none;float:right;' class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
+								<%} %>
+							</span>
+							<br/>
+							<span class='board_comment_content'>
+								<%=c.getBoCommentContent() %>
+							</span>
+						</span>
+					</li>
 					<%}	
 				} 
 			}%>
-		</table>
+			</ul>
+		</div>
 </section>
 		
 <script>
 $(function(){
 	$('#comment-insert-btn').click(function(){
 		$.ajax({
-			url:"<%=request.getContextPath()%>/board/commentInsert?groupNo=<%=groupNo%>",
+			url:"<%=request.getContextPath()%>/board/boardCommentInsert?groupNo=<%=groupNo%>",
 			data:{"boardNo":$('#boardNo').val(),
 				"boardCommentContent":$('#boardCommentContent').val(),
 				"boardCommentLevel":$('#boardCommentLevel').val(),
@@ -261,8 +229,8 @@ $(function(){
 			html+="<input type='hidden' name='boardNo' id='boardNo' value='<%=b.getBoardNo()%>'/>";
 			html+="<input type='hidden' name='boardCommentLevel' id='boardCommentLevel' value='2'/>";
 			html+="<input type='hidden' name='boardCommentRef' id='boardCommentRef2' value='"+$(this).val()+"'/>";
-			html+="<textarea name='boardCommentContent' id='boardCommentContent2' cols='60' rows='1'></textarea>";
-			html+="<button value='"+$(this).val()+"' id='comment-insert-btn' style='height:20px'>등록</button>";
+			html+="<textarea style='resize:none;' name='boardCommentContent' id='boardCommentContent2' cols='63' rows='3'></textarea>";
+			html+="<button value='"+$(this).val()+"' id='comment-insert-btn' style='float:right'>등록</button>";
 			html+="</div></td>";
 			tr.html(html);
 			tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
@@ -282,7 +250,7 @@ $(function(){
 					e.preventDefault();
 				}
 				$.ajax({
-					url:"<%=request.getContextPath()%>/board/commentInsert",
+					url:"<%=request.getContextPath()%>/board/boardCommentInsert",
 					data:{"groupNo":<%=groupNo%>,
 						"boardNo":$('#boardNo').val(),
 						"boardCommentLevel":2,
@@ -309,12 +277,6 @@ $(function(){
 		<%}%>
 		
 	});  
-	 
-	
-	
-	
-	
-	
 	<%-- $(function(){
 		$('[name=boardCommentContent]').focus(function(){
 			if(<%=loginMember.getMemberId()==null%>)
@@ -346,16 +308,27 @@ $(function(){
 	}
 	//댓글 삭제
 	$(function(){
-		$('.reply-delete-btn').click(function(){
-			$.ajax({
-				url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>",
-				type:"post",
-				dataType:"html",
-				success:function(data){
-					$('#board-container').html(data);
-				},
-				error:function(error,msg){console.log("---"+error+msg);}
-			});
+		$('.comment-delete-btn').click(function(){
+			if(!confirm('정말로 삭제하시겠습니까?')){return;}
+			else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/boardCommentDelete?groupNo=<%=groupNo%>",
+					data:{"bb":$(this).val()},
+					type:"post",
+					success:function(data){
+						console.log(data);
+						alert(data);
+						$.ajax({
+							url:"<%=request.getContextPath()%>/board/boardView?groupNo=<%=b.getGroupNo()%>&boardNo=<%=b.getBoardNo()%>",
+							type:"post",
+							dataType:"html",
+							success:function(data){
+								$('#board-container').html(data);
+							}
+						});
+					}
+				});
+			}
 		});
 	});
 	
@@ -427,39 +400,5 @@ $(function(){
 			
 		});
 	});
-	
-	<%-- //댓글 삭제
-	$(function(){
-		$('#comment-delete-btn').click(function(){
-			if(confirm('정말로 삭제하시겠습니까?')==true)
-			{
-				$.ajax({
-					url:"<%=request.getContextPath() %>/board/boardDelete?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>",
-					type:"post",
-					dataType:"html",
-					processData:false,
-					contentType:false,
-					success:function(data){
-						alert(data);
-						$.ajax({
-							url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=groupNo%>",
-							type:"post",
-							dataType:"html",
-							success:function(data){
-								$('#board-container').html(data);
-							}
-						});
-					}
-				});
-			}
-			else
-			{
-				return;
-			}
-			
-		});
-	});
-	 --%>
-
 	
 </script>		

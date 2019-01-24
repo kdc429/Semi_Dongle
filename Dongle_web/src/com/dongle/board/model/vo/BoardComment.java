@@ -2,6 +2,10 @@ package com.dongle.board.model.vo;
 
 import java.sql.Date;
 
+/**
+ * @author kjh
+ *
+ */
 public class BoardComment {
 	
 	private int groupNo;
@@ -13,11 +17,13 @@ public class BoardComment {
 	private int boCommentLevel;
 	private int boCommentRef;
 	private String groupMemberNickname;
+	private String groupMemberImageNewPath;
 	
 	public BoardComment() {}
 
 	public BoardComment(int groupNo, int boardNo, int boCommentNo, int memberNo, String boCommentContent,
-			Date boCommentDate, int boCommentLevel, int boCommentRef, String groupMemberNickname) {
+			Date boCommentDate, int boCommentLevel, int boCommentRef, String groupMemberNickname,
+			String groupMemberImageNewPath) {
 		super();
 		this.groupNo = groupNo;
 		this.boardNo = boardNo;
@@ -28,6 +34,7 @@ public class BoardComment {
 		this.boCommentLevel = boCommentLevel;
 		this.boCommentRef = boCommentRef;
 		this.groupMemberNickname = groupMemberNickname;
+		this.groupMemberImageNewPath = groupMemberImageNewPath;
 	}
 
 	public int getGroupNo() {
@@ -102,12 +109,21 @@ public class BoardComment {
 		this.groupMemberNickname = groupMemberNickname;
 	}
 
+	public String getGroupMemberImageNewPath() {
+		return groupMemberImageNewPath;
+	}
+
+	public void setGroupMemberImageNewPath(String groupMemberImageNewPath) {
+		this.groupMemberImageNewPath = groupMemberImageNewPath;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardComment [groupNo=" + groupNo + ", boardNo=" + boardNo + ", boCommentNo=" + boCommentNo
 				+ ", memberNo=" + memberNo + ", boCommentContent=" + boCommentContent + ", boCommentDate="
 				+ boCommentDate + ", boCommentLevel=" + boCommentLevel + ", boCommentRef=" + boCommentRef
-				+ ", groupMemberNickname=" + groupMemberNickname + "]";
+				+ ", groupMemberNickname=" + groupMemberNickname + ", groupMemberImageNewPath="
+				+ groupMemberImageNewPath + "]";
 	}
 	
 	
