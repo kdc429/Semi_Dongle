@@ -3,10 +3,10 @@
 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); 
 	font-weight: normal; font-style: normal; 
 }
-.bar {
+/* .bar {
 	text-align: right;
 	box-shadow: 4px 4px rgba(112, 110, 110, 0.3);
-}
+} */
 /* 가입한 동글 스타일 */
 .carousel-back {
 	display: flex;
@@ -70,15 +70,15 @@
 	position:absolute;
 	text-align: center;
 	width:130px;
-	font-family: 'S-CoreDream-3Light';
+	font-family: '나눔스퀘어라운드 Regular';
 	color:black;
 	
 }
 
-.icon:hover{
+/* .icon:hover{
 	background-image: linear-gradient(to right, rgba(130, 238, 41, 0.01)0,rgba(130, 238, 41, 0.3)50%,rgba(130, 238, 41, 0.01)100%);
 	
-}
+} */
 
 .dongle-icon {
 	
@@ -92,7 +92,7 @@
 	margin-top: 35px;
 	width: 60px;
 	height: 130px;
-	background-color: white;
+	background-color: transparent;
 	border: 0;
 	font-size: 40px;
 	color: gray;
@@ -106,7 +106,7 @@
 	margin-top: 35px;
 	width: 60px;
 	height: 130px;
-	background-color: white;
+	background-color: transparent;
 	border: 0;
 	font-size: 40px;
 	color: gray;
@@ -116,15 +116,15 @@
 }
 
 .right:hover {
-	background-image: linear-gradient(to right, rgba(130, 238, 41, 0.3)0,rgba(130, 238, 41, 0.01)100%);
-	border: 1px solid gray;
+	/* background-image: linear-gradient(to right, rgba(96,201,242,0.3)0,rgba(96,201,242,0.01)100%); */
+	/* border: 1px solid gray; */
 	border-radius: 10px 10px 10px 10px;
 	font-size: 50px;
 }
 
 .left:hover {
-	background-image: linear-gradient(to left, rgba(130, 238, 41, 0.3)0,rgba(130, 238, 41, 0.01)100%);
-	border: 1px solid gray;
+	/* background-image: linear-gradient(to right, rgba(96,201,242,0.3)0,rgba(96,201,242,0.01)100%); */
+	/* border: 1px solid gray; */
 	border-radius: 10px 10px 10px 10px;
 	font-size: 50px;
 }
@@ -151,6 +151,7 @@
 	width:auto;
 	height:auto;
 	z-index:2;
+	margin-bottom: 2px;
 }
 /* 에디터픽 스타일 */
 .editorPick{
@@ -192,7 +193,7 @@
 	border-radius:10px 10px;
 }
 .item-logo{
-	font-family: 'Bungee', cursive;
+	font-family: '여기어때잘난서체';
 	text-align: center;
 }
 
@@ -229,6 +230,8 @@
 
 .eContent{
 	font-size:20px;
+	font-family: 'netmarble Medium';
+	font-weight: bold;
 }
 
 .set-back{

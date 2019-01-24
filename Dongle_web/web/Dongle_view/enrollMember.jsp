@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>당신을 위한-DONGLE</title>
-<link href="<%=request.getContextPath()%>/Dongle_css/Login.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/Dongle_css/Login.css"	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 
 <style>
 	.tex{
@@ -45,10 +45,17 @@
 	}
 	
 	.logo-text {
-	font-family: 'Sunflower';
-	font-size: 30px;
-	/* margin-left: 50px; */
-}
+	font-family: 'netmarble Medium';
+	font-size: 40px;
+	margin-left: 200px;
+	font-weight: bold;
+	}
+	table th {
+	font-family: '나눔스퀘어라운드 Regular';
+	}
+	table input{
+	font-family: '나눔스퀘어라운드 Regular';
+	}
 </style>
 </head>
 <body>
@@ -126,7 +133,7 @@
 						<input type="text"  class="tex" placeholder="4글자이상" 
 						name="userId" id="userId_"  class="tex" required>
 						<input type="button" value="중복검사" 
-						onclick="fn_checkduplicate();"/>
+						onclick="fn_checkduplicate();" style="font-family: '나눔스퀘어라운드 Regular'; height: 30px"/>
 						<input type='hidden' name="idValid" value="0"/> 
 					</td>
 				</tr>
@@ -147,7 +154,7 @@
 				<tr>
 				<th>비밀번호 힌트&nbsp;</th>
 				<td>
-					<select id='pwdHint' name='pwdHint' class='tex' required/>
+					<select id='pwdHint' name='pwdHint' class='tex' style="font-family: '나눔스퀘어라운드 Regular';" required/>
 						<option value='나의 고향은?'>나의 고향은?</option>
 						<option value="나의 보물1호는?">나의 보물1호는?</option>
 						<option value='나의 어머니 이름은?'>나의 어머니 이름은?</option>
@@ -173,7 +180,7 @@
 				<tr>
 					<th>성별</th>
 					<td>
-						<input type="radio"  
+						<input type="radio" style="font-family: '나눔스퀘어라운드 Regular';"
 						id="gender0" name="gender" value='M' >
 						<label for="gender0">남</label>
 						<input type="radio"  
@@ -242,9 +249,9 @@
 			</table>
 			
 			<div class="btn">
-				<input type="submit" class="btn_s" value="가입"/>
+				<input type="submit" style="font-family: '나눔스퀘어라운드 Regular';" class="btn_s" value="가입"/>
 			</div>
-			<input type="reset" class="btn_s" value="취소"/>
+			<input type="reset" style="font-family: '나눔스퀘어라운드 Regular';" class="btn_s" value="취소"/>
 
 		</form>
 		</div>

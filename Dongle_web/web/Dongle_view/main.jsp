@@ -27,8 +27,8 @@
 		<!-- 동글 개설하기 버튼! -->
 		<div class="cre-icon-back">
 			<button class="img-icon">
-				<span class="sub-icon">동글개설하기</span>
-				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
+				<span class="sub-icon" style="margin-bottom: 2px;">동글개설하기</span>
+				<img class="create-img" style="width: 30px; height: 28px;" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
 			</button>
 		</div>
 	</div>
@@ -88,7 +88,7 @@
 			</div>
 		<%} %>
 	</div>
-	<h3 style="font-family:'YanoljaYacheR'; text-align:center;">당신을 위한 에디터의 추천!</h3>
+	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 에디터의 추천!</h4>
 	<div class="editorPick">
 		<h2 class="item-logo">Editor Pick's</h2>
 		<div id="carousel_section">
@@ -124,7 +124,7 @@
 	<hr>
 	<!-- 분야별 랭킹 컨텐츠 -->
 	<div class="bar"></div>
-	<h3 style="font-family:'YanoljaYacheR'; text-align:center";>당신을 위한 가장 인기있는 동글!</h3>
+	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 가장 인기있는 동글!</h4>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
 	<div class="dongle-rank">
 		
