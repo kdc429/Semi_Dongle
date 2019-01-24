@@ -175,7 +175,7 @@ public class GalleryDao {
                   rs.getString("group_member_image_old_path"),
                   rs.getString("group_member_image_new_path"),
                   rs.getDate("group_member_enroll_date"),
-                  rs.getString("blacklist_yn"),
+                  rs.getString("group_blacklist_yn"),
                   rs.getInt("report_dongle_count")
                   );
          }

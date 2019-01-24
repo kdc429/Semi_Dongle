@@ -376,21 +376,36 @@ if (n < 1) {slideIndex = slides.length}
 		</fieldset>
 	</div>
 <script>
+	/* 댓글 신고하기 */
+	$(function(){
+		
+		
+	});
+	
 	/* 댓글 삭제하기 */
 	$(function(){
-		$('#btn-delete').click(function(){
-			if(!comfirm("정말로 삭제하시겠습니까?")){return;}
+		$('.btn-delete').click(function(){
+			if(!confirm("정말로 삭제하시겠습니까?")){return;}
 			else{
 				$.ajax({
 					url:"<%=request.getContextPath()%>/gallery/deleteComment",
 					data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
 						'galNo':<%=gplist.get(0).getGalNo()%>,
-						'galFileNo':<%=gplist.get(0).getGalFileNo()%>
+						'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
+						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
 					},
 					type:'post',
 					dataType:'html',
 					success:function(data){
-						$('.comment-editor').html(data);
+						if(data!=null)
+						{	
+							alert('댓글을 삭제하였습니다');
+							$('.comment-editor').html(data);
+						}
+						else
+						{
+							alert('댓글 삭제에 실패하였습니다');
+						}
 					}
 				})
 			}
@@ -461,7 +476,7 @@ if (n < 1) {slideIndex = slides.length}
 						success:function(data){
 							if(data!=null)
 							{	
-								alert('댓글 등록 완료!');
+								alert('댓글을 등록하였습니다');
 								$('.comment-editor').html(data);
 							}
 							else
