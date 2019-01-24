@@ -1,28 +1,25 @@
-package com.dongle.gallery.controller;
+package com.dongle.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.dongle.gallery.model.service.GalleryService;
-import com.dongle.gallery.model.vo.AlbumCategory;
-import com.dongle.member.model.vo.Member;
+import com.dongle.board.model.service.BoardService;
+import com.dongle.board.model.vo.Board;
 
 /**
- * Servlet implementation class AlbumNameCheckServlet
+ * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/gallery/albumInsert")
-public class AlbumInsertServlet extends HttpServlet {
+@WebServlet("/board/boardDelete")
+public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlbumInsertServlet() {
+    public BoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +28,20 @@ public class AlbumInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String albumNameP = request.getParameter("albumNameP");
-		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		// TODO Auto-generated method stub
+		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		System.out.println("들어오냐"+boardNo+groupNo);
+		int rs=new BoardService().deleteBoard(boardNo,groupNo);
 		
-		int albumNo = new GalleryService().selectAlbumNo(groupNo);
-		
-		int rs = new GalleryService().insertAlbum(albumNameP, groupNo,albumNo);
 		if(rs!=0)
 		{
-			response.setContentType("text/csv;charset=UTF-8");
-			response.getWriter().println("앨범을 등록하였습니다.");
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 삭제 성공");
 		}
 		else {
-			response.setContentType("text/csv;charset=UTF-8");
-			response.getWriter().println("앨범을 등록하지 못했습니다. 다시 시도해주세요.");
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().println("게시글 삭제 실패");
 		}
 		
 	}

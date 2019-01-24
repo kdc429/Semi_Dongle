@@ -12,7 +12,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 	List<GalleryPath> galList = (List)request.getAttribute("galList");
 	//List<Board> list=(List)request.getAttribute("list");
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,6 +129,8 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 <body>
 	<script>
+	
+	
 		$(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/community/boardList",
@@ -167,6 +168,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			}); */
 		 
 </script>
+
     <div class='back'>
         <!-- 로고 헤더 -->
         <header>
@@ -258,16 +260,64 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 
 	</aside>
-<!--         게시판
-        <section>
-            <div class="main center" id="content-div" style='width:684px;height:auto; background-color:white; align-content: center;'>
-            	<span id="header" style='text-align: center;'></span>
-            	<br/><br/>
+       
+       <section>
+            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
+            	<!-- <span id="header" style='text-align: center;'></span> -->
+            	<!-- <br/><br/> -->
 
-            	<div id="mem_list_div" style="padding: 0 0 0 30%;"></div>
-           </div>
+            	<!-- <div id="mem_list_div" style="padding: 0 0 0 30%;"></div> -->
+            	
+            	<!-- 동글메인이미지 -->
+            	<div id='dongle_main_img'>
+            		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+            	</div>
+            	<div id='mini_board'></div>
+            	<div id='mini_gallery'>갤 러 리</div>
+            	
+            	<div class="demo" style="margin-top: 50px; padding-left: 50px;">      
+			       	 <div class="item">
+			            <ul id="content-slider" class="content-slider">
+			           
+			                <li>
+			                    <img src="./images/member_img/user01.png">
+			                </li>
+			             
+			                <li>
+			                    <img src="./images/member_img/user02.png"> 
+			                </li>
+			                <li>
+			                 	<img src="./images/member_img/user03.png"> 
+			                </li>
+			                <li>
+			                    <h3>4</h3>
+			                </li>
+			                <li>
+			                    <h3>5</h3>
+			                </li>
+			                <li>
+			                    <h3>6</h3>
+			                </li>
+			                <li>
+			                    <h3>7</h3>
+			                </li>
+			                <li>
+			                    <h3>8</h3>
+			                </li>
+			                <li>>
+			                    <h3>9</h3>
+			                </li>
+			                <li>
+			                    <h3>10</h3>
+			                </li>
+			                
+			            </ul>
+			        </div>
+			     </div>	
 
-       </section> -->
+             </div>
+        </section>
+        
        
        <script> 		
        <%--        	$('#dongle_mem_btn').click(function(){
@@ -341,11 +391,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
 
                     <!-- 메뉴 버튼 -->
+
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary' id="board-btn">공지사항</button><br>
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button class='btn btn-primary'>일정</button><br>
+                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
                     <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
                     <%} %>
@@ -354,62 +405,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
         </aside>
 	
         <!-- 게시판 -->
-        <section>
-            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
-            	<!-- <span id="header" style='text-align: center;'></span> -->
-            	<!-- <br/><br/> -->
 
-            	<!-- <div id="mem_list_div" style="padding: 0 0 0 30%;"></div> -->
-            	
-            	<!-- 동글메인이미지 -->
-            	<div id='dongle_main_img'>
-            		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
-            	</div>
-            	<div id='mini_board'></div>
-            	<div id='mini_gallery'>갤 러 리</div>
-            	
-            	<div class="demo" style="margin-top: 50px; padding-left: 50px;">      
-			       	 <div class="item">
-			            <ul id="content-slider" class="content-slider">
-			           
-			                <li>
-			                    <img src="./images/member_img/user01.png">
-			                </li>
-			             
-			                <li>
-			                    <img src="./images/member_img/user02.png"> 
-			                </li>
-			                <li>
-			                 	<img src="./images/member_img/user03.png"> 
-			                </li>
-			                <li>
-			                    <h3>4</h3>
-			                </li>
-			                <li>
-			                    <h3>5</h3>
-			                </li>
-			                <li>
-			                    <h3>6</h3>
-			                </li>
-			                <li>
-			                    <h3>7</h3>
-			                </li>
-			                <li>
-			                    <h3>8</h3>
-			                </li>
-			                <li>>
-			                    <h3>9</h3>
-			                </li>
-			                <li>
-			                    <h3>10</h3>
-			                </li>
-			                
-			            </ul>
-			        </div>
-			     </div>	
-
-             </div>
-        </section>
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
 <div class="modal-div">
 	<div class="dialog" id="modal-container">
@@ -417,6 +413,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 		</div>
    	</div>
 </div>       
+
 <script>
 
    	$('#dongle_mem_btn').click(function(){
@@ -546,6 +543,22 @@ $(function(){
 		})
 	})
 });
+
+$(function(){
+	$("#calendarview").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/calendarMainView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
+
 
 
 function comunnityHome(){

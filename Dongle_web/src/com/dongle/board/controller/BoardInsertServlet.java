@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardFormServlet
  */
-@WebServlet("/board/boardInsertForm")
+@WebServlet("/board/boardForm")
 public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,7 +28,6 @@ public class BoardInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*response.sendRedirect(request.getContextPath()+"/views/board/boardForm.jsp");*/
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-		System.out.println("여기"+groupNo);
 		request.setAttribute("groupNo", groupNo);
 		request.getRequestDispatcher("/views/board/boardForm.jsp").forward(request, response);
 	}

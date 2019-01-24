@@ -14,7 +14,7 @@ import com.dongle.gallery.model.service.GalleryService;
  */
 @WebServlet("/gallery/albumDelete")
 public class AlbumDeleteServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -24,33 +24,33 @@ public class AlbumDeleteServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String albumName = request.getParameter("albumName");
-		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-		String albumCode = request.getParameter("albumCode");
-		System.out.println(albumName);
-		
-		int rs = new GalleryService().deleteAlbum(groupNo,albumCode);
-		if(rs!=0)
-		{
-			response.setContentType("text/csv;charset=UTF-8");
-			response.getWriter().println("앨범을 삭제하였습니다.");
-		}
-		else {
-			response.setContentType("text/csv;charset=UTF-8");
-			response.getWriter().println("앨범을 삭제하지 못했습니다. 다시 시도해주세요.");
-		}
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String albumName = request.getParameter("albumName");
+      int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+      String albumCode = request.getParameter("albumCode");
+      System.out.println(albumName);
+      
+      int rs = new GalleryService().deleteAlbum(groupNo,albumCode);
+      if(rs!=0)
+      {
+         response.setContentType("text/csv;charset=UTF-8");
+         response.getWriter().println("앨범을 삭제하였습니다.");
+      }
+      else {
+         response.setContentType("text/csv;charset=UTF-8");
+         response.getWriter().println("앨범을 삭제하지 못했습니다. 다시 시도해주세요.");
+      }
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

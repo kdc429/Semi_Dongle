@@ -41,13 +41,13 @@ public class AlbumGetServlet extends HttpServlet {
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
 		System.out.println("동호회 회원이니?" + gm);
-		if((gm.getMemberNo()!=loginMember.getMemberNo()))
+		/*if((gm.getMemberNo()!=loginMember.getMemberNo()))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}
+		}*/
 		//그룹의 앨범 뽑아오기
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
 		//메인 이미지로 띄우기 위한 해당 앨범의 갤러리 뽑아오기

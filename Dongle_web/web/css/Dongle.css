@@ -31,8 +31,10 @@ div {
 }
 
 .headerBack {
+	/* background : url("https://i.imgur.com/I9h56r1.png"); */
+	background : url("https://i.imgur.com/ou2sfhl.png");
 	width: 1024px;
-	height: auto;
+	height: 191px;
 }
 
 .logo-back{
@@ -42,14 +44,16 @@ div {
 }
 .logo{
 	font-size: 80px;
-	font-family: 'Bungee', cursive;
+	font-family: '여기어때잘난서체';
+	color: rgb(7,81,110,);
 	
 }
 
 .bar {
-	background-color: rgba(130, 238, 41, 0.7);
-	font-family: 'YanoljaYacheR';
-	font-size:20px;
+	/* background-color: rgba(96,201,242,0.6); */
+	font-family: 'netmarble Medium';
+	font-weight:bold;
+	font-size:17px;
 	height:35px;
 	display:flex;
 	justify-content:flex-end;

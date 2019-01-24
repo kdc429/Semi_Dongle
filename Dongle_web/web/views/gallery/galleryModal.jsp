@@ -13,6 +13,20 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- 부트스트랩 -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
+<style>
 /* 모달창  */
 .close {
     color: #aaa;
@@ -35,8 +49,8 @@ body {font-family: 'a흑진주L';margin:0}
 
 .slideshow-container {
 
-width: 100%;
-height: 100%;
+width: 95%;
+height:95%;
 position: static;
 background-size: cover;
 margin: auto;
@@ -56,8 +70,8 @@ top : 100px;
   cursor: pointer;
   position: absolute;
   text-align : center;
-  top: 30%;
-  width:29px;
+  top: 20%;
+  width:10px;
   padding-right: 20px;
   margin-top: -22px;
   color: white;
@@ -74,7 +88,7 @@ top : 100px;
 /* Position the "next button" to the right */
 
 .next {
-  right: 0;
+  margin-right:30px;
   border-radius: 10px;
 }
 
@@ -189,7 +203,7 @@ li{padding:0;}
 .comment_date{float:left;font-size:12px;color:#a7a7a7;margin-top:3px;}
 .comment_content{display:block;font-size:13px;color:#5c5c5c;clear:both;line-height: 19px;padding-top:2px;}
 div.tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; box-sizing: border-box;} 
-li button.btn-reply{display:none; background-color:white;float:right;border:none;height:10px;}
+li button.btn-reply,button.btn-delete{display:none; background-color:white;float:right;border:none;height:10px;}
 li button.btn-delete{display:none;}
 /* li:hover {background:lightgray;} */
 li:hover button.btn-reply{display:inline;}
@@ -247,50 +261,18 @@ if (n < 1) {slideIndex = slides.length}
   dots[slideIndex-1].className += " active";
 }
 
-//사진 삭제
-$('#deleteGallery').click(function(e){
-	if(!confirm('사진을 삭제하겠습니까?'))
-	{return;}
-	else{
-		$.ajax({
-			url:"<%=request.getContextPath()%>/gallery/galleryDelete",
-			data:{'groupNo':<%=groupNo%>,
-				'albumCode':'<%=gplist.get(0).getAlbumCode()%>',
-				'galNo':<%=gplist.get(0).getGalNo()%>
-			},
-			dataType:"html",
-			type:"post",
-			success:function(data){
-				alert('Message: '+data);
-				$('#modal-container').css('display','none');
-				$.ajax({
-					url:"<%=request.getContextPath()%>/gallery/galleryGet",
-					data:{'groupNo':<%=groupNo%>,
-						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
-					},
-					dataType:"html",
-					type:"post",
-					success:function(data){
-						
-						$('#content-div').html(data);
-					}
-				});
-			}
-		});
-	}
-
-});
 
 </script>
 	<li class="level2" style="list-style:none;">
 		<span class='ico_skin thumb_profile'>
-			<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=gplist.get(0).getGroupMemberImageNewPath() %>'>
+			<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=gplist.get(0).getGroupMemberImageNewPath() %>'>
 		</span>
 		<span class='comment_box'>
 			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
 			<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
+			<span>&nbsp;&nbsp;      </span>
 			<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
-				<a id='deleteGallery' style='float:right;color:RGB(112,136,172);' >삭제</a>
+				<p id='deleteIgm' style='float:right;color:RGB(112,136,172);' >이미지 삭제     &nbsp; | &nbsp;</p>
 			<%} %>
 			<br/>
 		</span>
@@ -338,13 +320,14 @@ $('#deleteGallery').click(function(e){
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
 									<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
-									<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
-										<p id='deleteComment' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);' >삭제</p>
-									<%} %>
+									
 								</span>
 								<br/>
 								<span class='comment_content'>
 									<%=g.getGalCommentContent() %>
+									<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+										<button class='btn-delete' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);' >삭제</button>
+									<%} %>
 									<button class='btn-reply' value='<%=g.getGalCommentNo()%>'>답글</button>
 								</span>
 							</span>
@@ -353,20 +336,20 @@ $('#deleteGallery').click(function(e){
 					else{%>
 						<li class="level2" style="list-style:none;">
 							<span class='ico_skin thumb_profile'>
-								<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupMemberImageNewPath() %>'>
+								<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=g.getGroupMemberImageNewPath() %>'>
 							</span>
 							<span class='comment_box'>
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
 									<p style='float:right;color:RGB(112,136,172);' >신고</p>
-									<%if(loginMember.getMemberNo()==g.getMemberNo()){%>
-										<p id='deleteComment' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);'>삭제</p>
-									<%} %>
 								</span>
 								<br/>
 								<span class='comment_content'>
 									<%=g.getGalCommentContent() %>
+									<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+										<button class='btn-delete' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);' >삭제</button>
+									<%} %>
 								</span>
 							</span>
 						</li>
@@ -392,16 +375,23 @@ $('#deleteGallery').click(function(e){
 			</div>
 		</fieldset>
 	</div>
-
 <script>
 	/* 댓글 삭제하기 */
-	$(funtion(){
-		$('#deleteComment').click(function(){
+	$(function(){
+		$('#btn-delete').click(function(){
 			if(!comfirm("정말로 삭제하시겠습니까?")){return;}
 			else{
 				$.ajax({
 					url:"<%=request.getContextPath()%>/gallery/deleteComment",
-					data:
+					data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
+						'galNo':<%=gplist.get(0).getGalNo()%>,
+						'galFileNo':<%=gplist.get(0).getGalFileNo()%>
+					},
+					type:'post',
+					dataType:'html',
+					success:function(data){
+						$('.comment-editor').html(data);
+					}
 				})
 			}
 		});
@@ -524,3 +514,40 @@ $('#deleteGallery').click(function(e){
 		});
 	});
 </script>
+<script>
+//사진게시물 삭제하기 스크립트 입니다.
+	//앨범삭제
+	$('#deleteIgm').click(function(e){
+		if(!confirm('사진을 삭제하겠습니까?'))
+		{return;}
+		else{
+			console.log("여기 들어옴");
+			$.ajax({
+				url:"<%=request.getContextPath()%>/gallery/galleryDelete",
+				data:{'groupNo':<%=gplist.get(0).getGroupNo()%>,
+					'albumCode':'<%=gplist.get(0).getAlbumCode()%>',
+					'galNo':<%=gplist.get(0).getGalNo()%>
+				},
+				dataType:"html",
+				type:"post",
+				success:function(data){
+					alert('Message: '+data);
+					$('#modal-container').css('display','none');
+					$.ajax({
+						url:"<%=request.getContextPath()%>/gallery/galleryGet",
+						data:{'groupNo':<%=gplist.get(0).getGroupNo()%>,
+							'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
+						},
+						dataType:"html",
+						type:"post",
+						success:function(data){
+							$('#gallery-container').html(data);
+						}
+					});
+				}
+			});
+		}
+
+	});
+</script>
+

@@ -42,7 +42,7 @@ public class MemberViewServlet extends HttpServlet {
 		
 		request.setAttribute("member", data);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/memberView.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/memberView.jsp"); //화면에 띄울 화면을 여기 jsp로 이동!
 		rd.forward(request, response);
 	}
 

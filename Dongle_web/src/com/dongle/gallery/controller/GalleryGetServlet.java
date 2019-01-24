@@ -42,13 +42,13 @@ public class GalleryGetServlet extends HttpServlet {
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
 		System.out.println(gm);
-		if((gm.getMemberNo()!=loginMember.getMemberNo())||!loginMember.getMemberId().equals("admin"))
+		/*if(gm.getMemberNo()==0||!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}		
+		}	*/	
 		
 		//페이징 처리하기
 		int cPage; //현재 페이지를 의미함 (너가 지금 뭘 보고있는지!)
@@ -132,8 +132,6 @@ public class GalleryGetServlet extends HttpServlet {
 		else {
 			pageBar+="<a href='"+request.getContextPath()+"/galleryGet?groupNo="+groupNo+"&albumCode="+albumCode+"&cPage="+pageNo+"&numPerPage="+numPerPage+"'>&nbsp;＞</a></li>";
 		}
-/*		request.setAttribute("allList", allList);
-		request.setAttribute("list", list);*/
 		request.setAttribute("tList", tList);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("numPerPage", numPerPage);

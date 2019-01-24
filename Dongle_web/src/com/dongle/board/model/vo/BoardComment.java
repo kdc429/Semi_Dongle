@@ -5,7 +5,7 @@ import java.sql.Date;
 public class BoardComment {
 	
 	private int groupNo;
-	private int boarNo;
+	private int boardNo;
 	private int boCommentNo;
 	private int memberNo;
 	private String boCommentContent;
@@ -16,11 +16,11 @@ public class BoardComment {
 	
 	public BoardComment() {}
 
-	public BoardComment(int groupNo, int boarNo, int boCommentNo, int memberNo, String boCommentContent,
+	public BoardComment(int groupNo, int boardNo, int boCommentNo, int memberNo, String boCommentContent,
 			Date boCommentDate, int boCommentLevel, int boCommentRef, String groupMemberNickname) {
 		super();
 		this.groupNo = groupNo;
-		this.boarNo = boarNo;
+		this.boardNo = boardNo;
 		this.boCommentNo = boCommentNo;
 		this.memberNo = memberNo;
 		this.boCommentContent = boCommentContent;
@@ -38,12 +38,12 @@ public class BoardComment {
 		this.groupNo = groupNo;
 	}
 
-	public int getBoarNo() {
-		return boarNo;
+	public int getBoardNo() {
+		return boardNo;
 	}
 
-	public void setBoarNo(int boarNo) {
-		this.boarNo = boarNo;
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
 
 	public int getBoCommentNo() {
@@ -104,10 +104,11 @@ public class BoardComment {
 
 	@Override
 	public String toString() {
-		return "BoardComment [groupNo=" + groupNo + ", boarNo=" + boarNo + ", boCommentNo=" + boCommentNo
+		return "BoardComment [groupNo=" + groupNo + ", boardNo=" + boardNo + ", boCommentNo=" + boCommentNo
 				+ ", memberNo=" + memberNo + ", boCommentContent=" + boCommentContent + ", boCommentDate="
 				+ boCommentDate + ", boCommentLevel=" + boCommentLevel + ", boCommentRef=" + boCommentRef
 				+ ", groupMemberNickname=" + groupMemberNickname + "]";
 	}
-
-	}
+	
+	
+}
