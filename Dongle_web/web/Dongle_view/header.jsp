@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.member.model.vo.Member"%>
+
 <%
 
     	Member loginMember = (Member) session.getAttribute("loginMember");
@@ -12,7 +13,6 @@
     				cookieValue = c.getValue();
     			}
     		}
-
     	}
 %>
 <!DOCTYPE html>
@@ -24,6 +24,12 @@
 	href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_dongleList.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Admin_blackMemberList.css" />
 <link href="https://fonts.googleapis.com/css?family=Bungee"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
@@ -46,6 +52,9 @@
 	<header>
         <div class="headerBack">
             <div class="bar">
+            	<!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
+            		<a href="<%=request.getContextPath()%>/main/searchPage"><img src="<%=request.getContextPath()%>/images/button-images/search.png" style="width: 30px; height: 30px;" id='search-btn'></a>
+            	<!-- </button> -->
             	<!-- 정보수정 및 로그 아웃 버튼! -->
             	<div class="user-back">
             		<span><%=loginMember.getMemberName()%>님, 환영합니다!</span>
@@ -53,7 +62,7 @@
             	<div class="user-back">
             	<!-- 마이페이지 버튼 -->
             		<button class="img-icon">
-            			<span class="sub-icon">마이페이지</span>
+            			<span class="sub-icon" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>'"/>마이페이지</span>
             			<img class="user-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
             		</button>
             		
@@ -62,10 +71,9 @@
             	<div class="user-back">
             	<!-- 로그 아웃 버튼 -->
             		<button class="img-icon">
-            			<span class="sub-icon">로그아웃</span>
+            			<span class="sub-icon" onclick="location.href='<%=request.getContextPath()%>/member/logout'"/>로그아웃</span>
             			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
             		</button>
-            		
             	</div>
             </div>
             <div class="logo-back">
@@ -77,6 +85,8 @@
             	</div>
             </div>
         </div>
+        <script>
+        </script>
     </header>
 </body>
 </html>

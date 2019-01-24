@@ -7,6 +7,7 @@
 
 body {
 	/* position: absolute; */
+	
 	font-family: 'YanoljaYacheR';
 	display: flex;
 	flex-direction: column;
@@ -16,6 +17,12 @@ body {
 	right: 0;
 	align-items: center;
 	justify-content: center;
+	
+	
+}
+body.showBars { overflow:scroll; } 
+header, section{
+	width:1024px;
 }
 
 div {

@@ -16,14 +16,20 @@
 	
 
 <section>
+
 	<div class="bar">
+		<%if(loginMember.getMemberId().equals("admin")) {%>
+		<button class="img-icon" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'">
+				<span class="sub-icon">관리자 메뉴</span>
+				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/editSetting2.png">		
+		</button>
+		<%} %>
 		<!-- 동글 개설하기 버튼! -->
 		<div class="cre-icon-back">
 			<button class="img-icon">
 				<span class="sub-icon">동글개설하기</span>
 				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">		
 			</button>
-			
 		</div>
 	</div>
 	<h2 class="item-logo">MY DONGLE</h2>
@@ -34,21 +40,24 @@
         <!--캐러셀 아이템   -->
         <div class="carousel-box">
                 <ol class="item">
-                    <% if(list==null||list.isEmpty()||loginMember.getMemberId().equals("admin")){%>
+                    <% if(list.size()==0||list.isEmpty()||loginMember.getMemberId().equals("admin")){%>
                     	<!-- 동글에 가입하지 않았을 경우 혹은 관리자 일 경우-->
                     	<li>DONGLE 에 가입하세요!</li>
                     <%}else{ 
                     	for(Group g:list){
                     %>
                     	<!-- 가입한 동글 리스트 -->
-                    	<form action="<%=request.getContextPath()%>/communityJoin" name="join">
+
+                    	<form action="<%=request.getContextPath()%>/communityJoin" name="join" method='post'>
+
                     	<li class="dongle-icon">
                     		<div class="icon-back">
                     			<button class="join-btn" type="submit"> 
                     			
                     			<!-- 여기서 그룹 넘버 전송 -->
                     				<span class="group-name"><%=g.getGroupName() %></span>
-                    				<img class="icon" src="<%=request.getContextPath()%><%=g.getImgPath()%>"/>
+                    				<img class="icon" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
+
                     				<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
                     			</button>
@@ -72,6 +81,7 @@
 		<% if(loginMember.getMemberId().equals("admin")){ %>
 			<div class="set-back">
 				<button class="img-icon">
+					<span>설정</span>
 					<img class="set-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
 				</button>
 				<span class="sub-icon">설정</span>
@@ -85,26 +95,26 @@
 			<ul>
 				<%if(editList!=null){
 					for(EditPickGroup epg : editList){ %>
-				<li>
-					<!-- 에디터 픽 선정 동글 리스트 -->
-					<form action="<%=request.getContextPath()%>/communityJoin?=<%=epg.getGroupNo()%>&<%=loginMember.getMemberNo() %>" method="post" name="edit-pick">
-						<!-- 여기서 그룹 넘버 전송 -->
-						<div class="editor-img-back">
-							<div class="editor-img">
-								<button class="join-btn" >
-								<img class="eImg" src="<%=request.getContextPath() %><%=epg.getEditFilePath()%>">
-								<input type="hidden" name="groupNo" value="<%=epg.getGroupNo()%>"/>
-								<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
-								</button>
+					<li>
+						<!-- 에디터 픽 선정 동글 리스트 -->
+						<form action="<%=request.getContextPath()%>/communityJoin" method="post" name="edit-pick">
+							<!-- 여기서 그룹 넘버 전송 -->
+							<div class="editor-img-back">
+								<div class="editor-img">
+									<button class="join-btn" >
+									<img class="eImg" src="<%=request.getContextPath() %>/images/editor_images/<%=epg.getEditFilePath()%>">
+									<input type="hidden" name="groupNo" value="<%=epg.getGroupNo()%>"/>
+									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
+									</button>
+								</div>
 							</div>
+						</form>
+						
+						<div class="editor-content">
+						<!-- 에디터픽 소개 글 컨텐트 -->
+							<p class="eContent"><%=epg.getEditContent()%></p>
 						</div>
-					</form>
-					
-					<div class="editor-content">
-					<!-- 에디터픽 소개 글 컨텐트 -->
-						<p class="eContent"><%=epg.getEditContent()%></p>
-					</div>
-				</li>
+					</li>
 				<%	} 
 				}%>
 			</ul>
@@ -128,7 +138,7 @@
 					<div class="ranker-img"> 
 						<!-- 순위권 동글 리스트 -->
 						<button class="join-btn" type="submit">
-						<img class="rImg" src="<%=request.getContextPath()%>/images/group_images/back1.jpg"/>
+						<img class="rImg" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
 						<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
 						<input type="hidden" name="groupNo" value="<%=loginMember.getMemberNo()%>"/>
 						</button>
@@ -149,8 +159,7 @@
 	</div>
 	
 </section>
-<script
-	src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
+<script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
 
 </body>

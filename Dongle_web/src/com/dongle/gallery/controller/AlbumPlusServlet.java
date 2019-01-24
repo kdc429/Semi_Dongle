@@ -1,11 +1,14 @@
 package com.dongle.gallery.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.dongle.member.model.vo.Member;
 
 /**
  * Servlet implementation class AlbumPlusServlet
@@ -26,18 +29,16 @@ public class AlbumPlusServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
-		String groupNo=request.getParameter("groupNo");
-		System.out.println(groupNo);
-		if(memberId==null||!memberId.equals("admin"))
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		if(loginMember.getMemberId()==null||!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "잘못된 경로로 접근하였습니다.");
-			request.setAttribute("loc", "/albumGet?no="+groupNo);
+			request.setAttribute("loc", "/albumGet?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
 		request.setAttribute("groupNo", groupNo);
-		request.setAttribute("memberId", memberId);
 		request.getRequestDispatcher("/views/gallery/albumPlus.jsp").forward(request, response);
 	}
 
