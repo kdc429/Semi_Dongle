@@ -12,7 +12,11 @@
 <style>
 #btn_find{
 	width: 173px;
+<<<<<<< HEAD
 	height: 24px;
+=======
+	height: 24px;	
+>>>>>>> branch 'workTest' of https://github.com/kdc429/Semi_Dongle.git
 }
 </style>
 </head>

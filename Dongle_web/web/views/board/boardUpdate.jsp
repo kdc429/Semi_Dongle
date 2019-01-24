@@ -47,8 +47,8 @@
 	span#fname
 	{
     	position:absolute;
-    	left:218px;
-    	top:234px;
+    	left:186px;
+    	top:244px;
     	width: 440px;
     	background : white;
     }
@@ -63,6 +63,10 @@
     #update-writer
     {
     	width : 250px;
+    }
+    #update-list-btn
+    {
+    	text-align:center;
     }
 </style>
 	<div class="board-container">
@@ -112,13 +116,6 @@
 						</td>
 					</tr>
 				</tbody> 
-			<%-- 		<tr>
-						<td colspan="2" id="update-add">
-							<button id='update-list-btn'>목록으로</button>
-							<input type="hidden" value="<%=groupNo%>" name="groupNo" />
-							<input type="button" id='update-submit-btn' value="수정하기" />
-						</td>
-					</tr>		 --%>	
 			</table>
 		</form>
 		<div class="update-btn">

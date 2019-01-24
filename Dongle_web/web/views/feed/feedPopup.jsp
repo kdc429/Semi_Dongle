@@ -11,8 +11,13 @@
 <html>
 
 <meta charset="UTF-8">
-
+<div id="close">
+	<button id="close-btn">
+		<img class="popup-icon" src="<%=request.getContextPath() %>/images/button-images/window-close-solid.png"/>
+	</button>
+</div>
 <div id="popup-header">
+	<img style="padding:10px 10px;" src="<%=request.getContextPath() %>/images/member_img/<%=groupMember.getGroupMemberImageNewPath() %>" class="member-profile">
 	<span id="popupFeedWriter"><%=groupMember.getGroupMemberNickname()%></span> 
 	<span id="popupFeedDate"><%=feed.getFeedWriteDate() %></span>
 </div>
@@ -24,7 +29,11 @@
 		%>
 		<li>
 			<input type="hidden" class="feedFileNo" value="<%=ff.getFeedFileNo() %>">
-			<%=ff.getFeedOldFilePath() %><button class="delete-file">x</button></li>
+			<%=ff.getFeedOldFilePath() %>
+			<button class="delete-file">
+				<img class="popup-icon" src="<%=request.getContextPath() %>/images/button-images/backspace-solid.png"/>
+			</button>
+		</li>
 		<%}
 		} %> 
 	</ul>
@@ -37,14 +46,22 @@
             			
                     <li>
                     	<input type="hidden" class="feedFileNo" value="<%=ff.getFeedFileNo() %>">	
-                    	<img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"><button class="delete-file">x</button></li>
+                    	<img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic">
+                    	<button class="delete-file">
+                    		<img class="popup-icon" src="<%=request.getContextPath() %>/images/button-images/backspace-solid.png">
+                    	</button>
+                    </li>
                     	
                     <%		
                  }else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
                     			
                     <li>
                     	<input type="hidden" class="feedFileNo" value="<%=ff.getFeedFileNo() %>">
-                    	<video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video><button class="delete-file">x</button></li>
+                    	<video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video>
+                    	<button class="delete-file">
+                    		<img class="popup-icon" src="<%=request.getContextPath() %>/images/button-images/backspace-solid.png">
+                    	</button>
+                    </li>
                <%}else{%>
                     		
               	<%}
@@ -95,6 +112,7 @@
 								dataType:"html",
 								success:function(dataHtml){
 									$('#content-div').html(dataHtml);
+									setImage();
 									
 								}
 							})
@@ -106,6 +124,16 @@
 			}
 		})
 	})
+	
+	$('#close-btn').on('click',function(){//레이어 창 닫기 이벤트
+				console.log("눌리나?");
+				var button="<button class='delete-btn'><img class='delete-icon' src='<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png'></button>";
+				var feedPopup=document.getElementById("feed-popup");
+				console.log(feedPopup);
+				$('#feed-popup').removeAttr('style');
+				
+					
+			})
 	
 </script>
 </html>

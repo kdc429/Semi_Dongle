@@ -10,25 +10,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <style>
-	  div#updatePassword-container{
-	      background:red;
-	  }
-	  div#updatePassword-container table {
-	      margin:0 auto;
-	      border-spacing: 20px;
-	  }
-	  div#updatePassword-container table tr:last-of-type td {
-	      text-align:center;
-	  }
-  </style>
+	<style>
+		div#updatePassword-container
+		{
+			border-radius: 20px;	
+		    background:#EAEAEA;
+		    font-family: '나눔스퀘어라운드 Regular';
+		}
+		div#updatePassword-container table 
+		{
+		    margin:0 auto;
+		    border-spacing: 20px;
+		    font-family: '나눔스퀘어라운드 Regular';
+		}
+		div#updatePassword-container table tr:last-of-type td 
+		{
+		    text-align:center;
+		    
+		}
+	</style>
 </head>
 <body>
 	<div id="updatePassword-container">
 		<form name="updatePwdFrm" action="<%=request.getContextPath()%>/updatePasswordEnd" method="post">
 			<table>
 				<tr>
-					<th>현재비밀번호</th>
+					<th style="font-family: '나눔스퀘어라운드 Regular';">현재비밀번호</th>
 					<td>
 						<input type="password" name="password" id="password" required/>
 					</td>

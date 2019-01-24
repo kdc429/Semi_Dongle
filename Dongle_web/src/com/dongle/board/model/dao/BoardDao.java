@@ -339,6 +339,7 @@ public class BoardDao {
 					bc.setBoCommentLevel(rs.getInt("bo_comment_level"));
 					bc.setBoCommentRef(rs.getInt("bo_comment_ref"));
 					bc.setGroupMemberNickname(rs.getString("group_member_nickname"));
+					bc.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
 					bclist.add(bc);
 				}
 			}
@@ -353,4 +354,27 @@ public class BoardDao {
 			}
 			return bclist;
 		}
+		
+		public int deleteBoComment(Connection conn, int boCommentNo)
+		{
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String sql = prop.getProperty("deleteBoComment");
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, boCommentNo);
+				result = pstmt.executeUpdate();
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			} 
+			finally 
+			{
+				close(pstmt);
+			}
+			return result;
+
+		}
+
 }

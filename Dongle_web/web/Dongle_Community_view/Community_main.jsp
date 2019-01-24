@@ -190,7 +190,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 					<!-- 동글 프로필 -->
 
 					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
-
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -408,6 +407,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
         </aside>
 	
         <!-- 게시판 -->
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     </div>
@@ -419,6 +419,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
        </div>
     </div>
 =======
+=======
+
+>>>>>>> branch 'workTest' of https://github.com/kdc429/Semi_Dongle.git
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
 <div class="modal-div">
 	<div class="dialog" id="modal-container">
@@ -477,6 +480,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			dataType:"html",
 			success:function(data){
 				$('#content-div').html(data);
+				setImage();
 			}
 		});
 	});
@@ -502,6 +506,10 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
     </script>
 
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'workTest' of https://github.com/kdc429/Semi_Dongle.git
 
 <script>
 /* 갤러리 클릭시 매핑함수 */

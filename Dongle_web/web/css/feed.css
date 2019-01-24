@@ -1,3 +1,11 @@
+button{
+	outline:0;
+}
+textarea{
+	outline:0;
+	border:0;
+	background-color:white;
+}
 .main {
 	width: 684px;
 	height: auto;
@@ -59,21 +67,23 @@
 	height: auto;
 	left: 10%;
 	right: 10%;
+	border-radius:20px;
 }
 
 .delete-icon{
-	padding: 10px 10px;
-	max-height: 40px;
-	max-width:40px;
-	width: auto;
-	height: auto;
+	padding: 0;
+    max-height: 20px;
+    max-width: 20px;
+    width: auto;
+    height: auto;
 }
 .update-icon{
-	padding: 10px 10px;
-	max-height: 40px;
-	max-width:40px;
-	width: auto;
-	height: auto;
+	padding: 0;
+    max-height: 20px;
+    max-width: 40px;
+    width: auto;
+    height: auto;
+}
 }
 .delete-btn{
 	border:0;
@@ -84,27 +94,52 @@
 	background-color:rgba(0,0,0,0);;
 }
 .feed-header {
-	height: 40px;
-	background-color: rgb(240, 240, 240);
+	height: 70px;
+    background-color: rgb(240, 240, 240);
 }
 
 .feed-footer {
 	height: auto;
 }
+.download-back{
+	height:20px;
+	white-space:nowrap;
+	margin-top:-4%;
+}
+.update-back{
+	position: absolute;
+    width: 500px;
+    margin-top: -9%;
+}
 
 .member-profile {
-	max-height: 50px;
-	max-width: 50px;
-	width: auto;
-	height: auto;
+	padding: 10px;
+    max-height: 80px;
+    max-width: 80px;
+    width: auto;
+    height: auto;
+    border-radius:5px;
 }
 
 .feed-body {
 	width: 500px;
-	max-height: 600px;
 	height: auto;
 	justify-content: center;
 	background-color: rgb(240, 240, 240);
+}
+.popup-icon{
+	
+    max-height: 35px;
+    max-width: 35px;
+    width: auto;
+    height: auto;
+}
+.feed-content{
+	
+	overflow:visible;
+	width:450px;
+	height:auto;
+	
 }
 
 .feed-pic {
@@ -120,6 +155,8 @@
 	width: 500px;
 	padding: 0;
 	list-style: none;
+	display:flex;
+	justify-content:center;
 }
 
 .feed-pics {
@@ -224,43 +261,78 @@
 .feedup {
 	resize: none;
 }
+#feedup{
+	margin:10px;
+	background-color:rgba(20,150,200,0.5);
+	border:0;
+	float:right;
+	text-align:center;
+	border-radius:10px;
+}
+#upbtn-icon{
+	padding: 5px;
+    max-height: 35px;
+    max-width: 35px;
+    width: auto;
+    height: auto;
+    
+}
 
 .fileup {
-	height: 40px;
-	background-color: rgb(20,150,200);
+	border-top:1px solid gray;
+	border-bottom:1px solid gray;
+	height: 60px;
+	background-color: rgba(20,150,200,0);
+	display:flex;
+	flex-direction:row;
+}
+.fileup>div{
+	width:250px;
 }
 .upbtn-icon{
-	padding: 10px 10px;
-	max-height: 50px;
-	max-width:50px;
-	width: auto;
-	height: auto;
+	padding: 0;
+    max-height: 25px;
+    max-width: 30px;
+    width: auto;
+    height: auto;
 	
 }
 
-
 .up-btn{
+	margin-top:15px;
 	background-color:rgba(0,0,0,0);
 	border:0;
 }
 .file-download{
-	list-style:none;
-	
-	
-	white-space:nowrap;
+	list-style: none;
+    
+    height: 20px;
+    padding: 0;
+    white-space: nowrap;
+    float: right;
 }
+file-down-list{
+	display: inline;
+}
+
 
 .picup {
 	bottom: 0;
 }
 .delete-btn{
 	float:right;
+	border:0;
+	background-color:rgba(0,0,0,0);
 }
 .update-btn{
 	float:right;
+	border:0;
+	background-color:rgba(0,0,0,0);
 }
 #close-btn{
 	float:right;
+	border:0;
+	background-color: rgba(255,255,255,0);
 }
 #close{
 	width:683px;
@@ -297,7 +369,30 @@
 	background-color:rgb(240, 240, 240);
 	width:500px;
 }
+.delete-file{
+	border:0;
+	background-color:rgba(255,255,255,0);
+}
 
+.report-button{
+	float:right;
+	border:0;
+	background-color:rgba(0,0,0,0);
+}
+.report-icon{
+	padding: 0;
+    max-height: 25px;
+    max-width: 20px;
+    width: auto;
+    height: auto;
+}
+.reple-icon{
+	padding: 0;
+    max-height: 20px;
+    max-width: 20px;
+    width: auto;
+    height: auto;
+}
 /* loading animiation */
 #fountainG {
 	position: relative;

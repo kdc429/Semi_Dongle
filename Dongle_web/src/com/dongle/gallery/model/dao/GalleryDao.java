@@ -240,7 +240,6 @@ public class GalleryDao {
       PreparedStatement pstmt= null;
       ResultSet rs=null;
       String sql=prop.getProperty("selectOneList");
-      GalleryPath gp=null;
       
       List<GalleryPath> gplist=new ArrayList<GalleryPath>();
       try {
@@ -251,7 +250,7 @@ public class GalleryDao {
          rs=pstmt.executeQuery();
          while(rs.next())
          {
-            gp=new GalleryPath();
+            GalleryPath gp=new GalleryPath();
             gp.setGroupNo(rs.getInt("group_no"));
             gp.setAlbumCode(rs.getString("album_code"));
             gp.setMemberNo(rs.getInt("member_no"));
@@ -267,6 +266,7 @@ public class GalleryDao {
             
             gplist.add(gp);
          }
+         System.out.println("갤러리: "+gplist);
       }
       catch(Exception e)
       {

@@ -4,7 +4,6 @@
 com.dongle.group.model.vo.GroupMember"
 
 %>
-
 <%
 /*    List<GalleryPath> list = (List)request.getAttribute("list");
 
@@ -33,11 +32,10 @@ com.dongle.group.model.vo.GroupMember"
     
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <style>
-
 .dialog{
    display:none;
    position:absolute;
-   margin-top:-700px;
+   margin-top:-100px;
    z-index:10;
    left:0;                                                                                                   
    right:0;
@@ -67,7 +65,6 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
 
 </style>
 <script>
-
    $(function(){
       $('.galImg').mouseover(function(){
          $(this).fadeTo(100,0.4);
@@ -180,7 +177,7 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
          <tr>
                <td>
                  <ul class="pagination" id="paging">
-                     <%=pageBar %>
+                     <%-- <%=pageBar %> --%>
                  </ul>
                 </td>
          </tr>
@@ -197,4 +194,3 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
       </div>
       </div>
 </div> -->
-
