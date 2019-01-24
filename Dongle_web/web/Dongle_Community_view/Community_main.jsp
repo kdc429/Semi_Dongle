@@ -199,6 +199,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 						<div id="dongle_info_view" style="font-size: 11px;">회원수 : <%=result %> 명 &nbsp;</div>
 						<div id="dongle_info_view">
 							<button id="dongle_mem_btn">멤버보기</button>
+						<%if(gm!=null){ %>	
+							<button id="dongle_mem_update">정보수정</button>
+							<%} %>
 						<%if(gm==null){ %>
 							<button id="dongle_mem_join">가입하기</button>
 							<%} %>
@@ -396,7 +399,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
                     <button class='btn btn-primary' id="board-btn">공지사항</button><br>
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button class='btn btn-primary'>일정</button><br>
+                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
                     <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
                     <%} %>
@@ -500,8 +503,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 </div>
 
->>>>>>> branch 'workTest' of https://github.com/kdc429/Semi_Dongle.git
-
 <script>
 /* 갤러리 클릭시 매핑함수 */
 $(function(){
@@ -559,6 +560,21 @@ $(function(){
 	$("#calendarview").click(function(){
 		$.ajax({
 			url:"<%=request.getContextPath()%>/calendarMainView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
+
+$(function(){
+	$("#dongle_mem_update").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/dongleMemberUpdate?groupNo=<%=g.getGroupNo()%>",
 			type:"post",
 			dataType:"html",
 			success:function(data){

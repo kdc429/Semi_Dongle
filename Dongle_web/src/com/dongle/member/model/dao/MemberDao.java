@@ -116,14 +116,14 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPwd());
-			pstmt.setString(3, m.getPwdHintList());
-			pstmt.setString(4, m.getPwdHintAnswer());
-			pstmt.setString(5, m.getMemberName());
-			pstmt.setString(6, m.getGender());
-			pstmt.setString(7, m.getSsn());
-			pstmt.setString(8, m.getPhone());
-			pstmt.setString(9, m.getAddress());
-			pstmt.setString(10, m.getEmail());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getGender());
+			pstmt.setString(5, m.getSsn());
+			pstmt.setString(6, m.getPhone());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getEmail());
+			pstmt.setString(9, m.getPwdHintList());
+			pstmt.setString(10, m.getPwdHintAnswer());
 
 			result=pstmt.executeUpdate();						
 		}
@@ -154,7 +154,7 @@ public class MemberDao {
 			
 			
 			result=pstmt.executeUpdate();
-			System.out.println(result);
+			
 
 		}
 		catch (Exception e) {

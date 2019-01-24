@@ -1,6 +1,19 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import="com.dongle.group.model.vo.*,com.dongle.calender.model.vo.*" %>
+<%
+	int groupNo=(int)request.getAttribute("groupNo");	
+
+/* 	Calendar m =(Calendar)request.getAttribute("Calendar");
+	String calcontent = m.getCalcontent();
+	String caltitle = m.getCaltitle();
+	int remaincost = m.getRemaincost();
+	int totalcost =  m.getTotalcost();
+	int usecost =  m.getUsecost(); */
+	
+	
+%>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -73,26 +86,30 @@ $(function(){
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h3><span id="modal_result" class="modal-title"></span></h3>
+            <h3><span id="modal_result" class="modal-title" ></span></h3>
         </div>
           <div class="modal-body">
-            <h4>*회비 내역</h4>
+            
+            
+<!--             <h4>*회비 내역</h4>
             <span id="before_total"></span>
             <br>
-                  모은 총 회비 : <span id="cast1"></span>
+                  모은 총 회비 : <span id="cast1" ></span>
             <br>
-                  총 사용 금액 : <span id="cast2"></span>
+                  총 사용 금액 : <span id="cast2" ></span>
             <br>
-                  남은 회비 : <span id="cast3"></span> 
+                  남은 회비 : <span id="cast3" ></span> 
               <br>
               <h4>*일정 내용입니다.</h4>
+              <br>
+              <div></div>
               <br>
               <span id="cal_content_list"></span>
               <br>
               <button id="reciptview" >영수증보기</button>
               <div class="receipt">
               
-              </div>
+              </div> -->
               
 
                                 
@@ -101,7 +118,7 @@ $(function(){
 <%-- <form action="<%=request.getContextPath() %>/calendar/calendarFormEnd" method="post" enctype="multipart/form-data"> --%>
          <!-- manager 권한 -->
          
-         
+      
             <div id="manager">
                 <hr>
             
@@ -126,30 +143,12 @@ $(function(){
             <input type="hidden" name="groupNo" value=1/> <!-- //groupNo받아오기 -->
     <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
          </div>
+         
 	<script>
 			
-	        //남은 회비
+ 	        //남은 회비
 	        var betal = 1000;
 	        $('#before_total').html('남은 회비(전) :' + betal);
-	
-	        //회비 총합 계산
-	        function ttt() {
-	            var text1 = document.getElementById('text1').value;
-	            $('#cast1').html(parseInt(text1) + betal);
-	
-	            var text2 = document.getElementById('text2').value;
-	            $('#cast2').html(parseInt(text2));
-	
-	            var cast1 = document.getElementById('cast1').innerHTML;
-	            var cast2 = document.getElementById('cast2').innerHTML;
-	            $('#cast3').html(cast1 - cast2);
-	
-	            var modal_title = document.getElementById('caltitle').value;
-	            $('#modal_result').html(modal_title);
-	
-	            var cal_content = document.getElementById('calcontent').value;
-	            $('#cal_content_list').html(cal_content);
-	        }
 	
 	        //영수증 보기
 	        function rec() {
@@ -174,30 +173,35 @@ $(function(){
 	        	 $('#insert-btn').click(function(){
 	 	        	var caltitle = $('#caltitle').val();
 	 	        	console.log(caltitle);
+	 	        	var groupNo=<%=groupNo%>;
 	 				var today1 = $('#today1').val();
 	 				var today2 = $('#today2').val();
 	 				var calcontent = $('#calcontent').val();
-	 				var upfile = $('#upfile').val();
+	 				var upfile = document.getElementById('upfile').files[0];
 	 				var totalcost = $('#totalcost').val();
 	 				var usecost = $('#usecost').val();
-	 	        	
+	 	        	var fd=new FormData();
+	 	        	fd.append('caltitle',caltitle);
+	 	        	fd.append('groupNo',groupNo);
+	 	        	fd.append('today1',today1);
+	 	        	fd.append('today2',today2);
+	 	        	fd.append('calcontent',calcontent);
+	 	        	fd.append('upfile',upfile);
+	 	        	fd.append('totalcost',totalcost);
+	 	        	fd.append('usecost',usecost);
 	 	        	
 	 	        	$.ajax({
 	 	        		url:"<%=request.getContextPath()%>/calendar/calendarFormEnd",
 	 	        		type:"post",
-	 	        		data:{
-	 	        			"caltitle":caltitle,
-	 	        			"today2":today2,
-	 	        			"calcontent":calcontent,
-	 	        			"upfile":upfile,
-	 	        			"totalcost":totalcost,
-	 	        			"usecost":usecost
-	 	        			},
+	 	        		data:fd,
 	 	        		dataType:"html",
+	 	        		processData:false,
+	 	        		contentType:false,
 	 	        		success:function(data){
 	 	        			console.log(data);
 	 	        		}
 	 	        	})
+	 	        	
 	 	        }); 
 	        })
 	       

@@ -28,6 +28,31 @@ public class DongleMemberJoinDao {
 		}
 	}
 	
+	public int insertdongleupdate(Connection conn, GroupMember b)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertdongleupdate");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getGroupMemberNickname());
+			pstmt.setString(2, b.getGroupMemberImageNewPath());
+			pstmt.setString(3, b.getGroupMemberImageOldPath());
+			pstmt.setString(4, b.getGroupMemberNickname());
+			
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int insertdonglejoin(Connection conn, GroupMember b)
 	{
 		PreparedStatement pstmt=null;

@@ -29,7 +29,7 @@ public class CalendarModalServlet extends HttpServlet {
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		String allDate=request.getParameter("allDate");
 		System.out.println(allDate);
-		
+		request.setAttribute("groupNo", groupNo);
 		request.getRequestDispatcher("/Dongle_Community_view/calendarModal.jsp").forward(request, response);
 		
 	}

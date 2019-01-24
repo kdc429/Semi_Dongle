@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dongle.group.model.vo.*" %>
+<%
+	int groupNo=(int)request.getAttribute("groupNo");
+%>
 <!DOCTYPE html>
 <html>
 
@@ -170,6 +174,10 @@
                     <br><br><br><br><br><br>
 
           </div>
+          
+          <div>
+          	
+          </div>
         
     </section>
  
@@ -294,7 +302,7 @@
                
          
                   $.ajax({
-                     url:'<%=request.getContextPath()%>/calendar/calendarModal?groupNo=1&allDate='+all_date,
+                     url:'<%=request.getContextPath()%>/calendar/calendarModal?groupNo=<%=groupNo%>&allDate='+all_date,
                      type:'post',
                      dataType:'html',
                      success:function(data){
@@ -362,9 +370,9 @@
             var t = 2013;
             var n = 9;
             var r = [];
-            var i = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
-            var s = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            var o = ["#16a085", "#1abc9c", "#c0392b", "#27ae60", "#FF6860", "#f39c12", "#f1c40f", "#e67e22", "#2ecc71", "#e74c3c", "#d35400", "#2c3e50"];
+            var i = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"]; //달
+            var s = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; //요일
+            var o = ["#16a085", "#1abc9c", "#c0392b", "#27ae60", "#FF6860", "#f39c12", "#f1c40f", "#e67e22", "#2ecc71", "#e74c3c", "#d35400", "#2c3e50"];//색상
             var u = $("#calendar");
             var a = u.find("#calendar_header");
             var f = u.find("#calendar_weekdays");
@@ -382,7 +390,6 @@
                     r("previous")
                 } else { r("next") }
                });
-            
             
            
         });

@@ -68,23 +68,29 @@ public class CalendarInsertEndServlet extends HttpServlet {
 		
 //		b.setGroupno(Integer.parseInt(mr.getParameter("groupNo")));
 		b.setCaldate_d((mr.getParameter("today1")+" "+mr.getParameter("today2")+":00"));
+		b.setGroupno(Integer.parseInt(mr.getParameter("groupNo")));
 		b.setCaltitle(mr.getParameter("caltitle"));
 		b.setCalcontent(mr.getParameter("calcontent"));
 		b.setCalorfile(mr.getOriginalFileName("upfile"));
 		b.setRefile(mr.getFilesystemName("upfile"));
 		
 		System.out.println(b);
+		System.out.println("this");
 		
+		
+		
+
+		int result1=new CalendarService().insertcalendar(b);
 		
 		Calendar c = new Calendar();
 		System.out.println(mr.getParameter("totalcost"));
+		c.setCalno(result1);
+		c.setGroupno(Integer.parseInt(mr.getParameter("groupNo")));
 		c.setTotalcost(Integer.parseInt(mr.getParameter("totalcost")));
 		c.setUsecost(Integer.parseInt(mr.getParameter("usecost")));
 		
 		System.out.println(c);
 		
-
-		int result1=new CalendarService().insertcalendar(b);
 		int result2=new CalendarService().costcalendar(c);
 		
 		//응답처리
@@ -92,29 +98,16 @@ public class CalendarInsertEndServlet extends HttpServlet {
 		String loc="";
 		String view="/Dongle_view/msg.jsp";
 		
-		if(result1>0)
-		{
-			msg="캘린더 등록성공";
-			loc="/board/boardList";
-		}
-		else 
-		{
-			msg="캘린더 등록 실패";
-			loc="/Dongle_Community_view/boardInsert";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher(view).forward(request, response);
 		
 		if(result2>0)
 		{
 			msg="게시판 등록성공";
-			loc="/board/boardList";
+			loc="/communityJoin?groupNo="+mr.getParameter("groupNo");
 		}
 		else 
 		{
 			msg="게시판 등록 실패";
-			loc="/Dongle_Community_view/boardInsert";
+			loc="/Dongle_Community_view/sectioncalender.jsp";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

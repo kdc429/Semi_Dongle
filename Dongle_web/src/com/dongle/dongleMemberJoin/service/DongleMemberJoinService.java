@@ -13,6 +13,16 @@ import com.dongle.group.model.vo.GroupMember;
 
 public class DongleMemberJoinService {
 	
+	public int insertdongleupdate(GroupMember b)
+	{
+		Connection conn=getConnection();
+		int result=new DongleMemberJoinDao().insertdongleupdate(conn,b);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	};
+	
 	public int insertdonglejoin(GroupMember b)
 	{
 		Connection conn=getConnection();
@@ -34,7 +44,6 @@ public class DongleMemberJoinService {
 
 		close(conn);
 		return data;
-		
 	}
 
 }

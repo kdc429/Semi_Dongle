@@ -13,7 +13,6 @@
 #btn_find{
 	width: 173px;
 	height: 24px;
-	
 }
 </style>
 </head>

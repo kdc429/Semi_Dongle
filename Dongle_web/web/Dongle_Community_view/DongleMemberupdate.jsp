@@ -8,67 +8,66 @@
    Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <meta charset="UTF-8">
 
 
-    <style>
-#dongle_join{
-            border: 20px solid rgb(144, 202, 135);
-            width: 500px;
-            height: 500px;
-            margin-left: 90px;
+<style>
 
-        }
-        
-       .image_p{
-            border: 2px solid black;
-            width: 150px;
-            height: 150px;
-            border-radius: 40px;
-            margin-left: 155px;
-            margin-top: 50px;
-        }
-
-        .list{
-            width: 300px;
-            height: 50px;
-           margin-top: 50px;
-           margin-left: 75px;
-        }
-        #dongle_nickname{
-            width: 180px;
-            height: 25px;
-        }
-
-        .subm{
-           position: absolute;
-           left: 315px;
-           top: 500px;
-        }
-        
-        #upfile{
-            padding-left: 190px;
-            padding-top: 10px;
-        }
-        
-        #dongle_title{
-        	font-size: 70px;
-            margin-left: 190px;
-        }
-        /* 등러가는 이미지 style 클래스명 */
-        .selProductFile{
-            width: 145px;
-            height: 145px;
-            border-radius: 40px;
-            padding:3px;
-        }
-        
-        #nickbox{
-        	display: inline-block;
-        }
-        
-  
+	#dongle_join{
+	            border: 20px solid rgb(144, 202, 135);
+	            width: 500px;
+	            height: 500px;
+	            margin-left: 90px;
+	
+	        }
+	        
+	       .image_p{
+	            border: 2px solid black;
+	            width: 150px;
+	            height: 150px;
+	            border-radius: 40px;
+	            margin-left: 155px;
+	            margin-top: 50px;
+	        }
+	
+	        .list{
+	            width: 300px;
+	            height: 50px;
+	           margin-top: 50px;
+	           margin-left: 75px;
+	        }
+	        #dongle_nickname{
+	            width: 180px;
+	            height: 25px;
+	        }
+	
+	        .subm{
+	           position: absolute;
+	           left: 315px;
+	           top: 500px;
+	        }
+	        
+	        #upfile{
+	            padding-left: 190px;
+	            padding-top: 10px;
+	        }
+	        
+	        #dongle_title{
+	        	font-size: 70px;
+	            margin-left: 190px;
+	        }
+	        /* 등러가는 이미지 style 클래스명 */
+	        .selProductFile{
+	            width: 145px;
+	            height: 145px;
+	            border-radius: 40px;
+	            padding:3px;
+	        }
+	        
+	        #nickbox{
+	        	display: inline-block;
+	        } 
     </style>
     
 
@@ -96,7 +95,7 @@
 			var userId=$("#dongle_nickname").val().trim();
 			if(!userId || userId.length<4)
 			{
-				alert("닉네임를 2글자 이상 입력하세요~!");
+				alert("닉네임를 4글자 이상 입력하세요~!");
 				return;	
 			}
 			//팝업창에 대한 설정해주기!@
@@ -123,8 +122,8 @@
 	</script>
 
 
-<div id="dongle_title">동글 가입</div>
-	<form name='donglememberjoin' action="<%=request.getContextPath()%>/donglememberjoin" method="post" enctype="multipart/form-data">
+<div id="dongle_title">동글 정보수정</div>
+	<form name='dongleMemberUpdate' action="<%=request.getContextPath()%>/dongleMemberUpdate" method="post" enctype="multipart/form-data">
 		<section>
 	    <div id="container">
 	        <div id="dongle_join">
@@ -144,7 +143,7 @@
 	                    </tr>
 	                    <tr class="subm">
 	                        <td colspan='2'>
-	                            <input type="submit" onclick="return password_validate();" value="가입"/>
+	                            <input type="submit" onclick="return password_validate();" value="정보수정"/>
 	                        </td>
 	                    </tr>
 	                </table>
@@ -156,7 +155,7 @@
 	
 	<form action="" name="checkdongleDuplicateFrm">
 			<input type="hidden" name="dongle_nickname"/>
-		</form>	
+	</form>	
 	
 	
 <%-- 	<script>
