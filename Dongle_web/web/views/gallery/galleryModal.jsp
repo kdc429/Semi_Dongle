@@ -288,9 +288,9 @@ $('#deleteGallery').click(function(e){
 		</span>
 		<span class='comment_box'>
 			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
-			<a href='*' style='float:right;' >신고</a>
+			<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
 			<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
-				<a id='deleteGallery' style='float:right;' >삭제</a>
+				<a id='deleteGallery' style='float:right;color:RGB(112,136,172);' >삭제</a>
 			<%} %>
 			<br/>
 		</span>
@@ -307,13 +307,13 @@ $('#deleteGallery').click(function(e){
 		<%} %>
 		<a class="prev" onclick="plusSlides(-1)">❮</a>
 		<a class="next"onclick="plusSlides(1)">❯</a>
-		</div>
-		<br>
-		<div style="text-align: center">
-			<%for(int i=0;i<gplist.size();i++){ %>
-				<span class="dot" onclick="currentSlide(<%=i%>)"></span> 
-			<%} %>
-		</div>
+	</div>
+	<br>
+	<div style="text-align: center">
+		<%for(int i=0;i<gplist.size();i++){ %>
+			<span class="dot" onclick="currentSlide(<%=i%>)"></span> 
+		<%} %>
+	</div>
 	<div id="gal-content">
 		<table>
 			<tr>
@@ -337,7 +337,10 @@ $('#deleteGallery').click(function(e){
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
-									<a href='*' >신고</a>
+									<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
+									<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+										<p id='deleteComment' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);' >삭제</p>
+									<%} %>
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -356,7 +359,10 @@ $('#deleteGallery').click(function(e){
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
-									<a href='*' >신고</a>
+									<p style='float:right;color:RGB(112,136,172);' >신고</p>
+									<%if(loginMember.getMemberNo()==g.getMemberNo()){%>
+										<p id='deleteComment' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);'>삭제</p>
+									<%} %>
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -388,7 +394,18 @@ $('#deleteGallery').click(function(e){
 	</div>
 
 <script>
-
+	/* 댓글 삭제하기 */
+	$(funtion(){
+		$('#deleteComment').click(function(){
+			if(!comfirm("정말로 삭제하시겠습니까?")){return;}
+			else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/gallery/deleteComment",
+					data:
+				})
+			}
+		});
+	});
 	/* 대댓글 쓰기 함수*/
 	$(function(){
 		var eventflag;

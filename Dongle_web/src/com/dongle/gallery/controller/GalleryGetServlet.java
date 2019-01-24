@@ -42,7 +42,7 @@ public class GalleryGetServlet extends HttpServlet {
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
 		System.out.println(gm);
-		if(gm.getMemberNo()==0||!loginMember.getMemberId().equals("admin"))
+		if((gm.getMemberNo()!=loginMember.getMemberNo())||!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
