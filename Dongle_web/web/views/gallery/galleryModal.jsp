@@ -13,19 +13,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- 부트스트랩 -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-<link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <style>
 /* 모달창  */
 .close {
@@ -565,4 +553,3 @@ if (n < 1) {slideIndex = slides.length}
 
 	});
 </script>
-

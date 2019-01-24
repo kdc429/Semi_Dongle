@@ -190,7 +190,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 					<!-- 동글 프로필 -->
 
 					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
-
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -464,6 +463,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			dataType:"html",
 			success:function(data){
 				$('#content-div').html(data);
+				setImage();
 			}
 		});
 	});
