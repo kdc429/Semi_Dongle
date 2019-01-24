@@ -161,6 +161,4 @@
 </section>
 <script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
-
-</body>
-</html>
+<%@ include file="footer.jsp"%>
