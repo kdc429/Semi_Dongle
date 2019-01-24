@@ -48,7 +48,7 @@
 		<div class="modal fade"></div>
 		<div class="panel-body">동글 메인 꾸미기</div>
 		<div class="panel-heading">동글 회원관리</div>
-		<div class="panel-body">신고 회원 관리</div>
+		<div class="panel-body"><a id="report-member-btn">신고 회원 관리</a></div>
 	</div>
 	<div class="panel panel-default" style="width: 600px">
 		<div class="panel-body">
@@ -197,3 +197,27 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+$(function(){
+	$("#report-member-btn").click(function(){
+		var managerNo=<%=g.getMemberNo()%>;
+		
+		console.log(<%=g.getMemberNo()%>);
+		$.ajax({
+			url:"<%=request.getContextPath()%>/manager/reportMemberView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			data:{
+				"managerNo":managerNo
+			},
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complete:function(){console.log("ok");}
+		})
+	})
+});
+</script>
