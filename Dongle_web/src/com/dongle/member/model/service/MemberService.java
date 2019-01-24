@@ -6,10 +6,11 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
-import com.dongle.main.model.dao.MainDao;
 import com.dongle.member.model.dao.MemberDao;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 public class MemberService {
 	
@@ -116,6 +117,13 @@ public class MemberService {
 		Member data = new MemberDao().selectPwd(conn,m);
 		close(conn);
 		return data;
+	}
+	
+	public List<ReportReason> selectReportCategory(){
+		Connection conn=getConnection();
+		List<ReportReason> reportCategory=new MemberDao().selectReportCategory(conn);
+		close(conn);
+		return reportCategory;
 	}
 	
 	

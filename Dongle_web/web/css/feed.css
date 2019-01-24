@@ -255,7 +255,7 @@ textarea{
 
 .feednew-logo {
 	height: 40px;
-	background-color: rgb(20,150,200);
+	background-color: rgb(112,136,172);
 }
 
 .feedup {
@@ -263,7 +263,7 @@ textarea{
 }
 #feedup{
 	margin:10px;
-	background-color:rgba(20,150,200,0.5);
+	background-color:rgba(112,136,172);
 	border:0;
 	float:right;
 	text-align:center;

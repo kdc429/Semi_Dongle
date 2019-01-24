@@ -10,7 +10,7 @@
 	List<FeedFile> feedFileList=(List)request.getAttribute("feedFileList");
 	List<FeedComment> feedCommentList=(List)request.getAttribute("feedCommentList");
 	List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCommentList");
-	
+	List<ReportReason> reportCategory=(List)request.getAttribute("reportCategory");
 %>
 
 <html>
@@ -409,6 +409,42 @@
 		})
 	
 	
+	$(document).ready(function(){
+		
+		$('.report-button').on('click',function(){
+			var reNickName=$(this).parent().siblings('.content-writer-nick').val();
+			console.log(reNickName);
+			document.reportFrm.reportNickName.value=reNickName;
+			var reportWin=window.open("<%=request.getContextPath()%>/views/common/reportMember.jsp","reportWin","width=300, height=300, menubar=no, status=no, toolbar=no");
+			
+			var groupNo=<%=g.getGroupNo()%>;
+			var memberNo=$(this).children('.content-writer-no');
+			
+			
+			
+			
+			<%-- $.ajax({
+				url:"<%=request.getContextPath()%>/feed/feedReport",
+				type:"post",
+				data:{
+					
+					"groupNo":groupNo,
+					"memberNo":memberNo
+					
+				},
+				success:function(data){
+					if(data>0){
+						alert("신고되었습니다.");
+					}else{
+						alert("신고 실패 하였습니다.")
+					}
+				}
+			}) --%>
+		});
+		
+		
+	})
+	
 	
 	</script>
 	<div class="newsfeed">
@@ -459,6 +495,8 @@
                 	if(gm.getMemberNo()==f.getMemberNo()){%>
                 	<img style="padding:10px 10px;" src="<%=request.getContextPath() %>/images/member_img/<%=gm.getGroupMemberImageNewPath() %>" class="member-profile">
                 	<a><%=gm.getGroupMemberNickname() %></a>
+                	<input type="hidden" class="content-writer-nick" value="<%=gm.getGroupMemberNickname() %>">
+                	
                 <%		break;
                 		}
                 	}%>
@@ -466,7 +504,6 @@
                 	<div class="update-back">
             		<%if(f.getMemberNo()==loginMember.getMemberNo()){ %>
             			<input type="hidden" class="feed-no-update" value="<%=f.getFeedNo() %>"/>
-            			
             			<button class="delete-btn">
             				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
             			</button>
@@ -475,6 +512,8 @@
             			</button>
             		<%}else{%>
             			<button class="report-button">
+            				
+            				<input type="hidden" class="content-writer-no" value="<%=f.getMemberNo() %>"/>
             				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
             			</button>
             		<%} %>
@@ -588,6 +627,7 @@
                         			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fc.getFeCommentDate() %></span>
                         			<button class="report-button">
+                        				<input type="hidden" class="content-writer-no" value="<%=fc.getMemberNo() %>">
                         				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
                         			</button>
                         			<button class="comment-reple">
@@ -616,6 +656,7 @@
                         			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
                         			<button class="report-button">
+                        				<input type="hidden" class="content-writer-no" value="<%=fcl2.getMemberNo() %>">
                         				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
                         			</button>
                         			
@@ -675,6 +716,26 @@
 				
 			</div>
 		</div>
+		<form id='reportFrm' name="reportFrm">
+			<input type="hidden" name="reportNickName" value="">
+			<input type="hidden" id="report1" name="report1" value="<%=reportCategory.get(0).getReportCode()%>">
+			<input type="hidden" id="reason1" name="reason1" value="<%=reportCategory.get(0).getReportReason()%>">
+			<input type="hidden" id="report2" name="report2" value="<%=reportCategory.get(1).getReportCode()%>">
+			<input type="hidden" id="reason2" name="reason2" value="<%=reportCategory.get(1).getReportReason()%>">
+			<input type="hidden" id="report3" name="report3" value="<%=reportCategory.get(2).getReportCode()%>">
+			<input type="hidden" id="reason3" name="reason3" value="<%=reportCategory.get(2).getReportReason()%>">
+			<input type="hidden" id="report4" name="report4" value="<%=reportCategory.get(3).getReportCode()%>">
+			<input type="hidden" id="reason4" name="reason4" value="<%=reportCategory.get(3).getReportReason()%>">
+			<input type="hidden" id="report5" name="report5" value="<%=reportCategory.get(4).getReportCode()%>">
+			<input type="hidden" id="reason5" name="reason5" value="<%=reportCategory.get(4).getReportReason()%>">
+			<input type="hidden" id="report6" name="report6" value="<%=reportCategory.get(5).getReportCode()%>">
+			<input type="hidden" id="reason6" name="reason6" value="<%=reportCategory.get(5).getReportReason()%>">
+			<input type="hidden" id="report7" name="report7" value="<%=reportCategory.get(6).getReportCode()%>">
+			<input type="hidden" id="reason7" name="reason7" value="<%=reportCategory.get(6).getReportReason()%>">
+			
+			<!-- <input type="hidden" id="sel_recode" -->
+			
+		</form>
     <script src="<%=request.getContextPath()%>/Dongle_js/feed.js"></script>
 
 </html>

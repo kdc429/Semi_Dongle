@@ -1,15 +1,19 @@
 package com.dongle.member.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
-import static common.JDBCTemplate.close;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 
 public class MemberDao {
@@ -239,5 +243,33 @@ public class MemberDao {
 		
 		return data;
 			
+	}
+	
+	public List<ReportReason> selectReportCategory(Connection conn){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectReportCategory");
+		List<ReportReason> reportCategory=new ArrayList();
+		ReportReason rr=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				rr=new ReportReason();
+				rr.setReportCode(rs.getInt("report_code"));
+				rr.setReportReason(rs.getString("report_reason"));
+				reportCategory.add(rr);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return reportCategory;
+		
 	}
 }
