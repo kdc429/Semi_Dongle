@@ -69,7 +69,7 @@ public class DongleMemberUpdateServlet extends HttpServlet {
 		
 		GroupMember m = new GroupMember();
 		
-		m.setGroupMemberNickname(mr.getParameter("dongle_nickname"));
+		m.setGroupMemberNickname(mr.getParameter("nickname"));
 		m.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
 		m.setMemberNo(Integer.parseInt(mr.getParameter("memberNo")));
 		m.setGroupMemberImageNewPath(mr.getOriginalFileName("upfile"));

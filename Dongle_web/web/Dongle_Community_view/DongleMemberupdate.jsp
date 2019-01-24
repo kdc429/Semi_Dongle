@@ -37,7 +37,7 @@
 	           margin-top: 50px;
 	           margin-left: 75px;
 	        }
-	        #dongle_nickname{
+	        #nickname{
 	        	display:inline-block
 	            width: 180px;
 	            height: 25px;
@@ -90,7 +90,7 @@
 				alert('닉네임 중복체크를 해주세요!');
 				return false;	
 			}
-			var userId=$("#dongle_nickname");
+			var userId=$("#nickname");
 			if(userId.val().length<2)
 			{
 				alert("최소 2자리 이상 입력하세요!");
@@ -103,8 +103,8 @@
 		
 		//아이디 중복검사하기 : 팝업창을 띄워서 해보자~! 
 		function fn_checkduplicate(){
-			var userId=$("#dongle_nickname").val().trim();
-			if(!userId || userId.length<2)
+			var nickname=$("#nickname").val().trim();
+			if(!nickname || nickname.length<2)
 			{
 				alert("닉네임를 2글자 이상 입력하세요~!");
 				return;	
@@ -117,7 +117,7 @@
 			var popup=open("",title,shape);
 			
 			//현재페이지에 있는값을 새창으로 옮기는 작업~!
-			checkdongleDuplicateFrm.dongle_nickname.value=userId;
+			checkdongleDuplicateFrm.nickname.value=nickname;
 			//popup창에서 이 폼을 작동시키게 하는 구문!
 			checkdongleDuplicateFrm.target=title;
 			checkdongleDuplicateFrm.action=url;
@@ -146,7 +146,7 @@
 	                    <tr>
 	                        <th>닉네임 &nbsp;</th>
 	                        <td>
-	                            <input type="text" name="dongle_nickname" id="dongle_nickname" required/>
+	                            <input type="text" name="nickname" id="nickname" required/>
 	                            <input type="button" value="중복검사" onclick="fn_checkduplicate();"/>
 	                            <input type='hidden' name="idValid" value="0"/> 
 	                            <input type='hidden' name="groupNo" value="<%=groupNo%>"/> 
@@ -166,7 +166,7 @@
 	</form>
 	
 	<form action="" name="checkdongleDuplicateFrm">
-			<input type="hidden" name="dongle_nickname"/>
+			<input type="hidden" name="nickname"/>
 	</form>	
 	
 	

@@ -49,12 +49,13 @@
 		function setUserId(userId)
 		{
 			var frm=opener.document.memberEnrollFrm;//부모창을 호출
+			console.log(frm);
 			console.log(frm.isValid);
 			frm.userId.value=userId;
 			frm.idValid.value='1';
 			frm.password.focus();
 			
-			self.close();//현재 열려있는 창을 닫는 것			
+			self.close();//현재 열려있는 창을 닫는 것		
 		}
 		
 		
