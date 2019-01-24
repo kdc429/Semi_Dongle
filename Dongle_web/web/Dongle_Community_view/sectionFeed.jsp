@@ -19,6 +19,19 @@
 
 <link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet"/>
 	<script>
+	
+	$('.feed-content').each(function () {
+		  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+		}).on('input', function () {
+		  this.style.height = 'auto';
+		  this.style.height = (this.scrollHeight) + 'px';
+	});
+	$('#feed-content-up').each(function () {
+		  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+		}).on('input', function () {
+		  this.style.height = 'auto';
+		  this.style.height = (this.scrollHeight) + 'px';
+	});
 	$(document).ready(function() {
 		// 스크롤 발생 이벤트 처리
 		$(document).on("scroll",document,function() {
@@ -187,6 +200,9 @@
 			success:function(data){ 
 				console.log(data);
 					newFeed.next().after(data);
+					$('#feed-content-up').val("");
+					$('#imgPreview').children().children().remove();
+					setImage();
 			}
 			
 		});
@@ -322,8 +338,10 @@
 		
 		$(document).ready(function(){
 			//수정 팝업 레이어 열기
-			$('.update-btn').click(function(event){
+			console.log($(this));
+			$(document).on('click','.update-btn',function(event){
 				var button=$(this);
+				console.log(button);
 				var elementTop=$(this).parent().parent();
 				console.log("눌리나?");
 				var feedPopup=document.getElementById("feed-popup");
@@ -349,8 +367,8 @@
 					data:{"feedNo":feedNo},
 					
 					success:function(data){
-						$('#feed-popup').append(data);
-						button.off('click');
+						$('#feed-popup').html(data);
+						
 					}
 					
 				})
@@ -360,14 +378,6 @@
 			
 		});
 			//
-		$('#close-btn').on('click',function(){//레이어 창 닫기 이벤트
-			console.log("눌리나?");
-			var feedPopup=document.getElementById("feed-popup");
-			console.log(feedPopup);
-			$('#feed-popup').removeAttr('style');
-			$('.update-btn').on('click');
-					
-		})
 		
 		$(document).ready(function(){
 			//피드 삭제 에이작스
@@ -412,20 +422,28 @@
 							<div id="imgPreview">							
 							<ul></ul>
 							</div>
-							<button type="button" class="up-btn" id="pic-up-btn">
-								<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/camera-retro-solid.png">	
-							</button>
-							<button type="button" class="up-btn" id="video-up-btn">
-								<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/video-solid.png">
-							</button>
-							<button type="button" class="up-btn" id="file-up-btn">
-								<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/file-solid.png">
-							</button>
-							<input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept=".gif, .jpg, .png" style='display: none;'/>
-							<input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept=".mp4,.ogg" style='display: none;'/>
-                    		<input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
+							
                     		<div class="fileup" >
-                       			<button type="button" id="feedup">등록</button>
+                    			<div id="file-back">
+                    				<button type="button" class="up-btn" id="pic-up-btn">
+										<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/camera-retro-solid.png">	
+									</button>
+									<button type="button" class="up-btn" id="video-up-btn">
+										<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/video-solid.png">
+									</button>
+									<button type="button" class="up-btn" id="file-up-btn">
+										<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/file-solid.png">
+									</button>
+									<input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept=".gif, .jpg, .png" style='display: none;'/>
+									<input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept=".mp4,.ogg" style='display: none;'/>
+                    				<input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
+                    			</div>
+                    			<div id="upload-back">
+                    				<button type="button" id="feedup">
+                       					<img id="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/pen-solid.png"/>Upload
+                       				</button>
+                    			</div>
+                       			
                     		</div>
 						</form>
                 </div>
@@ -445,9 +463,7 @@
                 		}
                 	}%>
                 	<span class="write-date"><%=f.getFeedWriteDate() %></span>
-            	</div>
-            	<div class="feed-body">
-            		<div>
+                	<div class="update-back">
             		<%if(f.getMemberNo()==loginMember.getMemberNo()){ %>
             			<input type="hidden" class="feed-no-update" value="<%=f.getFeedNo() %>"/>
             			<button class="delete-btn">
@@ -458,19 +474,24 @@
             			</button>
             		<%} %>
             		</div>
-            		<textarea type="text" cols="73" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
             		<% if(feedFileList!=null){%>
- 
-            		<ul class="file-download">
-            		
+ 					<div class="download-back">
+	            		<ul class="file-download">
+ 					
             		<%for(FeedFile ff:feedFileList){
             			if(ff.getFeedNo()==f.getFeedNo()){ %>
-            			<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+            				<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
             		<%		}
             			}%>
-            		</ul>
-            		<% }%>
 
+            			</ul>
+            		</div>
+            		<% }%>
+            	</div>
+            	<div class="feed-body">
+            		
+            		<textarea type="text" cols="73" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
+            		
             		<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()){%>
     				<div class="feed-pics">
@@ -640,9 +661,7 @@
 			</div>
 			
 			<div id="feed-popup">
-				<div id="close">
-					<button id="close-btn">X</button>
-				</div>
+				
 			</div>
 		</div>
     <script src="<%=request.getContextPath()%>/Dongle_js/feed.js"></script>

@@ -464,6 +464,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			dataType:"html",
 			success:function(data){
 				$('#content-div').html(data);
+				setImage();
 			}
 		});
 	});
