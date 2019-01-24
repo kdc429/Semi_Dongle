@@ -12,6 +12,7 @@ public class FeedComment {
 	private String feCommentContent; //FE_COMMENT_CONTENT
 	private Date feCommentDate; //FE_COMMENT_DATE
 	private int feCommentRef; //FE_COMMENT_REF
+	private String feedCommentReportStatus;//FEED_COMMENT_REPORT_STATUS
 	
 	public FeedComment() {
 		
@@ -21,7 +22,7 @@ public class FeedComment {
 	
 
 	public FeedComment(int groupNo, int feedNo, int feCommentNo, int feCommentLevel, int memberNo,
-			String feCommentContent, Date feCommentDate, int feCommentRef) {
+			String feCommentContent, Date feCommentDate, int feCommentRef, String feedCommentReportStatus) {
 		super();
 		this.groupNo = groupNo;
 		this.feedNo = feedNo;
@@ -31,6 +32,7 @@ public class FeedComment {
 		this.feCommentContent = feCommentContent;
 		this.feCommentDate = feCommentDate;
 		this.feCommentRef = feCommentRef;
+		this.feedCommentReportStatus = feedCommentReportStatus;
 	}
 
 
@@ -106,12 +108,36 @@ public class FeedComment {
 		this.feCommentDate = feCommentDate;
 	}
 
+	public String getFeedCommentReportStatus() {
+		return feedCommentReportStatus;
+	}
+
+
+
+
+	public void setFeedCommentReportStatus(String feedCommentReportStatus) {
+		this.feedCommentReportStatus = feedCommentReportStatus;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "FeedComment [groupNo=" + groupNo + ", feedNo=" + feedNo + ", feCommentNo=" + feCommentNo
 				+ ", feCommentLevel=" + feCommentLevel + ", memberNo=" + memberNo + ", feCommentContent="
-				+ feCommentContent + ", feCommentDate=" + feCommentDate + "]";
+				+ feCommentContent + ", feCommentDate=" + feCommentDate + ", feCommentRef=" + feCommentRef
+				+ ", feedCommentReportStatus=" + feedCommentReportStatus + "]";
 	}
+
+	
+
+
+	
+
+
+
+
 	
 	
 

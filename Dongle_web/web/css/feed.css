@@ -311,7 +311,7 @@ textarea{
     white-space: nowrap;
     float: right;
 }
-file-down-list{
+.file-down-list{
 	display: inline;
 }
 
@@ -338,8 +338,40 @@ file-down-list{
 	width:683px;
 }
 #submit{
-	width:500px;
+	margin:10px;
+	background-color:rgba(112,136,172);
+	border:0;
+	float:right;
+	text-align:center;
+	border-radius:10px;
 }
+#updateImgPreview {
+    width: 500px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#updateImgPreview>ul{
+	padding:0;
+	list-style:none;
+}
+#updateImgPreview>ul>li{
+	
+	max-height: 300px;
+	max-width:500px;
+	width: auto;
+	height: auto;
+}
+
+#updateImgPreview>ul>li>img{
+	padding: 10px 10px;
+	max-height: 300px;
+	max-width:450px;
+	width: auto;
+	height: auto;
+}
+
 #feed-popup{
 	border:double;
 	width:684px;

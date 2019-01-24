@@ -97,6 +97,7 @@ public class FeedContentUploadServlet extends HttpServlet {
 				String fileName=(String)files.nextElement();
 				fl=new FileList();
 				fl.setFeedNo(feedNo);
+				System.out.println(fileName);
 				fl.setFeedOriFilePath(fileName); 
 				if(fileName.substring(0, 5).equals("image")) {
 					fl.setFeedRenameFilePath(mr.getFilesystemName("image"+i));

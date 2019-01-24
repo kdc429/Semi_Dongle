@@ -15,6 +15,10 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
 			<% if(feedList!=null){ 
             	for(Feed f:feedList){%>
                    <!-- 피드 한칸 -->
+                   <%if(f.getFeedReportStatus().equals("Y")) {
+                   
+                   }else{
+                   %>
         	<div class="feed">
             	<div class="feed-header">
 		
@@ -133,7 +137,7 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
             		<div class="comment-back">
             			<ul>
             			<%for(FeedComment fc:feedCommentList){
-            				if(fc.getFeedNo()==f.getFeedNo()){ %>
+            				if(fc.getFeedNo()==f.getFeedNo()&&fc.getFeedCommentReportStatus().equals("Y")){%>
                 			<li class='level1' style="list-style:none;">
                 				<input type="hidden" class="feedCommentNo" value="<%=fc.getFeCommentNo() %>"/>
                 				<%for(GroupMember gm:memberList){
@@ -158,6 +162,8 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
     									%> 
                 			</li>
                 			<%for(FeedComment fcl2:feedLevel2CommentList) {
+                				if(fcl2.getFeedCommentReportStatus().equals("Y")){
+                				}else{
                 				for(GroupMember gm:memberList){
                 				if(fcl2.getMemberNo()==gm.getMemberNo()&&fc.getFeCommentNo()==fcl2.getFeCommentRef()){
                 				
@@ -181,7 +187,7 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
                 				}
                 			}%>
             				
-            			<%				
+            			<%				}
                 					}
                 				}
             					%> 
@@ -206,7 +212,7 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
             </div>
             <hr>
 			<% 		
-            					
+                   }
             				}
             			}%>
 	

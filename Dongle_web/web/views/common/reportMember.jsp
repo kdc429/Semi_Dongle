@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>동글 멤버</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <script>
@@ -47,6 +48,106 @@
 		document.getElementById('reportNo7').innerHTML=reason7;
 		
 	}
+	
+	$(document).ready(function(){
+		$('#report').on('change',function(){
+			
+			window.opener.document.getElementById('selectRecode').value=document.getElementById('reportMemberNick').value;
+			report();
+		});
+	})
+	
+	$(document).ready(function(){
+		
+		
+		$('#report-close').on('click',function(){
+			var feedNo=window.opener.document.getElementById('reportFeedNo').value;
+			var feedCommentNo=window.opener.document.getElementById('reportFeedCommentNo').value;
+			var groupNo=window.opener.document.getElementById('reportGroupNo').value;
+			var memberNo=window.opener.document.getElementById('reportMemberNo').value;
+			var reportCode=document.getElementById('reportMemberNick').value;
+			console.log(feedNo);
+			console.log(groupNo);
+			console.log(feedCommentNo);
+			if(feedCommentNo==0){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/feed/feedReport",
+					type:"post",
+					data:{
+						"feedNo":feedNo,
+						"groupNo":groupNo,
+						"memberNo":memberNo,
+						"reportCode":reportCode
+						
+					},
+					success:function(data){
+						if(data>0){
+							alert("신고되었습니다.");
+							
+							$.ajax({
+								url:"<%=request.getContextPath()%>/feed/feedListView",
+								type:"post",
+								data:{
+									"groupNo":groupNo,
+									"memberNo":memberNo	
+								},
+								
+								dataType:"html",
+								success:function(data2){
+									console.log(data2);
+									$(opener.document).find('#content-div').html(data2);
+									setImage();
+									self.close();
+								}
+								
+							});
+							
+						}else{
+							alert("신고 실패 하였습니다.")
+						}
+					}
+				})
+			}else if(feedNo==0){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/feed/feedCommentReport",
+					type:"post",
+					data:{
+						"feedCommentNo":feedCommentNo,
+						"groupNo":groupNo,
+						"memberNo":memberNo,
+						"reportCode":reportCode
+						
+					},
+					success:function(data){
+						if(data>0){
+							alert("신고되었습니다.");
+							
+							$.ajax({
+								url:"<%=request.getContextPath()%>/feed/feedListView",
+								type:"post",
+								data:{
+									"groupNo":groupNo,
+									"memberNo":memberNo	
+								},
+								
+								dataType:"html",
+								success:function(data2){
+									$(opener.document).find('#content-div').html(data2);
+									setImage();
+									self.close();
+								}
+								
+							});
+							
+						}else{
+							alert("신고 실패 하였습니다.")
+						}
+					}
+				})
+			}
+			
+		})
+	})
 	
 </script>
 	<div>

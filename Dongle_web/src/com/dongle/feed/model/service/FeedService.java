@@ -192,5 +192,34 @@ public class FeedService {
 		
 		return result;
 	}
+	public int feedStatusUpdate(int feedNo) {
+		Connection conn=getConnection();
+		int result=0;
+		result=new FeedDao().feedStatusUpdate(conn,feedNo);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int feedCommentStatusUpdate(int feedNo) {
+		Connection conn=getConnection();
+		int result=0;
+		result=new FeedDao().feedCommentStatusUpdate(conn,feedNo);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
 }

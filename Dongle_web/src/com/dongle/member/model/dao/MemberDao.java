@@ -272,4 +272,24 @@ public class MemberDao {
 		return reportCategory;
 		
 	}
+	
+	public int insertReport(Connection conn,int groupNo,int memberNo,String reportCode) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertReport");
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, reportCode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

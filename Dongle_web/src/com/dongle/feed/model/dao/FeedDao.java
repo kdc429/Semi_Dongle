@@ -53,6 +53,7 @@ public class FeedDao {
 				feed.setMemberNo(rs.getInt("member_no"));
 				feed.setFeedContent(rs.getString("feed_content"));
 				feed.setFeedWriteDate(rs.getDate("feed_write_date"));
+				feed.setFeedReportStatus(rs.getString("feed_report_status"));
 				
 				feedList.add(feed);
 			}
@@ -372,6 +373,7 @@ public class FeedDao {
 				f.setMemberNo(rs.getInt("member_no"));
 				f.setFeedContent(rs.getString("feed_content"));
 				f.setFeedWriteDate(rs.getDate("feed_write_date"));
+				f.setFeedReportStatus(rs.getString("feed_report_status"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -552,6 +554,46 @@ public class FeedDao {
 		
 		return fileList;
 		
+	}
+	
+	public int feedStatusUpdate(Connection conn, int feedNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		String sql=prop.getProperty("feedStatusUpdate");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, feedNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int feedCommentStatusUpdate(Connection conn, int feedNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		String sql=prop.getProperty("feedCommentStatusUpdate");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, feedNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 

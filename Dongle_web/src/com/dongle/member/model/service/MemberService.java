@@ -126,5 +126,21 @@ public class MemberService {
 		return reportCategory;
 	}
 	
+	public int insertReport(int groupNo,int memberNo,String reportCode) {
+		Connection conn=getConnection();
+		int result=0;
+		result=new MemberDao().insertReport(conn,groupNo,memberNo,reportCode);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	
+		
+	}
+	
 	
 }

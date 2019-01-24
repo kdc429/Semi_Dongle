@@ -23,7 +23,7 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
 				ext=oldName.substring(dot);//확장자만 따로 분리
 			}
 			//파일 rename
-			String newName="newsfeed"+sdf.format(new Date(currentTime))+"_"+rndNum+ext;
+			String newName="member_img"+sdf.format(new Date(currentTime))+"_"+rndNum+ext;
 			newFile= new File(oldFile.getParent(),newName);
 			//oldFile.getParent(): 부모 디렉토리 경로
 			//newName: 새로 만들어진 파일 이름
