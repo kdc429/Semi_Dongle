@@ -11,9 +11,20 @@
 	List<BoardComment> bclist=(List)request.getAttribute("bclist");
 	/* int boCommentNo=(int)request.getAttribute("boCommentNo"); */
 %>
-    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-	
+div.view-btn
+{
+	text-align:center;
+}
 /* 댓글창 스타일 */
 div.board-comment-editor fieldset.modal_comment{
 padding:8px 10px 10px;
@@ -29,7 +40,7 @@ margin-top:2px;
 /* 댓글테이블!! */
 div.board-comment-editor{border-top: 1px solid rgb(240,240,240);margin-top:5%;}
 div.board-comment-ediotr ul{list-style:none;}
-div.board-comment-ediotr ul li{list-style:none;}
+div.board-comment-ediotr ul li{list-style:none; margin-bottom:20px;}
 .ico_skin{display:block;overflow:hidden;font-size:0;line-height: 0;text-indent:-9999px;}
 .thumb_profile{
    width: 33px;
@@ -63,7 +74,7 @@ line-height:15px;
 border-radius: 20px;
 border:none;
 background-color:white;
-}    
+}   
     
     
 	
@@ -71,33 +82,33 @@ background-color:white;
 </style>
 	<section id="board-container">
 		<form name="deleteFrm" method="post" enctype="multipart/form-data">
-			<table class="table table-bordered">
+			<table class="table">
 				<thead>
 					<br><br>
 					<tr>
-						<th colspan="3" id="title">공지사항</th>
+						<th colspan="3" id="title" style="border-top:1px solid #dddddd; ">공지사항</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th style="width: 20%;">글 제목</th>
-						<td colspan="2"><%=b.getBoardTitle()%></td>
+						<th style="width: 20%; background-color:rgba(245,245,245); color:black">글 제목</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardTitle()%></td>
 					</tr>
 					<tr>
-						<th>작성자</th>
-						<td colspan="2"><%=b.getBoardWriter() %></td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">작성자</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardWriter() %></td>
 					</tr>					
 					<tr>
-						<th>작성일자</th>
-						<td colspan="2"><%=b.getBoardWriteDate()%></td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">작성일자</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardWriteDate()%></td>
 					</tr>					
 					<tr>
-						<th>조회수</th>
-						<td colspan="2"><%=b.getBoardViewCount()%></td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">조회수</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardViewCount()%></td>
 					</tr>
 					<tr>
-						<th>첨부파일</th>
-						<td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">첨부파일</th>
+						<td style="text-align:left">
 							<%
 							if(bp.getBoardFileNewPath()!=null){%> 
 								<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
@@ -108,18 +119,18 @@ background-color:white;
 						</td>
 					</tr>
 					<tr>
-						<th>내용</th>
-						<td colspan="2"><%=b.getBoardContent()%></td>
+						<th style="border-bottom:1px solid #dddddd; background-color:rgba(245,245,245); color:black">내용</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardContent()%></td>
 					</tr>
 				</tbody> 
 			</table>
 		</form>
 		<div class="view-btn">
-			<button id='view-list-btn'>목록으로</button>
+			<button type="button" class="btn btn-default" id='view-list-btn' style="text-align:center; font-family: '나눔스퀘어라운드 Regular';">목록으로</button>
 			<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
-			<button id='view-update-btn'>수정하기</button>
+			<button type="button" class="btn btn-default" id='view-update-btn' style="font-family: '나눔스퀘어라운드 Regular';">수정하기</button>
 			<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-			<input type="button" id="view-delete-btn" value="삭제하기" />
+			<button type="button" class="btn btn-default" id="view-delete-btn" style="font-family: '나눔스퀘어라운드 Regular';">삭제하기</button>
 			<%} %>
 		</div>
 		<br><br>
@@ -137,7 +148,7 @@ background-color:white;
 			<input type="hidden" name="boardCommentRef" id="boardCommentRef"
 			value="0"/>
 			<textarea cols='70' rows='3' style='resize:none;' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
-			<button id="comment-insert-btn">등록</button>
+			<button type="button" class="btn btn-default" id="comment-insert-btn" style="float:right; width:60px; height:65px;">등록</button>
 		</div>
 		<!-- 댓글목록 테이블 -->
 		<div class="board-comment-editor">
@@ -229,8 +240,8 @@ $(function(){
 			html+="<input type='hidden' name='boardNo' id='boardNo' value='<%=b.getBoardNo()%>'/>";
 			html+="<input type='hidden' name='boardCommentLevel' id='boardCommentLevel' value='2'/>";
 			html+="<input type='hidden' name='boardCommentRef' id='boardCommentRef2' value='"+$(this).val()+"'/>";
-			html+="<textarea style='resize:none;' name='boardCommentContent' id='boardCommentContent2' cols='63' rows='3'></textarea>";
-			html+="<button value='"+$(this).val()+"' id='comment-insert-btn' style='float:right'>등록</button>";
+			html+="<textarea style='resize:none;' name='boardCommentContent' id='boardCommentContent2' cols='63' rows='1'></textarea>";
+			html+="<button value='"+$(this).val()+"'class='btn btn-default' id='comment-insert-btn' style='float:right; width:60px; height:26px; margin-left:17px;'>등록</button>";
 			html+="</div></td>";
 			tr.html(html);
 			tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
