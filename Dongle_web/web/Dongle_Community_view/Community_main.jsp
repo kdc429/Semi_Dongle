@@ -130,6 +130,8 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 
 <body>
 	<script>
+	
+	
 		$(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/community/boardList",
@@ -173,10 +175,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
             <div class='logoback' style='position:relative;width:1024px;height: auto'>
                 <!-- 로고 grid -->
                 <div class='logo' style='width:1024px; height: auto; background-color:rgb(20,150,200)'>
-                    <h2 style="color:rgb(250,237,125); margin-left:15px;">DONGLE</h2>
+                    <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2>
                 </div>
             </div>
-
         </header>
 	<aside>
 		<div class="center">
@@ -389,11 +390,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
 
                     <!-- 메뉴 버튼 -->
+
                     <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
                     <button class='btn btn-primary' id="board-btn">공지사항</button><br>
                     <button class='btn btn-primary' id="feed-btn">피드</button><br>
                     <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button class='btn btn-primary'>일정</button><br>
+                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
                     <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
                     <%} %>
@@ -402,8 +404,15 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
         </aside>
 	
         <!-- 게시판 -->
-        
-       
+
+<!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
+<div class="modal-div">
+	<div class="dialog" id="modal-container">
+		<div class="modal-content">
+		</div>
+   	</div>
+</div>       
+
 <script>
 
    	$('#dongle_mem_btn').click(function(){
@@ -533,6 +542,22 @@ $(function(){
 		})
 	})
 });
+
+$(function(){
+	$("#calendarview").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/calendarMainView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
+
 
 
 function comunnityHome(){

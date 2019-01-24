@@ -1,0 +1,40 @@
+	#enroll-container>h1{
+		font-family: '여기어때잘난서체';
+	}
+	body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+ a.white12bold:link { font-size : 12px;  color : #ffffff;  text-decoration : none; font-weight: bold;  }
+ a.white12bold:visited { font-size : 12px;  color : #ffffff;  text-decoration : none; font-weight: bold;  }
+ a.white12bold:active { font-size : 12px;  color : #ffffff;  text-decoration : none; font-weight: bold; }
+ a.white12bold:hover { font-size :12px;  color : #ffffff;  text-decoration : none; font-weight: bold;  }
+ a.grey12:link { font-size : 12px;  color : #666666;  text-decoration : none;   }
+ a.grey12:visited { font-size : 12px;  color : #666666;  text-decoration : none;   }
+ a.grey12:active { font-size : 12px;  color : #666666;  text-decoration : none;  }
+ a.grey12:hover { font-size :12px;  color : #666666;  text-decoration : none;   }
+ 
+ 
+.white12bold {
+	font-size: 12px;
+	font-weight: bold;
+	color: #ffffff;
+	line-height: 17px;
+}
+.grey12 {
+	font-size: 12px;
+	color: #666666;
+	line-height: 18px;
+	font-weight:normal;
+}
+.stitle{height:15px; color:#666666; font-size:11px; font-family:Tahoma, Verdana, MalgunGothic,"돋움", "굴림"; font-weight:bold; border-bottom:2px solid #cccccc}
+.regtable {border-top:1px solid #eaeaea; margin:0 0 20px 0}
+.regtable td{border-bottom:1px solid #eaeaea; padding:0 10px; font-family:Tahoma, Verdana, MalgunGothic,"돋움", "굴림"; font-size:11px;}
+
+.find_btn a{display:block; background:url('/images/bts.gif') left 0; float:left; font-size:11px; font-family:Tahoma, Verdana, MalgunGothic,"돋움", "굴림"; color:#777; padding-left:6px; text-decoration:none; height:21px; cursor:pointer; margin-right:3px; overflow:hidden; margin:0 0 0 3px; text-align:center}
+.find_btn a:hover{background:url('/images/bts.gif') left -21px; text-align:center}
+.find_btn a span{display:block; float:left; background:url('/images/bts.gif') right 0; line-height:180%; padding-right:6px; height:21px; overflow:hidden; text-align:center}
+.find_btn a:hover span{background:url('/images/bts.gif') right -21px; color:#000; text-align:center}

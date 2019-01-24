@@ -6,55 +6,50 @@ padding: 0px;
 font-family:"a흑진주B";
 }
 div#album-container form#albumFolder> table tr td.albumFolBox{
+	width:185px;
 	font-family:"a흑진주B";
 	/* border:1px solid red; */
 	display:inline-block;
 	text-align: center;
 	align-items: center;
 	padding:15px;
+	height:202px;
 }
-div#album-container form#albumFolder> table tr td.albumFolBox .alImg,p{
+div#album-container form#albumFolder> table tr td.albumFolBox p{
 	display:block;
 	/* border: 1px solid orange; */
 }
-.alImg{
+div#album-container form#albumFolder> table tr td.albumFolBox .alImg{
 	/* border: 1px solid orange; */
-	width:150px; height:150px;
-	border-radius: 2px;
+	width:70px; height:70px;
+	padding:2px;
+	display:inline-block;
+	border-radius: 10px;
 }
 
 /* galleryView - 갤러리 사진(4x3) */
-section#gallery-container{position:relative;}
-section#gallery-container *{ 
-	position: relative;
-	padding: 0px;
-	position: relative;
-	font-family:"a흑진주B";
+div#gallery-container{position:relative;}
+div#gallery-container *{ 
+position: relative;
+font-family:"a흑진주B";
 }
-/* section#gallery-container div#galleryList{position: relative;} */
-section#gallery-container div#galleryList> table tr td.galleryBox{
+/* div#gallery-container div#galleryList{position: relative;} */
+div#gallery-container div#galleryList> table tr td.galleryBox{
 	font-family:"a흑진주B";
-	/* border:1px solid red; */
 	display:inline-block;
 	text-align: center;
 	align-items: center;
-	padding:5px;
 	padding:2px;
 }
-section#gallery-container div#galleryList> table tr td.galleryBox .galImg{
+div#gallery-container div#galleryList> table tr td.galleryBox .galImg{
 	display:block;
-	margin-left:20px;
-	/* border: 1px solid orange; */
 }
 .galImg{
 	width:120px; height:120px;
-	border-radius: 3px;
+	border-radius: 4px;
+	padding:2px;
 }
-section#gallery-container div#galleryList> table tr td.galleryBox .galImg:hover{
+div#gallery-container div#galleryList> table tr td.galleryBox .galImg:hover{
 	background-color:rgb(200,200,200);
 }
-section#gallery-container div#pag-div{position:relative;}
-section#gallery-container table tr td{/* border:1px solid red; */align-items: center;}
-section#gallery-container table tr td ul.pagnation li{text-align:center; align-items: center;color:green;}
-section#gallery-container table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50);align-items: center;}
 

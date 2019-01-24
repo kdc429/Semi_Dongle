@@ -9,8 +9,14 @@
 $(function(){
    //선택한 이미지로 모달띄우기
    var modal = document.getElementById('modal-container');
+   var cal=$('#calendar');
+   console.log(cal);
+   var X=document.body.scrollLeft;
+   var Y=cal.offset().top;
    $('#calendar_content #tt').click(function(obj){
       console.log(obj);
+      modal.style.left=X+"px";
+      modal.style.top=Y+"px";
       modal.style.display="block";
    });
    $('.close').click(function(){
@@ -40,8 +46,8 @@ $(function(){
     .dialog{
       display:none;
       position:absolute;
-      margin-top:-1200px;
-      /* z-index:20; */
+      margin-top:-250px;
+      z-index:20;
       left:0;                                                                                                   
       right:0;
       width:100%;
@@ -55,7 +61,7 @@ $(function(){
         margin: 15% auto; 
         padding: 20px;
         border: 1px solid #888;
-        width: 50%;  
+        width: 30%;  
         border-radius: 5px;
     }
     

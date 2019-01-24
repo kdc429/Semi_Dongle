@@ -271,6 +271,7 @@
 	
 	
 	$(function(){
+		//대댓글 입력창 열기
 		var eventflag;
 		$(document).on('click','.comment-reple',function(e){
 			var feedNoReple=$(this).parent().parent().children('.feedCommentNo').val();
@@ -320,8 +321,9 @@
 
 		
 		$(document).ready(function(){
-			
+			//수정 팝업 레이어 열기
 			$('.update-btn').click(function(event){
+				var button=$(this);
 				var elementTop=$(this).parent().parent();
 				console.log("눌리나?");
 				var feedPopup=document.getElementById("feed-popup");
@@ -348,6 +350,7 @@
 					
 					success:function(data){
 						$('#feed-popup').append(data);
+						button.off('click');
 					}
 					
 				})
@@ -356,17 +359,18 @@
 			
 			
 		});
-			
-			$('#close-btn').on('click',function(){
-				console.log("눌리나?");
-				var feedPopup=document.getElementById("feed-popup");
-				console.log(feedPopup);
-				$('#feed-popup').removeAttr('style');
-				
-			})
+			//
+		$('#close-btn').on('click',function(){//레이어 창 닫기 이벤트
+			console.log("눌리나?");
+			var feedPopup=document.getElementById("feed-popup");
+			console.log(feedPopup);
+			$('#feed-popup').removeAttr('style');
+			$('.update-btn').on('click');
+					
+		})
 		
 		$(document).ready(function(){
-			
+			//피드 삭제 에이작스
 			$('.delete-btn').click(function(){
 				var feedNo=$(this).siblings('.feed-no-update').val();
 				$.ajax({
@@ -408,9 +412,15 @@
 							<div id="imgPreview">							
 							<ul></ul>
 							</div>
-							<button type="button" class="up-btn" id="pic-up-btn">사진업</button>
-							<button type="button" class="up-btn" id="video-up-btn">영상업</button>
-							<button type="button" class="up-btn" id="file-up-btn">파일업</button>
+							<button type="button" class="up-btn" id="pic-up-btn">
+								<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/camera-retro-solid.png">	
+							</button>
+							<button type="button" class="up-btn" id="video-up-btn">
+								<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/video-solid.png">
+							</button>
+							<button type="button" class="up-btn" id="file-up-btn">
+								<img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/file-solid.png">
+							</button>
 							<input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept=".gif, .jpg, .png" style='display: none;'/>
 							<input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept=".mp4,.ogg" style='display: none;'/>
                     		<input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
@@ -422,109 +432,102 @@
 			</div>
 			<hr>
             <% if(feedList!=null){ 
-            	for(Feed f:feedList){
-            %>       <!-- 피드 한칸 -->
-        		<div class="feed">
-            	feed
-            		<div class="feed-header">
-                		
-                		<% for(GroupMember gm:memberList){
-                				
-                				if(gm.getMemberNo()==f.getMemberNo()){%>
-                					<img src="<%=request.getContextPath() %>/images/member_img/<%=gm.getGroupMemberImageNewPath() %>" class="member-profile">
-                					<a><%=gm.getGroupMemberNickname() %></a>
-                			<%		break;
-                			 	}
-                			}	%>
-                			
-                		
-                		
-                		<span class="write-date"><%=f.getFeedWriteDate() %></span>
-            		</div>
+            	for(Feed f:feedList){%>
+                   <!-- 피드 한칸 -->
+        	<div class="feed">
+            	<div class="feed-header">
+		
+              <% for(GroupMember gm:memberList){		
+                	if(gm.getMemberNo()==f.getMemberNo()){%>
+                	<img style="padding:10px 10px;" src="<%=request.getContextPath() %>/images/member_img/<%=gm.getGroupMemberImageNewPath() %>" class="member-profile">
+                	<a><%=gm.getGroupMemberNickname() %></a>
+                <%		break;
+                		}
+                	}%>
+                	<span class="write-date"><%=f.getFeedWriteDate() %></span>
+            	</div>
             	<div class="feed-body">
             		<div>
             		<%if(f.getMemberNo()==loginMember.getMemberNo()){ %>
             			<input type="hidden" class="feed-no-update" value="<%=f.getFeedNo() %>"/>
-            			<button class="delete-btn">삭제</button>
-            			<button class="update-btn">수정</button>
+            			<button class="delete-btn">
+            				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
+            			</button>
+            			<button class="update-btn">
+            				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+            			</button>
             		<%} %>
             		</div>
-            		<textarea type="text" cols="75" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
+            		<textarea type="text" cols="73" class="feed-content" readonly><%=f.getFeedContent() %></textarea>
             		<% if(feedFileList!=null){%>
  
             		<ul class="file-download">
-            		<%
-            		for(FeedFile ff:feedFileList){
+            		
+            		<%for(FeedFile ff:feedFileList){
             			if(ff.getFeedNo()==f.getFeedNo()){ %>
-            		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
-            		<%}
+            			<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+            		<%		}
             			}%>
-            			
             		</ul>
             		<% }%>
-            		
-            		
+
             		<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()){%>
-    						<div class="feed-pics">
-    	                		<button class="prev">❮</button>
-    	                		<ul class="media-carousel">
-    						<%
-    							break;
+    				<div class="feed-pics">
+    	                <button class="prev">❮</button>
+    	                <ul class="media-carousel">
+    				<%		break;
     						}
-	            		}
-            			%>
-            			
-            			<% for(FeedFile ff:feedFileList){ 
-            				if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null&&feedFileList.size()>1){
-            					if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
+	            		}%>
+
+            		<% for(FeedFile ff:feedFileList){ 
+            			  if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null&&feedFileList.size()>1){
+            				 if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
             					%>
             			
                     		<li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
                     	
-                    	<%		
-                    			}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
-                    			
-                    			<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
-                    	<%		}else{%>
-                    		
-                    			<%}
-                    		}else if(feedFileList.size()==1){%>
-            					<%if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
-            					%>
-            						<ul class="media-carousel">
-                    					<li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
-            						
-            						</ul>
-                    	
                     		<%}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
-                    				<ul class="media-carousel">
-                    					<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
-                    				</ul>
+                    			
+                    		<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
                     		<%}else{%>
                     		
-                    			<%}
-            					}
-            				}
-            				%>
+                    		<%}
+                    	}else if(feedFileList.size()==1){%>
+            			<%if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
+            			%>
+            			<ul class="media-carousel">
+                    		<li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
+            						
+            			</ul>
+                    	
+                    	<%}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
+                    	<ul class="media-carousel">
+                    		<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
+                    	</ul>
+                    	<%}else{%>
+                    		
+                    	<%}
+            			}
+            			}
+            			%>
             				
             			<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>	
-                				</ul>
-                				<button class="next">❯</button>
-            				</div>
-            				<div class="indi-wrap-div" style="text-align: center">
+                		</ul>
+                		<button class="next">❯</button>
+            		</div>
+            		<div class="indi-wrap-div" style="text-align: center">
     
-                			<ul class="indi-wrap">
+                		<ul class="indi-wrap">
                 		<%
     							break;
     						}
 	            		}
-            			%>
-                			
+            			%>	
                 		<% for(FeedFile ff:feedFileList){ 
             				if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>
-            					<li class="feed-pic-indi"></li>
+            				<li class="feed-pic-indi"></li>
             			
                     	<%	}
             			}	%>
@@ -532,26 +535,19 @@
             			<% for(FeedFile ff:feedFileList){
     						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>	
                 			
-                			</ul>
-    						</div>
+                		</ul>
+    				</div>
                 		<%
     							break;
     						}
 	            		}
             			%>
-                    			
-                			
-            			
-            			
-    				
-            		
-        		</div><hr>
+        		</div>
+        		<hr>
             	
             	<div class="feed-footer">
             		<div class="comment-back">
             			<ul>
-
-            			
             			<%for(FeedComment fc:feedCommentList){
             				if(fc.getFeedNo()==f.getFeedNo()){ %>
                 			<li class='level1' style="list-style:none;">
@@ -572,11 +568,9 @@
                         			<span class="comment-content"><%=fc.getFeCommentContent() %></span>
                         			
                     			</span>
-                			<%			
-                					
+                			<%				
                 					}
                 				}
-                					
     									%> 
                 			</li>
                 			<%for(FeedComment fcl2:feedLevel2CommentList) {
@@ -599,12 +593,11 @@
                         			
                     			</span>
                 			</li>
-                			<%	}
+                			<%		}
                 				}
-                				}%>
+                			}%>
             				
-            			<%			
-                					
+            			<%				
                 					}
                 				}
             					%> 
@@ -624,17 +617,6 @@
                     			<button type="button" class='btn-insert'>입력</button>
                 			</div>
             			</fieldset>
-        			
-        			<% for(FeedComment fc:feedCommentList){
-            				if(fc.getFeedNo()==f.getFeedNo()){
-            			
-            			%>
-            				
-            				
-            			<% 		
-            					break;
-            				}
-            			}%>
         			</div>
             	</div>
             </div>
