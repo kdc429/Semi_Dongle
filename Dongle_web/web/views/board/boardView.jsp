@@ -112,11 +112,10 @@
 	
 	
 </style>
-	<section id="board-container">
 		<form name="deleteFrm" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<thead>
-					<br><br>
+				<br><br>
 					<tr>
 						<th colspan="3" id="title">공지사항</th>
 					</tr>
@@ -223,7 +222,6 @@
 				} 
 			}%>
 		</table>
-</section>
 		
 <script>
 $(function(){
@@ -297,7 +295,7 @@ $(function(){
 							type:"post",
 							dataType:"html",
 							success:function(data){
-								$('#board-container').html(data);
+								$('#content-div').html(data);
 							}
 						});
 					},

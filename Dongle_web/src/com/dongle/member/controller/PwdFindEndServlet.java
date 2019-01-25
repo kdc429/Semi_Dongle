@@ -49,7 +49,8 @@ public class PwdFindEndServlet extends HttpServlet {
 		if(m.getEmail().length()<1 || m.getMemberId().length()<1 || m.getPwdHintAnswer().length()<1)
 		{
 			request.setAttribute("msg","아이디,이메일,힌트를 입력해주세요.");
-			request.setAttribute("loc","/");
+			loc="/Dongle_view/idPwdFind.jsp";
+			request.setAttribute("loc",loc);
 			view="views/common/msg.jsp";
 		}
 		else
@@ -58,10 +59,12 @@ public class PwdFindEndServlet extends HttpServlet {
 			{
 				view="/resetPassword";
 				request.setAttribute("userId", userId);
+				
 			}
-			else if(!checkMember.getEmail().equals(userEmail)) {
+			else if(!checkMember.getEmail().equals(userEmail)||!checkMember.getMemberId().equals(userId)||!checkMember.getPwdHintList().equals(pwdHint) || !checkMember.getPwdHintAnswer().equals(hintAnswer)) {
 				request.setAttribute("msg","회원 정보가 없습니다.");
-				request.setAttribute("loc","/");
+				loc="/Dongle_view/idPwdFind.jsp";
+				request.setAttribute("loc",loc);
 				view="views/common/msg.jsp";
 			}
 		}

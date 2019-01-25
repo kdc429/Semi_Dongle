@@ -11,8 +11,8 @@
 .carousel-back {
 	display: flex;
 	justify-content: space-between;
-	border-radius:10px 10px;
-	background-color: rgba(195, 195, 195, 0.5);
+	/* border-radius:10px 10px; */
+	background-color: rgba(227,226,226,0.3);
 }
 
 .carousel-box {
@@ -207,9 +207,10 @@
 	height:350px;
 	font-family: 'S-CoreDream-3Light';
 	border-radius:10px 10px;
+	background-color: rgba(227,226,226,0.3);
 }
 .editor-img-back{
-	background-color:rgb(0,0,0,0.6);
+	background-color:rgb(0,0,0,0.3);
 	position:relative;
 	width:510px;
 	height:350px;

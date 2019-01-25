@@ -44,7 +44,7 @@
 	}
 	
 </style>
-	<section id="board-container" >
+	<div id="board-container" >
 		<h2>공지사항</h2>
 		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
 			<input type="button" value="글쓰기" id="add-btn"/>
@@ -79,7 +79,7 @@
 			}%>
 		</table>
 		
-	</section>
+	</div>
 <script>
 	$(function(){
 		$('.boardView-btn').click(function(e){
@@ -94,7 +94,7 @@
 				type:"post",
 				dataType:"html",
 				success:function(data){
-					$('#board-container').html(data);
+					$('#content-div').html(data);
 				},
 				error:function(error,msg){console.log("---"+error+msg);}
 			});
