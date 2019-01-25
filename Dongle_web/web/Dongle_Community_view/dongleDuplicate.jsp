@@ -13,17 +13,23 @@
 <meta charset="UTF-8">
 <title>아이디 중복확인</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<style>
+	div#checkid-container h3{
+		color : black;
+		font-family: '나눔스퀘어라운드 Regular';
+	}
+</style>
 </head>
 <body>
 	<div id="checkid-container">
 		<%if(isAble) { %>
-			<h1 style="color:black;">사용가능합니다.</h1>
+			<h3 style="color: black;font-family: '나눔스퀘어라운드 Regular';"><br>사용가능합니다.</h3>
 			<br><br>
 			<button type="button" onclick="setnickname('<%=nickname%>');">닫기</button>
 		<%}
 		  else {
 		%>
-			<h1 style="color:red;">사용할 수 없습니다.</h1>
+			<h3 style="color: black; font-family: '나눔스퀘어라운드 Regular';"><br>사용할 수 없습니다.</h3>
 			<br><br>
 			<form action="<%= request.getContextPath()%>/checkdongleDuplicate"
 				name="checkDuplicateFrm" method="post">

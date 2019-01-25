@@ -69,7 +69,6 @@
     	text-align:center;
     }
 </style>
-	<div class="board-container">
 		<form name="updateFrm" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<thead>
@@ -123,7 +122,6 @@
 			<input type="hidden" value="<%=groupNo%>" name="groupNo" />
 			<input type="button" id='update-submit-btn' value="수정하기" />
 		</div>
-	</div> 
 <script>
 $(function(){
 	$("[name=upfile]").change(function(){

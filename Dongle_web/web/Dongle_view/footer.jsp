@@ -1,4 +1,4 @@
-<footer style="width: 1024px; height: 120px; background: url('https://i.imgur.com/o4AHu7O.png');">
+<footer style="width: 1024px; height: 120px; margin-top: 800px; background: url('https://i.imgur.com/o4AHu7O.png');">
 <!-- <div style="background: url('https://i.imgur.com/o4AHu7O.png');">
 </div> -->
 </footer>

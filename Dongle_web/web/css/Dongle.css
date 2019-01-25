@@ -32,7 +32,8 @@ div {
 
 .headerBack {
 	/* background : url("https://i.imgur.com/I9h56r1.png"); */
-	background : url("https://i.imgur.com/ou2sfhl.png");
+	/* background : url("https://i.imgur.com/ou2sfhl.png"); */
+	background : url('https://i.imgur.com/bqEfBLr.png');
 	width: 1024px;
 	height: 191px;
 }

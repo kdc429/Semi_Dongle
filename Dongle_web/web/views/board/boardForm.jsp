@@ -50,7 +50,6 @@
 </style>
 </head>
 <body>
-	<div class="board-container">
 		<form name="insertFrm" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<thead>
@@ -99,7 +98,6 @@
 		<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
 		<input type="button" id='form-submit-btn' value="등록하기" />
 		</div>
-	</div>
 <script>
 $(function(){
 	$('#form-list-btn').click(function(){
