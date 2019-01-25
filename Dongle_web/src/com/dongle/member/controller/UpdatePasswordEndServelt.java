@@ -65,7 +65,8 @@ public class UpdatePasswordEndServelt extends HttpServlet {
 		else
 		{
 			msg="현재암호와 일치하지 않습니다!";
-			loc="/Dongle_view/updatePassword?userId="+id;
+			loc="/Dongle_view/updatePassword.jsp";
+			
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

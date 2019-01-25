@@ -23,7 +23,7 @@
 		<%if(isAble) { %>
 			<h2 style="color: black; font-family: '나눔스퀘어라운드 Regular';">[<%=userId %>]<br>는 사용가능합니다.</h2>
 			<br><br>
-			<button type="button" onclick="setUserId('<%=userId%>');">닫기</button>
+			<button type="button" class="btn" onclick="setUserId('<%=userId%>');" style="border-left: 10px;">닫기</button>
 		<%}
 		  else {
 		%>
