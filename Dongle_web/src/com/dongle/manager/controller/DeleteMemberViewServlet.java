@@ -48,7 +48,7 @@ public class DeleteMemberViewServlet extends HttpServlet {
 			return;
 		}
 		
-		List<GroupMember> memberList = new GroupService().selectMemberList(groupNo);
+		List<GroupMember> memberList = new ManagerService().selectMemberList(groupNo);
 		
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("group", g);

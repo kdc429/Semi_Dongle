@@ -20,6 +20,7 @@ div#search-metro {
 
 
 #tbl-dongle {	
+	width:1000px;
 	display: block;
 	border-collapse: collapse;
 	border: 0px solid black;
@@ -27,6 +28,9 @@ div#search-metro {
 
 #tbl-dongle th {
 	border: 1px solid black;
+	border-top : 0px;
+	border-left : 0px;
+	border-right: 0px;
 	background-color: gray;
 	text-align: center;
 	padding: 8px;
@@ -36,6 +40,8 @@ div#search-metro {
 #tbl-dongle td {
 	border: 1px solid black;
 	border-top: 0px;
+	border-left : 0px;
+	border-right : 0px;
 	text-align: left;
 	padding: 8px;
 	border-collapse: collapse;
@@ -43,8 +49,9 @@ div#search-metro {
 
 #tbl-dongle tbody {
 	display: block;
-	height: 500px;
-	overflow: auto;
+	height: 450px;
+	overflow: scroll ;
+	overflow-x: hidden;
 }
 
 #tbl-dongle th:nth-of-type(1), #tbl-dongle td:nth-of-type(1) {
@@ -56,11 +63,11 @@ div#search-metro {
 }
 
 #tbl-dongle th:nth-of-type(3), #tbl-dongle td:nth-of-type(3) {
-	width: 130px
+	width: 120px
 }
 
 #tbl-dongle th:nth-of-type(4), #tbl-dongle td:nth-of-type(4) {
-	width: 230px
+	width: 220px
 }
 
 #tbl-dongle th:nth-of-type(5), #tbl-dongle td:nth-of-type(5) {
@@ -72,14 +79,16 @@ div#search-metro {
 }
 
 #tbl-dongle th:nth-of-type(7), #tbl-dongle td:nth-of-type(7) {
-	width: 80px
+	width: 70px
 }
 
 #tbl-dongle th:nth-of-type(8), #tbl-dongle td:nth-of-type(8) {
 	width: 100px
 }
 
-#tbl-dongle th:nth-of-type(9), #tbl-dongle td:nth-of-type(9) {
-	width: 50px
+#tbl-dongle th:nth-of-type(9) {
+	width: 80px
 }
-
+#tbl-dongle td:nth-of-type(9) {
+	width: 60px
+}

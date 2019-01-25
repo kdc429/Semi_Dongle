@@ -226,7 +226,7 @@ $(function(){
 	$("#delete-member-btn").click(function(){
 		var managerNo=<%=g.getMemberNo()%>;
 		
-		console.log(<%=g.getMemberNo()%>);
+		console.log("매니저넘버" + <%=g.getMemberNo()%>);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/manager/deleteMemberView?groupNo=<%=g.getGroupNo()%>",
 			type:"post",
