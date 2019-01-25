@@ -39,6 +39,47 @@
 		});
 	}
 </script>
+<style>
+div#dongle-search-container #dongle-searchType{
+	display: block;
+	width: 85px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	float: left;
+}
+#search-dongle-txt{
+	display: block;
+	width: 200px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	float: left;
+	margin-left: 5px;
+}
+.search_list_btn{
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border : 1px solid transparent;
+	font-size: 14px;
+	line-height: 1.43;
+	border-radius: 4px;
+	width: 50px;
+	height: 30px;
+	margin-left: 5px;
+}
+</style>
 <section>
 	<div class="bar"></div>
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px">
@@ -47,8 +88,8 @@
     	<li><a href="#">메인 관리</a></li>
    		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
  	</ul>
-	<h2>동글 리스트 관리</h2>
-	<div id="dongle-list-container">
+	<h2 style="margin-left:30px;">동글 리스트 관리</h2>
+	<div style="margin-left:30px; margin-right:15px;" id="dongle-list-container">
 		<div id="dongle-search-container">
 			<select id="dongle-searchType">
 				<option value="dongleName">동글명</option>
@@ -60,47 +101,47 @@
 			<div id="search-dongleName">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="dongleName"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-dongle-txt' size="25" placeholder="검색할 이름을 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-managerId">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="managerId"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-dongle-txt' size="25" placeholder="검색할 아이디를 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-metro">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="metro"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 지역을 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-dongle-txt' size="25" placeholder="검색할 지역을 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-dongleEnDate">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="dongleEnDate"/>
-					<input type="date" name="searchKeyword"/>
-					<button type="submit">검색</button>
+					<input type="date" name="searchKeyword" id='dongle-searchType' style="width: 150px; margin-left: 5px;"/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			
 		</div>
 		<br>
-		<table id="tbl-dongle">
+		<table class="table" id="tbl-dongle">
 			<thead>
 				<tr>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("dongleName")&&flag.equals("true")?"false":"true"%>&rowValue=dongleName'">
+					<th style="width:159px; border-left : 1px solid white; padding-bottom:20px;"onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("dongleName")&&flag.equals("true")?"false":"true"%>&rowValue=dongleName'">
 						동글명				
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("managerId")&&flag.equals("true")?"false":"true"%>&rowValue=managerId'">
+					<th style="width:121px; padding-bottom:20px;"onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("managerId")&&flag.equals("true")?"false":"true"%>&rowValue=managerId'">
 						창설자 아이디
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("topic")&&flag.equals("true")?"false":"true"%>&rowValue=topic'">
+					<th style="width:129px; padding-bottom:20px;"onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("topic")&&flag.equals("true")?"false":"true"%>&rowValue=topic'">
 						주제
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("metro")&&flag.equals("true")?"false":"true"%>&rowValue=metro'">
+					<th style="width:229px; padding-bottom:20px;"onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("metro")&&flag.equals("true")?"false":"true"%>&rowValue=metro'">
 						지역
 					</th>
 					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("date")&&flag.equals("true")?"false":"true"%>&rowValue=date'">
@@ -112,7 +153,7 @@
 					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("maxAge")&&flag.equals("true")?"false":"true"%>&rowValue=maxAge'">
 						최대 가입 연령
 					</th>
-					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("enrollDate")&&flag.equals("true")?"false":"true"%>&rowValue=enrollDate'">
+					<th style="padding-bottom:20px;" onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("enrollDate")&&flag.equals("true")?"false":"true"%>&rowValue=enrollDate'">
 						생성일
 					</th>
 					<th onclick="location.href='<%=request.getContextPath() %>/admin/sortDongleList?flag=<%=rowValue.equals("reportCnt")&&flag.equals("true")?"false":"true"%>&rowValue=reportCnt'">
