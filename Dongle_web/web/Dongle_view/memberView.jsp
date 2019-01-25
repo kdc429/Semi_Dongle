@@ -37,7 +37,7 @@
   							<tr>
   								<td width="100" height="25" bgcolor="#f4f4f4">아이디</td>
   								<td width="130">
-									<input type="text" placeholder="4글자이상" name="userId" id="userId_" value='<%=id %>' readonly>
+									<input type="text" placeholder="4글자이상" name="userId" id="userId_" value='<%=id %>' required readonly>
   							</tr>
   							<tr>
   								<td height="25" bgcolor="#f4f4f4">이름</td>
@@ -97,7 +97,7 @@
 			var popUp=open(url,title,status);
 		}
 		
-	n 
+	n
 		function fn_update_validate(){
 			
 			return true;

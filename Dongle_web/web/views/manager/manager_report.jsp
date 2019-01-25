@@ -81,7 +81,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	
 <div id="repot-member-container">
-	
+	<h2>신고 회원 관리</h2>>
 		
 		<table id="tbl-manager-report">
 			<thead>

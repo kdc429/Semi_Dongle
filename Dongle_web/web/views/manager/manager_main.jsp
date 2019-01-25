@@ -46,8 +46,8 @@
 				수정</a>
 		</div>
 		<div class="modal fade"></div>
-		<div class="panel-body">동글 메인 꾸미기</div>
 		<div class="panel-heading">동글 회원관리</div>
+		<div class="panel-body"><a id="delete-member-btn">회원 탈퇴 관리</a></div>
 		<div class="panel-body"><a id="report-member-btn">신고 회원 관리</a></div>
 	</div>
 	<div class="panel panel-default" style="width: 600px">
@@ -207,6 +207,28 @@ $(function(){
 		console.log(<%=g.getMemberNo()%>);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/manager/reportMemberView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			data:{
+				"managerNo":managerNo
+			},
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complete:function(){console.log("ok");}
+		})
+	})
+});
+
+/* 멤버탈퇴관리버튼 */
+$(function(){
+	$("#delete-member-btn").click(function(){
+		var managerNo=<%=g.getMemberNo()%>;
+		
+		console.log(<%=g.getMemberNo()%>);
+		$.ajax({
+			url:"<%=request.getContextPath()%>/manager/deleteMemberView?groupNo=<%=g.getGroupNo()%>",
 			type:"post",
 			data:{
 				"managerNo":managerNo

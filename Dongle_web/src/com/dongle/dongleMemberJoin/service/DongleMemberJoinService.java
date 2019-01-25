@@ -45,5 +45,17 @@ public class DongleMemberJoinService {
 		return data;
 		
 	}
+	
+	public int deleteDongleMember(int memberNo, int groupNo)
+	{
+		Connection conn = getConnection();
+		int result = new DongleMemberJoinDao().deleteDongleMember(conn, memberNo, groupNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 
 }
