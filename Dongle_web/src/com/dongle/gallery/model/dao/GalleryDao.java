@@ -156,13 +156,14 @@ public class GalleryDao {
       return rs;
    }
    
-   public GroupMember groupMemberCheck(Connection conn, int groupNo, int memberNo)
+   public GroupMember checkGroupMember(Connection conn, int groupNo, int memberNo)
    {
       PreparedStatement pstmt=null;
       ResultSet rs=null;
-      String sql = prop.getProperty("groupMemberCheck");
+      String sql = prop.getProperty("checkGroupMember");
       GroupMember gm = null;
       try {
+    	  System.out.println(groupNo+memberNo+"여기다");
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, groupNo);
          pstmt.setInt(2, memberNo);
@@ -215,12 +216,14 @@ public class GalleryDao {
                   rs.getString("gal_comment_content"),
                   rs.getDate("gal_comment_date"),
                   rs.getInt("gal_comment_ref"),
+                  rs.getString("gal_comment_report_status"),
                   rs.getString("group_member_nickname"),
                   rs.getString("group_member_image_new_path"),
                   rs.getString("album_code"),
                   rs.getString("gal_file_new_path"),
                   rs.getInt("gal_no"),
                   rs.getString("gal_multi_status")
+
                   );
             gclist.add(gcj);
          }
@@ -350,8 +353,7 @@ public class GalleryDao {
          pstmt.setInt(3, gcj.getGalCommentLevel());
          pstmt.setInt(4, gcj.getMemberNo());
          pstmt.setString(5, gcj.getGalCommentContent());
-         if(gcj.getGalCommentRef()==1) {pstmt.setInt(6, Integer.parseInt(null));}
-         else {pstmt.setInt(6, gcj.getGalCommentRef());}
+         pstmt.setString(6,gcj.getGalCommentRef()==0?null:String.valueOf(gcj.getGalCommentRef()));
          rs=pstmt.executeUpdate();
       }
       catch(Exception e)
@@ -601,6 +603,28 @@ public class GalleryDao {
 		   pstmt.setInt(1, groupNo);
 		   pstmt.setString(2, albumCode);
 		   pstmt.setInt(3, galNo);
+		   rs=pstmt.executeUpdate();
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(pstmt);
+	   }
+	   return rs;
+   }
+   //신고 후 갤러리 코멘트 신고여부 변경
+   public int updateGalleryCommentReport(Connection conn,int groupNo,int galNo,int galCommentNo)
+   {
+	   PreparedStatement pstmt=null;
+	   int rs =0;
+	   String sql = prop.getProperty("updateGalleryCommentReport");
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, groupNo);
+		   pstmt.setInt(2, galCommentNo);
+
 		   rs=pstmt.executeUpdate();
 	   }
 	   catch(Exception e)

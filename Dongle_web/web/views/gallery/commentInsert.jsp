@@ -68,7 +68,7 @@
 				<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
 			</div>
 			<div class='comment_btn'>
-				<button type="button" id='btn-insert'>입력</button>
+				<button type="button" class='btn-insert'>입력</button>
 			</div>
 		</fieldset>
 	</div>
@@ -96,7 +96,7 @@
 				html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 				html+="</div>";
 				html+="<div class='comment_btn'>";
-				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>Send</button>";
+				html+="<button value='"+$(this).val()+"' type='button' class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
 				html+="</div>"
 				html+="</fieldset>"
 				div.html(html);
@@ -104,16 +104,16 @@
 				/* 연결된 이벤트 삭제 */
 				$(this).off('click');
 				/* 빈공간 누르면 display바뀌는 것 */
- 				$('.recomment_content').click(function(){
+ 				/* $('.recomment_content').click(function(){
 					if(eventflag)
 					{
 						$(this).css('display','none');
 						eventflag=false;
 						return;
 					}
-				}) 
+				}) */ 
 				
-				div.find('#btn-insert').click(function(e){
+				div.find('button.btn-insert1').click(function(e){
 					if(<%=loginMember==null%>)
 					{
 					 	fn_loginAlert();
@@ -173,7 +173,6 @@
 						"albumCode":$('#albumCode').val(),
 						"galFileNo":$('#galFileNo').val(),
 						"galCommentContent":$('#galCommentContent').val(),
-						"dataNum":2
 					},
 					type:"post",
 					success:function(data){

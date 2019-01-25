@@ -1,7 +1,6 @@
 package com.dongle.gallery.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.member.model.vo.Member;
 
 /**
- * Servlet implementation class GalleryReportServlet
+ * Servlet implementation class GalleryCommentReportServlet
  */
-@WebServlet("/gallery/galleryReport")
-public class GalleryReportServlet extends HttpServlet {
+@WebServlet("/gallery/galleryCommentReport")
+public class GalleryCommentReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryReportServlet() {
+    public GalleryCommentReportServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,13 +33,13 @@ public class GalleryReportServlet extends HttpServlet {
 		int galNo=Integer.parseInt(request.getParameter("galNo"));
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
-		String albumCode=request.getParameter("albumCode");
+		int galCommentNo=Integer.parseInt(request.getParameter("galCommentNo"));
 		String reportCode=(String)request.getParameter("reportCode");
 		System.out.println("reportCode: "+reportCode);
 	
 		int rs = new GalleryService().insertReport(groupNo,memberNo,reportCode);
 		if(rs!=0) {
-			int result = new GalleryService().updateGalleryReport(groupNo,albumCode,galNo);
+			int result = new GalleryService().updateGalleryCommentReport(groupNo,galNo,galCommentNo);
 			
 			 if(result!=0)
 		      {

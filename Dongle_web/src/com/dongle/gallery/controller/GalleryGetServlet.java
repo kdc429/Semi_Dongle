@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
@@ -38,17 +39,17 @@ public class GalleryGetServlet extends HttpServlet {
 		String albumCode = request.getParameter("albumCode");
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println("galleryGet서블릿에서: "+albumCode+" "+groupNo+" : "+loginMember.getMemberId());
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
-		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
-		System.out.println(gm);
-/*		if(gm.getMemberNo()==0||!loginMember.getMemberId().equals("admin"))
+		int memberNo=loginMember.getMemberNo();
+		GroupMember gm = new GalleryService().checkGroupMember(groupNo, memberNo);
+		System.out.println("그룹멤버니?"+gm);
+		if(gm==null&&!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}	*/	
+		}		
 		
 
 		//test : gal_no만 distinct된 dao에 갔다오기

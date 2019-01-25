@@ -61,10 +61,10 @@ public class GalleryService {
       return rs;
    }
    
-   public GroupMember groupMemberCheck(int groupNo,int memberNo)
+   public GroupMember checkGroupMember(int groupNo, int memberNo)
    {
       Connection conn=getConnection();
-      GroupMember gm= new GalleryDao().groupMemberCheck(conn,groupNo,memberNo);
+      GroupMember gm= new GalleryDao().checkGroupMember(conn,groupNo,memberNo);
       close(conn);
       return gm;
       
@@ -195,6 +195,14 @@ public class GalleryService {
    {
 	   Connection conn = getConnection();
 	   int rs = new GalleryDao().updateGalleryReport(conn,groupNo,albumCode,galNo);
+	   if(rs!=0) {commit(conn);}
+	   else {rollback(conn);}
+	   return rs;
+   }
+   //신고 후 갤러리 코멘트 신고여부 변경
+   public int updateGalleryCommentReport(int groupNo,int galNo,int galCommentNo) {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().updateGalleryCommentReport(conn,groupNo,galNo,galCommentNo);
 	   if(rs!=0) {commit(conn);}
 	   else {rollback(conn);}
 	   return rs;
