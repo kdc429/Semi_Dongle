@@ -38,7 +38,7 @@ public class GalleryGetServlet extends HttpServlet {
 		String albumCode = request.getParameter("albumCode");
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-/*		System.out.println(albumCode+" "+groupNo+" : "+loginMember.getMemberId());*/
+		System.out.println("galleryGet서블릿에서: "+albumCode+" "+groupNo+" : "+loginMember.getMemberId());
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GalleryService().groupMemberCheck(groupNo,loginMember.getMemberNo());
 		System.out.println(gm);
@@ -80,6 +80,7 @@ public class GalleryGetServlet extends HttpServlet {
 		request.setAttribute("albumCode", albumCode);
 		request.setAttribute("groupMember", gm);
 		request.setAttribute("totalList", totalMember);
+		request.setAttribute("tList", tList);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 

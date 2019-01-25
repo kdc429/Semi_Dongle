@@ -573,7 +573,7 @@ public class GalleryDao {
    {
 	   PreparedStatement pstmt=null;
 	   int rs =0;
-	   String sql = prop.getProperty("insertReport");
+	   String sql = prop.getProperty("insertReportGallery");
 	   try {
 		   pstmt=conn.prepareStatement(sql);
 		   pstmt.setInt(1, groupNo);
