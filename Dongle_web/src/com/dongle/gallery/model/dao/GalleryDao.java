@@ -14,6 +14,7 @@ import com.dongle.gallery.model.vo.AlbumCategory;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.member.model.vo.ReportReason;
 
 public class GalleryDao {
    //selectOneList getAllList 두개 쿼리문 확인
@@ -88,7 +89,7 @@ public class GalleryDao {
             gp.setGalFileContent(rs.getString("gal_file_content"));
             gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
             gp.setGalMultiStatus(rs.getString("gal_multi_status"));
-            
+            gp.setGalReportStatus(rs.getString("gal_report_status"));
             list.add(gp);
          }
       }
@@ -263,7 +264,7 @@ public class GalleryDao {
             gp.setGalMultiStatus(rs.getString("gal_multi_status"));
             gp.setGroupMemberNickname(rs.getString("group_member_nickname"));
             gp.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
-            
+            gp.setGalReportStatus(rs.getString("gal_report_status"));
             gplist.add(gp);
          }
          System.out.println("갤러리: "+gplist);
@@ -286,6 +287,7 @@ public class GalleryDao {
       String sql = prop.getProperty("insertGallery");
       try {
          for(int i=0;i<imageCount;i++) {
+        	System.out.println("확인: "+gp);
             pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1, gp.getGroupNo());
             pstmt.setString(2, gp.getAlbumCode());
@@ -340,7 +342,7 @@ public class GalleryDao {
    {
       PreparedStatement pstmt=null;
       int rs=0;
-      String sql=prop.getProperty("insetGalComment");
+      String sql=prop.getProperty("insertGalComment");
       try {
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, gcj.getGroupNo());
@@ -417,6 +419,8 @@ public class GalleryDao {
             gp.setGalFileContent(rs.getString("gal_file_content"));
             gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
             gp.setGalMultiStatus(rs.getString("gal_multi_status"));
+            gp.setGalReportStatus(rs.getString("gal_report_status"));
+            gp.setGalReportStatus(rs.getString("gal_report_status"));
             list.add(gp);
          }
       }
@@ -455,6 +459,7 @@ public class GalleryDao {
             gp.setGalFileContent(rs.getString("gal_file_content"));
             gp.setGalEnrollDate(rs.getDate("gal_enroll_date"));
             gp.setGalMultiStatus(rs.getString("gal_multi_status"));
+            gp.setGalReportStatus(rs.getString("gal_report_status"));
             galList.add(gp);
          }
       }
@@ -523,6 +528,79 @@ public class GalleryDao {
 		   pstmt= conn.prepareStatement(sql);
 		   pstmt.setInt(1, groupNo);
 		   pstmt.setInt(2, galCommentNo);
+		   rs=pstmt.executeUpdate();
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(pstmt);
+	   }
+	   return rs;
+   }
+   
+   public List<ReportReason> selectReportReason(Connection conn)
+   {
+	   PreparedStatement pstmt=null;
+	   ResultSet rs =null;
+	   String sql=prop.getProperty("selectReportReason");
+	   List<ReportReason> relist = new ArrayList<ReportReason>();
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   rs=pstmt.executeQuery();
+		   while(rs.next())
+		   {
+			   ReportReason rr = new ReportReason();
+			   rr.setReportCode(rs.getInt("report_code"));
+			   rr.setReportReason(rs.getString("report_reason"));
+			   relist.add(rr);
+		   }
+		   System.out.println(relist);
+		   
+	   }catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(rs);
+		   close(pstmt);
+	   }
+	   return relist;
+   }
+   // 갤러리 신고하기
+   public int insertReport(Connection conn, int groupNo, int memberNo, String reportCode)
+   {
+	   PreparedStatement pstmt=null;
+	   int rs =0;
+	   String sql = prop.getProperty("insertReport");
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, groupNo);
+		   pstmt.setInt(2, memberNo);
+		   pstmt.setString(3, reportCode);
+		   rs=pstmt.executeUpdate();
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(pstmt);
+	   }
+	   return rs;
+   }
+   //신고된 갤러리 신고여부 변경
+   public int updateGalleryReport(Connection conn,int groupNo,String albumCode,int galNo)
+   {
+	   PreparedStatement pstmt=null;
+	   int rs =0;
+	   String sql = prop.getProperty("updateGalleryReport");
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, groupNo);
+		   pstmt.setString(2, albumCode);
+		   pstmt.setInt(3, galNo);
 		   rs=pstmt.executeUpdate();
 	   }
 	   catch(Exception e)

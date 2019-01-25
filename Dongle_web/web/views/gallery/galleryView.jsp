@@ -5,13 +5,7 @@ com.dongle.group.model.vo.GroupMember"
 
 %>
 <%
-/*    List<GalleryPath> list = (List)request.getAttribute("list");
-
-   List<GalleryPath> allList = (List)request.getAttribute("allList"); */
-   
    List<GalleryPath> tList = (List)request.getAttribute("tList");
-   int numPerPage = (int)request.getAttribute("numPerPage");
-   String pageBar=(String)request.getAttribute("pageBar");
     Member loginMember = (Member)session.getAttribute("loginMember");
     int groupNo=(int)request.getAttribute("groupNo");
     String albumCode=(String) request.getAttribute("albumCode");
@@ -171,19 +165,6 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
       </table>
 <!--    </form> -->
    </div>
-   <br><br>
-   <div id="pag-div">
-      <table class='pag_table'>
-         <tr>
-               <td>
-                 <ul class="pagination" id="paging">
-                     <%-- <%=pageBar %> --%>
-                 </ul>
-                </td>
-         </tr>
-      </table>
-   </div>
-   
    <br><br>
 </div>
 
