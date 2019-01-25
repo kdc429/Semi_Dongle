@@ -53,8 +53,9 @@
    
     $(document).ready(function(){
   		$('#report-reason').on('change',function(){
-  			console.log($(this).val());
+  			
   			var reportCode=$('#report-reason option:selected').val();
+  			console.log(reportCode);
   			window.opener.document.getElementById('selectRecode').value=reportCode;
   			report();
   		});
@@ -63,85 +64,45 @@
    $(function(){
       
       $('.report-close').click(function(){
-         var galNo=window.opener.document.getElementById('reportGalNo').value;
-         var galCommentNo;
-         if(window.opener.document.getElementById('reportCommentNo').value!=null){
-         	galCommentNo=window.opener.document.getElementById('reportCommentNo').value;
-         }
+    	 var reportBoardNo = window.opener.document.getElementById('reportBoardNo').value;
+         var reportBoCommentNo=window.opener.document.getElementById('reportBoCommentNo').value;
          var groupNo=window.opener.document.getElementById('reportGroupNo').value;
          var memberNo=window.opener.document.getElementById('reportMemberNo').value;
          var reportCode=$('#report-reason option:selected').val();
-         var albumCode=window.opener.document.getElementById('reportAlbumCode').value;
-         console.log(galCommentNo);
+         console.log(reportBoCommentNo);
          if(!confirm('정말로 신고하시겠습니까?')){return;}
          {
-        	 if(galCommentNo!=null){
+        	 if(reportBoCommentNo!=0){
  	            $.ajax({
- 	               url:"<%=request.getContextPath()%>/gallery/galleryCommentReport",
+ 	               url:"<%=request.getContextPath()%>/board/boardCommentReport",
  	               type:"post",
  	               data:{
- 	            	  'galNo':galNo,
  	                  "groupNo":groupNo,
  	                  "memberNo":memberNo,
  	                  "reportCode":reportCode,
- 	                  "galCommentNo":galCommentNo
+ 	                  "reportBoCommentNo":reportBoCommentNo
  	               },
  	               success:function(data){
  	                	 alert("Message: "+data);
  	                     
  	                     $.ajax({
- 	                        url:"<%=request.getContextPath()%>/gallery/galleryGet",
+ 	                        url:"<%=request.getContextPath()%>/board/boardView",
  	                        type:"post",
  	                        data:{
  	                           "groupNo":groupNo,
  	                           "memberNo":memberNo,
- 	                           "albumCode":albumCode
+ 	                           "boardNo":reportBoardNo
  	                        },
  	                        
- 	                        dataType:"html",
+ 	                       dataType:"html",
 	                        success:function(data){
 	                        	$(opener.document).find('#content-div').html(data);
-	                        	$(opener.document).find('#modal-container').css('display','none');
 	                           self.close();
 	                        }
  	                        
  	                     });
  	               }
  	            })
-        	 }
-        	 else if(galCommentNo==null&&galNo!=0){
-	            $.ajax({
-	               url:"<%=request.getContextPath()%>/gallery/galleryReport",
-	               type:"post",
-	               data:{
-	            	   'galNo':galNo,
-	                  "groupNo":groupNo,
-	                  "memberNo":memberNo,
-	                  "reportCode":reportCode,
-	                  "albumCode":albumCode
-	               },
-	               success:function(data){
-	                     alert("Message: "+data);
-	                     
-	                     $.ajax({
-	                        url:"<%=request.getContextPath()%>/gallery/galleryGet",
-	                        type:"post",
-	                        data:{
-	                           "groupNo":groupNo,
-	                           "memberNo":memberNo,
-	                           "albumCode":albumCode
-	                        },
-	                        
-	                        dataType:"html",
-	                        success:function(data){
-	                        	$(opener.document).find('#content-div').html(data);
-	                        	$(opener.document).find('#modal-container').css('display','none');
-	                           self.close();
-	                        }
-	                        
-	                     });
-	               }
-	            })
 	         }else{
 	        	 alert("신고 실패 하였습니다. 다시 시도해주세요.")
 	        	 self.close();

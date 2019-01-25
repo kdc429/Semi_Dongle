@@ -311,6 +311,7 @@ if (n < 1) {slideIndex = slides.length}
 									<%=g.getGalCommentDate() %>
 									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
 									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -334,6 +335,7 @@ if (n < 1) {slideIndex = slides.length}
 									<%=g.getGalCommentDate() %>
 									<p class='btn-comment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
 									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -383,7 +385,7 @@ if (n < 1) {slideIndex = slides.length}
 	         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
 	         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
 	         
-          	 <input type="hidden" id="reportNickName" name="reportNickName" value="<%=gplist.get(0).getGroupMemberNickname()%>">
+          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
 	         <input type="hidden" id="reportGalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
 	         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
 	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
@@ -397,13 +399,15 @@ if (n < 1) {slideIndex = slides.length}
 	$(document).ready(function(){
 		$('#btn-report').click(function(e){
 			 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=500, height=300, top=200,left=500,menubar=no, status=no, toolbar=no");
+			 var reportNickName='<%=gplist.get(0).getGroupMemberNickname()%>';
 		});
 		
 		$('.btn-comment-report').click(function(e){
 			 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
-			 var reportCommentNo=$(this).siblings('input.comment-report-no').val();
-			 console.log(reportCommentNo);
+			 var reportCommentNo=$(this).siblings('[input.comment-report-no]').val();
+			 var reportCommentNickName=$(this).siblings('[input.reportCommentNickName]').val();
 			 document.getElementById('reportCommentNo').value=reportCommentNo;
+			 document.getElementById('reportNickName').value=reportCommentNickName;
 		});
 		
 	});
