@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath" %>
+<%@ page import="com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,
+com.dongle.member.model.vo.ReportReason,com.dongle.gallery.model.vo.GalleryPath" %>
 <%
-   List<GalleryPath> gplist=(List)request.getAttribute("gplist");
-   List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
-   int groupNo = (int)request.getAttribute("groupNo");
-   Member loginMember = (Member)session.getAttribute("loginMember");
+	List<GalleryPath> gplist=(List)request.getAttribute("gplist");
+	List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
+	int groupNo = (int)request.getAttribute("groupNo");
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	List<ReportReason> relist = (List)request.getAttribute("relist");
 %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,7 +15,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 /* 모달창  */
@@ -32,12 +33,11 @@
 /* 모달창에 있는 이미지 슬라이드  */
 * {box-sizing:border-box}
 
-body {font-family: 'a흑진주L';margin:0}
+body {font-family: 'netmarble Medium';;margin:0}
 
 /* Slideshow container */
 
 .slideshow-container {
-
 
 width: 95%;
 height:95%;
@@ -212,7 +212,6 @@ background-color:white;
 </style>
 <script>
 $(function(){
-
 	//선택한 이미지로 모달띄우기 이벤트
 	var modal = document.getElementById('modal-container');
 	$('.close').click(function(){
@@ -260,7 +259,7 @@ if (n < 1) {slideIndex = slides.length}
 		</span>
 		<span class='comment_box'>
 			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
-			<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
+			<p id='btn-report' style='float:right;color:RGB(112,136,172);' >신고</p>
 			<span>&nbsp;&nbsp;      </span>
 			<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
 				<p id='deleteIgm' style='float:right;color:RGB(112,136,172);' >이미지 삭제     &nbsp; | &nbsp;</p>
@@ -310,8 +309,7 @@ if (n < 1) {slideIndex = slides.length}
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
-									<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
-									
+									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -333,7 +331,7 @@ if (n < 1) {slideIndex = slides.length}
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
-									<p style='float:right;color:RGB(112,136,172);' >신고</p>
+									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -366,22 +364,66 @@ if (n < 1) {slideIndex = slides.length}
 			</div>
 		</fieldset>
 	</div>
+	<%if(relist!=null){ %>
+		<form id='reportFrm' name="reportFrm">
+	         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
+	         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
+	         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
+	         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
+	         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
+	         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
+	         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
+	         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
+	         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
+	         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
+	         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
+	         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
+	         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
+	         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
+	         
+          	 <input type="hidden" name="reportNickName" value="<%=gplist.get(0).getGroupMemberNickname()%>">;
+	         <input type="hidden" id="reportgalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
+	         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
+	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
+	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
+	      	 <input type="hidden" id="repertCommentNo" name="reportCommentNo" value=""/>
+	      </form>
+      <%} %>
 <script>
+	/* 댓글 신고하기 */
+	$(document).ready(function(){
+		$('.btn-report').click(function(){
+			 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=300, height=300, menubar=no, status=no, toolbar=no");
+			 var reportCommentNo=$(this).val();
+			 document.getElementsById('repertCommentNo').value=reportCommentNo;
+		});
+		
+	});
+	
 	/* 댓글 삭제하기 */
 	$(function(){
-		$('#btn-delete').click(function(){
-			if(!comfirm("정말로 삭제하시겠습니까?")){return;}
+		$('.btn-delete').click(function(){
+			if(!confirm("정말로 삭제하시겠습니까?")){return;}
 			else{
 				$.ajax({
 					url:"<%=request.getContextPath()%>/gallery/deleteComment",
 					data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
 						'galNo':<%=gplist.get(0).getGalNo()%>,
-						'galFileNo':<%=gplist.get(0).getGalFileNo()%>
+						'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
+						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
 					},
 					type:'post',
 					dataType:'html',
 					success:function(data){
-						$('.comment-editor').html(data);
+						if(data!=null)
+						{	
+							alert('댓글을 삭제하였습니다');
+							$('.comment-editor').html(data);
+						}
+						else
+						{
+							alert('댓글 삭제에 실패하였습니다');
+						}
 					}
 				})
 			}
@@ -452,7 +494,7 @@ if (n < 1) {slideIndex = slides.length}
 						success:function(data){
 							if(data!=null)
 							{	
-								alert('댓글 등록 완료!');
+								alert('댓글을 등록하였습니다');
 								$('.comment-editor').html(data);
 							}
 							else
@@ -541,4 +583,3 @@ if (n < 1) {slideIndex = slides.length}
 
 	});
 </script>
-

@@ -15,6 +15,13 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 
 <style>
+
+	body{
+		position:relative;
+		display:flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.tex{
 		border-radius: 3px;
 		width: 280px;
@@ -27,8 +34,8 @@
 		left: 30%;
 		width: 500px;
 		position: absolute;
-		left: 710px;
-		top: 300px;
+		/* left: 710px;
+		top: 300px; */
 	}
 
 	.btn{

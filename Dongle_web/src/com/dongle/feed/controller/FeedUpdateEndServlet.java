@@ -109,7 +109,7 @@ public class FeedUpdateEndServlet extends HttpServlet {
 				fl=new FileList();
 				fl.setFeedNo(feedNo);
 				System.out.println(fileName);
-				fl.setFeedOriFilePath(fileName); 
+				fl.setFeedOriFilePath(mr.getOriginalFileName(fileName)); 
 				if(fileName.substring(0, 5).equals("image")) {
 					fl.setFeedRenameFilePath(mr.getFilesystemName("image"+i));
 					System.out.println("00"+fl.getFeedRenameFilePath());
