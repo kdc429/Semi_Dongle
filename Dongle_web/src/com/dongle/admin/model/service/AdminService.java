@@ -23,6 +23,15 @@ public class AdminService {
 		return memberList;
 	}
 	
+	public Member selectMember(int memberNo)
+	{
+		Connection conn = getConnection();
+		Member m = new AdminDao().selectMember(conn, memberNo);
+		
+		close(conn);
+		return m;
+	}
+	
 	/* 멤버 검색 */
 	public List<Member> selectMemberId(String searchKeyword)
 	{

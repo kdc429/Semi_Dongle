@@ -71,6 +71,47 @@ public class AdminDao {
 		}
 		return memberList;
 	}
+	
+	public Member selectMember(Connection conn, int memberNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m= null;
+		String sql=prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				m = new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setGender(rs.getString("member_gen"));
+				m.setSsn(rs.getString("member_ssn"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setAddress(rs.getString("member_address"));
+				m.setEmail(rs.getString("member_email"));
+				m.setEnrollDate(rs.getDate("member_enroll_date"));
+				m.setBlackList(rs.getString("blacklist_yn"));
+				m.setReportCount(rs.getInt("report_member_count"));
+			
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 	/* 멤버리스트 검색 */
 	public List<Member> selectMemberId(Connection conn, String searchKeyword)
 	{

@@ -123,7 +123,7 @@
 			<tbody>
 				<% if(dongleList==null || dongleList.isEmpty()) {%>
 				<tr>
-					<td colspan="10" align="center">
+					<td colspan="10" align="center" style="width:1000px">
 						검색결과가 없습니다.
 					</td>
 				</tr>

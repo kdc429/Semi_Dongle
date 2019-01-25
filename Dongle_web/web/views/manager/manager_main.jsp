@@ -70,13 +70,14 @@
 						<span class="glyphicon glyphicon-cog"></span> 동글 정보 수정
 					</h3>
 				</div>
+				<form action="<%=request.getContextPath() %>/manager/updateDongle?groupNo=<%=groupNo %>" method="post">
 				<div class="modal-body" style="padding: 40px 50px;">
-					<form >
+					
 						<div class="form-group">
 							<label for="donglename">동호회 이름</label> 
-								<input type="text" class="form-control" id="donglename"> <br>
+								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
 							<label for="topic">주제</label><br> 
-							<select	class="form-control" id="topic">
+							<select	class="form-control" name="topic" id="topic" >
 								<option value="인문/과학">인문/과학</option>
 								<option value="스포츠/레저">스포츠/레저</option>
 								<option value="여행/캠핑">여행/캠핑</option>
@@ -87,7 +88,7 @@
 								<option value="게임/오락">게임/오락</option>
 							</select> <br> 
 							<label for="address">지역</label><br> 
-								<input type="text" class="form-control" id="address"  value="<%=address %>" readonly>
+								<input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
 								<button type="button" id="search-address" class="btn btn-info">검색</button><br>
 							
 							<!-- <select	class="form-control" id="area">
@@ -109,29 +110,31 @@
 								<label class="radio-inline">
 									<input type="radio" name="activetime" value="주말">주말
 								</label> 
-								<label class="radio-inline">
-									<input type="radio" name="activetime" value="무관">무관
-								</label>
 							</div>
-
-							<label for="">연령대</label><br>
+							<br>
+							<label for>연령대</label><br>
 							<div class="col-sm-3">
-								<input type="number" class="form-control" min="1" max="100" placeholder="최소">
+								<input type="number" class="form-control" name="minAge" id="minAge" min="1" max="100" placeholder="최소">
 							</div>
-							<div class="col-sm-1">~</div>
+							<div class="col-sm-1" style="padding-top:5px;">~</div>
 							<div class="col-sm-3">
-								<input type="number" class="form-control" min="1" max="100" placeholder="최대">
+								<input type="number" class="form-control" name="maxAge" id="maxAge" min="1" max="100" placeholder="최대">
 							</div>
+							<br><br><br>
+							
+							<label>소개글</label>
+							<textarea class="form-control" rows="5" name="intro" id="intro"></textarea>
 						</div>
 
 
-					</form>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default" data-dismiss="modal">완료</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 
 				</div>
+				</form>
 			</div>
 
 		</div>

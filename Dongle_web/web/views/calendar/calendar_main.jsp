@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html ng-app="calendar">
-<head>
-    <meta charset="utf-8">
-    <title>Angular Calendar</title>
-    <script
+
+<meta charset="utf-8">
+    
+<script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,11 +28,9 @@
     });
     </script>
     <script  src="<%=request.getContextPath()%>/Dongle_js/calendar.js"></script>
-</head>
 
-<div ng-controller="calendarWidget">
+	<div ng-controller="calendarWidget">
     <calendar selected="day" ></calendar> 
     <span>선택된 날짜 : <strong>{{day.format('dddd, MMMM Do YYYY')}}</strong>
-</dvi>
-</body>
+
 </html>

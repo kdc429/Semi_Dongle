@@ -38,6 +38,23 @@
 			.style.display="inline-block";
 		});
 	}
+	
+	function fn_memberView(memberNo)
+	{
+		var url="<%=request.getContextPath()%>/admin/memberPopUpView";
+		var title="memberView";
+		var shape="left=200px, top=100px, width=470px, height= 270px";
+		
+		var popup=open("",title,shape);
+		
+		memberViewFrm.memberNo.value=memberNo;
+		memberViewFrm.target=title;
+		memberViewFrm.action=url;
+		memberViewFrm.method="post";
+		memberViewFrm.submit();
+		
+	}
+	
 </script>
 <section>
 	<div class="bar"></div>
@@ -126,14 +143,15 @@
 			<tbody>
 				<% if(memberList==null || memberList.isEmpty()) {%>
 				<tr>
-					<td colspan="10" align="center">
+					<td colspan="10" align="center" style="width:1000px">
 						검색결과가 없습니다.
 					</td>
 				</tr>
 				<%} else { 
 					for(Member m : memberList) {
 				%>
-				<tr>
+				<tr onclick="fn_memberView(<%=m.getMemberNo()%>);">
+				
 					<td><%=m.getMemberId() %></td>
 					<td><%=m.getMemberName() %></td>
 					<td><%=m.getGender() %></td>
@@ -144,13 +162,18 @@
 					<td><%=m.getEnrollDate() %></td>
 					<td><%=m.getBlackList() %></td>
 					<td><%=m.getReportCount() %></td>
+					
 				</tr>
 				<%}
 				}%>
 			</tbody>
 		</table>
+		<form action="" name="memberViewFrm">
+			<input type="hidden" name="memberNo"/>
+		</form>	
 	</div>
 </section>
+
 	
 	
 </body>

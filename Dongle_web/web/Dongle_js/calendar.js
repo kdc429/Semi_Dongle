@@ -35,6 +35,7 @@ app.directive("calendar", function() {
             //날짜 선택 이벤트.
             scope.select = function(day) {
                 scope.selected = day.date;  
+                alert("나오냐?");
                 // 클릭시에 selected를 클릭한 날짜로 변경.
             };
 

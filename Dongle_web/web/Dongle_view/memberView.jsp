@@ -97,7 +97,7 @@
 			var popUp=open(url,title,status);
 		}
 		
-	n
+
 		function fn_update_validate(){
 			
 			return true;

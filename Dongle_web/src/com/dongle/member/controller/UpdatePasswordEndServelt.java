@@ -59,13 +59,13 @@ public class UpdatePasswordEndServelt extends HttpServlet {
 			else 
 			{
 				msg="비밀번호 변경에 실패!";
-				loc="/Dongle_view/updatePassword?userId="+id;
+				loc="/updatePassword?userId="+id;
 			}
 		}
 		else
 		{
 			msg="현재암호와 일치하지 않습니다!";
-			loc="/Dongle_view/updatePassword?userId="+id;
+			loc="/updatePassword?userId="+id;
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
