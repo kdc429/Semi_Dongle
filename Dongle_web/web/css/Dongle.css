@@ -1,126 +1,126 @@
 @font-face { 
-	font-family: 'YanoljaYacheR'; 
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YanoljaYacheR.woff') format('woff'); 
-	font-weight: normal; 
-	font-style: normal; 
+   font-family: 'YanoljaYacheR'; 
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YanoljaYacheR.woff') format('woff'); 
+   font-weight: normal; 
+   font-style: normal; 
 }
 
 body {
-	/* position: absolute; */
-	
-	font-family: 'YanoljaYacheR';
-	display: flex;
-	flex-direction: column;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	align-items: center;
-	justify-content: center;
-	
-	
+   /* position: absolute; */
+   
+   font-family: '여기어때잘난서체';
+   display: flex;
+   flex-direction: column;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   align-items: center;
+   justify-content: center;
+   
+   
 }
 body.showBars { overflow:scroll; } 
 header, section{
-	width:1024px;
+   width:1024px;
 }
 
 div {
-	/* border: 1px solid black; */
-	
+   /* border: 1px solid black; */
+   
 }
 
 .headerBack {
-	/* background : url("https://i.imgur.com/I9h56r1.png"); */
-	background : url("https://i.imgur.com/ou2sfhl.png");
-	width: 1024px;
-	height: 191px;
+   /* background : url("https://i.imgur.com/I9h56r1.png"); */
+   background : url("https://i.imgur.com/ou2sfhl.png");
+   width: 1024px;
+   height: 191px;
 }
 
 .logo-back{
-	
-	display:flex;
-	justify-content: space-between;
+   
+   display:flex;
+   justify-content: space-between;
 }
 .logo{
-	font-size: 80px;
-	font-family: '여기어때잘난서체';
-	color: rgb(7,81,110,);
-	
+   font-size: 80px;
+   font-family: '여기어때잘난서체';
+   color: rgb(7,81,110,);
+   
 }
 
 .bar {
-	/* background-color: rgba(96,201,242,0.6); */
-	font-family: 'netmarble Medium';
-	font-weight:bold;
-	font-size:17px;
-	height:35px;
-	display:flex;
-	justify-content:flex-end;
-	align-items:flex-end;
-	
+   /* background-color: rgba(96,201,242,0.6); */
+   font-family: 'netmarble Medium';
+   font-weight:bold;
+   font-size:17px;
+   height:35px;
+   display:flex;
+   justify-content:flex-end;
+   align-items:flex-end;
+   
 }
 .intro{
-	float:left;
-	left:0;
+   float:left;
+   left:0;
 }
 
 .user-back{
-	
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	height:auto;
-	margin-top:100px;
-	
+   
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   height:auto;
+   margin-top:100px;
+   
 }
 .img-icon{
-	width:85px;
-	height:35px;
-	border:0;
-	outline:0;
-	background-color: rgba(0, 0, 0,0);
-	border-radius:15px 15px;
-	position:relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index:1;
+   width:85px;
+   height:35px;
+   border:0;
+   outline:0;
+   background-color: rgba(0, 0, 0,0);
+   border-radius:15px 15px;
+   position:relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index:1;
 }
 .user-img{
-	max-height:33px;
-	max-width:33px;
-	position:absolute;
-	width:auto;
-	height:auto;
+   max-height:33px;
+   max-width:33px;
+   position:absolute;
+   width:auto;
+   height:auto;
 }
 
 section>.myDongle {
-	width: 1024px;
-	height: 300px;
+   width: 1024px;
+   height: 300px;
 }
 
 section>.editorPick {
-	width: 1024px;
-	height: 420px;
+   width: 1024px;
+   height: 420px;
 }
 
 section>.dongle-rank {
-	width: 1024px;
-	height: 300px;
+   width: 1024px;
+   height: 300px;
 }
 
 .loginMember {
-	float: right;
+   float: right;
 }
 .dongle-guide{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .guide-btn{
-	width:190px; 
-	background-color: rgba(0,0,0,0);
-	border-radius: 10px 10px;
+   width:190px; 
+   background-color: rgba(0,0,0,0);
+   border-radius: 10px 10px;
 }

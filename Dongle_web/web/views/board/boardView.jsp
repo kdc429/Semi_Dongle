@@ -10,137 +10,101 @@
 	int groupNo=(int)request.getAttribute("groupNo");
 	List<BoardComment> bclist=(List)request.getAttribute("bclist");
 %>
-    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-	
-	.table
-	{
-		text-align: center;
-		boder: 1px solid #dddddd;
-		padding : 10px;
-		height: 200px;
-	}
-	.table th
-	{
-		background-color: #EAEAEA;
-		text-align : center;
-		height: 10px;
-	}
-	.table td
-	{
-		text-align : left;
-	}
-	.view-btn
-	{
-		text-align : center;
-	}
-	#title
-	{
-		background-color: #F2CB61;
-	}
-	/* 댓글테이블 */
-	table#tbl-comment
-	{
-		width:580px; 
-		margin:0 auto; 
-		border-collapse:collapse; 
-		clear:both;
-		background-color : #EAEAEA;
-	} 
-    table#tbl-comment tr td
-    {
-		border-bottom:1px solid; 
-		border-top:1px solid; 
-		padding:5px; 
-		text-align:left; 
-    	line-height:120%;
-    }
-    table#tbl-comment tr td:first-of-type
-    {
-    padding: 5px 5px 5px 50px;
-    }
-    table#tbl-comment tr td:last-of-type 
-    {
-    	text-align:center; 
-    	width: 60px;
-    }
-    table#tbl-comment button.btn-reply
-    {
-    	display:none;
-    }
-    table#tbl-comment button.btn-delete
-    {
-    	display:none;
-    }
-    table#tbl-comment tr.lebel1
-    {
-		background-color:gray;    
-    }
-    table#tbl-comment tr.level2
-    {
-		color:gray; 
-    	font-size: 14px;
-    }
-    table#tbl-comment sub.board-comment-writer 
-    {
-    	color:navy; 
-    	font-size:14px;
-    }
-    table#tbl-comment sub.board-comment-date 
-    {
-		color:tomato; 
-    	font-size:10px;
-    }
-    table#tbl-comment tr.level2 td:first-of-type
-    {
-    	padding-left:100px;
-    }
-    table#tbl-comment tr.level2 sub.comment-writer 
-    {
-    	color:#8e8eff; 
-    	font-size:14px
-    }
-    table#tbl-comment tr.level2 sub.comment-date 
-    {
-    	color:#ff9c8a; 
-    	font-size:10px
-    } 
-    #report
-    {
-    	float:right;
-    }
-	
+div.view-btn
+{
+	text-align:center;
+}
+/* 댓글창 스타일 */
+div.board-comment-editor fieldset.modal_comment{
+padding:8px 10px 10px;
+border-bottom:1px solid #efefef;
+font-family:'a흑진주L';
+border-top:1px solid #e8e8e8;
+background-color:rgb(240,240,240);
+position:relative;
+margin-top:2px;
+}
+.screen_out{overfloa:hidden;width:0;height:0;line-height:0;text-indent:-9999px;}
+.lab_write{top:8px;left:14px;}
+/* 댓글테이블!! */
+div.board-comment-editor{border-top: 1px solid rgb(240,240,240);margin-top:5%;}
+div.board-comment-ediotr ul{list-style:none;}
+div.board-comment-ediotr ul li{list-style:none; margin-bottom:20px;}
+.ico_skin{display:block;overflow:hidden;font-size:0;line-height: 0;text-indent:-9999px;}
+.thumb_profile{
+   width: 33px;
+   height: 33px;
+   margin-right: 11px;
+   margin-top: 2px;
+   background-position: -120px -20px;
+   float:left;
+   border-radius:48px;
+}
+img.img_profile{display:block;width:100%;height:100%;border-radius:48px;}
+
+.comment_box{margin-top:4px;overflow:hidden;display:block;}
+div.comment_box ul{}
+li{padding:0;}
+.comment_writer{float:left;overflow:hidden;color:rgb(250,250,250);text-overflow: ellipsis;white-space: nowrap;font-size:14px;margin-right:5px;max-width:120px;}
+.comment_date{float:left;font-size:12px;color:#a7a7a7;margin-top:3px;}
+.comment_content{display:block;font-size:13px;color:#5c5c5c;clear:both;line-height: 19px;padding-top:2px;}
+div.tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; clear:both; box-sizing: border-box;} 
+li button.btn-reply{display:none; background-color:white;float:right;border:none;height:10px;}
+li button.btn-delete{display:none;}
+/* li:hover {background:lightgray;} */
+li:hover button.btn-reply{display:inline;}
+li:hover button.btn-delete{display:inline;}
+li.level2{padding-left:50px;}
+div.board-comment-editor fieldset.modal_comment div.comment-btn button#btn-insert{
+float:right;
+width:65px;height:28px;
+font-size:14px;
+line-height:15px;
+border-radius: 20px;
+border:none;
+background-color:white;
+}   
 	
 </style>
 	<section id="board-container">
 		<form name="deleteFrm" method="post" enctype="multipart/form-data">
-			<table class="table table-bordered">
+			<table class="table">
 				<thead>
 					<br><br>
 					<tr>
-						<th colspan="3" id="title">공지사항</th>
+						<th colspan="3" id="title" style="border-top:1px solid #dddddd; ">공지사항</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th style="width: 20%;">글 제목</th>
-						<td colspan="2"><%=b.getBoardTitle()%></td>
+						<th style="width: 20%; background-color:rgba(245,245,245); color:black">글 제목</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardTitle()%></td>
 					</tr>
 					<tr>
-						<th>작성자</th>
-						<td colspan="2"><%=b.getBoardWriter() %></td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">작성자</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardWriter() %></td>
 					</tr>					
 					<tr>
-						<th>작성일자</th>
-						<td colspan="2"><%=b.getBoardWriteDate()%></td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">작성일자</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardWriteDate()%></td>
 					</tr>					
 					<tr>
-						<th>조회수</th>
-						<td colspan="2"><%=b.getBoardViewCount()%></td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">조회수</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardViewCount()%></td>
 					</tr>
 					<tr>
-						<th>첨부파일</th>
-						<td>
+						<th style="background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">첨부파일</th>
+						<td style="text-align:left">
 							<%
 							if(bp.getBoardFileNewPath()!=null){%> 
 								<a href="javascript:fn_fileDownLoad('<%=bp.getBoardFileNewPath() %>','<%=bp.getBoardFileOldPath()%>');"> 
@@ -151,18 +115,18 @@
 						</td>
 					</tr>
 					<tr>
-						<th>내용</th>
-						<td colspan="2"><%=b.getBoardContent()%></td>
+						<th style="border-bottom:1px solid #dddddd; background-color:rgba(245,245,245); color:black">내용</th>
+						<td colspan="2" style="text-align:left"><%=b.getBoardContent()%></td>
 					</tr>
 				</tbody> 
 			</table>
 		</form>
 		<div class="view-btn">
-			<button id='view-list-btn'>목록으로</button>
+			<button type="button" class="btn btn-default" id='view-list-btn' style="text-align:center; font-family: '나눔스퀘어라운드 Regular';">목록으로</button>
 			<%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
-			<button id='view-update-btn'>수정하기</button>
+			<button type="button" class="btn btn-default" id='view-update-btn' style="font-family: '나눔스퀘어라운드 Regular';">수정하기</button>
 			<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-			<input type="button" id="view-delete-btn" value="삭제하기" />
+			<button type="button" class="btn btn-default" id="view-delete-btn" style="font-family: '나눔스퀘어라운드 Regular';">삭제하기</button>
 			<%} %>
 		</div>
 		<br><br>
@@ -177,8 +141,8 @@
 			value="1"/>
 			<input type="hidden" name="boardCommentRef" id="boardCommentRef"
 			value="0"/>
-			<textarea cols='75' rows='3' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
-			<button id="comment-insert-btn">등록</button>
+			<textarea cols='70' rows='3' style='resize:none;' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
+			<button type="button" class="btn btn-default" id="comment-insert-btn" style="float:right; width:60px; height:65px;">등록</button>
 		</div>
 		<!-- 댓글목록 테이블 -->
 		<table id="tbl-comment">
@@ -261,8 +225,8 @@ $(function(){
 			html+="<input type='hidden' name='boardNo' id='boardNo' value='<%=b.getBoardNo()%>'/>";
 			html+="<input type='hidden' name='boardCommentLevel' id='boardCommentLevel' value='2'/>";
 			html+="<input type='hidden' name='boardCommentRef' id='boardCommentRef2' value='"+$(this).val()+"'/>";
-			html+="<textarea name='boardCommentContent' id='boardCommentContent2' cols='60' rows='1'></textarea>";
-			html+="<button value='"+$(this).val()+"' id='comment-insert-btn' style='height:20px'>등록</button>";
+			html+="<textarea style='resize:none;' name='boardCommentContent' id='boardCommentContent2' cols='63' rows='1'></textarea>";
+			html+="<button value='"+$(this).val()+"'class='btn btn-default' id='comment-insert-btn' style='float:right; width:60px; height:26px; margin-left:17px;'>등록</button>";
 			html+="</div></td>";
 			tr.html(html);
 			tr.insertAfter($(this).parent().parent()).children("td").slideDown(800);
