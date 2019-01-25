@@ -148,7 +148,6 @@ public class BoardService {
 		close(conn);
 		return bclist;
 	}
-	
 	public int deleteBoComment (int boCommentNo)
 	{
 		Connection conn=getConnection();

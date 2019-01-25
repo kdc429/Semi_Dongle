@@ -29,10 +29,8 @@
      	padding-bottom: 5px;
      }
   </style>
-
 </head>
 <body>
-
    <div id="updatePassword-container">
       <form name="updatePwdFrm" action="<%=request.getContextPath()%>/updatePasswordEnd" method="post">
          <table style="margin-top: 30px;">
@@ -81,7 +79,9 @@
          }
          return true;         
       }
+
    </script>
+
 
 </body>
 </html>

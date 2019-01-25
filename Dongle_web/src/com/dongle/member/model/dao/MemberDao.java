@@ -17,150 +17,148 @@ import com.dongle.member.model.vo.ReportReason;
 
 
 public class MemberDao {
-	
-	Properties prop=new Properties();
-	public MemberDao() {
-		String fileName = MemberDao.class.getResource("./memberquery.properties").getPath();
+   
+   Properties prop=new Properties();
+   public MemberDao() {
+      String fileName = MemberDao.class.getResource("./memberquery.properties").getPath();
 
-		try {
-			prop.load(new FileReader(fileName)); //properties 로드
+      try {
+         prop.load(new FileReader(fileName)); //properties 로드
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
 
-	public Member selectMember(Connection conn, Member m) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql=prop.getProperty("loginCheck");
-		Member data=null;
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, m.getMemberId());
-//			pstmt.setString(2, pw));
-			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {//일단 아이디 패스워드만 받음 추후 수정할 예정
-				data=new Member();
-				data.setMemberNo(rs.getInt("member_no"));
-				data.setMemberId(rs.getString("member_id"));
-				data.setMemberPwd(rs.getString("member_pwd"));
-				data.setMemberName(rs.getString("member_name"));
-				data.setGender(rs.getString("member_gen"));
-				data.setSsn(rs.getString("member_ssn"));
-				data.setEmail(rs.getString("member_email"));
-				data.setPhone(rs.getString("member_phone"));
-				data.setAddress(rs.getString("member_address"));
-				data.setEnrollDate(rs.getDate("member_enroll_date"));
-				data.setPwdHintList(rs.getString("pwd_hint_list"));
-				data.setPwdHintAnswer(rs.getString("pwd_hint_answer"));
-				data.setBlackList(rs.getString("blacklist_yn"));
-				data.setReportCount(rs.getInt("report_member_count"));
+   public Member selectMember(Connection conn, Member m) {
+      PreparedStatement pstmt=null;
+      ResultSet rs=null;
+      String sql=prop.getProperty("loginCheck");
+      Member data=null;
+      try {
+         pstmt=conn.prepareStatement(sql);
+         pstmt.setString(1, m.getMemberId());
+//         pstmt.setString(2, pw));
+         rs=pstmt.executeQuery();
+         
+         if(rs.next()) {//일단 아이디 패스워드만 받음 추후 수정할 예정
+            data=new Member();
+            data.setMemberNo(rs.getInt("member_no"));
+            data.setMemberId(rs.getString("member_id"));
+            data.setMemberPwd(rs.getString("member_pwd"));
+            data.setMemberName(rs.getString("member_name"));
+            data.setGender(rs.getString("member_gen"));
+            data.setSsn(rs.getString("member_ssn"));
+            data.setEmail(rs.getString("member_email"));
+            data.setPhone(rs.getString("member_phone"));
+            data.setAddress(rs.getString("member_address"));
+            data.setEnrollDate(rs.getDate("member_enroll_date"));
+            data.setBlackList(rs.getString("blacklist_yn"));
+            data.setReportCount(rs.getInt("report_member_count"));
+//            data.setPwdHintList(rs.getString("pwd_hint_list"));
+//            data.setPwdHintAnswer(rs.getString("pwd_hint_answer"));
+         }
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }
+      close(pstmt);
+      close(rs);
+      
+      return data;
+   }
+   
+   public int updatePassword(Connection conn, Member data)
+   {
+      PreparedStatement pstmt=null;
+      int result=0;
+      String sql=prop.getProperty("updatePassword");
+      try 
+      {
+         pstmt=conn.prepareStatement(sql);
+         pstmt.setString(1, data.getMemberPwd());
+         pstmt.setString(2, data.getMemberId());
+         result=pstmt.executeUpdate();
+      }
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+      finally
+      {
+         close(pstmt);
+      }
+      return result;
+   }
+   
+   public int resetPassword(Connection conn, Member data)
+   {
+      PreparedStatement pstmt=null;
+      int result=0;
+      String sql=prop.getProperty("updatePassword");
+      try 
+      {
+         pstmt=conn.prepareStatement(sql);
+         pstmt.setString(1, data.getMemberPwd());
+         pstmt.setString(2, data.getMemberId());
+         result=pstmt.executeUpdate();
+      }
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+      finally
+      {
+         close(pstmt);
+      }
+      return result;
+   }
+   
+   public int insertMember(Connection conn, Member m)
+   {
+      PreparedStatement pstmt=null;
+      int result=0;
+      String sql=prop.getProperty("insertMember");
+      try {
+         pstmt=conn.prepareStatement(sql);
+         pstmt.setString(1, m.getMemberId());
+         pstmt.setString(2, m.getMemberPwd());
+         pstmt.setString(3, m.getMemberName());
+         pstmt.setString(4, m.getGender());
+         pstmt.setString(5, m.getSsn());
+         pstmt.setString(6, m.getPhone());
+         pstmt.setString(7, m.getAddress());
+         pstmt.setString(8, m.getEmail());
+         pstmt.setString(9, m.getPwdHintList());
+         pstmt.setString(10, m.getPwdHintAnswer());
 
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		close(pstmt);
-		close(rs);
-		
-		return data;
-	}
-	
-	public int updatePassword(Connection conn, Member data)
-	{
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("updatePassword");
-		try 
-		{
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, data.getMemberPwd());
-			pstmt.setString(2, data.getMemberId());
-			result=pstmt.executeUpdate();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally
-		{
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	public int resetPassword(Connection conn, Member data)
-	{
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("updatePassword");
-		try 
-		{
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, data.getMemberPwd());
-			pstmt.setString(2, data.getMemberId());
-			result=pstmt.executeUpdate();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally
-		{
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	public int insertMember(Connection conn, Member m)
-	{
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("insertMember");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
-			pstmt.setString(3, m.getPwdHintList());
-			pstmt.setString(4, m.getPwdHintAnswer());
-			pstmt.setString(5, m.getMemberName());
-			pstmt.setString(6, m.getGender());
-			pstmt.setString(7, m.getSsn());
-			pstmt.setString(8, m.getPhone());
-			pstmt.setString(9, m.getAddress());
-			pstmt.setString(10, m.getEmail());
-
-			result=pstmt.executeUpdate();						
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(pstmt);
-		}
-		
-		return result;		
-		
-	}
-	
-	public int memberUpdate (Connection conn, Member m)
-	{
-		PreparedStatement pstmt=null;
-		int result=0;
-		String sql=prop.getProperty("memberUpdate");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, m.getMemberName());
-			pstmt.setString(2, m.getSsn());
-			pstmt.setString(3, m.getPhone());
-			pstmt.setString(4, m.getAddress());
-			pstmt.setString(5, m.getEmail());
-			pstmt.setString(6, m.getMemberId());
-			
-			
-			result=pstmt.executeUpdate();
-			System.out.println(result);
-
+         result=pstmt.executeUpdate();                  
+      }
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+      finally {
+         close(pstmt);
+      }
+      
+      return result;      
+      
+   }
+   
+   public int memberUpdate (Connection conn, Member m)
+   {
+      PreparedStatement pstmt=null;
+      int result=0;
+      String sql=prop.getProperty("memberUpdate");
+      try {
+         pstmt=conn.prepareStatement(sql);
+         pstmt.setString(1, m.getMemberName());
+         pstmt.setString(2, m.getSsn());
+         pstmt.setString(3, m.getPhone());
+         pstmt.setString(4, m.getAddress());
+         pstmt.setString(5, m.getEmail());
+         pstmt.setString(6, m.getMemberId());
+         
+         
+         result=pstmt.executeUpdate();
+         
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -294,3 +292,4 @@ public class MemberDao {
 		return result;
 	}
 }
+

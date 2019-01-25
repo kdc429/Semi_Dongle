@@ -29,10 +29,17 @@
 	}
 	.table th
 	{
-		background-color: #F2CB61;
+		font-family: 'netmarble Medium';
+		background-color: rgba(112,136,172);
+		color : white;
 		text-align: center;
-		
-	}
+		}
+	.table td
+	{
+		border-top:1px solid #dddddd;
+		border-bottom:1px solid #dddddd;
+	}		
+	
 	#add-btn
 	{
 		float:right;
@@ -47,9 +54,9 @@
 	<div id="board-container" >
 		<h2>공지사항</h2>
 		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
-			<input type="button" value="글쓰기" id="add-btn"/>
+			<button type="button" class="btn btn-default" id="add-btn" style="font-family: '나눔스퀘어라운드 Regular';">글쓰기</button>
 		 <%} %>  
-		<table class="table table-bordered">
+		<table class="table table-hover">
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
@@ -60,18 +67,18 @@
 			<%if(!list.isEmpty()) { %>
 			<%for(Board b : list) {%>
 				<tr>
-					<td><%=b.getBoardNo() %></td>
-					<td class="boardView-btn">
+					<td style="font-family: '나눔스퀘어라운드 Regular';"><%=b.getBoardNo() %></td>
+					<td class="boardView-btn" style="font-family: '나눔스퀘어라운드 Regular';">
 							<%=b.getBoardTitle()%>
 							<input type="hidden" name="boardNo" id="boardNo" value="<%=b.getBoardNo() %>"/>
 					</td>
-					<td>
+					<td style="font-family: '나눔스퀘어라운드 Regular';">
 						<%=b.getBoardWriter() %>
 					</td>
-					<td>
+					<td style="font-family: '나눔스퀘어라운드 Regular';">
 						<%=b.getBoardWriteDate()%>
 					</td>
-					<td>
+					<td style="font-family: '나눔스퀘어라운드 Regular';">
 						<%=b.getBoardViewCount() %>
 					</td>
 				</tr>
