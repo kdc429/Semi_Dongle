@@ -16,14 +16,15 @@ public class BoardComment {
 	private Date boCommentDate;
 	private int boCommentLevel;
 	private int boCommentRef;
+	private String boCommentReportStatus;
 	private String groupMemberNickname;
 	private String groupMemberImageNewPath;
 	
 	public BoardComment() {}
 
 	public BoardComment(int groupNo, int boardNo, int boCommentNo, int memberNo, String boCommentContent,
-			Date boCommentDate, int boCommentLevel, int boCommentRef, String groupMemberNickname,
-			String groupMemberImageNewPath) {
+			Date boCommentDate, int boCommentLevel, int boCommentRef, String boCommentReportStatus,
+			String groupMemberNickname, String groupMemberImageNewPath) {
 		super();
 		this.groupNo = groupNo;
 		this.boardNo = boardNo;
@@ -33,6 +34,7 @@ public class BoardComment {
 		this.boCommentDate = boCommentDate;
 		this.boCommentLevel = boCommentLevel;
 		this.boCommentRef = boCommentRef;
+		this.boCommentReportStatus = boCommentReportStatus;
 		this.groupMemberNickname = groupMemberNickname;
 		this.groupMemberImageNewPath = groupMemberImageNewPath;
 	}
@@ -101,6 +103,14 @@ public class BoardComment {
 		this.boCommentRef = boCommentRef;
 	}
 
+	public String getBoCommentReportStatus() {
+		return boCommentReportStatus;
+	}
+
+	public void setBoCommentReportStatus(String boCommentReportStatus) {
+		this.boCommentReportStatus = boCommentReportStatus;
+	}
+
 	public String getGroupMemberNickname() {
 		return groupMemberNickname;
 	}
@@ -122,9 +132,8 @@ public class BoardComment {
 		return "BoardComment [groupNo=" + groupNo + ", boardNo=" + boardNo + ", boCommentNo=" + boCommentNo
 				+ ", memberNo=" + memberNo + ", boCommentContent=" + boCommentContent + ", boCommentDate="
 				+ boCommentDate + ", boCommentLevel=" + boCommentLevel + ", boCommentRef=" + boCommentRef
-				+ ", groupMemberNickname=" + groupMemberNickname + ", groupMemberImageNewPath="
-				+ groupMemberImageNewPath + "]";
+				+ ", boCommentReportStatus=" + boCommentReportStatus + ", groupMemberNickname=" + groupMemberNickname
+				+ ", groupMemberImageNewPath=" + groupMemberImageNewPath + "]";
 	}
-	
 	
 }

@@ -12,6 +12,7 @@ public class BoardPath {
 	private Date boardWriteDate;
 	private int boardViewCount;
 	private String boardStatus;
+	private String boardReportStatus;
 	private int boardFileNo;
 	private String boardFileOldPath;
 	private String boardFileNewPath;
@@ -19,8 +20,8 @@ public class BoardPath {
 	public BoardPath() {}
 
 	public BoardPath(int boardNo, int groupNo, String boardTitle, String boardWriter, String boardContent,
-			Date boardWriteDate, int boardViewCount, String boardStatus, int boardFileNo, String boardFileOldPath,
-			String boardFileNewPath) {
+			Date boardWriteDate, int boardViewCount, String boardStatus, String boardReportStatus, int boardFileNo,
+			String boardFileOldPath, String boardFileNewPath) {
 		super();
 		this.boardNo = boardNo;
 		this.groupNo = groupNo;
@@ -30,6 +31,7 @@ public class BoardPath {
 		this.boardWriteDate = boardWriteDate;
 		this.boardViewCount = boardViewCount;
 		this.boardStatus = boardStatus;
+		this.boardReportStatus = boardReportStatus;
 		this.boardFileNo = boardFileNo;
 		this.boardFileOldPath = boardFileOldPath;
 		this.boardFileNewPath = boardFileNewPath;
@@ -99,6 +101,14 @@ public class BoardPath {
 		this.boardStatus = boardStatus;
 	}
 
+	public String getBoardReportStatus() {
+		return boardReportStatus;
+	}
+
+	public void setBoardReportStatus(String boardReportStatus) {
+		this.boardReportStatus = boardReportStatus;
+	}
+
 	public int getBoardFileNo() {
 		return boardFileNo;
 	}
@@ -128,9 +138,7 @@ public class BoardPath {
 		return "BoardPath [boardNo=" + boardNo + ", groupNo=" + groupNo + ", boardTitle=" + boardTitle
 				+ ", boardWriter=" + boardWriter + ", boardContent=" + boardContent + ", boardWriteDate="
 				+ boardWriteDate + ", boardViewCount=" + boardViewCount + ", boardStatus=" + boardStatus
-				+ ", boardFileNo=" + boardFileNo + ", boardFileOldPath=" + boardFileOldPath + ", boardFileNewPath="
-				+ boardFileNewPath + "]";
+				+ ", boardReportStatus=" + boardReportStatus + ", boardFileNo=" + boardFileNo + ", boardFileOldPath="
+				+ boardFileOldPath + ", boardFileNewPath=" + boardFileNewPath + "]";
 	}
-
-	
 }

@@ -68,6 +68,9 @@
    </div>
    <script src="http://code.jquery.com/jquery-latest.js"></script>
    <script>
+   
+   
+   	
       function password_validate(){
          var pw1=$('#password_new').val().trim();
          var pw2=$('#password_ck').val().trim();

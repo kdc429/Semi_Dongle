@@ -143,7 +143,7 @@ background-color:white;
 			value="<%=loginMember.getMemberId() %>"/>
 			<input type="hidden" name="boardCommentLevel" id="boardCommentLevel"
 			value="1"/>
-		<%-- 	<input type="hidden" name="boCommentNo" id="boCommentNo"
+			<%-- <input type="hidden" name="boCommentNo" id="boCommentNo"
 			value="<%=b.getBoCommentNo()%>"/> --%>
 			<input type="hidden" name="boardCommentRef" id="boardCommentRef"
 			value="0"/>
@@ -288,29 +288,6 @@ $(function(){
 		<%}%>
 		
 	});  
-	<%-- $(function(){
-		$('[name=boardCommentContent]').focus(function(){
-			if(<%=loginMember.getMemberId()==null%>)
-			{
-				fn_loginAlert();
-			}
-		});
-		$('[name=boardCommentFrm]').submit(function(e){
-			if(<%=loginMember.getMemberId()==null%>)
-			{
-				fn_loginAlert();
-				e.preventDefault();
-				return;
-			}
-			var len=$('textarea[name=boardCommentContent]').val().trim().length;
-			if(len==0)
-			{
-				alert('내용을 입력하세요~!');
-				$('textarea[name=boardCommentContent]').focus();
-				e.preventDefault();	
-			}
-		})
-	});	 --%>
 
 	function fn_loginAlert()
 	{
