@@ -163,4 +163,14 @@ public class GalleryService {
       else {rollback(conn);}
       return rs;
    }
+   //코멘트 삭제하기
+   public int deleteComment(int groupNo,int galCommentNo)
+   {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().deleteComment(conn,groupNo,galCommentNo);
+	      if(rs!=0) {commit(conn);}
+	      else {rollback(conn);}
+	      return rs;
+   }
+   
 }

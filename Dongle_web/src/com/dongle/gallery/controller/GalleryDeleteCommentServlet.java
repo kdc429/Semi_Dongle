@@ -1,29 +1,29 @@
-package com.dongle.member.controller;
+package com.dongle.gallery.controller;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.gallery.model.service.GalleryService;
+import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.member.model.vo.Member;
-import com.dongle.member.model.service.MemberService;
-
 
 /**
- * Servlet implementation class MemberViewServlet
+ * Servlet implementation class GalleryDeleteCommentServlet
  */
-@WebServlet("/Dongle_view/memberView")
-public class MemberViewServlet extends HttpServlet {
+@WebServlet("/gallery/deleteComment")
+public class GalleryDeleteCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberViewServlet() {
+    public GalleryDeleteCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +32,20 @@ public class MemberViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String id=request.getParameter("userId");
-		System.out.println(id);
-		Member m=new Member();
-		m.setMemberId(id);
+		int galCommentNo = Integer.parseInt(request.getParameter("galCommentNo"));
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		
-		Member data=new MemberService().selectMember(m);
+		int rs = new GalleryService().deleteComment(groupNo,galCommentNo);
 		
-		request.setAttribute("member", data);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/memberView.jsp"); //화면에 띄울 화면을 여기 jsp로 이동!
-		rd.forward(request, response);
+		
+
+		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
+		int galNo=Integer.parseInt(request.getParameter("galNo"));
+		
+		List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
+		
+		
 	}
 
 	/**
@@ -55,9 +57,3 @@ public class MemberViewServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-

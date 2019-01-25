@@ -2,13 +2,13 @@ package com.dongle.member.model.vo;
 
 public class DongleRptMember {
 	private int memberNo; //MEMBER_NO
-	private int groupNo;
+	private int groupNo; //GROUP_NO
 	private String memberId; //MEMBER_ID
 	private String memberNickname; //GROUP_MEMBER_NICKNAME
 	private String rptCode; //REPORT_CODE
 	private String rptReason; //REPORT_REASON
 	private int rptCount; //REPORT_DONGLE_COUNT
-	private String isBlack; //BLACKLIST_YN
+	private String isBlack; //GROUP_BLACKLIST_YN
 	
 	public DongleRptMember() {}
 	public DongleRptMember(String memberId, String memberNickname, String rptCode, String rptReason, int rptCount,
@@ -28,6 +28,12 @@ public class DongleRptMember {
 	}
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
+	}
+	public int getGroupNo() {
+		return groupNo;
+	}
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -67,12 +73,10 @@ public class DongleRptMember {
 	}
 	@Override
 	public String toString() {
-		return "DongleRptMember [memberNo=" + memberNo + ", memberId=" + memberId + ", memberNickname=" + memberNickname
-				+ ", rptCode=" + rptCode + ", rptReason=" + rptReason + ", rptCount=" + rptCount + ", isBlack="
-				+ isBlack + "]";
+		return "DongleRptMember [memberNo=" + memberNo + ", groupNo=" + groupNo + ", memberId=" + memberId
+				+ ", memberNickname=" + memberNickname + ", rptCode=" + rptCode + ", rptReason=" + rptReason
+				+ ", rptCount=" + rptCount + ", isBlack=" + isBlack + "]";
 	}
-	
-	
 	
 	
 	

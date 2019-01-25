@@ -12,7 +12,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 	List<GalleryPath> galList = (List)request.getAttribute("galList");
 	//List<Board> list=(List)request.getAttribute("list");
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -169,6 +168,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 			}); */
 		 
 </script>
+
     <div class='back'>
         <!-- 로고 헤더 -->
         <header>
@@ -198,6 +198,10 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 						<div id="dongle_info_view" style="font-size: 11px;">회원수 : <%=result %> 명 &nbsp;</div>
 						<div id="dongle_info_view">
 							<button id="dongle_mem_btn">멤버보기</button>
+						
+						<%if(gm!=null){ %>	
+							<button id="dongle_mem_update">정보수정</button>
+							<%} %>
 						<%if(gm==null){ %>
 							<button id="dongle_mem_join">가입하기</button>
 							<%} %>
@@ -559,6 +563,20 @@ $(function(){
 	})
 });
 
+$(function(){
+	$("#dongle_mem_update").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/dongleUpdateView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
 
 
 function comunnityHome(){

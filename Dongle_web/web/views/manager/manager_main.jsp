@@ -48,7 +48,7 @@
 		<div class="modal fade"></div>
 		<div class="panel-body">동글 메인 꾸미기</div>
 		<div class="panel-heading">동글 회원관리</div>
-		<div class="panel-body">신고 회원 관리</div>
+		<div class="panel-body"><a id="report-member-btn">신고 회원 관리</a></div>
 	</div>
 	<div class="panel panel-default" style="width: 600px">
 		<div class="panel-body">
@@ -88,7 +88,7 @@
 							</select> <br> 
 							<label for="address">지역</label><br> 
 								<input type="text" class="form-control" id="address"  value="<%=address %>" readonly>
-								<button type="button" class="btn btn-info">검색</button><br>
+								<button type="button" id="search-address" class="btn btn-info">검색</button><br>
 							
 							<!-- <select	class="form-control" id="area">
 								<option value="경기도">경기도</option>
@@ -100,18 +100,6 @@
 								<option value="전라남도">전라남도</option>
 								<option value="제주도">제주도</option>
 							</select> <br>  -->
-							<label>성별</label><br>
-							<div class="radio">
-								<label class="radio-inline">
-									<input type="radio" name="gender" value="남자" checked>남자
-								</label>
-								<label class="radio-inline">
-									<input type="radio" name="gender" value="여자">여자
-								</label> 
-								<label class="radio-inline">
-									<input type="radio" name="gender" value="무관">무관
-								</label>
-							</div>
 							<br> 
 							<label>활동 시간대</label><br>
 							<div class="radio">
@@ -197,3 +185,41 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+/* 동글 정보변경 -> 주소 검색 */
+$(function(){
+	$("#search-address").click(function(){
+		var url="<%=request.getContextPath()%>/views/manager/manager_searchAddress.jsp";
+		var title="주소 검색";
+		var shape="left=200px, top=100px, width=600px, height=700px";
+		
+		var popup=open(url,title,shape);
+	})
+});
+
+/* 신고관리버튼 */
+$(function(){
+	$("#report-member-btn").click(function(){
+		var managerNo=<%=g.getMemberNo()%>;
+		
+		console.log(<%=g.getMemberNo()%>);
+		$.ajax({
+			url:"<%=request.getContextPath()%>/manager/reportMemberView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			data:{
+				"managerNo":managerNo
+			},
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complete:function(){console.log("ok");}
+		})
+	})
+});
+
+
+</script>

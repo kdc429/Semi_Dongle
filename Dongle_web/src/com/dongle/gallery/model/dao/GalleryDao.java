@@ -513,4 +513,25 @@ public class GalleryDao {
       }
       return rs;
    }
+   
+   public int deleteComment(Connection conn,int groupNo,int galCommentNo)
+   {
+	   PreparedStatement pstmt=null;
+	   int rs =0;
+	   String sql = prop.getProperty("deleteComment");
+	   try {
+		   pstmt= conn.prepareStatement(sql);
+		   pstmt.setInt(1, groupNo);
+		   pstmt.setInt(2, galCommentNo);
+		   rs=pstmt.executeUpdate();
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(pstmt);
+	   }
+	   return rs;
+   }
 }

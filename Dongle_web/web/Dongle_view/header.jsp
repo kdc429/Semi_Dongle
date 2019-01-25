@@ -3,17 +3,16 @@
 <%@ page import="com.dongle.member.model.vo.Member"%>
 
 <%
-
-    	Member loginMember = (Member) session.getAttribute("loginMember");
-    	Cookie[] cookies = request.getCookies();
-    	String cookieValue = "";
-    	if (cookies != null) {
-    		for (Cookie c : cookies) {
-    			if (c.getName().equals("saveId")) {
-    				cookieValue = c.getValue();
-    			}
-    		}
-    	}
+      Member loginMember = (Member) session.getAttribute("loginMember");
+       Cookie[] cookies = request.getCookies();
+       String cookieValue = "";
+       if (cookies != null) {
+          for (Cookie c : cookies) {
+             if (c.getName().equals("saveId")) {
+                cookieValue = c.getValue();
+             }
+          }
+       }
 %>
 <!DOCTYPE html>
 <html>
@@ -21,69 +20,104 @@
 <meta charset="UTF-8">
 <title>당신을 위한 맞춤형 동호회</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/Dongle.css" />
+   href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
+   href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
+   href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/Admin_dongleList.css" />
+   href="<%=request.getContextPath()%>/css/Admin_dongleList.css" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/Admin_blackMemberList.css" />
+   href="<%=request.getContextPath()%>/css/Admin_blackMemberList.css" />
 <link href="https://fonts.googleapis.com/css?family=Bungee"
-	rel="stylesheet">
+   rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
-	rel="stylesheet">
+   rel="stylesheet">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif:700" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/css/icon.css" rel="stylesheet">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.guide-btn{
+   width:120px; 
+   background-color: rgba(0,0,0,0); 
+/*    margin-left: 850px; 
+   margin-top: 100px; */
+   font-family: '여기어때잘난서체';
+   border: 1px;
+   font-weight: bold;
+   font-size: 17px;
+   color : white;
+}
+.search-btn{
+   width:100px; 
+   background-color: rgba(0,0,0,0); 
+   margin-left: 650px; 
+   margin-top: 60px;
+   font-family: '여기어때잘난서체';
+   border: 1px;
+   font-weight: bold;
+   font-size: 17px;
+   color : white;
+}
+div.bar span{
+   color : white;
+}
+/* div.bar .search-btn{
+   width: 20px;
+   height: 20px;
+   margin-bottom: 2px;
+   margin-right: 3px;
+} */
+div.user-back #userInfo_btn{
+   width: 28px;
+   height: 28px;
+}
+div.user-back #logout_btn{
+   width: 25px;
+   height: 25xp;
+   margin-left: 50px;
+}
+</style>
 </head>
 
 
 
+
 <body>
-	<header>
+   <header>
         <div class="headerBack">
             <div class="bar">
-            	<!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
-            		<a href="<%=request.getContextPath()%>/main/searchPage"><img src="<%=request.getContextPath()%>/images/button-images/search.png" style="width: 30px; height: 30px;" id='search-btn'></a>
-            	<!-- </button> -->
-            	<!-- 정보수정 및 로그 아웃 버튼! -->
-            	<div class="user-back">
-            		<span><%=loginMember.getMemberName()%>님, 환영합니다!</span>
-            	</div>&nbsp;&nbsp;
-            	<div class="user-back">
-            	<!-- 마이페이지 버튼 -->
-            		<button class="img-icon">
-            			<span class="sub-icon" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>'"/>마이페이지</span>
-            			<img class="user-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
-            		</button>
-            		
-            		
-            	</div>
-            	<div class="user-back">
-            	<!-- 로그 아웃 버튼 -->
-            		<button class="img-icon">
-            			<span class="sub-icon" onclick="location.href='<%=request.getContextPath()%>/member/logout'"/>로그아웃</span>
-            			<img class="user-img" src="<%=request.getContextPath()%>/images/button-images/logout.png">
-            		</button>
-            	</div>
+               <!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
+               <img src="<%=request.getContextPath() %>/images/button-images/user-img.png" id='userInfo_btn' onclick="memberView();" style="width: 30px; height: 30px;">
+                 
+                 <span><%=loginMember.getMemberName()%>님, 환영합니다!</span>
+               <!-- </button> -->
+               <!-- 정보수정 및 로그 아웃 버튼! -->
+               <div class="user-back">
+                  
+                  <%-- <a href="<%=request.getContextPath()%>/main/searchPage"><img src="<%=request.getContextPath()%>/images/button-images/search-btn.png" id='search-btn'></a> --%>
+                  <img src="<%=request.getContextPath()%>/images/button-images/logout-btn.png" id='logout_btn' onclick="location.href='<%=request.getContextPath()%>/member/logout'">
+                  <script>
+                     function memberView(){
+                        $.ajax({
+                           url:"<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>",
+                           success:
+                              function(data){
+                                 $('section').html(data); //header에 section으로 이동
+                                }
+                        });
+                     }
+                  </script>
+               </div>&nbsp;&nbsp;
             </div>
-            <div class="logo-back">
-            	<div style="font-family:'SunFlower'";><h4>당신을 위한 맞춤형 동호회</h4></div>
-            	<div class="logo">DONGLE</div>
-            	<div class="dongle-guide">
-            	<!-- 동글 가이드 버튼 -->
-            		<button class="guide-btn" style="width:190px; background-color: rgba(0,0,0,0);">동글 가이드</button>
-            	</div>
-            </div>
+              <button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
+              <button class="guide-btn">동글 가이드</button>
         </div>
         <script>
         </script>

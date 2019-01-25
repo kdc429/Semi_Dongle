@@ -9,22 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 import com.dongle.dongleMemberJoin.service.DongleMemberJoinService;
 import com.dongle.group.model.vo.GroupMember;
 import com.oreilly.servlet.MultipartRequest;
+
 import common.MyFileRenamePolicy;
 
 /**
- * Servlet implementation class DongleMemberJoin
+ * Servlet implementation class DongleMemberUpdateServlet
  */
-@WebServlet("/donglememberjoin")
-public class DongleMemberJoinEndServlet extends HttpServlet {
+@WebServlet("/dongleMemberUpdate")
+public class DongleMemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DongleMemberJoinEndServlet() {
+    public DongleMemberUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,6 +35,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub			
 		
 		if(!ServletFileUpload.isMultipartContent(request))
 		{
@@ -45,7 +48,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		String root=getServletContext().getRealPath("/");
 		//파일경로를 설정할때 구분자!
 		/*String saveDir=root+"upload/board";*/
-		String saveDir=root+"images"+File.separator+"member_img";
+		String saveDir=root+"upload"+File.separator+"board";
 		
 		//파일 크기설정
 		int maxSize=1024*1024*10;//10MB
@@ -66,13 +69,15 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		
 		GroupMember m = new GroupMember();
 		
-		m.setGroupMemberNickname(mr.getParameter("dongle_nickname"));
+		m.setGroupMemberNickname(mr.getParameter("nickname"));
 		m.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
 		m.setMemberNo(Integer.parseInt(mr.getParameter("memberNo")));
 		m.setGroupMemberImageNewPath(mr.getOriginalFileName("upfile"));
 		m.setGroupMemberImageOldPath(mr.getFilesystemName("upfile"));
 		
-		int result = new DongleMemberJoinService().insertdonglejoin(m);
+	
+		
+		int result = new DongleMemberJoinService().insertdongleupdate(m);
 		
 		//응답처리
 		String msg="";
@@ -81,19 +86,21 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		
 		if(result>0)
 		{
-			msg="동글 등록성공";
+			msg="정보수정 성공";
 			loc="/communityJoin?groupNo="+mr.getParameter("groupNo");
 
 		}
 		else 
 		{
-			msg="동글 등록 실패";
+			msg="정보수정 실패";
 			loc="/Dongle_Community_view/DongleMemberJoin.jsp";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher(view).forward(request, response);
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
