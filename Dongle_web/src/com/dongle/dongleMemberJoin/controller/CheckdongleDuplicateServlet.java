@@ -36,7 +36,7 @@ public class CheckdongleDuplicateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//파라미터로 전송된 id가 DB에 있는지 확인하는것!
-		String nickname=request.getParameter("dongle_nickname");
+		String nickname=request.getParameter("nickname");
 		System.out.println("닉넴확이뉴 : " + nickname);
 		GroupMember m=new GroupMember();
 		

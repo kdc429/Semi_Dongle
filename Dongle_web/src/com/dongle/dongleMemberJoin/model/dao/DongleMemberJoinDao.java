@@ -131,6 +131,27 @@ public class DongleMemberJoinDao {
 		return data;
 	}
 	
-	
+	public int deleteDongleMember(Connection conn, int memberNo, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("deleteDongleMember");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, groupNo);
+		
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

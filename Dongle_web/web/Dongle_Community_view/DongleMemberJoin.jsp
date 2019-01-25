@@ -80,11 +80,11 @@
 				alert('아이디 중복체크를 해주세요!');
 				return false;	
 			}
-			var userId=$("#dongle_nickname");
-			if(userId.val().length<4)
+			var nickname=$("#nickname");
+			if(nickname.val().length<2)
 			{
-				alert("최소 4자리 이상 입력하세요!");
-				userId.focus();
+				alert("최소 2자리 이상 입력하세요!");
+				nickname.focus();
 				return false;
 			}
 			return true;			
@@ -93,10 +93,10 @@
 		
 		//아이디 중복검사하기 : 팝업창을 띄워서 해보자~! 
 		function fn_checkduplicate(){
-			var userId=$("#dongle_nickname").val().trim();
-			if(!userId || userId.length<4)
+			var nickname=$("#nickname").val().trim();
+			if(!nickname || nickname.length<4)
 			{
-				alert("아이디를 4글자 이상 입력하세요~!");
+				alert("아이디를 2글자 이상 입력하세요~!");
 				return;	
 			}
 			//팝업창에 대한 설정해주기!@
@@ -107,7 +107,7 @@
 			var popup=open("",title,shape);
 			
 			//현재페이지에 있는값을 새창으로 옮기는 작업~!
-			checkdongleDuplicateFrm.dongle_nickname.value=userId;
+			checkdongleDuplicateFrm.nickname.value=nickname;
 			//popup창에서 이 폼을 작동시키게 하는 구문!
 			checkdongleDuplicateFrm.target=title;
 			checkdongleDuplicateFrm.action=url;
@@ -124,7 +124,7 @@
 
 
 <div id="dongle_title">동글 가입</div>
-	<form name='donglememberjoin' action="<%=request.getContextPath()%>/donglememberjoin" method="post" enctype="multipart/form-data">
+	<form name='dongleMemberUpdate' action="<%=request.getContextPath()%>/donglememberjoin" method="post" enctype="multipart/form-data">
 		<section>
 	    <div id="container">
 	        <div id="dongle_join">
@@ -135,7 +135,7 @@
 	                    <tr>
 	                        <th>닉네임 &nbsp;&nbsp;&nbsp;</th>
 	                        <td>
-	                            <input type="text" name="dongle_nickname" id="dongle_nickname" required/>
+	                            <input type="text" name="nickname" id="nickname" required/>
 	                            <input type="button" value="중복검사" onclick="fn_checkduplicate();"/>
 	                            <input type='hidden' name="idValid" value="0"/> 
 	                            <input type='hidden' name="groupNo" value="<%=groupNo%>"/> 
@@ -154,7 +154,7 @@
 		</section>
 	</form>
 	<form action="" name="checkdongleDuplicateFrm">
-			<input type="hidden" name="dongle_nickname"/>
+			<input type="hidden" name="nickname"/>
 		</form>	
 	
 	

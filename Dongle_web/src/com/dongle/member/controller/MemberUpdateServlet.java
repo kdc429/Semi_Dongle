@@ -56,11 +56,11 @@ public class MemberUpdateServlet extends HttpServlet {
 		
 		int result=new MemberService().memberUpdate(m);
 		
+		
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";
-		
-		if(result>0)
+				if(result>0)
 		{
 			msg="회원정보수정을 완료했습니다.";
 			loc="/Dongle_view/memberView?userId="+m.getMemberId();
@@ -70,6 +70,7 @@ public class MemberUpdateServlet extends HttpServlet {
 			msg="회원정보수정을 실패하였습니다.";
 			loc="/Dongle_view/memberView.jsp";
 		}
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		//페이지 포워딩
