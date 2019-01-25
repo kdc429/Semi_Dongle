@@ -50,6 +50,60 @@
 	}
 
 </script>
+<style>
+#search-black-txt{
+	width: 200px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	margin-left: 5px;
+}
+#add-btn{
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border : 1px solid transparent;
+	font-size: 14px;
+	line-height: 1.43;
+	border-radius: 4px;
+	width: 100px;
+	height: 30px;
+}
+#remove-btn{
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border : 1px solid transparent;
+	font-size: 14px;
+	line-height: 1.43;
+	border-radius: 4px;
+	width: 100px;
+	height: 30px;
+}
+
+.search_black_btn{
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	border : 1px solid transparent;
+	font-size: 14px;
+	line-height: 1.43;
+	border-radius: 4px;
+	width: 50px;
+	height: 30px;
+	margin-left: 5px;
+}
+</style>
 <section>
 	<div class="bar"></div>
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top: 10px">
@@ -63,12 +117,12 @@
 	<h2>블랙 리스트 관리</h2>
 	<div id="blackSearch-container">
 		<form id="nonblack-search-frm" method="post" action="<%=request.getContextPath() %>/admin/searchBlack?search-black=<%=searchBlack%>">
-			아이디 : <input type="text" name="search-nonblack" size="15"/>
-			<input type="submit" value="검색">
+			아이디 : <input type="text" name="search-nonblack" id='search-black-txt' size="15"/>
+			<input type="submit" class='search_black_btn' value="검색">
 		</form>
 		<form id="black-search-frm" method="post" action="<%=request.getContextPath() %>/admin/searchBlack?search-nonblack=<%=searchNonBlack%>">
-			아이디 : <input type="text" name="search-black" size="15"/>
-			<input type="submit" value="검색">
+			아이디 : <input type="text" name="search-black" id='search-black-txt' size="15"/>
+			<input type="submit" class='search_black_btn' value="검색">
 		</form>
 	</div>
 	<div id="blacklist-container">
@@ -185,9 +239,7 @@
 
 				</tbody>
 			</table>
-			<button id="remove-btn">
-				&lt;&lt;블랙 제외
-			</button>
+			<button id="remove-btn">&lt;&lt;블랙 제외</button>
 		</form>
 
 	</div>

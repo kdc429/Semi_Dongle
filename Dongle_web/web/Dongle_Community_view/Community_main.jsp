@@ -15,6 +15,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 %>
 
 <!DOCTYPE html>
+<link rel='icon' href='https://i.imgur.com/8k8yVjE.png'>
 <html lang="en">
 
 <head>
@@ -125,39 +126,94 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
     color: #FFF;
    }
    .demo{
-      width: 600px;;
+      width: 600px;
    }
+   .com_mian_btn{
+		display: inline-block;
+		margin-bottom: 0;
+		font-weight: 400;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: middle;
+		border: 1px solid transparent;
+		font-size: 14px;
+		line-height: 1.43;
+		border-radius: 4px;
+		color: #333;
+		background-color: #fff;
+		border-color: #ccc;
+		margin: 5px 0 0 45px;
+		font-family: 'netmarble Medium';
+   }
+   .menu-btn{
+		color: #333;
+		background-color: #fff;
+		border-color: #ccc;
+		display: inline-block;
+		font-weight: 400;
+		text-align: center;
+		vertical-align: middle;
+		background-image: none;
+		border : 1px solid transparent;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.43;
+		border-radius: 4px;
+		width: 100px;
+		height: 34px;
+		font-family: 'netmarble Medium';
+		font-weight: bold;
+		margin-left: -5px;
+   }
+
+
 </style>
 
 <body>
 
-   <script>  
-      $(function(){
-         $.ajax({
-            url:"<%=request.getContextPath()%>/community/boardList",
-            data:{groupNo:<%=g.getGroupNo()%>},
-            dataType:"html",
-            success:function(data){
-               $('#mini_board').html(data);
-            }
-         });    
-      });
-      
-      $(function(){
-         $('.boardView-btn').click(function(){
-            console.log($(this).children('input').val());
-            var num=$(this).children('input').val();
-            $.ajax({
-               url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>&boardNo="+num,
-               type:"post",
-               dataType:"html",
-               success:function(data){
-                  $('#board-container').html(data);
-               },
-               error:function(error,msg){console.log("---"+error+msg);}
-            });
-         });
-      });
+<script> 
+	$(function(){
+		$('.menu-btn').mouseenter(function(){
+			$(this).css('background-color','rgb(255,234,184)');
+			$(this).css('color','white');
+		});
+		$('.menu-btn').mouseleave(function(){
+			$(this).css('background-color','#fff');
+			$(this).css('color','#333');
+		});
+	});
+/* 	$(function(){
+		$('.menu-btn').click(function(){
+			$(this).css('background-color','rgb(255,234,184)');
+			$(this).css('color','white');
+		});
+	}); */
+	$(function(){
+	   $.ajax({
+	      url:"<%=request.getContextPath()%>/community/boardList",
+	     data:{groupNo:<%=g.getGroupNo()%>},
+	      dataType:"html",
+	      success:function(data){
+	         $('#mini_board').html(data);
+	      }
+	   });    
+	});
+	
+	$(function(){
+	   $('.boardView-btn').click(function(){
+	      console.log($(this).children('input').val());
+	      var num=$(this).children('input').val();
+	      $.ajax({
+	         url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>&boardNo="+num,
+	         type:"post",
+	         dataType:"html",
+	         success:function(data){
+	            $('#board-container').html(data);          
+	         },
+	         error:function(error,msg){console.log("---"+error+msg);}
+	      });
+	   });
+	});
 </script>
     <div class='back'>
         <!-- 로고 헤더 -->
@@ -167,7 +223,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 			</div>
         <div class='logo' style='width:1024px; height: 100px; background-color:rgb(20,150,200); margin-top:45px; '>
        		
-        	<img src ='<%=request.getContextPath()%>/images/css-image/dongle-logo.png' onclick="logoCk()" style="margin-left: 15px; height: 30px;">
+        	<img src ='<%=request.getContextPath()%>/images/css-image/dongle-logo.png' onclick="logoCk()" style="margin-left: 15px; height: 60px;">
                     <!-- <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2> -->
                 </div>
             <div class='logoback' style='position:relative;width:1024px;height: 100px;'>
@@ -182,24 +238,19 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             style='height: 100vh; background-color: rgb(228, 228, 228);margin-top:45px;'>
             
             <div class="sideitem1"
-               style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
+               style="left: 10%; right: 10%; height: 250px; margin: 5px 0 0 8px;">
                <!-- 동글 프로필 -->
 
                <img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
                
                <!-- 동글이름 -->
-               <p class="dongle_name"><%=g.getGroupName()%></p>
+               <p class="dongle_name" style="margin-bottom: 0;"><%=g.getGroupName()%></p>
                <!-- 멤버 회원수 / 그룹멤버 전체 보기-->
-               <div class="dongle_info">
-                  <div id="dongle_info_view" style="font-size: 11px;">회원수 : <%=result %> 명 &nbsp;</div>
-                  <div id="dongle_info_view">
-                     <button id="dongle_mem_btn">멤버보기</button>
-                  <%if(gm==null){ %>
-                     <button id="dongle_mem_join">가입하기</button>
-                     <%} %>
-                  </div>
-               </div>
-               <br/>
+               <div id="dongle_info_view" style="font-size: 11px; padding-left: 40px;">회원수 : <%=result %> 명 &nbsp;</div>
+               <button id="dongle_mem_btn" class='com_mian_btn'>멤버보기</button>
+               <%if(gm==null){ %>
+                   <button id="dongle_mem_join" class='com_mian_btn'>가입하기</button>
+               <%} %>
                
             <!-- 단추 -->
             <div class='profile_btn'>
@@ -230,7 +281,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             </div>
             <!-- 소개글 -->
             <div class="sideitem2"
-               style='border: 1px solid rgba(255,0,0,0.1);  right: 10%; height: 150px'>
+               style='margin-top:90px; right: 10%; height: 150px'>
                <%=g.getGroupIntro() %>
             </div>
          </div>
@@ -246,161 +297,78 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                else{
                   $(this).next().slideUp();
                   flag=true;
-               }
-               
-         })
-            
+               }               
+         	})            
          });
+         
+         $('#dongle_mem_btn').click(function(){
+             $.ajax({
+                url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+                type:"get",
+                dataType:"json",
+                success:function(data){
+                   $('#content-div').html(data);
+                   var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+                   //var h2_main = $('<h2></h2>');
+                   var tbl = $('<table id="tbl"></table>');
+                   var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
+                   <%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
+                    var thtml="";
+                     for(var i = 0; i < data.length; i++)
+                         {
+                           /* var tbody= "<tr>"; */
+                           thtml+="<tr>";
+                           thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
+                           thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+                           /* thtml+=tbody; */
+                           thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+                           thtml+="</tr>";
+                   }
+                   console.log(thtml);
+                   thead += thtml;
+                   tbl.append(thead);
+                   console.log(thead);
+                   console.log(tbl);
+                   console.log(h);
+                    $('#header').html(h);                     
+                    $('#mem_list_div').append(tbl);
+                   }
+             });         
+          });    
       </script>
-
-
    </aside>
-       
-       <section>
-            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;margin-top:45px;'>
-               <!-- <span id="header" style='text-align: center;'></span> -->
-               <!-- <br/><br/> -->
+ <script>       
 
-               <!-- <div id="mem_list_div" style="padding: 0 0 0 30%;"></div> -->
-               
-               <!-- 동글메인이미지 -->
-               <div id='dongle_main_img'>
-                  <img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
-               </div>
-               <div id='mini_board'></div>
-               <div id='mini_gallery'>갤 러 리</div>
-               
-               <div class="demo" style="margin-top: 50px; padding-left: 50px;">      
-                    <div class="item">
-                     <ul id="content-slider" class="content-slider">
-                    
-                         <li>
-                             <img src="./images/member_img/user01.png">
-                         </li>
-                      
-                         <li>
-                             <img src="./images/member_img/user02.png"> 
-                         </li>
-                         <li>
-                             <img src="./images/member_img/user03.png"> 
-                         </li>
-                         <li>
-                             <h3>4</h3>
-                         </li>
-                         <li>
-                             <h3>5</h3>
-                         </li>
-                         <li>
-                             <h3>6</h3>
-                         </li>
-                         <li>
-                             <h3>7</h3>
-                         </li>
-                         <li>
-                             <h3>8</h3>
-                         </li>
-                         <li>>
-                             <h3>9</h3>
-                         </li>
-                         <li>
-                             <h3>10</h3>
-                         </li>
-                         
-                     </ul>
-                 </div>
-              </div>   
-
-             </div>
-        </section>
-        
-       
-       <script>       
-       <%--           $('#dongle_mem_btn').click(function(){
-                    $.ajax({
-                       url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-                       type:"get",
-                       dataType:"json",
-                       success:function(data){
-                          var thead="<br/><caption><%=g.getGroupName()%>의 멤버보기</caption><tr><th id='tbl_nav'>닉네임</th><th id='tbl_nav'>가입일</th></tr>";
-                           var thtml="";
-                            for(var i = 0; i < data.length; i++)
-                                {
-                                  var tbody= "<tr><td>"+data[i]['groupMemberNickname']+"</td>";
-                                  
-                                  thtml+=tbody;
-                                  thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td><tr>"
-                                  
-                                }
-                            
-                            thead += thtml;
-                            console.log(thtml);
-                            $('#tbl').html(thead);
-                            
-                       }
-                    });         
-                 }); --%>
-                 
-                    $('#dongle_mem_btn').click(function(){
-                    $.ajax({
-                       url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-                       type:"get",
-                       dataType:"json",
-                       success:function(data){
-                          $('#content-div').html(data);
-                          var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-                          //var h2_main = $('<h2></h2>');
-                          var tbl = $('<table id="tbl"></table>');
-                          var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
-                          <%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
-                           var thtml="";
-                            for(var i = 0; i < data.length; i++)
-                                {
-                                  /* var tbody= "<tr>"; */
-                                  thtml+="<tr>";
-                                  thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
-                                  thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
-                                  /* thtml+=tbody; */
-                                  thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
-                                  thtml+="</tr>";
-                          }
-                            console.log(thtml);
-                          thead += thtml;
-                          tbl.append(thead);
-                          
-                            
-                          console.log(thead);
-                          console.log(tbl);
-                          console.log(h);
-                           $('#header').html(h);                     
-                           $('#mem_list_div').append(tbl);
-                          
-                            
-                       }
-                    });         
-                 });       
+     
+   
        </script>
         <!-- 오른쪽 사이드 -->
         <aside>
             <div class="center" style="background-color: rgb(228, 228, 228);margin-top:45px;">
 
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
-
-                    <!-- 메뉴 버튼 -->
-
-                    <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
-                    <button class='btn btn-primary' id="board-btn">공지사항</button><br>
-                    <button class='btn btn-primary' id="feed-btn">피드</button><br>
-                    <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
+                   <!-- 메뉴 버튼 -->
+                    <button class='menu-btn' onclick="comunnityHome();">HOME</button><br>
+                    <button class='menu-btn' id="board-btn">공지사항</button><br>
+                    <button class='menu-btn' id="feed-btn">피드</button><br>
+                    <button class='menu-btn' id="gallery-btn" >갤러리</button><br>
+                    <button class='menu-btn' id="calendarview">일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
-                    <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
+                    	<button class='menu-btn'>동글 관리</button><br>
                     <%} %>
                 </div>
             </div>
         </aside>
    
         <!-- 게시판 -->
+	<section>
+            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;margin-top:45px;'>
 
+               <div id='dongle_main_img'>
+                  <img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+               </div>
+               <div id='mini_board'></div>
+        </section>
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
 <div class="modal-div">
    <div class="dialog" id="modal-container">
@@ -459,6 +427,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
          dataType:"html",
          success:function(data){
             $('#content-div').html(data);
+            
+            $("#feed-btn").css('background-color','rgb(255,234,184)');
+            $("#feed-btn").css('color','white');
          }
       });
    });
@@ -472,6 +443,13 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                success:function(data){
                   $('#content-div').html(data);
                   //해당 div를 ajax로 바꾼다는 의미.
+                  
+                  $('#gallery-btn').css('background-color','#fff');
+                  $('#gallery-btn').css('color','#333');
+                  $("#board-btn").css('background-color','rgb(255,234,184)');
+                  $("#board-btn").css('color','white');
+                  
+                  
                }
             });
          });
@@ -496,6 +474,9 @@ $(function(){
          dataType:"html",
          success:function(data){
             $('#content-div').html(data);
+            
+			$("#gallery-btn").css('background-color','rgb(255,234,184)');
+			$("#gallery-btn").css('color','white');
          },
          error:function(request){},
          complete:function(){console.log("ok");}
@@ -547,6 +528,9 @@ $(function(){
          dataType:"html",
          success:function(data){
             $('#content-div').html(data);
+            
+			$("#calendarview").css('background-color','rgb(255,234,184)');
+			$("#calendarview").css('color','white');
          },
          error:function(request){},
          complate:function(){console.log("ok");}
@@ -560,7 +544,7 @@ function comunnityHome(){
    location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 function logoCk(){
-   location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+   location.href="<%=request.getContextPath()%>/communityJoin?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
 }
 
 </script>

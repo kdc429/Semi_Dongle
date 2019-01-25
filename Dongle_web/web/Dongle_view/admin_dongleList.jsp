@@ -39,6 +39,47 @@
 		});
 	}
 </script>
+<style>
+div#dongle-search-container #dongle-searchType{
+	display: block;
+	width: 85px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	float: left;
+}
+#search-dongle-txt{
+	display: block;
+	width: 200px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	float: left;
+	margin-left: 5px;
+}
+.search_list_btn{
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border : 1px solid transparent;
+	font-size: 14px;
+	line-height: 1.43;
+	border-radius: 4px;
+	width: 50px;
+	height: 30px;
+	margin-left: 5px;
+}
+</style>
 <section>
 	<div class="bar"></div>
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px">
@@ -60,29 +101,29 @@
 			<div id="search-dongleName">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="dongleName"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-dongle-txt' size="25" placeholder="검색할 이름을 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-managerId">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="managerId"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-dongle-txt' size="25" placeholder="검색할 아이디를 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-metro">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="metro"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 지역을 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-dongle-txt' size="25" placeholder="검색할 지역을 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-dongleEnDate">
 				<form action="<%=request.getContextPath() %>/admin/dongleSearch">
 					<input type="hidden" name="dongle-searchType" value="dongleEnDate"/>
-					<input type="date" name="searchKeyword"/>
-					<button type="submit">검색</button>
+					<input type="date" name="searchKeyword" id='dongle-searchType' style="width: 150px; margin-left: 5px;"/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			

@@ -1,5 +1,6 @@
 form#nonblack-search-frm{
 	display:inline-block;
+	margin-left: 20px;
 }
 form#black-search-frm{
 	margin-left:165px;
@@ -15,9 +16,8 @@ div#blacklist-container {
 	display: block;
 	border-collapse: collapse;
 	border: 1px solid black;
-	float: right;
-	
-	margin-right: 340px;
+	float: right;	
+	margin-right: 210px;
 }
 
 #tbl-member-black th {
@@ -65,10 +65,9 @@ div#blacklist-container {
 #tbl-member-nonblack {
 	display: block;
 	border-collapse: collapse;
-	border: 1px solid black;
-	
-	margin-left: 0px;
-	float: left
+	border: 1px solid black;	
+	margin-left: 60px;
+	float: left;
 }
 
 #tbl-member-nonblack th {
@@ -120,13 +119,12 @@ div#blacklist-container {
 
 button#add-btn {
 	float: left;
-	margin-left: 35px;
-	margin-top: 70px;
+	margin-left: 70px;
+	margin-top: 80px;
 }
 
 button#remove-btn {
 	float: left;
-	margin-left : -92px;
-	
-	margin-top: 100px;
+	margin-left : 70px;
+	margin-top: 10px;
 }

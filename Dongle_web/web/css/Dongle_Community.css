@@ -95,7 +95,7 @@ button.btn button.btn-primary{
 	font-family: '나눔스퀘어라운드 Regular';
 }
 /* 오른쪽 사이드 div */
-.sider {
+.sider{
 	width: 170px;
 	height:100vh;
 	position: fixed;
@@ -204,12 +204,6 @@ div.logo h2 a{text-decoration: none;}
  	display : flex;
  	justify-content: center;
  	align-items: center;
- }
- #dongle_info_view
- {
-	display:inline;
-	/* float: left; */
-
  }
 .tbl{
  	left: 45%;

@@ -19,6 +19,7 @@
 <head>
 <meta charset="UTF-8">
 <title>당신을 위한 맞춤형 동호회</title>
+<link rel='icon' href='https://i.imgur.com/8k8yVjE.png'>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Dongle.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Admin_memberList.css" />
@@ -42,14 +43,14 @@
 }
 .search-btn{
 	width:100px; 
-	background-color: rgba(0,0,0,0); 
-	margin-left: 650px; 
-	margin-top: 60px;
+	background-color: rgba(0,0,0,0);
 	font-family: '여기어때잘난서체';
 	border: 1px;
 	font-weight: bold;
 	font-size: 17px;
-	color : white;
+	margin-bottom: 2px;
+	color: white;
+
 }
 div.bar span{
 	color : white;
@@ -72,12 +73,16 @@ div.user-back #logout_btn{
 </style>
 </head>
 
-
-
+<script>
+ 	$('#dongleLogoCk'){
+		location.href="<%=request.getContextPath()%>/communityJoin?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
+	}
+</script>
 
 <body>
 	<header>
         <div class="headerBack">
+        <div  style="width: 280px; height: 100px; background-color: rgba(0,0,0,0); float: left; margin-top: 70px;" id="dongleLogoCk"></div>
             <div class="bar">
             	<!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
             	<img src="<%=request.getContextPath() %>/images/button-images/user-img.png" id='userInfo_btn' onclick="memberView();" style="width: 30px; height: 30px;">
@@ -89,6 +94,7 @@ div.user-back #logout_btn{
             		
             		<%-- <a href="<%=request.getContextPath()%>/main/searchPage"><img src="<%=request.getContextPath()%>/images/button-images/search-btn.png" id='search-btn'></a> --%>
             		<img src="<%=request.getContextPath()%>/images/button-images/logout-btn.png" id='logout_btn' onclick="location.href='<%=request.getContextPath()%>/member/logout'">
+            		
             		<script>
             			function memberView(){
             				$.ajax({
@@ -102,8 +108,10 @@ div.user-back #logout_btn{
             		</script>
             	</div>&nbsp;&nbsp;
             </div>
-           	<button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
-           	<button class="guide-btn">동글 가이드</button>
+            <div style="width: 300px; float: right; margin-top: 55px; margin-right: 60px;">
+	           	<button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
+	           	<button class="guide-btn">동글 가이드</button>
+           	</div>
         </div>
         <script>
         </script>

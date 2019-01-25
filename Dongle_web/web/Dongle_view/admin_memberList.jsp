@@ -4,7 +4,6 @@
 <%@ page import="com.dongle.group.model.service.GroupService"%>
 <%@ page import="java.util.*" %> 
 <%@ include file="header.jsp"%>
-
 <%	
 	List<Group> list=(List)request.getAttribute("list");
 	List<Member> memberList = (List)request.getAttribute("memberList");
@@ -39,6 +38,49 @@
 		});
 	}
 </script>
+<style>
+div#member-search-container  #member-searchType{
+	display: block;
+	width: 85px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	float: left;
+}
+#search-user-txt{
+	display: block;
+	width: 200px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border-radius: 4px;
+	float: left;
+	margin-left: 5px;
+}
+.search_list_btn{
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border : 1px solid transparent;
+	font-size: 14px;
+	line-height: 1.43;
+	border-radius: 4px;
+	width: 50px;
+	height: 30px;
+	margin-left: 5px;
+}
+
+</style>
+
 <section>
 	<div class="bar"></div>
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px">
@@ -60,29 +102,29 @@
 			<div id="search-memberId">
 				<form action="<%=request.getContextPath() %>/admin/memberSearch">
 					<input type="hidden" name="member-searchType" value="memberId"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" id='search-user-txt' name="searchKeyword" size="25" placeholder="검색할 아이디를 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-memberName">
 				<form action="<%=request.getContextPath() %>/admin/memberSearch">
 					<input type="hidden" name="member-searchType" value="memberName"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-user-txt' size="25" placeholder="검색할 이름을 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-phone">
 				<form action="<%=request.getContextPath() %>/admin/memberSearch">
 					<input type="hidden" name="member-searchType" value="phone"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 전화번호를 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-user-txt' size="25" placeholder="검색할 전화번호를 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			<div id="search-email">
 				<form action="<%=request.getContextPath() %>/admin/memberSearch">
 					<input type="hidden" name="member-searchType" value="email"/>
-					<input type="text" name="searchKeyword" size="25" placeholder="검색할 이메일을 입력하세요."/>
-					<button type="submit">검색</button>
+					<input type="text" name="searchKeyword" id='search-user-txt' size="25" placeholder="검색할 이메일을 입력하세요."/>
+					<button type="submit" class='search_list_btn'>검색</button>
 				</form>
 			</div>
 			

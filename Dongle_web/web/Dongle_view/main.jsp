@@ -19,10 +19,7 @@
 
 	<div class="bar">
 		<%if(loginMember.getMemberId().equals("admin")) {%>
-		<button class="img-icon" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'">
-				<span class="sub-icon">관리자 메뉴</span>
-				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/editSetting2.png">		
-		</button>
+		<button class="create-img" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'" style="color: black; font-family: '여기어때잘난서체';">관리자 메뉴</button>
 		<%} %>
 		<!-- 동글 개설하기 버튼! -->
 		<button class="search-btn" style="color: black; font-family: '여기어때잘난서체';">동글 개설</button>

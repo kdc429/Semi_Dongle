@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>당신을 위한-DONGLE</title>
+<link rel='icon' href='https://i.imgur.com/8k8yVjE.png'>
 	<link href="<%=request.getContextPath()%>/css/Login.css"
 	rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">

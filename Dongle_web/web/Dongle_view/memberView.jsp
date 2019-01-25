@@ -91,8 +91,7 @@
 			var status="left=200px, top=200px, width=400px, height=210px";
 			var popUp=open(url,title,status);
 		}
-		
-	n 
+
 		function fn_update_validate(){
 			
 			return true;

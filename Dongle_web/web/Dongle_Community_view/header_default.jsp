@@ -40,11 +40,11 @@ div.user-back #userInfo_btn{
 </head>
 <body>
 	<header>
-		<div class="bar" style="background-color: lightgray; width: 1024px; height: 45px;">
-     	 	<img src="<%=request.getContextPath() %>/images/button-images/user-img.png" id='userInfo_btn' onclick="memberView();" style="width: 30px; height: 30px;">
-           	<span style="color:black;"><%=loginMember.getMemberName()%>님, 환영합니다!</span>
+		<div class="bar" style="background-color: rgb(20,150,200); width: 1024px; height: 45px;">
+     	 	<img src="<%=request.getContextPath() %>/images/button-images/user-img.png" id='userInfo_btn' onclick="memberView();" style="width: 30px; height: 30px; margin-bottom: 5px;">
+           	<span style="color:black; margin-bottom: 5px;"><%=loginMember.getMemberName()%>님, 환영합니다!</span>
             	<div class="user-back">
-	            	<img src="<%=request.getContextPath()%>/images/button-images/logout-btn.png" id='logout_btn' onclick="location.href='<%=request.getContextPath()%>/member/logout'" style="height: 25px; width: 25px;">
+	            	<img src="<%=request.getContextPath()%>/images/button-images/logout-btn.png" id='logout_btn' onclick="location.href='<%=request.getContextPath()%>/member/logout'" style="height: 25px; width: 25px; margin: 0 10px 5px 5px;">
             		<script>
             			function memberView(){
             				$.ajax({
