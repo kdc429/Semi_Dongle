@@ -16,6 +16,7 @@
 		var reportFrm=window.opener.document.getElementById('reportFrm');
 		console.log(reportFrm);
 		var reNickName=reportFrm.reportNickName.value;
+		var reCommentNickName=reportFrm.reportCommentNickName.value;
 		var reCode1=reportFrm.report1.value;
 		var reCode2=reportFrm.report2.value;
 		var reCode3=reportFrm.report3.value;

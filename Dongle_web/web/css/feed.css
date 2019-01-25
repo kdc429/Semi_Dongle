@@ -425,6 +425,10 @@ textarea{
     width: auto;
     height: auto;
 }
+.report-comment-button{
+	border:0;
+	background-color:rgba(0,0,0,0);
+}
 /* loading animiation */
 #fountainG {
 	position: relative;

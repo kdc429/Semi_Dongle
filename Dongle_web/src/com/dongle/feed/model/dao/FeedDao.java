@@ -273,7 +273,7 @@ public class FeedDao {
 				feedComment.setFeCommentContent(rs.getString("fe_comment_content"));
 				feedComment.setFeCommentDate(rs.getDate("fe_comment_date"));
 				feedComment.setFeCommentRef(rs.getInt("fe_comment_ref"));
-				
+				feedComment.setFeedCommentReportStatus(rs.getString("fe_comment_report_status"));
 				feedCommentList.add(feedComment);
 			}
 		}catch(SQLException e) {
@@ -309,6 +309,7 @@ public class FeedDao {
 				feedComment.setFeCommentContent(rs.getString("fe_comment_content"));
 				feedComment.setFeCommentDate(rs.getDate("fe_comment_date"));
 				feedComment.setFeCommentRef(rs.getInt("fe_comment_ref"));
+				feedComment.setFeedCommentReportStatus(rs.getString("fe_comment_report_status"));
 				
 				feedLevel2CommentList.add(feedComment);
 			}
@@ -343,6 +344,7 @@ public class FeedDao {
 				fc.setFeCommentContent(rs.getString("fe_comment_content"));
 				fc.setFeCommentDate(rs.getDate("fe_comment_date"));
 				fc.setFeCommentRef(rs.getInt("fe_comment_ref"));
+				fc.setFeedCommentReportStatus(rs.getString("fe_comment_report_status"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

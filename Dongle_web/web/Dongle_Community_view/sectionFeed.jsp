@@ -461,7 +461,7 @@
 	$(document).ready(function(){
 		
 		$('.report-comment-button').on('click',function(){
-			var reNickName=$(this).parent().siblings('.content-writer-nick').val();
+			var reNickName=$(this).children('.comment-writer-nick').val();
 			console.log(reNickName);
 			document.reportFrm.reportNickName.value=reNickName;
 			var reportWin=window.open("<%=request.getContextPath()%>/views/common/reportMember.jsp","reportWin","width=300, height=300, menubar=no, status=no, toolbar=no");
@@ -652,7 +652,7 @@
             		<div class="comment-back">
             			<ul>
             			<%for(FeedComment fc:feedCommentList){
-            				if(fc.getFeedNo()==f.getFeedNo()&&fc.getFeedCommentReportStatus().equals("Y")){ %>
+            				if(fc.getFeedNo()==f.getFeedNo()&&fc.getFeedCommentReportStatus().equals("N")){ %>
                 			<li class='level1' style="list-style:none;">
                 				<input type="hidden" class="feedCommentNo" value="<%=fc.getFeCommentNo() %>"/>
                 				<%for(GroupMember gm:memberList){
@@ -664,14 +664,16 @@
                     			<span class="comment-info">
                         			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fc.getFeCommentDate() %></span>
+                        			<%if(fc.getMemberNo()!=loginMember.getMemberNo()){ %>
                         			<button class="report-comment-button">
-                        				<input type="hidden" class="comment-writer-no" value="<%=gm.getGroupMemberNickname() %>"/>
+                        				<input type="hidden" class="comment-writer-nick" value="<%=gm.getGroupMemberNickname() %>"/>
                         				<input type="hidden" class="comment-no" value="<%=fc.getFeCommentNo() %>"/>
                         				<input type="hidden" class="comment-writer-no" value="<%=fc.getMemberNo() %>">
                         				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
                         			</button>
+                        			<%} %>
                         			<button class="comment-reple">
-                        				<img class="reple-icon" src="<%=request.getContextPath()%>/images/button-images/comment-solid.png">
+                        				<img class="reple-icon" src="<%=request.getContextPath()%>/images/button-images/comments-solid.png">답글
                         			</button>
                     			</span>
                     			<span class="comment-content-back">
@@ -698,12 +700,14 @@
                     			<span class="comment-info">
                         			<span class="comment-writer"><%=gm.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
+                        			<%if(fcl2.getMemberNo()!=loginMember.getMemberNo()){ %>
                         			<button class="report-comment-button">
                         				<input type="hidden" class="comment-writer-nick" value="<%=gm.getGroupMemberNickname() %>"/>
                         				<input type="hidden" class="comment-feed-no" value="<%=fcl2.getFeCommentNo() %>"/>
                         				<input type="hidden" class="comment-writer-no" value="<%=fcl2.getMemberNo() %>">
                         				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
                         			</button>
+                        			<%} %>
                         			
                     			</span>
                     			<span class="comment-content-back">
@@ -735,7 +739,7 @@
                     			<textarea name="feedCommentContent" class='feedCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
                 			</div>
                 			<div class='comment_btn'>
-                    			<button type="button" class='btn-insert'>입력</button>
+                    			<button type="button" class='btn-insert'>SEND</button>
                 			</div>
             			</fieldset>
         			</div>
@@ -766,6 +770,7 @@
 		</div>
 		<form id='reportFrm' name="reportFrm">
 			<input type="hidden" name="reportNickName" value="">
+			<input type="hidden" name="reportCommentNickName" value="">
 			<input type="hidden" id="report1" name="report1" value="<%=reportCategory.get(0).getReportCode()%>">
 			<input type="hidden" id="reason1" name="reason1" value="<%=reportCategory.get(0).getReportReason()%>">
 			<input type="hidden" id="report2" name="report2" value="<%=reportCategory.get(1).getReportCode()%>">
