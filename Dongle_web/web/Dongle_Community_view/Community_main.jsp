@@ -10,7 +10,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 	int result = (int)request.getAttribute("result");
 	int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 	List<GalleryPath> galList = (List)request.getAttribute("galList");
+	List<EditPickGroup> editList=(List)request.getAttribute("editList");
 	//List<Board> list=(List)request.getAttribute("list");
+	int editnum=0;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +192,27 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
                     <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2>
                 </div>
             </div>
+
+            <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:20px;z-index:3;'>
+            	<%if(loginMember.getMemberId().equals("admin")){ %>
+	            	<%for(int i=0;i<editList.size();i++){ %>
+	            		<%if(editList.get(i).getGroupNo()==groupNo){ %>
+	            			<%editnum++; %>
+	            			<img alt="" src="<%=request.getContextPath() %>/images/editor_images/groupEdit.png" style='width:30px; height:30px;position:fixed;'>
+	            			<span style='display:inline-block;margin-left:37px;margin-top:7px;position: fixed;'>에디터 선정</span>
+						<%} %>
+	            	<%} %>
+	            	<%if(editnum==0){ %>
+	            		<button id='goEdit' onclick='goEdit();' style='background-color:rgb(20,150,200); color:white;border:none;position:fixed;'>에디터픽 선정하기</button>
+            		<%} %>
+           		<%} %>
+            </div>
         </header>
+        <script>
+        	function goEdit(){
+        		location.href='<%=request.getContextPath()%>/admin/editpickForm?groupNo=<%=groupNo%>';
+        	}
+        </script>
 	<aside>
 		<div class="center">
 			<!-- 왼쪽 사이드 -->
@@ -201,7 +223,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
 
-					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
+					<img class="profile_img" style='width:165px; height:260px;' src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -365,7 +387,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
             	
             	<!-- 동글메인이미지 -->
             	<div id='dongle_main_img'>
-            		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+            		<img style='width:540px; height:280px;' src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
             	</div>
             	<div id='mini_board'></div>
             	<div id='mini_gallery'></div>

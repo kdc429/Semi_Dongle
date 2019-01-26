@@ -29,9 +29,11 @@
 	<h5><b><mark style='background-color:yellow;color:red;'><i>&nbsp;New&nbsp;</i></mark>&nbsp; 갤러리</b></h5>
 	<div>
 		<div style='white-space: nowrap;overflow: hidden;margin-left:10px;'>
-			<%for(int j=0;j<6;j++){ %>
-					<img style='width:80px;height:70px;display:inline-block;padding:2px;' class="main-alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
-					<%-- <img style='width:80px;height:70px;display:inline-block;padding:2px;' class="alImg" src="<%=request.getContextPath() %>/images/gallery/imgplus.png"> --%>
+			<%if(galList.size()!=0){ %>
+				<%for(int j=0;j<6;j++){ %>
+						<img style='width:80px;height:70px;display:inline-block;padding:2px;' class="main-alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
+						<%-- <img style='width:80px;height:70px;display:inline-block;padding:2px;' class="alImg" src="<%=request.getContextPath() %>/images/gallery/imgplus.png"> --%>
+				<%} %>
 			<%} %>
 		</div>
 	</div>

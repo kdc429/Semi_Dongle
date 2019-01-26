@@ -33,9 +33,13 @@ public class EditpickFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EditPickGroup epg = new EditPickGroup();
 		List<EditPickGroup> editList = new GroupService().selectEditGr();
+		int groupNo=0;
+		if(request.getParameter("groupNo")!=null) {
+			groupNo = Integer.parseInt(request.getParameter("groupNo"));
+		}
+		if(groupNo!=0) {request.setAttribute("newGroupNo", groupNo);};
 		request.setAttribute("editList", editList);
 		request.getRequestDispatcher("/views/admin/adminEditPick.jsp").forward(request, response);
-		/*request.getRequestDispatcher("/Dongle_view/edit-pick.jsp").forward(request, response);*/
 	}
 
 	/**

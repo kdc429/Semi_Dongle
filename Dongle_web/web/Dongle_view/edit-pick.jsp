@@ -63,47 +63,47 @@
         
     </style>
 <!-- <body> -->
-<div style="width:1000px;margin:80px auto;">
+<div id='edit_all_div' style="width:1000px;margin:80px auto;">
         <div id="ninja-slider" style="float:left;">
             <div class="slider-inner">
                 <ul  style='width:600px; height:400px;'>
                     <li>
-                    	<a id="<%=editList.get(0).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(0).getEditFilePath() %>">
+                    	<a id='<%=editList.get(0).getGroupNo() %>' class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(0).getEditNewFilePath() %>">
                     		<div class="img-cover">
                     			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(0).getEditContent() %></div>
                     		</div>
                    		</a>
                		</li>
                     <li>
-                    	<a id="<%=editList.get(1).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(1).getEditFilePath() %>">
+                    	<a id='<%=editList.get(1).getGroupNo() %>' class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(1).getEditNewFilePath() %>">
                     		<div class="img-cover">
                     			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(1).getEditContent() %></div>
                     		</div>
                    		</a>
                		</li>
                     <li>
-                    	<a id="<%=editList.get(2).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(2).getEditFilePath() %>">
+                    	<a id='<%=editList.get(2).getGroupNo() %>' class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(2).getEditNewFilePath() %>">
                     		<div class="img-cover">
                     			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(2).getEditContent() %></div>
                     		</div>
                    		</a>
                		</li>
                     <li>
-                    	<a id="<%=editList.get(3).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(3).getEditFilePath() %>">
+                    	<a id='<%=editList.get(3).getGroupNo() %>' class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(3).getEditNewFilePath() %>">
                     		<div class="img-cover">
                     			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(3).getEditContent() %></div>
                     		</div>
                    		</a>
                		</li>
                     <li>
-                    	<a id="<%=editList.get(4).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(4).getEditFilePath() %>">
+                    	<a id='<%=editList.get(4).getGroupNo() %>' class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(4).getEditNewFilePath() %>">
                     		<div class="img-cover">
                     			<div class='edit-content' style='margin-top:35px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(4).getEditContent() %></div>
                     		</div>
                    		</a>
                		</li>
                     <li>
-                    	<a id="<%=editList.get(5).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(5).getEditFilePath() %>">
+                    	<a id='<%=editList.get(5).getGroupNo() %>' class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(5).getEditNewFilePath() %>">
                     		<div class="img-cover">
                     			<div class='edit-content' style='margin-top:35px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(5).getEditContent() %></div>
                     		</div>
@@ -117,22 +117,22 @@
             <div class="inner">
                 <ul>
                     <li>
-                        <a class="thumb" href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(0).getEditFilePath() %>"></a>
+                        <a class="thumb" href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(0).getEditNewFilePath() %>"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(1).getEditFilePath() %>"></a>
+                        <a class="thumb" href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(1).getEditNewFilePath() %>"></a>
                     </li>
                     <li>
-                        <a class="thumb"  href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(2).getEditFilePath() %>"></a>
+                        <a class="thumb"  href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(2).getEditNewFilePath() %>"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(3).getEditFilePath() %>"></a>
+                        <a class="thumb" href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(3).getEditNewFilePath() %>"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(4).getEditFilePath() %>"></a>
+                        <a class="thumb" href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(4).getEditNewFilePath() %>"></a>
                     </li>
                     <li>
-                        <a class="thumb" href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(5).getEditFilePath() %>"></a>
+                        <a class="thumb" href="<%=request.getContextPath()%>/upload/editPick/<%=editList.get(5).getEditNewFilePath() %>"></a>
                     </li>
                 </ul>
             </div>

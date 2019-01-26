@@ -46,24 +46,42 @@
       <script>
    function fn_enroll_validate()
    {
-       var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-       var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	   
+       if($('input[name=idValid]')[0].value=='0')
+       {
+          alert('아이디 중복체크를 해주세요!');
+          return false;   
+       }
+       var userId=$("#userId_");
+       if(userId.val().length<4)
+       {
+          alert("최소 4자리 이상 입력하세요!");
+          userId.focus();
+          return false;
+       }
+       return true; 
+   };
+
+
+	   /* // 아이디와 패스워드가 적합한지 검사할 정규식
+       var reg = /^[a-zA-Z0-9]{4,12}$/ 
        // 이메일이 적합한지 검사할 정규식
+       var reg2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
        var id = document.getElementById("userId_");
        var pw = document.getElementById("password_");
        var email = document.getElementById("email");
        
-       if(!check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) 
+       if(!check(reg,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) 
        {
           check.focus();
           return false;
        }
-       if(!check(re,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) 
+       if(!check(reg,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) 
        {
           check.focus();
           return false;
        }
-       if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) 
+       if(!check(reg2, email, "적합하지 않은 이메일 형식입니다.")) 
        {
            return false;
        }
@@ -73,27 +91,29 @@
            email.focus();
            return false;
        }
-       function chk(re, e, msg){
-              if(re.test(e.value)) return true;
-              alert(msg);
-              e.value="";
-              e.focus();
-              return false;
+       if($('input[name=idValid]')[0].value=='0')
+       {
+          alert('아이디 중복체크를 해주세요!');
+          return false;   
        }
-      if($('input[name=idValid]')[0].value=='0')
-      {
-         alert('아이디 중복체크를 해주세요!');
-         return false;   
-      }
-      var userId=$("#userId_");
-      if(userId.val().length<4)
-      {
-         alert("최소 4자리 이상 입력하세요!");
-         userId.focus();
-         return false;
-      }
-      return true;         
-   };
+       var userId=$("#userId_");
+       if(userId.val().length<4)
+       {
+          alert("최소 4자리 이상 입력하세요!");
+          userId.focus();
+          return false;
+       }
+       return true; 
+   
+       function chk(reg, e, msg)
+       {
+             if(re.test(e.value)) return true;
+             alert(msg);
+             e.value="";
+             e.focus();
+             return false;
+       }
+   }; */
    $(function(){
       $("#password_2").blur(function(){
       

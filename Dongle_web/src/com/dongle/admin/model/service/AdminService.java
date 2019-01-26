@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.dongle.admin.model.dao.AdminDao;
+import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
@@ -336,5 +337,31 @@ public class AdminService {
 		close(conn);
 		return blackList;
 	}
-	
+	//관리자 에디터픽 전체 업데이트
+	public int editPickUpdate(EditPickGroup ep)
+	{
+		Connection conn =getConnection();
+		int rs = new AdminDao().editPickUpdate(conn,ep);
+		if(rs!=0) {commit(conn);}
+		else {rollback(conn);}
+		return rs;
+	}
+	//관리자 에디터픽 콘텐트만 업데이트
+	public int editPickUpdateContent(EditPickGroup ep)
+	{
+		Connection conn =getConnection();
+		int rs = new AdminDao().editPickUpdate(conn,ep);
+		if(rs!=0) {commit(conn);}
+		else {rollback(conn);}
+		return rs;
+	}
+	//관리자 에디터픽 변경
+	public int editPickChange(EditPickGroup ep, int newGroupNo)
+	{
+		Connection conn =getConnection();
+		int rs = new AdminDao().editPickChange(conn,ep,newGroupNo);
+		if(rs!=0) {commit(conn);}
+		else {rollback(conn);}
+		return rs;
+	}
 }

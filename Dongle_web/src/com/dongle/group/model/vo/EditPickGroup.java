@@ -3,17 +3,19 @@ package com.dongle.group.model.vo;
 public class EditPickGroup {
 	
 	private int groupNo; //GROUP_NO
-	private String editFilePath; //EDIT_FILE_PATH
+	private String editOldFilePath; //EDIT_FILE_PATH
+	private String editNewFilePath;
 	private String editContent; //EDIT_CONTENT
 	
 	public EditPickGroup() {
 		
 	}
 
-	public EditPickGroup(int groupNo, String editFilePath, String editContent) {
+	public EditPickGroup(int groupNo, String editOldFilePath, String editNewFilePath, String editContent) {
 		super();
 		this.groupNo = groupNo;
-		this.editFilePath = editFilePath;
+		this.editOldFilePath = editOldFilePath;
+		this.editNewFilePath = editNewFilePath;
 		this.editContent = editContent;
 	}
 
@@ -25,12 +27,20 @@ public class EditPickGroup {
 		this.groupNo = groupNo;
 	}
 
-	public String getEditFilePath() {
-		return editFilePath;
+	public String getEditOldFilePath() {
+		return editOldFilePath;
 	}
 
-	public void setEditFilePath(String editFilePath) {
-		this.editFilePath = editFilePath;
+	public void setEditOldFilePath(String editOldFilePath) {
+		this.editOldFilePath = editOldFilePath;
+	}
+
+	public String getEditNewFilePath() {
+		return editNewFilePath;
+	}
+
+	public void setEditNewFilePath(String editNewFilePath) {
+		this.editNewFilePath = editNewFilePath;
 	}
 
 	public String getEditContent() {
@@ -43,9 +53,10 @@ public class EditPickGroup {
 
 	@Override
 	public String toString() {
-		return "EditPickGroup [groupNo=" + groupNo + ", editFilePath=" + editFilePath + ", editContent=" + editContent
-				+ "]";
+		return "EditPickGroup [groupNo=" + groupNo + ", editOldFilePath=" + editOldFilePath + ", editNewFilePath="
+				+ editNewFilePath + ", editContent=" + editContent + "]";
 	}
 	
+
 
 }

@@ -182,7 +182,8 @@ public class GroupDao {
 			while(rs.next()) {
 				epg=new EditPickGroup();
 				epg.setGroupNo(rs.getInt("group_no"));
-				epg.setEditFilePath(rs.getString("edit_file_path"));
+				epg.setEditOldFilePath(rs.getString("edit_old_file_path"));
+				epg.setEditNewFilePath(rs.getString("edit_new_file_path"));
 				epg.setEditContent(rs.getString("edit_content"));
 				
 				editList.add(epg);
