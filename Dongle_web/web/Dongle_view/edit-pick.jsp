@@ -20,27 +20,95 @@
             display: inline-block;
             padding: 4px 8px;
             margin-right: 10px;
-/*             border: 2px solid #000;
-            background: #DDD;
-            color: #000; */
             text-decoration: none;
             text-align: center;
             height: 20px;
         }
-        header span {/* background:white; */}
-        a {color: #1155CC;}
+        a {
+       	text-decoration:none;
+       	color:rgb(240,240,240);
+       	font-size:17px;
+       	font-family: 'netmarble Medium';
+       	 position: absolute;
+	     z-index: 3;
+	     opacity: 0.9;
+	    /*  text-align: center;	 */
+       	}
+       	a:hover{
+       		color:white;
+   			text-shadow:1px 1px 2px gray;
+       	}
+        
+        .img-cover{
+        	margin-top:300px;
+		   position: absolute;
+		   height: 100px;
+		   width: 100%;
+		   background-color: rgba(0, 0, 0, 0.5);                                                                 
+		   z-index:2;
+		}
+        
+	div.ns-img div.img-cover > div.edit-content{
+	     position: absolute;
+	     top:50%;
+	     /* left:50%; */
+	     transform: translate(-50%, -50%);                                                              
+         font-size:17px;
+		 font-family: 'netmarble Medium';
+	     color: white;
+	     z-index: 3;
+	     
+	     /* text-align: center; */
+	}
+        
     </style>
 <!-- <body> -->
 <div style="width:1000px;margin:80px auto;">
         <div id="ninja-slider" style="float:left;">
             <div class="slider-inner">
                 <ul  style='width:600px; height:400px;'>
-                    <li><a class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(0).getEditFilePath() %>"></a></li>
-                    <li><a class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(1).getEditFilePath() %>"></a></li>
-                    <li><a class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(2).getEditFilePath() %>"></a></li>
-                    <li><a class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(3).getEditFilePath() %>"></a></li>
-                    <li><a class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(4).getEditFilePath() %>"></a></li>
-                    <li><a class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(5).getEditFilePath() %>"></a></li>
+                    <li>
+                    	<a id="<%=editList.get(0).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(0).getEditFilePath() %>">
+                    		<div class="img-cover">
+                    			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(0).getEditContent() %></div>
+                    		</div>
+                   		</a>
+               		</li>
+                    <li>
+                    	<a id="<%=editList.get(1).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(1).getEditFilePath() %>">
+                    		<div class="img-cover">
+                    			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(1).getEditContent() %></div>
+                    		</div>
+                   		</a>
+               		</li>
+                    <li>
+                    	<a id="<%=editList.get(2).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(2).getEditFilePath() %>">
+                    		<div class="img-cover">
+                    			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(2).getEditContent() %></div>
+                    		</div>
+                   		</a>
+               		</li>
+                    <li>
+                    	<a id="<%=editList.get(3).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(3).getEditFilePath() %>">
+                    		<div class="img-cover">
+                    			<div class='edit-content' style='margin-top:25px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(3).getEditContent() %></div>
+                    		</div>
+                   		</a>
+               		</li>
+                    <li>
+                    	<a id="<%=editList.get(4).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(4).getEditFilePath() %>">
+                    		<div class="img-cover">
+                    			<div class='edit-content' style='margin-top:35px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(4).getEditContent() %></div>
+                    		</div>
+                   		</a>
+               		</li>
+                    <li>
+                    	<a id="<%=editList.get(5).getGroupNo() %>" class="ns-img" style='width:600px; height:400px;' href="<%=request.getContextPath()%>/images/editor_images/<%=editList.get(5).getEditFilePath() %>">
+                    		<div class="img-cover">
+                    			<div class='edit-content' style='margin-top:35px;margin-left:10px;opacity:1;'>Editor:<br>&nbsp;&nbsp;<%=editList.get(5).getEditContent() %></div>
+                    		</div>
+                   		</a>
+               		</li>
                 </ul>
                 <!-- <div class="fs-icon" title="Expand/Close"></div> -->
             </div>
@@ -71,7 +139,16 @@
         </div>
         <div style="clear:both;"></div>
     </div>
-<!--     </body> -->
+    
+   <script>
+   	$(function(){
+   		var po;
+   		$('.ns-img').click(function(e){
+   			po = $(this).get(0).id;
+   			location.href="<%=request.getContextPath()%>/communityJoin?groupNo="+po;
+   		});
+   	});
+   </script>
 </html>
 
 

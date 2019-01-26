@@ -104,20 +104,9 @@
     </div>
 	<hr>
 	<!-- 에디터 픽 캐러셀 -->
-<%-- 		<div class="bar">
-		<% if(loginMember.getMemberId().equals("admin")){ %>
-			<div class="set-back">
-				<button class="img-icon">
-					<span>설정</span>
-					<img class="set-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
-				</button>
-				<span class="sub-icon">설정</span>
-			</div>
-		<%} %>
-	</div> --%>
-	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;">TODAY's</h2>
-	<h1 style="font-family:'YanoljaYacheR'; text-align:left;display:inline;">  &nbsp;에디터 추천</h1>
-	<div id='edit_test' style='width:1024px;height:400px;margin-top:-30px;'>
+	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;margin-top:-20px;">TODAY's</h2>
+	<h1 style="font-family:'YanoljaYacheR'; text-align:left;display:inline;margin-top:-20px;text-shadow: 1px 1px 2px gray;">  &nbsp;에디터 추천</h1>
+	<div id='edit_test' style='width:1024px;height:400px;margin-top:-80px;'>
 	
 	</div>
 	<hr>
