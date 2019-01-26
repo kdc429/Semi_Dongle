@@ -48,7 +48,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		else
 		{
 			request.setAttribute("msg", "조회된 자료가 없습니다");
-			request.setAttribute("loc", "/board/boardList?groupNo"+groupNo);
+			request.setAttribute("loc", "/board/boardList?groupNo="+groupNo);
 			view="/views/common/msg.jsp";
 		}
 		request.getRequestDispatcher(view).forward(request, response);

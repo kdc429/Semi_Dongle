@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*, com.dongle.member.model.vo.Member,
@@ -70,11 +69,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
    
    }
    section div#mini_board{
-      border:1px solid rgba(178,204,255,0.3); 
-      width: 300px; 
-      height: 250px;
-      margin-top: 100px;
-      margin-left: 30px;
+      border-top:1px solid rgba(0,0,0,0.2); 
+      border-bottom:1px solid rgba(0,0,0,0.2); 
+      width: 530px; 
+      height: 180px;
+      margin-top: 30px;
+      margin-left: 75px;
       position:relative;
       display:inline-block;
       left : 0px;
@@ -82,27 +82,27 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
       float: left;   
    }
    
-   section div#mini_feed{
-   border:1px solid rgba(178,204,255,0.3); 
-   width: 300px; 
-   height: 250px; 
+  section div#mini_feed{
+   border-top:1px solid rgba(0,0,0,0.2); 
+   border-bottom:1px solid rgba(0,0,0,0.2); 
    position:relative;
    display:inline-block;
-   margin-top: 100px;
-   margin-left: 10px;
-   float: left;
-   
+   width: 530px; 
+   height: 180px;
+   margin-top: 30px;
+   margin-left: 75px;  
    }   
    
-   section div#mini_gallery{
-   
-      border: 1px solid rgba(178,204,255,0.3);  
-      width: 300px; 
-      height: 250px; 
+   section div#mini_gallery{   
+      border-top:1px solid rgba(0,0,0,0.2); 
+      border-bottom:1px solid rgba(0,0,0,0.2);  
+      width: 530px; 
+      height: 130px; 
       margin-left:10px; 
       display:inline-block;
-      margin-top: 150px;
-      
+      margin-top: 20px;
+      position:relative;
+      margin-left: 75px;      
    }
    
    #main-table-bordered>tr{
@@ -165,8 +165,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 		font-weight: bold;
 		margin-left: -5px;
    }
-
-
 </style>
 
 <body>
@@ -182,22 +180,25 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 			$(this).css('color','#333');
 		});
 	});
-/* 	$(function(){
-		$('.menu-btn').click(function(){
-			$(this).css('background-color','rgb(255,234,184)');
-			$(this).css('color','white');
-		});
-	}); */
-	$(function(){
-	   $.ajax({
-	      url:"<%=request.getContextPath()%>/community/boardList",
-	     data:{groupNo:<%=g.getGroupNo()%>},
-	      dataType:"html",
-	      success:function(data){
-	         $('#mini_board').html(data);
-	      }
-	   });    
-	});
+    $(function(){
+        $.ajax({
+           url:"<%=request.getContextPath()%>/community/boardList",
+           data:{groupNo:<%=g.getGroupNo()%>},
+           dataType:"html",
+           success:function(data){
+              $('#mini_board').html(data);
+           }
+        });
+        
+        $.ajax({
+           url:"<%=request.getContextPath()%>/community/mainGallery",
+           data:{groupNo:<%=g.getGroupNo()%>},
+           dataType:"html",
+           success:function(data){
+              $('#mini_gallery').html(data);
+           }
+        });
+     });
 	
 	$(function(){
 	   $('.boardView-btn').click(function(){
@@ -300,48 +301,47 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                }               
          	})            
          });
-         
-         $('#dongle_mem_btn').click(function(){
-             $.ajax({
-                url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-                type:"get",
-                dataType:"json",
-                success:function(data){
-                   $('#content-div').html(data);
-                   var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-                   //var h2_main = $('<h2></h2>');
-                   var tbl = $('<table id="tbl"></table>');
-                   var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
-                   <%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
-                    var thtml="";
-                     for(var i = 0; i < data.length; i++)
-                         {
-                           /* var tbody= "<tr>"; */
-                           thtml+="<tr>";
-                           thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
-                           thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
-                           /* thtml+=tbody; */
-                           thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
-                           thtml+="</tr>";
-                   }
-                   console.log(thtml);
-                   thead += thtml;
-                   tbl.append(thead);
-                   console.log(thead);
-                   console.log(tbl);
-                   console.log(h);
-                    $('#header').html(h);                     
-                    $('#mem_list_div').append(tbl);
-                   }
-             });         
-          });    
+
       </script>
    </aside>
  <script>       
-
-     
+ 
+ $('#dongle_mem_btn').click(function(){
+     $.ajax({
+        url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+        type:"get",
+        dataType:"json",
+        success:function(data){
+           $('#content-div').html(data);
+           var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+           //var h2_main = $('<h2></h2>');
+           var tbl = $('<table id="tbl"></table>');
+           var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
+           <%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
+            var thtml="";
+             for(var i = 0; i < data.length; i++)
+                 {
+                   /* var tbody= "<tr>"; */
+                   thtml+="<tr>";
+                   thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
+                   thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+                   /* thtml+=tbody; */
+                   thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+                   thtml+="</tr>";
+           }
+           console.log(thtml);
+           thead += thtml;
+           tbl.append(thead);
+           console.log(thead);
+           console.log(tbl);
+           console.log(h);
+            $('#header').html(h);                     
+            $('#mem_list_div').append(tbl);
+           }
+     });         
+  });    
    
-       </script>
+</script>
         <!-- 오른쪽 사이드 -->
         <aside>
             <div class="center" style="background-color: rgb(228, 228, 228);margin-top:45px;">
@@ -354,7 +354,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                     <button class='menu-btn' id="gallery-btn" >갤러리</button><br>
                     <button class='menu-btn' id="calendarview">일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
-                    	<button class='menu-btn'>동글 관리</button><br>
+                    	<button class='menu-btn' id='manager-menu-btn'>동글 관리</button><br>
                     <%} %>
                 </div>
             </div>
@@ -367,7 +367,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                <div id='dongle_main_img'>
                   <img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
                </div>
-               <div id='mini_board'></div>
+            	<div id='mini_board'></div>
+            	<div id='mini_gallery'></div>
+            	<div id='mini_feed'></div>
         </section>
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
 <div class="modal-div">
@@ -378,7 +380,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 </div>       
 
 <script>
-
       $('#dongle_mem_btn').click(function(){
          $.ajax({
          url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
@@ -394,7 +395,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
               var thtml="";
               for(var i = 0; i < data.length; i++)
               {
-               thtml+="<tr>";
+					thtml+="<tr>";
                   thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImageNewPath']+"'/></td>";
                   thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
                   thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
@@ -433,7 +434,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
          }
       });
    });
-
       $(function(){
          $('#board-btn').click(function(){
             $.ajax({
@@ -447,14 +447,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                   $('#gallery-btn').css('background-color','#fff');
                   $('#gallery-btn').css('color','#333');
                   $("#board-btn").css('background-color','rgb(255,234,184)');
-                  $("#board-btn").css('color','white');
-                  
+                  $("#board-btn").css('color','white');           
                   
                }
             });
          });
       });
-
       
       function comunnityHome(){
          location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
@@ -463,7 +461,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 
 </div>
 
-
+<div style='display: inline-block; width:1024px;height:60px;background-color:color:rgb(250,237,125);position:relative;'></div>
 <script>
 /* 갤러리 클릭시 매핑함수 */
 $(function(){
@@ -483,7 +481,6 @@ $(function(){
       })
    })
 });
-
 $(function(){
    $("#manager-menu-btn").click(function(){
       var managerNo=<%=g.getMemberNo()%>;
@@ -504,7 +501,6 @@ $(function(){
       })
    })
 });
-
 $(function(){
    $("#dongle_mem_join").click(function(){
       $.ajax({
@@ -519,7 +515,6 @@ $(function(){
       })
    })
 });
-
 $(function(){
    $("#calendarview").click(function(){
       $.ajax({
@@ -537,16 +532,12 @@ $(function(){
       })
    })
 });
-
-
-
 function comunnityHome(){
    location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 function logoCk(){
-   location.href="<%=request.getContextPath()%>/communityJoin?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
+	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
-
 </script>
 </body>
 

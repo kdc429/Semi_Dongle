@@ -46,7 +46,7 @@ public class MemberDeleteEndServlet extends HttpServlet {
 		if(result>0)
 		{
 			msg="회원탈퇴을 완료했습니다.";
-			loc="/";
+			loc="/Dongle_view/main.jsp";
 		}
 		else 
 		{

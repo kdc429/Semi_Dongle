@@ -14,7 +14,9 @@ import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardComment;
 import com.dongle.board.model.vo.BoardPath;
+import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 /**
  * Servlet implementation class BoardViewServlet
@@ -80,8 +82,11 @@ public class BoardViewServlet extends HttpServlet {
 		String view="";
 		if(b!=null)
 		{
+			//신고 카테고리 뽑아오기
+		      List<ReportReason> relist = new GalleryService().selectReportReason();
 			List<BoardComment> bclist=new BoardService().selectCommentList(boardNo,groupNo);
 			
+			request.setAttribute("relist", relist);
 			request.setAttribute("board", b);
 			view="/views/board/boardView.jsp";
 			request.setAttribute("groupNo", groupNo);

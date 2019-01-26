@@ -13,6 +13,7 @@ import com.dongle.gallery.model.vo.AlbumCategory;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.member.model.vo.ReportReason;
 
 public class GalleryService {
    
@@ -60,10 +61,10 @@ public class GalleryService {
       return rs;
    }
    
-   public GroupMember groupMemberCheck(int groupNo,int memberNo)
+   public GroupMember checkGroupMember(int groupNo, int memberNo)
    {
       Connection conn=getConnection();
-      GroupMember gm= new GalleryDao().groupMemberCheck(conn,groupNo,memberNo);
+      GroupMember gm= new GalleryDao().checkGroupMember(conn,groupNo,memberNo);
       close(conn);
       return gm;
       
@@ -163,4 +164,48 @@ public class GalleryService {
       else {rollback(conn);}
       return rs;
    }
+   //코멘트 삭제하기
+   public int deleteComment(int groupNo,int galCommentNo)
+   {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().deleteComment(conn,groupNo,galCommentNo);
+	      if(rs!=0) {commit(conn);}
+	      else {rollback(conn);}
+	      return rs;
+   }
+   //신고 카테고리 테이블 뽑아오기
+   public List<ReportReason> selectReportReason()
+   {
+	   Connection conn = getConnection();
+	   List<ReportReason> relist = new GalleryDao().selectReportReason(conn);
+	   close(conn);
+	   return relist;
+   }
+   
+   //갤러리 신고하기
+   public int insertReport(int groupNo,int memberNo,String reportCode) {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().insertReport(conn, groupNo, memberNo, reportCode);
+	   if(rs!=0) {commit(conn);}
+	   else {rollback(conn);}
+	   return rs;
+   }
+   //신고 후 갤러리 신고여부 변경
+   public int updateGalleryReport(int groupNo,String albumCode,int galNo)
+   {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().updateGalleryReport(conn,groupNo,albumCode,galNo);
+	   if(rs!=0) {commit(conn);}
+	   else {rollback(conn);}
+	   return rs;
+   }
+   //신고 후 갤러리 코멘트 신고여부 변경
+   public int updateGalleryCommentReport(int groupNo,int galNo,int galCommentNo) {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().updateGalleryCommentReport(conn,groupNo,galNo,galCommentNo);
+	   if(rs!=0) {commit(conn);}
+	   else {rollback(conn);}
+	   return rs;
+   }
+   
 }

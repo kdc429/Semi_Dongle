@@ -64,8 +64,7 @@ public class IdFindEndServlet extends HttpServlet {
 				else if(!checkMember.getEmail().equals(userEmail)){
 					
 					request.setAttribute("msg","회원 정보가 없습니다.");
-					loc="/Dongle_view/idPwdFind.jsp";
-					request.setAttribute("loc",loc);
+					request.setAttribute("loc","/");
 					view="views/common/msg.jsp";
 				}
 			}

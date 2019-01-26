@@ -19,21 +19,21 @@
 	.table
 	{
  		text-align : center;
-		border : 1px solid #dddddd;
 	}
 	.table thead th
 	{
-		background-color : #F2CB61;
+		background-color : rgba(245,245,245);
  		text-align: center; 
 	}
 	.table tbody tr th 
 	{
-		background-color : #EAEAEA;
+		background-color : rgba(245,245,245);
  		text-align : center; 
 	}
 	.table tbody td
 	{
 		text-align: left;
+		
 	} 
 	.form-btn
 	{
@@ -50,54 +50,49 @@
 </style>
 </head>
 <body>
+	<div class="board-container">
 		<form name="insertFrm" method="post" enctype="multipart/form-data">
-			<table class="table table-bordered">
+			<table class="table">
 				<thead>
 					<br><br>
 					<tr>
-						<th colspan="3">공지사항</th>
+						<th colspan="3" style="border-top:1px solid #dddddd; background-color: rgba(112,136,172); font-family: 'netmarble Medium';">공지사항</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th style="vertical-align:middle" style="width: 20%">글 제목</th>
+						<th style="vertical-align:middle; width: 20%; background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">글 제목</th>
 						<td id="title">
 							<input type="text" name='title' id='form-title' required="required"/>
 						</td>
 					</tr>
 					<tr>
-						<th style="vertical-align:middle">작성자</th>
+						<th style="vertical-align:middle; background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">작성자</th>
 						<td id="writer" >
 							<input style="background-color:#EAEAEA" type="text" name='writer' id='form-writer' value="admin" readonly="readonly"/>
 						</td>
 					</tr>					
 					<tr>
-						<th style="vertical-align:middle">첨부파일</th>
+						<th style="vertical-align:middle; background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">첨부파일</th>
 						<td>
 							<input type="file" name="upfile"/>
 						</td>
 					</tr>
 					<tr>
-						<th style="vertical-align:middle">내용</th>
+						<th style="border-bottom:1px solid #dddddd; vertical-align:middle;; background-color:rgba(245,245,245); color:black; font-family: '나눔스퀘어라운드 Regular';">내용</th>
 						<td>
 							<textarea style="width: 540px" rows="5" cols="50" id='form-content' name='content'></textarea>
 						</td>
 					</tr>
-				</tbody> 
-				<%-- 	<tr>
-						<td colspan="2" id="board-add">
-							<button id='form-list-btn'>목록으로</button>
-							<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-							<input type="button" id='form-submit-btn' value="등록하기" />
-						</td>
-					</tr>	 --%>		
+				</tbody> 	
 			</table>
 		</form>
 		<div class="form-btn">
-		<button id='form-list-btn'>목록으로</button>
+		<button type="button" class="btn btn-default" id='form-list-btn'>목록으로</button>
 		<input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
-		<input type="button" id='form-submit-btn' value="등록하기" />
+		<button type="button" class="btn btn-default" id='form-submit-btn'>등록하기</button>
 		</div>
+	</div>
 <script>
 $(function(){
 	$('#form-list-btn').click(function(){

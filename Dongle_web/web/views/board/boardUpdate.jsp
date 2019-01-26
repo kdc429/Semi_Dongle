@@ -10,7 +10,7 @@
 	
 %>
 <meta charset="UTF-8">
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -23,11 +23,10 @@
 	.table
 	{
 		text-align : center;
-		boder : 1px solid #dddddd;
 	}
 	.table thead th
 	{
-		background-color : #F2CB61;
+		background-color : rgba(245,245,245);
 		text-align: center;
 	}
 	.table tbody tr th 
@@ -40,15 +39,11 @@
 		min-height : 200px;
 		text-align : left;
 	}
-	.update-btn
-	{
-		text-align : center;
-	}
 	span#fname
 	{
     	position:absolute;
-    	left:218px;
-    	top:234px;
+    	left:181px;
+    	top:244px;
     	width: 440px;
     	background : white;
     }
@@ -64,36 +59,41 @@
     {
     	width : 250px;
     }
+    #update-list-btn
+    {
+    	text-align:"center";
+    }
 </style>
+	<div class="board-container">
 		<form name="updateFrm" method="post" enctype="multipart/form-data">
-			<table class="table table-bordered">
+			<table class="table">
 				<thead>
-					<br><br>
+					<br/><br/>
 					<tr>
-						<th colspan="3">공지사항</th>
+						<th colspan="3" style="border-top:1px solid #dddddd; background-color: rgba(112,136,172); font-family: 'netmarble Medium';">공지사항</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th style="vertical-align:middle">번호</th>
+						<th style="vertical-align:middle; background-color:rgba(245,245,245); color:black;">번호</th>
 						<td>
 							<input style="background-color:#EAEAEA" type="text" name="no" id='update-no' value="<%=bp.getBoardNo()%>" readonly="readonly"/>
 						</td>
 					</tr>
 					<tr>
-						<th style="vertical-align:middle" style="width:20%;">글 제목</th>
+						<th style="vertical-align:middle; width:20%; background-color:rgba(245,245,245); color:black;">글 제목</th>
 						<td id="title">
 							<input type="text" name='title' id='update-title' value="<%=bp.getBoardTitle()%>" required="required"/>
 						</td>
 					</tr>
 					<tr>
-						<th style="vertical-align:middle">작성자</th>
+						<th style="vertical-align:middle; background-color:rgba(245,245,245); color:black;">작성자</th>
 						<td id="writer" >
 							<input  style="background-color:#EAEAEA" type="text" id='update-writer' name='writer' value="<%=bp.getBoardWriter() %>" readonly="readonly"/>
 						</td>
 					</tr>					
 					<tr>
-						<th style="vertical-align:middle">첨부파일</th>
+						<th style="vertical-align:middle; background-color:rgba(245,245,245); color:black;">첨부파일</th>
 						<td>
 							<%if(bp.getBoardFileOldPath()!=null){%>
 								<input type="file" name="upfile" value="<%=bp.getBoardFileOldPath()%>"/>
@@ -105,7 +105,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="vertical-align:middle">내용</th>
+						<th style="border-bottom:1px solid #dddddd; vertial-align:middle;background-color:rgba(245,245,245); color:black;">내용</th>
 						<td>
 							<textarea style="width: 540px" rows="5" cols="50" name='content' id='update-content'><%=bp.getBoardContent()%></textarea>
 						</td>
@@ -120,11 +120,13 @@
 					</tr>		 --%>	
 			</table>
 		</form>
-		<div class="update-btn">
-			<button id='update-list-btn'>목록으로</button>
+		<div class="update-btn" style="float: left; margin-left: 220px;">
+			<button type="button" class="btn btn-default" id='update-list-btn' style="text-align:center">목록으로</button>
 			<input type="hidden" value="<%=groupNo%>" name="groupNo" />
-			<input type="button" id='update-submit-btn' value="수정하기" />
+			<button type="button" class="btn btn-default" id='update-submit-btn' style="text-align:center">수정하기</button>
+			<br/><br/>
 		</div>
+	</div> 
 <script>
 $(function(){
 	$("[name=upfile]").change(function(){

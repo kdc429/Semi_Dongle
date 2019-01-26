@@ -12,11 +12,12 @@ public class Board {
 	private Date boardWriteDate;
 	private int boardViewCount;
 	private String boardStatus;
+	private String boardReportStaut;
 	
 	public Board() {}
 
 	public Board(int boardNo, int groupNo, String boardTitle, String boardWriter, String boardContent,
-			Date boardWriteDate, int boardViewCount, String boardStatus) {
+			Date boardWriteDate, int boardViewCount, String boardStatus, String boardReportStaut) {
 		super();
 		this.boardNo = boardNo;
 		this.groupNo = groupNo;
@@ -26,6 +27,7 @@ public class Board {
 		this.boardWriteDate = boardWriteDate;
 		this.boardViewCount = boardViewCount;
 		this.boardStatus = boardStatus;
+		this.boardReportStaut = boardReportStaut;
 	}
 
 	public int getBoardNo() {
@@ -92,11 +94,21 @@ public class Board {
 		this.boardStatus = boardStatus;
 	}
 
+	public String getBoardReportStaut() {
+		return boardReportStaut;
+	}
+
+	public void setBoardReportStaut(String boardReportStaut) {
+		this.boardReportStaut = boardReportStaut;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", groupNo=" + groupNo + ", boardTitle=" + boardTitle + ", boardWriter="
 				+ boardWriter + ", boardContent=" + boardContent + ", boardWriteDate=" + boardWriteDate
-				+ ", boardViewCount=" + boardViewCount + ", boardStatus=" + boardStatus + "]";
+				+ ", boardViewCount=" + boardViewCount + ", boardStatus=" + boardStatus + ", boardReportStaut="
+				+ boardReportStaut + "]";
 	}
 	
+
 }

@@ -13,20 +13,18 @@ import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.member.model.vo.Member;
-import com.dongle.member.model.vo.ReportReason;
-import com.google.gson.Gson;
 
 /**
- * Servlet implementation class GalleryCommentInsertServlet
+ * Servlet implementation class GalleryDeleteCommentServlet
  */
-@WebServlet("/gallery/commentInsert")
-public class GalleryCommentInsertServlet extends HttpServlet {
+@WebServlet("/gallery/deleteComment")
+public class GalleryDeleteCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryCommentInsertServlet() {
+    public GalleryDeleteCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,30 +33,19 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+		System.out.println("뭐야 왜 안들어와 ㅠ");
+		int galCommentNo = Integer.parseInt(request.getParameter("galCommentNo"));
+		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+		
+		int rs = new GalleryService().deleteComment(groupNo,galCommentNo);
+		
 		int galNo=Integer.parseInt(request.getParameter("galNo"));
-		int galCommentWriterNo=Integer.parseInt(request.getParameter("galCommentWriterNo"));
-		String galCommentContent = request.getParameter("galCommentContent");
-		int galCommentLevel = Integer.parseInt(request.getParameter("galCommentLevel"));
-		int galCommentRef = Integer.parseInt(request.getParameter("galCommentRef"));
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
 		String albumCode=request.getParameter("albumCode");
-		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
-		System.out.println("galCommentNo: "+galCommentRef);
-		GalleryCommentJoin gcj =  new GalleryCommentJoin();
-		gcj.setGroupNo(groupNo);
-		gcj.setGalNo(galNo);
-		gcj.setGalCommentContent(galCommentContent);
-		gcj.setGalCommentLevel(galCommentLevel);;
-		gcj.setGalFileNo(galFileNo);
-		gcj.setMemberNo(galCommentWriterNo);
-		gcj.setGalCommentRef(galCommentRef);
 		
-		//신고 카테고리 뽑아오기
-		List<ReportReason> relist = new GalleryService().selectReportReason();	
-		int rs=new GalleryService().insertGalComment(gcj);
 		if(rs!=0)
 		{
+
 			List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
 			if(gplist!=null) {
 				//갤러리 해당 댓글 뽑아오기
@@ -68,7 +55,6 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 					System.out.println("2코멘트gplist: "+gplist);
 					System.out.println("2코멘트gclist: "+gclist);
 				}
-				request.setAttribute("relist", relist);
 				request.setAttribute("gplist", gplist);
 				request.setAttribute("groupNo", groupNo);
 				request.getRequestDispatcher("/views/gallery/commentInsert.jsp").forward(request, response);
