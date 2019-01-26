@@ -45,13 +45,16 @@ div#search-metro {
 	text-align: left;
 	padding: 8px;
 	border-collapse: collapse;
+	
 }
 
 #tbl-dongle tbody {
+	
 	display: block;
 	height: 450px;
 	overflow: scroll ;
 	overflow-x: hidden;
+	/* table-layout:fixed; */
 }
 
 #tbl-dongle th:nth-of-type(1), #tbl-dongle td:nth-of-type(1) {

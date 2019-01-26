@@ -2,9 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*, com.dongle.member.model.vo.Member,
-com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
+com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
+%>
 <%
 	Group g = (Group)request.getAttribute("group");
+	List<MultiLocation> locList = (List)request.getAttribute("locList");
+	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
 	Member loginMember = (Member)request.getAttribute("loginMember");
 	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
 	int result = (int)request.getAttribute("result");

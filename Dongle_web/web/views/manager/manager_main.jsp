@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group" %>
+<%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group,
+com.dongle.group.model.vo.MultiLocation, com.dongle.group.model.vo.MultiTopic,
+com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 
 <%
 	int groupNo=(int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	Group g = (Group)request.getAttribute("group");
+	List<MultiLocation> locList = (List)request.getAttribute("locList");
+	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
+	List<TopicCtg> topicCtg = (List)request.getAttribute("topicCtg");
 	
-	String address = g.getLocMetroName() + " " + g.getLocAreaName() + (g.getLocTownName()!=null?" " +g.getLocTownName():"");
+	String address = g.getLocCtgCode();
 %>
 <meta charset="UTF-8">
 
@@ -77,30 +82,18 @@
 							<label for="donglename">동호회 이름</label> 
 								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
 							<label for="topic">주제</label><br> 
-							<select	class="form-control" name="topic" id="topic" >
-								<option value="인문/과학">인문/과학</option>
-								<option value="스포츠/레저">스포츠/레저</option>
-								<option value="여행/캠핑">여행/캠핑</option>
-								<option value="문화/예술">문화/예술</option>
-								<option value="취업/자격증">취업/자격증</option>
-								<option value="외국어/어학">외국어/어학</option>
-								<option value="건강/다이어트">건강/다이어트</option>
-								<option value="게임/오락">게임/오락</option>
+							<select	class="form-control" name="selectTopic" id="selectTopic" >
+								<%for(TopicCtg topic : topicCtg){ %>
+								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
+								<%} %>
+								<div id="topic-add-div">
+									
+								</div>
 							</select> <br> 
 							<label for="address">지역</label><br> 
 								<input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
 								<button type="button" id="search-address" class="btn btn-info">검색</button><br>
-							
-							<!-- <select	class="form-control" id="area">
-								<option value="경기도">경기도</option>
-								<option value="서울">서울</option>
-								<option value="강원도">강원도</option>
-								<option value="경상북도">경상북도</option>
-								<option value="경상남도">경상남도</option>
-								<option value="전라북도">전라북도</option>
-								<option value="전라남도">전라남도</option>
-								<option value="제주도">제주도</option>
-							</select> <br>  -->
+
 							<br> 
 							<label>활동 시간대</label><br>
 							<div class="radio">
