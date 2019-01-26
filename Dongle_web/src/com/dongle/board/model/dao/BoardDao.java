@@ -304,6 +304,7 @@ public class BoardDao {
 				pstmt.setInt(5,bc.getBoCommentLevel());
 				pstmt.setString(6,bc.getBoCommentRef()==0?null:String.valueOf(bc.getBoCommentRef()));
 				result=pstmt.executeUpdate();
+				System.out.println("DAO 결과 : "+result);
 			}
 			catch(SQLException e)
 			{

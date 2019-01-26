@@ -76,9 +76,7 @@ border:none;
 background-color:white;
 }   
     
-    
-	
-	
+    	
 </style>
 	<section id="board-container">
 		<form name="deleteFrm" method="post" enctype="multipart/form-data">

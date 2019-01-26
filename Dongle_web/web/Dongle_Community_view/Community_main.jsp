@@ -378,7 +378,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
               			 	$('#header').html(h);         			   
               			    $('#mem_list_div').append(tbl);
               				
-              			     
+              			 
               			}
               		});   		
               	});       

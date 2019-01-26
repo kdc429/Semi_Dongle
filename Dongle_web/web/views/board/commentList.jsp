@@ -155,9 +155,7 @@
 					<%}	
 				} 
 			}%>
-		</table>
-</section>
-		
+		</table>		
 <script>
 $(function(){
 	$('#comment-insert-btn').click(function(){
@@ -243,35 +241,6 @@ $(function(){
 		<%}%>
 		
 	});  
-	 
-	
-	
-	
-	
-	
-	<%-- $(function(){
-		$('[name=boardCommentContent]').focus(function(){
-			if(<%=loginMember.getMemberId()==null%>)
-			{
-				fn_loginAlert();
-			}
-		});
-		$('[name=boardCommentFrm]').submit(function(e){
-			if(<%=loginMember.getMemberId()==null%>)
-			{
-				fn_loginAlert();
-				e.preventDefault();
-				return;
-			}
-			var len=$('textarea[name=boardCommentContent]').val().trim().length;
-			if(len==0)
-			{
-				alert('내용을 입력하세요~!');
-				$('textarea[name=boardCommentContent]').focus();
-				e.preventDefault();	
-			}
-		})
-	});	 --%>
 
 	function fn_loginAlert()
 	{
@@ -348,7 +317,7 @@ $(function(){
 		});
 	});
 	
-	<%-- //댓글 삭제
+	//댓글 삭제
 	$(function(){
 		$('#comment-delete-btn').click(function(){
 			if(confirm('정말로 삭제하시겠습니까?')==true)
@@ -379,7 +348,7 @@ $(function(){
 			
 		});
 	});
-	 --%>
+	
 
 	
 </script>

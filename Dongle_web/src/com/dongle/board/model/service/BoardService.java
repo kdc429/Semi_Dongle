@@ -30,7 +30,6 @@ public class BoardService {
 			}
 			else
 			{
-				System.out.println("롤");
 				rollback(conn);
 			}
 		}
@@ -125,6 +124,7 @@ public class BoardService {
 	
 	public int insertBoComment(BoardComment bc)
 	{
+		System.out.println("서비스 bc : "+bc);
 		Connection conn=getConnection();
 		int result=new BoardDao().insertBoComment(conn,bc);
 		if(result>0) 
