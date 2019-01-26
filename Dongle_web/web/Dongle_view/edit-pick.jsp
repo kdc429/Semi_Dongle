@@ -3,7 +3,7 @@
 <%@ page import="com.dongle.group.model.vo.ListGroup"%>
 <%@ page import="com.dongle.group.model.service.GroupService"%>
 <%@ page import="java.util.*" %> 
-<%@ include file="/Dongle_view/header.jsp"%>
+
 <%@ page import='com.dongle.group.model.vo.EditPickGroup,java.util.*' %>
 <%
 	List<EditPickGroup> editList = (List)request.getAttribute("editList");
@@ -71,8 +71,9 @@
         </div>
         <div style="clear:both;"></div>
     </div>
-
-<%@ include file="/Dongle_view/footer.jsp"%>
-
-
+<!--     </body> -->
 </html>
+
+
+
+
