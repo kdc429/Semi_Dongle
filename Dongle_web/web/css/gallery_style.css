@@ -12,11 +12,12 @@ div#album-container form#albumFolder> table tr td.albumFolBox{
 	display:inline-block;
 	text-align: center;
 	align-items: center;
-	padding:15px;
+	padding:12px;
 	height:202px;
 }
 div#album-container form#albumFolder> table tr td.albumFolBox p{
 	display:block;
+	margin-left:25px;
 	/* border: 1px solid orange; */
 }
 div#album-container form#albumFolder> table tr td.albumFolBox .alImg{
@@ -25,6 +26,8 @@ div#album-container form#albumFolder> table tr td.albumFolBox .alImg{
 	padding:2px;
 	display:inline-block;
 	border-radius: 10px;
+	
+	
 }
 
 /* galleryView - 갤러리 사진(4x3) */

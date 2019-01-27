@@ -18,7 +18,7 @@
     <link href="<%=request.getContextPath() %>/3/thumbnail-slider.css" rel="stylesheet" type="text/css" />
     <script src="<%=request.getContextPath() %>/3/thumbnail-slider.js" type="text/javascript"></script>
     <style>
-        body {font: normal 0.9em Arial;color:#222;}
+       /*  body {font: normal 0.9em Arial;color:#222;} */
         /* header {display:block; font-size:1.2em;margin-bottom:100px;} */
         header a, header span {
             display: inline-block;
@@ -65,7 +65,20 @@
 	}
         
     </style>
-<div id='edit_all_div' style="width:1000px;margin:80px auto;">
+  	<div class='back-div'style='padding:0;'>
+      <a href="<%=request.getContextPath()%>/admin/memberList" class='list_btn'>
+         <img style='width:15px;height:15px;margin-left:-500px;' class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
+      </a>
+	</div>
+<%--    	<div class="bar"></div>
+	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px; margin-left:-500px;;">
+    	<li ><a href="<%=request.getContextPath()%>/admin/memberList">회원 리스트 관리</a></li>
+    	<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
+    	<li class="active"><a href="<%=request.getContextPath()%>/admin/editpickForm">메인 관리</a></li>
+   		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
+ 	</ul> --%>
+ 	<h3>현재 Main 에디터픽 화면</h3>
+	<div id='edit_all_div' style="width:1000px;margin:80px auto;">
         <div id="ninja-slider" style="float:left;">
             <div class="slider-inner">
                 <ul  style='width:600px; height:400px;'>
@@ -141,7 +154,7 @@
         </div>
         <div style="clear:both;"></div>
     </div>
-    <h2>변경할 에디터픽 선택</h2>
+    <h3 style='margin-top:20px;margin-bottom:-10px;'>변경할 에디터픽 선택</h3>
 	<div  style='margin-left:10px;display:inline;position:relative;width:auto;height:auto;'>
 		<%for(int j=0;j<6;j++){ %>
 			<%if((j+1)%3==1){ %>
@@ -161,7 +174,7 @@
 		</div>
 		<%if(newGroupNo!=0){ %>
 			<div>
-				<p>새로 변경 될 동글 번호: &nbsp;<%=newGroupNo %></p>
+				<p style='font-size: 20px;'>새로 변경 될 동글 번호: &nbsp;<%=newGroupNo %></p>
 				<input type='hidden' id='new_group_no' value='<%=newGroupNo %>'>
 			</div>
 		<%} %>
@@ -170,7 +183,7 @@
 			<label>메인 이미지:<input type='file' id='input_edit_img' name='input_edit_img' multiple/></label>
 		</div>
 		<div class='edit_textarea'>
-			<textarea name="input_edit_text" id='input_edit_text' cols='100' rows='4' style=' resize:none;margin-top:10px;' placeholder="내용을 입력해주세요." tabindex='3'></textarea>
+			<textarea name="input_edit_text" id='input_edit_text' cols='70' rows='4' style=' resize:none;margin-top:10px;' placeholder="내용을 입력해주세요." tabindex='3'></textarea>
 			<br><br>
 			<button style='float:right;display:inline-block;margin-right:100px;' name='edit_update' id='edit_update'>확인</button>
 		</div>
@@ -188,7 +201,7 @@
 			numdiv.empty();
 			$(this).css('border','2px solid rgb(112,136,172)');
 			en=$(this).get(0).id;
-			var html='<p>선택한 에디터 픽 동글번호: ';
+			var html="<p style='font-size: 20px;'>선택한 에디터 픽 동글번호: ";
 			html+=en+"</p>";
 			html+="<input type='hidden' name='groupNo' id='groupNo' value='"+en+"'>";
 			numdiv.append(html);

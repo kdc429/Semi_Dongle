@@ -134,7 +134,35 @@ public class GalleryDao {
       return result;
    }
    
-   public int inserAlbum(Connection conn,String albumNameP,int groupNo)
+   //앨범 순서대로 정렬허가 위해서 Max albumNo 뽑기
+   public int selectMaxAlbumNo(Connection conn, int groupNo)
+   {
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   int albumNo=0;
+	   String sql=prop.getProperty("selectMaxAlbumNo");
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, groupNo);
+		   rs=pstmt.executeQuery();
+		   while(rs.next()) {
+			   albumNo = rs.getInt("MAXALBUM")+1;
+		   }
+	   }catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(rs);
+		   close(pstmt);
+	   }
+	   System.out.println("albumNo: "+albumNo);
+	   return albumNo;
+	   
+   }
+   
+   //앨범 추가하기
+   public int insertAlbum(Connection conn,String albumNameP,int groupNo,int albumNo)
    {
       PreparedStatement pstmt=null;
       int rs=0;
@@ -143,6 +171,7 @@ public class GalleryDao {
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, groupNo);
          pstmt.setString(2, albumNameP);
+         pstmt.setInt(3, albumNo );
          rs=pstmt.executeUpdate();
       }
       catch(Exception e)
@@ -163,7 +192,6 @@ public class GalleryDao {
       String sql = prop.getProperty("checkGroupMember");
       GroupMember gm = null;
       try {
-    	  System.out.println(groupNo+memberNo+"여기다");
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, groupNo);
          pstmt.setInt(2, memberNo);
@@ -270,7 +298,7 @@ public class GalleryDao {
             gp.setGalReportStatus(rs.getString("gal_report_status"));
             gplist.add(gp);
          }
-         System.out.println("갤러리: "+gplist);
+         /*System.out.println("갤러리: "+gplist);*/
       }
       catch(Exception e)
       {
@@ -288,6 +316,7 @@ public class GalleryDao {
       PreparedStatement pstmt=null;
       int rs=0;
       String sql = prop.getProperty("insertGallery");
+      System.out.println("이미지카운트:"+imageCount);
       try {
          for(int i=0;i<imageCount;i++) {
         	System.out.println("확인: "+gp);
@@ -300,7 +329,7 @@ public class GalleryDao {
             pstmt.setString(6,(String) newFileName.get(i));
             pstmt.setString(7, gp.getGalFileContent());
             pstmt.setString(8, gp.getGalMultiStatus());
-            rs+=pstmt.executeUpdate();
+            rs=pstmt.executeUpdate();
          }
          
       }

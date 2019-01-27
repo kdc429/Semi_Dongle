@@ -19,6 +19,7 @@ public class GalleryService {
    
    public GalleryService() {}
    
+   //해당 그룹 갤러리에 있는 앨범뽑기
    public List<AlbumCategory> albumGet(int groupNo){
       Connection conn = getConnection();
       List<AlbumCategory> list=new GalleryDao().albumGet(conn,groupNo);
@@ -49,10 +50,21 @@ public class GalleryService {
       close(conn);
       return result;
    }
-   public int insertAlbum(String albumNameP,int groupNo)
+   
+   //앨범 정렬을 위해서 albumNo뽑아보기
+   public int selectMaxAlbumNo(int groupNo)
+   {
+	   Connection conn = getConnection();
+	   int albumNo = new GalleryDao().selectMaxAlbumNo(conn,groupNo);
+	   close(conn);
+	   return albumNo;
+   }
+   
+   //앨범 추가하기
+   public int insertAlbum(String albumNameP,int groupNo,int albumNo)
    {
       Connection conn = getConnection();
-      int rs= new GalleryDao().inserAlbum(conn,albumNameP,groupNo);
+      int rs= new GalleryDao().insertAlbum(conn,albumNameP,groupNo,albumNo);
       if(rs!=0)
       {
          commit(conn);

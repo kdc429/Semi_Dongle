@@ -34,14 +34,13 @@ public class AlbumPlusServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-		System.out.println("뭐야");
-		/*if(loginMember.getMemberId()==null||!loginMember.getMemberId().equals("admin"))
+		if(loginMember.getMemberId()==null&&!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "잘못된 경로로 접근하였습니다.");
 			request.setAttribute("loc", "/albumGet?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}*/
+		}
 		//그룹의 앨범 뽑아오기
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
 		

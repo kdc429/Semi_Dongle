@@ -41,15 +41,15 @@ public class GalleryGetServlet extends HttpServlet {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		int memberNo=loginMember.getMemberNo();
-		GroupMember gm = new GalleryService().checkGroupMember(groupNo, memberNo);
-		System.out.println("그룹멤버니?"+gm);
+		//동호회 회원인지 아닌지 group_member_tab에서 확인
+		GroupMember gm = new GroupService().selectGmInfo(groupNo, memberNo);
 		if(gm==null&&!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}		
+		}
 		
 
 		//test : gal_no만 distinct된 dao에 갔다오기
@@ -80,7 +80,6 @@ public class GalleryGetServlet extends HttpServlet {
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("albumCode", albumCode);
 		request.setAttribute("groupMember", gm);
-		request.setAttribute("totalList", totalMember);
 		request.setAttribute("tList", tList);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}

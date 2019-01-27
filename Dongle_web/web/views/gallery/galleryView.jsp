@@ -136,9 +136,7 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
                      <tr>
                      </tr>
                      <td class="galleryBox" >
-                        <%-- <%if(t.getGalMultiStatus().equals("Y")){ %> --%>
-                           <img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
-                        <%-- <%} %> --%>
+                        <img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
                         <input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
                         <input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
                         <input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>

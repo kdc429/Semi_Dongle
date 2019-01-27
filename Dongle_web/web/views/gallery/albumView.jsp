@@ -104,7 +104,6 @@ $(function(){
 				});
 			}
 		});
-
 	});
 });
 
@@ -135,23 +134,32 @@ $(function(){
 						</tr>
 						<%albumCount=0; empty=0;%>
 						<td class="albumFolBox" style='width:185px; height:202px;'>
-							<%for(int j=0;j<galList.size();j++){ %>
-								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())&&galList.get(j).getGalReportStatus().equals("N")){ %>
-									<%if(albumCount<4){ %>
-										<%if(galList.get(j).getAlbumCode()!=null){ %>
-											<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
-											<%empty++; %>
-										<%}
-										else{%>
-											<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png">
-										<%} %>
-										<%albumCount++;%>
-									<%}else{continue;} %>
-								<%}else{continue;} %>
+							<%if(galList.size()!=0){ %>
+								<div style='width:185px; height:142px; background-color:white;'>
+									<%for(int j=0;j<galList.size();j++){ %>
+										<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())&&galList.get(j).getGalReportStatus().equals("N")){ %>
+											<%if(albumCount<4){ %>
+												<%if(galList.get(j).getAlbumCode()!=null){ %>
+													<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
+													<%empty++; %>
+												<%}
+												else{%>
+													<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png">
+												<%} %>
+												<%albumCount++;%>
+											<%}else{continue;} %>
+										<%}else{continue;} %>
+									<%} %>
+								</div>
+							<%}
+							else{%>
+								<div style='width:185px; height:142px; background-color:white;'  >
+									<img style='width:100px;height:100px;' src="<%=request.getContextPath()%>/images/gallery/folder.png">
+								</div>
 							<%} %>
-			 				<%for(int j=0;j<4;j++){ %>
+<%-- 			 				<%for(int j=0;j<4;j++){ %>
 								<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
-							<%} %>
+							<%} %> --%>
 							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
@@ -161,24 +169,33 @@ $(function(){
 					<%} 
 					else{%>
 						<td class="albumFolBox"  style='width:185px; height:202px;'>
-							<%albumCount=0;  empty=0;%>
-							<%for(int j=0;j<galList.size();j++){ %>
-								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())&&galList.get(j).getGalReportStatus().equals("N")){ %>
-									<%if(albumCount<4){ %>
-										<%if(galList.get(j).getAlbumCode()!=null){ %>
-											<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
-											<%empty++;%>
-										<%}
-										else{%>
-											<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png">
+							<%if(galList.size()!=0){ %>
+								<div style='width:185px; height:142px; background-color:white;'>
+									<%albumCount=0;  empty=0;%>
+										<%for(int j=0;j<galList.size();j++){ %>
+											<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())&&galList.get(j).getGalReportStatus().equals("N")){ %>
+												<%if(albumCount<4){ %>
+													<%if(galList.get(j).getAlbumCode()!=null){ %>
+														<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
+														<%empty++;%>
+													<%}
+													else{%>
+														<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png">
+													<%} %>
+													<%albumCount++;%>
+												<%}else{continue;} %>
+											<%}else{continue;} %>
 										<%} %>
-										<%albumCount++;%>
-									<%}else{continue;} %>
-								<%}else{continue;} %>
+								</div>
+							<%}
+							else{%>
+								<div style='width:185px; height:142px; background-color:white;' >
+									<img style='width:100px;height:100px;' src="<%=request.getContextPath()%>/images/gallery/folder.png">
+								</div>
 							<%} %>
-							<%for(int j=0;j<4;j++){ %>
+<%-- 							<%for(int j=0;j<4;j++){ %>
 								<%if(empty==0){%><img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/white.png"><%} %>
-							<%} %>
+							<%} %> --%>
 							<p class='alname'>[&nbsp;<%=list.get(i).getAlbumName()%>&nbsp;]</p>
 							<input type='radio' name='delcheck' class='delcheck' value="<%=list.get(i).getAlbumName() %>" hidden="hidden">
 							<input type="hidden" name="groupNo" id="groupNo" value="<%=list.get(i).getGroupNo()%>"/>
