@@ -85,6 +85,29 @@ java.util.*" %>
 		topicArr.splice(index,1);
 		
 	}
+	
+	function fn_metroChange()
+	{
+		var metroCode = $("#selectMetro").val();
+		var html = "";
+	
+	      $.ajax({
+			url:"<%=request.getContextPath()%>/manager/compareMetro",
+			type:"post",
+			data:{
+			  "metroCode":metroCode
+			},
+			dataType:"html",
+			success:function(data){
+			   $('#content-div').html(data);
+			}, 
+			error:function(request){},
+			complete:function(){console.log("ok");}
+	      })
+		   
+		
+		
+	}
 	function validate(){
 		console.log($("#checkPwd").val()+" : <%=loginMember.getMemberPwd()%>");
 		if($("#checkPwd").val() != '<%=loginMember.getMemberPwd()%>')
@@ -144,6 +167,7 @@ java.util.*" %>
 								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
 							<label for="topic">토픽</label><br> 
 							<select	class="form-control" style="padding_bottm:2px; width:79%; display:inline" name="selectTopic" id="selectTopic" >
+								<option disabled selected>===선택===</option>
 								<%for(TopicCtg topic : topicCtg){ %>
 								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
 								<%} %>
@@ -157,7 +181,8 @@ java.util.*" %>
 							<br>
 							<label>지역</label><br> 
 							
-							<select	class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectMetro" id="selectMetro" >
+							<select	class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectMetro" id="selectMetro" onchange="fn_metroChange()" >
+								<option disabled selected>===대분류===</option>
 								<%
 								String[] metroArr = new String[18];
 								int metroCnt = 0;
@@ -188,8 +213,10 @@ java.util.*" %>
 									}
 								}
 								%>
+								
 							</select>
-							<select>
+							<select class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectArea" id="selectArea" >
+								<option disabled selected>===중분류===</option>
 								
 							</select>
 								<%-- <input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
