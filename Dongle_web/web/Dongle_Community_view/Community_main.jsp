@@ -445,23 +445,19 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
         });
       
       $('#feed-btn').click(function(){
-      var groupNo=<%=groupNo%>;
-      var memberNo=<%=loginMember.getMemberNo()%>;
-      console.log(groupNo);
-      $.ajax({
-         url:"<%=request.getContextPath()%>/feed/feedListView",
-         type:"post",
-         data:{
-            "groupNo":groupNo,
-            "memberNo":memberNo   
-         },
-         
-         dataType:"html",
-         success:function(data){
-            $('#content-div').html(data);
-         }
-      });
-   });
+      	var groupNo=<%=g.getGroupNo()%>;
+     
+     	console.log(groupNo);
+      	$.ajax({
+         	url:"<%=request.getContextPath()%>/feed/feedListView?groupNo=<%=g.getGroupNo()%>",
+         	type:"post",
+         	dataType:"html",
+         	success:function(data){
+            	$('#content-div').html(data);
+            	setImage();
+         	}
+      	})
+   	});
 
       $(function(){
          $('#board-btn').click(function(){

@@ -73,9 +73,22 @@ div.user-back #logout_btn{
 </head>
 
 
-
-
 <body>
+	<script>
+		$(document).ready(function(){
+			$('.search-btn').on('click',function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/main/mainSearch",
+					type:"post",
+					dataType:"html",
+					success:function(data){
+						$('section').html(data);
+					}
+				})
+			})
+		})
+		
+	</script>
    <header>
         <div class="headerBack">
             <div class="bar">
@@ -102,7 +115,7 @@ div.user-back #logout_btn{
                   </script>
                </div>&nbsp;&nbsp;
             </div>
-              <button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
+              <button class="search-btn">동글 검색</button>
               <button class="guide-btn">동글 가이드</button>
         </div>
         <script>

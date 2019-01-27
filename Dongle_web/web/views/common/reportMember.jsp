@@ -52,8 +52,8 @@
 	
 	$(document).ready(function(){
 		$('#report').on('change',function(){
-			
-			window.opener.document.getElementById('selectRecode').value=document.getElementById('reportMemberNick').value;
+			var reportCode=$('#report-reason option:selected').val();
+			window.opener.document.getElementById('selectRecode').value=reportCode;
 			report();
 		});
 	})
@@ -66,7 +66,7 @@
 			var feedCommentNo=window.opener.document.getElementById('reportFeedCommentNo').value;
 			var groupNo=window.opener.document.getElementById('reportGroupNo').value;
 			var memberNo=window.opener.document.getElementById('reportMemberNo').value;
-			var reportCode=document.getElementById('reportMemberNick').value;
+			var reportCode=$('#report-reason option:selected').val();
 			console.log(feedNo);
 			console.log(groupNo);
 			console.log(feedCommentNo);
@@ -109,6 +109,7 @@
 					}
 				})
 			}else if(feedNo==0){
+				console.log("신고되라");
 				$.ajax({
 					url:"<%=request.getContextPath()%>/feed/feedCommentReport",
 					type:"post",

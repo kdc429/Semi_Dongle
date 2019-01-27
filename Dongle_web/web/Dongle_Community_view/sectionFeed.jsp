@@ -4,7 +4,7 @@
 <%
 	List<Feed> feedList=(List)request.getAttribute("feedList");
 	Group g=(Group)request.getAttribute("group");
-	Member loginMember=(Member)request.getAttribute("loginMember");
+	Member loginMember=(Member)request.getSession().getAttribute("loginMember");
 	List<GroupMember> memberList=(List)request.getAttribute("memberList");
 	GroupMember groupMember=(GroupMember)request.getAttribute("groupMember");
 	List<FeedFile> feedFileList=(List)request.getAttribute("feedFileList");
@@ -174,7 +174,7 @@
 				if(imageExt != "jpg" && imageExt != "png" &&  imageExt != "gif"){ //확장자를 확인합니다.
 
 					alert('사진 파일은 이미지 파일(jpg, png, gif)만 등록 가능합니다.');
-
+					console.log(document.feedFrm.feedPicUp.value);
 					return;
 
 				}else{
@@ -255,8 +255,8 @@
 			//댓글 레벨 1 태그
 			var commentLevel2=$(this).parent().parent().parent().parent();
 			//댓글 레벨 2 태그
-			var commentRepleTag=$(this).parent().parent().parent('.recomment_content');
-			console.log(commentLevel2);
+			var commentRepleTag=$(this).parent().parent();
+			console.log(commentRepleTag);
 			if(feedCommentContent==""){
 				alert("댓글 내용을 입력해주세요!");
 				return;
@@ -322,7 +322,7 @@
 			console.log(feedNo);
 			<%if(loginMember!=null){%>
 				eventflag=true;
-				var div=$("<div class='recomment_content'></div>");
+				var div=$(this).parent().siblings('.recomment_content');
 				var html="";
 				html+="<input type='hidden' class='groupNo' value='<%=g.getGroupNo()%>'/>"
 				html+="<input type='hidden' class='feedNo' value='"+feedNo+"'/>";
@@ -340,9 +340,7 @@
 				div.html(html);
 				div.insertAfter($(this).parent().siblings('.comment-content-back')).slideDown(800);
 				/* 연결된 이벤트 삭제 */
-				$(this).remove();
-				e.stopPropagation();
-				console.log($(this));
+				
 				
 				
 				div.find('.btn-insert').click(function(e){
@@ -408,7 +406,7 @@
 		
 		$(document).ready(function(){
 			//피드 삭제 에이작스
-			$('.delete-btn').click(function(){
+			$(document).on('click','.delete-btn',function(){
 				var feedNo=$(this).siblings('.feed-no-update').val();
 				$.ajax({
 					url:"<%=request.getContextPath()%>/feed/feedDelete",
@@ -484,7 +482,7 @@
 		<br><br>
 		<div class="news">
 			<div class="feednew">
-				<div class="feednew-logo">NEWSFEED</div>
+				<div class="feednew-logo"></div>
 					<div>
 						<form name="feedFrm" id="feedFrm" method="post" enctype="multipart/form-data">
 							<textarea name="feedContentUp" id="feed-content-up" cols='75' rows="6" style="resize:none"></textarea>
@@ -584,7 +582,7 @@
 	            		}%>
 
             		<% for(FeedFile ff:feedFileList){ 
-            			  if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null&&feedFileList.size()>1){
+            			  if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null&&feedFileList.size()>0){
             				 if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
             					%>
             			
@@ -593,30 +591,15 @@
                     		<%}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
                     			
                     		<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
-                    		<%}else{%>
+                    		<%}%>
                     		
-                    		<%}
-                    	}else if(feedFileList.size()==1){%>
-            			<%if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
-            			%>
-            			<ul class="media-carousel">
-                    		<li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
-            						
-            			</ul>
-                    	
-                    	<%}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
-                    	<ul class="media-carousel">
-                    		<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
-                    	</ul>
-                    	<%}else{%>
                     		
                     	<%}
-            			}
             			}
             			%>
             				
             			<% for(FeedFile ff:feedFileList){
-    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>	
+    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>0){%>	
                 		</ul>
                 		<button class="next">❯</button>
             		</div>
@@ -629,14 +612,14 @@
 	            		}
             			%>	
                 		<% for(FeedFile ff:feedFileList){ 
-            				if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>
+            				if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>0){%>
             				<li class="feed-pic-indi"></li>
             			
                     	<%	}
             			}	%>
             			
             			<% for(FeedFile ff:feedFileList){
-    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>	
+    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>0){%>	
                 			
                 		</ul>
     				</div>
@@ -676,10 +659,10 @@
                         				<img class="reple-icon" src="<%=request.getContextPath()%>/images/button-images/comments-solid.png">답글
                         			</button>
                     			</span>
-                    			<span class="comment-content-back">
-                        			<span class="comment-content"><%=fc.getFeCommentContent() %></span>
-                        			
+                    			<span class="comment-content-back">	
+                        			<span class="comment-content"><%=fc.getFeCommentContent() %></span>		
                     			</span>
+                    			<div class='recomment_content'></div>
                 			<%				
                 					}
                 				}
@@ -703,7 +686,7 @@
                         			<%if(fcl2.getMemberNo()!=loginMember.getMemberNo()){ %>
                         			<button class="report-comment-button">
                         				<input type="hidden" class="comment-writer-nick" value="<%=gm.getGroupMemberNickname() %>"/>
-                        				<input type="hidden" class="comment-feed-no" value="<%=fcl2.getFeCommentNo() %>"/>
+                        				<input type="hidden" class="comment-no" value="<%=fcl2.getFeCommentNo() %>"/>
                         				<input type="hidden" class="comment-writer-no" value="<%=fcl2.getMemberNo() %>">
                         				<img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
                         			</button>

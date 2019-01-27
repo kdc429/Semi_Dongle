@@ -69,7 +69,7 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
 	            		}%>
 
             		<% for(FeedFile ff:feedFileList){ 
-            			  if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null&&feedFileList.size()>1){
+            			  if(ff.getFeedNo()==f.getFeedNo()&&ff.getFeedNewFilePath()!=null&&feedFileList.size()>0){
             				 if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
             					%>
             			
@@ -81,27 +81,12 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
                     		<%}else{%>
                     		
                     		<%}
-                    	}else if(feedFileList.size()==1){%>
-            			<%if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
-            			%>
-            			<ul class="media-carousel">
-                    		<li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
-            						
-            			</ul>
-                    	
-                    	<%}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
-                    	<ul class="media-carousel">
-                    		<li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
-                    	</ul>
-                    	<%}else{%>
-                    		
-                    	<%}
-            			}
+                    	}
             			}
             			%>
             				
             			<% for(FeedFile ff:feedFileList){
-    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>	
+    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>0){%>	
                 		</ul>
                 		<button class="next">❯</button>
             		</div>
@@ -114,14 +99,14 @@ List<FeedComment> feedLevel2CommentList=(List)request.getAttribute("level2FeedCo
 	            		}
             			%>	
                 		<% for(FeedFile ff:feedFileList){ 
-            				if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>
+            				if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>0){%>
             				<li class="feed-pic-indi"></li>
             			
                     	<%	}
             			}	%>
             			
             			<% for(FeedFile ff:feedFileList){
-    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>1){%>	
+    						if(ff.getFeedNo()==f.getFeedNo()&&feedFileList.size()>0){%>	
                 			
                 		</ul>
     				</div>

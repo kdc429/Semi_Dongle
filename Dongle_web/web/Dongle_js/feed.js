@@ -10,7 +10,7 @@ var time; // 슬라이드 넘어가는 시간
         imgWidth=$('.media-carousel').children('li').width();
        
         function setImage(){
-         	
+        	currentIndex = 0;
          	for(var i=0;i<carouselLength;i++){
          		
          		if($('.media-carousel').eq(i).children().length==1){
@@ -28,7 +28,7 @@ var time; // 슬라이드 넘어가는 시간
          				
          			}else{
          				
-         				$('.media-carousel').eq(i).children().eq(j).css("left",imgWidth+"px");
+         				$('.media-carousel').eq(i).children().eq(j).css("left",imgWidth);
          				
          			}
          		}
@@ -135,7 +135,7 @@ var time; // 슬라이드 넘어가는 시간
 
             });
         	
-        	$('.media-carousel').ready(function(){
+        	$(document).ready(function(){
         		$(document).on('click','.next',function(e) {
                     // carousel_setImgPosition();
                 	
@@ -143,7 +143,7 @@ var time; // 슬라이드 넘어가는 시간
                     imgWidth = feedPicLi.width();
                     feedPicCount = feedPicLi.length;
                     indicator=$(this);
-                    if(currentIndex>feedPicLi){
+                    if(currentIndex>feedPicCount){
                     	currentIndex=0;
                     }
                     
@@ -200,10 +200,10 @@ var time; // 슬라이드 넘어가는 시간
                 });
         	})
             
-        	$('.media-carousel').ready(function(){
+        	$(document).ready(function(){
         		$(document).on('click','.prev',function(e) {
         			
-        			if(currentIndex>feedPicLi){
+        			if(currentIndex>feedPicCount){
                     	currentIndex=0;
                     }
                 	
@@ -212,9 +212,7 @@ var time; // 슬라이드 넘어가는 시간
                     feedPicCount = feedPicLi.length;
                     indicator=$(this);
                     
-                    if(currentIndex>feedPicLi){
-                    	currentIndex=0;
-                    }
+                    
                     for (var i = 0; i < feedPicCount; i++) {
                         if (i == currentIndex) {
                             feedPicLi.eq(i).css("left", 0);
