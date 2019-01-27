@@ -14,16 +14,16 @@ import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.LocalCtg;
 
 /**
- * Servlet implementation class CompareMetroServlet
+ * Servlet implementation class CompareAreaServlet
  */
-@WebServlet("/manager/compareMetro")
-public class CompareMetroServlet extends HttpServlet {
+@WebServlet("/manager/compareArea")
+public class CompareAreaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompareMetroServlet() {
+    public CompareAreaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,46 +33,27 @@ public class CompareMetroServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String metroCode = request.getParameter("metroCode");
+		String areaCode = request.getParameter("areaCode");
 		
 		List<LocalCtg> localCtg = new GroupService().selectLocalCtg();
 		
-		List<String> areaCodeList = new ArrayList();
-		List<String> areaNameList = new ArrayList();
+		List<String> townCodeList = new ArrayList();
+		List<String> townNameList = new ArrayList();
 		
-		boolean flag = false;
 		for(LocalCtg local : localCtg)
 		{
-			
-			if(metroCode.equals(local.getMetroCode()))
+			if(areaCode.equals(local.getAreaCode()))
 			{
-				for(int i = 0; i < areaCodeList.size(); i++)
-				{
-					if(areaCodeList.get(i).equals(local.getAreaCode()))
-					{
-						flag = true;
-						break;
-					}
-				}
-				if(!flag)
-				{
-					areaCodeList.add(local.getAreaCode());
-					areaNameList.add(local.getLocAreaName());
-				}
-			
-				else
-				{
-					flag = false;
-				}
-				
+				townCodeList.add(local.getTownCode());
+				townNameList.add(local.getLocTownName());
 				
 			}
 		}
 		
-		request.setAttribute("areaCodeList", areaCodeList);
-		request.setAttribute("areaNameList", areaNameList);
+		request.setAttribute("townCodeList", townCodeList);
+		request.setAttribute("townNameList", townNameList);
 		
-		request.getRequestDispatcher("/views/manager/manager_compareMetro.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/manager/manager_compareArea.jsp").forward(request, response);
 	}
 
 	/**

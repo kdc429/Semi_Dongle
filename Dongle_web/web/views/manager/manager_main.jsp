@@ -32,6 +32,11 @@ java.util.*" %>
 	var topicCnt = 0;
 	var topicArr = [];
 	var topicFlag = false;
+	
+	var locCnt = 0;
+	var locArr = [];
+	var locFlag = false;
+	
 	$(function(){
 		$("#addtopic-btn").click(function(){
 			if(topicCnt > 2)
@@ -61,7 +66,7 @@ java.util.*" %>
 					div.append(str);
 					
 					topicArr.push(topicName);
-					console.log("topicArr" + topicArr);
+					console.log("topicArr추가" + topicArr);
 					topicCnt++; 
 					
 				}
@@ -82,9 +87,13 @@ java.util.*" %>
 		$(spanId).remove();
 		topicCnt--;
 		
-		topicArr.splice(index,1);
+		
+		topicArr.splice(index, 1);
+		console.log("topicArr삭제" + topicArr);
 		
 	}
+	
+	
 	
 	function fn_metroChange()
 	{
@@ -99,15 +108,190 @@ java.util.*" %>
 			},
 			dataType:"html",
 			success:function(data){
-			   $('#content-div').html(data);
+				console.log(data);
+			   	$("#selectArea").html(data);
+			   	$("#selectTown").html("<option disabled selected>==소분류==</option>");
 			}, 
 			error:function(request){},
 			complete:function(){console.log("ok");}
 	      })
-		   
+	}
+	
+	function fn_areaChange()
+	{
+		var areaCode = $("#selectArea").val();
+		var html = "";
+	
+	      $.ajax({
+			url:"<%=request.getContextPath()%>/manager/compareArea",
+			type:"post",
+			data:{
+			  "areaCode":areaCode
+			},
+			dataType:"html",
+			success:function(data){
+				console.log("데이타 : " + data);
+			   	$("#selectTown").html(data);
+			}, 
+			error:function(request){},
+			complete:function(){console.log("ok");}
+	      })
+	}
+	
+	$(function(){
+		$("#addLoc-btn").click(function(){
+			if(locCnt > 2)
+			{
+				alert("지역은 최대 3개만 가능합니다.")	
+			}
+			else
+			{
+				var metroCode = $("#selectMetro option:selected").val();
+				var metroName = $("#selectMetro option:selected").text();
+				var areaCode = $("#selectArea option:selected").val();
+				var areaName = $("#selectArea option:selected").text();
+				var townCode = $("#selectTown option:selected").val();
+				var townName = $("#selectTown option:selected").text();
+				
+				if(areaCode == "==중분류==")
+				{
+					areaCode = "";
+					areaName = "";
+				}
+				if(townCode == "==소분류==")
+				{
+					townCode="";
+					townName="";
+				}
+				
+				for(var i = 0; i < locArr.length; i++)
+				{
+					if(townName == "")
+					{
+						if(areaName == "")
+						{
+							if(locArr[i] == metroName)
+							{
+								locFlag = true;	
+								console.log("세종시");
+								
+							}
+							
+						}
+						else
+						{
+							if(locArr[i] == areaName)
+							{
+								locFlag = true;	
+							}
+						}
+					}
+					else
+					{
+						if(locArr[i] == townName)
+						{
+							locFlag = true;
+						}
+					}
+					
+					
+				}
+				console.log("토픽"  + locFlag);
+				if(!locFlag)
+				{
+					var name = metroName + " " + areaName + " " + townName;
+					var div = $("#local-add-div");
+					var str = 
+					"<span id='local-span"+locCnt+"' onclick='fn_delLocal("+locCnt+")'>"
+					+"<a class='aLocal'>"+name+ "&nbsp&times</a>"
+					+"<input type='hidden' name='metroCode' value='"+metroCode+"'>"
+					+"<input type='hidden' name='metroName' value='"+metroName+"'>"
+					+"<input type='hidden' name='areaCode' value='"+areaCode+"'>"
+					+"<input type='hidden' name='areaName' value='"+areaName+"'>"
+					+"<input type='hidden' name='townCode' value='"+townCode+"'>"
+					+"<input type='hidden' name='townName' value='"+townName+"'></a></span>";
+						
+					div.append(str);
+					
+					if(townName == "")
+					{
+						if(areaName == "")
+						{
+							locArr.push(metroName);
+						}
+						else
+						{
+							locArr.push(areaName);
+							
+						}
+						
+					}
+					else
+					{
+						locArr.push(townName);
+					}
+					
+					locCnt++; 
+					
+				}
+				else
+				{
+					alert("같은 지역은 선택할 수 없습니다.");
+					locFlag = false;
+				}
+				
+			}
+		});
+	});
+	
+	function fn_delLocal(index)
+	{
+		var spanId = "#local-span" + index;
 		
+		$(spanId).remove();
+		locCnt--;
+		console.log(locArr);
+		locArr.splice(index,1);
 		
 	}
+	
+	var sel_files = [];
+	   
+	$(document).ready(function(){
+    	$('#upfile').on('change', handleImgFileSelect);
+	});
+   
+   	function fileUploadAction(){
+    	console.log('fileUploadAction');
+    	$('#upfile').trigger('click');
+  	}
+   	
+	function handleImgFileSelect(e){
+	      //이미지 정보들을 초기화
+	   sel_files = [];
+	      $('.image_p').empty();
+	      var files=e.target.files;
+	      var filesArr=Array.prototype.slice.call(files);
+	      
+	      var index = 0;
+	      filesArr.forEach(function(f){
+	         if(!f.type.match("image.*")){
+	            alert('확장자는 이미지 확장자만 가능합니다.');
+	            return;
+	         }
+	         sel_files.push(f);
+	         var reader = new FileReader();
+	         reader.onload=function(e){
+	            var html = "<img src='"+e.target.result+"' data-file='"+f.name+"' class='selProductFile' name='selProductFile' title='프로필이미지'>";
+	            $(".image_p").append(html);
+	            index++;
+	         }
+	         reader.readAsDataURL(f);
+	         
+	         
+	      })
+	}
+	
 	function validate(){
 		console.log($("#checkPwd").val()+" : <%=loginMember.getMemberPwd()%>");
 		if($("#checkPwd").val() != '<%=loginMember.getMemberPwd()%>')
@@ -123,6 +307,28 @@ java.util.*" %>
 <style>
 	input#address{display:"inline-block"}
 	a.aTopic{padding-right:15px;}
+	a.aLocal{padding-right:15px; font-size:9pt;}
+	.image_p{
+            border: 1px solid rgb(230,230,230);
+            width: 120px;
+            height: 120px;
+            border-radius: 100px;
+            margin-left: 180px;
+           
+    }
+	#upfile{
+          
+           
+            font-family: "netmarble Medium";
+    }
+    /*들어가는 이미지 style*/
+    .selProductFile{
+            width: 120px;
+            height: 120px;
+            border-radius: 100px;
+           /*  margin-left:2px;
+            margin-top:1px; */
+    }
 </style>
 <div class="manager-container">
 	
@@ -159,10 +365,14 @@ java.util.*" %>
 						<span class="glyphicon glyphicon-cog"></span> 동글 정보 수정
 					</h3>
 				</div>
-				<form action="<%=request.getContextPath() %>/manager/updateDongle?groupNo=<%=groupNo %>" method="post">
+				<form action="<%=request.getContextPath() %>/manager/updateDongle?groupNo=<%=groupNo %>" method="post" enctype="multipart/form-data">
 				<div class="modal-body" style="padding: 40px 50px;">
 					
 						<div class="form-group">
+							<input type="hidden" name="groupNo" value="<%=groupNo %>"/>
+							<div class="image_p"></div>
+							<label>이미지</label>
+	           				<input type="file" id="upfile" class="upfile" name="upfile" ><br>
 							<label for="donglename">동호회 이름</label> 
 								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
 							<label for="topic">토픽</label><br> 
@@ -181,8 +391,8 @@ java.util.*" %>
 							<br>
 							<label>지역</label><br> 
 							
-							<select	class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectMetro" id="selectMetro" onchange="fn_metroChange()" >
-								<option disabled selected>===대분류===</option>
+							<select	class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectMetro" id="selectMetro" onchange="fn_metroChange()" >
+								<option disabled selected>==대분류==</option>
 								<%
 								String[] metroArr = new String[18];
 								int metroCnt = 0;
@@ -190,9 +400,6 @@ java.util.*" %>
 								for(LocalCtg local : localCtg){ 
 									for(int i = 0; i < metroCnt; i++)
 									{
-										System.out.println(flag);
-										System.out.println(local.getMetroCode());
-										System.out.println(metroArr[i]);
 										if(metroArr[i].equals(local.getMetroCode()))
 										{
 											flag = true;
@@ -215,14 +422,21 @@ java.util.*" %>
 								%>
 								
 							</select>
-							<select class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectArea" id="selectArea" >
-								<option disabled selected>===중분류===</option>
+							<select class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectArea" id="selectArea" onchange="fn_areaChange()">
+								<option disabled selected>==중분류==</option>
 								
 							</select>
-								<%-- <input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
-								<button type="button" id="search-address" class="btn btn-info">검색</button><br> --%>
-
+							<select class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectTown" id="selectTown" >
+								<option disabled selected>==소분류==</option>
+								
+							</select>
+							<button type="button" class="btn btn-info" id="addLoc-btn" style="width:20%; height:34px;">지역 추가</button>
 							<br> 
+							<div id="local-add-div" style="height:19px">
+									
+							</div>
+							<br>
+							
 							<label>활동 시간대</label><br>
 							<div class="radio">
 								<label class="radio-inline">
@@ -251,7 +465,7 @@ java.util.*" %>
 					
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-default" data-dismiss="modal">완료</button>
+					<button type="submit" class="btn btn-default" >완료</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 
 				</div>
