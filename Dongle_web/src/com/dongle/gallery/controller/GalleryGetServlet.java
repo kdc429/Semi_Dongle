@@ -21,7 +21,7 @@ import com.dongle.member.model.vo.Member;
  */
 @WebServlet("/gallery/galleryGet")
 public class GalleryGetServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,6 +30,7 @@ public class GalleryGetServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,6 +52,7 @@ public class GalleryGetServlet extends HttpServlet {
 			return;
 		}		
 		
+
 
 		//test : gal_no만 distinct된 dao에 갔다오기
 		List<Integer> galNoList = new GalleryService().distictGalNoList(albumCode,groupNo); //7,6,5,4,3,2,1
@@ -85,12 +87,12 @@ public class GalleryGetServlet extends HttpServlet {
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

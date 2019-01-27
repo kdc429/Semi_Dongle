@@ -288,6 +288,7 @@ public class GalleryDao {
       PreparedStatement pstmt=null;
       int rs=0;
       String sql = prop.getProperty("insertGallery");
+      System.out.println(gp.getGalNo()+"???");
       try {
          for(int i=0;i<imageCount;i++) {
         	System.out.println("확인: "+gp);

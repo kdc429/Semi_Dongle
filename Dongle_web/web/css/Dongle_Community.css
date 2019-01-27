@@ -1,36 +1,36 @@
 body {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	overflow: auto;
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   overflow: auto;
 }
 
 /* 컨테이너 스타일 */
 .back {
-	width: 1024px;
-	height: 100vh;
-	font-family: '나눔스퀘어라운드 Regular';
+   width: 1024px;
+   height: 100vh;
+   font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 우측사이드 메뉴 스타일 */
 .btn {
-	margin-left: 0;
-	margin-bottom: 1px;
-	border: 0px;
-	background-color: rgb(253, 253, 253);
-	width: 100px;
-	color: rgb(41, 41, 41);
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-	font-family: '나눔스퀘어라운드 Regular';
+   margin-left: 0;
+   margin-bottom: 1px;
+   border: 0px;
+   background-color: rgb(253, 253, 253);
+   width: 100px;
+   color: rgb(41, 41, 41);
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
+   border-top-left-radius: 0px;
+   border-bottom-left-radius: 0px;
+   font-family: '나눔스퀘어라운드 Regular';
 }
 button.btn button.btn-primary{
     background-color: rgb(253, 253, 253);
@@ -44,64 +44,64 @@ button.btn button.btn-primary{
 
 /* 게시판 스타일 */
 .main {
-	/* display: flex; */
-	/* flex-direction: column; */
-	/*font-family: '나눔스퀘어라운드 Regular';*/
-	justify-content: center;
-	align-items: center;
-	margin-left: 170px;
-	margin-top: 62.8px;
-	
+   /* display: flex; */
+   /* flex-direction: column; */
+   /*font-family: '나눔스퀘어라운드 Regular';*/
+   justify-content: center;
+   align-items: center;
+   margin-left: 170px;
+   margin-top: 62.8px;
+   
 }
 .logoback {
-	width: 1024px;
-	height: auto;
+   width: 1024px;
+   height: auto;
 }
 
 .logo {
-	width: 1024px;
-	height: auto;
-	color : #1F51B7;
-	font-family: '여기어때잘난서체';
-	
-	
+   width: 1024px;
+   height: auto;
+   color : #1F51B7;
+   font-family: '여기어때잘난서체';
+   
+   
 }
 
 /* 행 스타일 적용
         flex-direction: row; -> 가로로 정렬
          */
 .center {
-	position: absolute;
+   position: absolute;
 
-	/* display: flex;
-	flex-direction: row; */
+   /* display: flex;
+   flex-direction: row; */
 
-	font-family: '나눔스퀘어라운드 Regular';
+   font-family: '나눔스퀘어라운드 Regular';
 }
 
 .sideback {
-	/* position: relative; */
-	/*display: flex;*/
-	flex-direction: row;
-	font-family: '나눔스퀘어라운드 Regular';
+   /* position: relative; */
+   /*display: flex;*/
+   flex-direction: row;
+   font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 왼쪽 사이드 div
          */
 .sidel {
-	width: 170px;
-	position: fixed;
-	margin-top: 62px;
-	font-family: '나눔스퀘어라운드 Regular';
+   width: 170px;
+   position: fixed;
+   margin-top: 62px;
+   font-family: '나눔스퀘어라운드 Regular';
 }
 /* 오른쪽 사이드 div */
 .sider {
-	width: 170px;
-	height:100vh;
-	position: fixed;
-	margin-top: 62px;
-	margin-left: 854px;
-	font-family: '나눔스퀘어라운드 Regular';
+   width: 170px;
+   height:100vh;
+   position: fixed;
+   margin-top: 62px;
+   margin-left: 854px;
+   font-family: '나눔스퀘어라운드 Regular';
 }
 
 /* 로고 div
@@ -109,84 +109,84 @@ button.btn button.btn-primary{
          */
 .logo {
 
-	position: fixed;
-	z-index: 2;
-	font-family: '여기어때잘난서체';
+   position: fixed;
+   z-index: 2;
+   font-family: '여기어때잘난서체';
 
 }
 div.logo h2 a{text-decoration: none;}
 /* 왼쪽 사이드 컨텐트 */
 .sideitem1 {
-	font-family: '나눔스퀘어라운드 Regular';
+   font-family: '나눔스퀘어라운드 Regular';
 }
 .sideitem2 {
-/* 	margin-left: 15px;
-	margin-right: 15px; */
-	font-family: '나눔스퀘어라운드 Regular';
+/*    margin-left: 15px;
+   margin-right: 15px; */
+   font-family: '나눔스퀘어라운드 Regular';
 
 }
 .profile_img{
-	border-radius: 100px;
+   border-radius: 100px;
 }
 .dongle_name{
-	/* font-weight: bold; */
-	color : darkslategray;
-	font-size:21px;
-	text-align: center;
-	font-family: '나눔스퀘어라운드 ExtraBold';
+   /* font-weight: bold; */
+   color : darkslategray;
+   font-size:21px;
+   text-align: center;
+   font-family: '나눔스퀘어라운드 ExtraBold';
 }
 .profile_btn{
-	height: 15px;
-	width: 15px;
-	margin-top:20px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	cursor: pointer;
+   height: 15px;
+   width: 15px;
+   margin-top:20px;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   cursor: pointer;
 }
 /* 동글 회원 프로필 단추 */
 /* span{
-	height: 10px;
-	width: 10px;
-	display: block;
-	position: relative;
+   height: 10px;
+   width: 10px;
+   display: block;
+   position: relative;
 } */
 .demoSpan1{
-	height: 10px;
-	width: 10px;
-	display: block;
-	position: relative;	
+   height: 10px;
+   width: 10px;
+   display: block;
+   position: relative;   
 }
 .demoSpan1:before{
-	content: '';
-	height: 0;
-	width: 0;
-	display: block;
-	border:7px transparent solid; 
-	border-bottom-width: 0;
-	border-top-color: #333;
-	position:absolute;
-	top:0px;
-	left:0px;
+   content: '';
+   height: 0;
+   width: 0;
+   display: block;
+   border:7px transparent solid; 
+   border-bottom-width: 0;
+   border-top-color: #333;
+   position:absolute;
+   top:0px;
+   left:0px;
 }
 #user_img{
- 	width: 60px;
- 	height: 60px;
- 	border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
 }
 .gm_info{
-	width: 50px;
+   width: 50px;
 }
 .user_info{
- 	display: none;
- 	text-align: center;
- 	font-family: '나눔스퀘어라운드 Regular';
- 	font-size : 11px;
- 	position: relative;
- 	/*padding: 1em;*/
+    display: none;
+    text-align: center;
+    font-family: '나눔스퀘어라운드 Regular';
+    font-size : 11px;
+    position: relative;
+    /*padding: 1em;*/
  }
 .user_info_tb{
-	width: 138px;
+   width: 138px;
  }
 #dongle_info
 {
@@ -199,16 +199,16 @@ div.logo h2 a{text-decoration: none;}
  }
  .dongle_info
  {
- 	display : flex;
- 	justify-content: center;
- 	align-items: center;
+    display : flex;
+    justify-content: center;
+    align-items: center;
  }
  #dongle_info_view
  {
-	display:inline;
-	/* float: left; */
+   display:inline;
+   /* float: left; */
 
  }
 .tbl{
- 	left: 45%;
+    left: 45%;
 }

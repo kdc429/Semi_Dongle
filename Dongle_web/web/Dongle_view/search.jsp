@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*,com.dongle.main.model.vo.*" %>
 <!DOCTYPE html>
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
-	List<LocationCategory>metroCodeList = (List)request.getAttribute("metroCodeList");
-	
+	List<TopicCategory> topicList=(List)request.getAttribute("topicList");
 %>
 <html>
 <head>
@@ -23,7 +21,6 @@
 </head>
 <style>
     body {
-	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -80,10 +77,10 @@
 	}
 	.search-container
 	{
-		margin :10px;
+		
 		/* border: 4px solid #bcbcbc; */
 		width: 1024px;
-		height: 100vh;
+		height: auto;
 		font-family: '나눔스퀘어라운드 Regular';
 
 	}
@@ -96,7 +93,7 @@
     .location-container
     {
     	padding : 10px;
-    	height : 250px;
+    	height : auto;
     	font-family: '나눔스퀘어라운드 Regular';
     }
      .location-container>h3{
@@ -117,17 +114,20 @@
     	display : inline-block;
     }
     .search_dongle_main_img{
-    	border: 1px solid blue;
-    	width: 150px;
+    	
+    	width: auto;
     	height: 150px;
     	/* margin-left: 10%; */
-    	display: inline-block;
+    	display: flex;
+    	justify-content:center;
+    	align-items:center;
     	margin-left: 50px;
     	margin-right: 20px;
     	float: left;
+    	text-align: center;
     }
     .search_dongle_info{
-    	border: 1px solid blue;
+    	text-align:center;
     	width: 250px;
     	height: 150px;
     	display: inline-block;
@@ -146,129 +146,511 @@
 	fieldset {
 		font-family: '나눔스퀘어라운드 Regular';
 	}
-}
-    
+	#topic-select>ul>li{
+		display:inline;
+	}
+	#topic-select>ul{
+		list-style:none;
+		padding:10px;
+	}
+	.topic-container>h3{
+		font-family: '나눔스퀘어라운드 Regular';
+		font-weight: bold;
+	}
+	.topic-container{
+		padding : 10px;
+	}
+	#dongle-container-back>ul{
+		list-style:none;
+		padding:10px;
+		height:auto;
+	}
+	
+	#dongle-container{
+		display:inline-block;
+		
+	}
+	.group-img{
+		max-width:150px;
+		max-height:150px;
+		width:auto;
+		height:auto;
+		
+	}
+	#dongle-container-back{
+		display:inline-block;
+		height:auto;
+		width:1000px;
+	}
+	#page-bar-back{
+		text-align:center;
+		vertical-align: bottom;
+	}
+	.page-bar{
+		margin:5px;
+	}
+	.dongle-list{
+		height:150px;
+		width:450px;
+		display:inline;
+	}
+
 </style>
+<script>
+
+	var checkLoc; //체크한 로케이션 코드
+	var locArray=[]; //체크한 로케이션 코드 배열
+	var checkTime;//체크한 평일 주말 value
+	var checkMinAge;//체크한 최소 연령
+	var checkMaxAge;//체크한 최대 연령
+	var checkTopic;// 체크한 토픽 코드
+	var topicArray=[];//체크한 토픽코드 배열
+	var sortCheck;
+	
+	$(document).ready(function(){
+		//metro check 서울,인천,대전......
+		$('.tab-link').on('click',function(){
+			var locationCode=$(this).children('input').val();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/main/mainLocationSearch",
+				type:"post",
+				data:{"locationCode":locationCode},
+				datatype:"html",
+				success:function(data){
+					console.log(data);
+					locArray=[];
+					$('#do>li').remove();
+					$('#tab-1>ul>label').remove();
+					$('#tab-1>ul').html(data);
+				}
+			})
+		})
+	});
+	
+	$(document).ready(function(){
+		//metro check 강원,경기,......
+		$('.tab-link2').on('click',function(){
+			var locationCode=$(this).children('input').val();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/main/mainLocationSearch2",
+				type:"post",
+				data:{"locationCode":locationCode},
+				datatype:"html",
+				success:function(data){
+					console.log(data);
+					locArray=[];
+					var html="";
+					$('#tab-1>ul>label').remove();
+					$('#do>li').remove();
+					
+					for(var key in data){
+						var areaNameCode=data[key];
+						var areaCode=areaNameCode["areaCode"];
+						var areaName=areaNameCode["locAreaName"];
+						console.log(areaCode);
+						console.log(areaName);
+						html+="<li class='tab-link-area'><input class='area-code' type='hidden' value='"+areaCode+"'>"+areaName+"</li>";
+					}
+					
+					$('#do').html(html);
+				}
+			})
+		})
+		
+	});
+	
+	$(document).on('click','.tab-link-area',function(){
+		//click area 도 선택 이후 시(성남시,안산시.......)
+		console.log("dd");
+		var locationCode=$(this).children('input').val();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/main/mainLocationSearch3",
+			type:"post",
+			data:{"locationCode":locationCode},
+			datatype:"html",
+			success:function(data){
+				console.log(data);
+				$('#tab-1>ul').html(data);
+			}
+		})
+	})
+	
+	$(document).on('click','#tab-1>ul>label>input',function(){
+		
+		console.log(locArray);
+		console.log(topicArray);
+		console.log(checkMinAge)
+		console.log(checkMaxAge);
+		console.log(checkTime);
+		if($(this).is(":checked")){
+			checkLoc=($(this).val());
+			locArray.push(checkLoc);
+			console.log(locArray);
+		}else{
+			checkLoc=($(this).val());
+			
+			for(var i=0;i<locArray.length;i++){
+				if(locArray[i]==checkLoc){
+					
+					var idx=locArray.indexOf(locArray[i]);
+					if(idx>-1){
+						locArray.splice(idx,1);
+					}
+					
+				}
+			}
+			console.log(locArray);
+		}
+		jQuery.ajaxSettings.traditional = true;
+		
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+		
+		
+	})
+	
+	$(document).on('click','#time',function(){
+		checkTime=$(this).val();
+		
+		console.log(locArray);
+		console.log(topicArray);
+		console.log(checkMinAge)
+		console.log(checkMaxAge);
+		console.log(checkTime);
+		jQuery.ajaxSettings.traditional = true;
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+	});
+	
+	$(document).on('change','#min-age',function(){
+		checkMinAge=$('#min-age option:selected').val();
+		
+		console.log(locArray);
+		console.log(topicArray);
+		console.log(checkMinAge)
+		console.log(checkMaxAge);
+		console.log(checkTime);
+		jQuery.ajaxSettings.traditional = true;
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+	});
+	
+	$(document).on('change','#max-age',function(){
+		checkMaxAge=$('#max-age option:selected').val();
+		
+		console.log(locArray);
+		console.log(topicArray);
+		console.log(checkMinAge)
+		console.log(checkMaxAge);
+		console.log(checkTime);
+		jQuery.ajaxSettings.traditional = true;
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+		
+	});
+	
+	$(document).on('click','.topic',function(){
+		
+		console.log(locArray);
+		console.log(topicArray);
+		console.log(checkMinAge)
+		console.log(checkMaxAge);
+		console.log(checkTime);
+		if($(this).is(":checked")){
+			checkTopic=($(this).val());
+			topicArray.push(checkTopic);
+			
+		}else{
+			checkTopic=($(this).val());
+			
+			for(var i=0;i<topicArray.length;i++){
+				if(topicArray[i]==checkTopic){
+					
+					var idx=topicArray.indexOf(topicArray[i]);
+					if(idx>-1){
+						topicArray.splice(idx,1);
+					}
+					
+				}
+			}
+			console.log(topicArray);
+		}
+		jQuery.ajaxSettings.traditional = true;
+
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+		
+	})
+	
+	$(document).on('keyup','#searchKeyword',function(){
+		
+		var keyword=$('#searchKeyword').val();
+		console.log(keyword);
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			data:{
+				"keyword":keyword,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+			},
+			type:"post",
+			datatype:"html",
+			success:function(data){
+				
+				$('#dongle-container').html(data);
+			}
+		})
+		
+	})
+	
+	$(document).on('change','#sortBar',function(){
+		
+		sortCheck=$('#sortBar option:selected').val();
+		console.log(sortCheck);
+		
+		jQuery.ajaxSettings.traditional = true;
+
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+	
+	})
+	
+	$(document).on('click','.pageBar',function(){
+		var cPage=$(this).children('input').val();
+		
+		jQuery.ajaxSettings.traditional = true;
+
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+		
+	})
+	
+	
+
+	
+</script>
 <body>
-<div class="search-container" style="border:1px solid red;">
+<hr>
+<div class="search-container" >
 	<div class='search-menu' style="border: 1px dotted darkgray;">
 		<div class="condition-container" style="border : red">
 			<form style="widht:400px" id='search-condition'>	
 				<fieldset>
-					<span style="font-size: 20px;font-weight: bold;">시간대 :</span><span><label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id="time" name="time"/>평일</label>
-					<label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id="time" name="time"/>주말</label></span> &nbsp;&nbsp; &nbsp;&nbsp;
-					<span style="font-size: 20px;font-weight: bold;">성별 : </span><span><label style="font-size: 17px; font-weight: lighter;"><input type="radio" id="gender" name="gender"/>무관</label>
-				   	<label style="font-size: 17px; font-weight: lighter;"><input type="radio" id="gender" name="gender"/>남</label>
-					<label style="font-size: 17px; font-weight: lighter;"><input type="radio" id="gender" name="gender" />여</label></span> &nbsp;&nbsp; &nbsp;&nbsp;
+					<span style="font-size: 20px;font-weight: bold;">시간대 :</span>
+					<span>
+						<label style="font-size: 17px; font-weight: lighter;">
+							<input type="checkbox" id="time" name="time" value="평일"/>평일
+						</label>
+						<label style="font-size: 17px; font-weight: lighter;">
+							<input type="checkbox" id="time" name="time" value="주말"/>주말</label>
+					</span> &nbsp;&nbsp; &nbsp;&nbsp;
 					<span style="font-size: 20px;font-weight: bold;">연령대 : </span><!-- <input type="range" id="age-group" name="age-group" min="0" max="100"/></label> -->
-					<label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id='ck-age'>10대</label><label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id='ck-age'>20대</label>
-					<label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id='ck-age'>30대</label><label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id='ck-age'>40대</label>
-					<label style="font-size: 17px; font-weight: lighter;"><input type="checkbox" id='ck-age'>50대이상</label>
+					<label style="font-size: 17px; font-weight: lighter;">
+						<select id="min-age">
+							<option value="0">최소 연령</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+							<option value="60">60</option>
+							<option value="70">70</option>
+							<option value="80">80</option>
+							<option value="90">90</option>
+						</select>
+						<select id="max-age">
+							<option value="0">최대연령</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+							<option value="60">60</option>
+							<option value="70">70</option>
+							<option value="80">80</option>
+							<option value="90">90</option>
+						</select>
+					</label>
+					
 				</fieldset>
 			</form>
+		</div>
+		<div class="topic-container">
+			<h3>분야별 검색 설정</h3>
+			<div id='topic-select'>
+				<ul>
+				<%for(TopicCategory tc:topicList) {%>
+					<li><label><input class="topic" type="checkbox" value="<%=tc.getTopicCtgCode()%>"><%=tc.getTopicCtgName()%></label></li>
+				<%} %>
+				</ul>
+			</div>
+			
 		</div>
 		<div class="location-container">
 			<h3>지역검색설정</h3>
 				<ul class="tabs">
-					<li class="tab-link current" data-tab="tab-1">서울</li>
-				    <li class="tab-link" data-tab="tab-2">경기</li>
-				    <li class="tab-link" data-tab="tab-3">인천</li>
-				    <li class="tab-link" data-tab="tab-4">강원</li>
-				    <li class="tab-link" data-tab="tab-5">대전</li>
-				    <li class="tab-link" data-tab="tab-6">세종</li>
-				    <li class="tab-link" data-tab="tab-7">충북</li>
-				    <li class="tab-link" data-tab="tab-8">충남</li>
-				    <li class="tab-link" data-tab="tab-9">부산</li>
-				    <li class="tab-link" data-tab="tab-10">울산</li>
-				    <li class="tab-link" data-tab="tab-11">경남</li>
-				    <li class="tab-link" data-tab="tab-12">경북</li>
-				    <li class="tab-link" data-tab="tab-13">대구</li>
-				    <li class="tab-link" data-tab="tab-14">광주</li>
-				    <li class="tab-link" data-tab="tab-15">전남</li>
-				    <li class="tab-link" data-tab="tab-16">전북</li>
-				    <li class="tab-link" data-tab="tab-17">제주</li>
-				    <li class="tab-link" data-tab="tab-18">전국</li> 
+					
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L1">서울특별시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L2">인천광역시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L3">대전광역시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L4">대구광역시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L5">광주광역시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L6">울산광역시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L7">부산광역시</li>
+					<li class="tab-link"><input class="loc-code" type="hidden" value="L8">세종특별시</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L9">강원도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L10">경기도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L11">충청남도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L12">충청북도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L13">전라남도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L14">전라북도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L15">경상남도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L16">경상북도</li>
+					<li class="tab-link2"><input class="loc-code" type="hidden" value="L17">제주도</li>
+
 				</ul>
-				<div id="tab-1" class="tab-content current">
-					<label><input type="checkbox" id="time1"/>서울전체</label>
-					<label><input type="checkbox" id="time2"/>강남구</label>
-					<label><input type="checkbox" id="time"/>강동구</label>
-					<label><input type="checkbox" id="time"/>강북구</label>
-					<label><input type="checkbox" id="time"/>강서구</label>
-					<label><input type="checkbox" id="time"/>관악구</label>
-					<label><input type="checkbox" id="time"/>광진구</label>
-					<label><input type="checkbox" id="time"/>구로구</label>
-					<label><input type="checkbox" id="time" name="time"/>금천구</label>
-					<label><input type="checkbox" id="time" name="time"/>노원구</label>
-					<label><input type="checkbox" id="time" name="time"/>도봉구</label>
-					<label><input type="checkbox" id="time" name="time"/>동대문구</label>
-					<label><input type="checkbox" id="time" name="time"/>동작구</label>
-					<label><input type="checkbox" id="time" name="time"/>마포구</label>
-					<label><input type="checkbox" id="time" name="time"/>서대문구</label>
-					<label><input type="checkbox" id="time" name="time"/>서초구</label>
-					<label><input type="checkbox" id="time" name="time"/>성동구</label>
-					<label><input type="checkbox" id="time" name="time"/>성북구</label>
-					<label><input type="checkbox" id="time" name="time"/>송파구</label>
-					<label><input type="checkbox" id="time" name="time"/>양천구</label>
-					<label><input type="checkbox" id="time" name="time"/>영등포구</label>
-					<label><input type="checkbox" id="time" name="time"/>용산구</label>
-					<label><input type="checkbox" id="time" name="time"/>은평구</label>
-					<label><input type="checkbox" id="time" name="time"/>종로구</label>
-					<label><input type="checkbox" id="time" name="time"/>중구</label>
-					<label><input type="checkbox" id="time" name="time"/>중랑구</label>
-				
-					<div id="tab-2" class="tab-content">
-					---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-						
-					</div>
-					<div id="tab-3" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-4" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-5" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-6" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-7" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-8" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-9" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-10" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-11" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-12" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-13" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-14" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-15" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-16" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-17" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
-					<div id="tab-18" class="tab-content">
-						---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
-					</div>
+				<hr>
+				<ul class="tabs" id="do">
+					
+				</ul>
+				<div id="tab-1">
+					<ul>
+					
+					</ul>
 				</div>
 		</div>
 	</div>
@@ -278,45 +660,29 @@
 			<form action="<%=request.getContextPath() %>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="groupName"/>
 				<input type="text" name="searchKeyword" size="100" placeholder="검색할 동글을 입력하세요" id='searchKeyword'/>
-				<button type="submit">검색</button>
 										
 				<select id="sortBar" style="height:25px">				
-					<option value="userId">게시글수 </option>
-					<option value="userName">조회수</option>
+					<option value="date">창설 날짜</option>
 					<option value="gender">회원수</option>				
 				</select>	
 			</form>
 		</div>				
 	</div>
-	<%for(int i=0; i<groupList.size();i++){%>
-	<div style="vertical-align: middle;">
-		<div class='search_dongle_main_img'><img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" style='width: 150px; height: 150px;'></div>
-		<div class='search_dongle_info'><p><%=groupList.get(i).getGroupIntro() %></p></div>
+	<div id="dongle-container">
+		<div id="dongle-container-back">
+			<ul>
+		<%for(int i=0; i<groupList.size();i++){%>
+			<li class="dongle-list">
+				<div class='search_dongle_main_img'>
+					<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" style='width: 150px; height: 150px;'>
+				</div>
+				<div class='search_dongle_info'><p><%=groupList.get(i).getGroupIntro() %></p></div>
+			</li>
+		<%} %>
+			</ul>
+		</div>
 	</div>
-	
-		
-	<%} %>
 </div>	
 </body>
 
-
-
-
-<script>
-$(document).ready(function(){
-	   
-	  $('ul.tabs li').click(function(){
-	    var tab_id = $(this).attr('data-tab');
-	 
-	    $('ul.tabs li').removeClass('current');
-	    $('.tab-content').removeClass('current');
-	 
-	    $(this).addClass('current');
-	    $("#"+tab_id).addClass('current');
-	  });
-	 
-});
-
-
-</script>
 </html>

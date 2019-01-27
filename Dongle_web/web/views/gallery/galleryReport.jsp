@@ -177,6 +177,7 @@
    </div>
    <div>
       <button class="report-close">신고</button>
+
    </div>
 </body>
 </html>

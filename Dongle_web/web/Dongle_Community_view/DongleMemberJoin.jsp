@@ -38,7 +38,7 @@
             margin-left: 155px;
             margin-top: 50px;
         }
-        #dongle_nickname{
+        #nickname{
             width: 180px;
             height: 30px;
         }
@@ -81,14 +81,14 @@
 			
 			if($('input[name=idValid]')[0].value=='0')
 			{
-				alert('아이디 중복체크를 해주세요!');
+				alert('닉네임 중복체크를 해주세요!');
 				return false;	
 			}
-			var userId=$("#dongle_nickname");
-			if(userId.val().length<4)
+			var nickname=$("#nickname");
+			if(nickname.val().length<2)
 			{
-				alert("최소 4자리 이상 입력하세요!");
-				userId.focus();
+				alert("최소 2자리 이상 입력하세요!");
+				nickname.focus();
 				return false;
 			}
 			return true;			
@@ -97,10 +97,10 @@
 		
 		//아이디 중복검사하기 : 팝업창을 띄워서 해보자~! 
 		function fn_checkduplicate(){
-			var userId=$("#dongle_nickname").val().trim();
-			if(!userId || userId.length<4)
+			var nickname=$("#nickname").val().trim();
+			if(!nickname || nickname.length<2)
 			{
-				alert("아이디를 4글자 이상 입력하세요~!");
+				alert("닉네임을 2글자 이상 입력하세요~!");
 				return;	
 			}
 			//팝업창에 대한 설정해주기!@
@@ -111,7 +111,7 @@
 			var popup=open("",title,shape);
 			
 			//현재페이지에 있는값을 새창으로 옮기는 작업~!
-			checkdongleDuplicateFrm.dongle_nickname.value=userId;
+			checkdongleDuplicateFrm.nickname.value=nickname;
 			//popup창에서 이 폼을 작동시키게 하는 구문!
 			checkdongleDuplicateFrm.target=title;
 			checkdongleDuplicateFrm.action=url;
@@ -130,13 +130,14 @@
 <div id="dongle_title">
 	<h4><b>동글 가입하기</b></h4>
 </div>
-	<form name='donglememberjoin' action="<%=request.getContextPath()%>/donglememberjoin" method="post" enctype="multipart/form-data">
+	<form name='dongleMemberUpdate' action="<%=request.getContextPath()%>/donglememberjoin" method="post" enctype="multipart/form-data">
+
 	        <div id="dongle_join">
 	            <div class="image_p"></div>
 	            <input type="file" id="upfile" class="upfile" name="upfile" ><br/><br/>
 	            <div class="form-group">
-                	<input type="text" class="form-control" name="dongle_nickname" id="dongle_nickname" placeholder="닉네임" style="font-family:'나눔스퀘어라운드 Regular'; display:inline; margin-left:100px;" required>&nbsp;&nbsp;&nbsp;&nbsp;
-                	<button style="width:70px; height:30px;" class="btn btn-default" onclick="fn_checkduplicate();">중복검사</button><br/><br/>
+                	<input type="text" class="form-control" name="nickname" id="nickname" placeholder="닉네임" style="font-family:'나눔스퀘어라운드 Regular'; display:inline; margin-left:100px;" required>&nbsp;&nbsp;&nbsp;&nbsp;
+                	<button style="width:70px; height:30px;" class="btn btn-default" type="button" onclick="fn_checkduplicate();">중복검사</button><br/><br/>
                 	<button style="width:268px; height:30px; margin-left:100px;"class="btn btn-primary" type="submit" onclick="return password_validate();">동글 가입</button>
            		</div>
            		<div class="form-group">
@@ -148,8 +149,13 @@
 	                    <tr>
 	                        <th style="width:100px;">닉네임 </th>
 	                        <td>
+<<<<<<< HEAD
+	                            <input type="text" name="nickname" id="nickname" required/>
+	                            <input type="button" value="중복검사" onclick="fn_checkduplicate();"/>
+=======
 	                            <input type="text" name="dongle_nickname" id="dongle_nickname" required/>
 	                            <button class="btn btn-default" onclick="fn_checkduplicate();">중복검사</button>
+>>>>>>> refs/remotes/origin/SJH2
 	                            <input type='hidden' name="idValid" value="0"/> 
 	                            <input type='hidden' name="groupNo" value="<%=groupNo%>"/> 
 	                            <input type='hidden' name="memberNo" value="<%=loginMember.getMemberNo()%>"/> 
@@ -167,7 +173,7 @@
 	            </div>
 	</form>
 	<form action="" name="checkdongleDuplicateFrm">
-			<input type="hidden" name="dongle_nickname"/>
+			<input type="hidden" name="nickname"/>
 		</form>	
 	
 	

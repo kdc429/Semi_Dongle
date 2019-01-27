@@ -13,23 +13,28 @@
 <meta charset="UTF-8">
 <title>아이디 중복확인</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div id="checkid-container">
 		<%if(isAble) { %>
-			<h1 style="color:black;">[<%=userId %>]는 사용가능합니다.</h1>
+			<h2 style="color: black; font-family: '나눔스퀘어라운드 Regular';">[<%=userId %>]<br>는 사용가능합니다.</h2>
 			<br><br>
-			<button type="button" onclick="setUserId('<%=userId%>');">닫기</button>
+			<button type="button" class="btn" onclick="setUserId('<%=userId%>');" style="border-left: 10px;">닫기</button>
 		<%}
 		  else {
 		%>
-			<h1 style="color:red;">[<%=userId %>]는 사용할 수 없습니다.</h1>
+			<h2 style="color: black; font-family: '나눔스퀘어라운드 Regular';">[<%=userId %>]는<br> 사용할 수 없습니다.</h2>
 			<br><br>
 			<form action="<%= request.getContextPath()%>/checkIdDuplicate"
 				name="checkDuplicateFrm" method="post">
-				<input type="text" name="userId" id="userId" 
+				<input type="text" name="userId" id="userId"
+				style="border: 1px solid #ccc; border-radius: 4px; height: 34px; margin-left: 5px;" 
 				placeholder="4글자이상 입력하세요"/>
-				<button type="button" onclick="fn_checkIdDuplicate();">
+				<button type="button" onclick="fn_checkIdDuplicate();" class="btn">
 				중복검사</button>		
 			</form>
 		<%} %>
@@ -49,12 +54,13 @@
 		function setUserId(userId)
 		{
 			var frm=opener.document.memberEnrollFrm;//부모창을 호출
+			console.log(frm);
 			console.log(frm.isValid);
 			frm.userId.value=userId;
 			frm.idValid.value='1';
 			frm.password.focus();
 			
-			self.close();//현재 열려있는 창을 닫는 것			
+			self.close();//현재 열려있는 창을 닫는 것		
 		}
 		
 		

@@ -109,7 +109,7 @@
 				리스트 관리</a></li>
 		<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글
 				리스트 관리</a></li>
-		<li><a href="#">메인 관리</a></li>
+		<li><a href="<%=request.getContextPath()%>/admin/editpickForm">메인 관리</a></li>
 		<li class="active"><a href="#">블랙 리스트 관리</a></li>
 	</ul>
 	<h2 style="margin-left: 30px;">블랙 리스트 관리</h2>

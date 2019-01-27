@@ -32,7 +32,6 @@ $(function(){
 		}
 		for(var i=0;i< <%=list.size()%>; i++)
 		{
-			console.log('Message'+'<%=list.get(0).getAlbumName()%>'+'<%=list.get(1).getAlbumName()%>');
 			if($('#albumNameP').val()=='<%=list.get(count).getAlbumName()%>')
 			{
 				alert('이미 존재하는 앨범입니다. 다시 입력해주세요.');

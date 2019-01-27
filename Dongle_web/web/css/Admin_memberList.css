@@ -19,6 +19,7 @@ div#search-email {
 }
 
 #tbl-member {
+	width:1000px;
 	display: block;
 	border-collapse: collapse;
 	border: 0px solid black;
@@ -40,6 +41,8 @@ div#search-email {
 	border: 1px solid white;	
 	border-bottom :1px solid #dddddd;
 	border-top: 0px;
+	border-left : 0px;
+	border-right : 0px;
 	text-align: left;
 	padding: 8px;
 	border-collapse: collapse;
@@ -49,8 +52,9 @@ div#search-email {
 
 #tbl-member tbody {
 	display: block;
-	height: 500px;
-	overflow: auto;
+	height: 450px;
+	overflow: scroll ;
+	overflow-x: hidden;
 }
 
 #tbl-member th:nth-of-type(1), #tbl-member td:nth-of-type(1) {
@@ -82,14 +86,17 @@ div#search-email {
 }
 
 #tbl-member th:nth-of-type(8), #tbl-member td:nth-of-type(8) {
-	width: 100px
+	width: 90px
 }
 
 #tbl-member th:nth-of-type(9), #tbl-member td:nth-of-type(9) {
 	width: 60px
 }
 
-#tbl-member th:nth-of-type(10), #tbl-member td:nth-of-type(10) {
+#tbl-member th:nth-of-type(10){
+	width: 80px
+}
+#tbl-member td:nth-of-type(10) {
 	width: 60px
 }
 

@@ -16,8 +16,7 @@
                     		<span class="comment-info">
                        			<span class="comment-writer"><%=commentGroupMember.getGroupMemberNickname() %></span>
                        			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
-                       			<button class="report-button">신고</button>
-                       			
+      			
                    			</span>
                    			<span class="comment-content-back">
                        			<span class="comment-content"><%=fcl2.getFeCommentContent() %></span>

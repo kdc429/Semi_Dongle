@@ -52,8 +52,7 @@ font-family: '나눔스퀘어라운드 Regular';
                		<button id="btn_find" class="btn btn-primary" style="font-family: 'netmarble Medium';" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/idPwdFind.jsp'">아이디/비밀번호 찾기</button><br>
               </div>            
             </div>
-            
-
+           
         </div>
      </div>
   

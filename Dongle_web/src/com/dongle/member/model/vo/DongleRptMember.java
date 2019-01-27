@@ -2,13 +2,13 @@ package com.dongle.member.model.vo;
 
 public class DongleRptMember {
 	private int memberNo; //MEMBER_NO
-	private int groupNo;
+	private int groupNo; //GROUP_NO
 	private String memberId; //MEMBER_ID
 	private String memberNickname; //GROUP_MEMBER_NICKNAME
 	private String rptCode; //REPORT_CODE
 	private String rptReason; //REPORT_REASON
 	private int rptCount; //REPORT_DONGLE_COUNT
-	private String isBlack; //BLACKLIST_YN
+	private String isBlack; //GROUP_BLACKLIST_YN
 	
 	public DongleRptMember() {}
 
@@ -36,11 +36,9 @@ public class DongleRptMember {
 	public int getGroupNo() {
 		return groupNo;
 	}
-
 	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;
 	}
-
 	public String getMemberId() {
 		return memberId;
 	}
@@ -95,8 +93,5 @@ public class DongleRptMember {
 				+ ", memberNickname=" + memberNickname + ", rptCode=" + rptCode + ", rptReason=" + rptReason
 				+ ", rptCount=" + rptCount + ", isBlack=" + isBlack + "]";
 	}
-	
-	
-	
-	
+
 }

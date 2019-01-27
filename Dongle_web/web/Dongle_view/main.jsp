@@ -43,27 +43,23 @@
       });
    </Script>
 <section>
-
-   <div class="bar">
-      <%if(loginMember.getMemberId().equals("admin")) {%>
-      <button class="img-icon" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'">
-            <span class="sub-icon">관리자 메뉴</span>
-            <img class="create-img" src="<%=request.getContextPath()%>/images/button-images/editSetting2.png">      
-      </button>
-      <%} %>
-      <!-- 동글 개설하기 버튼! -->
-      <div class="cre-icon-back">
-         <button class="img-icon">
-            <span class="sub-icon" style="margin-bottom: 2px;">동글개설하기</span>
-            <img class="create-img" style="width: 30px; height: 28px;" src="<%=request.getContextPath()%>/images/button-images/addDongle.png">      
-         </button>
-      </div>
-   </div>
-   <h2 class="item-logo">MY DONGLE</h2>
-   <!-- 가입한 동글 캐러셀 -->
-   <div class="carousel-back">
-      <!-- 이전 버튼 -->
-        <button class="left"><</button>
+	<div class="bar">
+		<%if(loginMember.getMemberId().equals("admin")) {%>
+		<button class="img-icon" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'">
+				<span class="sub-icon">관리자 메뉴</span>
+				<img class="create-img" src="<%=request.getContextPath()%>/images/button-images/editSetting2.png">		
+		</button>
+		<%} %>
+		<!-- 동글 개설하기 버튼! -->
+		<button class="search-btn" style="color: black; font-family: '여기어때잘난서체';">동글 개설</button>
+	</div>
+	<h2 class="item-logo">MY DONGLE</h2>
+	<!-- 가입한 동글 캐러셀 -->
+	<div class="carousel-back">
+		<!-- 이전 버튼 -->
+        <button class="left">
+        	<img src='<%=request.getContextPath()%>/images/button-images/left-btn.png' style='width: 30px;'>
+        </button>
         <!--캐러셀 아이템   -->
         <div class="carousel-box">
                 <ol class="item">
@@ -97,10 +93,9 @@
                     %>
    
                 </ol>
-         
-       </div>
-      <!-- 다음 버튼 -->
-       <button class="right">></button>
+    	</div>
+		<!-- 다음 버튼 -->
+    	<button class="right"><img src='<%=request.getContextPath()%>/images/button-images/right-btn.png' style='width: 30px;'></button>
     </div>
    <hr>
    <!-- 에디터 픽 캐러셀 -->

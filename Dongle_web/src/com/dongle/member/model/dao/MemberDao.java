@@ -1,15 +1,19 @@
 package com.dongle.member.model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
-import static common.JDBCTemplate.close;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 
 public class MemberDao {
@@ -25,7 +29,6 @@ public class MemberDao {
          e.printStackTrace();
       }
    }
-
    public Member selectMember(Connection conn, Member m) {
       PreparedStatement pstmt=null;
       ResultSet rs=null;
@@ -154,90 +157,139 @@ public class MemberDao {
          
          
          result=pstmt.executeUpdate();
-         
 
-      }
-      catch (Exception e) {
-         e.printStackTrace();
-      }
-      finally {
-         close(pstmt);
-      }
-      return result;
-   }
-   
-   public int memberDelete(Connection conn, Member m)
-   {
-      PreparedStatement pstmt = null;
-      int result =0;
-      String sql = prop.getProperty("memberDelete");
-      
-      try {
-         pstmt=conn.prepareStatement(sql);
-         pstmt.setString(1,m.getMemberId());
-         
-         result=pstmt.executeUpdate();
-         System.out.println(result);
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      finally {
-         close(pstmt);
-      }
-      return result;
-   }
-   
-   public Member selectId(Connection conn, Member m) {
-      PreparedStatement pstmt=null;
-      ResultSet rs=null;
-      String sql=prop.getProperty("selectId");
-      Member data=null;
-      try {
-         pstmt=conn.prepareStatement(sql);
-         pstmt.setString(1, m.getMemberName());
-         rs=pstmt.executeQuery();
-         
-         if(rs.next()) {
-            data=new Member();
-            data.setMemberId(rs.getString("member_id"));
-            data.setMemberName(m.getMemberName());
-            data.setEmail(rs.getString("member_email"));
-            
-         }
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }
-      close(pstmt);
-      close(rs);
-      
-      return data;
-   }
-   
-   public Member selectPwd(Connection conn, Member m) {
-      PreparedStatement pstmt = null;
-      ResultSet rs = null;
-      String sql = prop.getProperty("selectPwd");
-      Member data = null;
-      try {
-         pstmt=conn.prepareStatement(sql);
-         pstmt.setString(1,m.getMemberId());
-         rs=pstmt.executeQuery();
-         
-         if(rs.next()) {
-            data=new Member();
-            data.setMemberPwd(rs.getString("member_pwd"));            
-            data.setEmail(rs.getString("member_email"));
-            data.setPwdHintList(rs.getString("pwd_hint_list"));
-            data.setPwdHintAnswer(rs.getString("pwd_hint_answer"));
-            data.setMemberId(m.getMemberId());            
-         }
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }
-      close(pstmt);
-      close(rs);
-      
-      return data;
-         
-   }
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int memberDelete(Connection conn, Member m)
+	{
+		PreparedStatement pstmt = null;
+		int result =0;
+		String sql = prop.getProperty("memberDelete");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,m.getMemberId());
+			
+			result=pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public Member selectId(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectId");
+		Member data=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemberName());
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				data=new Member();
+				data.setMemberId(rs.getString("member_id"));
+				data.setMemberName(m.getMemberName());
+				data.setEmail(rs.getString("member_email"));
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		close(pstmt);
+		close(rs);
+		
+		return data;
+	}
+	
+	public Member selectPwd(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectPwd");
+		Member data = null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,m.getMemberId());
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				data=new Member();
+				data.setMemberPwd(rs.getString("member_pwd"));				
+				data.setEmail(rs.getString("member_email"));
+				data.setPwdHintList(rs.getString("pwd_hint_list"));
+				data.setPwdHintAnswer(rs.getString("pwd_hint_answer"));
+				data.setMemberId(m.getMemberId());				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		close(pstmt);
+		close(rs);
+		
+		return data;
+			
+	}
+	
+	public List<ReportReason> selectReportCategory(Connection conn){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectReportCategory");
+		List<ReportReason> reportCategory=new ArrayList();
+		ReportReason rr=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				rr=new ReportReason();
+				rr.setReportCode(rs.getInt("report_code"));
+				rr.setReportReason(rs.getString("report_reason"));
+				reportCategory.add(rr);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return reportCategory;
+		
+	}
+	
+	public int insertReport(Connection conn,int groupNo,int memberNo,String reportCode) {
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertReport");
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, reportCode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
+
+

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,com.dongle.group.model.vo.*,com.dongle.main.model.vo.*" %>
+<%@ page import="java.util.*,com.dongle.group.model.vo.*,com.dongle.main.model.vo.*, com.dongle.member.model.vo.Member" %>
 <!DOCTYPE html>
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
-	List<LocationCategory>metroCodeList = (List)request.getAttribute("metroCodeList");
+	Member loginMember = (Member)request.getAttribute("loginMember");
+	//String Checked = 6
 	
 %>
 <html>
@@ -125,8 +126,8 @@ body {
   							 <tr>
   								<td height="25" bgcolor="#f4f4f4">비밀번호힌트</td>
   								<td>
-				 					<select id='pwdHint' name='pwdHint' tabindex="7">
-										<option value='나의 고향은?'>나의 고향은?</option>
+				 					<select id='pwdHint' name='pwdHint' tabindex="7" value="">
+										<option value='나의 고향은?' selected=''>나의 고향은?</option>
 										<option value="나의 보물1호는?">나의 보물1호는?</option>
 										<option value='나의 어머니 이름은?'>나의 어머니 이름은?</option>
 										<option value="나의 아버지 이름은?">나의 아버지 이름은?</option>
@@ -170,6 +171,11 @@ body {
 				return false;
 			}
 		return true;
+	}
+	
+	function(){
+		
+		$("pwdHint option:eq(1)").attr();
 	}
 </script>
 </body>

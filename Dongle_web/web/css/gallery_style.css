@@ -30,12 +30,14 @@ div#album-container form#albumFolder> table tr td.albumFolBox .alImg{
 /* galleryView - 갤러리 사진(4x3) */
 div#gallery-container{position:relative;}
 div#gallery-container *{ 
-position: relative;
-font-family: 'netmarble Medium';
+	position: relative;
+	font-family: 'netmarble Medium';
+
 }
 /* div#gallery-container div#galleryList{position: relative;} */
 div#gallery-container div#galleryList> table tr td.galleryBox{
-font-family: 'netmarble Medium';
+
+	font-family: 'netmarble Medium';
 	display:inline-block;
 	text-align: center;
 	align-items: center;
@@ -43,6 +45,7 @@ font-family: 'netmarble Medium';
 }
 div#gallery-container div#galleryList> table tr td.galleryBox .galImg{
 	display:block;
+
 }
 .galImg{
 	width:120px; height:120px;
@@ -50,6 +53,8 @@ div#gallery-container div#galleryList> table tr td.galleryBox .galImg{
 	padding:2px;
 }
 div#gallery-container div#galleryList> table tr td.galleryBox .galImg:hover{
+
 	background-color:rgb(200,200,200);
+
 }
 

@@ -18,8 +18,9 @@
                     			<span class="comment-info">
                         			<span class="comment-writer"><%=commentGroupMember.getGroupMemberNickname() %></span>
                         			<span class="comment-date"><%=fc.getFeCommentDate() %></span>
-                        			<button class="report-button">신고</button>
-                        			<button class="comment-reple">답글</button>
+                        			<button class="comment-reple">
+                        				<img class="reple-icon" src="<%=request.getContextPath()%>/images/button-images/comments-solid.png">답글
+                        			</button>
                     			</span>
                     			<span class="comment-content-back">
                         			<span class="comment-content"><%=fc.getFeCommentContent() %></span>

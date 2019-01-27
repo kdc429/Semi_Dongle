@@ -64,7 +64,6 @@
     	text-align:"center";
     }
 </style>
-	<div class="board-container">
 		<form name="updateFrm" method="post" enctype="multipart/form-data">
 			<table class="table">
 				<thead>
@@ -126,7 +125,6 @@
 			<button type="button" class="btn btn-default" id='update-submit-btn' style="text-align:center">수정하기</button>
 			<br/><br/>
 		</div>
-	</div> 
 <script>
 $(function(){
 	$("[name=upfile]").change(function(){
