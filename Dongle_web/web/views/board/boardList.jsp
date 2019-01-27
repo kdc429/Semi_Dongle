@@ -51,7 +51,7 @@
 	}
 	
 </style>
-	<section id="board-container" >
+	<div id="board-container" >
 		<h2>공지사항</h2>
 		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
 			<button type="button" class="btn btn-default" id="add-btn" style="font-family: '나눔스퀘어라운드 Regular';">글쓰기</button>
@@ -86,7 +86,7 @@
 			}%>
 		</table>
 		
-	</section>
+	</div>
 <script>
 	$(function(){
 		$('.boardView-btn').click(function(e){

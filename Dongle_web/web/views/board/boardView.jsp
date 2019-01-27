@@ -81,7 +81,7 @@ background-color:white;
    
    
 </style>
-   <section id="board-container">
+   <div id="board-container">
       <form name="deleteFrm" method="post" enctype="multipart/form-data">
          <table class="table">
             <thead>
@@ -234,7 +234,7 @@ background-color:white;
 		      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
 		      </form>
       <%} %>
-</section>
+</div>
       
 <script>
 

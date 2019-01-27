@@ -79,7 +79,7 @@
 				<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
 			</div>
 			<div class='comment_btn'>
-				<button type="button" class='btn-insert1'>입력</button>
+				<button type="button" class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>
 			</div>
 		</fieldset>
 	</div>

@@ -281,7 +281,7 @@ if (n < 1) {slideIndex = slides.length}
 			<tr>
 				<td>&nbsp;&nbsp;&nbsp;</td>
 				<td><%=gplist.get(0).getGalFileContent()%></td>
-				<td style='float:right;'><%=gplist.get(0).getGalEnrollDate() %></td>
+				<td style='float:right; display:block;'><%=gplist.get(0).getGalEnrollDate() %></td>
 			</tr>
 		</table>
 	</div>
@@ -356,7 +356,7 @@ if (n < 1) {slideIndex = slides.length}
 				<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
 			</div>
 			<div class='comment_btn'>
-				<button type="button" class='btn-insert1'>입력</button>
+				<button type="button" class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>
 			</div>
 		</fieldset>
 	</div>
@@ -411,6 +411,7 @@ if (n < 1) {slideIndex = slides.length}
 	/* 댓글 삭제하기 */
 	$(function(){
 		$('.btn-delete').click(function(){
+			
 			if(!confirm("정말로 삭제하시겠습니까?")){return;}
 			else{
 				$.ajax({
@@ -475,7 +476,7 @@ if (n < 1) {slideIndex = slides.length}
 					}
 				}) */
 				
-				div.find('#btn-insert').click(function(e){
+				div.find('.btn-insert').click(function(e){
 					if(<%=loginMember==null%>)
 					{
 					 	fn_loginAlert();

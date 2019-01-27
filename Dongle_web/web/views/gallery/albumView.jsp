@@ -1,4 +1,4 @@
-<%@page import="com.dongle.gallery.model.vo.AlbumCategory,java.util.*,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath"%>
+<%@page import="com.dongle.gallery.model.vo.AlbumCategory,java.util.*,com.dongle.group.model.vo.Group,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
@@ -6,6 +6,7 @@
  	int groupNo=(int)request.getAttribute("groupNo");
  	List<GalleryPath> galList = (List)request.getAttribute("galList");
  	Member loginMember = (Member)session.getAttribute("loginMember");
+ 	Group g = (Group)request.getAttribute("g");
  	int count=1;
  	int albumCount=1;
  	int empty=0;
@@ -113,7 +114,7 @@ $(function(){
 	<table width="370px" id="albumPlus-tbl" style='margin-left:20%;'>
 		<tr>
 			<td>
-				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>
+				<%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals("admin")||loginMember.getMemberNo()==g.getMemberNo())){ %>
 				<div><br></div>
 					<div id="albumPlus">
 						<input style="float:right; border:none; background-color:rgb(0,0,0,0); margin-left:10px;" type="button" id="albumPlusBtn" name="albumPlusBtn" value="앨범 추가"/>

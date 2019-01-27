@@ -68,7 +68,7 @@ $(function(){
        console.log($(this).children('input').val());
        var num=$(this).children('input').val();
        $.ajax({
-          url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>&boardNo="+num,
+          url:"<%=request.getContextPath() %>/board/boardList?groupNo=<%=groupNo%>",
           type:"post",
           dataType:"html",
           success:function(data){

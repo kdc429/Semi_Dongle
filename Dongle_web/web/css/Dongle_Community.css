@@ -91,15 +91,15 @@ button.btn button.btn-primary{
 .sidel {
 	width: 170px;
 	position: fixed;
-	margin-top: 62px;
+	/*margin-top: 62px;*/
 	font-family: '나눔스퀘어라운드 Regular';
 }
 /* 오른쪽 사이드 div */
-.sider {
+.sider{
 	width: 170px;
 	height:100vh;
 	position: fixed;
-	margin-top: 62px;
+/*margin-top: 62px;*/
 	margin-left: 854px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
@@ -117,6 +117,8 @@ button.btn button.btn-primary{
 div.logo h2 a{text-decoration: none;}
 /* 왼쪽 사이드 컨텐트 */
 .sideitem1 {
+	margin-left: 15x;
+	margin-right: 15px;
 	font-family: '나눔스퀘어라운드 Regular';
 }
 .sideitem2 {
@@ -138,7 +140,7 @@ div.logo h2 a{text-decoration: none;}
 .profile_btn{
 	height: 15px;
 	width: 15px;
-	margin-top:20px;
+	margin-top:10px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -203,12 +205,3 @@ div.logo h2 a{text-decoration: none;}
  	justify-content: center;
  	align-items: center;
  }
- #dongle_info_view
- {
-	display:inline;
-	/* float: left; */
-
- }
-.tbl{
- 	left: 45%;
-}

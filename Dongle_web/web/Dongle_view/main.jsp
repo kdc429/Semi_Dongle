@@ -104,13 +104,13 @@
     </div>
 	<hr>
 	<!-- 에디터 픽 캐러셀 -->
-	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;margin-top:-20px;">TODAY's</h2>
+	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;margin-top:-20px;">HOT</h2>
 	<h1 style="font-family:'YanoljaYacheR'; text-align:left;display:inline;margin-top:-20px;text-shadow: 1px 1px 2px gray;">  &nbsp;에디터 추천</h1>
 	<div id='edit_test' style='width:1024px;height:400px;margin-top:-80px;'>
 	
 	</div>
 	<hr>
-	<!-- 분야별 랭킹 컨텐츠 -->
+<%-- 	<!-- 분야별 랭킹 컨텐츠 -->
 	<div class="bar"></div>
 	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 가장 인기있는 동글!</h4>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
@@ -144,9 +144,58 @@
 		<%	}
 		}%>
 		
-	</div>
+	</div> --%>
 	
 </section>
 <script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
+
+<%-- <style>
+.dialog{
+   display:none;
+   position:absolute;
+   margin-top:-100px;
+   z-index:10;
+   left:0;                                                                                                   
+   right:0;
+   width:100%;
+   height:auto;
+   overflow:hidden;
+   background-color:rgb(0,0,0);
+   background-color:rgba(0,0,0,0.4);
+}
+.modal-content {
+       background-color: #fefefe;
+       margin: 15% auto; 
+       padding: 20px;
+       border: 1px solid #888;
+       width: 40%;  
+       border-radius: 5px;
+   }
+</style>
+<script>
+$(function(){
+    //모달띄우기
+    $('.galImg').click(function(event){
+       $.ajax({
+          url:"<%=request.getContextPath()%>/gallery/galleryAllList,
+          type:"post",
+          dataType:"html",
+          success:function(data){
+             $('.modal-content').html(data);
+             $('#modal-container').css('display','block');
+          },
+          error:function(request,m,e){console.log(request);}
+          
+       });   
+    });
+    
+ });
+</script>
+<div class="modal-div">
+	<div class="dialog" id="modal-container">
+		<div class="modal-content">
+		</div>
+   	</div>
+</div>   --%>  
 <%@ include file="footer.jsp"%>

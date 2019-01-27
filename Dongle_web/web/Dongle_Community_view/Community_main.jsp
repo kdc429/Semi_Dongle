@@ -8,7 +8,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	Group g = (Group)request.getAttribute("group");
 	List<MultiLocation> locList = (List)request.getAttribute("locList");
 	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
-	Member loginMember = (Member)request.getAttribute("loginMember");
 	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
 	int result = (int)request.getAttribute("result");
 	int groupNo = Integer.parseInt(request.getParameter("groupNo"));
@@ -18,6 +17,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	int editnum=0;
 %>
 <!DOCTYPE html>
+<link rel='icon' href='https://i.imgur.com/8k8yVjE.png'>
 <html lang="en">
 
 <head>
@@ -30,20 +30,15 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
-	
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
-
 	<script src="./lightslider/js/lightslider.js"></script> 
 	<!-- image slide -->
 	<link rel="stylesheet"  href="./lightslider/css/lightslider.css"/>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    
 
 </head>
 <style>
@@ -130,27 +125,74 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	#main-table-bordered>th{
 		text-align: center;
 	}
-	.demo ul{
-		list-style: none outside none;
-		padding-left: 0;
+   .demo ul{
+      list-style: none outside none;
+      padding-left: 0;
         margin: 0;
-	}
+   }
    .demo .item{
    margin-bottom: 60px;
     }
-	.content-slider li{
-	background-color: lightgray;
-	text-align: center;
-	 color: #FFF;
-	}
-	.demo{
-		width: 600px;;
-	}
+   .content-slider li{
+   background-color: lightgray;
+   text-align: center;
+    color: #FFF;
+   }
+   .demo{
+      width: 600px;
+   }
+   .com_mian_btn{
+		display: inline-block;
+		margin-bottom: 0;
+		font-weight: 400;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: middle;
+		border: 1px solid transparent;
+		font-size: 14px;
+		line-height: 1.43;
+		border-radius: 4px;
+		color: #333;
+		background-color: #fff;
+		border-color: #ccc;
+		margin: 5px 0 0 45px;
+		font-family: 'netmarble Medium';
+   }
+   .menu-btn{
+		color: #333;
+		background-color: #fff;
+		border-color: #ccc;
+		display: inline-block;
+		font-weight: 400;
+		text-align: center;
+		vertical-align: middle;
+		background-image: none;
+		border : 1px solid transparent;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.43;
+		border-radius: 4px;
+		width: 100px;
+		height: 34px;
+		font-family: 'netmarble Medium';
+		font-weight: bold;
+		margin-left: -5px;
+   }
+   
 </style>
 
 <body>
 	<script>
-	
+	$(function(){
+		$('.menu-btn').mouseenter(function(){
+			$(this).css('background-color','rgb(255,234,184)');
+			$(this).css('color','white');
+		});
+		$('.menu-btn').mouseleave(function(){
+			$(this).css('background-color','#fff');
+			$(this).css('color','#333');
+		});
+	});
 	
 		$(function(){
 			$.ajax({
@@ -187,27 +229,21 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 				});
 			});
 		});
-		
-		/*  $(document).ready(function() {
-				$("#content-slider").lightSlider({
-	                loop:true,
-	                keyPress:true
-	            });
-			}); */
-		 
 </script>
 
     <div class='back'>
         <!-- 로고 헤더 -->
         <header>
-            <div class='logoback' style='position:relative;width:1024px;height: auto'>
-                <!-- 로고 grid -->
-                <div class='logo' style='width:1024px; height: auto; background-color:rgb(20,150,200)'>
-                    <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2>
-                </div>
+        	<div style="width: 1024px;height: 45px; position:fixed;z-index:2; margin-top:90px;">
+				<%@ include file="header_default.jsp"%>
+			</div>
+        	<div class='logo' style='width:1024px; height: 100px; background-color:rgb(20,150,200); margin-top:45px; '>
+        		<img src ='<%=request.getContextPath()%>/images/css-image/dongle-logo.png' onclick="logoCk()" style="margin-left: 15px; height: 60px;">
+           	</div>
+			<div class='logoback' style='position:relative;width:1024px;height: auto'>
             </div>
 
-            <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:20px;z-index:3;'>
+            <div style='width:auto; height:auto;position:relative; float:right;margin-right:140px;margin-top:100px;z-index:3;'>
             	<%if(loginMember.getMemberId().equals("admin")){ %>
 	            	<%for(int i=0;i<editList.size();i++){ %>
 	            		<%if(editList.get(i).getGroupNo()==groupNo){ %>
@@ -231,13 +267,13 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 		<div class="center">
 			<!-- 왼쪽 사이드 -->
 			<div class="sidel"
-				style='height: 100vh; background-color: rgb(228, 228, 228)'>
-				
-				<div class="sideitem1"
-					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
-					<!-- 동글 프로필 -->
+            style='height: 100vh; background-color: rgb(228, 228, 228);margin-top:145px;'>
+            
+            <div class="sideitem1"
+               style="left: 10%; right: 10%; width:160px; height: 250px; margin: 5px 0 0 8px;">
+              	<!-- 동글 프로필 -->
 
-					<img class="profile_img" style='width:165px; height:260px;' src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
+					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>" style="width: 155px; height: 150px;">
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -245,7 +281,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 					<div class="dongle_info">
 						<div id="dongle_info_view" style="font-size: 11px;">회원수 : <%=result %> 명 &nbsp;</div>
 						<div id="dongle_info_view">
-							<button id="dongle_mem_btn">멤버보기</button>
+						<button id="dongle_mem_btn" class='com_mian_btn'>멤버보기</button>
 						
 						<%if(gm!=null){ %>	
 							<button id="dongle_mem_update">정보수정</button>
@@ -286,9 +322,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 				</div>
 				<!-- 소개글 -->
 				<div class="sideitem2"
-					style='border: 1px solid rgba(255,0,0,0.1);  right: 10%; height: 150px'>
-					<%=g.getGroupIntro() %>
-				</div>
+               style="margin-top:140px; margin-left:10px; right: 10%; width:150px; height: 150px; font-family: '나눔스퀘어라운드 Regular';" >
+               <%=g.getGroupIntro() %>
+            </div>
 			</div>
 		</div>
 		<script>
@@ -303,97 +339,54 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 						$(this).next().slideUp();
 						flag=true;
 					}
-			})
-				
+				})
 			});
 		</script>
-
-
 	</aside>
-       
-
-        
-       
        <script> 		
-       <%--        	$('#dongle_mem_btn').click(function(){
-              		$.ajax({
-              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-              			type:"get",
-              			dataType:"json",
-              			success:function(data){
-              				var thead="<br/><caption><%=g.getGroupName()%>의 멤버보기</caption><tr><th id='tbl_nav'>닉네임</th><th id='tbl_nav'>가입일</th></tr>";
-              		 		var thtml="";
-              			     for(var i = 0; i < data.length; i++)
-              		            {
-              			    	 	var tbody= "<tr><td>"+data[i]['groupMemberNickname']+"</td>";
-              			    	 	
-              			    	 	thtml+=tbody;
-              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td><tr>"
-              			    	 	
-              		            }
-              			     
-              			     thead += thtml;
-              			     console.log(thtml);
-              			     $('#tbl').html(thead);
-              			     
-              			}
-              		});   		
-              	}); --%>
-              	
-                 	$('#dongle_mem_btn').click(function(){
-              		$.ajax({
-              			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
-              			type:"get",
-              			dataType:"json",
-              			success:function(data){
-              				$('#content-div').html(data);
-              				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-              				//var h2_main = $('<h2></h2>');
-              				var tbl = $('<table id="tbl"></table>');
-              				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
-              				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
-              		 		var thtml="";
-              			     for(var i = 0; i < data.length; i++)
-              		            {
-              			    	 	/* var tbody= "<tr>"; */
-              			    	 	thtml+="<tr>";
-              			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
-              			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
-              			    	 	/* thtml+=tbody; */
-              			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
-              			    	 	thtml+="</tr>";
-              			   }
-              			     console.log(thtml);
-              			   thead += thtml;
-              			   tbl.append(thead);
-              			   
-              			     
-              			   console.log(thead);
-              			   console.log(tbl);
-              			   console.log(h);
-              			 	$('#header').html(h);         			   
-              			    $('#mem_list_div').append(tbl);
-              				
-              			     
-              			}
-              		});   		
-              	});       
+       	$('#dongle_mem_btn').click(function(){
+    		$.ajax({
+    			url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+    			type:"get",
+    			dataType:"json",
+    			success:function(data){
+    				$('#content-div').html(data);
+    				var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+    				//var h2_main = $('<h2></h2>');
+    				var tbl = $('<table id="tbl"></table>');
+    				var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
+    				<%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
+    		 		var thtml="";
+    			    for(var i = 0; i < data.length; i++)
+   		            {
+  			    	 	/* var tbody= "<tr>"; */
+  			    	 	thtml+="<tr>";
+  			    	 	thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
+  			    	 	thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+  			    	 	/* thtml+=tbody; */
+  			    	 	thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+  			    	 	thtml+="</tr>";
+    			    }
+    			    thead += thtml;
+    			    tbl.append(thead);
+    				$('#header').html(h);         			   
+   			    	$('#mem_list_div').append(tbl);
+    			}
+    		});   		
+    	});       
        </script>
         <!-- 오른쪽 사이드 -->
         <aside>
-            <div class="center" style="background-color: rgb(228, 228, 228)">
+            <div class="center" style="background-color: rgb(228, 228, 228);margin-top:82px;">
 
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
-
-                    <!-- 메뉴 버튼 -->
-
-                    <button class='btn btn-primary' onclick="comunnityHome();">HOME</button><br>
-                    <button class='btn btn-primary' id="board-btn">공지사항</button><br>
-                    <button class='btn btn-primary' id="feed-btn">피드</button><br>
-                    <button id="gallery-btn" class='btn btn-primary'>갤러리</button><br>
-                    <button id="calendarview" class='btn btn-primary'>일정</button><br>
+                   <!-- 메뉴 버튼 -->
+                    <button class='menu-btn' id='home-btn'onclick="comunnityHome();">HOME</button><br>
+                    <button class='menu-btn' id="board-btn">공지사항</button><br>
+                    <button class='menu-btn' id="feed-btn">피드</button><br>
+                    <button class='menu-btn' id="gallery-btn" >갤러리</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
-                    <button class='btn btn-primary' id="manager-menu-btn">동글 관리</button><br>
+                    	<button class='menu-btn' id='manager-menu-btn'>동글 관리</button><br>
                     <%} %>
                 </div>
             </div>
@@ -401,20 +394,14 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	
         <!-- 게시판 -->
        <section>
-            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
-            	
-            	<!-- 동글메인이미지 -->
-            	<div id='dongle_main_img'>
-            		<img style='width:540px; height:280px;' src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
-            	</div>
-            	<div id='mini_board'></div>
-            	<div id='mini_gallery'></div>
-            	<div id='mini_feed'></div>
-
-             </div>
-             
+            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;margin-top:145px;'>
+            <div id='dongle_main_img'>
+               <img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+            </div>
+           	<div id='mini_board'></div>
+           	<div id='mini_gallery'></div>
+           	<div id='mini_feed'></div>
         </section>
-        
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
 <div class="modal-div">
 	<div class="dialog" id="modal-container">
@@ -591,10 +578,11 @@ function comunnityHome(){
 	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 function logoCk(){
-	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+	location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
 }
 
 </script>
+<footer style="width: 1024px; height: 120px; margin-top: 800px; background: url('https://i.imgur.com/o4AHu7O.png');">
+</footer>
 </body>
-
 </html>
