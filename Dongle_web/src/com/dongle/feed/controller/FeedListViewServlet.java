@@ -72,6 +72,7 @@ public class FeedListViewServlet extends HttpServlet {
 		request.setAttribute("feedCommentList", feedCommentList);
 		request.setAttribute("level2FeedCommentList", level2FeedCommentList);
 		request.setAttribute("reportCategory", reportCategory);
+		
 		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);
 		
 	}

@@ -35,10 +35,8 @@ public class MainSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Group> groupList=new GroupService().selectAllGroupList();
-		List<LocationCategory> locationList=new MainService().selectMetroCode();
 		List<TopicCategory> topicList=new MainService().selectTopicCategory();
 		request.setAttribute("groupList", groupList);
-		request.setAttribute("metroCodeList", locationList);
 		request.setAttribute("topicList", topicList);
 		request.getRequestDispatcher("/Dongle_view/search.jsp").forward(request, response);
 	}

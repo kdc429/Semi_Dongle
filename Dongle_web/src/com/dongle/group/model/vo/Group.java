@@ -12,7 +12,7 @@ public class Group {
 	private String topicName; //TOPIC_CTG_NAME	
 	private String locMetroName; //LOC_METRO_NAME
 	private String locAreaName; //LOC_AREA_NAME
-	private String locTownName; //LOC_TOWN_NAME
+	private String locTownName; //LOC_TOWN_NAME	
 	private String locCtgCode; //LOC_CTG_CODE
 	private String groupDateCtg; //GROUP_DATE_CTG
 	private int minAge; //MIN_AGE

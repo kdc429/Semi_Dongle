@@ -1,4 +1,4 @@
-var time; // 슬라이드 넘어가는 시간
+	var time; // 슬라이드 넘어가는 시간
         var feedPicLi;
         var feedPicCount; // 캐러셀 사진 갯수
         var currentIndex; // 현재 보여지는 슬라이드 인덱스 값
@@ -10,36 +10,36 @@ var time; // 슬라이드 넘어가는 시간
         imgWidth=$('.media-carousel').children('li').width();
        
         function setImage(){
-        	currentIndex = 0;
-         	for(var i=0;i<carouselLength;i++){
-         		
-         		if($('.media-carousel').eq(i).children().length==1){
-         			$('.media-carousel').eq(i).siblings('.prev').remove();
-         			$('.media-carousel').eq(i).siblings('.next').remove()
-         			$('.media-carousel').eq(i).parent().siblings('.indi-wrap-div').remove();
-         			$('.media-carousel').eq(i).children().css("width",500);
-         		}
-         		
-         		for(var j=0;j<$('.media-carousel').eq(i).children().length;j++){
-         			
-         			if(j==currentIndex){
+           currentIndex = 0;
+            for(var i=0;i<carouselLength;i++){
+               
+               if($('.media-carousel').eq(i).children().length==1){
+                  $('.media-carousel').eq(i).siblings('.prev').remove();
+                  $('.media-carousel').eq(i).siblings('.next').remove()
+                  $('.media-carousel').eq(i).parent().siblings('.indi-wrap-div').remove();
+                  $('.media-carousel').eq(i).children().css("width",500);
+               }
+               
+               for(var j=0;j<$('.media-carousel').eq(i).children().length;j++){
+                  
+                  if(j==currentIndex){
 
-         				$('.media-carousel').eq(i).children().eq(j).css("left",0);
-         				
-         			}else{
-         				
-         				$('.media-carousel').eq(i).children().eq(j).css("left",imgWidth);
-         				
-         			}
-         		}
-         	}
+                     $('.media-carousel').eq(i).children().eq(j).css("left",0);
+                     
+                  }else{
+                     
+                     $('.media-carousel').eq(i).children().eq(j).css("left",imgWidth);
+                     
+                  }
+               }
+            }
          }
         
         
         $(document).ready(function(){
-        	
-        	$(document).on('click','.feed-pic-indi',function () {
-        		
+           
+           $(document).on('click','.feed-pic-indi',function () {
+              
                 console.log($($(this).parent('ul').children('li')).index(this));
                 feedPicLi=$(this).parent('ul').parent('div').siblings('.feed-pics').children('.media-carousel').children('li');
                 indiIndex = $($(this).parent('ul').children('li')).index(this);
@@ -52,7 +52,7 @@ var time; // 슬라이드 넘어가는 시간
                     //같은 인덱스의 인디케이터를 눌렀을때 이벤트 작동 안함
                 } else if (indiIndex > currentIndex) {
                     
-                    imgWidth = feedPicLi.width(); // 사진 한장의 너비	
+                    imgWidth = feedPicLi.width(); // 사진 한장의 너비   
                     // 이미지 위치 조정
                     
                     
@@ -73,7 +73,7 @@ var time; // 슬라이드 넘어가는 시간
                     feedPicLi.eq(currentIndex).animate({
                         left: left
                     },function () {
-                    	
+                       
                         feedPicLi.eq(currentIndex-1).css("left", imgWidth);
                     });
                     //선택화면 넘어옴
@@ -94,7 +94,7 @@ var time; // 슬라이드 넘어가는 시간
                     return currentIndex;
 
                 } else if (indiIndex < currentIndex) {
-                    imgWidth = feedPicLi.width(); // 사진 한장의 너비	
+                    imgWidth = feedPicLi.width(); // 사진 한장의 너비   
                     // 이미지 위치 조정
                     for (var i = 0; i < feedPicCount; i++) {
                         if (i == currentIndex) {
@@ -111,7 +111,7 @@ var time; // 슬라이드 넘어가는 시간
                     feedPicLi.eq(currentIndex).animate({
                         left: left
                     },function () {
-                    	
+                       
                         feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
                     });
 
@@ -134,17 +134,17 @@ var time; // 슬라이드 넘어가는 시간
                 }
 
             });
-        	
-        	$(document).ready(function(){
-        		$(document).on('click','.next',function(e) {
+           
+           $(document).ready(function(){
+              $(document).on('click','.next',function(e) {
                     // carousel_setImgPosition();
-                	
+                   
                     feedPicLi=$(this).siblings('.media-carousel').children('li');
                     imgWidth = feedPicLi.width();
                     feedPicCount = feedPicLi.length;
                     indicator=$(this);
                     if(currentIndex>feedPicCount){
-                    	currentIndex=0;
+                       currentIndex=0;
                     }
                     
                         // 이미지 위치 조정
@@ -164,7 +164,7 @@ var time; // 슬라이드 넘어가는 시간
                     feedPicLi.eq(currentIndex).animate({
                         left: left
                     }, function () {
-                    	
+                       
                         feedPicLi.eq(currentIndex-1).css("left", imgWidth);
                     });
                     
@@ -198,15 +198,15 @@ var time; // 슬라이드 넘어가는 시간
                     //현재 화면 인덱스 저장
                     return currentIndex;
                 });
-        	})
+           })
             
-        	$(document).ready(function(){
-        		$(document).on('click','.prev',function(e) {
-        			
-        			if(currentIndex>feedPicCount){
-                    	currentIndex=0;
+           $(document).ready(function(){
+              $(document).on('click','.prev',function(e) {
+                 
+                 if(currentIndex>feedPicCount){
+                       currentIndex=0;
                     }
-                	
+                   
                     feedPicLi=$(this).siblings('.media-carousel').children('li');
                     imgWidth = feedPicLi.width();
                     feedPicCount = feedPicLi.length;
@@ -230,7 +230,7 @@ var time; // 슬라이드 넘어가는 시간
                         left: left
                         
                     },function () {
-                    	
+                       
                         feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
                     });
                     console.log("태그이동!");

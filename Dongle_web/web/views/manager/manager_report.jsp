@@ -14,17 +14,22 @@
 <meta charset="UTF-8">
 
 <Style>
+div#report-member-container
+{
+	margin : 25px;
+}
 	#tbl-manager-report {
 	width: 630px;
 	display: block;
 	border-collapse: collapse;
-	border: 1px solid black;
+	border: 0px solid black;
 }
 
 #tbl-manager-report th {
 	border: 1px solid black;
 	border-top : 0px;
 	border-left : 0px;
+	border-right: 0px;
 	background-color: gray;
 	text-align: center;
 	padding: 8px;
@@ -35,6 +40,7 @@
 	border: 1px solid black;
 	border-top: 0px;
 	border-left : 0px;
+	border-right : 0px;
 	text-align: left;
 	padding: 8px;
 	border-collapse: collapse;
@@ -63,7 +69,10 @@
 	width: 250px
 }
 
-#tbl-manager-report th:nth-of-type(5), #tbl-manager-report td:nth-of-type(5) {
+#tbl-manager-report th:nth-of-type(5){
+	width: 100px
+}
+#tbl-manager-report td:nth-of-type(5) {
 	width: 80px
 }
 
@@ -80,8 +89,8 @@
 <!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	
-<div id="repot-member-container">
-	<h2>신고 회원 관리</h2>>
+<div id="report-member-container">
+	<h2>신고 회원 관리</h2>
 		
 		<table id="tbl-manager-report">
 			<thead>

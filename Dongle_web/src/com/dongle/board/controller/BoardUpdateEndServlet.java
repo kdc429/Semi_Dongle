@@ -40,7 +40,6 @@ public class BoardUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("들어옴>>>???");
 		if(!ServletFileUpload.isMultipartContent(request))
 		{
 			request.setAttribute("mag", "공지사항작성오류");

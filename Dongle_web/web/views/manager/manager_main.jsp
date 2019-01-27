@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group" %>
+<%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group,
+com.dongle.group.model.vo.MultiLocation, com.dongle.group.model.vo.MultiTopic,
+com.dongle.group.model.vo.TopicCtg, com.dongle.group.model.vo.LocalCtg,
+java.util.*" %>
 
 <%
 	int groupNo=(int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	Group g = (Group)request.getAttribute("group");
+	List<MultiLocation> locList = (List)request.getAttribute("locList");
+	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
+	List<TopicCtg> topicCtg = (List)request.getAttribute("topicCtg");
+	List<LocalCtg> localCtg = (List)request.getAttribute("localCtg");
 	
-	String address = g.getLocMetroName() + " " + g.getLocAreaName() + (g.getLocTownName()!=null?" " +g.getLocTownName():"");
+	String address = g.getLocCtgCode();
 %>
 <meta charset="UTF-8">
 
@@ -22,6 +29,62 @@
 <!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script>
+	var topicCnt = 0;
+	var topicArr = [];
+	var topicFlag = false;
+	$(function(){
+		$("#addtopic-btn").click(function(){
+			if(topicCnt > 2)
+			{
+				alert("토픽은 최대 3개만 가능합니다.")	
+			}
+			else
+			{
+				var topicCode = $("#selectTopic option:selected").val();
+				var topicName = $("#selectTopic option:selected").text();
+				
+				for(var i = 0; i < topicArr.length; i++)
+				{
+					if(topicArr[i] == topicName)
+					{
+						topicFlag = true;
+					}
+					
+				}
+				if(!topicFlag)
+				{
+					var div = $("#topic-add-div");
+					var str = "<span id='topic-span"+topicCnt+"' onclick='fn_delTopic("+topicCnt+")'><a class='aTopic'>"
+					+topicName+"&nbsp&times</a>"+"<input type='hidden' name='topicCode' value='"+topicCode+"'>"
+					+"<input type='hidden' name='topicName' value='"+topicName+"'></a></span>";
+						
+					div.append(str);
+					
+					topicArr.push(topicName);
+					console.log("topicArr" + topicArr);
+					topicCnt++; 
+					
+				}
+				else
+				{
+					alert("같은 토픽은 선택할 수 없습니다.");
+					topicFlag = false;
+				}
+				
+			}
+		});
+	});
+	
+	function fn_delTopic(index)
+	{
+		var spanId = "#topic-span" + index;
+		
+		$(spanId).remove();
+		topicCnt--;
+		
+		topicArr.splice(index,1);
+		
+	}
 	function validate(){
 		console.log($("#checkPwd").val()+" : <%=loginMember.getMemberPwd()%>");
 		if($("#checkPwd").val() != '<%=loginMember.getMemberPwd()%>')
@@ -31,9 +94,12 @@
 		}
 		modelFrm.submit();
 	}
+	
+	
 </script>
 <style>
 	input#address{display:"inline-block"}
+	a.aTopic{padding-right:15px;}
 </style>
 <div class="manager-container">
 	
@@ -70,36 +136,65 @@
 						<span class="glyphicon glyphicon-cog"></span> 동글 정보 수정
 					</h3>
 				</div>
+				<form action="<%=request.getContextPath() %>/manager/updateDongle?groupNo=<%=groupNo %>" method="post">
 				<div class="modal-body" style="padding: 40px 50px;">
-					<form >
+					
 						<div class="form-group">
 							<label for="donglename">동호회 이름</label> 
-								<input type="text" class="form-control" id="donglename"> <br>
-							<label for="topic">주제</label><br> 
-							<select	class="form-control" id="topic">
-								<option value="인문/과학">인문/과학</option>
-								<option value="스포츠/레저">스포츠/레저</option>
-								<option value="여행/캠핑">여행/캠핑</option>
-								<option value="문화/예술">문화/예술</option>
-								<option value="취업/자격증">취업/자격증</option>
-								<option value="외국어/어학">외국어/어학</option>
-								<option value="건강/다이어트">건강/다이어트</option>
-								<option value="게임/오락">게임/오락</option>
-							</select> <br> 
-							<label for="address">지역</label><br> 
-								<input type="text" class="form-control" id="address"  value="<%=address %>" readonly>
-								<button type="button" id="search-address" class="btn btn-info">검색</button><br>
+								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
+							<label for="topic">토픽</label><br> 
+							<select	class="form-control" style="padding_bottm:2px; width:79%; display:inline" name="selectTopic" id="selectTopic" >
+								<%for(TopicCtg topic : topicCtg){ %>
+								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
+								<%} %>
+								
+							</select>
+							<button type="button" class="btn btn-info" id="addtopic-btn" style="width:20%; height:34px;">토픽 추가</button>
+							<br>
+							<div id="topic-add-div" style="height:19px">
+									
+							</div>
+							<br>
+							<label>지역</label><br> 
 							
-							<!-- <select	class="form-control" id="area">
-								<option value="경기도">경기도</option>
-								<option value="서울">서울</option>
-								<option value="강원도">강원도</option>
-								<option value="경상북도">경상북도</option>
-								<option value="경상남도">경상남도</option>
-								<option value="전라북도">전라북도</option>
-								<option value="전라남도">전라남도</option>
-								<option value="제주도">제주도</option>
-							</select> <br>  -->
+							<select	class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectMetro" id="selectMetro" >
+								<%
+								String[] metroArr = new String[18];
+								int metroCnt = 0;
+								boolean flag = false;
+								for(LocalCtg local : localCtg){ 
+									for(int i = 0; i < metroCnt; i++)
+									{
+										System.out.println(flag);
+										System.out.println(local.getMetroCode());
+										System.out.println(metroArr[i]);
+										if(metroArr[i].equals(local.getMetroCode()))
+										{
+											flag = true;
+											break;
+										}
+									}
+									if(!flag)
+									{
+										metroArr[metroCnt] = local.getMetroCode();	
+										metroCnt++;
+										%>
+											<option value="<%=local.getMetroCode()%>"><%=local.getLocMetroName() %></option>
+										<%
+									}
+									else
+									{
+										flag = false;
+									}
+								}
+								%>
+							</select>
+							<select>
+								
+							</select>
+								<%-- <input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
+								<button type="button" id="search-address" class="btn btn-info">검색</button><br> --%>
+
 							<br> 
 							<label>활동 시간대</label><br>
 							<div class="radio">
@@ -109,29 +204,31 @@
 								<label class="radio-inline">
 									<input type="radio" name="activetime" value="주말">주말
 								</label> 
-								<label class="radio-inline">
-									<input type="radio" name="activetime" value="무관">무관
-								</label>
 							</div>
-
-							<label for="">연령대</label><br>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" min="1" max="100" placeholder="최소">
-							</div>
-							<div class="col-sm-1">~</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" min="1" max="100" placeholder="최대">
-							</div>
+							<br>
+							<label for>연령대</label><br>
+							
+								<input type="number" class="form-control" style="width:20%; display:inline;"name="minAge" id="minAge" min="1" max="100" placeholder="최소">
+							
+							&nbsp~&nbsp
+							
+								<input type="number" class="form-control" style="width:20%; display:inline;" name="maxAge" id="maxAge" min="1" max="100" placeholder="최대">
+							
+							<br><br><br>
+							
+							<label>소개글</label>
+							<textarea class="form-control" rows="5" name="intro" id="intro"></textarea>
 						</div>
 
 
-					</form>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default" data-dismiss="modal">완료</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 
 				</div>
+				</form>
 			</div>
 
 		</div>
@@ -226,7 +323,7 @@ $(function(){
 	$("#delete-member-btn").click(function(){
 		var managerNo=<%=g.getMemberNo()%>;
 		
-		console.log(<%=g.getMemberNo()%>);
+		console.log("매니저넘버" + <%=g.getMemberNo()%>);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/manager/deleteMemberView?groupNo=<%=g.getGroupNo()%>",
 			type:"post",

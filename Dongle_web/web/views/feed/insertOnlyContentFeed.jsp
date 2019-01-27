@@ -21,17 +21,6 @@ Feed feed=(Feed)request.getAttribute("feed");
                 		<span class="write-date"><%=feed.getFeedWriteDate() %></span>
             		</div>
             	<div class="feed-body">
-            		<div>
-            		<%if(feed.getMemberNo()==loginMember.getMemberNo()){ %>
-            			<input type="hidden" class="feed-no-update" value="<%=feed.getFeedNo() %>"/>
-            			<button class="delete-btn">
-            				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
-            			</button>
-            			<button class="update-btn">
-            				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
-            			</button>
-            		<%} %>
-            		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=feed.getFeedContent() %></textarea>
             		
         		</div><hr>

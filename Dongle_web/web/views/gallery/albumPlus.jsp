@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <title>앨범 추가하기</title>
 <style>
-div#albumPlus-container{padding:0 auto;margin-left:120px; margin-top:30px;}
+div#albumPlus-container{padding:0 auto;margin-left:200px; margin-top:30px;}
 div#albumPlus-container input{font-size:18px;font-family:'a흑진주L';}
 div#albumPlus-container button{color:gray;border:none;font-family:'a흑진주L';}
 </style>
@@ -32,7 +32,6 @@ $(function(){
 		}
 		for(var i=0;i< <%=list.size()%>; i++)
 		{
-			console.log('Message'+'<%=list.get(0).getAlbumName()%>'+'<%=list.get(1).getAlbumName()%>');
 			if($('#albumNameP').val()=='<%=list.get(count).getAlbumName()%>')
 			{
 				alert('이미 존재하는 앨범입니다. 다시 입력해주세요.');

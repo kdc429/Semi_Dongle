@@ -8,6 +8,7 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.manager.model.dao.ManagerDao;
 import com.dongle.member.model.vo.DongleRptMember;
 
@@ -107,4 +108,29 @@ public class ManagerService {
 		return result;
 	}
 	
+	public List<GroupMember> selectMemberList(int groupNo)
+	{
+		Connection conn = getConnection();
+		List<GroupMember> memberList = new ManagerDao().selectMemberList(conn, groupNo);
+		
+		close(conn);
+		return memberList;
+	}
+	
+	public int deleteMemberSubmit(int groupNo, int selectMemberNo)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().deleteMemberSubmit(conn, groupNo, selectMemberNo);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

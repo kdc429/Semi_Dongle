@@ -13,6 +13,7 @@ import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 import com.google.gson.Gson;
 
 /**
@@ -53,6 +54,8 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 		gcj.setMemberNo(galCommentWriterNo);
 		gcj.setGalCommentRef(galCommentRef);
 		
+		//신고 카테고리 뽑아오기
+		List<ReportReason> relist = new GalleryService().selectReportReason();	
 		int rs=new GalleryService().insertGalComment(gcj);
 		if(rs!=0)
 		{
@@ -65,6 +68,7 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 					System.out.println("2코멘트gplist: "+gplist);
 					System.out.println("2코멘트gclist: "+gclist);
 				}
+				request.setAttribute("relist", relist);
 				request.setAttribute("gplist", gplist);
 				request.setAttribute("groupNo", groupNo);
 				request.getRequestDispatcher("/views/gallery/commentInsert.jsp").forward(request, response);

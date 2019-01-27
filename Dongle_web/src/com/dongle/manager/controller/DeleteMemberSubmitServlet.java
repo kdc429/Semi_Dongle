@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.manager.model.service.ManagerService;
 import com.dongle.member.model.vo.DongleRptMember;
 import com.dongle.member.model.vo.Member;
@@ -52,13 +53,15 @@ public class DeleteMemberSubmitServlet extends HttpServlet {
 		int result = 0;
 		
 		
-		List<DongleRptMember> rptList = new ManagerService().selectRptMember(groupNo);
+		result = new ManagerService().deleteMemberSubmit(groupNo, selectMemberNo);
+		
+		List<GroupMember> memberList = new ManagerService().selectMemberList(groupNo);
 		
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("group", g);
-		request.setAttribute("rptList", rptList);
+		request.setAttribute("memberList", memberList);
 	
-		request.getRequestDispatcher("/views/manager/manager_report.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/manager/manager_deleteMember.jsp").forward(request, response);
 	}
 
 	/**

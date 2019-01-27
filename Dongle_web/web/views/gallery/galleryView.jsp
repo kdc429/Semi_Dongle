@@ -130,7 +130,8 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
    <div id="galleryList">
       <table style='margin-left:80px;'>
          <%if(tList.size()!=0){%>
-               <%for(GalleryPath t :tList){ %>
+            <%for(GalleryPath t :tList){ %>
+               <%if(t.getGalReportStatus().equals("N")){ %>
                   <%if(count%4==1){%>
                      <tr>
                      </tr>
@@ -156,6 +157,7 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
                      <%count++; %>
                   <%} %>
                <%} %>
+            <%} %>
          <%}
          else{%>
             <div style='margin-left:100px;'>

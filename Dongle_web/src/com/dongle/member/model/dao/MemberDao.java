@@ -157,7 +157,7 @@ public class MemberDao {
          
          
          result=pstmt.executeUpdate();
-         
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -291,4 +291,5 @@ public class MemberDao {
 		return result;
 	}
 }
+
 

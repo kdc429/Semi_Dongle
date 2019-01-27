@@ -13,14 +13,7 @@ import com.dongle.main.model.vo.TopicCategory;
 
 public class MainService {
 	
-	public List<LocationCategory> selectMetroCode()
-	{
-		Connection conn = getConnection();
-		List<LocationCategory>metroCodeList = new MainDao().selectMetroCode(conn);
-		close(conn);
-		return metroCodeList;		
-	}
-	
+
 	public List<TopicCategory> selectTopicCategory(){
 		
 		Connection conn=getConnection();
@@ -391,8 +384,5 @@ public class MainService {
 		return groupList;
 		
 	}
-	
-	
-
 
 }

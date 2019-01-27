@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
-	List<LocationCategory>metroCodeList = (List)request.getAttribute("metroCodeList");
 	List<TopicCategory> topicList=(List)request.getAttribute("topicList");
 %>
 <html>

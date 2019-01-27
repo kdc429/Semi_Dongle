@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <meta charset="UTF-8">
 <title>동글 멤버</title>
 </head>
@@ -47,26 +51,31 @@
       
    }
    
-   $(document).ready(function(){
-      $('#report').on('change',function(){
-         
-         window.opener.document.getElementById('selectRecode').value=document.getElementById('reportMemberNick').value;
-         report();
-      });
-   })
+    $(document).ready(function(){
+  		$('#report-reason').on('change',function(){
+  			console.log($(this).val());
+  			var reportCode=$('#report-reason option:selected').val();
+  			window.opener.document.getElementById('selectRecode').value=reportCode;
+  			report();
+  		});
+  	})
    
-   $(document).ready(function(){
+   $(function(){
       
-      
-      $('#report-close').on('click',function(){
+      $('.report-close').click(function(){
          var galNo=window.opener.document.getElementById('reportGalNo').value;
-         var galCommentNo=window.opener.document.getElementById('reportGalCommentNo').value;
+         var galCommentNo;
+         if(window.opener.document.getElementById('reportCommentNo').value!=null){
+         	galCommentNo=window.opener.document.getElementById('reportCommentNo').value;
+         }
          var groupNo=window.opener.document.getElementById('reportGroupNo').value;
          var memberNo=window.opener.document.getElementById('reportMemberNo').value;
-         var reportCode=document.getElementById('reportMemberNick').value;
+         var reportCode=$('#report-reason option:selected').val();
          var albumCode=window.opener.document.getElementById('reportAlbumCode').value;
-         if(!confirm('정말로 신고하시겠습니까?')){
-        	 if(galCommentNo!=0){
+         console.log(galCommentNo);
+         if(!confirm('정말로 신고하시겠습니까?')){return;}
+         {
+        	 if(galCommentNo!=null){
  	            $.ajax({
  	               url:"<%=request.getContextPath()%>/gallery/galleryCommentReport",
  	               type:"post",
@@ -75,7 +84,7 @@
  	                  "groupNo":groupNo,
  	                  "memberNo":memberNo,
  	                  "reportCode":reportCode,
- 	                  "albumCode":albumCode
+ 	                  "galCommentNo":galCommentNo
  	               },
  	               success:function(data){
  	                	 alert("Message: "+data);
@@ -90,17 +99,17 @@
  	                        },
  	                        
  	                        dataType:"html",
- 	                        success:function(data){
- 	                           window.opener.document.getElementById('content-div').html(data);
- 	                           setImage();
- 	                           self.close();
- 	                        }
+	                        success:function(data){
+	                        	$(opener.document).find('#content-div').html(data);
+	                        	$(opener.document).find('#modal-container').css('display','none');
+	                           self.close();
+	                        }
  	                        
  	                     });
  	               }
  	            })
         	 }
-        	 else if(galCommentNo==0&&galNo!=0){
+        	 else if(galCommentNo==null&&galNo!=0){
 	            $.ajax({
 	               url:"<%=request.getContextPath()%>/gallery/galleryReport",
 	               type:"post",
@@ -125,8 +134,8 @@
 	                        
 	                        dataType:"html",
 	                        success:function(data){
-	                           window.opener.document.getElementById('content-div').html(data);
-	                           setImage();
+	                        	$(opener.document).find('#content-div').html(data);
+	                        	$(opener.document).find('#modal-container').css('display','none');
 	                           self.close();
 	                        }
 	                        
@@ -136,9 +145,8 @@
 	         }else{
 	        	 alert("신고 실패 하였습니다. 다시 시도해주세요.")
 	        	 self.close();
-	         }
-         }
-         
+	         } 
+         } 
       })
    })
    
@@ -168,7 +176,8 @@
       </div>
    </div>
    <div>
-      <button id="report-close">신고</button>
+      <button class="report-close">신고</button>
+
    </div>
 </body>
 </html>

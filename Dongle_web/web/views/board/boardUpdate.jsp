@@ -110,6 +110,13 @@
 						</td>
 					</tr>
 				</tbody> 
+			<%-- 		<tr>
+						<td colspan="2" id="update-add">
+							<button id='update-list-btn'>목록으로</button>
+							<input type="hidden" value="<%=groupNo%>" name="groupNo" />
+							<input type="button" id='update-submit-btn' value="수정하기" />
+						</td>
+					</tr>		 --%>	
 			</table>
 		</form>
 		<div class="update-btn" style="float: left; margin-left: 220px;">

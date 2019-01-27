@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.DongleRptMember;
 import com.dongle.member.model.vo.Member;
 
@@ -199,4 +200,66 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
+	public List<GroupMember> selectMemberList(Connection conn, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<GroupMember> memberList=new ArrayList<GroupMember>();
+		String sql=prop.getProperty("selectMemberList");
+
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				GroupMember gm = new GroupMember();
+
+				gm.setGroupNo(rs.getInt("group_no"));
+				gm.setMemberNo(rs.getInt("member_no"));
+				gm.setGroupMemberNickname(rs.getString("group_member_nickname"));
+				gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
+				gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
+				gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
+				gm.setBlackListYN(rs.getString("group_blacklist_yn"));
+				gm.setReportDongleCount(rs.getInt("report_dongle_count"));
+
+				memberList.add(gm);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return memberList;
+	}
+	
+	public int deleteMemberSubmit(Connection conn, int groupNo, int selectMemberNo)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteMemberSubmit");
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setInt(1, selectMemberNo);
+			pstmt.setInt(2, groupNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
 }

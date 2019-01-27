@@ -44,6 +44,11 @@ public class MemberUpdateServlet extends HttpServlet {
 		String address=request.getParameter("address");
 		String email=request.getParameter("email");
 
+		String isAdmin = "";
+		if(request.getParameter("isAdmin")!=null)
+		{
+			isAdmin = request.getParameter("isAdmin");
+		}
 //		Member m=new Member(userId,password,userName,gender,ssn,phone,address,email, null, 0, 0);
 		
 		Member m=new Member();
@@ -60,10 +65,19 @@ public class MemberUpdateServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";
-				if(result>0)
+		if(result>0)
 		{
-			msg="회원정보수정을 완료했습니다.";
-			loc="/Dongle_view/memberView?userId="+m.getMemberId();
+			if(isAdmin.equals("true"))
+			{
+				msg="회원정보수정을 완료했습니다.";
+				String script="self.close();opener.location.reload();";
+				request.setAttribute("script", script);
+			}
+			else
+			{
+				msg="회원정보수정을 완료했습니다.";
+				loc="/Dongle_view/memberView?userId="+m.getMemberId();
+			}
 		}
 		else 
 		{

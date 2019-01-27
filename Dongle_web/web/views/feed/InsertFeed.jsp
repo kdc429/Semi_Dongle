@@ -17,43 +17,43 @@
                 					<a><%=groupMember.getGroupMemberNickname() %></a>
                 			
                 		<span class="write-date"><%=feed.getFeedWriteDate() %></span>
-                		<div class="update-back">
-            		<%if(feed.getMemberNo()==loginMember.getMemberNo()){ %>
-            				<input type="hidden" class="feed-no-update" value="<%=feed.getFeedNo() %>"/>
-            				<button class="delete-btn">
-            					<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
-            				</button>
-            				<button class="update-btn">
-            					<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
-            				</button>
-            		<%} %>
-            			</div>
-            			<% if(fileList!=null){%>
- 						<div class="download-back">
-	            			<ul class="file-download">
- 					
-            			<%for(FeedFile ff:fileList){
-            			if(ff.getFeedNo()==feed.getFeedNo()){ %>
-            					<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
-            			<%		}
-            				}%>
-            				</ul>
-            			</div>
-            			<% }%>
             		</div>
             	<div class="feed-body">
+            		<div>
+            		<%if(feed.getMemberNo()==loginMember.getMemberNo()){ %>
+            			<input type="hidden" class="feed-no-update" value="<%=feed.getFeedNo() %>"/>
+            			<button class="delete-btn">
+            				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
+            			</button>
+            			<button class="update-btn">
+            				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+            			</button>
+            		<%} %>
+            		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=feed.getFeedContent() %></textarea>
-            		
-            			<% for(FeedFile ff:fileList){
+            		<% if(fileList!=null){%>
+ 
+            		<ul class="file-download">
+            		<%
+            		for(FeedFile ff:fileList){
+            			if(ff.getFeedNo()==feed.getFeedNo()){ %>
+            		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+            		<%}
+            			}%>
+            			
+            		</ul>
+            		<% }%>
+            		<% for(FeedFile ff:fileList){
     						if(ff.getFeedNo()==feed.getFeedNo()){%>
-    					<div class="feed-pics">
-    	                	<button class="prev">❮</button>
+    						<div class="feed-pics">
+    	                		<button class="prev">❮</button>
     	                		<ul class="media-carousel">
     						<%
     							break;
     						}
 	            		}
             			%>
+            			
             			<% for(FeedFile ff:fileList){ 
             				if(ff.getFeedNo()==feed.getFeedNo()&&ff.getFeedNewFilePath()!=null){
             					if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
@@ -76,14 +76,16 @@
     						if(ff.getFeedNo()==feed.getFeedNo()){%>	
                 				</ul>
                 				<button class="next">❯</button>
-            			</div>
-            			<div class="indi-wrap-div" style="text-align: center">
+            				</div>
+            				<div class="indi-wrap-div" style="text-align: center">
+    
                 			<ul class="indi-wrap">
                 		<%
     							break;
     						}
 	            		}
-            			%>	
+            			%>
+                			
                 		<% for(FeedFile ff:fileList){ 
             				if(ff.getFeedNo()==feed.getFeedNo()){%>
             					<li class="feed-pic-indi"></li>
@@ -95,7 +97,7 @@
     						if(ff.getFeedNo()==feed.getFeedNo()){%>	
                 			
                 			</ul>
-    					</div>
+    						</div>
                 		<%
     							break;
     						}
