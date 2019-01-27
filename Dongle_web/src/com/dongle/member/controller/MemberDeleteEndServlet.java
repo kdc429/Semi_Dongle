@@ -32,6 +32,11 @@ public class MemberDeleteEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String userid = request.getParameter("userId");
+		String isAdmin="";
+		if(request.getParameter("isAdmin")!=null)
+		{
+			isAdmin=request.getParameter("isAdmin");
+		}
 		
 		Member m = new Member();
 		m.setMemberId(userid);
@@ -45,8 +50,17 @@ public class MemberDeleteEndServlet extends HttpServlet {
 		
 		if(result>0)
 		{
-			msg="회원탈퇴을 완료했습니다.";
-			loc="/";
+			if(isAdmin.equals("true"))
+			{
+				msg="회원탈퇴을 완료했습니다.";
+				String script="self.close();opener.location.reload();";
+				request.setAttribute("script", script);
+			}
+			else
+			{
+				msg="회원탈퇴을 완료했습니다.";
+				loc="/";
+			}
 		}
 		else 
 		{

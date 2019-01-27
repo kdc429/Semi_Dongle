@@ -71,6 +71,47 @@ public class AdminDao {
 		}
 		return memberList;
 	}
+	
+	public Member selectMember(Connection conn, int memberNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m= null;
+		String sql=prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				m = new Member();
+				m.setMemberNo(rs.getInt("member_no"));
+				m.setMemberId(rs.getString("member_id"));
+				m.setMemberPwd(rs.getString("member_pwd"));
+				m.setMemberName(rs.getString("member_name"));
+				m.setGender(rs.getString("member_gen"));
+				m.setSsn(rs.getString("member_ssn"));
+				m.setPhone(rs.getString("member_phone"));
+				m.setAddress(rs.getString("member_address"));
+				m.setEmail(rs.getString("member_email"));
+				m.setEnrollDate(rs.getDate("member_enroll_date"));
+				m.setBlackList(rs.getString("blacklist_yn"));
+				m.setReportCount(rs.getInt("report_member_count"));
+			
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
 	/* 멤버리스트 검색 */
 	public List<Member> selectMemberId(Connection conn, String searchKeyword)
 	{
@@ -1243,8 +1284,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1283,8 +1324,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1322,8 +1363,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1361,8 +1402,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1393,16 +1434,15 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + searchKeyword + "%");
-			pstmt.setString(2, "%" + searchKeyword + "%");
-			pstmt.setString(3, "%" + searchKeyword + "%");
+			
 			rs = pstmt.executeQuery();
 			while(rs.next())
 			{
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1482,7 +1522,11 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(!searchType.equals(""))
+			if(searchType.equals("dongleEnDate"))
+			{
+				pstmt.setString(1, searchKeyword);
+			}
+			else if(!searchType.equals(""))
 			{
 				System.out.println("2");
 				System.out.println(sql);
@@ -1497,8 +1541,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1578,11 +1622,9 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -1599,8 +1641,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1680,11 +1722,9 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -1701,8 +1741,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1781,12 +1821,9 @@ public class AdminDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -1803,8 +1840,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1884,11 +1921,9 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -1905,8 +1940,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -1986,11 +2021,9 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -2007,8 +2040,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -2088,11 +2121,9 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -2109,8 +2140,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -2190,11 +2221,9 @@ public class AdminDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -2211,8 +2240,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));
@@ -2291,12 +2320,9 @@ public class AdminDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			
-			if(searchType.equals("metro"))
+			if(searchType.equals("dongleEnDate"))
 			{
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
-				pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setString(1, searchKeyword);
 			}
 			else if(!searchType.equals(""))
 			{
@@ -2313,8 +2339,8 @@ public class AdminDao {
 				ListGroup g = new ListGroup();
 				g.setDongleName(rs.getString("group_name"));
 				g.setManagerId(rs.getString("member_id"));
-				g.setTopic(rs.getString("topic_ctg_name"));
-				g.setAddress(rs.getString("loc_metro_name") + " " + rs.getString("loc_area_name") + " " + (rs.getString("loc_town_name")==null?"":rs.getString("loc_town_name")));
+				g.setTopic(rs.getString("topic_ctg_code"));
+				g.setAddress(rs.getString("loc_ctg_code"));
 				g.setActiveDate(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
 				g.setMaxAge(rs.getInt("max_age"));

@@ -187,10 +187,3 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
    <br><br>
 </div>
 
-<!-- modal-container 모달 들어갈 곳->>(메인으로 이동함!)-->
-<!-- <div class="modal-div">
-   <div class="dialog" id="modal-container">
-      <div class="modal-content">
-      </div>
-      </div>
-</div> -->

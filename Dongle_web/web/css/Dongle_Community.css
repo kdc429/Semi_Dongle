@@ -140,7 +140,7 @@ div.logo h2 a{text-decoration: none;}
 .profile_btn{
 	height: 15px;
 	width: 15px;
-	margin-top:20px;
+	margin-top:10px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -205,6 +205,3 @@ div.logo h2 a{text-decoration: none;}
  	justify-content: center;
  	align-items: center;
  }
-.tbl{
- 	left: 45%;
-}

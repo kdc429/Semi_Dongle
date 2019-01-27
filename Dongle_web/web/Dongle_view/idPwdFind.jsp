@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="/error.jsp" %>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*,com.dongle.main.model.vo.*, com.dongle.member.model.vo.Member" %>
 <!DOCTYPE html>
 <%

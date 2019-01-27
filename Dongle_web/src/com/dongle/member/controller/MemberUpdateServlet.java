@@ -45,6 +45,11 @@ public class MemberUpdateServlet extends HttpServlet {
 		
 		
 
+		String isAdmin = "";
+		if(request.getParameter("isAdmin")!=null)
+		{
+			isAdmin = request.getParameter("isAdmin");
+		}
 //		Member m=new Member(userId,password,userName,gender,ssn,phone,address,email, null, 0, 0);
 		
 		Member m=new Member();
@@ -58,21 +63,30 @@ public class MemberUpdateServlet extends HttpServlet {
 		Member loginMember = new MemberService().selectMember(m);
 		int result=new MemberService().memberUpdate(m);
 		
+		
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";
-		
 		if(result>0)
 		{
-			msg="회원정보수정을 완료했습니다.";
-			loc="/login?userId="+m.getMemberId()+"&password="+loginMember.getMemberPwd();
-			/*loc="/Dongle_view/memberView?userId="+m.getMemberId();*/
+			if(isAdmin.equals("true"))
+			{
+				msg="회원정보수정을 완료했습니다.";
+				String script="self.close();opener.location.reload();";
+				request.setAttribute("script", script);
+			}
+			else
+			{
+				msg="회원정보수정을 완료했습니다.";
+				loc="/Dongle_view/memberView?userId="+m.getMemberId();
+			}
 		}
 		else 
 		{
 			msg="회원정보수정을 실패하였습니다.";
 			loc="/Dongle_view/memberView.jsp";
 		}
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		//페이지 포워딩

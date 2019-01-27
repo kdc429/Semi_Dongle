@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.*,com.dongle.group.model.vo.*, com.dongle.member.model.vo.Member,
 com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.model.vo.Member" %>
-<%
-   Group g = (Group)request.getAttribute("group");
-   //Member loginMember = (Member)request.getAttribute("loginMember");
-   GroupMember gm = (GroupMember)request.getAttribute("groupMember");
-   int result = (int)request.getAttribute("result");
-   int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-   List<GalleryPath> galList = (List)request.getAttribute("galList");
-   //List<Board> list=(List)request.getAttribute("list");
- 
-%>
 
+<%
+	Group g = (Group)request.getAttribute("group");
+	List<MultiLocation> locList = (List)request.getAttribute("locList");
+	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
+	//Member loginMember = (Member)request.getAttribute("loginMember");
+	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
+	int result = (int)request.getAttribute("result");
+	int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+	List<GalleryPath> galList = (List)request.getAttribute("galList");
+%>
 <!DOCTYPE html>
 <link rel='icon' href='https://i.imgur.com/8k8yVjE.png'>
 <html lang="en">
@@ -27,15 +28,11 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
-
    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
    <link href="<%=request.getContextPath() %>/css/Dongle_Community.css" rel="stylesheet">
    <link href="<%=request.getContextPath()%>/css/feed.css" rel="stylesheet">
-
    <script src="./lightslider/js/lightslider.js"></script> 
    <!-- image slide -->
    <link rel="stylesheet"  href="./lightslider/css/lightslider.css"/>
@@ -47,13 +44,28 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 <style>
    section div#mem_list_div table#tbl{
       margin-top: 20px;
+      margin-left: 70px;
+      width: 550px;
    }
    table#tbl>tr{
-      border : 1px solid darkgray;      
+       
+   }
+   table#tbl>tr th{
+      text-align: center;
+      padding-left: 10px;
+      padding-right: 10px;   
    }
    table#tbl>td
    {
       border: 1px solid lightgray;
+      padding-right: 5px;
+      padding-left: 5px;
+   }
+   table#tbl #tbl_img{
+       width: 100px;
+       height: 100px;
+       border-radius: 50%;
+       padding: 5px 0 5px 0;
    }
    section div#mem_list_div table#tbl>tr th,td{text-align:center;}
    
@@ -165,6 +177,8 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 		font-weight: bold;
 		margin-left: -5px;
    }
+   
+   
 </style>
 
 <body>
@@ -199,7 +213,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
            }
         });
      });
-	
+
 	$(function(){
 	   $('.boardView-btn').click(function(){
 	      console.log($(this).children('input').val());
@@ -216,6 +230,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 	   });
 	});
 </script>
+
     <div class='back'>
         <!-- 로고 헤더 -->
         <header>
@@ -239,10 +254,10 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             style='height: 100vh; background-color: rgb(228, 228, 228);margin-top:45px;'>
             
             <div class="sideitem1"
-               style="left: 10%; right: 10%; height: 250px; margin: 5px 0 0 8px;">
+               style="left: 10%; right: 10%; width:160px; height: 250px; margin: 5px 0 0 8px;">
                <!-- 동글 프로필 -->
 
-               <img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
+               <img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>" style="width: 155px; height: 150px;">
                
                <!-- 동글이름 -->
                <p class="dongle_name" style="margin-bottom: 0;"><%=g.getGroupName()%></p>
@@ -260,7 +275,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             <!-- 회원정보 -->
             <%if(gm!=null){ %>
             <div class="user_info">
-               <table id="user_info_tb" style="width:138px; margin-right: 8px; border: 1px solid lightgray;">
+               <table id="user_info_tb" style="width:138px; margin-left: 10px; border: 1px solid lightgray;">
                   <tr>
                   <td style="width:65px" rowspan="2">
 
@@ -282,7 +297,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             </div>
             <!-- 소개글 -->
             <div class="sideitem2"
-               style='margin-top:90px; right: 10%; height: 150px'>
+               style="margin-top:90px; margin-left:10px; right: 10%; width:150px; height: 150px; font-family: '나눔스퀘어라운드 Regular';" >
                <%=g.getGroupIntro() %>
             </div>
          </div>
@@ -308,14 +323,14 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
  
  $('#dongle_mem_btn').click(function(){
      $.ajax({
-        url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
+       url:"<%=request.getContextPath()%>/memberList?groupNo=" + <%=g.getGroupNo()%>,
         type:"get",
         dataType:"json",
         success:function(data){
            $('#content-div').html(data);
            var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
            //var h2_main = $('<h2></h2>');
-           var tbl = $('<table id="tbl"></table>');
+           var tbl = $('<table id="tbl" style="margin-left:70px; width:550px;"></table>');
            var thead="<tr style='font-size:18px;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
            <%-- var h2_txt="<%=g.getGroupName()%>"+"의 멤버보기"; --%>
             var thtml="";
@@ -324,9 +339,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                    /* var tbody= "<tr>"; */
                    thtml+="<tr>";
                    thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImagePath']+"'/></td>";
-                   thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
+                   thtml+="<td style='padding-right:10px;'>"+data[i]['groupMemberNickname']+"</td>";
                    /* thtml+=tbody; */
-                   thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
+                   thtml+="<td style='padding-right:10px;'>"+data[i]['groupMemberEnrollData']+"</td>";
                    thtml+="</tr>";
            }
            console.log(thtml);
@@ -348,11 +363,10 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 
                 <div class="sider" style='height:100vh; background-color:rgb(228, 228, 228)'>
                    <!-- 메뉴 버튼 -->
-                    <button class='menu-btn' onclick="comunnityHome();">HOME</button><br>
+                    <button class='menu-btn' id='home-btn'onclick="comunnityHome();">HOME</button><br>
                     <button class='menu-btn' id="board-btn">공지사항</button><br>
                     <button class='menu-btn' id="feed-btn">피드</button><br>
                     <button class='menu-btn' id="gallery-btn" >갤러리</button><br>
-                    <button class='menu-btn' id="calendarview">일정</button><br>
                     <%if(loginMember.getMemberNo() == g.getMemberNo()){ %>
                     	<button class='menu-btn' id='manager-menu-btn'>동글 관리</button><br>
                     <%} %>
@@ -389,14 +403,14 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
               var sp = "<span id='header' style='text-align:center;'>"+"</span>";
               sp+="<br/>"+"<br/>";
               sp+="<div id='mem_list_div' style='padding:0 0 0 30%';>"+"</div>";
-              var h = "<h2>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
-              var tbl = $('<table id="tbl" style="margin-left:200px;"></table>');
-              var thead="<tr style='font-size:18px; background-color: #E1E1E1;'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
+              var h = "<h2 style='margin-top:100px;'>"+"<%=g.getGroupName()%>"+"의 멤버보기"+"</h2>";
+              var tbl = $('<table id="tbl" style="margin-left:70px; width:550px;"></table>');
+              var thead="<tr style='font-size:20px; height:50px; background-color:rgba(234,233,233,0.4);'><th>프로필</th><th>닉네임</th><th>가입일</th></tr>";
               var thtml="";
               for(var i = 0; i < data.length; i++)
               {
 					thtml+="<tr>";
-                  thtml+="<td><img src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImageNewPath']+"'/></td>";
+                  thtml+="<td><img id='tbl_img' src='<%=request.getContextPath()%>/images/member_img/"+data[i]['groupMemberImageNewPath']+"'/></td>";
                   thtml+="<td>"+data[i]['groupMemberNickname']+"</td>";
                   thtml+="<td>"+data[i]['groupMemberEnrollData']+"</td>";
                   thtml+="</tr>";
@@ -443,11 +457,10 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                success:function(data){
                   $('#content-div').html(data);
                   //해당 div를 ajax로 바꾼다는 의미.
-                  
+/*                   
                   $('#gallery-btn').css('background-color','#fff');
                   $('#gallery-btn').css('color','#333');
-                  $("#board-btn").css('background-color','rgb(255,234,184)');
-                  $("#board-btn").css('color','white');           
+                  $("#board-btn").css('background-color':'rgb(255,234,184)','color':'white');    */       
                   
                }
             });

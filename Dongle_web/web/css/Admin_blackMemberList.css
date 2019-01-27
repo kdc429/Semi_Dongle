@@ -13,6 +13,7 @@ div#blacklist-container {
 }
 
 #tbl-member-black {
+	width: 250px;
 	display: block;
 	border-collapse: collapse;
 	border: 1px solid black;
@@ -24,6 +25,7 @@ div#blacklist-container {
 	border: 1px solid black;
 	border-top : 0px;
 	border-left : 0px;
+	border-right : 0px;
 	background-color: gray;
 	text-align: center;
 	padding: 6px;
@@ -34,6 +36,7 @@ div#blacklist-container {
 	border: 1px solid black;
 	border-left : 0px;
 	border-top: 0px;
+	border-right: 0px;
 	text-align: left;
 	padding: 6px;
 	border-collapse: collapse;
@@ -57,12 +60,17 @@ div#blacklist-container {
 	width: 100px
 }
 
-#tbl-member-black th:nth-of-type(3), #tbl-member-black td:nth-of-type(3)
-	{
+#tbl-member-black th:nth-of-type(3)
+{
+	width: 120px
+}
+#tbl-member-black td:nth-of-type(3)
+{
 	width: 100px
 }
 
 #tbl-member-nonblack {
+	width: 250px;
 	display: block;
 	border-collapse: collapse;
 	border: 1px solid black;	
@@ -74,6 +82,7 @@ div#blacklist-container {
 	border: 1px solid black;
 	border-top : 0px;
 	border-left : 0px;
+	border-right: 0px;
 	background-color: gray;
 	text-align: center;
 	padding: 6px;
@@ -84,6 +93,7 @@ div#blacklist-container {
 	border: 1px solid black;
 	border-top: 0px;
 	border-left : 0px;
+	border-right: 0px;
 	text-align: left;
 	padding: 6px;
 	border-collapse: collapse;
@@ -108,14 +118,15 @@ div#blacklist-container {
 	width: 100px
 }
 
-#tbl-member-nonblack th:nth-of-type(3), #tbl-member-nonblack td:nth-of-type(3)
+#tbl-member-nonblack th:nth-of-type(3)
+{
+	width: 120px
+}
+#tbl-member-nonblack td:nth-of-type(3)
 	{
 	width: 100px
 }
-#tbl-member-nonblack td:nth-last-of-type(0)
-{
-	border-bottom:0px;
-}
+
 
 button#add-btn {
 	float: left;
