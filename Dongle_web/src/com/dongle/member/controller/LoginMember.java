@@ -23,7 +23,6 @@ import com.dongle.member.model.vo.Member;
 @WebServlet("/login")
 public class LoginMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -31,21 +30,18 @@ public class LoginMember extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("userId");//입력한 아이디	
 		String pw = request.getParameter("password");//입력한 패스워드
 		MemberService ms = new MemberService();
 		GroupService gs= new GroupService();
 		Member m = new Member();
 		m.setMemberId(id);
-		m.setMemberPwd(pw);
-		
+		m.setMemberPwd(pw);		
 
 		Member data = ms.selectMember(m);
 		List<Group> joinList=gs.selectGroup(id);
@@ -67,13 +63,8 @@ public class LoginMember extends HttpServlet {
 				// 로그인 성공
 				System.out.println("로그인성공!");
 				// 쿠키이용하여 회원아이디 저장하기
-				
-
 				view = "Dongle_view/main.jsp";// 메인화면으로 
-
-//				request.setAttribute("LoginMember", data);
 				// 로그인이 성공했으므로 session객체에 값을 넣고 유지
-
 				HttpSession session = request.getSession();// 세션생성~!
 				session.setAttribute("loginMember", data);
 				request.setAttribute("list", joinList);
@@ -81,7 +72,6 @@ public class LoginMember extends HttpServlet {
 				request.setAttribute("rankList", rankList);
 				RequestDispatcher rd = request.getRequestDispatcher(view);
 				rd.forward(request, response);
-
 			} else {
 				// 패스워드가 일치 하지 않음
 				msg = "비밀번호가 일치하지 않습니다";
@@ -90,12 +80,9 @@ public class LoginMember extends HttpServlet {
 				request.setAttribute("msg", msg);
 				RequestDispatcher rd = request.getRequestDispatcher(view);
 				rd.forward(request, response);
-
 			}
-
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

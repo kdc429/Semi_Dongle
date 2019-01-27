@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link href="<%=request.getContextPath()%>/Dongle_css/memberView.css"	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/Dongle_css/memberView.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/Dongle_css/Login.css"	rel="stylesheet">
 
 <!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> -->
@@ -15,6 +15,7 @@
 
 <%
 	Member m=(Member)request.getAttribute("member");
+	String pw = m.getMemberPwd();
 	String id=m.getMemberId();
 	String name=m.getMemberName();
 	String ssn=m.getSsn();
@@ -76,7 +77,8 @@
 						<div class='find_btn' style="margin: 10px 100px 0 0">
 							<button type="button" class="btn btn-default" onclick="fn_update_member();">정보수정</button>
 							<button type="button" class="btn btn-default" onclick="fn_update_password();">비밀번호 변경</button>
-							<button type="button" class="btn btn-default"onclick="confirmDelete();">탈퇴</button>
+							<button type="button" class="btn btn-default" onclick="confirmDelete();">탈퇴</button>
+							<button type="button" class="btn btn-default" onclick="resetMemberView()">취소</button>
 						</div>
 					</td>
 				</tr>
@@ -91,6 +93,12 @@
 			var status="left=200px, top=200px, width=400px, height=210px";
 			var popUp=open(url,title,status);
 		}
+		function resetMemberView(){
+			var frm=$('#memberFrm');
+			var url="<%=request.getContextPath()%>/login?userId=<%=id%>&password=<%=pw%>";
+			frm.attr('action',url);
+			frm.submit();		
+		}
 
 		function fn_update_validate(){
 			
@@ -99,17 +107,15 @@
 		//회원정보수정했을때 동작
 		function fn_update_member(){
 			
-			var frm=$('#memberFrm');
-			
+			var frm=$('#memberFrm');			
 			var url="<%=request.getContextPath()%>/memberUpdate";
-			frm.attr('action',url);
-			
+			frm.attr('action',url);			
 			frm.submit();
 		}
 	
 		//회원 탈퇴
 		
-		function confirmDelete(){
+		function confirmDelete(){ln
 			
 			var dele=$('#memberFrm');
 			

@@ -37,12 +37,13 @@ public class MemberUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userId=request.getParameter("userId");
-		String password=request.getParameter("password");
 		String userName=request.getParameter("userName");	
 		String ssn=request.getParameter("age");
 		String phone=request.getParameter("phone");
 		String address=request.getParameter("address");
 		String email=request.getParameter("email");
+		
+		
 
 //		Member m=new Member(userId,password,userName,gender,ssn,phone,address,email, null, 0, 0);
 		
@@ -54,6 +55,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		m.setEmail(email);
 		m.setPhone(phone);
 		
+		Member loginMember = new MemberService().selectMember(m);
 		int result=new MemberService().memberUpdate(m);
 		
 		String msg="";
@@ -63,7 +65,8 @@ public class MemberUpdateServlet extends HttpServlet {
 		if(result>0)
 		{
 			msg="회원정보수정을 완료했습니다.";
-			loc="/Dongle_view/memberView?userId="+m.getMemberId();
+			loc="/login?userId="+m.getMemberId()+"&password="+loginMember.getMemberPwd();
+			/*loc="/Dongle_view/memberView?userId="+m.getMemberId();*/
 		}
 		else 
 		{

@@ -260,7 +260,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             <!-- 회원정보 -->
             <%if(gm!=null){ %>
             <div class="user_info">
-               <table id="user_info_tb" style="width:138px" border="1px solid black">
+               <table id="user_info_tb" style="width:138px; margin-right: 8px; border: 1px solid lightgray;">
                   <tr>
                   <td style="width:65px" rowspan="2">
 

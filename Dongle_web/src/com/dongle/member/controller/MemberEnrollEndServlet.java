@@ -78,7 +78,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		else
 		{
 			msg="회원가입을 실패하였습니다.!";
-			loc="/Dongle_view/enrollMember.jsp";
+			loc="/";
 		}
 		//응답객체에 데이터넣어야함
 		request.setAttribute("msg", msg);

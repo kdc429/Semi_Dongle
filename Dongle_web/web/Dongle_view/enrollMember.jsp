@@ -105,7 +105,7 @@
  <div class="btn">
     <button type="submit" style="font-family:'나눔스퀘어라운드 Regular'; margin-left:150px" class="btn btn-primary" >가입</button>
  </div>
- <button type="reset" style="font-family: '나눔스퀘어라운드 Regular';" class="btn btn-primary">취소</button>
+ <button style="font-family: '나눔스퀘어라운드 Regular';" class="btn btn-primary" id='enroll-reset-btn' onclick="location.href='<%=request.getContextPath()%>/index.jsp'">취소</button>
 
    </form>
    </div>
@@ -207,6 +207,12 @@ function fn_checkduplicate(){
    checkIdDuplicateFrm.method="post";
    checkIdDuplicateFrm.submit();      
 }
+
+$(document).ready(function(){
+	$('#enroll-reset-btn').click(function(){
+		clearInput();
+	})
+});
 </script>
 </body>
 </html>

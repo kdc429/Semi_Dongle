@@ -54,7 +54,7 @@ public class UpdatePasswordEndServelt extends HttpServlet {
 			{
 				msg="비밀번호 변경 성공!";
 				String script="self.close()";
-				request.setAttribute("script", script);
+				request.setAttribute("script", script);			
 			}
 			else 
 			{
