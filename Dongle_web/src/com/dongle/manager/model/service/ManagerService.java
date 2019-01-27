@@ -228,4 +228,21 @@ public class ManagerService {
 		close(conn);
 		return result;
 	}
+	public int insertDongle(int memberNo, Group g)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().insertDongle(conn, memberNo, g);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
 }

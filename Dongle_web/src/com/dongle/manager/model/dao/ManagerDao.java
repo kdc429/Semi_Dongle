@@ -8,10 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dongle.feed.model.vo.FeedNoResult;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.DongleRptMember;
@@ -473,6 +475,58 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public int insertDongle(Connection conn, int memberNo, Group g)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		int groupNo = 0;
+		Statement stmt=null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("insertDongle");
+		try
+		{	
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, g.getGroupName());
+			pstmt.setString(3, g.getTopicCode());
+			pstmt.setString(4, g.getLocCtgCode());
+			pstmt.setString(5, g.getGroupDateCtg());
+			pstmt.setInt(6, g.getMinAge());
+			pstmt.setInt(7, g.getMaxAge());
+			pstmt.setString(8, g.getGroupImageOldPath());
+			pstmt.setString(9, g.getGroupImageNewPath());
+			pstmt.setString(10, g.getGroupIntro());
+			
+			
+			result = pstmt.executeUpdate();
+			
+			if(result>0) {
+				String sql2="SELECT SEQ_GROUP_NO.CURRVAL AS NO FROM DUAL";
+				stmt=conn.createStatement();
+				rs=stmt.executeQuery(sql2);
+				
+				if(rs.next()) {
+					groupNo = (rs.getInt("no"));
+				}
+			}
+			
+			
+			
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return groupNo;
 	}
 	
 }
