@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.ListGroup;
 import com.dongle.member.model.vo.Member;
 
@@ -2517,5 +2518,76 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return blackList;
+	}
+	
+	public int editPickUpdate(Connection conn,EditPickGroup ep)
+	{
+		PreparedStatement pstmt = null;
+		int rs =0;
+		String sql= prop.getProperty("editPickUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ep.getEditOldFilePath());
+			pstmt.setString(2, ep.getEditNewFilePath());
+			pstmt.setString(3, ep.getEditContent());
+			pstmt.setInt(4, ep.getGroupNo());
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return rs;
+	}
+	
+	public int editPickUpdateContent(Connection conn,EditPickGroup ep)
+	{
+		PreparedStatement pstmt = null;
+		int rs =0;
+		String sql= prop.getProperty("editPickUpdateContent");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ep.getEditContent());
+			pstmt.setInt(2, ep.getGroupNo());
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return rs;
+	}
+	
+	public int editPickChange(Connection conn, EditPickGroup ep,int newGroupNo)
+	{
+		PreparedStatement pstmt = null;
+		int rs =0;
+		String sql= prop.getProperty("editPickChange");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ep.getEditOldFilePath());
+			pstmt.setString(2, ep.getEditNewFilePath());
+			pstmt.setString(3, ep.getEditContent());
+			pstmt.setInt(4, newGroupNo);
+			pstmt.setInt(5, ep.getGroupNo());
+			rs=pstmt.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return rs;
 	}
 }

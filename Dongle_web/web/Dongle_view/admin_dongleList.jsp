@@ -44,7 +44,7 @@
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px">
     	<li><a href="<%=request.getContextPath() %>/admin/memberList">회원 리스트 관리</a></li>
     	<li class="active"><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
-    	<li><a href="#">메인 관리</a></li>
+    	<li><a href="<%=request.getContextPath()%>/admin/editpickForm">메인 관리</a></li>
    		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
  	</ul>
 	<h2>동글 리스트 관리</h2>
@@ -131,7 +131,7 @@
 					for(ListGroup g : dongleList) {
 				%>
 				<tr>
-					<td title="<%=g.getDongleName()%>"><%=g.getDongleName() %></td>
+					<td title="<%=g.getDongleName()%>"><%=g.getDongleName().length()>9?g.getDongleName().substring(0,9)+"...":g.getDongleName() %></td>
 					<td title="<%=g.getManagerId()%>"><%=g.getManagerId() %></td>
 					<td title="<%=g.getTopic()%>"><%=g.getTopic().length()>6?g.getTopic().substring(0,6)+"...":g.getTopic() %></td>
 					<td title="<%=g.getAddress()%>"><%=g.getAddress().length()>14?g.getAddress().substring(0,14)+"...":g.getAddress() %></td>

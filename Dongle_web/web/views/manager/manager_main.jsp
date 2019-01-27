@@ -27,6 +27,62 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 <!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script>
+	var topicCnt = 0;
+	var topicArr = [];
+	var topicFlag = false;
+	$(function(){
+		$("#addtopic-btn").click(function(){
+			if(topicCnt > 2)
+			{
+				alert("토픽은 최대 3개만 가능합니다.")	
+			}
+			else
+			{
+				var topicCode = $("#selectTopic option:selected").val();
+				var topicName = $("#selectTopic option:selected").text();
+				
+				for(var i = 0; i < topicArr.length; i++)
+				{
+					if(topicArr[i] == topicName)
+					{
+						topicFlag = true;
+					}
+					
+				}
+				if(!topicFlag)
+				{
+					var div = $("#topic-add-div");
+					var str = "<span id='topic-span"+topicCnt+"' onclick='fn_delTopic("+topicCnt+")'><a class='aTopic'>"
+					+topicName+"&nbsp&times</a>"+"<input type='hidden' name='topicCode' value='"+topicCode+"'>"
+					+"<input type='hidden' name='topicName' value='"+topicName+"'></a></span>";
+						
+					div.append(str);
+					
+					topicArr.push(topicName);
+					console.log("topicArr" + topicArr);
+					topicCnt++; 
+					
+				}
+				else
+				{
+					alert("같은 토픽은 선택할 수 없습니다.");
+					topicFlag = false;
+				}
+				
+			}
+		});
+	});
+	
+	function fn_delTopic(index)
+	{
+		var spanId = "#topic-span" + index;
+		
+		$(spanId).remove();
+		topicCnt--;
+		
+		topicArr.splice(index,1);
+		
+	}
 	function validate(){
 		console.log($("#checkPwd").val()+" : <%=loginMember.getMemberPwd()%>");
 		if($("#checkPwd").val() != '<%=loginMember.getMemberPwd()%>')
@@ -36,9 +92,12 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 		}
 		modelFrm.submit();
 	}
+	
+	
 </script>
 <style>
 	input#address{display:"inline-block"}
+	a.aTopic{padding-right:15px;}
 </style>
 <div class="manager-container">
 	
@@ -81,18 +140,28 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 						<div class="form-group">
 							<label for="donglename">동호회 이름</label> 
 								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
-							<label for="topic">주제</label><br> 
-							<select	class="form-control" name="selectTopic" id="selectTopic" >
+							<label for="topic">토픽</label><br> 
+							<select	class="form-control" style="padding_bottm:2px; width:79%; display:inline" name="selectTopic" id="selectTopic" >
 								<%for(TopicCtg topic : topicCtg){ %>
 								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
 								<%} %>
-								<div id="topic-add-div">
+								
+							</select>
+							<button type="button" class="btn btn-info" id="addtopic-btn" style="width:20%; height:34px;">토픽 추가</button>
+							<br>
+							<div id="topic-add-div" style="height:19px">
 									
-								</div>
-							</select> <br> 
-							<label for="address">지역</label><br> 
-								<input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
-								<button type="button" id="search-address" class="btn btn-info">검색</button><br>
+							</div>
+							<br>
+							<label>지역</label><br> 
+							<select	class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectMetro" id="selectMetro" >
+								<%for(TopicCtg topic : topicCtg){ %>
+								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
+								<%} %>
+								
+							</select>
+								<%-- <input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>
+								<button type="button" id="search-address" class="btn btn-info">검색</button><br> --%>
 
 							<br> 
 							<label>활동 시간대</label><br>
@@ -106,13 +175,13 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 							</div>
 							<br>
 							<label for>연령대</label><br>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" name="minAge" id="minAge" min="1" max="100" placeholder="최소">
-							</div>
-							<div class="col-sm-1" style="padding-top:5px;">~</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" name="maxAge" id="maxAge" min="1" max="100" placeholder="최대">
-							</div>
+							
+								<input type="number" class="form-control" style="width:20%; display:inline;"name="minAge" id="minAge" min="1" max="100" placeholder="최소">
+							
+							&nbsp~&nbsp
+							
+								<input type="number" class="form-control" style="width:20%; display:inline;" name="maxAge" id="maxAge" min="1" max="100" placeholder="최대">
+							
 							<br><br><br>
 							
 							<label>소개글</label>

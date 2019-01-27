@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 /**
  * Servlet implementation class GalleryAllListServlet
@@ -40,6 +40,9 @@ public class GalleryAllListServlet extends HttpServlet {
       int galNo=Integer.parseInt(request.getParameter("galNo"));
       Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
       
+      //신고 카테고리 뽑아오기
+      List<ReportReason> relist = new GalleryService().selectReportReason();
+      System.out.println("relist"+relist);
       //해당 갤러리 리스트 뽑아오기
       List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
 
@@ -52,6 +55,7 @@ public class GalleryAllListServlet extends HttpServlet {
             System.out.println("gplst: "+gplist);
             System.out.println("gclst: "+gclist);
          }
+         request.setAttribute("relist", relist);
          request.setAttribute("gplist", gplist);
          request.setAttribute("groupNo", groupNo);
          request.getRequestDispatcher("/views/gallery/galleryModal.jsp").forward(request, response);

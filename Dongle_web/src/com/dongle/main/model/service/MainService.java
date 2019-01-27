@@ -13,14 +13,7 @@ import com.dongle.member.model.vo.Member;
 
 public class MainService {
 	
-	public List<LocationCategory> selectMetroCode()
-	{
-		Connection conn = getConnection();
-		List<LocationCategory>metroCodeList = new MainDao().selectMetroCode(conn);
-		close(conn);
-		return metroCodeList;		
-	}
-	
+
 
 
 }

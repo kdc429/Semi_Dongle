@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<meta charset="UTF-8">
 <%@ page import="com.dongle.member.model.vo.Member"%>
 
 <%
@@ -8,38 +8,43 @@
    Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 
-<script
-	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<meta charset="UTF-8">
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <style>
+#dongle_title h4{color:rgb(20,150,200);float:left;margin-left:20px;margin-top:70px;position:relative;display: block;}
 #dongle_join {
-	border: 20px solid rgb(144, 202, 135);
 	width: 500px;
-	height: 500px;
-	margin-left: 90px;
+    height: 400px;
+    margin-left: 100px;
+	position:relative;
+	margin-top:120px;
+	display: block;
+	font-family: "여기어때잘난서체";
 }
 
 .image_p {
-	border: 2px solid black;
+	border: 1px solid rgb(230,230,230);
 	width: 150px;
 	height: 150px;
-	border-radius: 40px;
-	margin-left: 155px;
-	margin-top: 50px;
+	border-radius: 100px;
+    margin-left: 155px;
+    margin-top: 50px;
 }
 
-.list {
-	width: 300px;
-	height: 50px;
-	margin-top: 50px;
-	margin-left: 75px;
-}
 
 #nickname {
-	display: inline-block width: 180px;
-	height: 25px;
+	width: 180px;
+  	height: 30px;
 }
 
 .subm {
@@ -49,34 +54,29 @@
 }
 
 #upfile {
-	padding-left: 190px;
-	padding-top: 10px;
+	padding-left: 120px;
+    padding-top: 10px;
+    font-family: "netmarble Medium";
 }
 
 #dongle_title {
-	font-size: 70px;
-	margin-left: 120px;
+	font-size: 40px;
+    margin-left: 260px;
 }
 /* 등러가는 이미지 style 클래스명 */
 .selProductFile {
 	width: 145px;
-	height: 145px;
-	border-radius: 40px;
-	padding: 3px;
+    height: 145px;
+    border-radius: 100px;
+    margin-left:2px;
+    margin-top:1px;
 }
 
 #nickbox {
 	display: inline-block;
 }
 
-#just {
-	position: relative;
-	left: 195px;
-	top: -70px;
-	width: 120px;
-	height: 25px;
-	background: white;
-}
+
 </style>
 
 
@@ -131,16 +131,28 @@
 	</script>
 
 
-<div id="dongle_title">동글 정보수정</div>
+<div id="dongle_title"><h4><b>동글 정보수정</b></h4></div>
 <form name='dongleMemberUpdate'
 	action="<%=request.getContextPath()%>/dongleMemberUpdate" method="post"
 	enctype="multipart/form-data">
-	<section>
-		<div id="container">
+	
 			<div id="dongle_join">
 				<div class="image_p"></div>
 				<input type="file" id="upfile" class="upfile" name="upfile">
-				<div class="list">
+				<div class="form-group">
+                	<input type="text" class="form-control" name="nickname" id="nickname" placeholder="닉네임" style="font-family:'나눔스퀘어라운드 Regular'; display:inline; margin-left:100px;" required>&nbsp;&nbsp;&nbsp;&nbsp;
+                	<button style="width:70px; height:30px;" class="btn btn-default" type="button" onclick="fn_checkduplicate();">중복검사</button><br/><br/>
+                	<button style="width:268px; height:30px; margin-left:100px;"class="btn btn-primary" type="submit" onclick="return password_validate();">정보 수정</button>
+                	<button style="width:268px; height:30px; margin-left:100px;"class="btn btn-primary" type="button" onclick="fn_deleteDongleMember();">동글 탈퇴</button>
+                	
+           		</div>
+           		<div class="form-group">
+                    <input type='hidden' name="idValid" value="0"/> 
+                    <input type='hidden' name="groupNo" value="<%=groupNo%>"/> 
+                    <input type='hidden' name="memberNo" value="<%=loginMember.getMemberNo()%>"/>
+           		</div>
+				
+				<%-- <div class="list">
 					<div id="just"></div>
 					<table id="nickbox">
 						<tr>
@@ -157,10 +169,9 @@
 							<td><button type="button" id="delete-btn" onclick="fn_deleteDongleMember();">동글 탈퇴</button></td>
 						</tr>
 					</table>
-				</div>
+				</div> --%>
 			</div>
-		</div>
-	</section>
+		
 </form>
 
 <form action="" name="checkdongleDuplicateFrm">

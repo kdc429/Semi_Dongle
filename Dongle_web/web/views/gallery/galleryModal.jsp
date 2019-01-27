@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath" %>
+<%@ page import="com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,
+com.dongle.member.model.vo.ReportReason,com.dongle.gallery.model.vo.GalleryPath" %>
 <%
 	List<GalleryPath> gplist=(List)request.getAttribute("gplist");
 	List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
 	int groupNo = (int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	List<ReportReason> relist = (List)request.getAttribute("relist");
 %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,19 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- 부트스트랩 -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-<link rel="stylesheet" href="<%= request.getContextPath()%>/css/gallery_style.css"> 
 <style>
 /* 모달창  */
 .close {
@@ -43,7 +33,7 @@
 /* 모달창에 있는 이미지 슬라이드  */
 * {box-sizing:border-box}
 
-body {font-family: 'a흑진주L';margin:0}
+body {font-family: 'netmarble Medium';;margin:0}
 
 /* Slideshow container */
 
@@ -174,7 +164,7 @@ padding:8px 10px 10px;
 border-bottom:1px solid #efefef;
 font-family:'a흑진주L';
 border-top:1px solid #e8e8e8;
-background-color:rgb(240,240,240);
+background-color:rgb(248,248,248);
 position:relative;
 margin-top:2px;
 }
@@ -269,9 +259,9 @@ if (n < 1) {slideIndex = slides.length}
 		</span>
 		<span class='comment_box'>
 			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
-			<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
+			<p id='btn-report' style='float:right;color:RGB(112,136,172);' >신고</p>
 			<span>&nbsp;&nbsp;      </span>
-			<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+			<%if(loginMember.getMemberId().equals("admin")||gplist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
 				<p id='deleteIgm' style='float:right;color:RGB(112,136,172);' >이미지 삭제     &nbsp; | &nbsp;</p>
 			<%} %>
 			<br/>
@@ -306,11 +296,11 @@ if (n < 1) {slideIndex = slides.length}
 		</table>
 	</div>
 	<!-- 댓글창 시작 -->
-	<div class="comment-editor">
+	<div class="comment-editor" style='background-color:rgb(248,248,248);'>
 		<ul>
-			<%if(gclist!=null){ %>
+			<%if(gclist.size()!=0){ %>
 				<%for(GalleryCommentJoin g:gclist){ %>
-					<%if(g.getGalCommentLevel()==1){ %>
+					<%if(g.getGalCommentLevel()==1&&g.getGalCommentReportStatus().equals("N")){ %>
 						<li class='level1' style="list-style:none;">
 							<span class='ico_skin thumb_profile'>
 								<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupMemberImageNewPath() %>'>
@@ -319,8 +309,9 @@ if (n < 1) {slideIndex = slides.length}
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
-									<p id='' style='float:right;color:RGB(112,136,172);' >신고</p>
-									
+									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
+									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -333,7 +324,7 @@ if (n < 1) {slideIndex = slides.length}
 							</span>
 						</li>
 					<%} 
-					else{%>
+					else if(g.getGalCommentLevel()==2&&g.getGalCommentReportStatus().equals("N")){%>
 						<li class="level2" style="list-style:none;">
 							<span class='ico_skin thumb_profile'>
 								<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=g.getGroupMemberImageNewPath() %>'>
@@ -342,7 +333,9 @@ if (n < 1) {slideIndex = slides.length}
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
-									<p style='float:right;color:RGB(112,136,172);' >신고</p>
+									<p class='btn-comment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
+									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -371,26 +364,78 @@ if (n < 1) {slideIndex = slides.length}
 				<textarea name="galCommentContent" id='galCommentContent' placeholder="소중한 댓글을 입력해주세요" tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>
 			</div>
 			<div class='comment_btn'>
-				<button type="button" id='btn-insert'>입력</button>
+				<button type="button" class='btn-insert1'>입력</button>
 			</div>
 		</fieldset>
 	</div>
+	<%if(relist!=null){ %>
+		<form id='reportFrm' name="reportFrm">
+	         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
+	         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
+	         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
+	         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
+	         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
+	         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
+	         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
+	         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
+	         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
+	         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
+	         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
+	         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
+	         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
+	         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
+	         
+          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
+	         <input type="hidden" id="reportGalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
+	         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
+	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
+	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
+	      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
+	      	 <input type="hidden" id="reportCommentNo" name="selectRecode" value=""/>
+	      </form>
+      <%} %>
 <script>
+	/* 댓글 신고하기 */
+	$(document).ready(function(){
+		$('#btn-report').click(function(e){
+			 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=500, height=300, top=200,left=500,menubar=no, status=no, toolbar=no");
+			 var reportNickName='<%=gplist.get(0).getGroupMemberNickname()%>';
+		});
+		
+		$('.btn-comment-report').click(function(e){
+			 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
+			 var reportCommentNo=$(this).siblings('[input.comment-report-no]').val();
+			 var reportCommentNickName=$(this).siblings('[input.reportCommentNickName]').val();
+			 document.getElementById('reportCommentNo').value=reportCommentNo;
+			 document.getElementById('reportNickName').value=reportCommentNickName;
+		});
+		
+	});
+	
 	/* 댓글 삭제하기 */
 	$(function(){
-		$('#btn-delete').click(function(){
-			if(!comfirm("정말로 삭제하시겠습니까?")){return;}
+		$('.btn-delete').click(function(){
+			if(!confirm("정말로 삭제하시겠습니까?")){return;}
 			else{
 				$.ajax({
 					url:"<%=request.getContextPath()%>/gallery/deleteComment",
 					data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
 						'galNo':<%=gplist.get(0).getGalNo()%>,
-						'galFileNo':<%=gplist.get(0).getGalFileNo()%>
+						'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
+						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
 					},
 					type:'post',
 					dataType:'html',
 					success:function(data){
-						$('.comment-editor').html(data);
+						if(data!=null)
+						{	
+							alert('댓글을 삭제하였습니다');
+							$('.comment-editor').html(data);
+						}
+						else
+						{
+							alert('댓글 삭제에 실패하였습니다');
+						}
 					}
 				})
 			}
@@ -417,7 +462,7 @@ if (n < 1) {slideIndex = slides.length}
 				html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 				html+="</div>";
 				html+="<div class='comment_btn'>";
-				html+="<button value='"+$(this).val()+"' type='button' id='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
+				html+="<button value='"+$(this).val()+"' type='button' class='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
 				html+="</div>"
 				html+="</fieldset>"
 				div.html(html);
@@ -441,11 +486,11 @@ if (n < 1) {slideIndex = slides.length}
 						e.preventDefault();
 						return;
 					}
-					/* var len=($(this).parent().find()).siblings('textarea').val().trim().length;
+					var len=($(this).parent().find()).siblings('textarea').val().trim().length;
 					if(len==0)
 					{
 						e.preventDefault();
-					} */
+					}
 					$.ajax({
 						url:"<%=request.getContextPath()%>/gallery/commentInsert",
 						data:{"groupNo":$('#groupNo').val(),
@@ -461,7 +506,7 @@ if (n < 1) {slideIndex = slides.length}
 						success:function(data){
 							if(data!=null)
 							{	
-								alert('댓글 등록 완료!');
+								alert('댓글을 등록하였습니다');
 								$('.comment-editor').html(data);
 							}
 							else
@@ -483,7 +528,7 @@ if (n < 1) {slideIndex = slides.length}
 		
 		/* 댓글 등록 */
 		$(function(){
-			$('#btn-insert').click(function(){
+			$('.btn-insert1').click(function(){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/gallery/commentInsert",
 					data:{"groupNo":$('#groupNo').val(),
@@ -494,7 +539,6 @@ if (n < 1) {slideIndex = slides.length}
 						"albumCode":$('#albumCode').val(),
 						"galFileNo":$('#galFileNo').val(),
 						"galCommentContent":$('#galCommentContent').val(),
-						"dataNum":2
 					},
 					type:"post",
 					success:function(data){
@@ -516,12 +560,10 @@ if (n < 1) {slideIndex = slides.length}
 </script>
 <script>
 //사진게시물 삭제하기 스크립트 입니다.
-	//앨범삭제
 	$('#deleteIgm').click(function(e){
 		if(!confirm('사진을 삭제하겠습니까?'))
 		{return;}
 		else{
-			console.log("여기 들어옴");
 			$.ajax({
 				url:"<%=request.getContextPath()%>/gallery/galleryDelete",
 				data:{'groupNo':<%=gplist.get(0).getGroupNo()%>,
@@ -550,4 +592,3 @@ if (n < 1) {slideIndex = slides.length}
 
 	});
 </script>
-

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.LocalCtg;
 import com.dongle.group.model.vo.MultiLocation;
 import com.dongle.group.model.vo.MultiTopic;
 import com.dongle.group.model.vo.TopicCtg;
@@ -44,6 +45,7 @@ public class ManagerView extends HttpServlet {
 		List<MultiTopic> topicList = new GroupService().selectGrTopic(groupNo); //해당 그룹 주제
 		
 		List<TopicCtg> topicCtg = new GroupService().selectTopicCtg();
+		List<LocalCtg> localCtg = new GroupService().selectLocalCtg();
 	
 		
 		if(loginMember==null||loginMember.getMemberNo() != managerNo) 

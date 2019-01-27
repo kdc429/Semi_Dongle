@@ -3,11 +3,11 @@
 /* albumView - 앨범화면 */
 div#album-container *{ 
 padding: 0px;
-font-family:"a흑진주B";
+font-family: 'netmarble Medium';
 }
 div#album-container form#albumFolder> table tr td.albumFolBox{
 	width:185px;
-	font-family:"a흑진주B";
+	font-family: 'netmarble Medium';
 	/* border:1px solid red; */
 	display:inline-block;
 	text-align: center;
@@ -31,11 +31,11 @@ div#album-container form#albumFolder> table tr td.albumFolBox .alImg{
 div#gallery-container{position:relative;}
 div#gallery-container *{ 
 position: relative;
-font-family:"a흑진주B";
+font-family: 'netmarble Medium';
 }
 /* div#gallery-container div#galleryList{position: relative;} */
 div#gallery-container div#galleryList> table tr td.galleryBox{
-	font-family:"a흑진주B";
+font-family: 'netmarble Medium';
 	display:inline-block;
 	text-align: center;
 	align-items: center;

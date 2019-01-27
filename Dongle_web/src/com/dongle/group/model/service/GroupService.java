@@ -11,6 +11,7 @@ import com.dongle.group.model.dao.GroupDao;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.group.model.vo.LocalCtg;
 import com.dongle.group.model.vo.MultiLocation;
 import com.dongle.group.model.vo.MultiTopic;
 import com.dongle.group.model.vo.TopicCtg;
@@ -113,6 +114,14 @@ public class GroupService {
 		List<TopicCtg> topicCtg=new GroupDao().selectTopicCtg(conn);
 		close(conn);
 		return topicCtg;
+	}
+	
+	public List<LocalCtg> selectLocalCtg()
+	{
+		Connection conn=getConnection();
+		List<LocalCtg> localCtg=new GroupDao().selectLocalCtg(conn);
+		close(conn);
+		return localCtg;
 	}
 	
 

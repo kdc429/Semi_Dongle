@@ -72,7 +72,7 @@
 	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px">
     	<li class="active"><a href="<%=request.getContextPath()%>/admin/memberList">회원 리스트 관리</a></li>
     	<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
-    	<li><a href="#">메인 관리</a></li>
+    	<li><a href="<%=request.getContextPath()%>/admin/editpickForm">메인 관리</a></li>
    		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
  	</ul>
 	<h2>회원 리스트 관리</h2>

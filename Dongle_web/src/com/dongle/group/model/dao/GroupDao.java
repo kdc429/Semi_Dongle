@@ -16,6 +16,7 @@ import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.group.model.vo.LocalCtg;
 import com.dongle.group.model.vo.MultiLocation;
 import com.dongle.group.model.vo.MultiTopic;
 import com.dongle.group.model.vo.TopicCtg;
@@ -181,7 +182,8 @@ public class GroupDao {
 			while(rs.next()) {
 				epg=new EditPickGroup();
 				epg.setGroupNo(rs.getInt("group_no"));
-				epg.setEditFilePath(rs.getString("edit_file_path"));
+				epg.setEditOldFilePath(rs.getString("edit_old_file_path"));
+				epg.setEditNewFilePath(rs.getString("edit_new_file_path"));
 				epg.setEditContent(rs.getString("edit_content"));
 				
 				editList.add(epg);
@@ -470,5 +472,38 @@ public class GroupDao {
 			close(pstmt);
 		}
 		return topicCtg;
+	}
+	
+	public List<LocalCtg> selectLocalCtg(Connection conn)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectLocalCtg");
+		List<LocalCtg> localCtg=new ArrayList<LocalCtg>();
+		LocalCtg local = null;		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				/*
+				 * local = new TopicCtg();
+				 * local.setTopicCtgCode(rs.getString("topic_ctg_code"));
+				 * local.setTopicCtgName(rs.getString("topic_ctg_name"));
+				 * 
+				 * localCtg.add(local);
+				 */
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return localCtg;
 	}
 }

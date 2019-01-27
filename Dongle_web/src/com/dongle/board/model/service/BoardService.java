@@ -26,7 +26,6 @@ public class BoardService {
 			int result=new BoardDao().updateCount(conn,boardNo);
 			if(result>0)
 			{
-				System.out.println("커밋");
 				commit(conn);
 			}
 			else
@@ -147,6 +146,38 @@ public class BoardService {
 		List<BoardComment> bclist=new BoardDao().selectBoCommentList(conn, boardNo, groupNo);
 		close(conn);
 		return bclist;
+	}
+	public int deleteBoComment (int boCommentNo)
+	{
+		Connection conn=getConnection();
+		int result = new BoardDao().deleteBoComment(conn, boCommentNo);
+		if (result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	//공지사항 코멘트 신고 후 신고여부 변경
+	public int updateBoardCommentReportStatus(int groupNo,int reportBoCommentNo)
+	{
+		Connection conn=getConnection();
+		int result = new BoardDao().updateBoardCommentReportStatus(conn, groupNo,reportBoCommentNo);
+		if (result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }
 	

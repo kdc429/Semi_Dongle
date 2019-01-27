@@ -13,7 +13,9 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	int result = (int)request.getAttribute("result");
 	int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 	List<GalleryPath> galList = (List)request.getAttribute("galList");
+	List<EditPickGroup> editList=(List)request.getAttribute("editList");
 	//List<Board> list=(List)request.getAttribute("list");
+	int editnum=0;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,11 +72,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	
 	}
 	section div#mini_board{
-		border:1px solid rgba(178,204,255,0.3); 
-		width: 300px; 
-		height: 250px;
-		margin-top: 100px;
-		margin-left: 30px;
+		border-top:1px solid rgba(0,0,0,0.2); 
+		border-bottom:1px solid rgba(0,0,0,0.2); 
+		width: 530px; 
+		height: 180px;
+		margin-top: 30px;
+		margin-left: 75px;
 		position:relative;
 		display:inline-block;
 		left : 0px;
@@ -83,25 +86,29 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 	}
 	
 	section div#mini_feed{
-	border:1px solid rgba(178,204,255,0.3); 
-	width: 300px; 
-	height: 250px; 
+	border-top:1px solid rgba(0,0,0,0.2); 
+	border-bottom:1px solid rgba(0,0,0,0.2); 
 	position:relative;
 	display:inline-block;
-	margin-top: 100px;
-	margin-left: 10px;
-	float: left;
+	width: 530px; 
+	height: 180px;
+	margin-top: 30px;
+	margin-left: 75px;
+	
 	
 	}	
 	
 	section div#mini_gallery{
 	
-		border: 1px solid rgba(178,204,255,0.3);  
-		width: 300px; 
-		height: 250px; 
+		border-top:1px solid rgba(0,0,0,0.2); 
+		border-bottom:1px solid rgba(0,0,0,0.2);  
+		width: 530px; 
+		height: 130px; 
 		margin-left:10px; 
 		display:inline-block;
-		margin-top: 150px;
+		margin-top: 20px;
+		position:relative;
+		margin-left: 75px;
 		
 	}
 	
@@ -144,7 +151,14 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 				}
 			});
 			
-			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/community/mainGallery",
+				data:{groupNo:<%=g.getGroupNo()%>},
+				dataType:"html",
+				success:function(data){
+					$('#mini_gallery').html(data);
+				}
+			});
 		});
 		
 		$(function(){
@@ -181,7 +195,27 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
                     <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2>
                 </div>
             </div>
+
+            <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:20px;z-index:3;'>
+            	<%if(loginMember.getMemberId().equals("admin")){ %>
+	            	<%for(int i=0;i<editList.size();i++){ %>
+	            		<%if(editList.get(i).getGroupNo()==groupNo){ %>
+	            			<%editnum++; %>
+	            			<img alt="" src="<%=request.getContextPath() %>/images/editor_images/groupEdit.png" style='width:30px; height:30px;position:fixed;'>
+	            			<span style='display:inline-block;margin-left:37px;margin-top:7px;position: fixed;'>에디터 선정</span>
+						<%} %>
+	            	<%} %>
+	            	<%if(editnum==0){ %>
+	            		<button id='goEdit' onclick='goEdit();' style='background-color:rgb(20,150,200); color:white;border:none;position:fixed;'>에디터픽 선정하기</button>
+            		<%} %>
+           		<%} %>
+            </div>
         </header>
+        <script>
+        	function goEdit(){
+        		location.href='<%=request.getContextPath()%>/admin/editpickForm?groupNo=<%=groupNo%>';
+        	}
+        </script>
 	<aside>
 		<div class="center">
 			<!-- 왼쪽 사이드 -->
@@ -192,8 +226,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 					style="border: 1px solid rgba(255,0,0,0.1); left: 10%; right: 10%; height: 250px;">
 					<!-- 동글 프로필 -->
 
-					<img class="profile_img" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
-
+					<img class="profile_img" style='width:165px; height:260px;' src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>">
 					
 					<!-- 동글이름 -->
 					<p class="dongle_name"><%=g.getGroupName()%></p>
@@ -259,7 +292,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 						$(this).next().slideUp();
 						flag=true;
 					}
-					
 			})
 				
 			});
@@ -268,62 +300,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 
 	</aside>
        
-       <section>
-            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
-            	<!-- <span id="header" style='text-align: center;'></span> -->
-            	<!-- <br/><br/> -->
 
-            	<!-- <div id="mem_list_div" style="padding: 0 0 0 30%;"></div> -->
-            	
-            	<!-- 동글메인이미지 -->
-            	<div id='dongle_main_img'>
-            		<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
-            	</div>
-            	<div id='mini_board'></div>
-            	<div id='mini_gallery'>갤 러 리</div>
-            	
-            	<div class="demo" style="margin-top: 50px; padding-left: 50px;">      
-			       	 <div class="item">
-			            <ul id="content-slider" class="content-slider">
-			           
-			                <li>
-			                    <img src="./images/member_img/user01.png">
-			                </li>
-			             
-			                <li>
-			                    <img src="./images/member_img/user02.png"> 
-			                </li>
-			                <li>
-			                 	<img src="./images/member_img/user03.png"> 
-			                </li>
-			                <li>
-			                    <h3>4</h3>
-			                </li>
-			                <li>
-			                    <h3>5</h3>
-			                </li>
-			                <li>
-			                    <h3>6</h3>
-			                </li>
-			                <li>
-			                    <h3>7</h3>
-			                </li>
-			                <li>
-			                    <h3>8</h3>
-			                </li>
-			                <li>>
-			                    <h3>9</h3>
-			                </li>
-			                <li>
-			                    <h3>10</h3>
-			                </li>
-			                
-			            </ul>
-			        </div>
-			     </div>	
-
-             </div>
-        </section>
         
        
        <script> 		
@@ -412,7 +389,21 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
         </aside>
 	
         <!-- 게시판 -->
+       <section>
+            <div class="main center" id="content-div"  style='width:684px; height:auto; background-color:white; align-content: center;'>
+            	
+            	<!-- 동글메인이미지 -->
+            	<div id='dongle_main_img'>
+            		<img style='width:540px; height:280px;' src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+            	</div>
+            	<div id='mini_board'></div>
+            	<div id='mini_gallery'></div>
+            	<div id='mini_feed'></div>
 
+             </div>
+             
+        </section>
+        
 <!-- 갤러리 모달창 들어갈 부분입니다 (추가해주세요) 삭제하지마요 ㅠㅠ-->
 <div class="modal-div">
 	<div class="dialog" id="modal-container">
@@ -471,6 +462,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
 			dataType:"html",
 			success:function(data){
 				$('#content-div').html(data);
+				setImage();
 			}
 		});
 	});
@@ -496,7 +488,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
     </script>
 
 </div>
-
+<div style='display: inline-block; width:1024px;height:60px;background-color:color:rgb(250,237,125);position:relative;'></div>
 
 <script>
 /* 갤러리 클릭시 매핑함수 */
