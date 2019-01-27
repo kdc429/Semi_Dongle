@@ -110,7 +110,7 @@ $(function(){
 </script>
 
 <div id="album-container">
-	<table width="370px" id="albumPlus-tbl" style='margin-left:25%;'>
+	<table width="370px" id="albumPlus-tbl" style='margin-left:20%;'>
 		<tr>
 			<td>
 				<%if(loginMember.getMemberId()!=null&loginMember.getMemberId().equals("admin")){ %>

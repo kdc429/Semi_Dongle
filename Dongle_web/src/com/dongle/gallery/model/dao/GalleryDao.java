@@ -1,4 +1,4 @@
-package com.dongle.gallery.model.dao;
+                                                 package com.dongle.gallery.model.dao;
 
 import static common.JDBCTemplate.close;
 
@@ -185,42 +185,6 @@ public class GalleryDao {
       return rs;
    }
    
-   public GroupMember checkGroupMember(Connection conn, int groupNo, int memberNo)
-   {
-      PreparedStatement pstmt=null;
-      ResultSet rs=null;
-      String sql = prop.getProperty("checkGroupMember");
-      GroupMember gm = null;
-      try {
-         pstmt=conn.prepareStatement(sql);
-         pstmt.setInt(1, groupNo);
-         pstmt.setInt(2, memberNo);
-         rs=pstmt.executeQuery();
-         while(rs.next())
-         {
-            gm= new GroupMember(
-                  rs.getInt("group_no"),
-                  rs.getInt("member_no"),
-                  rs.getString("group_member_nickname"),
-                  rs.getString("group_member_image_old_path"),
-                  rs.getString("group_member_image_new_path"),
-                  rs.getDate("group_member_enroll_date"),
-                  rs.getString("group_blacklist_yn"),
-                  rs.getInt("report_dongle_count")
-                  );
-         }
-         
-      }catch(Exception e)
-      {
-         e.printStackTrace();
-      }
-      finally {
-         close(rs);
-         close(pstmt);
-      }
-      return gm;
-   }
-   
    public List<GalleryCommentJoin> selectGalCommentList(Connection conn, int groupNo,int galFileNo,int galNo)
    {
       PreparedStatement pstmt = null;
@@ -231,7 +195,8 @@ public class GalleryDao {
       try {
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, groupNo);
-         pstmt.setInt(2, galFileNo);
+         pstmt.setInt(2, groupNo);
+         pstmt.setInt(3, galFileNo);
          rs=pstmt.executeQuery();
          while(rs.next())
          {
@@ -277,8 +242,9 @@ public class GalleryDao {
       try {
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, groupNo);
-         pstmt.setInt(2, galNo);
-         pstmt.setString(3, albumCode);
+         pstmt.setInt(2, groupNo);
+         pstmt.setInt(3, galNo);
+         pstmt.setString(4, albumCode);
          rs=pstmt.executeQuery();
          while(rs.next())
          {

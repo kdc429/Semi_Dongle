@@ -73,14 +73,6 @@ public class GalleryService {
       return rs;
    }
    
-   public GroupMember checkGroupMember(int groupNo, int memberNo)
-   {
-      Connection conn=getConnection();
-      GroupMember gm= new GalleryDao().checkGroupMember(conn,groupNo,memberNo);
-      close(conn);
-      return gm;
-      
-   }
    public List<GalleryCommentJoin> selectGalCommentList(int groupNo,int galFileNo,int galNo)
    {
       Connection conn = getConnection();

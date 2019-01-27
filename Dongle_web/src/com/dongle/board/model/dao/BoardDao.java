@@ -325,7 +325,8 @@ public class BoardDao {
          {
             pstmt=conn.prepareStatement(sql);
             pstmt.setInt(1, groupNo);
-            pstmt.setInt(2, boardNo);
+            pstmt.setInt(2, groupNo);
+            pstmt.setInt(3, boardNo);
             rs=pstmt.executeQuery();
             while(rs.next())
             {

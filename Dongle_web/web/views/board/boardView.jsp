@@ -256,7 +256,7 @@ $(document).ready(function(){
 $(function(){
    $('#comment-insert-btn').click(function(){
       $.ajax({
-         url:"<%=request.getContextPath()%>/board/boardCommentInsert?groupNo=<%=groupNo%>",
+         url:"<%=request.getContextPath()%>/board/commentInsert?groupNo=<%=groupNo%>",
          data:{"boardNo":$('#boardNo').val(),
             "boardCommentContent":$('#boardCommentContent').val(),
             "boardCommentLevel":$('#boardCommentLevel').val(),
@@ -309,7 +309,7 @@ $(function(){
                e.preventDefault();
             }
             $.ajax({
-               url:"<%=request.getContextPath()%>/board/boardCommentInsert",
+               url:"<%=request.getContextPath()%>/board/commentInsert",
                data:{"groupNo":<%=groupNo%>,
                   "boardNo":$('#boardNo').val(),
                   "boardCommentLevel":2,

@@ -59,11 +59,8 @@ top : 100px;
 .slideshow-container a.prev, a.next{
   cursor: pointer;
   position: absolute;
-  text-align : center;
   top: 20%;
-  width:10px;
   padding-right: 20px;
-  margin-top: -22px;
   color: white;
   font-weight: bold;
   font-size: 18px;
@@ -78,17 +75,10 @@ top : 100px;
 /* Position the "next button" to the right */
 
 .next {
-  margin-right:30px;
+  margin-left:520px;
   border-radius: 10px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover{
- background-color: rgba(0,0,0,0.8);
-}
-.next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
 
 /* Caption text */
 
