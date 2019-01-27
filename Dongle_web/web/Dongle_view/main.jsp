@@ -13,8 +13,35 @@
 %>
 	<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Dongle_Main.css" />
-	
-
+    <style>
+        div.body-a {font: normal 0.9em Arial;color:#222;}
+        div.header-a {display:block; font-size:1.2em;margin-bottom:100px;}
+        div.header-a a, div.header-a span {
+            display: inline-block;
+            padding: 4px 8px;
+            margin-right: 10px;
+            border: 2px solid #000;
+            background: #DDD;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            height: 20px;
+        }
+        div.header-a span {background:white;}
+        a {color: #1155CC;}
+    </style>
+    <Script>
+		$(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/admin/editpickForm2",
+				dataType:"html",
+				type:'post',
+				success:function(data){
+					$('#edit_test').html(data);
+				}
+			});
+		});
+	</Script>
 <section>
 
 	<div class="bar">
@@ -77,60 +104,21 @@
     </div>
 	<hr>
 	<!-- 에디터 픽 캐러셀 -->
-	<div class="bar">
-		<% if(loginMember.getMemberId().equals("admin")){ %>
-			<div class="set-back">
-				<button class="img-icon">
-					<span>설정</span>
-					<img class="set-img" src="<%=request.getContextPath() %>/images/button-images/userEdit.png">
-				</button>
-				<span class="sub-icon">설정</span>
-			</div>
-		<%} %>
-	</div>
-	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 에디터의 추천!</h4>
-	<div class="editorPick">
-		<h2 class="item-logo">Editor Pick's</h2>
-		<div id="carousel_section">
-			<ul>
-				<%if(editList!=null){
-					for(EditPickGroup epg : editList){ %>
-					<li>
-						<!-- 에디터 픽 선정 동글 리스트 -->
-						<form action="<%=request.getContextPath()%>/communityJoin" method="post" name="edit-pick">
-							<!-- 여기서 그룹 넘버 전송 -->
-							<div class="editor-img-back">
-								<div class="editor-img">
-									<button class="join-btn" >
-									<img class="eImg" src="<%=request.getContextPath() %>/images/editor_images/<%=epg.getEditFilePath()%>">
-									<input type="hidden" name="groupNo" value="<%=epg.getGroupNo()%>"/>
-									<input type="hidden" name="memberNo" value="<%=loginMember.getMemberNo() %>"/>
-									</button>
-								</div>
-							</div>
-						</form>
-						
-						<div class="editor-content">
-						<!-- 에디터픽 소개 글 컨텐트 -->
-							<p class="eContent"><%=epg.getEditContent()%></p>
-						</div>
-					</li>
-				<%	} 
-				}%>
-			</ul>
-		</div>
-		
+	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;margin-top:-20px;">TODAY's</h2>
+	<h1 style="font-family:'YanoljaYacheR'; text-align:left;display:inline;margin-top:-20px;text-shadow: 1px 1px 2px gray;">  &nbsp;에디터 추천</h1>
+	<div id='edit_test' style='width:1024px;height:400px;margin-top:-80px;'>
+	
 	</div>
 	<hr>
 	<!-- 분야별 랭킹 컨텐츠 -->
 	<div class="bar"></div>
 	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 가장 인기있는 동글!</h4>
 	<h2 class="item-logo">DONGLE'S RANKING</h2>
-	<div class="dongle-rank">
+	<div class="dongle-rank" style='height:auto;'>
 		
 		<% if(rankList!=null) {
 			for(Group g :rankList){%>
-		<div class="dongle-ranker">
+		<div class="dongle-ranker" >
 			
 			<div class="ranker-img-back">
 				<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>">

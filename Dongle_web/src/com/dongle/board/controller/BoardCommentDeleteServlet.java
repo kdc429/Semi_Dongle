@@ -14,7 +14,7 @@ import com.dongle.board.model.service.BoardService;
  */
 @WebServlet("/board/boardCommentDelete")
 public class BoardCommentDeleteServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -24,36 +24,36 @@ public class BoardCommentDeleteServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		/*int groupNo=Integer.parseInt(request.getParameter("groupNo"));*/
-		/*int boardNo=Integer.parseInt(request.getParameter("boardNo"));*/
-		int boCommentNo =Integer.parseInt(request.getParameter("bb"));
-		System.out.println("댓글넘버"+boCommentNo);
-		
-		int result = new BoardService().deleteBoComment(boCommentNo);		
-		
-		if(result>0)
-		{
-			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().println("댓글 삭제 성공");
-		}
-		else
-		{
-			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().println("댓글 삭제 실패");
-		}
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      /*int groupNo=Integer.parseInt(request.getParameter("groupNo"));*/
+      /*int boardNo=Integer.parseInt(request.getParameter("boardNo"));*/
+      int boCommentNo =Integer.parseInt(request.getParameter("bb"));
+      System.out.println("댓글넘버"+boCommentNo);
+      
+      int result = new BoardService().deleteBoComment(boCommentNo);      
+      
+      if(result>0)
+      {
+         response.setContentType("text/html;charset=UTF-8");
+         response.getWriter().println("댓글 삭제 성공");
+      }
+      else
+      {
+         response.setContentType("text/html;charset=UTF-8");
+         response.getWriter().println("댓글 삭제 실패");
+      }
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

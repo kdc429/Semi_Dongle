@@ -182,7 +182,8 @@ public class GroupDao {
 			while(rs.next()) {
 				epg=new EditPickGroup();
 				epg.setGroupNo(rs.getInt("group_no"));
-				epg.setEditFilePath(rs.getString("edit_file_path"));
+				epg.setEditOldFilePath(rs.getString("edit_old_file_path"));
+				epg.setEditNewFilePath(rs.getString("edit_new_file_path"));
 				epg.setEditContent(rs.getString("edit_content"));
 				
 				editList.add(epg);
@@ -265,7 +266,7 @@ public class GroupDao {
               gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
               gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
               gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
-              gm.setBlackListYN(rs.getString("blacklist_yn"));
+              gm.setBlackListYN(rs.getString("group_blacklist_yn"));
               gm.setReportDongleCount(rs.getInt("report_dongle_count"));
            }
         }catch(SQLException e) {
@@ -325,7 +326,7 @@ public class GroupDao {
 	              gm.setGroupMemberImageOldPath(rs.getString("group_member_image_old_path"));
 	              gm.setGroupMemberImageNewPath(rs.getString("group_member_image_new_path"));
 	              gm.setGroupMemberEnrollDate(rs.getDate("group_member_enroll_date"));
-	              gm.setBlackListYN(rs.getString("blacklist_yn"));
+	              gm.setBlackListYN(rs.getString("group_blacklist_yn"));
 	              gm.setReportDongleCount(rs.getInt("report_dongle_count"));
 
 				

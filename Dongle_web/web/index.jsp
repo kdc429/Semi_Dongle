@@ -15,9 +15,14 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 #btn_find{
+<<<<<<< HEAD
 	width: 215px;
 	height: 34px;
 	
+=======
+	width: 173px;
+	height: 24px;	
+>>>>>>> refs/remotes/origin/workTest
 }
 .logo-text{
 font-family: '나눔스퀘어라운드 Regular';

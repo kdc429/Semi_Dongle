@@ -162,5 +162,22 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	//공지사항 코멘트 신고 후 신고여부 변경
+	public int updateBoardCommentReportStatus(int groupNo,int reportBoCommentNo)
+	{
+		Connection conn=getConnection();
+		int result = new BoardDao().updateBoardCommentReportStatus(conn, groupNo,reportBoCommentNo);
+		if (result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
 	

@@ -5,13 +5,7 @@ com.dongle.group.model.vo.GroupMember"
 
 %>
 <%
-/*    List<GalleryPath> list = (List)request.getAttribute("list");
-
-   List<GalleryPath> allList = (List)request.getAttribute("allList"); */
-   
    List<GalleryPath> tList = (List)request.getAttribute("tList");
-   int numPerPage = (int)request.getAttribute("numPerPage");
-   String pageBar=(String)request.getAttribute("pageBar");
     Member loginMember = (Member)session.getAttribute("loginMember");
     int groupNo=(int)request.getAttribute("groupNo");
     String albumCode=(String) request.getAttribute("albumCode");
@@ -136,7 +130,8 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
    <div id="galleryList">
       <table style='margin-left:80px;'>
          <%if(tList.size()!=0){%>
-               <%for(GalleryPath t :tList){ %>
+            <%for(GalleryPath t :tList){ %>
+               <%if(t.getGalReportStatus().equals("N")){ %>
                   <%if(count%4==1){%>
                      <tr>
                      </tr>
@@ -162,6 +157,7 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
                      <%count++; %>
                   <%} %>
                <%} %>
+            <%} %>
          <%}
          else{%>
             <div style='margin-left:100px;'>
@@ -172,25 +168,5 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
 <!--    </form> -->
    </div>
    <br><br>
-   <div id="pag-div">
-      <table class='pag_table'>
-         <tr>
-               <td>
-                 <ul class="pagination" id="paging">
-                     <%-- <%=pageBar %> --%>
-                 </ul>
-                </td>
-         </tr>
-      </table>
-   </div>
-   
-   <br><br>
 </div>
 
-<!-- modal-container 모달 들어갈 곳->>(메인으로 이동함!)-->
-<!-- <div class="modal-div">
-   <div class="dialog" id="modal-container">
-      <div class="modal-content">
-      </div>
-      </div>
-</div> -->

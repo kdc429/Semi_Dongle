@@ -12,22 +12,20 @@ com.dongle.member.model.vo.Member,com.dongle.main.*" %>
 
  
 <style>
-	section h3{
+	div h4{
 		font-family: '나눔스퀘어라운드 Regular';
-		text-align : center;
+		/* text-align : center; */
 		margin : 10px;
 		color:black;
 	}
-	section table{
-		width:298px;
+	div table{
+		width: 500px;
 	}
-	#main-table-bordered-th1{
+	table#main-table-bordered tr td{
 		
 		background-color: #8EC7D0;
 		text-align: center;
-	}
-	section table.main-table-bordered>th{
-		border : 1px solid darkgray;
+		margin-left:20px;
 	}
 	
 	input.add-btn
@@ -37,33 +35,33 @@ com.dongle.member.model.vo.Member,com.dongle.main.*" %>
 		background-color:#F2CB61;
 	}
 </style>
-	<section id="main-board-container">
-		<h3 style="font-family: '나눔스퀘어라운드 Regular';">공지사항</h3>
-		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
-		 <%} %>  
-		<table class="main-table-bordered">
-			<tr id='main-table-bordered-th1'>
-				<th style="text-align: center;">번호</th>
-				<th id='mini_board_title'style="text-align: center;">제목</th>
-				<th style="text-align: center;">작성일</th>
-			</tr>
+	<div id="main-board-container">
+		<h4 style="font-family: '나눔스퀘어라운드 Regular';"><b>[ 공지사항 ]</b></h4>
+		<hr>
+		<table class="main-table-bordered" style='margin-left:17px;'>
+		<%if(list.size()!=0){ %>
 			<%for(Board b : list) {%>
-				<tr style="border: 1px solid lightgray;">
+				<tr style="border-bottom: 1px solid lightgray;">
 					<td><%=b.getBoardNo() %></td>
 					<td class="boardView-btn">
 						<%-- <a id="boardView-btn" href ="<%=request.getContextPath() %>/board/boardView?boardNo=<%=b.getBoardNo()%>&groupNo=<%=b.getGroupNo()%>"> --%>
-							<%=b.getBoardTitle()%>
+							<b><%=b.getBoardTitle()%></b>
 							<input type="hidden" name="boardNo" id="boardNo" value="<%=b.getBoardNo() %>"/>
 						<!-- </a> -->
+					</td>
+					<td>
+						<span><img src='<%=request.getContextPath()%>/images/board_images/adminstar.png' style='width:15px;height:15px;'></span>
+						<span><%=b.getBoardWriter() %></span>
 					</td>
 					<td>
 						<%=b.getBoardWriteDate()%>
 					</td>
 				</tr>
 				<%} %>
+			<%} %>
 		</table>
 		
-	</section>
+	</div>
 <script>
 $(function(){
     $('.boardView-btn').click(function(){

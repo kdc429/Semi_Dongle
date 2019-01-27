@@ -130,14 +130,13 @@ $(function(){
 		<table  style='margin-left:25%;'>
 			<%if(list.size()!=0){ %>
 				<%for(int i=0;i<list.size();i++){ %>
-					
 					<%if(count%2==1){%>
 						<tr>
 						</tr>
 						<%albumCount=0; empty=0;%>
 						<td class="albumFolBox" style='width:185px; height:202px;'>
 							<%for(int j=0;j<galList.size();j++){ %>
-								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())){ %>
+								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())&&galList.get(j).getGalReportStatus().equals("N")){ %>
 									<%if(albumCount<4){ %>
 										<%if(galList.get(j).getAlbumCode()!=null){ %>
 											<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">
@@ -164,7 +163,7 @@ $(function(){
 						<td class="albumFolBox"  style='width:185px; height:202px;'>
 							<%albumCount=0;  empty=0;%>
 							<%for(int j=0;j<galList.size();j++){ %>
-								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())){ %>
+								<%if(list.get(i).getAlbumCode().equals(galList.get(j).getAlbumCode())&&galList.get(j).getGalReportStatus().equals("N")){ %>
 									<%if(albumCount<4){ %>
 										<%if(galList.get(j).getAlbumCode()!=null){ %>
 											<img class="alImg" src="<%=request.getContextPath() %>/upload/gallery/<%=galList.get(j).getGalFileNewPath()%>">

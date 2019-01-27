@@ -2,10 +2,6 @@ package com.dongle.board.model.vo;
 
 import java.sql.Date;
 
-/**
- * @author kjh
- *
- */
 public class BoardComment {
 	
 	private int groupNo;
@@ -135,5 +131,6 @@ public class BoardComment {
 				+ ", boCommentReportStatus=" + boCommentReportStatus + ", groupMemberNickname=" + groupMemberNickname
 				+ ", groupMemberImageNewPath=" + groupMemberImageNewPath + "]";
 	}
+
 	
 }

@@ -19,20 +19,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
+#dongle_title h4{color:rgb(20,150,200);float:left;margin-left:20px;margin-top:70px;position:relative;display: block;}
 #dongle_join{
-            border: 6px solid #dddddd;
             width: 500px;
             height: 400px;
             margin-left: 100px;
-            border-radius: 10px;
-
+			position:relative;
+			margin-top:120px;
+			display: block;
+			font-family: "여기어때잘난서체";
         }
         
        .image_p{
-            border: 2px solid black;
+            border: 1px solid rgb(230,230,230);
             width: 150px;
             height: 150px;
-            border-radius: 40px;
+            border-radius: 100px;
             margin-left: 155px;
             margin-top: 50px;
         }
@@ -48,8 +50,9 @@
         }
         
         #upfile{
-            padding-left: 140px;
+            padding-left: 120px;
             padding-top: 10px;
+            font-family: "netmarble Medium";
         }
         
         #dongle_title{
@@ -60,8 +63,9 @@
         .selProductFile{
             width: 145px;
             height: 145px;
-            border-radius: 40px;
-            padding:3px;
+            border-radius: 100px;
+            margin-left:2px;
+            margin-top:1px;
         }
         
         #nickbox{
@@ -123,17 +127,17 @@
 	</script>
 
 
-<div id="dongle_title">동글 가입</div>
+<div id="dongle_title">
+	<h4><b>동글 가입하기</b></h4>
+</div>
 	<form name='donglememberjoin' action="<%=request.getContextPath()%>/donglememberjoin" method="post" enctype="multipart/form-data">
-		<section>
-	    <div id="container">
 	        <div id="dongle_join">
 	            <div class="image_p"></div>
 	            <input type="file" id="upfile" class="upfile" name="upfile" ><br/><br/>
 	            <div class="form-group">
                 	<input type="text" class="form-control" name="dongle_nickname" id="dongle_nickname" placeholder="닉네임" style="font-family:'나눔스퀘어라운드 Regular'; display:inline; margin-left:100px;" required>&nbsp;&nbsp;&nbsp;&nbsp;
                 	<button style="width:70px; height:30px;" class="btn btn-default" onclick="fn_checkduplicate();">중복검사</button><br/><br/>
-                	<button style="width:268px; height:30px; margin-left:100px;"class="btn btn-primary" type="submit" onclick="return password_validate();">가입</button>
+                	<button style="width:268px; height:30px; margin-left:100px;"class="btn btn-primary" type="submit" onclick="return password_validate();">동글 가입</button>
            		</div>
            		<div class="form-group">
                     <input type='hidden' name="idValid" value="0"/> 
@@ -161,8 +165,6 @@
 	                    </tr>
 	                </table> -->
 	            </div>
-	        </div>
-		</section>
 	</form>
 	<form action="" name="checkdongleDuplicateFrm">
 			<input type="hidden" name="dongle_nickname"/>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.member.model.vo.Member;
@@ -34,11 +35,9 @@ public class CommunityGalleryListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-/*		String albumCode = request.getParameter("albumCode");
-		int galNo=Integer.parseInt(request.getParameter("galNo"));
-		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));*/
 		
-		List<GalleryPath> galList = new GroupService().selectAllGallery(groupNo);
+		//메인 이미지로 띄우기 위한 해당 앨범의 갤러리 뽑아오기
+		List<GalleryPath> galList = new GalleryService().albumAndGalList(groupNo);
 		request.setAttribute("groupNo",groupNo);
 		request.setAttribute("galList",galList);
 		System.out.println("갤러리 : "+galList);
