@@ -81,6 +81,7 @@ background-color:white;
    
    
 </style>
+
    <section id="board-container">
       <form name="deleteFrm" method="post" enctype="multipart/form-data">
          <table class="table">
@@ -235,9 +236,8 @@ background-color:white;
 		      </form>
       <%} %>
 </section>
-      
-<script>
 
+<script>
 /* 댓글 신고하기 */
 $(document).ready(function(){
 	

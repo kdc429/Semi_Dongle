@@ -488,16 +488,19 @@ public class GroupDao {
 			
 			
 			while(rs.next()) {
-				/*
-				 * local = new TopicCtg();
-				 * local.setTopicCtgCode(rs.getString("topic_ctg_code"));
-				 * local.setTopicCtgName(rs.getString("topic_ctg_name"));
-				 * 
-				 * localCtg.add(local);
-				 */
-			}
-			
-			
+				
+				  local = new LocalCtg();
+				  local.setLocCtgCode(rs.getString("loc_ctg_code"));
+				  local.setMetroCode(rs.getString("metro_code"));
+				  local.setLocMetroName(rs.getString("loc_metro_name"));
+				  local.setAreaCode(rs.getString("area_code"));
+				  local.setLocAreaName(rs.getString("loc_area_name"));
+				  local.setTownCode(rs.getString("town_code"));
+				  local.setLocTownName(rs.getString("loc_town_name"));
+				  
+				  localCtg.add(local);
+				 
+			}	
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

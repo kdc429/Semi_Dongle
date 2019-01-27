@@ -26,6 +26,7 @@ public class PwdFindServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.getRequestDispatcher("/Dongle_view/idPwdFind.jsp").forward(request, response);
 	}
 

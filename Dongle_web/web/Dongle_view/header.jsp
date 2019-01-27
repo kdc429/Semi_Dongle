@@ -34,8 +34,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Admin_blackMemberList.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="<%=request.getContextPath() %>/css/icon.css" rel="stylesheet">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 .guide-btn{
    width:120px; 
@@ -81,6 +83,21 @@ div.user-back #logout_btn{
 </head>
 
 <body>
+	<script>
+		$(document).ready(function(){
+			$('.search-btn').on('click',function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/main/mainSearch",
+					type:"post",
+					dataType:"html",
+					success:function(data){
+						$('section').html(data);
+					}
+				})
+			})
+		})
+		
+	</script>
    <header>
         <div class="headerBack">
             <div class="bar">
@@ -107,7 +124,7 @@ div.user-back #logout_btn{
                   </script>
                </div>&nbsp;&nbsp;
             </div>
-              <button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
+              <button class="search-btn">동글 검색</button>
               <button class="guide-btn">동글 가이드</button>
         </div>
         <script>

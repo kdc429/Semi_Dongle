@@ -65,6 +65,7 @@ public class UpdatePasswordEndServelt extends HttpServlet {
 		else
 		{
 			msg="현재암호와 일치하지 않습니다!";
+
 			loc="/updatePassword?userId="+id;
 		}
 		request.setAttribute("msg", msg);

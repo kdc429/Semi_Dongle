@@ -31,10 +31,12 @@ div {
 }
 
 .headerBack {
+
    /* background : url("https://i.imgur.com/I9h56r1.png"); */
    background : url("https://i.imgur.com/ou2sfhl.png");
    width: 1024px;
    height: 191px;
+
 }
 
 .logo-back{
@@ -107,7 +109,7 @@ section>.editorPick {
 
 section>.dongle-rank {
    width: 1024px;
-   height: 300px;
+   height: auto;
 }
 
 .loginMember {

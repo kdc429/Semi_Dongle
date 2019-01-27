@@ -46,7 +46,9 @@ public class ManagerView extends HttpServlet {
 		
 		List<TopicCtg> topicCtg = new GroupService().selectTopicCtg();
 		List<LocalCtg> localCtg = new GroupService().selectLocalCtg();
-	
+		
+		System.out.println(managerNo);
+		
 		
 		if(loginMember==null||loginMember.getMemberNo() != managerNo) 
 		{
@@ -62,6 +64,7 @@ public class ManagerView extends HttpServlet {
 		request.setAttribute("locList", locList);
 		request.setAttribute("topicList", topicList);
 		request.setAttribute("topicCtg", topicCtg);
+		request.setAttribute("localCtg", localCtg);
 		
 		request.getRequestDispatcher("/views/manager/manager_main.jsp").forward(request, response);
 	}

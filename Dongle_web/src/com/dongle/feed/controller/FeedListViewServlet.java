@@ -16,7 +16,9 @@ import com.dongle.feed.model.vo.FeedFile;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.member.model.service.MemberService;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 /**
  * Servlet implementation class FeedListViewServlet
@@ -60,6 +62,7 @@ public class FeedListViewServlet extends HttpServlet {
 		List<FeedFile> feedFileList=new FeedService().selectFeedFileList(groupNo);
 		List<FeedComment> feedCommentList=new FeedService().selectFeedCommentList(groupNo);
 		List<FeedComment> level2FeedCommentList=new FeedService().selectLevel2FeedCommentList();
+		List<ReportReason> reportCategory=new MemberService().selectReportCategory();
 		request.setAttribute("loginMember", loginMember);
 		request.setAttribute("memberList",memberlist);
 		request.setAttribute("feedList", feedList);
@@ -68,6 +71,8 @@ public class FeedListViewServlet extends HttpServlet {
 		request.setAttribute("feedFileList", feedFileList);
 		request.setAttribute("feedCommentList", feedCommentList);
 		request.setAttribute("level2FeedCommentList", level2FeedCommentList);
+		request.setAttribute("reportCategory", reportCategory);
+		
 		request.getRequestDispatcher("/Dongle_Community_view/sectionFeed.jsp").forward(request, response);
 		
 	}

@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group,
 com.dongle.group.model.vo.MultiLocation, com.dongle.group.model.vo.MultiTopic,
-com.dongle.group.model.vo.TopicCtg, java.util.*" %>
+com.dongle.group.model.vo.TopicCtg, com.dongle.group.model.vo.LocalCtg,
+java.util.*" %>
 
 <%
 	int groupNo=(int)request.getAttribute("groupNo");
@@ -11,6 +12,7 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 	List<MultiLocation> locList = (List)request.getAttribute("locList");
 	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
 	List<TopicCtg> topicCtg = (List)request.getAttribute("topicCtg");
+	List<LocalCtg> localCtg = (List)request.getAttribute("localCtg");
 	
 	String address = g.getLocCtgCode();
 %>
@@ -154,10 +156,40 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 							</div>
 							<br>
 							<label>지역</label><br> 
+							
 							<select	class="form-control" style="padding_bottm:2px; width:33%; display:inline" name="selectMetro" id="selectMetro" >
-								<%for(TopicCtg topic : topicCtg){ %>
-								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
-								<%} %>
+								<%
+								String[] metroArr = new String[18];
+								int metroCnt = 0;
+								boolean flag = false;
+								for(LocalCtg local : localCtg){ 
+									for(int i = 0; i < metroCnt; i++)
+									{
+										System.out.println(flag);
+										System.out.println(local.getMetroCode());
+										System.out.println(metroArr[i]);
+										if(metroArr[i].equals(local.getMetroCode()))
+										{
+											flag = true;
+											break;
+										}
+									}
+									if(!flag)
+									{
+										metroArr[metroCnt] = local.getMetroCode();	
+										metroCnt++;
+										%>
+											<option value="<%=local.getMetroCode()%>"><%=local.getLocMetroName() %></option>
+										<%
+									}
+									else
+									{
+										flag = false;
+									}
+								}
+								%>
+							</select>
+							<select>
 								
 							</select>
 								<%-- <input type="text" class="form-control" id="address" name="address" value="<%=address %>" readonly>

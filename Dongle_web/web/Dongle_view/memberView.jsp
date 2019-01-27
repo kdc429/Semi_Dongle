@@ -31,6 +31,7 @@
 						<form name="memberFrm" id="memberFrm" method="post" onclick="return fn_update_validate();">
   						<table width="380" border="0" cellspacing="1" class="regtable">
   							<tr>
+
   								<td width="100" height="25" bgcolor="#f4f4f4">아이디</td>
 
   								<td width="130" style="padding-bottom: 5px;">

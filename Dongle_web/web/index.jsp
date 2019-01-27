@@ -14,12 +14,10 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-#btn_find{
 
+#btn_find{
 	width: 215px;
 	height: 34px;
-	
-
 }
 .logo-text{
 font-family: '나눔스퀘어라운드 Regular';
@@ -56,8 +54,7 @@ font-family: '나눔스퀘어라운드 Regular';
                		<button id="btn_find" class="btn btn-primary" style="font-family: 'netmarble Medium';" onclick="location.href='<%=request.getContextPath()%>/Dongle_view/idPwdFind.jsp'">아이디/비밀번호 찾기</button><br>
               </div>            
             </div>
-            
-
+           
         </div>
      </div>
   

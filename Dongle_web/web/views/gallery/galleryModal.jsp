@@ -312,6 +312,7 @@ if (n < 1) {slideIndex = slides.length}
 									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
 									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
 									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
+
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -336,6 +337,7 @@ if (n < 1) {slideIndex = slides.length}
 									<p class='btn-comment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
 									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
 									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
+
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -392,6 +394,7 @@ if (n < 1) {slideIndex = slides.length}
 	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
 	      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
 	      	 <input type="hidden" id="reportCommentNo" name="selectRecode" value=""/>
+
 	      </form>
       <%} %>
 <script>

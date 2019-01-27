@@ -123,6 +123,5 @@ public class GroupService {
 		close(conn);
 		return localCtg;
 	}
-	
 
 }

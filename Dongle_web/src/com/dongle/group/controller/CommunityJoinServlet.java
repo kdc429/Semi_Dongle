@@ -65,9 +65,9 @@ public class CommunityJoinServlet extends HttpServlet {
 		if(g==null) { //데이터 없을시 에러페이지 이동으로 변경예정
 			msg="접속실패! 다시 시도해주세요.";
 			loc="/login";
-			request.getRequestDispatcher(view).forward(request, response);
 			request.setAttribute("loc",loc);
 			request.setAttribute("msg", msg);
+			request.getRequestDispatcher(view).forward(request, response);
 		}else {
 			
 
@@ -81,6 +81,7 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.setAttribute("loc",loc);
 			request.setAttribute("loginMember", loginMember);
 			request.setAttribute("result",result);
+			request.setAttribute("groupNo", groupNo);
 			//request.setAttribute("galList",galList);
 			request.getRequestDispatcher(loc).forward(request, response);
 			
