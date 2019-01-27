@@ -33,7 +33,7 @@ font-family: '나눔스퀘어라운드 Regular';
             <div class="logo" style="font-family: '여기어때잘난서체';margin-top: 100px">DONGLE</div>
             
             <div>
-            	<form id="loginFrm" action="<%=request.getContextPath()%>/login" method="post" onsubmit="return validate();">
+            	<form id="loginFrm" action="<%=request.getContextPath()%>/login" method="post">
                 <div class="login">
                     <label for="">
                         <input type="text" name="userId" id="userId" class="form-control" placeholder="아이디">
@@ -45,9 +45,8 @@ font-family: '나눔스퀘어라운드 Regular';
                         <input type="checkbox" name="saveId" id="saveId">아이디 저장
                     </label><br>
 
-                    <button id="btn_login" onclick='login()' class="btn btn-primary" style="font-family: 'netmarble Medium';">로그인</button><br>
-                    <input type="button" value="회원가입" class="btn btn-primary" style="font-family: 'netmarble Medium';"
-                     onclick="location.href='<%=request.getContextPath() %>/memberEnroll'"/>
+                    <button id="btn_login" class="btn btn-primary" style="font-family: 'netmarble Medium';">로그인</button><br>
+                    <input type="button" value="회원가입" class="btn btn-primary" style="font-family: 'netmarble Medium';" onclick="location.href='<%=request.getContextPath() %>/memberEnroll'"/>
               	</form><br>
               	
                </div>
