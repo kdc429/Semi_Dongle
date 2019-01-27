@@ -101,7 +101,7 @@
 				type:"post",
 				dataType:"html",
 				success:function(data){
-					$('#content-div').html(data);
+					$('#board-container').html(data);
 				},
 				error:function(error,msg){console.log("---"+error+msg);}
 			});

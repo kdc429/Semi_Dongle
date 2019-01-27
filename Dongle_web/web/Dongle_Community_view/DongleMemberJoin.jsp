@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<meta charset="UTF-8">
+
+   <meta charset="UTF-8">
 
 <%@ page import="com.dongle.member.model.vo.Member" %>
 
@@ -19,8 +20,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
+
 #dongle_title h4{color:rgb(20,150,200);float:left;margin-left:20px;margin-top:70px;position:relative;display: block;}
+
 #dongle_join{
+
+            border: 6px solid #dddddd;
             width: 500px;
             height: 400px;
             margin-left: 100px;
@@ -28,6 +33,8 @@
 			margin-top:120px;
 			display: block;
 			font-family: "여기어때잘난서체";
+            border-radius: 10px;
+
         }
         
        .image_p{
@@ -38,7 +45,9 @@
             margin-left: 155px;
             margin-top: 50px;
         }
-        #nickname{
+
+        #dongle_nickname{
+
             width: 180px;
             height: 30px;
         }
@@ -50,13 +59,15 @@
         }
         
         #upfile{
-            padding-left: 120px;
+
+            padding-left: 140px;
             padding-top: 10px;
             font-family: "netmarble Medium";
         }
         
         #dongle_title{
-        	font-size: 40px;
+
+           font-size: 40px;
             margin-left: 260px;
         }
         /* 등러가는 이미지 style 클래스명 */
@@ -69,13 +80,12 @@
         }
         
         #nickbox{
-        	display: inline-block;
+           display: inline-block;
         }
         
   
     </style>
     
-
 	<script>
 		function fn_enroll_validate(){
 			
@@ -119,12 +129,10 @@
 			checkdongleDuplicateFrm.submit();		
 			
 			//window.open(url,"명칭/여는방식",shape)
-			
-
-		}
-		
-	
-	</script>
+      }
+      
+   
+   </script>
 
 
 <div id="dongle_title">
@@ -237,4 +245,5 @@
 	      })
 	   }
 
-	</script>
+   </script>
+

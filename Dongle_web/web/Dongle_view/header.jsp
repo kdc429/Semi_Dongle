@@ -17,8 +17,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+<link rel='icon' href='https://i.imgur.com/8k8yVjE.png'>
 <title>당신을 위한 맞춤형 동호회</title>
+
 <link href="https://fonts.googleapis.com/css?family=Bungee"
    rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
@@ -34,6 +37,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Admin_blackMemberList.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="<%=request.getContextPath() %>/css/icon.css" rel="stylesheet">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -80,6 +84,9 @@ div.user-back #logout_btn{
    margin-left: 50px;
 }
 </style>
+<script>
+
+</script>
 </head>
 
 <body>

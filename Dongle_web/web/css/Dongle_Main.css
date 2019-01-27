@@ -146,13 +146,13 @@
    z-index:3;
 }
 .create-img{
-   max-height:33px;
-   max-width:33px;
-   align-items:right;
-   width:auto;
-   height:auto;
-   z-index:2;
-   margin-bottom: 2px;
+
+	width:110px;
+	height:30px;
+	z-index:2;
+	border: 1px;
+	background-color: rgba(0,0,0,0);
+
 }
 /* 에디터픽 스타일 */
 .editorPick{

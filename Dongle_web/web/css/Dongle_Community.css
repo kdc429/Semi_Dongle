@@ -95,13 +95,15 @@ button.btn button.btn-primary{
    font-family: '나눔스퀘어라운드 Regular';
 }
 /* 오른쪽 사이드 div */
-.sider {
-   width: 170px;
-   height:100vh;
-   position: fixed;
-   margin-top: 62px;
-   margin-left: 854px;
-   font-family: '나눔스퀘어라운드 Regular';
+
+.sider{
+	width: 170px;
+	height:100vh;
+	position: fixed;
+/*margin-top: 62px;*/
+	margin-left: 854px;
+	font-family: '나눔스퀘어라운드 Regular';
+
 }
 
 /* 로고 div
@@ -136,13 +138,15 @@ div.logo h2 a{text-decoration: none;}
    font-family: '나눔스퀘어라운드 ExtraBold';
 }
 .profile_btn{
-   height: 15px;
-   width: 15px;
-   margin-top:20px;
-   margin-left: auto;
-   margin-right: auto;
-   text-align: center;
-   cursor: pointer;
+
+	height: 15px;
+	width: 15px;
+	margin-top:10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	cursor: pointer;
+
 }
 /* 동글 회원 프로필 단추 */
 /* span{
@@ -199,16 +203,9 @@ div.logo h2 a{text-decoration: none;}
  }
  .dongle_info
  {
-    display : flex;
-    justify-content: center;
-    align-items: center;
- }
- #dongle_info_view
- {
-   display:inline;
-   /* float: left; */
 
+ 	display : flex;
+ 	justify-content: center;
+ 	align-items: center;
  }
-.tbl{
-    left: 45%;
-}
+

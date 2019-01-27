@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page errorPage="/error.jsp" %>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*,com.dongle.main.model.vo.*, com.dongle.member.model.vo.Member" %>
 <!DOCTYPE html>
 <%
@@ -153,7 +154,7 @@ body {
 			<table border="0" align="right" cellpadding="0" cellspacing="0">
 				<tr>
 					<td height="40" style="padding:0 13px 0 0">
-						<div class='find_btn'><button type="button" class="btn btn-default" onclick="self.close();">닫기</button></div>
+						<div class='find_btn'><button type="button" class="btn btn-default" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">닫기</button></div>
 					</td>
 				</tr>
 			</table>
@@ -173,10 +174,8 @@ body {
 		return true;
 	}
 	
-	function(){
-		
-		$("pwdHint option:eq(1)").attr();
-	}
+
+	
 </script>
 </body>
 </html>

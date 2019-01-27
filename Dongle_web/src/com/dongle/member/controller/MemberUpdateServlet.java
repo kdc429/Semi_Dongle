@@ -37,12 +37,13 @@ public class MemberUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userId=request.getParameter("userId");
-		String password=request.getParameter("password");
 		String userName=request.getParameter("userName");	
 		String ssn=request.getParameter("age");
 		String phone=request.getParameter("phone");
 		String address=request.getParameter("address");
 		String email=request.getParameter("email");
+		
+		
 
 		String isAdmin = "";
 		if(request.getParameter("isAdmin")!=null)
@@ -59,6 +60,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		m.setEmail(email);
 		m.setPhone(phone);
 		
+		Member loginMember = new MemberService().selectMember(m);
 		int result=new MemberService().memberUpdate(m);
 		
 		

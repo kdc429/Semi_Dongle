@@ -541,8 +541,7 @@ public class GalleryDao {
 		   close(pstmt);
 	   }
 	   return rs;
-   }
-   
+   }   
    public List<ReportReason> selectReportReason(Connection conn)
    {
 	   PreparedStatement pstmt=null;
@@ -571,6 +570,7 @@ public class GalleryDao {
 	   }
 	   return relist;
    }
+
    // 갤러리 신고하기
    public int insertReport(Connection conn, int groupNo, int memberNo, String reportCode)
    {
@@ -637,4 +637,5 @@ public class GalleryDao {
 	   }
 	   return rs;
    }
+
 }

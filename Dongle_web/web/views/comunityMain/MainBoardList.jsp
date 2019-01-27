@@ -39,7 +39,9 @@ com.dongle.member.model.vo.Member,com.dongle.main.*" %>
 		<h4 style="font-family: '나눔스퀘어라운드 Regular';"><b>[ 공지사항 ]</b></h4>
 		<hr>
 		<table class="main-table-bordered" style='margin-left:17px;'>
+
 		<%if(list.size()!=0){ %>
+
 			<%for(Board b : list) {%>
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td><%=b.getBoardNo() %></td>

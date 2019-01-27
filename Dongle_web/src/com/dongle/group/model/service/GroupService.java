@@ -117,6 +117,7 @@ public class GroupService {
 		List<TopicCtg> topicCtg=new GroupDao().selectTopicCtg(conn);
 		close(conn);
 		return topicCtg;
+
 	}
 	
 	public List<LocalCtg> selectLocalCtg()
@@ -149,6 +150,7 @@ public class GroupService {
 		List<GroupMemberCount> memberCountList=new GroupDao().selectMemberCount(conn,groupNo);
 		close(conn);
 		return memberCountList;
+
 	}
 
 }
