@@ -5,6 +5,9 @@
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
 	String pageBar=(String)request.getAttribute("pageBar");
+	List<MultiLocationName> locationList=(List)request.getAttribute("locationList");
+	List<MultiTopicName> topicList=(List)request.getAttribute("topicList2");
+	List<GroupMemberCount> memberCountList=(List)request.getAttribute("memberCountList");
 %>
 <html>
 <style>
@@ -16,6 +19,9 @@
 		height:auto;
 		max-height:800px;
 	}
+	.page-bar{
+		cursor: pointer;
+	}
 	
 </style>
 
@@ -26,10 +32,31 @@
 		for(Group g:groupList){%>
 			<li class="dongle-back">
 				<div class='search_dongle_main_img'>
+					<input type="hidden" value="<%=g.getGroupNo() %>">
 					<img class="group-img" src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>"'>
 				</div>
 				<div class='search_dongle_info'>
-					<p><%=g.getGroupIntro() %></p>
+					<p>동글 명: <%=g.getGroupName() %></p>
+					<%for(GroupMemberCount gmc:memberCountList){
+						if(gmc.getGroupNo()==g.getGroupNo()){	
+						%>
+					<p>동글 회원수: <%=gmc.getMemberCount() %></p>
+					<%}} %>
+					<p>동글 창설 날짜: <%=g.getGroupEnrollDate() %></p>
+					<ul>동글 활동 지역:
+						<%for(MultiLocationName mln:locationList){ 
+							if(mln.getGroupNo()==g.getGroupNo()&&mln!=null){
+						%>
+						<li><%=mln.getLocCtgName() %></li>
+						<%}} %>
+					</ul>
+					<ul>동글 활동 주제:
+						<%for(MultiTopicName mtn:topicList){ 
+							if(mtn.getGroupNo()==g.getGroupNo()&&mtn!=null){
+						%>
+						<li><%=mtn.getTopicCtgName() %></li>
+						<%}} %>
+					</ul>
 				</div>
 			</li>
 		<%} %>

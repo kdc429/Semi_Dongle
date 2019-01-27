@@ -11,9 +11,12 @@ import com.dongle.group.model.dao.GroupDao;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.group.model.vo.GroupMemberCount;
 import com.dongle.group.model.vo.LocalCtg;
 import com.dongle.group.model.vo.MultiLocation;
+import com.dongle.group.model.vo.MultiLocationName;
 import com.dongle.group.model.vo.MultiTopic;
+import com.dongle.group.model.vo.MultiTopicName;
 import com.dongle.group.model.vo.TopicCtg;
 
 public class GroupService {
@@ -122,6 +125,30 @@ public class GroupService {
 		List<LocalCtg> localCtg=new GroupDao().selectLocalCtg(conn);
 		close(conn);
 		return localCtg;
+	}
+	
+	public List<MultiLocationName> selectSearchLocation(String groupNo){
+		
+		Connection conn=getConnection();
+		List<MultiLocationName> locationList= new GroupDao().selectSearchLocation(conn,groupNo);
+		close(conn);
+		return locationList;
+	}
+	
+	public List<MultiTopicName> selectSearchTopic(String groupNo){
+		
+		Connection conn=getConnection();
+		List<MultiTopicName> topicList= new GroupDao().selectSearchTopic(conn,groupNo);
+		close(conn);
+		return topicList;
+	}
+	
+	public List<GroupMemberCount> selectMemberCount(String groupNo){
+		
+		Connection conn=getConnection();
+		List<GroupMemberCount> memberCountList=new GroupDao().selectMemberCount(conn,groupNo);
+		close(conn);
+		return memberCountList;
 	}
 
 }

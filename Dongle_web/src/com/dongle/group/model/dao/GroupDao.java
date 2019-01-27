@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -16,9 +17,12 @@ import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.group.model.vo.GroupMemberCount;
 import com.dongle.group.model.vo.LocalCtg;
 import com.dongle.group.model.vo.MultiLocation;
+import com.dongle.group.model.vo.MultiLocationName;
 import com.dongle.group.model.vo.MultiTopic;
+import com.dongle.group.model.vo.MultiTopicName;
 import com.dongle.group.model.vo.TopicCtg;
 
 public class GroupDao {
@@ -509,4 +513,103 @@ public class GroupDao {
 		}
 		return localCtg;
 	}
+	
+	public List<MultiLocationName> selectSearchLocation(Connection conn,String groupNo){
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT M.*, LOC_METRO_NAME||' '||LOC_AREA_NAME||' '||LOC_TOWN_NAME AS LOCATION_NAME FROM MULTI_LOCATION_TAB M JOIN LOCATION_CATEGORY_TABLE L ON(M.LOC_CTG_CODE=L.LOC_CTG_CODE) WHERE GROUP_NO IN("+groupNo+")";
+		List<MultiLocationName> locationList=new ArrayList();
+		MultiLocationName ml=null;
+		try {
+			
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				ml=new MultiLocationName();
+				ml.setGroupNo(rs.getInt("group_no"));
+				ml.setLocCtgCode(rs.getString("loc_ctg_code"));
+				ml.setLocCtgName(rs.getString("location_name"));
+				locationList.add(ml);
+			}
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}finally {
+			
+			close(rs);
+			close(stmt);
+			
+		}
+		
+		return locationList;
+		
+	}
+	
+	public List<MultiTopicName> selectSearchTopic(Connection conn,String groupNo){
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT M.*, TOPIC_CTG_NAME FROM MULTI_TOPIC_TAB M JOIN TOPIC_CATEGORY_TAB L ON(M.TOPIC_CTG_CODE=L.TOPIC_CTG_CODE) WHERE GROUP_NO IN("+groupNo+")";
+		List<MultiTopicName> topicList=new ArrayList();
+		MultiTopicName mt=null;
+		try {
+			
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				mt=new MultiTopicName();
+				mt.setGroupNo(rs.getInt("group_no"));
+				mt.setTopicCtgCode(rs.getString("topic_ctg_code"));
+				mt.setTopicCtgName(rs.getString("topic_ctg_name"));
+				topicList.add(mt);
+			}
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}finally {
+			
+			close(rs);
+			close(stmt);
+			
+		}
+		
+		return topicList; 
+	}
+	
+	public List<GroupMemberCount> selectMemberCount(Connection conn,String groupNo){
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT GROUP_NO,COUNT(*) AS MEMBER_COUNT FROM GROUP_MEMBER_TAB WHERE GROUP_NO IN("+groupNo+") GROUP BY GROUP_NO";
+		List<GroupMemberCount> memberCountList=new ArrayList();
+		GroupMemberCount gmc=null;
+		
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				gmc=new GroupMemberCount();
+				gmc.setGroupNo(rs.getInt("group_no"));
+				gmc.setMemberCount(rs.getInt("member_count"));
+				memberCountList.add(gmc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return memberCountList;
+	}
+		
+		
 }

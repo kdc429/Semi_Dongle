@@ -5,6 +5,10 @@
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
 	List<TopicCategory> topicList=(List)request.getAttribute("topicList");
+	String pageBar=(String)request.getAttribute("pageBar");
+	List<MultiLocationName> locationList=(List)request.getAttribute("locationList");
+	List<MultiTopicName> topicList2=(List)request.getAttribute("topicList2");
+	List<GroupMemberCount> memberCountList=(List)request.getAttribute("memberCountList");
 %>
 <html>
 <head>
@@ -115,7 +119,7 @@
     }
     .search_dongle_main_img{
     	
-    	width: auto;
+    	width: 150px;
     	height: 150px;
     	/* margin-left: 10%; */
     	display: flex;
@@ -129,9 +133,14 @@
     .search_dongle_info{
     	text-align:center;
     	width: 250px;
-    	height: 150px;
+    	height: 250px;
     	display: inline-block;
     	float: left;
+    	font-size:12px;
+    }
+    .search_dongle_info>ul{
+    	list-style:none;
+    	padding:0;
     }
 	#searchKeyword
 	{
@@ -175,6 +184,7 @@
 		max-height:150px;
 		width:auto;
 		height:auto;
+		cursor:pointer;
 		
 	}
 	#dongle-container-back{
@@ -188,6 +198,8 @@
 	}
 	.page-bar{
 		margin:5px;
+		display:inline;
+		cursor:pointer;
 	}
 	.dongle-list{
 		height:150px;
@@ -205,7 +217,8 @@
 	var checkMaxAge;//체크한 최대 연령
 	var checkTopic;// 체크한 토픽 코드
 	var topicArray=[];//체크한 토픽코드 배열
-	var sortCheck;
+	var sortCheck="date";
+	var cPage;
 	
 	$(document).ready(function(){
 		//metro check 서울,인천,대전......
@@ -530,8 +543,9 @@
 	
 	})
 	
-	$(document).on('click','.pageBar',function(){
-		var cPage=$(this).children('input').val();
+	$(document).on('click','.page-bar',function(){
+		cPage=$(this).children('input').val();
+		console.log(cPage);
 		
 		jQuery.ajaxSettings.traditional = true;
 
@@ -557,9 +571,19 @@
 			
 		})
 		
-	})
+	});
 	
 	
+	$(document).ready(function(){
+		
+		$(document).on('click','.group-img',function(){
+			var groupNo=$(this).siblings('input').val();
+			
+			location.href="<%=request.getContextPath()%>/communityJoin?groupNo="+groupNo;
+			
+		})
+		
+	});
 
 	
 </script>
@@ -674,13 +698,43 @@
 		<%for(int i=0; i<groupList.size();i++){%>
 			<li class="dongle-list">
 				<div class='search_dongle_main_img'>
-					<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" style='width: 150px; height: 150px;'>
+					<input type="hidden" value="<%=groupList.get(i).getGroupNo() %>">
+					<img class="group-img" src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" >
 				</div>
-				<div class='search_dongle_info'><p><%=groupList.get(i).getGroupIntro() %></p></div>
+				<div class='search_dongle_info'>
+					<p><strong>동글 명:</strong> <%=groupList.get(i).getGroupName() %></p>
+					<%for(GroupMemberCount gmc:memberCountList){
+						if(gmc.getGroupNo()==groupList.get(i).getGroupNo()){	
+						%>
+					<p><strong>동글 회원수:</strong> <%=gmc.getMemberCount() %></p>
+					<%}} %>
+					<p><strong>동글 창설 날짜:</strong> <%=groupList.get(i).getGroupEnrollDate() %>
+					<ul><strong>동글 활동 지역:</strong>
+						<%for(MultiLocationName mln:locationList){ 
+							if(mln.getGroupNo()==groupList.get(i).getGroupNo()&&mln!=null){
+						%>
+						<li><%=mln.getLocCtgName() %></li>
+						<%}} %>
+					</ul>
+					<ul><strong>동글 활동 주제:</strong>
+						<%for(MultiTopicName mtn:topicList2){ 
+							if(mtn.getGroupNo()==groupList.get(i).getGroupNo()&&mtn!=null){
+						%>
+						<li><%=mtn.getTopicCtgName() %></li>
+						<%}} %>
+					</ul>
+				</div>
 			</li>
 		<%} %>
 			</ul>
 		</div>
+	</div>
+	<div id='page-bar-back'>
+		<ul id='page-bar'>
+			<%if(pageBar!=null){ %>
+			<%=pageBar %>
+			<%} %>
+		</ul>
 	</div>
 </div>	
 </body>
