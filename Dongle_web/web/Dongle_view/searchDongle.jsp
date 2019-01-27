@@ -4,23 +4,49 @@
 
 <%
 	List<Group> groupList = (List)request.getAttribute("groupList");
+	String pageBar=(String)request.getAttribute("pageBar");
 %>
 <html>
+<style>
+	.dongle-back{
+		vertical-align: middle;
+		height:auto;
+	}
+	#dongle-container-back{
+		height:auto;
+		max-height:800px;
+	}
+	
+</style>
 
 <meta charset="UTF-8">
-	)
-	<%if(groupList!=null){
+	<div id="dongle-container-back">
+		<ul>
+		<%if(groupList!=null){
 		for(Group g:groupList){%>
-	<div style="vertical-align: middle;">
-		<div class='search_dongle_main_img'><img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>" style='width: 150px; height: 150px;'></div>
-		<div class='search_dongle_info'><p><%=g.getGroupIntro() %></p></div>
-	</div>
+			<li class="dongle-back">
+				<div class='search_dongle_main_img'>
+					<img class="group-img" src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>"'>
+				</div>
+				<div class='search_dongle_info'>
+					<p><%=g.getGroupIntro() %></p>
+				</div>
+			</li>
 		<%} %>
-		
-	<%}else{ %>
-	<div style="vertical-align: middle;">
-		<h2>검색결과가 없습니다!</h2>
+		</ul>
+		<%}else if(groupList==null){ %>
+		<div style="vertical-align: middle;">
+			<h2>검색결과가 없습니다!</h2>
+		</div>
+	
+		<%}%>
 	</div>
 	
-	<%}%>
+	<div id='page-bar-back'>
+		<ul id='page-bar'>
+			<%if(pageBar!=null){ %>
+			<%=pageBar %>
+			<%} %>
+		</ul>
+	</div>
 </html>

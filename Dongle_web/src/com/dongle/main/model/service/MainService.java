@@ -354,6 +354,44 @@ public class MainService {
 		
 	}
 	
+	public List<Group> selectKeywordCheckList(String keyword){
+		
+		
+		Connection conn=getConnection();
+		List<Group> groupList=new MainDao().selectKeywordCheckList(conn,keyword);
+		close(conn);
+		return groupList;
+		
+	}
+	
+	public List<Group> selectAllNullCheckList(){
+		
+		
+		Connection conn=getConnection();
+		List<Group> groupList=new MainDao().selectAllNullCheckList(conn);
+		close(conn);
+		return groupList;
+		
+	}
+	
+	public List<Group> selectGroupSortDate(String groupNo,int cPage,int numPerPage){
+		
+		Connection conn=getConnection();
+		List<Group> groupList=new MainDao().selectGroupSortDate(conn,groupNo,cPage,numPerPage);
+		close(conn);
+		return groupList;
+		
+	}
+	
+	public List<Group> selectGroupSortMemberCnt(String groupNo,int cPage,int numPerPage){
+		
+		Connection conn=getConnection();
+		List<Group> groupList=new MainDao().selectGroupSortMemberCnt(conn,groupNo,cPage,numPerPage);
+		close(conn);
+		return groupList;
+		
+	}
+	
 	
 
 

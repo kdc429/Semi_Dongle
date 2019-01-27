@@ -81,7 +81,7 @@
 		
 		/* border: 4px solid #bcbcbc; */
 		width: 1024px;
-		height: 100vh;
+		height: auto;
 		font-family: '나눔스퀘어라운드 Regular';
 
 	}
@@ -115,17 +115,20 @@
     	display : inline-block;
     }
     .search_dongle_main_img{
-    	border: 1px solid blue;
-    	width: 150px;
+    	
+    	width: auto;
     	height: 150px;
     	/* margin-left: 10%; */
-    	display: inline-block;
+    	display: flex;
+    	justify-content:center;
+    	align-items:center;
     	margin-left: 50px;
     	margin-right: 20px;
     	float: left;
+    	text-align: center;
     }
     .search_dongle_info{
-    	border: 1px solid blue;
+    	text-align:center;
     	width: 250px;
     	height: 150px;
     	display: inline-block;
@@ -158,6 +161,40 @@
 	.topic-container{
 		padding : 10px;
 	}
+	#dongle-container-back>ul{
+		list-style:none;
+		padding:10px;
+		height:auto;
+	}
+	
+	#dongle-container{
+		display:inline-block;
+		
+	}
+	.group-img{
+		max-width:150px;
+		max-height:150px;
+		width:auto;
+		height:auto;
+		
+	}
+	#dongle-container-back{
+		display:inline-block;
+		height:auto;
+		width:1000px;
+	}
+	#page-bar-back{
+		text-align:center;
+		vertical-align: bottom;
+	}
+	.page-bar{
+		margin:5px;
+	}
+	.dongle-list{
+		height:150px;
+		width:450px;
+		display:inline;
+	}
 
 </style>
 <script>
@@ -169,6 +206,7 @@
 	var checkMaxAge;//체크한 최대 연령
 	var checkTopic;// 체크한 토픽 코드
 	var topicArray=[];//체크한 토픽코드 배열
+	var sortCheck;
 	
 	$(document).ready(function(){
 		//metro check 서울,인천,대전......
@@ -276,6 +314,8 @@
 				"minAge":checkMinAge,
 				"maxAge":checkMaxAge,
 				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
 				
 			},
 			datatype:"html",
@@ -308,6 +348,8 @@
 				"minAge":checkMinAge,
 				"maxAge":checkMaxAge,
 				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
 				
 			},
 			datatype:"html",
@@ -338,6 +380,8 @@
 				"minAge":checkMinAge,
 				"maxAge":checkMaxAge,
 				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
 				
 			},
 			datatype:"html",
@@ -368,6 +412,8 @@
 				"minAge":checkMinAge,
 				"maxAge":checkMaxAge,
 				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
 				
 			},
 			datatype:"html",
@@ -418,6 +464,8 @@
 				"minAge":checkMinAge,
 				"maxAge":checkMaxAge,
 				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
 				
 			},
 			datatype:"html",
@@ -430,12 +478,95 @@
 		
 	})
 	
+	$(document).on('keyup','#searchKeyword',function(){
+		
+		var keyword=$('#searchKeyword').val();
+		console.log(keyword);
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			data:{
+				"keyword":keyword,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+			},
+			type:"post",
+			datatype:"html",
+			success:function(data){
+				
+				$('#dongle-container').html(data);
+			}
+		})
+		
+	})
+	
+	$(document).on('change','#sortBar',function(){
+		
+		sortCheck=$('#sortBar option:selected').val();
+		console.log(sortCheck);
+		
+		jQuery.ajaxSettings.traditional = true;
+
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+	
+	})
+	
+	$(document).on('click','.pageBar',function(){
+		var cPage=$(this).children('input').val();
+		
+		jQuery.ajaxSettings.traditional = true;
+
+		$.ajax({
+			
+			url:"<%=request.getContextPath()%>/main/mainSearchEnd",
+			type:"post",
+			data:{
+				"locArray":locArray,
+				"topicArray":topicArray,
+				"minAge":checkMinAge,
+				"maxAge":checkMaxAge,
+				"time":checkTime,
+				"sortCheck":sortCheck,
+				"cPage":cPage
+				
+			},
+			datatype:"html",
+			success:function(data){
+				$('#dongle-container').html(data);
+				
+			}
+			
+		})
+		
+	})
+	
+	
 
 	
 </script>
 <body>
 <hr>
-<div class="search-container" ">
+<div class="search-container" >
 	<div class='search-menu' style="border: 1px dotted darkgray;">
 		<div class="condition-container" style="border : red">
 			<form style="widht:400px" id='search-condition'>	
@@ -452,6 +583,7 @@
 					<label style="font-size: 17px; font-weight: lighter;">
 						<select id="min-age">
 							<option value="0">최소 연령</option>
+							<option value="10">10</option>
 							<option value="20">20</option>
 							<option value="30">30</option>
 							<option value="40">40</option>
@@ -463,6 +595,7 @@
 						</select>
 						<select id="max-age">
 							<option value="0">최대연령</option>
+							<option value="10">10</option>
 							<option value="20">20</option>
 							<option value="30">30</option>
 							<option value="40">40</option>
@@ -528,23 +661,27 @@
 			<form action="<%=request.getContextPath() %>/admin/memberFinder">
 				<input type="hidden" name="searchType" value="groupName"/>
 				<input type="text" name="searchKeyword" size="100" placeholder="검색할 동글을 입력하세요" id='searchKeyword'/>
-				<button type="submit">검색</button>
 										
 				<select id="sortBar" style="height:25px">				
-					<option value="userId">게시글수 </option>
-					<option value="userName">조회수</option>
+					<option value="date">창설 날짜</option>
 					<option value="gender">회원수</option>				
 				</select>	
 			</form>
 		</div>				
 	</div>
 	<div id="dongle-container">
-	<%for(int i=0; i<groupList.size();i++){%>
-		<div style="vertical-align: middle;">
-			<div class='search_dongle_main_img'><img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" style='width: 150px; height: 150px;'></div>
-			<div class='search_dongle_info'><p><%=groupList.get(i).getGroupIntro() %></p></div>
+		<div id="dongle-container-back">
+			<ul>
+		<%for(int i=0; i<groupList.size();i++){%>
+			<li class="dongle-list">
+				<div class='search_dongle_main_img'>
+					<img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" style='width: 150px; height: 150px;'>
+				</div>
+				<div class='search_dongle_info'><p><%=groupList.get(i).getGroupIntro() %></p></div>
+			</li>
+		<%} %>
+			</ul>
 		</div>
-	<%} %>
 	</div>
 </div>	
 </body>

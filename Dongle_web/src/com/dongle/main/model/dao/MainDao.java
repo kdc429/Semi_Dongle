@@ -1472,6 +1472,180 @@ public class MainDao {
 		return groupList;
 	}
 	
+	public List<Group> selectKeywordCheckList(Connection conn,String keyword){
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT * FROM GROUP_TAB WHERE GROUP_NAME LIKE '%"+keyword+"%'";
+		System.out.println(sql);
+		Group g=null;
+		List<Group> groupList=new ArrayList();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				g=new Group();
+				g.setMemberNo(rs.getInt("member_no"));
+				g.setGroupNo(rs.getInt("group_no"));
+				g.setGroupName(rs.getString("group_name"));
+				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setLocCtgCode(rs.getString("loc_ctg_code"));
+				g.setGroupDateCtg(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_new_path"));
+				g.setGroupIntro(rs.getString("group_introduce"));
+				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
+				
+				groupList.add(g);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return groupList;
+	}
+	
+	public List<Group> selectAllNullCheckList(Connection conn){
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT * FROM GROUP_TAB";
+		System.out.println(sql);
+		Group g=null;
+		List<Group> groupList=new ArrayList();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				g=new Group();
+				g.setMemberNo(rs.getInt("member_no"));
+				g.setGroupNo(rs.getInt("group_no"));
+				g.setGroupName(rs.getString("group_name"));
+				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setLocCtgCode(rs.getString("loc_ctg_code"));
+				g.setGroupDateCtg(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_new_path"));
+				g.setGroupIntro(rs.getString("group_introduce"));
+				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
+				
+				groupList.add(g);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return groupList;
+	}
+	
+	public List<Group> selectGroupSortDate(Connection conn,String groupNo,int cPage,int numPerPage){
+		
+		int startNo=(cPage-1)*numPerPage+1;
+		int endNo=cPage*numPerPage;
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM, V.* FROM (SELECT * FROM GROUP_TAB WHERE GROUP_NO IN("+groupNo+") ORDER BY GROUP_ENROLL_DATE)V)G WHERE G.RNUM BETWEEN "+startNo+" AND "+endNo;
+		System.out.println(sql);
+		Group g=null;
+		List<Group> groupList=new ArrayList();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				g=new Group();
+				g.setMemberNo(rs.getInt("member_no"));
+				g.setGroupNo(rs.getInt("group_no"));
+				g.setGroupName(rs.getString("group_name"));
+				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setLocCtgCode(rs.getString("loc_ctg_code"));
+				g.setGroupDateCtg(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_new_path"));
+				g.setGroupIntro(rs.getString("group_introduce"));
+				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
+				
+				groupList.add(g);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return groupList;
+	}
+	
+	public List<Group> selectGroupSortMemberCnt(Connection conn,String groupNo,int cPage,int numPerPage){
+		
+		int startNo=(cPage-1)*numPerPage+1;
+		int endNo=cPage*numPerPage;
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM,V.*,G.MEMBER_COUNT FROM GROUP_TAB V JOIN(SELECT GROUP_NO,COUNT(*) AS MEMBER_COUNT FROM GROUP_MEMBER_TAB WHERE GROUP_NO IN("+groupNo+") GROUP BY GROUP_NO ORDER BY COUNT(*) DESC)G ON(V.GROUP_NO=G.GROUP_NO)) WHERE RNUM BETWEEN "+startNo+" AND "+endNo;
+		System.out.println(sql);
+		Group g=null;
+		List<Group> groupList=new ArrayList();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				g=new Group();
+				g.setMemberNo(rs.getInt("member_no"));
+				g.setGroupNo(rs.getInt("group_no"));
+				g.setGroupName(rs.getString("group_name"));
+				g.setTopicCode(rs.getString("topic_ctg_code"));
+				g.setLocCtgCode(rs.getString("loc_ctg_code"));
+				g.setGroupDateCtg(rs.getString("group_date_ctg"));
+				g.setMinAge(rs.getInt("min_age"));
+				g.setMaxAge(rs.getInt("max_age"));
+				g.setGroupImageOldPath(rs.getString("group_image_old_path"));
+				g.setGroupImageNewPath(rs.getString("group_image_new_path"));
+				g.setGroupIntro(rs.getString("group_introduce"));
+				g.setGroupEnrollDate(rs.getDate("group_enroll_date"));
+				g.setReportGroupCnt(rs.getInt("report_group_count"));
+				g.setGroupMainOldImgPath(rs.getString("group_main_img_old_path"));
+				g.setGroupMainNewImgPath(rs.getString("group_main_img_new_path"));
+				
+				groupList.add(g);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		return groupList;
+	}
+	
 	
 
 }
