@@ -1,6 +1,7 @@
 package com.dongle.manager.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.LocalCtg;
+import com.dongle.group.model.vo.MultiLocation;
+import com.dongle.group.model.vo.MultiTopic;
+import com.dongle.group.model.vo.TopicCtg;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -36,6 +41,11 @@ public class ManagerView extends HttpServlet {
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		int managerNo = Integer.parseInt(request.getParameter("managerNo"));
 		Group g = new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
+		List<MultiLocation> locList = new GroupService().selectGrLoc(groupNo); //해당 그룹 지역
+		List<MultiTopic> topicList = new GroupService().selectGrTopic(groupNo); //해당 그룹 주제
+		
+		List<TopicCtg> topicCtg = new GroupService().selectTopicCtg();
+		List<LocalCtg> localCtg = new GroupService().selectLocalCtg();
 	
 		
 		if(loginMember==null||loginMember.getMemberNo() != managerNo) 
@@ -49,7 +59,10 @@ public class ManagerView extends HttpServlet {
 		
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("group", g);
-	
+		request.setAttribute("locList", locList);
+		request.setAttribute("topicList", topicList);
+		request.setAttribute("topicCtg", topicCtg);
+		
 		request.getRequestDispatcher("/views/manager/manager_main.jsp").forward(request, response);
 	}
 

@@ -123,23 +123,23 @@
 			<tbody>
 				<% if(dongleList==null || dongleList.isEmpty()) {%>
 				<tr>
-					<td colspan="10" align="center">
+					<td colspan="9" align="center" style="width:1000px">
 						검색결과가 없습니다.
 					</td>
 				</tr>
 				<%} else { 
 					for(ListGroup g : dongleList) {
 				%>
-				<tr >
-					<td><%=g.getDongleName() %></td>
-					<td><%=g.getManagerId() %></td>
-					<td><%=g.getTopic() %></td>
-					<td><%=g.getAddress() %></td>
-					<td><%=g.getActiveDate() %></td>
-					<td><%=g.getMinAge() %></td>
-					<td><%=g.getMaxAge() %></td>
-					<td><%=g.getEnrollDate() %></td>
-					<td><%=g.getReportCnt() %></td>
+				<tr>
+					<td title="<%=g.getDongleName()%>"><%=g.getDongleName().length()>9?g.getDongleName().substring(0,9)+"...":g.getDongleName() %></td>
+					<td title="<%=g.getManagerId()%>"><%=g.getManagerId() %></td>
+					<td title="<%=g.getTopic()%>"><%=g.getTopic().length()>6?g.getTopic().substring(0,6)+"...":g.getTopic() %></td>
+					<td title="<%=g.getAddress()%>"><%=g.getAddress().length()>14?g.getAddress().substring(0,14)+"...":g.getAddress() %></td>
+					<td title="<%=g.getActiveDate()%>"><%=g.getActiveDate() %></td>
+					<td title="<%=g.getMinAge()%>"><%=g.getMinAge() %></td>
+					<td title="<%=g.getMaxAge()%>"><%=g.getMaxAge() %></td>
+					<td title="<%=g.getEnrollDate()%>"><%=g.getEnrollDate() %></td>
+					<td title="<%=g.getReportCnt()%>"><%=g.getReportCnt() %></td>
 					
 				</tr>
 				<%}

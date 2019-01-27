@@ -38,8 +38,6 @@ public class mainSearchServlet extends HttpServlet {
 		/*int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		Group g = new GroupService().selectGrInfo(groupNo);*/
 		List<Group> groupList = new GroupService().selectAllGroupList();
-		List<LocationCategory>metroCodeList = new MainService().selectMetroCode();
-		
 		
 		String loc="";
 		loc="/Dongle_view/search.jsp";
@@ -47,9 +45,6 @@ public class mainSearchServlet extends HttpServlet {
 		request.setAttribute("groupNo",groupNo);*/
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("groupList",groupList);
-		request.setAttribute("metroCodeList",metroCodeList);
-		System.out.println("dd");
-		System.out.println("메트로코드"+metroCodeList.get(0));
 		request.getRequestDispatcher(loc).forward(request, response);
 		
 		

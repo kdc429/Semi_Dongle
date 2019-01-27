@@ -45,7 +45,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		String root=getServletContext().getRealPath("/");
 		//파일경로를 설정할때 구분자!
 		/*String saveDir=root+"upload/board";*/
-		String saveDir=root+"upload"+File.separator+"board";
+		String saveDir=root+"images"+File.separator+"member_img";
 		
 		//파일 크기설정
 		int maxSize=1024*1024*10;//10MB
@@ -66,7 +66,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		
 		GroupMember m = new GroupMember();
 		
-		m.setGroupMemberNickname(mr.getParameter("dongle_nickname"));
+		m.setGroupMemberNickname(mr.getParameter("nickname"));
 		m.setGroupNo(Integer.parseInt(mr.getParameter("groupNo")));
 		m.setMemberNo(Integer.parseInt(mr.getParameter("memberNo")));
 		m.setGroupMemberImageNewPath(mr.getOriginalFileName("upfile"));
@@ -82,7 +82,7 @@ public class DongleMemberJoinEndServlet extends HttpServlet {
 		if(result>0)
 		{
 			msg="동글 등록성공";
-			loc="/board/boardList";
+			loc="/communityJoin?groupNo="+mr.getParameter("groupNo");
 
 		}
 		else 

@@ -1,23 +1,27 @@
-package com.dongle.calender.controller;
+package com.dongle.admin.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dongle.admin.model.service.AdminService;
+import com.dongle.member.model.vo.Member;
+
 /**
- * Servlet implementation class CalendarModalServlet
+ * Servlet implementation class MemberPopUpViewServlet
  */
-@WebServlet("/calendar/calendarModal")
-public class CalendarModalServlet extends HttpServlet {
+@WebServlet("/admin/memberPopUpView")
+public class MemberPopUpViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarModalServlet() {
+    public MemberPopUpViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +30,13 @@ public class CalendarModalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-		String allDate=request.getParameter("allDate");
-		System.out.println(allDate);
+		// TODO Auto-generated method stub
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-		request.getRequestDispatcher("/Dongle_Community_view/calendarModal.jsp").forward(request, response);
+		Member m = new AdminService().selectMember(memberNo);
+		
+		request.setAttribute("member", m);
+		request.getRequestDispatcher("/Dongle_view/admin_memberPopUpView.jsp").forward(request, response);;
 		
 	}
 

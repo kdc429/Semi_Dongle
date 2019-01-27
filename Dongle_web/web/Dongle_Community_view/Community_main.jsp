@@ -2,9 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,com.dongle.group.model.vo.*, com.dongle.member.model.vo.Member,
-com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
+com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
+%>
 <%
 	Group g = (Group)request.getAttribute("group");
+	List<MultiLocation> locList = (List)request.getAttribute("locList");
+	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
 	Member loginMember = (Member)request.getAttribute("loginMember");
 	GroupMember gm = (GroupMember)request.getAttribute("groupMember");
 	int result = (int)request.getAttribute("result");
@@ -27,7 +30,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
-
+	
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
@@ -232,6 +235,10 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*" %>
 						<div id="dongle_info_view" style="font-size: 11px;">회원수 : <%=result %> 명 &nbsp;</div>
 						<div id="dongle_info_view">
 							<button id="dongle_mem_btn">멤버보기</button>
+						
+						<%if(gm!=null){ %>	
+							<button id="dongle_mem_update">정보수정</button>
+							<%} %>
 						<%if(gm==null){ %>
 							<button id="dongle_mem_join">가입하기</button>
 							<%} %>
@@ -551,6 +558,22 @@ $(function(){
 	})
 });
 
+
+
+$(function(){
+	$("#dongle_mem_update").click(function(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/dongleUpdateView?groupNo=<%=g.getGroupNo()%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+			},
+			error:function(request){},
+			complate:function(){console.log("ok");}
+		})
+	})
+});
 
 
 function comunnityHome(){

@@ -32,32 +32,7 @@ public class MainDao {
 		}
 	}	
 	
-	public List<LocationCategory> selectMetroCode(Connection conn)
-	{
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<LocationCategory>metroCodeList = new ArrayList<LocationCategory>();
-		String sql = prop.getProperty("selectMetroCode");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next())
-			{
-				LocationCategory lc = new LocationCategory();
-				lc.setMetroCode(rs.getString("metro_code"));
-				lc.setLocMetroName(rs.getString("loc_metro_name"));
-				metroCodeList.add(lc);
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(rs);
-			close(pstmt);
-		}
-		return metroCodeList;
-	}
+	
 	
 	
 

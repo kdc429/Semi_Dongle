@@ -1,4 +1,4 @@
-package com.dongle.calender.controller;
+package com.dongle.manager.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CalendarViewServlet
+ * Servlet implementation class SearchAddressServlet
  */
-@WebServlet("/calendarMainView")
-public class CalendarViewServlet extends HttpServlet {
+@WebServlet("/manager/searchAddress")
+public class SearchAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarViewServlet() {
+    public SearchAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +26,8 @@ public class CalendarViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-	   
-	      request.setAttribute("groupNo", groupNo);
-	      
-	      request.getRequestDispatcher("/Dongle_Community_view/sectioncalender.jsp").forward(request, response);
-		
-		
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/views/manager/manager_searchAddress.jsp").forward(request, response);
 	}
 
 	/**

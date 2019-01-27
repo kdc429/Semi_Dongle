@@ -16,6 +16,10 @@ import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.group.model.vo.LocalCtg;
+import com.dongle.group.model.vo.MultiLocation;
+import com.dongle.group.model.vo.MultiTopic;
+import com.dongle.group.model.vo.TopicCtg;
 
 public class GroupDao {
 	
@@ -138,10 +142,6 @@ public class GroupDao {
 				g.setGroupNo(rs.getInt("group_no"));
 				g.setGroupName(rs.getString("group_name"));
 				g.setTopicCode(rs.getString("topic_ctg_code"));
-				g.setTopicName(rs.getString("topic_ctg_name"));
-				g.setLocMetroName(rs.getString("loc_metro_name"));
-				g.setLocAreaName(rs.getString("loc_area_name"));
-				g.setLocTownName(rs.getString("loc_town_name"));
 				g.setLocCtgCode(rs.getString("loc_ctg_code"));
 				g.setGroupDateCtg(rs.getString("group_date_ctg"));
 				g.setMinAge(rs.getInt("min_age"));
@@ -380,5 +380,130 @@ public class GroupDao {
 		}
 		return galList;
 	}
+	
+	public List<MultiLocation> selectGrLoc(Connection conn, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectGrLoc");
+		List<MultiLocation> list=new ArrayList<MultiLocation>();
+		MultiLocation loc = null;		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				loc = new MultiLocation();
+				loc.setGroupNo(rs.getInt("group_no"));
+				loc.setLocCtgCode(rs.getString("loc_ctg_code"));
+				
+				list.add(loc);
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public List<MultiTopic> selectGrTopic(Connection conn, int groupNo)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectGrTopic");
+		List<MultiTopic> list=new ArrayList<MultiTopic>();
+		MultiTopic topic = null;		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			rs=pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				topic = new MultiTopic();
+				topic.setGroupNo(rs.getInt("group_no"));
+				topic.setTopicCtgCode(rs.getString("topic_ctg_code"));
+				
+				list.add(topic);
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 
+	public List<TopicCtg> selectTopicCtg(Connection conn)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectTopicCtg");
+		List<TopicCtg> topicCtg=new ArrayList<TopicCtg>();
+		TopicCtg topic = null;		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				topic = new TopicCtg();
+				topic.setTopicCtgCode(rs.getString("topic_ctg_code"));
+				topic.setTopicCtgName(rs.getString("topic_ctg_name"));
+				
+				topicCtg.add(topic);
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return topicCtg;
+	}
+	
+	public List<LocalCtg> selectLocalCtg(Connection conn)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectLocalCtg");
+		List<LocalCtg> localCtg=new ArrayList<LocalCtg>();
+		LocalCtg local = null;		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				/*
+				 * local = new TopicCtg();
+				 * local.setTopicCtgCode(rs.getString("topic_ctg_code"));
+				 * local.setTopicCtgName(rs.getString("topic_ctg_name"));
+				 * 
+				 * localCtg.add(local);
+				 */
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return localCtg;
+	}
 }
