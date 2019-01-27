@@ -22,7 +22,7 @@
 font-family: '나눔스퀘어라운드 Regular';
 /* font-family: '여기어때잘난서체'; */
 }
-.lo}
+
 </style>
 </head>
 <body>

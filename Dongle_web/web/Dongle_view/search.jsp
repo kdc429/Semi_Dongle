@@ -137,6 +137,7 @@
     	display: inline-block;
     	float: left;
     	font-size:12px;
+    	border-top:1px solid gray;
     }
     .search_dongle_info>ul{
     	list-style:none;
@@ -206,7 +207,7 @@
 		width:450px;
 		display:inline;
 	}
-
+	
 </style>
 <script>
 
@@ -715,7 +716,7 @@
 						%>
 						<li><%=mln.getLocCtgName() %></li>
 						<%}} %>
-					</ul>
+					</ul><br>
 					<ul><strong>동글 활동 주제:</strong>
 						<%for(MultiTopicName mtn:topicList2){ 
 							if(mtn.getGroupNo()==groupList.get(i).getGroupNo()&&mtn!=null){

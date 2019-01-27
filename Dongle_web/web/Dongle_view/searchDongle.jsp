@@ -50,6 +50,7 @@
 						<li><%=mln.getLocCtgName() %></li>
 						<%}} %>
 					</ul>
+					<br>
 					<ul>동글 활동 주제:
 						<%for(MultiTopicName mtn:topicList){ 
 							if(mtn.getGroupNo()==g.getGroupNo()&&mtn!=null){
