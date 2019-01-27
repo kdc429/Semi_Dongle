@@ -66,6 +66,7 @@ public class FeedAddServlet extends HttpServlet {
 		request.setAttribute("groupMember", gm);
 		request.setAttribute("feedFileList", feedFileList);
 		request.setAttribute("feedCommentList", feedCommentList);
+		request.setAttribute("feedLevel2CommentList", level2FeedCommentList);
 		request.getRequestDispatcher("/views/feed/addFeed.jsp").forward(request, response);
 	}
 

@@ -71,14 +71,20 @@ public class FeedUpdateEndServlet extends HttpServlet {
 			}
 		}
 		String[] fileNums=null;
-		if(delFileList!=null) {
-			
-			fileNums=new String[delFileList.size()];
-			for(int i=0;i<fileNums.length;i++) {
-				fileNums[i]=delFileList.get(i);
+		try {
+			if(delFileList!=null) {
+				
+				fileNums=new String[delFileList.size()];
+				for(int i=0;i<fileNums.length;i++) {
+					fileNums[i]=delFileList.get(i);
+				}
+				
 			}
-			
+		}catch(Exception e) {
+			fileNums=null;
 		}
+		
+		
 
 		//DB에 저장할 데이터 리스트 
 		List<FileList> uploadFileList =new ArrayList();
@@ -93,13 +99,13 @@ public class FeedUpdateEndServlet extends HttpServlet {
 		int n=0;
 		
 		
-		if(fileNums!=null) {
+		if(fileNums==null) {
 			
-			result=new FeedService().updateFeed(feedNo,content,fileNums);
-			
-		}else {
 			result=new FeedService().updateFeedContent(feedNo,content);
 			
+		}else {
+			
+			result=new FeedService().updateFeed(feedNo,content,fileNums);
 		}
 		
 		if(files.hasMoreElements()!=false) {

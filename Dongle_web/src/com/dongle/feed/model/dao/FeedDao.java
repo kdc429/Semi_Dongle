@@ -456,13 +456,16 @@ public class FeedDao {
 					result+=pstmt.executeUpdate();
 				}catch(SQLException e) {
 					e.printStackTrace();
+				}finally {
+					
+					close(pstmt);
 				}
 				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			close(pstmt);
+			
 		}
 		
 		return result;
@@ -493,14 +496,17 @@ public class FeedDao {
 					}
 				}catch(SQLException e) {
 					e.printStackTrace();
+				}finally {
+					close(rs);
+					close(pstmt);
 				}
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			close(rs);
-			close(pstmt);
+			
+			
 		}
 		
 		return fileList;
