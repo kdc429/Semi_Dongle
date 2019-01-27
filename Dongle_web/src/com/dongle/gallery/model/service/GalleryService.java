@@ -211,5 +211,14 @@ public class GalleryService {
 	   else {rollback(conn);}
 	   return rs;
    }
+   //레벨 1신고당하면 레벨 2도 status 'Y'
+   public int updateGalleryCommentReport2(int groupNo, int galNo, int galCommentNo)
+   {
+	   Connection conn = getConnection();
+	   int rs = new GalleryDao().updateGalleryCommentReport2(conn,groupNo,galNo,galCommentNo);
+	   if(rs!=0) {commit(conn);}
+	   else {rollback(conn);}
+	   return rs;
+   }
    
 }

@@ -273,7 +273,7 @@ if (n < 1) {slideIndex = slides.length}
 	<br>
 	<div style="text-align: center">
 		<%for(int i=0;i<gplist.size();i++){ %>
-			<span class="dot" onclick="currentSlide(<%=i%>)"></span> 
+			<span class="dot" onclick="currentSlide(<%=i+1%>)"></span> 
 		<%} %>
 	</div>
 	<div id="gal-content">
@@ -293,15 +293,16 @@ if (n < 1) {slideIndex = slides.length}
 					<%if(g.getGalCommentLevel()==1&&g.getGalCommentReportStatus().equals("N")){ %>
 						<li class='level1' style="list-style:none;">
 							<span class='ico_skin thumb_profile'>
-								<img class='img_profile' src='<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupMemberImageNewPath() %>'>
+								<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=g.getGroupMemberImageNewPath() %>'>
 							</span>
 							<span class='comment_box'>
 								<span class='comment-writer'><%=g.getGroupMemberNickname()%></span>
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
 									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
-									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportGalCommentNo' value='<%=g.getGalCommentNo()%>' >
 									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
+									<input type='hidden' class='reportCommentLevel' value='<%=g.getGalCommentLevel()%>'>
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -324,8 +325,9 @@ if (n < 1) {slideIndex = slides.length}
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
 									<p class='btn-comment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
-									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportGalCommentNo' value='<%=g.getGalCommentNo()%>' >
 									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
+									<input type='hidden' class='reportCommentLevel' value='<%=g.getGalCommentLevel()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
@@ -381,7 +383,8 @@ if (n < 1) {slideIndex = slides.length}
 	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
 	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
 	      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
-	      	 <input type="hidden" id="reportCommentNo" name="selectRecode" value=""/>
+	      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
+	      	 <input type="hidden" id="reportGalCommentLevel" name="reportGalCommentLevel" value=""/> 
 	      </form>
       <%} %>
 <script>
@@ -394,10 +397,13 @@ if (n < 1) {slideIndex = slides.length}
 		
 		$('.btn-comment-report').click(function(e){
 			 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
-			 var reportCommentNo=$(this).siblings('[input.comment-report-no]').val();
-			 var reportCommentNickName=$(this).siblings('[input.reportCommentNickName]').val();
+			 var reportCommentNo=$(this).siblings('.reportGalCommentNo').val();
+			 var reportCommentNickName=$(this).siblings('.reportCommentNickName').val();
+			 var reportGalCommentLevel=$(this).siblings('.reportCommentLevel').val();
+			 console.log(reportCommentNo);
 			 document.getElementById('reportCommentNo').value=reportCommentNo;
 			 document.getElementById('reportNickName').value=reportCommentNickName;
+			 document.getElementById('reportGalCommentLevel').value=reportGalCommentLevel;
 		});
 		
 	});
@@ -475,11 +481,6 @@ if (n < 1) {slideIndex = slides.length}
 					 	fn_loginAlert();
 						e.preventDefault();
 						return;
-					}
-					var len=($(this).parent().find()).siblings('textarea').val().trim().length;
-					if(len==0)
-					{
-						e.preventDefault();
 					}
 					$.ajax({
 						url:"<%=request.getContextPath()%>/gallery/commentInsert",

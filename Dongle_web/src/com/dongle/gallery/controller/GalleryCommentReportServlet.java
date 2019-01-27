@@ -34,13 +34,24 @@ public class GalleryCommentReportServlet extends HttpServlet {
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		int galCommentNo=Integer.parseInt(request.getParameter("galCommentNo"));
-		String reportCode=(String)request.getParameter("reportCode");
-		System.out.println("reportCode: "+reportCode);
-	
+		int galCommentLevel=Integer.parseInt(request.getParameter("galCommentLevel"));
+		String reportCode=(String)request.getParameter("reportCode");                                               
+		System.out.println("galCommentNo: "+galCommentNo);
+		
 		int rs = new GalleryService().insertReport(groupNo,memberNo,reportCode);
 		if(rs!=0) {
 			int result = new GalleryService().updateGalleryCommentReport(groupNo,galNo,galCommentNo);
-			
+			if(galCommentLevel==1) {
+				int result2 = new GalleryService().updateGalleryCommentReport2(groupNo, galNo, galCommentNo);
+				
+				if(result2!=0)
+				{
+					System.out.println("레벨 2도 신고됨");
+				}else
+				{
+					System.out.println("레벨 2 신고안됨");
+				}
+			}
 			 if(result!=0)
 		      {
 		         response.setContentType("text/csv;charset=UTF-8");

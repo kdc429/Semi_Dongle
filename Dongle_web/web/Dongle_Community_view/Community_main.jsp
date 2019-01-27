@@ -46,20 +46,31 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*"
     
 
 </head>
-
 <style>
-	section div#mem_list_div table#tbl{
-		margin-top: 20px;
-	}
-	table#tbl>tr{
-		border : 1px solid darkgray;		
-	}
-	table#tbl>td
-	{
-		border: 1px solid lightgray;
-	}
-	section div#mem_list_div table#tbl>tr th,td{text-align:center;}
-	
+  section div#mem_list_div table#tbl{
+      margin-top: 20px;
+      margin-left: 70px;
+      width: 550px;
+   }
+   table#tbl>tr th{
+      text-align: center;
+      padding-left: 10px;
+      padding-right: 10px;   
+   }
+   table#tbl>td
+   {
+      border: 1px solid lightgray;
+      padding-right: 5px;
+      padding-left: 5px;
+   }
+   table#tbl #tbl_img{
+       width: 100px;
+       height: 100px;
+       border-radius: 50%;
+       padding: 5px 0 5px 0;
+   }
+   section div#mem_list_div table#tbl>tr th,td{text-align:center;}
+
 	section div#dongle_main_img {
 		/*border: 1px solid black*/ 
 		width:500px; 

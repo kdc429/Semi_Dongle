@@ -126,7 +126,7 @@ $(function(){
 		</tr>
 	</table>
 	<form name="albumFolder" id="albumFolder">
-		<table  style='margin-left:25%;'>
+		<table  style='margin-left:20%;'>
 			<%if(list.size()!=0){ %>
 				<%for(int i=0;i<list.size();i++){ %>
 					<%if(count%2==1){%>

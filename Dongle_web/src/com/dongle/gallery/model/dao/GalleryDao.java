@@ -631,4 +631,26 @@ public class GalleryDao {
 	   }
 	   return rs;
    }
+   //레벨 1 신고당하면 레벨2도
+   public int updateGalleryCommentReport2(Connection conn,int groupNo,int galNo,int galCommentNo)
+   {
+	   PreparedStatement pstmt=null;
+	   int rs =0;
+	   String sql = prop.getProperty("updateGalleryCommentReport2");
+	   try {
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, groupNo);
+		   pstmt.setInt(2, galCommentNo);
+
+		   rs=pstmt.executeUpdate();
+	   }
+	   catch(Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   finally {
+		   close(pstmt);
+	   }
+	   return rs;
+   }
 }
