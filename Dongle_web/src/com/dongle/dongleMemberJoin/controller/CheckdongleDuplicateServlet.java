@@ -20,7 +20,7 @@ import com.dongle.group.model.vo.GroupMember;
  */
 @WebServlet("/NicknameCheck")
 public class CheckdongleDuplicateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,39 +30,37 @@ public class CheckdongleDuplicateServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//파라미터로 전송된 id가 DB에 있는지 확인하는것!
-		String nickname=request.getParameter("nickname");
-		System.out.println("닉넴확이뉴 : " + nickname);
-		GroupMember m=new GroupMember();
-		
-		m=new DongleMemberJoinService().selectMember(nickname);
-		System.out.println("너니"+m);
-		boolean isAble=(m==null)?true:false;
-		//id true면 사용가능, false면 사용불가
-		
-		request.setAttribute("nickname", nickname);
-		request.setAttribute("isAble", isAble);
-		
-		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_Community_view/dongleDuplicate.jsp");
-		rd.forward(request, response);
-		
-		
-		
-		
-	
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      //파라미터로 전송된 id가 DB에 있는지 확인하는것!
+      String nickname=request.getParameter("nickname");
+      
+      GroupMember m=new GroupMember();
+      m.setGroupMemberNickname(nickname);
+      GroupMember m1=new DongleMemberJoinService().selectMember(nickname);   
+      
+/*      Member m=new Member();
+      m.setMemberId(userId);
+      Member m1=new MemberService().selectMember(m);*/
+      
+      boolean isAble=(m1==null)?true:false;
+      response.getWriter().println(isAble);
+      
+      
+      
+      
+   
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }
