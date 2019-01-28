@@ -305,6 +305,9 @@ java.util.*" %>
 	
 </script>
 <style>
+	div.manager-container{
+		padding-left:45px;
+	}
 	input#address{display:"inline-block"}
 	a.aTopic{padding-right:15px;}
 	a.aLocal{padding-right:15px; font-size:9pt;}

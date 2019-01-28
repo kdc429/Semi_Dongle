@@ -32,29 +32,34 @@
         div.header-a span {background:white;}
         a {color: #1155CC;}
         input#address{display:"inline-block"}
-		a.aTopic{padding-right:15px;}
-		a.aLocal{padding-right:15px; font-size:9pt;}
-		.image_p{
-	            border: 1px solid rgb(230,230,230);
-	            width: 120px;
-	            height: 120px;
-	            border-radius: 100px;
-	            margin-left: 180px;
-	           
-	    }
-		#upfile{
-	          
-	           
-	            font-family: "netmarble Medium";
-	    }
-	    /*들어가는 이미지 style*/
-	    .selProductFile{
-	            width: 120px;
-	            height: 120px;
-	            border-radius: 100px;
-	           /*  margin-left:2px;
-	            margin-top:1px; */
-	    }
+		a.aTopic{padding-right:15px;color: rgb(50,50,50);position:relative;font-size:9pt;text-decoration:none;}
+      a.aLocal{padding-right:15px;color: rgb(50,50,50);position:relative;font-size:9pt;text-decoration:none;}
+      .image_p{
+               border: 1px solid rgb(230,230,230);
+               width: 120px;
+               height: 120px;
+               border-radius: 100px;
+               margin-left: 180px;
+              
+       }
+       a.aTopic:hover{color:rgb(50,50,50);}
+       a.aLocal:hover{color:rgb(50,50,50);}
+      #upfile{
+             
+              
+               font-family: "netmarble Medium";
+       }
+       /*들어가는 이미지 style*/
+       .selProductFile{
+               width: 120px;
+               height: 120px;
+               border-radius: 100px;
+              /*  margin-left:2px;
+               margin-top:1px; */
+       }
+       div.form-group label{
+          font-size:12pt;
+       }
     </style>
     <Script>
 		$(function(){

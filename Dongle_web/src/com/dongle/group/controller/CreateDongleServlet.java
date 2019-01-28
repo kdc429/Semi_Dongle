@@ -49,7 +49,7 @@ public class CreateDongleServlet extends HttpServlet {
 		String root=getServletContext().getRealPath("/");
 		//파일경로를 설정할때 구분자!
 		/*String saveDir=root+"upload/board";*/
-		String saveDir=root+"upload"+File.separator+"dongle";
+		String saveDir=root+"images"+File.separator+"group_profile";
 		int maxSize=1024*1024*10;//10MB
 		
 		MultipartRequest mr=new MultipartRequest(request, 
@@ -127,6 +127,9 @@ public class CreateDongleServlet extends HttpServlet {
 		
 		
 		int result1 = new ManagerService().insertDongle(loginMember.getMemberNo(), newGroup);
+		int result2 = new ManagerService().updateMultiTopic(topicCode, result1);
+	    int result3 = new ManagerService().updateMultiLoc(locCode, result1);
+		
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";

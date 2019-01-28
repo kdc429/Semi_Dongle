@@ -49,7 +49,7 @@ public class UpdateDongleServlet extends HttpServlet {
 		String root=getServletContext().getRealPath("/");
 		//파일경로를 설정할때 구분자!
 		/*String saveDir=root+"upload/board";*/
-		String saveDir=root+"upload"+File.separator+"dongle";
+		String saveDir=root+"images"+File.separator+"group_profile";
 		int maxSize=1024*1024*10;//10MB
 		
 		MultipartRequest mr=new MultipartRequest(request, 
