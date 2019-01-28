@@ -214,7 +214,7 @@ $(function(){
 					e.preventDefault();
 				}
 				$.ajax({
-					url:"<%=request.getContextPath()%>/gallery/commentInsert",
+					url:"<%=request.getContextPath()%>/board/commentInsert",
 					data:{"groupNo":<%=groupNo%>,
 						"boardNo":$('#boardNo').val(),
 						"boCommentWriter":$('#boCommentWriter').val(),

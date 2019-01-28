@@ -51,11 +51,6 @@ div.back-div{padding-left:90px;padding-top:50px;}
 div.back-div a.list_btn{text-decoration:none;}
 div.back-div a.list_btn img.back_icon{width:10px;height:10px;}
 div.back-div button.insert-bnt{float:right; border:none;background-color:rgb(0,0,0,0);margin-right:90px;}
-div#gallery-container div#pag-div{position:relative; border:none;}
-div#gallery-container div#pag-div>table.pag_table{width:100%; text-align:center;}
-div#gallery-container div#pag-div>table.pag_table tr td{align-items: center;}
-div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li{text-align:center; align-items: center;color:green;}
-div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-decoration:none;color:rgb(50,50,50);align-items: center;}
 
 </style>
 <script>
@@ -136,9 +131,7 @@ div#gallery-container div#pag-div>table.pag_table tr td ul.pagnation li a{text-d
                      <tr>
                      </tr>
                      <td class="galleryBox" >
-                        <%-- <%if(t.getGalMultiStatus().equals("Y")){ %> --%>
-                           <img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
-                        <%-- <%} %> --%>
+                        <img class="galImg" src="<%=request.getContextPath()%>/upload/gallery/<%=t.getGalFileNewPath() %>">
                         <input type="hidden" name="groupNo" value="<%=t.getGroupNo()%>"/>
                         <input type="hidden" name="albumCode" value="<%=t.getAlbumCode()%>"/>
                         <input type="hidden" name="galFileNo" id="galFileNo" value="<%=t.getGalFileNo() %>"/>

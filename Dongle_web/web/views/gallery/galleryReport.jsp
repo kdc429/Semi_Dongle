@@ -56,7 +56,6 @@
   			console.log($(this).val());
   			var reportCode=$('#report-reason option:selected').val();
   			window.opener.document.getElementById('selectRecode').value=reportCode;
-  			report();
   		});
   	})
    
@@ -65,14 +64,19 @@
       $('.report-close').click(function(){
          var galNo=window.opener.document.getElementById('reportGalNo').value;
          var galCommentNo;
+         console.log(window.opener.document.getElementById('reportCommentNo'));
          if(window.opener.document.getElementById('reportCommentNo').value!=null){
          	galCommentNo=window.opener.document.getElementById('reportCommentNo').value;
+         }
+         var galCommentLevel;
+         if(window.opener.document.getElementById('reportGalCommentLevel').value!=null){
+        	 galCommentLevel=window.opener.document.getElementById('reportGalCommentLevel').value;
          }
          var groupNo=window.opener.document.getElementById('reportGroupNo').value;
          var memberNo=window.opener.document.getElementById('reportMemberNo').value;
          var reportCode=$('#report-reason option:selected').val();
          var albumCode=window.opener.document.getElementById('reportAlbumCode').value;
-         console.log(galCommentNo);
+         console.log(galCommentNo+": "+galCommentLevel);
          if(!confirm('정말로 신고하시겠습니까?')){return;}
          {
         	 if(galCommentNo!=null){
@@ -84,7 +88,8 @@
  	                  "groupNo":groupNo,
  	                  "memberNo":memberNo,
  	                  "reportCode":reportCode,
- 	                  "galCommentNo":galCommentNo
+ 	                  "galCommentNo":galCommentNo,
+ 	                  "galCommentLevel":galCommentLevel
  	               },
  	               success:function(data){
  	                	 alert("Message: "+data);
@@ -177,7 +182,6 @@
    </div>
    <div>
       <button class="report-close">신고</button>
-
    </div>
 </body>
 </html>

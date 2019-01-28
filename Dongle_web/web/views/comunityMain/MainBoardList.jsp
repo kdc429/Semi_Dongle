@@ -67,17 +67,15 @@ com.dongle.member.model.vo.Member,com.dongle.main.*" %>
 <script>
 $(function(){
     $('.boardView-btn').click(function(){
-       console.log($(this).children('input').val());
-       var num=$(this).children('input').val();
        $.ajax({
-          url:"<%=request.getContextPath() %>/board/boardView?groupNo=<%=groupNo%>&boardNo="+num,
-          type:"post",
-          dataType:"html",
-          success:function(data){
-             $('#content-div').html(data);
-          },
-          error:function(error,msg){console.log("---"+error+msg);}
-       });
+            url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=groupNo%>",
+            type:"post",
+            dataType:"html",
+            success:function(data){
+               $('#content-div').html(data);
+               //해당 div를 ajax로 바꾼다는 의미.
+            }
+         });
     });
  });
 </script>

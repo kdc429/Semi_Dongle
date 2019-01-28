@@ -21,7 +21,7 @@ import com.dongle.member.model.vo.Member;
  */
 @WebServlet("/gallery/galleryGet")
 public class GalleryGetServlet extends HttpServlet {
-   private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,7 +30,6 @@ public class GalleryGetServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,17 +41,16 @@ public class GalleryGetServlet extends HttpServlet {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		int memberNo=loginMember.getMemberNo();
-		GroupMember gm = new GalleryService().checkGroupMember(groupNo, memberNo);
-		System.out.println("그룹멤버니?"+gm);
+		//동호회 회원인지 아닌지 group_member_tab에서 확인
+		GroupMember gm = new GroupService().selectGmInfo(groupNo, memberNo);
 		if(gm==null&&!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
 			request.setAttribute("loc", "/communityJoin?groupNo="+groupNo);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
-		}		
+		}
 		
-
 
 		//test : gal_no만 distinct된 dao에 갔다오기
 		List<Integer> galNoList = new GalleryService().distictGalNoList(albumCode,groupNo); //7,6,5,4,3,2,1
@@ -82,17 +80,16 @@ public class GalleryGetServlet extends HttpServlet {
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("albumCode", albumCode);
 		request.setAttribute("groupMember", gm);
-		request.setAttribute("totalList", totalMember);
 		request.setAttribute("tList", tList);
 		request.getRequestDispatcher("/views/gallery/galleryView.jsp").forward(request, response);
 	}
 
-   /**
-    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-    */
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // TODO Auto-generated method stub
-      doGet(request, response);
-   }
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

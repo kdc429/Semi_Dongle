@@ -24,15 +24,16 @@ div#albumPlus-container button{color:gray;border:none;font-family:'a흑진주L';
 $(function(){
 	
 	$('.fn_albumPlus').click(function(){
-		console.log($('#albumNameP').val()+" : "+$('#albumNameP').val().trim().length);
-		if($('#albumNameP').val().trim().length==0)
+		var albumName =$('#albumNameP');
+		console.log(albumName.val()+" : "+albumName.val().trim().length);
+		if(albumName.val().trim().length==0)
 		{
 			alert('앨범명을 입력해주세요.');
 			return;
 		}
 		for(var i=0;i< <%=list.size()%>; i++)
 		{
-			if($('#albumNameP').val()=='<%=list.get(count).getAlbumName()%>')
+			if(albumName.val()=='<%=list.get(count).getAlbumName()%>')
 			{
 				alert('이미 존재하는 앨범입니다. 다시 입력해주세요.');
 				return;
@@ -41,7 +42,7 @@ $(function(){
 		}
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallery/albumInsert",
-			data:{'albumNameP':$('#albumNameP').val(),
+			data:{'albumNameP':albumName.val(),
 				'groupNo':<%=groupNo%>
 			},
 			type:'post',

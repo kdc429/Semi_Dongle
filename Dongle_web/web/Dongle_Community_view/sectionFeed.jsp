@@ -402,7 +402,48 @@
          
          
       });
-         //
+      
+      $(document).ready(function(){
+          //수정 팝업 레이어 열기
+          console.log($(this));
+          $(document).on('click','.feed-pic',function(event){
+             var button=$(this);
+             console.log(button);
+             var elementTop=$(this).parent().parent();
+             console.log("눌리나?");
+             var feedPopup=document.getElementById("feed-popup");
+             console.log(elementTop);
+             var feedNo=$(this).siblings('.feed-no-update').val();
+             console.log(feedNo);
+             var _x = document.body.scrollLeft; //마우스로 선택한곳의 x축(화면에서 좌측으로부터의 거리)를 얻는다. 
+             var _y = elementTop.offset().top; //마우스로 선택한곳의 y축(화면에서 상단으로부터의 거리)를 얻는다. 
+             console.log(_x);
+             console.log(_y);
+             //if(_x < 0) _x = 0; //마우스로 선택한 위치의 값이 -값이면 0으로 초기화. (화면은 0,0으로 시작한다.) 
+             //if(_y < 0) _y = 0; //마우스로 선택한 위치의 값이 -값이면 0으로 초기화. (화면은 0,0으로 시작한다.) 
+    
+             feedPopup.style.left = _x+"px"; //레이어팝업의 좌측으로부터의 거리값을 마우스로 클릭한곳의 위치값으로 변경. 
+             feedPopup.style.top = _y+"px"; //레이어팝업의 상단으로부터의 거리값을 마우스로 클릭한곳의 위치값으로 변경. 
+
+             feedPopup.style.visibility="visible";
+             feedPopup.style.display="flex";
+             
+             $.ajax({
+                url:"<%=request.getContextPath()%>/feed/feedPopupView2",
+                type:"post",
+                data:{"feedNo":feedNo},
+                
+                success:function(data){
+                   $('#feed-popup').html(data);
+                   
+                }
+                
+             })
+             
+          })
+          
+          
+       });
       
       $(document).ready(function(){
          //피드 삭제 에이작스

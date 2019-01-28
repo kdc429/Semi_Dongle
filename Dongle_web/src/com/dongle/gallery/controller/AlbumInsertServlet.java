@@ -35,7 +35,10 @@ public class AlbumInsertServlet extends HttpServlet {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		
-		int rs = new GalleryService().insertAlbum(albumNameP, groupNo);
+		//앨범을 순서대로 정렬하기 위해서 
+		int albumNo = new GalleryService().selectMaxAlbumNo(groupNo);
+		
+		int rs = new GalleryService().insertAlbum(albumNameP, groupNo,albumNo);
 		if(rs!=0)
 		{
 			response.setContentType("text/csv;charset=UTF-8");

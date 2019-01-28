@@ -104,43 +104,14 @@
 	
 	</div>
 	<hr>
-	<!-- 분야별 랭킹 컨텐츠 -->
-	<div class="bar"></div>
-	<h4 style="font-family: 'netmarble Medium'; text-align:center; font-weight: bold;">당신을 위한 가장 인기있는 동글!</h4>
-	<h2 class="item-logo">DONGLE'S RANKING</h2>
-	<div class="dongle-rank" style='height:auto;'>
-		
-		<% if(rankList!=null) {
-			for(Group g :rankList){%>
-		<div class="dongle-ranker" >
-			
-			<div class="ranker-img-back">
-				<form action="<%=request.getContextPath()%>/communityJoin?=<%=g.getGroupNo()%>&<%=loginMember.getMemberNo() %>">
-				<!-- 여기서 그룹 넘버 전송 -->
-					<div class="ranker-img"> 
-						<!-- 순위권 동글 리스트 -->
-						<button class="join-btn" type="submit">
-						<img class="rImg" src="<%=request.getContextPath()%>/images/group_profile/<%=g.getGroupImageNewPath()%>"/>
-						<input type="hidden" name="groupNo" value="<%=g.getGroupNo()%>"/>
-						<input type="hidden" name="groupNo" value="<%=loginMember.getMemberNo()%>"/>
-						</button>
-					</div>
-				</form>
-			</div>
-			<div class="ranker-intro">
-					<!-- 동글 소개 컨텐트 -->			
-					<p class="intro-content">
-						<%=g.getGroupName() %><br>
-						동글 소개:<%=g.getGroupIntro() %><br>
-					</p>
-			</div>
-		</div>
-		<%	}
-		}%>
-		
-	</div>
 	
 </section>
 <script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
 <%@ include file="footer.jsp"%>
+<div class="modal-div">
+   <div class="dialog" id="modal-container">
+      <div class="modal-content">
+      </div>
+      </div>
+</div> 

@@ -13,6 +13,7 @@ import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.AlbumCategory;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.Member;
 
@@ -41,7 +42,10 @@ public class AlbumGetServlet extends HttpServlet {
 		int memberNo=loginMember.getMemberNo();
 		//동호회 회원인지 아닌지 group_member_tab에서 확인
 		GroupMember gm = new GroupService().selectGmInfo(groupNo, memberNo);
-		System.out.println("동호회 회원이니?" + gm);
+		
+		//그룹장 정보 받아오기
+		Group g = new GroupService().selectGrInfo(groupNo);
+		
 		if(gm==null&&!loginMember.getMemberId().equals("admin"))
 		{
 			request.setAttribute("msg", "회원만 열람 가능합니다. 동글에 가입해주세요.");
@@ -57,6 +61,7 @@ public class AlbumGetServlet extends HttpServlet {
 		System.out.println("albumGetServlst의 "+list.size()+list);
 		System.out.println("albumGetServlst의 "+galList.size()+galList);
 		
+		request.setAttribute("g", g);
 		request.setAttribute("galList", galList);
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("list", list);
