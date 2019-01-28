@@ -78,7 +78,7 @@ div.user-back #logout_btn{
    margin-left: 50px;
 }
 
-.dialog{
+.dialog2{
    display:none;
    position:absolute;
    margin-top:-1200px;
@@ -91,7 +91,7 @@ div.user-back #logout_btn{
    background-color:rgb(0,0,0);
    background-color:rgba(0,0,0,0.4);
 }
-.modal-content {
+.modal-content2 {
        background-color: #fefefe;
        margin: 15% auto; 
        padding: 20px;
@@ -140,13 +140,26 @@ div.user-back #logout_btn{
                 type:"post",
                 dataType:"html",
                 success:function(data){
-                   $('.modal-content').html(data);
+                   $('.modal-content2').html(data);
                    $('#modal-container').css('display','block');
                 },
                 error:function(request,m,e){console.log(request);}
                 
              });
         });
+        
+        $(document).ready(function(){
+			$('.search-btn').on('click',function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/main/mainSearch",
+					type:"post",
+					dataType:"html",
+					success:function(data){
+						$('section').html(data);
+					}
+				})
+			})
+		})
         </script>
     </header>
 </body>

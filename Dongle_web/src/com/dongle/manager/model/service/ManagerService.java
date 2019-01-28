@@ -8,6 +8,7 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.manager.model.dao.ManagerDao;
 import com.dongle.member.model.vo.DongleRptMember;
@@ -132,5 +133,116 @@ public class ManagerService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public int updateDongle(Group g)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().updateDongle(conn, g);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public String selectLocCtgCode(String metroCode, String areaCode, String townCode)
+	{
+		Connection conn = getConnection();
+		String locCode = new ManagerDao().selectLocCtgCode(conn, metroCode, areaCode, townCode);
+		
+		close(conn);
+		return locCode;
+	}
+	
+	public int deleteMultiTopic(int groupNo)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().deleteMultiTopic(conn, groupNo);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
+	public int updateMultiTopic(String[] topicCode, int groupNo)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().updateMultiTopic(conn, topicCode, groupNo);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteMultiLoc(int groupNo)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().deleteMultiLoc(conn, groupNo);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
+	public int updateMultiLoc(String[] locCode, int groupNo)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().updateMultiLoc(conn, locCode, groupNo);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public int insertDongle(int memberNo, Group g)
+	{
+		Connection conn = getConnection();
+		int result = new ManagerDao().insertDongle(conn, memberNo, g);
+		
+		if(result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
 	}
 }

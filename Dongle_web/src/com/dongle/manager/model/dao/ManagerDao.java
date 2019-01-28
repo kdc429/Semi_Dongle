@@ -8,13 +8,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.dongle.feed.model.vo.FeedNoResult;
+import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
 import com.dongle.member.model.vo.DongleRptMember;
-import com.dongle.member.model.vo.Member;
 
 public class ManagerDao {
 private Properties prop = new Properties();
@@ -262,4 +264,270 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+	
+	public int updateDongle(Connection conn, Group g)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateDongle");
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, g.getGroupName());
+			pstmt.setString(2, g.getTopicCode());
+			pstmt.setString(3, g.getLocCtgCode());
+			pstmt.setString(4, g.getGroupDateCtg());
+			pstmt.setInt(5, g.getMinAge());
+			pstmt.setInt(6, g.getMaxAge());
+			pstmt.setString(7, g.getGroupImageOldPath());
+			pstmt.setString(8, g.getGroupImageNewPath());
+			pstmt.setString(9, g.getGroupIntro());
+			pstmt.setInt(10, g.getGroupNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public String selectLocCtgCode(Connection conn, String metroCode, String areaCode, String townCode)
+	{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String locCode = "";
+		String sql = "";
+		if(townCode.equals(""))
+		{
+			if(areaCode.equals(""))
+			{
+				sql=prop.getProperty("selectLocCtgCode1");
+			}
+			else
+			{
+				sql=prop.getProperty("selectLocCtgCode2");
+			}
+		}
+		else
+		{
+			sql=prop.getProperty("selectLocCtgCode3");
+		}
+		
+
+		try {
+			pstmt=conn.prepareStatement(sql);
+			if(townCode.equals(""))
+			{
+				if(areaCode.equals(""))
+				{
+					pstmt.setString(1, metroCode);
+				}
+				else
+				{
+					pstmt.setString(1, metroCode);
+					pstmt.setString(2, areaCode);
+				}
+			}
+			else
+			{
+				pstmt.setString(1, metroCode);
+				pstmt.setString(2, areaCode);
+				pstmt.setString(3, townCode);
+			}
+			
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				locCode = rs.getString("loc_ctg_code");
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return locCode;
+	}
+	
+	public int deleteMultiTopic(Connection conn, int groupNo)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteMultiTopic");
+		try
+		{	
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, groupNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateMultiTopic(Connection conn, String[] topicCode, int groupNo)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMultiTopic");
+		try
+		{	
+			for(int i = 0; i < topicCode.length; i++)
+			{
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, groupNo);
+				pstmt.setString(2, topicCode[i]);
+				
+				
+				result = pstmt.executeUpdate();
+			}
+			
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteMultiLoc(Connection conn, int groupNo)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteMultiLoc");
+		try
+		{	
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, groupNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateMultiLoc(Connection conn, String[] locCode, int groupNo)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMultiLoc");
+		try
+		{	
+			for(int i = 0; i < locCode.length; i++)
+			{
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, groupNo);
+				pstmt.setString(2, locCode[i]);
+				
+				
+				result = pstmt.executeUpdate();
+			}
+			
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertDongle(Connection conn, int memberNo, Group g)
+	{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		int groupNo = 0;
+		Statement stmt=null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("insertDongle");
+		try
+		{	
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, g.getGroupName());
+			pstmt.setString(3, g.getTopicCode());
+			pstmt.setString(4, g.getLocCtgCode());
+			pstmt.setString(5, g.getGroupDateCtg());
+			pstmt.setInt(6, g.getMinAge());
+			pstmt.setInt(7, g.getMaxAge());
+			pstmt.setString(8, g.getGroupImageOldPath());
+			pstmt.setString(9, g.getGroupImageNewPath());
+			pstmt.setString(10, g.getGroupIntro());
+			
+			
+			result = pstmt.executeUpdate();
+			
+			if(result>0) {
+				String sql2="SELECT SEQ_GROUP_NO.CURRVAL AS NO FROM DUAL";
+				stmt=conn.createStatement();
+				rs=stmt.executeQuery(sql2);
+				
+				if(rs.next()) {
+					groupNo = (rs.getInt("no"));
+				}
+			}
+			
+			
+			
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(pstmt);
+		}
+		return groupNo;
+	}
+	
 }
+

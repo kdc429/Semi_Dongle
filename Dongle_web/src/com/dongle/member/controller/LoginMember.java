@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.LocalCtg;
+import com.dongle.group.model.vo.TopicCtg;
 import com.dongle.member.model.service.MemberService;
 import com.dongle.member.model.vo.Member;
 
@@ -47,6 +49,9 @@ public class LoginMember extends HttpServlet {
 		List<Group> joinList=gs.selectGroup(id);
 		List<EditPickGroup> editList=gs.selectEditGr();
 		List<Group> rankList=gs.selectRank();
+		List<TopicCtg> topicCtg = new GroupService().selectTopicCtg();
+		List<LocalCtg> localCtg = new GroupService().selectLocalCtg();
+		
 		String view = "";
 		String msg = "";
 		if (data == null) {
@@ -70,6 +75,8 @@ public class LoginMember extends HttpServlet {
 				request.setAttribute("list", joinList);
 				request.setAttribute("editList", editList);
 				request.setAttribute("rankList", rankList);
+				request.setAttribute("topicCtg", topicCtg);
+				request.setAttribute("localCtg", localCtg);
 				RequestDispatcher rd = request.getRequestDispatcher(view);
 				rd.forward(request, response);
 			} else {

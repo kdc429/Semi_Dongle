@@ -255,11 +255,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                     <!-- <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2> -->
                 </div>
             <div class='logoback' style='position:relative;width:1024px;height: 100px;'>
-
-                <!-- 로고 grid -->
-                <div class='logo' style='width:1024px; height: auto; background-color:rgb(20,150,200)'>
-                    <h2 style="color:rgb(250,237,125); margin-left:15px;" onclick='logoCk();'>DONGLE</h2>
-                </div>
             </div>
 
             <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:20px;z-index:3;'>
