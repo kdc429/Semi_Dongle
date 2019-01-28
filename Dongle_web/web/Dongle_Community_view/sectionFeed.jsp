@@ -225,6 +225,7 @@
             success:function(data){ 
                console.log(data);
                   newFeed.next().after(data);
+                  alert("등록되었습니다");
                   $('#feed-content-up').val("");
                   $('#imgPreview').children().children().remove();
                   setImage();
@@ -392,6 +393,7 @@
                data:{"feedNo":feedNo},
                
                success:function(data){
+            	  
                   $('#feed-popup').html(data);
                   
                }

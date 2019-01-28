@@ -483,7 +483,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
          
          dataType:"html",
          success:function(data){
-        	alert("등록되었습니다");
+        	
             $('#content-div').html(data);
             setImage();
             $("#feed-btn").css('background-color','rgb(255,234,184)');
