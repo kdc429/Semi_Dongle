@@ -49,7 +49,7 @@
 					<span><strong>동글 창설 날짜:</strong> <%=g.getGroupEnrollDate() %></span><br><br>
 					
 					<%if(locationList.size()>0){%>
-					<ul>동글 활동 지역-
+					<ul><strong>동글 활동 지역-</strong>
 						<%for(MultiLocationName mln:locationList){
 							if(mln.getGroupNo()==g.getGroupNo()){
 						%>
@@ -59,7 +59,7 @@
 					<%} %>
 					<br>
 					<%if(topicList.size()>0){%>
-					<ul>동글 활동 분야-
+					<ul><strong>동글 활동 분야-</strong>
 						<%for(MultiTopicName mtn:topicList){
 							if(mtn.getGroupNo()==g.getGroupNo()){
 						%>
