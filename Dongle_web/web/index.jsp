@@ -40,11 +40,8 @@ font-family: '나눔스퀘어라운드 Regular';
                     <label for="">
                         <input type="password" name="password" id="password"  class="form-control"placeholder="비밀번호">
                     </label><br>
-                    <label for="">
-                        <input type="checkbox" name="saveId" id="saveId">아이디 저장
-                    </label><br>
 
-                    <button id="btn_login" onclick='login()' class="btn btn-primary" style="font-family: 'netmarble Medium';">로그인</button><br>
+                    <button id="btn_login"  class="btn btn-primary" style="font-family: 'netmarble Medium';">로그인</button><br>
                     <input type="button" value="회원가입" class="btn btn-primary" style="font-family: 'netmarble Medium';"
                      onclick="location.href='<%=request.getContextPath() %>/memberEnroll'"/>
               	</form><br>

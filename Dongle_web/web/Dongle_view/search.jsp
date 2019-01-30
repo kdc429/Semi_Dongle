@@ -696,6 +696,7 @@
 	<div id="dongle-container">
 		<div id="dongle-container-back">
 			<ul>
+			<%if(groupList.size()>0){ %>
 		<%for(int i=0; i<groupList.size();i++){%>
 			<li class="dongle-list">
 				<div class='search_dongle_main_img'>
@@ -704,38 +705,23 @@
 				</div>
 				<div class='search_dongle_info'>
 					<p><strong>동글 명:</strong> <%=groupList.get(i).getGroupName() %></p>
-					<%for(GroupMemberCount gmc:memberCountList){
-						if(gmc.getGroupNo()==groupList.get(i).getGroupNo()){	
-						%>
-					<p><strong>동글 회원수:</strong> <%=gmc.getMemberCount() %></p>
-					<%}} %>
-					<p><strong>동글 창설 날짜:</strong> <%=groupList.get(i).getGroupEnrollDate() %>
-					<ul><strong>동글 활동 지역:</strong>
-						<%for(MultiLocationName mln:locationList){ 
-							if(mln.getGroupNo()==groupList.get(i).getGroupNo()&&mln!=null){
-						%>
-						<li><%=mln.getLocCtgName() %></li>
-						<%}} %>
-					</ul><br>
-					<ul><strong>동글 활동 주제:</strong>
-						<%for(MultiTopicName mtn:topicList2){ 
-							if(mtn.getGroupNo()==groupList.get(i).getGroupNo()&&mtn!=null){
-						%>
-						<li><%=mtn.getTopicCtgName() %></li>
-						<%}} %>
-					</ul>
+					
+					<p><strong>동글 창설 날짜:</strong> <%=groupList.get(i).getGroupEnrollDate() %></p>
+					<br>
+					
 				</div>
 			</li>
 		<%} %>
+		<%} %>
 			</ul>
 		</div>
-	</div>
 	<div id='page-bar-back'>
 		<ul id='page-bar'>
 			<%if(pageBar!=null){ %>
 			<%=pageBar %>
 			<%} %>
 		</ul>
+	</div>
 	</div>
 </div>	
 </body>

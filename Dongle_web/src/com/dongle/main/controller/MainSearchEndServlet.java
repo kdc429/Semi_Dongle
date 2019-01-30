@@ -152,7 +152,7 @@ public class MainSearchEndServlet extends HttpServlet {
 				request.setAttribute("cPage", cPage);
 				request.setAttribute("pageBar", barPage);
 				request.getRequestDispatcher("/Dongle_view/searchDongle.jsp").forward(request, response);
-
+				return;
 
 			}
 
@@ -181,6 +181,7 @@ public class MainSearchEndServlet extends HttpServlet {
 			} else {
 				barPage += "<li class='page-bar'><input type='hidden' value='" + (pageNo) + "'>" + pageNo + "</li>";
 			}
+			
 
 			if ("date".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -216,12 +217,15 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
+				
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -283,13 +287,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
-				
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -304,12 +309,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -372,12 +379,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -392,12 +401,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -460,12 +471,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -480,12 +493,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -548,12 +563,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -568,12 +585,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -636,12 +655,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -656,12 +677,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -724,12 +747,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -744,12 +769,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -811,12 +838,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -831,12 +860,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -899,12 +930,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -919,12 +952,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -987,12 +1022,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1007,12 +1044,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1075,12 +1114,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1095,12 +1136,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1163,12 +1206,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1183,12 +1228,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1251,12 +1298,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1271,12 +1320,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1339,12 +1390,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1359,12 +1412,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1427,12 +1482,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1447,12 +1504,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1515,12 +1574,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1535,12 +1596,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1603,12 +1666,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1623,12 +1688,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1691,12 +1758,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1711,12 +1780,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1779,12 +1850,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1799,12 +1872,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1867,12 +1942,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1887,12 +1964,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -1954,12 +2033,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1974,12 +2055,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2041,12 +2124,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2061,12 +2146,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2128,12 +2215,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2215,12 +2304,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2235,12 +2326,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2303,12 +2396,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2323,12 +2418,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2390,12 +2487,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2410,12 +2509,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2477,12 +2578,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2498,12 +2601,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2565,12 +2670,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2653,12 +2760,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2674,12 +2783,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2741,12 +2852,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2762,12 +2875,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2829,12 +2944,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2849,12 +2966,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2916,12 +3035,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2937,12 +3058,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -3004,12 +3127,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -3025,12 +3150,14 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				if(groupNo!=null) {
+//					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+//					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+//					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+//					request.setAttribute("memberCountList", memberCountList);
+//					request.setAttribute("locationList", locationList);
+//					request.setAttribute("topicList", topicList);
+				}
 			}
 			System.out.println(groupList.size());
 			System.out.println(barPage);

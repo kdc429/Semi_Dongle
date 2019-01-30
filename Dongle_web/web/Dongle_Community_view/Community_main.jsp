@@ -78,12 +78,21 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
    section div#dongle_main_img {
       /*border: 1px solid black*/ 
       width:500px; 
-      height: 250px; 
+      height: 300px; 
       /* background-color: lightgray;  */
       align-content: center;
       float: left;
       margin-left: 100px;
       margin-top: 30px;
+      text-align:center;
+   
+   }
+   section div#dongle_main_img >img{
+   		
+   		max-width:500px;
+   		max-height:300px;
+   		width:auto;
+   		height:auto;
    
    }
    section div#mini_board{
@@ -258,7 +267,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             </div>
 
             <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:20px;z-index:3;'>
-               <%if(loginMember.getMemberId().equals("admin")){ %>
                   <%for(int i=0;i<editList.size();i++){ %>
                      <%if(editList.get(i).getGroupNo()==groupNo){ %>
                         <%editnum++; %>
@@ -269,7 +277,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                   <%if(editnum==0){ %>
                      <button id='goEdit' onclick='goEdit();' style='background-color:rgb(20,150,200); color:white;border:none;position:fixed;'>에디터픽 선정하기</button>
                   <%} %>
-                 <%} %>
             </div>
         </header>
         <script>
@@ -417,7 +424,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                
                <!-- 동글메인이미지 -->
                <div id='dongle_main_img'>
-                  <img style='width:540px; height:280px;' src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
+                  <img src="<%=request.getContextPath()%>/images/dongle_main_img/<%=g.getGroupMainNewImgPath()%>">
                </div>
                <div id='mini_board'></div>
                <div id='mini_gallery'></div>

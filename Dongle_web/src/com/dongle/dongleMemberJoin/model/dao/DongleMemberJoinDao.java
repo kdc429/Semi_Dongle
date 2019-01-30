@@ -75,7 +75,7 @@ public class DongleMemberJoinDao {
 	{
 		PreparedStatement pstmt=null;
 		int result=0;
-		String sql=prop.getProperty("insertdonglejoin");
+		String sql=prop.getProperty("insertdonglejoin1");
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -84,6 +84,31 @@ public class DongleMemberJoinDao {
 			pstmt.setString(3, b.getGroupMemberNickname());
 			pstmt.setString(4, b.getGroupMemberImageNewPath());
 			pstmt.setString(5, b.getGroupMemberImageOldPath());
+			
+			result=pstmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertdonglejoin2(Connection conn, int groupNo, int memberNo)
+	{
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("insertdonglejoin2");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, groupNo);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, "관리자");
+			
 			
 			result=pstmt.executeUpdate();
 		}
@@ -153,5 +178,7 @@ public class DongleMemberJoinDao {
 		}
 		return result;
 	}
+	
+	
 
 }

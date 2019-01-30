@@ -33,6 +33,16 @@ public class DongleMemberJoinService {
 		return result;
 	};
 	
+	public int insertdonglejoin2(int groupNo, int memberNo)
+	{
+		Connection conn=getConnection();
+		int result=new DongleMemberJoinDao().insertdonglejoin2(conn,groupNo,memberNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	};
+	
 
 	public GroupMember selectMember(String nickname)
 	{	

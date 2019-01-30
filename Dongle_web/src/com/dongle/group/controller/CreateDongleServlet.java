@@ -2,6 +2,7 @@ package com.dongle.group.controller;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.dongle.dongleMemberJoin.service.DongleMemberJoinService;
 import com.dongle.group.model.vo.Group;
 import com.dongle.manager.model.service.ManagerService;
 import com.dongle.member.model.vo.Member;
@@ -129,7 +131,7 @@ public class CreateDongleServlet extends HttpServlet {
 		int result1 = new ManagerService().insertDongle(loginMember.getMemberNo(), newGroup);
 		int result2 = new ManagerService().updateMultiTopic(topicCode, result1);
 	    int result3 = new ManagerService().updateMultiLoc(locCode, result1);
-		
+		int result4 = new DongleMemberJoinService().insertdonglejoin2(result1,loginMember.getMemberNo());
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";

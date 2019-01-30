@@ -17,7 +17,7 @@
 	}
 	#dongle-container-back{
 		height:auto;
-		max-height:800px;
+		
 	}
 	.page-bar{
 		cursor: pointer;
@@ -40,24 +40,12 @@
 					<%for(GroupMemberCount gmc:memberCountList){
 						if(gmc.getGroupNo()==g.getGroupNo()){	
 						%>
-					<p>동글 회원수: <%=gmc.getMemberCount() %></p>
+					
 					<%}} %>
 					<p>동글 창설 날짜: <%=g.getGroupEnrollDate() %></p>
-					<ul>동글 활동 지역:
-						<%for(MultiLocationName mln:locationList){ 
-							if(mln.getGroupNo()==g.getGroupNo()&&mln!=null){
-						%>
-						<li><%=mln.getLocCtgName() %></li>
-						<%}} %>
-					</ul>
+					
 					<br>
-					<ul>동글 활동 주제:
-						<%for(MultiTopicName mtn:topicList){ 
-							if(mtn.getGroupNo()==g.getGroupNo()&&mtn!=null){
-						%>
-						<li><%=mtn.getTopicCtgName() %></li>
-						<%}} %>
-					</ul>
+					
 				</div>
 			</li>
 		<%} %>

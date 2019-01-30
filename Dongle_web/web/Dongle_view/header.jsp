@@ -130,8 +130,14 @@ div.user-back #logout_btn{
                   </script>
                </div>&nbsp;&nbsp;
             </div>
-              <button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
+              <button class="search-btn">동글 검색</button>
               <button class="guide-btn">동글 가이드</button>
+              <div onclick='logoGo()' style='width:300px; height:100px;display:inline-block;'></div>\
+              <script>
+                 function logoGo(){
+                    location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
+                 }
+              </script>
         </div>
         <script>
         $('.guide-btn').click(function(event){
