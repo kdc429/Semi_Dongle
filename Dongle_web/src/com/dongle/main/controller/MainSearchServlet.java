@@ -108,6 +108,11 @@ public class MainSearchServlet extends HttpServlet {
 			groupNums[i] = groupList.get(i).getGroupNo() + "";
 		}
 		groupNo = String.join(",", groupNums);
+		
+		if(groupNo.equals("")) {
+			groupNo=0+"";
+		}
+		
 		groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 		
 		groupNums=new String[groupList.size()];
@@ -115,6 +120,22 @@ public class MainSearchServlet extends HttpServlet {
 			groupNums[i] = groupList.get(i).getGroupNo() + "";
 		}
 		groupNo = String.join(",", groupNums);
+		
+		if(groupNo.equals("")) {
+			groupNo=0+"";
+		}
+		
+		if(groupList.size()==0) {
+			
+			request.setAttribute("cPage", cPage);
+			request.setAttribute("pageBar", barPage);
+			request.setAttribute("groupList", groupList);
+			request.setAttribute("topicList", topicList);
+			request.getRequestDispatcher("/Dongle_view/search.jsp").forward(request, response);
+			
+			return;
+		}
+		
 		List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 		List<MultiTopicName> topicList2=new GroupService().selectSearchTopic(groupNo);
 		List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
