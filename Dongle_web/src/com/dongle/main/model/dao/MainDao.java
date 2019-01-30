@@ -877,7 +877,7 @@ public class MainDao {
 		
 		Statement stmt=null;
 		ResultSet rs=null;
-		String sql="SELECT * FROM GROUP_TAB WHERE MIN_AGE>="+minAge+" GROUP_DATE_CTG='"+time+"'";
+		String sql="SELECT * FROM GROUP_TAB WHERE MIN_AGE>="+minAge+" AND GROUP_DATE_CTG='"+time+"'";
 		Group g=null;
 		List<Group> groupList=new ArrayList();
 		try {
@@ -1410,9 +1410,10 @@ public class MainDao {
 		
 		Statement stmt=null;
 		ResultSet rs=null;
-		String sql="SELECT * FROM (SELECT * FROM GROUP_TAB WHERE MAX_AGE<="+maxAge+" AND GROUP_DATE_CTG='"+time+"') WHERE GROUP_NO IN (SELECT GROUP_NO FROM (SELECT GROUP_NO,LOC_CTG_CODE,TOPIC_CTG_CODE FROM MULTI_LOCATION_TAB JOIN MULTI_TOPIC_TAB USING(GROUP_NO)) WHERE AND TOPIC_CTG_CODE IN("+topicArr+"))";
+		String sql="SELECT * FROM (SELECT * FROM GROUP_TAB WHERE MAX_AGE<="+maxAge+" AND GROUP_DATE_CTG='"+time+"') WHERE GROUP_NO IN (SELECT GROUP_NO FROM (SELECT GROUP_NO,LOC_CTG_CODE,TOPIC_CTG_CODE FROM MULTI_LOCATION_TAB JOIN MULTI_TOPIC_TAB USING(GROUP_NO)) WHERE TOPIC_CTG_CODE IN("+topicArr+"))";
 		Group g=null;
 		List<Group> groupList=new ArrayList();
+		System.out.println(sql);
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);

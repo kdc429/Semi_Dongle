@@ -133,7 +133,7 @@
     .search_dongle_info{
     	text-align:center;
     	width: 250px;
-    	height: 250px;
+    	height: 260px;
     	display: inline-block;
     	float: left;
     	font-size:12px;
@@ -290,7 +290,7 @@
 	})
 	
 	$(document).on('click','#tab-1>ul>label>input',function(){
-		
+		cPage=1;
 		console.log(locArray);
 		console.log(topicArray);
 		console.log(checkMinAge)
@@ -344,7 +344,7 @@
 	
 	$(document).on('click','#time',function(){
 		checkTime=$(this).val();
-		
+		cPage=1;
 		console.log(locArray);
 		console.log(topicArray);
 		console.log(checkMinAge)
@@ -376,7 +376,7 @@
 	
 	$(document).on('change','#min-age',function(){
 		checkMinAge=$('#min-age option:selected').val();
-		
+		cPage=1;
 		console.log(locArray);
 		console.log(topicArray);
 		console.log(checkMinAge)
@@ -408,7 +408,7 @@
 	
 	$(document).on('change','#max-age',function(){
 		checkMaxAge=$('#max-age option:selected').val();
-		
+		cPage=1;
 		console.log(locArray);
 		console.log(topicArray);
 		console.log(checkMinAge)
@@ -440,7 +440,7 @@
 	});
 	
 	$(document).on('click','.topic',function(){
-		
+		cPage=1;
 		console.log(locArray);
 		console.log(topicArray);
 		console.log(checkMinAge)
@@ -492,7 +492,7 @@
 	})
 	
 	$(document).on('keyup','#searchKeyword',function(){
-		
+		cPage=1;
 		var keyword=$('#searchKeyword').val();
 		console.log(keyword);
 		
@@ -514,7 +514,7 @@
 	})
 	
 	$(document).on('change','#sortBar',function(){
-		
+		cPage=1;
 		sortCheck=$('#sortBar option:selected').val();
 		console.log(sortCheck);
 		
@@ -688,7 +688,7 @@
 										
 				<select id="sortBar" style="height:25px">				
 					<option value="date">창설 날짜</option>
-					<option value="gender">회원수</option>				
+					<option value="memberCnt">회원수</option>				
 				</select>	
 			</form>
 		</div>				
@@ -704,11 +704,37 @@
 					<img class="group-img" src="<%=request.getContextPath()%>/images/dongle_main_img/<%=groupList.get(i).getGroupMainNewImgPath()%>" >
 				</div>
 				<div class='search_dongle_info'>
-					<p><strong>동글 명:</strong> <%=groupList.get(i).getGroupName() %></p>
+					<span><strong>동글 명:</strong> <%=groupList.get(i).getGroupName() %></span><br>
 					
-					<p><strong>동글 창설 날짜:</strong> <%=groupList.get(i).getGroupEnrollDate() %></p>
+					<%if(memberCountList.size()>0){
+						for(GroupMemberCount gmc:memberCountList){
+							if(gmc.getGroupNo()==groupList.get(i).getGroupNo()){
+						%>
+					<span><Strong>동글 회원 수:</Strong>&nbsp;&nbsp;<%=gmc.getMemberCount() %>&nbsp;&nbsp;명</span><br>
+					<%}}} %>
+					<span><strong>동글 회원 연령대:</strong><%=groupList.get(i).getMinAge() %>대 ~ <%=groupList.get(i).getMaxAge() %>대</span><br>
+					<span><strong>동글 활동 시간:</strong><%=groupList.get(i).getGroupDateCtg() %></span><br>
+					<span><strong>동글 창설 날짜:</strong> <%=groupList.get(i).getGroupEnrollDate() %></span><br><br>
+					
+					<%if(locationList.size()>0){%>
+					<ul><strong>동글 활동 지역-</strong>
+						<%for(MultiLocationName mln:locationList){
+							if(mln.getGroupNo()==groupList.get(i).getGroupNo()){
+						%>
+						<li><%=mln.getLocCtgName() %></li>
+					<%}} %>
+					</ul>
+					<%} %>
 					<br>
-					
+					<%if(topicList.size()>0){%>
+					<ul><strong>동글 활동 분야-</strong>
+						<%for(MultiTopicName mtn:topicList2){
+							if(mtn.getGroupNo()==groupList.get(i).getGroupNo()){
+						%>
+						<li><%=mtn.getTopicCtgName() %></li>
+					<%}} %>
+					</ul>
+					<%} %>
 				</div>
 			</li>
 		<%} %>

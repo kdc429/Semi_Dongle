@@ -520,6 +520,7 @@ public class GroupDao {
 		ResultSet rs=null;
 		String sql="SELECT M.*, LOC_METRO_NAME||' '||LOC_AREA_NAME||' '||LOC_TOWN_NAME AS LOCATION_NAME FROM MULTI_LOCATION_TAB M JOIN LOCATION_CATEGORY_TABLE L ON(M.LOC_CTG_CODE=L.LOC_CTG_CODE) WHERE GROUP_NO IN("+groupNo+")";
 		List<MultiLocationName> locationList=new ArrayList();
+		System.out.println(sql);
 		MultiLocationName ml=null;
 		try {
 			

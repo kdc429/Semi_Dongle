@@ -190,6 +190,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -197,26 +202,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
-			} else if ("memberCnt".equals(sortCheck)) {
-				groupNums = new String[groupList.size()];
-
-				for (int i = 0; i < groupNums.length; i++) {
-					groupNums[i] = groupList.get(i).getGroupNo() + "";
-				}
-				groupNo = String.join(",", groupNums);
-				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
-				groupNums=new String[groupList.size()];
-				for (int i = 0; i < groupNums.length; i++) {
-					groupNums[i] = groupList.get(i).getGroupNo() + "";
+				if(groupNo.equals("")) {
+					groupNo=0+"";
 				}
-				groupNo = String.join(",", groupNums);
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -225,6 +215,47 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+			} else if ("memberCnt".equals(sortCheck)) {
+				groupNums = new String[groupList.size()];
+
+				for (int i = 0; i < groupNums.length; i++) {
+					groupNums[i] = groupList.get(i).getGroupNo() + "";
+				}
+				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
+				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
+				
+				groupNums=new String[groupList.size()];
+				for (int i = 0; i < groupNums.length; i++) {
+					groupNums[i] = groupList.get(i).getGroupNo() + "";
+				}
+				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 				
 			}
 			System.out.println(barPage);
@@ -280,6 +311,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -287,6 +323,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -295,6 +336,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -302,6 +348,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -309,6 +360,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -317,6 +373,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -372,6 +433,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -379,6 +445,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -387,6 +458,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -394,6 +470,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -401,6 +482,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -409,6 +495,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -464,6 +555,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -471,6 +567,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -479,6 +580,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -486,6 +592,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -493,6 +604,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -501,6 +617,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -556,6 +677,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -563,6 +689,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -571,6 +702,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -578,6 +714,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -585,6 +726,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -593,6 +739,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -648,6 +799,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -655,6 +811,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -663,6 +824,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -670,6 +836,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -677,6 +848,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -685,6 +861,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -740,6 +921,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -747,6 +933,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -755,6 +946,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -762,6 +958,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -769,6 +970,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -776,6 +982,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -831,6 +1041,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -838,6 +1053,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -845,6 +1065,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -853,6 +1077,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -860,6 +1089,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -867,6 +1101,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -923,6 +1161,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -930,6 +1173,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -937,6 +1185,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -945,6 +1197,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -952,6 +1209,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -959,6 +1221,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1015,6 +1281,12 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+			
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+					
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1022,6 +1294,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1029,6 +1306,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1037,6 +1318,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1044,6 +1330,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1051,6 +1342,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1107,6 +1402,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1114,6 +1414,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1121,6 +1426,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1129,6 +1438,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1136,6 +1450,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1143,6 +1462,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1199,6 +1522,12 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo="0"+"";
+					
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1206,6 +1535,12 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				System.out.println(groupNo);
+				if(groupNo.equals("")) {
+					groupNo="0"+"";
+					
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1213,6 +1548,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1221,6 +1560,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1228,6 +1572,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1236,12 +1585,17 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
 			request.setAttribute("cPage", cPage);
 			request.setAttribute("pageBar", barPage);
 			request.getRequestDispatcher("/Dongle_view/searchDongle.jsp").forward(request, response);
+			
 
 		} else if (locArr == null && topicArr != null && minAge > 0 && maxAge == 0 && time != null) {// 12
 
@@ -1291,6 +1645,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1298,6 +1657,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1305,6 +1669,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1313,6 +1681,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1320,6 +1693,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1327,6 +1705,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1383,6 +1765,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1390,6 +1777,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1397,6 +1789,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1405,6 +1801,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1412,6 +1813,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1419,6 +1825,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1475,6 +1885,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1482,6 +1897,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1489,6 +1909,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1497,6 +1921,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1504,6 +1933,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1511,6 +1945,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1567,6 +2005,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1574,6 +2017,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1582,6 +2030,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1589,6 +2042,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1596,6 +2054,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1603,6 +2066,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1659,6 +2126,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1666,6 +2138,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1673,6 +2150,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1681,6 +2162,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1688,6 +2174,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1695,6 +2186,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1751,6 +2246,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1758,6 +2258,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1765,6 +2270,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1773,6 +2282,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1780,6 +2294,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1787,6 +2306,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1843,6 +2366,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1850,6 +2378,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1858,6 +2391,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -1865,6 +2403,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1872,6 +2415,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1879,6 +2427,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -1935,6 +2487,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1942,6 +2499,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1949,6 +2511,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -1957,6 +2523,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -1964,6 +2535,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -1971,6 +2547,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2026,6 +2606,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2033,6 +2618,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2041,6 +2631,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2048,6 +2643,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2055,6 +2655,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2062,6 +2667,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2117,6 +2726,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2124,6 +2738,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2132,6 +2751,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2139,6 +2763,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2146,6 +2775,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2153,6 +2787,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2208,6 +2846,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2215,6 +2858,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2223,6 +2871,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2230,6 +2883,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2237,12 +2895,23 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2297,6 +2966,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2304,6 +2978,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2311,6 +2990,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2319,6 +3002,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2326,6 +3014,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2333,6 +3026,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2389,6 +3086,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2396,6 +3098,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2403,6 +3110,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2411,6 +3122,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2418,6 +3134,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2425,6 +3146,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2480,6 +3205,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2487,6 +3217,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2494,6 +3229,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
@@ -2502,6 +3241,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2509,6 +3253,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2516,6 +3265,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2571,6 +3324,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2578,6 +3336,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2585,6 +3348,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
@@ -2594,6 +3361,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2601,6 +3373,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2608,6 +3385,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2663,6 +3444,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2670,6 +3456,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2679,6 +3470,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("topicList", topicList);
 				}
 				
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2686,6 +3481,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2693,12 +3493,23 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-				List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-				List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-				request.setAttribute("memberCountList", memberCountList);
-				request.setAttribute("locationList", locationList);
-				request.setAttribute("topicList", topicList);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
+				}
 			}
 			System.out.println(barPage);
 			request.setAttribute("groupList", groupList);
@@ -2753,6 +3564,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2760,6 +3576,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2767,6 +3588,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
@@ -2776,6 +3601,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 			
 				groupNums=new String[groupList.size()];
@@ -2783,6 +3613,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2790,6 +3625,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2845,6 +3684,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2852,6 +3696,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2859,6 +3708,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
@@ -2868,6 +3721,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 			
 				groupNums=new String[groupList.size()];
@@ -2875,6 +3733,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2882,6 +3745,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2937,6 +3804,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2944,6 +3816,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2952,6 +3829,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
 				}
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			} else if ("memberCnt".equals(sortCheck)) {
 				groupNums = new String[groupList.size()];
 
@@ -2959,6 +3840,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -2966,6 +3852,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -2973,6 +3864,9 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -2981,7 +3875,7 @@ public class MainSearchEndServlet extends HttpServlet {
 			request.setAttribute("pageBar", barPage);
 			request.getRequestDispatcher("/Dongle_view/searchDongle.jsp").forward(request, response);
 
-		} else if (locArr == null && topicArr != null && minAge == 0 && maxAge >= 0 && time != null) {// 31
+		} else if (locArr == null && topicArr != null && minAge == 0 && maxAge > 0 && time != null) {// 31
 
 			List<Group> groupList = new MainService().selectLocMinNullCheckList(topicArr, maxAge, time);
 			
@@ -3028,6 +3922,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -3035,6 +3934,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -3042,6 +3946,9 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				if(groupList.size()==0) {
+					return;
 				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
@@ -3051,6 +3958,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -3058,6 +3970,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -3065,6 +3982,9 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+				}
+				if(groupList.size()==0) {
+					return;
 				}
 			}
 			System.out.println(barPage);
@@ -3120,6 +4040,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortDate(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -3127,6 +4052,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				if(groupNo!=null) {
 					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
 					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
@@ -3134,6 +4064,10 @@ public class MainSearchEndServlet extends HttpServlet {
 					request.setAttribute("memberCountList", memberCountList);
 					request.setAttribute("locationList", locationList);
 					request.setAttribute("topicList", topicList);
+					
+				}
+				if(groupList.size()==0) {
+					return;
 				}
 				
 			} else if ("memberCnt".equals(sortCheck)) {
@@ -3143,6 +4077,11 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
+				}
+				
 				groupList = new MainService().selectGroupSortMemberCnt(groupNo, cPage, numPerPage);
 				
 				groupNums=new String[groupList.size()];
@@ -3150,14 +4089,24 @@ public class MainSearchEndServlet extends HttpServlet {
 					groupNums[i] = groupList.get(i).getGroupNo() + "";
 				}
 				groupNo = String.join(",", groupNums);
-				if(groupNo!=null) {
-//					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
-//					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
-//					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
-//					request.setAttribute("memberCountList", memberCountList);
-//					request.setAttribute("locationList", locationList);
-//					request.setAttribute("topicList", topicList);
+				
+				
+				if(groupNo.equals("")) {
+					groupNo=0+"";
 				}
+				
+				if(groupNo!=null) {
+					List<MultiLocationName> locationList=new GroupService().selectSearchLocation(groupNo);
+					List<MultiTopicName> topicList=new GroupService().selectSearchTopic(groupNo);
+					List<GroupMemberCount> memberCountList=new GroupService().selectMemberCount(groupNo);
+					request.setAttribute("memberCountList", memberCountList);
+					request.setAttribute("locationList", locationList);
+					request.setAttribute("topicList", topicList);
+				}
+				if(groupList.size()==0) {
+					return;
+				}
+				
 			}
 			System.out.println(groupList.size());
 			System.out.println(barPage);
