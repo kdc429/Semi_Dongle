@@ -19,6 +19,17 @@ Feed feed=(Feed)request.getAttribute("feed");
                 					<a><%=groupMember.getGroupMemberNickname() %></a>
                 			
                 		<span class="write-date"><%=feed.getFeedWriteDate() %></span>
+                		<div class="update-back">
+                  			<%if(feed.getMemberNo()==loginMember.getMemberNo()){ %>
+                     		<input type="hidden" class="feed-no-update" value="<%=feed.getFeedNo() %>"/>
+                     		<button class="delete-btn">
+                        		<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">   
+                     		</button>
+                     		<button class="update-btn">
+                        		<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+                     		</button>
+                  			<%} %>
+                  		</div>
             		</div>
             	<div class="feed-body">
             		<textarea type="text" cols="60" class="feed-content" readonly><%=feed.getFeedContent() %></textarea>

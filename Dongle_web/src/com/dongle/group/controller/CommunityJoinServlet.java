@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.EditPickGroup;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.GroupMember;
+import com.dongle.group.model.vo.MultiLocation;
+import com.dongle.group.model.vo.MultiTopic;
+import com.dongle.main.model.service.MainService;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -45,15 +47,19 @@ public class CommunityJoinServlet extends HttpServlet {
 
 		Group g=new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
 		GroupMember gm = new GroupService().selectGmInfo(groupNo,loginMember.getMemberNo());
-		System.out.println("여긴 커뮤:"+gm);
 		List<GalleryPath> galList = new GroupService().selectAllGallery(groupNo);
 		request.setAttribute("groupNo",groupNo);
 		request.setAttribute("galList",galList);
-		System.out.println("갤러리 : "+galList);
 
 		//에디터픽 선정된 그룹 여부
 		List<EditPickGroup> editList = new GroupService().selectEditGr();
-
+		List<MultiTopic> topicList=new GroupService().selectGrTopic(groupNo);
+		List<MultiLocation> locationList=new GroupService().selectGrLoc(groupNo);
+		
+		System.out.println(editList);
+		System.out.println(topicList);
+		System.out.println(locationList);
+		
 
 		String view="/Dongle_view/msg.jsp";
 		String msg="";
@@ -73,6 +79,9 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.setAttribute("group", g);
 			request.setAttribute("groupMember", gm);
 			request.setAttribute("loc",loc);
+			request.setAttribute("editList", editList);
+			request.setAttribute("locList", locationList);
+			request.setAttribute("topicList",topicList);
 			request.setAttribute("loginMember", loginMember);
 			request.setAttribute("result",result);
 

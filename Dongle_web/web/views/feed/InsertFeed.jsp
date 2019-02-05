@@ -17,32 +17,33 @@
                 					<a><%=groupMember.getGroupMemberNickname() %></a>
                 			
                 		<span class="write-date"><%=feed.getFeedWriteDate() %></span>
+                		<div class="update-back">
+                  			<%if(feed.getMemberNo()==loginMember.getMemberNo()){ %>
+                     		<input type="hidden" class="feed-no-update" value="<%=feed.getFeedNo() %>"/>
+                     		<button class="delete-btn">
+                        		<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">   
+                     		</button>
+                     		<button class="update-btn">
+                        		<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
+                     		</button>
+                  			<%} %>
+                  		</div>
+                  		  <% if(fileList!=null){%>
+                		<div class="download-back">
+                     		<ul class="file-download">
+                
+                  <%for(FeedFile ff:fileList){
+                     if(ff.getFeedNo()==feed.getFeedNo()){ %>
+                        		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
+                  <%      }
+                     }%>
+
+                     		</ul>
+                  		</div>
+                  <% }%>
             		</div>
             	<div class="feed-body">
-            		<div>
-            		<%if(feed.getMemberNo()==loginMember.getMemberNo()){ %>
-            			<input type="hidden" class="feed-no-update" value="<%=feed.getFeedNo() %>"/>
-            			<button class="delete-btn">
-            				<img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">	
-            			</button>
-            			<button class="update-btn">
-            				<img class="update-icon" src="<%=request.getContextPath()%>/images/button-images/edit-solid.png">
-            			</button>
-            		<%} %>
-            		</div>
             		<textarea type="text" cols="60" class="feed-content" readonly><%=feed.getFeedContent() %></textarea>
-            		<% if(fileList!=null){%>
- 
-            		<ul class="file-download">
-            		<%
-            		for(FeedFile ff:fileList){
-            			if(ff.getFeedNo()==feed.getFeedNo()){ %>
-            		<li class="file-down-list" ><a href="<%=request.getContextPath()%>/feed/fileDownLoad?rName=<%=ff.getFeedNewFilePath()%>"><%=ff.getFeedOldFilePath()%></a></li>
-            		<%}
-            			}%>
-            			
-            		</ul>
-            		<% }%>
             		<% for(FeedFile ff:fileList){
     						if(ff.getFeedNo()==feed.getFeedNo()){%>
     						<div class="feed-pics">

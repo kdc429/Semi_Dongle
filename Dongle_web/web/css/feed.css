@@ -104,12 +104,12 @@ textarea{
 .download-back{
    height:20px;
    white-space:nowrap;
-   margin-top:-4%;
+   
 }
 .update-back{
    position: absolute;
     width: 500px;
-    margin-top: -9%;
+    margin-top: -5%;
 }
 
 .member-profile {

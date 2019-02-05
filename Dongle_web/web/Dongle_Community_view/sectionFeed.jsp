@@ -227,6 +227,7 @@
                   newFeed.next().after(data);
                   alert("등록되었습니다");
                   $('#feed-content-up').val("");
+                  $('.filein').val("");
                   $('#imgPreview').children().children().remove();
                   setImage();
             }
@@ -544,9 +545,9 @@
                            <button type="button" class="up-btn" id="file-up-btn">
                               <img class="upbtn-icon" src="<%=request.getContextPath()%>/images/button-images/file-solid.png">
                            </button>
-                           <input type="file" id='feed-pic-up' name='feedPicUp' class="fileup" multiple="multiple" accept=".gif, .jpg, .png" style='display: none;'/>
-                           <input type="file" id='feed-video-up' name='feedVideoUp' class="fileup" multiple="multiple" accept=".mp4,.ogg" style='display: none;'/>
-                                <input type="file" id='feed-file-up' name='feedFileUp' class="fileup" multiple="multiple" style='display: none;'/>
+                           <input type="file" id='feed-pic-up' name='feedPicUp' class="filein" multiple="multiple" accept=".gif, .jpg, .png" style='display: none;'/>
+                           <input type="file" id='feed-video-up' name='feedVideoUp' class="filein" multiple="multiple" accept=".mp4,.ogg" style='display: none;'/>
+                                <input type="file" id='feed-file-up' name='feedFileUp' class="filein" multiple="multiple" style='display: none;'/>
                              </div>
                              <div id="upload-back">
                                 <button type="button" id="feedup">

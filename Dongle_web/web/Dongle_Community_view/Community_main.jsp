@@ -12,7 +12,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
    Member loginMember = (Member)request.getAttribute("loginMember");
    GroupMember gm = (GroupMember)request.getAttribute("groupMember");
    int result = (int)request.getAttribute("result");
-   int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+   int groupNo = (int)request.getAttribute("groupNo");
    List<GalleryPath> galList = (List)request.getAttribute("galList");
    List<EditPickGroup> editList=(List)request.getAttribute("editList");
    //List<Board> list=(List)request.getAttribute("list");
