@@ -66,8 +66,6 @@
                         }
                     }
                 
-                    
-                    console.log(feedPicLi.eq(currentIndex));
                     var left = -imgWidth;
                     //현재 슬라이드를 왼쪽으로 이동 ( 마이너스 지점 )
                     feedPicLi.eq(currentIndex).animate({
@@ -95,6 +93,8 @@
 
                 } else if (indiIndex < currentIndex) {
                     imgWidth = feedPicLi.width(); // 사진 한장의 너비   
+                    
+                    
                     // 이미지 위치 조정
                     for (var i = 0; i < feedPicCount; i++) {
                         if (i == currentIndex) {
@@ -110,11 +110,12 @@
                     //현재 슬라이드를 오른쪽으로 이동 ( 마이너스 지점 )
                     feedPicLi.eq(currentIndex).animate({
                         left: left
+                        
                     },function () {
                        
                         feedPicLi.eq(currentIndex+1).css("left", -imgWidth);
                     });
-
+                    
                     //선택화면 넘어옴
                     for (var i = 0; i < feedPicCount; i++) {
                         if (i == indiIndex) {
@@ -138,14 +139,23 @@
            $(document).ready(function(){
               $(document).on('click','.next',function(e) {
                     // carousel_setImgPosition();
-                   
                     feedPicLi=$(this).siblings('.media-carousel').children('li');
                     imgWidth = feedPicLi.width();
                     feedPicCount = feedPicLi.length;
                     indicator=$(this);
-                    if(currentIndex>feedPicCount){
-                       currentIndex=0;
+                    
+                    for(var i=0;i<feedPicCount;i++){
+                    	//currentIndex 현재 보여지는 태그 인덱스로 초기화
+                    	if(feedPicLi.eq(i).position().left==0){
+                    		console.log(i);
+                    		currentIndex=i;
+                    	}
                     }
+                    
+                    if(currentIndex>feedPicCount){
+                    	//currentIndex가 현재 캐러셀 길이보다 길면 0으로 초기화 
+                        currentIndex=0;
+                     }
                     
                         // 이미지 위치 조정
                     for (var i = 0; i < feedPicCount; i++) {
@@ -159,7 +169,7 @@
                     }
                     
 
-                    
+                    // 현재 슬라이드 밖으로 넘기기
                     var left = -imgWidth;
                     feedPicLi.eq(currentIndex).animate({
                         left: left
@@ -202,17 +212,24 @@
             
            $(document).ready(function(){
               $(document).on('click','.prev',function(e) {
-                 
-                 if(currentIndex>feedPicCount){
-                       currentIndex=0;
-                    }
-                   
+            	  
                     feedPicLi=$(this).siblings('.media-carousel').children('li');
                     imgWidth = feedPicLi.width();
                     feedPicCount = feedPicLi.length;
                     indicator=$(this);
                     
-                    
+                    for(var i=0;i<feedPicCount;i++){
+                    	// currentIndex 현재 보여지는 슬라이드 인덱스로 초기화
+                    	if(feedPicLi.eq(i).position().left==0){
+                    		console.log(i);
+                    		currentIndex=i;
+                    	}
+                    }
+                 // currentIndex 가 현재 캐러셀 길이보다 크면 0으로 초기화
+                    if(currentIndex>feedPicCount){
+                        currentIndex=0;
+                    }
+                    // 이미지 위치 조정
                     for (var i = 0; i < feedPicCount; i++) {
                         if (i == currentIndex) {
                             feedPicLi.eq(i).css("left", 0);
@@ -222,10 +239,10 @@
                         }
                     }
 
-                    // carousel_setImgPositionL();
+                    // 현재 슬라이드 밖으로 넘기기
                     
                     var left = imgWidth;
-                    console.log(left);
+                    
                     feedPicLi.eq(currentIndex).animate({
                         left: left
                         

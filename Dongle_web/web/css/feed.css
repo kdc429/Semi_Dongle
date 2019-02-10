@@ -151,6 +151,15 @@ textarea{
    border-radius:10px 10px;
 }
 
+.feed-pic2 {
+   padding: 10px 10px;
+   max-height: 600px;
+   max-width:600px;
+   width: auto;
+   height: auto;
+   border-radius:10px 10px;
+}
+
 .media-carousel {
    width: 500px;
    padding: 0;
@@ -287,7 +296,7 @@ textarea{
    flex-direction:row;
 }
 .fileup>div{
-   width:250px;
+   width:300px;
 }
 .upbtn-icon{
    padding: 0;
@@ -390,16 +399,16 @@ textarea{
 }
 #popup-header{
    background-color:rgb(240, 240, 240);
-   width:500px;
+   width:600px;
 }
 #popup-body{
    background-color:rgb(240, 240, 240);
-   width:500px;
+   width:600px;
    text-align:center;
 }
 #popup-footer{
    background-color:rgb(240, 240, 240);
-   width:500px;
+   width:600px;
 }
 .delete-file{
    border:0;

@@ -604,5 +604,39 @@ public class FeedDao {
 		return result;
 	}
 	
+	public FeedFile selectFeedFile(Connection conn,int feedFileNo) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=prop.getProperty("selectFeedFile");
+		FeedFile ff=null;
+		System.out.println(sql);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, feedFileNo);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				ff=new FeedFile();
+				ff.setFeedNo(rs.getInt("feed_no"));
+				ff.setGroupNo(rs.getInt("group_no"));
+				ff.setFeedFileNo(rs.getInt("feed_file_no"));
+				ff.setFeedOldFilePath(rs.getString("feed_old_file_path"));
+				ff.setFeedNewFilePath(rs.getString("feed_new_file_path"));
+				
+				
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return ff;
+	}
+	
 
 }

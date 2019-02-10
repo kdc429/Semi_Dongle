@@ -203,7 +203,7 @@ public class FeedService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
 	}
 	
@@ -218,8 +218,17 @@ public class FeedService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result;
+	}
+	
+	public FeedFile selectFeedFile(int feedFileNo) {
+		
+		Connection conn=getConnection();
+		FeedFile ff=new FeedDao().selectFeedFile(conn, feedFileNo);
+		close(conn);
+		return ff;
+		
 	}
 
 }

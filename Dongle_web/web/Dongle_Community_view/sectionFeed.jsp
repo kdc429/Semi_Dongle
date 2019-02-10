@@ -416,8 +416,8 @@
              console.log("눌리나?");
              var feedPopup=document.getElementById("feed-popup");
              console.log(elementTop);
-             var feedNo=$(this).siblings('.feed-no-update').val();
-             console.log(feedNo);
+             var feedFileNo=$(this).siblings('input').val();
+             
              var _x = document.body.scrollLeft; //마우스로 선택한곳의 x축(화면에서 좌측으로부터의 거리)를 얻는다. 
              var _y = elementTop.offset().top; //마우스로 선택한곳의 y축(화면에서 상단으로부터의 거리)를 얻는다. 
              console.log(_x);
@@ -434,7 +434,7 @@
              $.ajax({
                 url:"<%=request.getContextPath()%>/feed/feedPopupView2",
                 type:"post",
-                data:{"feedNo":feedNo},
+                data:{"feedFileNo":feedFileNo},
                 
                 success:function(data){
                    $('#feed-popup').html(data);
@@ -630,11 +630,17 @@
                          if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("jpg")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("png")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("gif")){
                            %>
                      
-                          <li><img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic"></li>
+                          <li>
+                          	<input type="hidden" value="<%=ff.getFeedFileNo() %>"/>
+                          	<img src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic">
+                          </li>
                        
                           <%}else if(ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("mp4")||ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1),ff.getFeedNewFilePath().length()).equals("ogg")){%>
                              
-                          <li><video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video></li>
+                          <li>
+                          	<input type="hidden" value="<%=ff.getFeedFileNo() %>"/>
+                          	<video controls src="<%=request.getContextPath() %>/images/feed-images/<%=ff.getFeedNewFilePath() %>" class="feed-pic" type="video/<%=ff.getFeedNewFilePath().substring((ff.getFeedNewFilePath().lastIndexOf(".")+1))%>"></video>
+                          </li>
                           <%}%>
                           
                           
