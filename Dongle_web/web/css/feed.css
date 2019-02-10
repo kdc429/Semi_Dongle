@@ -381,6 +381,14 @@ textarea{
    height: auto;
 }
 
+#updateImgPreview>ul>li>video{
+   padding: 10px 10px;
+   max-height: 300px;
+   max-width:450px;
+   width: auto;
+   height: auto;
+}
+
 #feed-popup{
    border:double;
    width:684px;
