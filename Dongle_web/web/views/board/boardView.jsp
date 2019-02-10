@@ -168,6 +168,7 @@ background-color:white;
                            <%=c.getBoCommentDate()%>
                            <p class='btn-bocomment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
                   		<input type='hidden' class='bocomment-report-no' value='<%=c.getBoCommentNo()%>' >
+                  		<input type='hidden' class='reportBoCommentLevel' value='<%=c.getBoCommentLevel()%>' >
 						<input type='hidden' class='reportBoCommentNickName' value='<%=c.getGroupMemberNickname()%>' >
 						<input type='hidden' class='reportMemberNo' value='<%=c.getMemberNo()%>' >
                         </span>
@@ -192,6 +193,7 @@ background-color:white;
                         <%=c.getBoCommentDate()%>
                         <p class='btn-bocomment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
                   		<input type='hidden' class='bocomment-report-no' value='<%=c.getBoCommentNo()%>' >
+                  		<input type='hidden' class='reportBoCommentLevel' value='<%=c.getBoCommentLevel()%>' >
 						<input type='hidden' class='reportBoCommentNickName' value='<%=c.getGroupMemberNickname()%>' >
 						<input type='hidden' class='reportMemberNo' value='<%=c.getMemberNo()%>' >
                         <%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
@@ -231,6 +233,7 @@ background-color:white;
 	          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
 		         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
 		      	 <input type="hidden" id="reportBoCommentNo" name="reportBoCommentNo" value=""/>
+		      	 <input type="hidden" id="reportBoCommentLevel" name="reportBoCommentlevel" value=""/>
 		      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
 		      </form>
       <%} %>
@@ -244,9 +247,11 @@ $(document).ready(function(){
 	$('.btn-bocomment-report').click(function(e){
 		 var reportWin=window.open("<%=request.getContextPath()%>/views/board/boardReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
 		 var reportBoCommentNo=$(this).siblings('.bocomment-report-no').val();
+		 var reportBoCommentLevel=$(this).siblings('.reportBoCommentLevel').val();
 		 var reportBoCommentNickName=$(this).siblings('.reportBoCommentNickName').val();
 		 var reportMemberNo=$(this).siblings('input.reportMemberNo').val();
 		 document.getElementById('reportBoCommentNo').value=reportBoCommentNo;
+		 document.getElementById('reportBoCommentLevel').value=reportBoCommentLevel;
 		 document.getElementById('reportNickName').value=reportBoCommentNickName;
 		 document.getElementById('reportMemberNo').value=reportMemberNo;
 		 console.log(reportBoCommentNo);

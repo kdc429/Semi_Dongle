@@ -12,35 +12,13 @@
 		newGroupNo=(int)request.getAttribute("newGroupNo");
 	}
 %>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="<%=request.getContextPath() %>/3/ninja-slider.css" rel="stylesheet" />
     <script src="<%=request.getContextPath() %>/3/ninja-slider.js"></script>
     <link href="<%=request.getContextPath() %>/3/thumbnail-slider.css" rel="stylesheet" type="text/css" />
     <script src="<%=request.getContextPath() %>/3/thumbnail-slider.js" type="text/javascript"></script>
     <style>
-       /*  body {font: normal 0.9em Arial;color:#222;} */
-        /* header {display:block; font-size:1.2em;margin-bottom:100px;} */
-        header a, header span {
-            display: inline-block;
-            padding: 4px 8px;
-            margin-right: 10px;
-            text-decoration: none;
-            text-align: center;
-            height: 20px;
-        }
-        a {
-       	text-decoration:none;
-       	color:rgb(220,220,220);
-       	font-size:17px;
-       	font-family: 'netmarble Medium';
-       	 position: absolute;
-	     z-index: 3;
-	     opacity: 0.9;
-	    /*  text-align: center;	 */
-       	}
-       	a:hover{
-       		color:white;
-       	}
+
         
         .img-cover{
         	margin-top:300px;
@@ -65,18 +43,15 @@
 	}
         
     </style>
-  	<div class='back-div'style='padding:0;'>
-      <a href="<%=request.getContextPath()%>/admin/memberList" class='list_btn'>
-         <img style='width:15px;height:15px;margin-left:-500px;' class='back_icon' src='<%=request.getContextPath()%>/images/gallery/back.png' title='목록으로'>
-      </a>
-	</div>
-<%--    	<div class="bar"></div>
-	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px; margin-left:-500px;;">
+    
+    <!-- 에디터픽 시작 -->
+   	<div class="bar"></div>
+	<ul class="nav nav-tabs" id="admin-menu" style="margin-top:10px;width:1024px;">
     	<li ><a href="<%=request.getContextPath()%>/admin/memberList">회원 리스트 관리</a></li>
     	<li><a href="<%=request.getContextPath()%>/admin/dongleList">동글 리스트 관리</a></li>
     	<li class="active"><a href="<%=request.getContextPath()%>/admin/editpickForm">메인 관리</a></li>
    		<li><a href="<%=request.getContextPath()%>/admin/blackMemberList">블랙 리스트 관리</a></li>
- 	</ul> --%>
+ 	</ul>
  	<h3>현재 Main 에디터픽 화면</h3>
 	<div id='edit_all_div' style="width:1000px;margin:80px auto;">
         <div id="ninja-slider" style="float:left;">

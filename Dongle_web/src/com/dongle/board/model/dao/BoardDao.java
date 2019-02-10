@@ -400,4 +400,26 @@ public class BoardDao {
            }
            return result;
       }
+      
+      public int updateBoardCommentReportStatus2(Connection conn, int groupNo, int reportBoCommentNo)
+      {
+          PreparedStatement pstmt = null;
+          int result = 0;
+          String sql = prop.getProperty("updateBoardCommentReportStatus2");
+          try {
+              pstmt = conn.prepareStatement(sql);
+              pstmt.setInt(1, groupNo);
+              pstmt.setInt(2, reportBoCommentNo);
+              result = pstmt.executeUpdate();
+           } 
+           catch (SQLException e) 
+           {
+              e.printStackTrace();
+           } 
+           finally 
+           {
+              close(pstmt);
+           }
+           return result;
+      }
 }

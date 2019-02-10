@@ -32,11 +32,24 @@ public class BoardCommentReportServlet extends HttpServlet {
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		int reportBoCommentNo=Integer.parseInt(request.getParameter("reportBoCommentNo"));
+		int reportBoCommentLevel=Integer.parseInt(request.getParameter("reportBoCommentLevel"));
 		String reportCode=(String)request.getParameter("reportCode");
 		
 		int rs= new GalleryService().insertReport(groupNo,memberNo,reportCode);
 		if(rs!=0) {
 			int result = new BoardService().updateBoardCommentReportStatus(groupNo,reportBoCommentNo);
+			if(reportBoCommentLevel==1) {
+				int result2 = new BoardService().updateBoardCommentReportStatus2(groupNo,reportBoCommentNo);
+				
+				if(result2!=0)
+				{
+					System.out.println("레벨 2도 신고됨");
+				}else
+				{
+					System.out.println("레벨 2 신고안됨");
+				}
+			}
+			
 			
 			 if(result!=0)
 		      {

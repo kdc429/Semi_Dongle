@@ -75,8 +75,17 @@
     display:block;
     position:absolute;
     font-size:0;
+    
+    text-decoration:none;
+   	color:rgb(220,220,220);
+   	font-size:17px;
+   	font-family: 'netmarble Medium';
+  	z-index: 3;
+  	opacity: 0.9;
 }
-
+#thumbnail-slider .thumb {
+	color:white;
+}
 /* --------- navigation controls ------- */   
 /* The nav id should be: slider id + ("-prev", "-next", and "-pause-play") */  
 

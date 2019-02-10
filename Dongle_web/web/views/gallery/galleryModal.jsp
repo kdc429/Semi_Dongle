@@ -76,7 +76,7 @@ top : 100px;
 /* Position the "next button" to the right */
 
 .next {
-  margin-left:520px;
+  margin-left:88%;
   border-radius: 10px;
 }
 
@@ -246,46 +246,59 @@ if (n < 1) {slideIndex = slides.length}
 </script>
 	<li class="level2" style="list-style:none;">
 		<span class='ico_skin thumb_profile'>
+		<%if(gplist==null){ %>
+			<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/admin.png'>
+		<%} 
+		else if(gplist!=null){ %>
 			<img class='img_profile' src='<%=request.getContextPath()%>/images/member_img/<%=gplist.get(0).getGroupMemberImageNewPath() %>'>
+		<%} %>
 		</span>
 		<span class='comment_box'>
-			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
-			<p id='btn-report' style='float:right;color:RGB(112,136,172);' >신고</p>
-			<span>&nbsp;&nbsp;      </span>
-			<%if((group.getMemberNo()==loginMember.getMemberNo()&&loginMember.getMemberId().equals("admin"))||gplist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
-				<p id='deleteIgm' style='float:right;color:RGB(112,136,172);' >이미지 삭제     &nbsp; | &nbsp;</p>
+		<%if(gplist==null){%>
+			<span class='comment-writer'>관리자</span>
+		<%}
+			else if(gplist!=null){ %>
+				<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
 			<%} %>
-			<br/>
+				<p id='btn-report' style='float:right;color:RGB(112,136,172);' >신고</p>
+				<span>&nbsp;&nbsp;      </span>
+				<%if((group.getMemberNo()==loginMember.getMemberNo()&&loginMember.getMemberId().equals("admin"))||gplist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+					<p id='deleteIgm' style='float:right;color:RGB(112,136,172);' >이미지 삭제     &nbsp; | &nbsp;</p>
+				<%} %>
+				<br/>
+
 		</span>
 	</li>
 	<span class="close">&times;</span>
 	<!-- 이미지 슬라이드 -->
 	<!-- 메인 슬라이드 -->
-	<div class="slideshow-container">
-	 	<%for(int i=0;i<gplist.size();i++){ %>
-			<div class="mySlides fade2">
-				<img class="main_slideImg" src="<%=request.getContextPath() %>/upload/gallery/<%=gplist.get(i).getGalFileNewPath() %>">
-				<div class="text">Caption Text</div>
-			</div>
-		<%} %>
-		<a class="prev" onclick="plusSlides(-1)">❮</a>
-		<a class="next"onclick="plusSlides(1)">❯</a>
-	</div>
-	<br>
-	<div style="text-align: center">
-		<%for(int i=0;i<gplist.size();i++){ %>
-			<span class="dot" onclick="currentSlide(<%=i+1%>)"></span> 
-		<%} %>
-	</div>
-	<div id="gal-content">
-		<table>
-			<tr>
-				<td>&nbsp;&nbsp;&nbsp;</td>
-				<td><%=gplist.get(0).getGalFileContent()%></td>
-				<td style='float:right; display:block;'><%=gplist.get(0).getGalEnrollDate() %></td>
-			</tr>
-		</table>
-	</div>
+	<%if(gplist!=null){%>
+		<div class="slideshow-container">
+		 	<%for(int i=0;i<gplist.size();i++){ %>
+				<div class="mySlides fade2">
+					<img class="main_slideImg" src="<%=request.getContextPath() %>/upload/gallery/<%=gplist.get(i).getGalFileNewPath() %>">
+					<div class="text">Caption Text</div>
+				</div>
+			<%} %>
+			<a class="prev" onclick="plusSlides(-1)">❮</a>
+			<a class="next"onclick="plusSlides(1)">❯</a>
+		</div>
+		<br>
+		<div style="text-align: center">
+			<%for(int i=0;i<gplist.size();i++){ %>
+				<span class="dot" onclick="currentSlide(<%=i+1%>)"></span> 
+			<%} %>
+		</div>
+		<div id="gal-content">
+			<table>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td><%=gplist.get(0).getGalFileContent()%></td>
+					<td style='float:right; display:block;'><%=gplist.get(0).getGalEnrollDate() %></td>
+				</tr>
+			</table>
+		</div>
+	<%} %>
 	<!-- 댓글창 시작 -->
 	<div class="comment-editor" style='background-color:rgb(248,248,248);'>
 		<ul>
@@ -468,14 +481,14 @@ if (n < 1) {slideIndex = slides.length}
 				/* 연결된 이벤트 삭제 */
 				$(this).off('click');
 				/* 빈공간 누르면 display바뀌는 것 */
-/* 				$('.recomment_content').click(function(){
+ 				$('.recomment_content').click(function(){
 					if(eventflag)
 					{
 						$(this).css('display','none');
 						eventflag=false;
 						return;
 					}
-				}) */
+				})
 				
 				div.find('.btn-insert').click(function(e){
 					if(<%=loginMember==null%>)

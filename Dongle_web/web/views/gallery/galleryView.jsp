@@ -82,7 +82,7 @@ div.back-div button.insert-bnt{float:right; border:none;background-color:rgb(0,0
          var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
          var galNo = $(event.target).nextAll('#galNo')[0].value;
          $.ajax({
-            url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo+"&dataNum="+1,
+            url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo,
             type:"post",
             dataType:"html",
             success:function(data){

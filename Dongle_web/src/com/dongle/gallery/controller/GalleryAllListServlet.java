@@ -50,16 +50,15 @@ public class GalleryAllListServlet extends HttpServlet {
       System.out.println("relist"+relist);
       //해당 갤러리 리스트 뽑아오기
       List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
-
       
       if(gplist!=null) {
          //갤러리 해당 댓글 뽑아오기
          List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
          if(gclist!=null) {
             request.setAttribute("gclist", gclist);
-            System.out.println("gplst: "+gplist);
             System.out.println("gclst: "+gclist);
          }
+         System.out.println("gplst: "+gplist);
          request.setAttribute("g", g);
          request.setAttribute("relist", relist);
          request.setAttribute("gplist", gplist);
