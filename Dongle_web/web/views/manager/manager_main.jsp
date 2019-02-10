@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dongle.member.model.vo.Member, com.dongle.group.model.vo.Group,
-com.dongle.group.model.vo.MultiLocation, com.dongle.group.model.vo.MultiTopic,
+com.dongle.group.model.vo.MultiLocationName, com.dongle.group.model.vo.MultiTopicName,
 com.dongle.group.model.vo.TopicCtg, com.dongle.group.model.vo.LocalCtg,
 java.util.*" %>
 
 <%
+	int j = 0;
 	int groupNo=(int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	Group g = (Group)request.getAttribute("group");
-	List<MultiLocation> locList = (List)request.getAttribute("locList");
-	List<MultiTopic> topicList = (List)request.getAttribute("topicList");
+	List<MultiLocationName> locList = (List)request.getAttribute("locList");
+	List<MultiTopicName> topicList = (List)request.getAttribute("topicList");
 	List<TopicCtg> topicCtg = (List)request.getAttribute("topicCtg");
 	List<LocalCtg> localCtg = (List)request.getAttribute("localCtg");
 	
@@ -37,6 +38,36 @@ java.util.*" %>
 	var locArr = [];
 	var locFlag = false;
 	
+	//동글 정보 변경 -> 초기 토픽, 지역 표시
+	$(function(){
+		$("#change-dongle-btn").click(function(){
+			topicArr = [];
+			
+			topicCnt = 0;
+			
+			//토픽
+			for(var i = 0; i < <%=topicList.size()%>; i++)
+			{
+				var div = $("#topic-add-div");
+				var topicName = "<%=topicList.get(j).getTopicCtgName()%>"
+				var topicCode = <%=topicList.get(j).getTopicCtgCode()%>;
+				var str = "<span id='topic-span"+topicCnt+"' onclick='fn_delTopic("+topicCnt+")'><a class='aTopic'>"
+				+topicName+"&nbsp&times</a>"+"<input type='hidden' name='topicCode' value='"+ topicCode +"'>"
+				+"<input type='hidden' name='topicName' value='"+topicName+"'></a></span>";
+					
+				div.html(str);
+				
+				topicArr.push(topicName);
+				
+				console.log("topicArr추가" + topicArr);
+				topicCnt++; 
+				<%j++;%>
+			}
+			<%j = 0;%>
+			
+		})
+	})
+	//토픽 추가
 	$(function(){
 		$("#addtopic-btn").click(function(){
 			if(topicCnt > 2)
@@ -80,6 +111,7 @@ java.util.*" %>
 		});
 	});
 	
+	//토픽 삭제
 	function fn_delTopic(index)
 	{
 		var spanId = "#topic-span" + index;
@@ -94,7 +126,7 @@ java.util.*" %>
 	}
 	
 	
-	
+	//지역 대분류 변경
 	function fn_metroChange()
 	{
 		var metroCode = $("#selectMetro").val();
@@ -117,6 +149,7 @@ java.util.*" %>
 	      })
 	}
 	
+	//지역 중분류 변경
 	function fn_areaChange()
 	{
 		var areaCode = $("#selectArea").val();
@@ -138,6 +171,7 @@ java.util.*" %>
 	      })
 	}
 	
+	//지역 추가
 	$(function(){
 		$("#addLoc-btn").click(function(){
 			if(locCnt > 2)
@@ -196,7 +230,7 @@ java.util.*" %>
 					
 					
 				}
-				console.log("토픽"  + locFlag);
+				
 				if(!locFlag)
 				{
 					var name = metroName + " " + areaName + " " + townName;
@@ -244,6 +278,7 @@ java.util.*" %>
 		});
 	});
 	
+	//지역 삭제
 	function fn_delLocal(index)
 	{
 		var spanId = "#local-span" + index;
@@ -340,7 +375,7 @@ java.util.*" %>
 	<div class="panel panel-default" style="margin-top: 5%; width: 600px">
 		<div class="panel-heading">동글 관리</div>
 		<div class="panel-body">
-			<a data-toggle="modal" data-target="#change-dongle-modal">동글 정보
+			<a data-toggle="modal" data-target="#change-dongle-modal" id="change-dongle-btn">동글 정보
 				수정</a>
 		</div>
 		<div class="modal fade"></div>
@@ -377,7 +412,7 @@ java.util.*" %>
 							<label>이미지</label>
 	           				<input type="file" id="upfile" class="upfile" name="upfile" ><br>
 							<label for="donglename">동호회 이름</label> 
-								<input type="text" class="form-control" name="dongleName"id="dongleName"> <br>
+								<input type="text" class="form-control" name="dongleName"id="dongleName" value="<%=g.getGroupName()%>"> <br>
 							<label for="topic">토픽</label><br> 
 							<select	class="form-control" style="padding_bottm:2px; width:79%; display:inline" name="selectTopic" id="selectTopic" >
 								<option disabled selected>===선택===</option>
@@ -529,16 +564,6 @@ java.util.*" %>
 
 
 <script>
-/* 동글 정보변경 -> 주소 검색 */
-$(function(){
-	$("#search-address").click(function(){
-		var url="<%=request.getContextPath()%>/views/manager/manager_searchAddress.jsp";
-		var title="주소 검색";
-		var shape="left=200px, top=100px, width=600px, height=700px";
-		
-		var popup=open(url,title,shape);
-	})
-});
 
 /* 신고관리버튼 */
 $(function(){
@@ -584,5 +609,42 @@ $(function(){
 	})
 });
 
+//동글 정보 변경 연령 10단위 이벤트
+$(function() {
+	$('#minAge').on('change', function() {
+		var n = $(this).val(); 
+		if(n > 100 || n < 0)
+		{
+			alert("0~100 사이로 입력하세요.")
+			$(this).val(0);
+			$(this).focus();
+		}
+		else
+		{
+			n = Math.floor(n/10) * 10; 
+			$(this).val(n);
+			
+		}
+	   
+	});
+});
+
+$(function() {
+	$('#maxAge').on('change', function() {
+		var n = $(this).val(); 
+		if(n > 100 || n < 0)
+		{
+			alert("0~100 사이로 입력하세요.")
+			$(this).val(0);
+			$(this).focus();
+		}
+		else
+		{
+			n = Math.floor(n/10) * 10; 
+			$(this).val(n);
+			
+		}
+	});
+});
 
 </script>

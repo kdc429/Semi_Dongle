@@ -13,7 +13,8 @@ import com.dongle.group.model.service.GroupService;
 import com.dongle.group.model.vo.Group;
 import com.dongle.group.model.vo.LocalCtg;
 import com.dongle.group.model.vo.MultiLocation;
-import com.dongle.group.model.vo.MultiTopic;
+import com.dongle.group.model.vo.MultiLocationName;
+import com.dongle.group.model.vo.MultiTopicName;
 import com.dongle.group.model.vo.TopicCtg;
 import com.dongle.member.model.vo.Member;
 
@@ -41,8 +42,8 @@ public class ManagerView extends HttpServlet {
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		int managerNo = Integer.parseInt(request.getParameter("managerNo"));
 		Group g = new GroupService().selectGrInfo(groupNo); //그룹정보 받아오기
-		List<MultiLocation> locList = new GroupService().selectGrLoc(groupNo); //해당 그룹 지역
-		List<MultiTopic> topicList = new GroupService().selectGrTopic(groupNo); //해당 그룹 주제
+		List<MultiLocationName> locList = new GroupService().selectSearchLocation(""+groupNo); //해당 그룹 지역
+		List<MultiTopicName> topicList = new GroupService().selectSearchTopic(""+groupNo); //해당 그룹 주제
 		
 		List<TopicCtg> topicCtg = new GroupService().selectTopicCtg();
 		List<LocalCtg> localCtg = new GroupService().selectLocalCtg();

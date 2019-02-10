@@ -338,6 +338,43 @@
 		      })
 		}
 		
+		//동글 창설 연령 10단위 이벤트
+		$(function() {
+			$('#minAge').on('change', function() {
+				var n = $(this).val(); 
+				if(n > 100 || n < 0)
+				{
+					alert("0~100 사이로 입력하세요.")
+					$(this).val(0);
+					$(this).focus();
+				}
+				else
+				{
+					n = Math.floor(n/10) * 10; 
+					$(this).val(n);
+					
+				}
+			   
+			});
+		});
+		
+		$(function() {
+			$('#maxAge').on('change', function() {
+				var n = $(this).val(); 
+				if(n > 100 || n < 0)
+				{
+					alert("0~100 사이로 입력하세요.")
+					$(this).val(0);
+					$(this).focus();
+				}
+				else
+				{
+					n = Math.floor(n/10) * 10; 
+					$(this).val(n);
+					
+				}
+			});
+		});
 		
 		
 	</Script>
@@ -415,7 +452,7 @@
 				<div class="modal-header" style="padding: 35px 50px;">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h3>
-						<span class="glyphicon glyphicon-cog"></span> 동글 정보 수정
+						<span class="glyphicon glyphicon-cog"></span> 동글 생성
 					</h3>
 				</div>
 				<form action="<%=request.getContextPath() %>/createDongle" method="post" enctype="multipart/form-data">
