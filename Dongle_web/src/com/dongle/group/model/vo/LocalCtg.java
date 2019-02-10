@@ -6,20 +6,20 @@ public class LocalCtg {
 	private String locMetroName; //LOC_METRO_NAME;
 	private String areaCode; //AREA_CODE;
 	private String locAreaName; //LOC_AREA_NAME;
-	private String twonCode; //TOWN_CODE;
+	private String townCode; //TOWN_CODE;
 	private String locTownName; //LOC_TOWN_NAME;
 	public LocalCtg() {
 		super();
 	}
 	public LocalCtg(String locCtgCode, String metroCode, String locMetroName, String areaCode, String locAreaName,
-			String twonCode, String locTownName) {
+			String townCode, String locTownName) {
 		super();
 		this.locCtgCode = locCtgCode;
 		this.metroCode = metroCode;
 		this.locMetroName = locMetroName;
 		this.areaCode = areaCode;
 		this.locAreaName = locAreaName;
-		this.twonCode = twonCode;
+		this.townCode = townCode;
 		this.locTownName = locTownName;
 	}
 	public String getLocCtgCode() {
@@ -52,11 +52,11 @@ public class LocalCtg {
 	public void setLocAreaName(String locAreaName) {
 		this.locAreaName = locAreaName;
 	}
-	public String getTwonCode() {
-		return twonCode;
+	public String getTownCode() {
+		return townCode;
 	}
-	public void setTwonCode(String twonCode) {
-		this.twonCode = twonCode;
+	public void setTownCode(String townCode) {
+		this.townCode = townCode;
 	}
 	public String getLocTownName() {
 		return locTownName;
@@ -67,7 +67,7 @@ public class LocalCtg {
 	@Override
 	public String toString() {
 		return "LocalCtg [locCtgCode=" + locCtgCode + ", metroCode=" + metroCode + ", locMetroName=" + locMetroName
-				+ ", areaCode=" + areaCode + ", locAreaName=" + locAreaName + ", twonCode=" + twonCode
+				+ ", areaCode=" + areaCode + ", locAreaName=" + locAreaName + ", townCode=" + townCode
 				+ ", locTownName=" + locTownName + "]";
 	}
 	

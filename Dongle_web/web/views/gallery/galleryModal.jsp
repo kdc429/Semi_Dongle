@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,
-com.dongle.member.model.vo.ReportReason,com.dongle.gallery.model.vo.GalleryPath" %>
+com.dongle.member.model.vo.ReportReason,com.dongle.gallery.model.vo.GalleryPath,com.dongle.group.model.vo.Group" %>
 <%
 	List<GalleryPath> gplist=(List)request.getAttribute("gplist");
 	List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
 	int groupNo = (int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	List<ReportReason> relist = (List)request.getAttribute("relist");
+	Group group =(Group)request.getAttribute("g");
 %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -251,7 +252,7 @@ if (n < 1) {slideIndex = slides.length}
 			<span class='comment-writer'><%=gplist.get(0).getGroupMemberNickname()%></span>
 			<p id='btn-report' style='float:right;color:RGB(112,136,172);' >신고</p>
 			<span>&nbsp;&nbsp;      </span>
-			<%if(loginMember.getMemberId().equals("admin")||gplist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+			<%if((group.getMemberNo()==loginMember.getMemberNo()&&loginMember.getMemberId().equals("admin"))||gplist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
 				<p id='deleteIgm' style='float:right;color:RGB(112,136,172);' >이미지 삭제     &nbsp; | &nbsp;</p>
 			<%} %>
 			<br/>

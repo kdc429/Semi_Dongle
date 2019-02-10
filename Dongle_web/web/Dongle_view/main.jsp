@@ -150,11 +150,11 @@
 <script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
 
-<%-- <style>
+<style>
 .dialog{
    display:none;
    position:absolute;
-   margin-top:-100px;
+   margin-top:-1050px;
    z-index:10;
    left:0;                                                                                                   
    right:0;
@@ -173,29 +173,11 @@
        border-radius: 5px;
    }
 </style>
-<script>
-$(function(){
-    //모달띄우기
-    $('.galImg').click(function(event){
-       $.ajax({
-          url:"<%=request.getContextPath()%>/gallery/galleryAllList,
-          type:"post",
-          dataType:"html",
-          success:function(data){
-             $('.modal-content').html(data);
-             $('#modal-container').css('display','block');
-          },
-          error:function(request,m,e){console.log(request);}
-          
-       });   
-    });
-    
- });
-</script>
+
 <div class="modal-div">
-	<div class="dialog" id="modal-container">
-		<div class="modal-content">
+	<div class="dialog2" id="modal-container">
+		<div class="modal-content2">
 		</div>
    	</div>
-</div>   --%>  
+</div>    
 <%@ include file="footer.jsp"%>

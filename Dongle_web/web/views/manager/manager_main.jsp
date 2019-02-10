@@ -109,6 +109,9 @@ com.dongle.group.model.vo.TopicCtg, java.util.*" %>
 			<a data-toggle="modal" data-target="#change-dongle-modal">동글 정보
 				수정</a>
 		</div>
+		<div class='panel-body'>
+			<a id='update-main-image'>동글 메인 변경</a>
+		</div>
 		<div class="modal fade"></div>
 		<div class="panel-heading">동글 회원관리</div>
 		<div class="panel-body"><a id="delete-member-btn">회원 탈퇴 관리</a></div>
@@ -308,5 +311,19 @@ $(function(){
 	})
 });
 
+//동글 메인 이미지 변경
+$(function(){
+	$('#update-main-image').click(function(){
+		var groupNo=<%=groupNo%>
+		$.ajax({
+			url:"<%=request.getContextPath()%>/dongle/updateMain%>",
+			data:{"groupNo":groupNo},
+			type:'post',
+			success:function(data){
+				$('#content-div').html(data);
+			};
+		});
+	});
+})
 
 </script>

@@ -77,12 +77,35 @@ div.user-back #logout_btn{
    height: 25xp;
    margin-left: 50px;
 }
+
+.dialog2{
+   display:none;
+   position:absolute;
+   margin-top:-1050px;
+   z-index:10;
+   left:0;                                                                                                   
+   right:0;
+   width:100%;
+   height:auto;
+   overflow:hidden;
+   background-color:rgb(0,0,0);
+   background-color:rgba(0,0,0,0.4);
+}
+.modal-content2 {
+       background-color: #fefefe;
+       margin: 15% auto; 
+       padding: 20px;
+       border: 1px solid #888;
+       width: 60%;  
+       border-radius: 5px;
+   }
 </style>
 </head>
 
 <body>
    <header>
         <div class="headerBack">
+        	
             <div class="bar">
                <!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
                <img src="<%=request.getContextPath() %>/images/button-images/user-img.png" id='userInfo_btn' onclick="memberView();" style="width: 30px; height: 30px;">
@@ -103,14 +126,34 @@ div.user-back #logout_btn{
                                  $('section').html(data); //header에 section으로 이동
                                 }
                         });
+                        
                      }
                   </script>
                </div>&nbsp;&nbsp;
             </div>
               <button class="search-btn" onclick="<%=request.getContextPath()%>/main/searchPage">동글 검색</button>
               <button class="guide-btn">동글 가이드</button>
+              <div onclick='logoGo()' style='width:300px; height:100px;display:inline-block;'></div>\
+              <script>
+              	function logoGo(){
+              		location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
+              	}
+              </script>
         </div>
         <script>
+        $('.guide-btn').click(function(event){
+        	$.ajax({
+                url:"<%=request.getContextPath()%>/main/guide",
+                type:"post",
+                dataType:"html",
+                success:function(data){
+                   $('.modal-content').html(data);
+                   $('#modal-container').css('display','block');
+                },
+                error:function(request,m,e){console.log(request);}
+                
+             });
+        });
         </script>
     </header>
 </body>
