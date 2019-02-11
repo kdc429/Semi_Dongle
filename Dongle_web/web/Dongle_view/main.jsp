@@ -338,7 +338,43 @@
 		      })
 		}
 		
-		
+		//동글 창설 연령 10단위 이벤트
+	      $(function() {
+	         $('#minAge').on('change', function() {
+	            var n = $(this).val(); 
+	            if(n > 100 || n < 0)
+	            {
+	               alert("0~100 사이로 입력하세요.")
+	               $(this).val(0);
+	               $(this).focus();
+	            }
+	            else
+	            {
+	               n = Math.floor(n/10) * 10; 
+	               $(this).val(n);
+	               
+	            }
+	            
+	         });
+	      });
+	      
+	      $(function() {
+	         $('#maxAge').on('change', function() {
+	            var n = $(this).val(); 
+	            if(n > 100 || n < 0)
+	            {
+	               alert("0~100 사이로 입력하세요.")
+	               $(this).val(0);
+	               $(this).focus();
+	            }
+	            else
+	            {
+	               n = Math.floor(n/10) * 10; 
+	               $(this).val(n);
+	               
+	            }
+	         });
+	      });
 		
 	</Script>
 <section>
@@ -405,128 +441,128 @@
 	<hr>
 	
 </section>
-
 <!-- 동글 정보 수정창(modal) -->
-	<div class="modal fade" id="change-dongle-modal" role="dialog">
-		<div class="modal-dialog">
+   <div class="modal fade" id="change-dongle-modal" role="dialog">
+      <div class="modal-dialog">
 
 
-			<div class="modal-content">
-				<div class="modal-header" style="padding: 35px 50px;">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3>
-						<span class="glyphicon glyphicon-cog"></span> 동글 정보 수정
-					</h3>
-				</div>
-				<form action="<%=request.getContextPath() %>/createDongle" method="post" enctype="multipart/form-data">
-				<div class="modal-body" style="padding: 40px 50px;">
-					
-						<div class="form-group">
-							
-							<div class="image_p"></div>
-							<label>이미지</label>
-	           				<input type="file" id="upfile" class="upfile" name="upfile" required ><br>
-							<label for="donglename">동호회 이름</label> 
-								<input type="text" class="form-control" name="dongleName"id="dongleName" required> <br>
-							<label for="topic">토픽</label><br> 
-							<select	class="form-control" style="padding_bottm:2px; width:79%; display:inline" name="selectTopic" id="selectTopic" >
-								<option disabled selected>===선택===</option>
-								<%for(TopicCtg topic : topicCtg){ %>
-								<option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
-								<%} %>
-								
-							</select>
-							<button type="button" class="btn btn-info" id="addtopic-btn" style="width:20%; height:34px;">토픽 추가</button>
-							<br>
-							<div id="topic-add-div" style="height:19px">
-									
-							</div>
-							<br>
-							<label>지역</label><br> 
-							
-							<select	class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectMetro" id="selectMetro" onchange="fn_metroChange()" >
-								<option disabled selected>==대분류==</option>
-								<%
-								String[] metroArr = new String[18];
-								int metroCnt = 0;
-								boolean flag = false;
-								for(LocalCtg local : localCtg){ 
-									for(int i = 0; i < metroCnt; i++)
-									{
-										if(metroArr[i].equals(local.getMetroCode()))
-										{
-											flag = true;
-											break;
-										}
-									}
-									if(!flag)
-									{
-										metroArr[metroCnt] = local.getMetroCode();	
-										metroCnt++;
-										%>
-											<option value="<%=local.getMetroCode()%>"><%=local.getLocMetroName() %></option>
-										<%
-									}
-									else
-									{
-										flag = false;
-									}
-								}
-								%>
-								
-							</select>
-							<select class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectArea" id="selectArea" onchange="fn_areaChange()">
-								<option disabled selected>==중분류==</option>
-								
-							</select>
-							<select class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectTown" id="selectTown" >
-								<option disabled selected>==소분류==</option>
-								
-							</select>
-							<button type="button" class="btn btn-info" id="addLoc-btn" style="width:20%; height:34px;">지역 추가</button>
-							<br> 
-							<div id="local-add-div" style="height:19px">
-									
-							</div>
-							<br>
-							
-							<label>활동 시간대</label><br>
-							<div class="radio">
-								<label class="radio-inline">
-									<input type="radio" name="activetime" value="주중" checked>주중
-								</label> 
-								<label class="radio-inline">
-									<input type="radio" name="activetime" value="주말">주말
-								</label> 
-							</div>
-							<br>
-							<label for>연령대</label><br>
-							
-								<input type="number" class="form-control" style="width:20%; display:inline;"name="minAge" id="minAge" min="1" max="100" placeholder="최소" required>
-							
-							&nbsp~&nbsp
-							
-								<input type="number" class="form-control" style="width:20%; display:inline;" name="maxAge" id="maxAge" min="1" max="100" placeholder="최대" required>
-							
-							<br><br><br>
-							
-							<label>소개글</label>
-							<textarea class="form-control" rows="5" name="intro" id="intro" required></textarea>
-						</div>
+         <div class="modal-content">
+            <div class="modal-header" style="padding: 35px 50px;">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h3>
+                  <span class="glyphicon glyphicon-cog"></span> 동글 생성
+               </h3>
+            </div>
+            <form action="<%=request.getContextPath() %>/createDongle" method="post" enctype="multipart/form-data">
+            <div class="modal-body" style="padding: 40px 50px;">
+               
+                  <div class="form-group">
+                     
+                     <div class="image_p"></div>
+                     <label>이미지</label>
+                          <input type="file" id="upfile" class="upfile" name="upfile" required ><br>
+                     <label for="donglename">동호회 이름</label> 
+                        <input type="text" class="form-control" name="dongleName"id="dongleName" required> <br>
+                     <label for="topic">토픽</label><br> 
+                     <select   class="form-control" style="padding_bottm:2px; width:79%; display:inline" name="selectTopic" id="selectTopic" >
+                        <option disabled selected>===선택===</option>
+                        <%for(TopicCtg topic : topicCtg){ %>
+                        <option value="<%=topic.getTopicCtgCode()%>"><%=topic.getTopicCtgName() %></option>
+                        <%} %>
+                        
+                     </select>
+                     <button type="button" class="btn btn-info" id="addtopic-btn" style="width:20%; height:34px;">토픽 추가</button>
+                     <br>
+                     <div id="topic-add-div" style="height:19px">
+                           
+                     </div>
+                     <br>
+                     <label>지역</label><br> 
+                     
+                     <select   class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectMetro" id="selectMetro" onchange="fn_metroChange()" >
+                        <option disabled selected>==대분류==</option>
+                        <%
+                        String[] metroArr = new String[18];
+                        int metroCnt = 0;
+                        boolean flag = false;
+                        for(LocalCtg local : localCtg){ 
+                           for(int i = 0; i < metroCnt; i++)
+                           {
+                              if(metroArr[i].equals(local.getMetroCode()))
+                              {
+                                 flag = true;
+                                 break;
+                              }
+                           }
+                           if(!flag)
+                           {
+                              metroArr[metroCnt] = local.getMetroCode();   
+                              metroCnt++;
+                              %>
+                                 <option value="<%=local.getMetroCode()%>"><%=local.getLocMetroName() %></option>
+                              <%
+                           }
+                           else
+                           {
+                              flag = false;
+                           }
+                        }
+                        %>
+                        
+                     </select>
+                     <select class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectArea" id="selectArea" onchange="fn_areaChange()">
+                        <option disabled selected>==중분류==</option>
+                        
+                     </select>
+                     <select class="form-control" style="padding_bottm:2px; width:25.6%; display:inline" name="selectTown" id="selectTown" >
+                        <option disabled selected>==소분류==</option>
+                        
+                     </select>
+                     <button type="button" class="btn btn-info" id="addLoc-btn" style="width:20%; height:34px;">지역 추가</button>
+                     <br> 
+                     <div id="local-add-div" style="height:19px">
+                           
+                     </div>
+                     <br>
+                     
+                     <label>활동 시간대</label><br>
+                     <div class="radio">
+                        <label class="radio-inline">
+                           <input type="radio" name="activetime" value="주중" checked>주중
+                        </label> 
+                        <label class="radio-inline">
+                           <input type="radio" name="activetime" value="주말">주말
+                        </label> 
+                     </div>
+                     <br>
+                     <label for>연령대</label><br>
+                     
+                        <input type="number" class="form-control" style="width:20%; display:inline;"name="minAge" id="minAge" min="1" max="100" placeholder="최소" required>
+                     
+                     &nbsp~&nbsp
+                     
+                        <input type="number" class="form-control" style="width:20%; display:inline;" name="maxAge" id="maxAge" min="1" max="100" placeholder="최대" required>
+                     
+                     <br><br><br>
+                     
+                     <label>소개글</label>
+                     <textarea class="form-control" rows="5" name="intro" id="intro" required></textarea>
+                  </div>
 
 
-					
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-default" >완료</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+               
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-default" >완료</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 
-				</div>
-				</form>
-			</div>
+            </div>
+            </form>
+         </div>
 
-		</div>
-	</div>
+      </div>
+   </div>
+
 <script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
 <%@ include file="footer.jsp"%>
