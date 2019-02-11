@@ -48,7 +48,7 @@ public class IdFindEndServlet extends HttpServlet {
 			if(m.getEmail().length()<1 || m.getMemberName().length()<1)
 			{
 				request.setAttribute("msg","이름과 이메일을 입력해주세요.");
-				request.setAttribute("loc","/");
+				request.setAttribute("loc","/PwdFind");
 				view="views/common/msg.jsp";
 			}
 			else
@@ -64,7 +64,7 @@ public class IdFindEndServlet extends HttpServlet {
 				else if(!checkMember.getEmail().equals(userEmail)){
 					
 					request.setAttribute("msg","회원 정보가 없습니다.");
-					request.setAttribute("loc","/");
+					request.setAttribute("loc","/PwdFind");
 					view="views/common/msg.jsp";
 				}
 			}

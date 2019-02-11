@@ -13,6 +13,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.dongle.dongleMemberJoin.service.DongleMemberJoinService;
 import com.dongle.group.model.vo.Group;
+import com.dongle.group.model.vo.GroupMember;
 import com.dongle.manager.model.service.ManagerService;
 import com.dongle.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -135,12 +136,22 @@ public class CreateDongleServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		String view="/Dongle_view/msg.jsp";
+		
 		if(result1>0)
-		{
-			msg="동글 생성 성공";
-			loc="/communityJoin?groupNo="+ result1;
+	      {
+	         GroupMember m = new GroupMember();
+	         
+	         m.setGroupMemberNickname("매니저");
+	         m.setGroupNo(result1);
+	         m.setMemberNo(loginMember.getMemberNo());
+	         m.setGroupMemberImageOldPath("default.png");
+	         
+	         int result = new DongleMemberJoinService().insertdonglejoin(m);
+	         
+	         msg="동글 생성 성공";
+	         loc="/communityJoin?groupNo="+ result1;
 
-		}
+	      }
 		else 
 		{
 			

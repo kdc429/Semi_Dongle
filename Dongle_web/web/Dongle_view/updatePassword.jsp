@@ -60,7 +60,7 @@
 				</tr>		
 				<tr>
 					<td colspan='2'>
-						<input type="submit" onclick="return password_validate();" 
+						<input type="submit" onsubmit="return password_validate();" 
 						value="변경"/>
 						&nbsp;&nbsp;&nbsp;
 						<input type="button" onclick="self.close();" 
@@ -73,16 +73,34 @@
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script>
-		function password_validate(){
-			var pw1=$('#password_new').val().trim();
-			var pw2=$('#password_ck').val().trim();
-			if(pw1!=pw2)
+		var re = /^[a-zA-Z0-9]{4,12}$/
+	
+		var pw=$("#password_new").val();
+		var pw1=$("#password_ck").val();
+
+		function check(re, what, message) {
+		    if(re.test(what.value)) {
+		         return true;
+		     }else{
+		         return false;
+		     }  
+		}
+		
+		function password_validate(){	
+		    if(!check(re,pw,"적합하지 않은 비밀번호 형식입니다.")){
+		        alert("적합하지 않은 비밀번호 형식입니다.");
+		        return false;
+		     } 
+			if(pw!=pw1)
 			{
 				alert("입력한 비밀번호가 다릅니다.");
 				$('#password_new').focus();
 				$('#password_ck').val('');
 				return false;
 			}
+			
+
+
 			return true;			
 		}
 	</script>

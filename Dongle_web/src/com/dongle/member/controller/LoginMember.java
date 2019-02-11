@@ -37,8 +37,17 @@ public class LoginMember extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("userId");//입력한 아이디	
-		String pw = request.getParameter("password");//입력한 패스워드
+		String id="";
+		String pw="";
+		if(request.getParameter("userId")!=null) {
+			id = request.getParameter("userId");//입력한 아이디	
+			pw = request.getParameter("password");//입력한 패스워드
+		}
+		else {
+			Member loginMember =(Member)request.getSession().getAttribute("loginMember");
+			id=loginMember.getMemberId();
+			pw=loginMember.getMemberPwd();
+		}
 		MemberService ms = new MemberService();
 		GroupService gs= new GroupService();
 		Member m = new Member();

@@ -268,14 +268,17 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             </div>
 
             <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:10px;z-index:3;'>
-                  <%for(int i=0;i<editList.size();i++){ %>
+                  <%
+                 
+                  for(int i=0;i<editList.size();i++){ %>
                      <%if(editList.get(i).getGroupNo()==groupNo){ %>
                         <%editnum++; %>
                         <img alt="" src="<%=request.getContextPath() %>/images/editor_images/groupEdit.png" style='width:30px; height:30px;position:fixed;'>
                         <span style='display:inline-block;margin-left:37px;margin-top:3px;position: fixed;'>에디터 선정</span>
                   <%} %>
                   <%} %>
-                  <%if(editnum==0){ %>
+                  <%if(editnum==0&&loginMember.getMemberId().equals("admin")){ 
+                  %>
                      <button id='goEdit' onclick='goEdit();' style='background-color:rgb(20,150,200); color:white;border:none;position:fixed;'>에디터픽 선정하기</button>
                   <%} %>
             </div>

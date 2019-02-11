@@ -290,6 +290,30 @@ public class MemberDao {
 		
 		return result;
 	}
+	public Member selectEmail(Connection conn, Member m) {
+        PreparedStatement pstmt=null;
+        ResultSet rs=null;
+        String sql=prop.getProperty("selectEmail");
+        Member data=null;
+        try {
+           pstmt=conn.prepareStatement(sql);
+           pstmt.setString(1, m.getEmail());
+           rs=pstmt.executeQuery();
+           
+           if(rs.next()) {
+              data=new Member();
+              data.setEmail(rs.getString("member_email"));
+              System.out.println(data);
+           }
+        }catch(SQLException e) {
+           e.printStackTrace();
+        }
+        finally {
+        close(pstmt);
+        close(rs);
+        }
+        return data;
+     }
 }
 
 
