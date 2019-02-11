@@ -50,6 +50,7 @@ div.user-back #userInfo_btn{
             			function memberView(){
             				$.ajax({
             					url:"<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember2.getMemberId()%>",
+
             					success:
             						function(data){
             							$('section').html(data);

@@ -114,7 +114,8 @@
 $(document).ready(function(){
 	
 	$('#btn-report').click(function(e){
-		if(loginMember.getMemberNo()==<%=gplist.get(0).getMemberNo()%>){
+		
+		if(<%=loginMember.getMemberNo()%>==<%=gplist.get(0).getMemberNo()%>){
 			alert('자신을 신고할 수 없습니다.');
 			return;
 		}
@@ -123,7 +124,7 @@ $(document).ready(function(){
 	});
 	
 	$('.btn-comment-report').click(function(e){
-		if(loginMember.getMemberNo()==<%=gplist.get(0).getMemberNo()%>){
+		if(<%=loginMember.getMemberNo()%>==<%=gplist.get(0).getMemberNo()%>){
 			alert('자신을 신고할 수 없습니다.');
 			return;
 		}

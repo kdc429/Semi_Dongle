@@ -68,14 +68,15 @@ com.dongle.member.model.vo.Member,com.dongle.main.*" %>
 $(function(){
     $('.boardView-btn').click(function(){
        $.ajax({
-            url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=groupNo%>",
-            type:"post",
-            dataType:"html",
-            success:function(data){
-               $('#content-div').html(data);
-               //해당 div를 ajax로 바꾼다는 의미.
-            }
-         });
+			url:"<%=request.getContextPath()%>/board/boardList?groupNo=<%=groupNo%>",
+			type:"post",
+			dataType:"html",
+			success:function(data){
+				$('#content-div').html(data);
+				//해당 div를 ajax로 바꾼다는 의미.
+			}
+		});
+
     });
  });
 </script>

@@ -27,8 +27,6 @@
     border:1px solid rgba(255,255,255,0.3);
     border-radius:2px;
     opacity:0;
-/*     -webkit-transition:opacity 0.8s;
-    transition:opacity 0.8s; */
 }
 
 #ninja-slider .slider-inner:hover div.fs-icon,
@@ -46,7 +44,7 @@
 }
 
 #ninja-slider .slider-inner {
-    margin:0 auto;/*center-aligned */
+    margin:0 auto;
     font-size:0px;
     position:relative;
     box-sizing:border-box;
@@ -96,11 +94,9 @@
 /* --------- slider image ------- */  
 #ninja-slider .ns-img {
     background-color:rgba(0,0,0,0.3);
-    background-size:cover;/*Note: If transitionType is zoom, it will be overridden to cover.*/
-
+    background-size:cover;
     /*decorate border*/
     box-shadow: 0 1px 5px rgba(0,0,0,.8),inset 0 0 2px rgba(255,255,255,.4);
-
     cursor:default;
     display:block;
     position: absolute;
@@ -108,8 +104,17 @@
     height:100%;
     background-repeat:no-repeat;
     background-position:center center;
+    
+   	text-decoration:none;
+  	color:rgb(220,220,220);
+  	font-size:17px;
+  	font-family: 'netmarble Medium';
+    z-index: 3;
+    opacity: 0.9;
 }
-
+#ninja-slider .ns-img:hover {
+	color:white;
+	}
 
 #ninja-slider div.stopVideoIcon::before {
     content:"+";
@@ -193,17 +198,12 @@
 }
 
 #ninja-slider-prev::before {
-/*     -ms-transform:rotate(-45deg);IE 9
-    -webkit-transform:rotate(-45deg);
     transform: rotate(-45deg); */
     backface-visibility:hidden;
     left:14px;
 }
 
 #ninja-slider-next::before {
-/*     -ms-transform:rotate(135deg);IE 9
-    -webkit-transform:rotate(135deg);
-    transform: rotate(135deg); */
     backface-visibility:hidden;
     right:14px;
 }
@@ -211,7 +211,6 @@
 
 
 /*------ pager(nav bullets) ------*/      
-/* The pager id should be: slider id + "-pager" */
 
 #ninja-slider-pager { display:none;}
    

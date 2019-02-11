@@ -72,11 +72,8 @@ button.btn button.btn-primary{
          */
 .center {
    position: absolute;
+	font-family: '나눔스퀘어라운드 Regular';
 
-   /* display: flex;
-   flex-direction: row; */
-
-   font-family: '나눔스퀘어라운드 Regular';
 }
 
 .sideback {
@@ -89,10 +86,12 @@ button.btn button.btn-primary{
 /* 왼쪽 사이드 div
          */
 .sidel {
+
    width: 170px;
    position: fixed;
-   margin-top: 62px;
+   margin-top: 45px;
    font-family: '나눔스퀘어라운드 Regular';
+
 }
 /* 오른쪽 사이드 div */
 
@@ -100,7 +99,7 @@ button.btn button.btn-primary{
 	width: 170px;
 	height:100vh;
 	position: fixed;
-	margin-top: 62px;
+	margin-top: 45px;
 	margin-left: 854px;
 	font-family: '나눔스퀘어라운드 Regular';
 
@@ -115,11 +114,14 @@ button.btn button.btn-primary{
    z-index: 2;
    font-family: '여기어때잘난서체';
 
+
 }
 div.logo h2 a{text-decoration: none;}
 /* 왼쪽 사이드 컨텐트 */
 .sideitem1 {
+
    font-family: '나눔스퀘어라운드 Regular';
+
 }
 .sideitem2 {
 /*    margin-left: 15px;
@@ -207,5 +209,7 @@ div.logo h2 a{text-decoration: none;}
  	display : flex;
  	justify-content: center;
  	align-items: center;
+
  }
+
 

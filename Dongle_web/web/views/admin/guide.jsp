@@ -69,7 +69,7 @@ top : 100px;
 /* Position the "next button" to the right */
 
 .next {
-  margin-left:700px;
+  margin-left:52.3%;
   border-radius: 10px;
 }
 

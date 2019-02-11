@@ -66,6 +66,7 @@
       $('.report-close').click(function(){
     	 var reportBoardNo = window.opener.document.getElementById('reportBoardNo').value;
          var reportBoCommentNo=window.opener.document.getElementById('reportBoCommentNo').value;
+         var reportBoCommentLevel=window.opener.document.getElementById('reportBoCommentLevel').value;
          var groupNo=window.opener.document.getElementById('reportGroupNo').value;
          var memberNo=window.opener.document.getElementById('reportMemberNo').value;
          var reportCode=$('#report-reason option:selected').val();
@@ -80,7 +81,8 @@
  	                  "groupNo":groupNo,
  	                  "memberNo":memberNo,
  	                  "reportCode":reportCode,
- 	                  "reportBoCommentNo":reportBoCommentNo
+ 	                  "reportBoCommentNo":reportBoCommentNo,
+ 	                  "reportBoCommentLevel":reportBoCommentLevel
  	               },
  	               success:function(data){
  	                	 alert("Message: "+data);

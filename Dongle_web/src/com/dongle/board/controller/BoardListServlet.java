@@ -2,13 +2,17 @@ package com.dongle.board.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -33,9 +37,11 @@ public class BoardListServlet extends HttpServlet {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		List<Board> list=new BoardService().selectList(groupNo,loginMember.getMemberId());
-		
+		Group g=new GroupService().selectGrInfo(groupNo);
 		System.out.println("여기확인해주세요: "+groupNo+" : "+list);
 		
+		
+		request.setAttribute("group", g);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);;
 		

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
@@ -266,12 +267,12 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
             <div class='logoback' style='position:relative;width:1024px;height: 100px;'>
             </div>
 
-            <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:20px;z-index:3;'>
+            <div style='width:auto; height:auto;position:relative; float:right;margin-right:120px;margin-top:10px;z-index:3;'>
                   <%for(int i=0;i<editList.size();i++){ %>
                      <%if(editList.get(i).getGroupNo()==groupNo){ %>
                         <%editnum++; %>
                         <img alt="" src="<%=request.getContextPath() %>/images/editor_images/groupEdit.png" style='width:30px; height:30px;position:fixed;'>
-                        <span style='display:inline-block;margin-left:37px;margin-top:7px;position: fixed;'>에디터 선정</span>
+                        <span style='display:inline-block;margin-left:37px;margin-top:3px;position: fixed;'>에디터 선정</span>
                   <%} %>
                   <%} %>
                   <%if(editnum==0){ %>
@@ -416,7 +417,6 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                 </div>
             </div>
         </aside>
-   
         <!-- 게시판 -->
 
        <section>
@@ -604,7 +604,7 @@ function comunnityHome(){
    location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
 }
 function logoCk(){
-	location.href="<%=request.getContextPath()%>/communityJoin?groupNo=<%=g.getGroupNo()%>";
+	location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
 }
 </script>
 </body>

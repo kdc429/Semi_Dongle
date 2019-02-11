@@ -433,13 +433,13 @@
     </div>
 	<hr>
 	<!-- 에디터 픽 캐러셀 -->
-	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;margin-top:-20px;">TODAY's</h2>
+	<h2 style="font-family:'YanoljaYacheR'; text-align:left;margin-left:100px;display:inline-block;margin-top:-20px;">HOT</h2>
 	<h1 style="font-family:'YanoljaYacheR'; text-align:left;display:inline;margin-top:-20px;text-shadow: 1px 1px 2px gray;">  &nbsp;에디터 추천</h1>
 	<div id='edit_test' style='width:1024px;height:400px;margin-top:-80px;'>
 	
 	</div>
 	<hr>
-	
+
 </section>
 <!-- 동글 정보 수정창(modal) -->
    <div class="modal fade" id="change-dongle-modal" role="dialog">
@@ -565,10 +565,35 @@
 
 <script src="<%=request.getContextPath()%>/Dongle_js/Dongle_main.js">
 </script>
-<%@ include file="footer.jsp"%>
+
+<style>
+.dialog{
+   display:none;
+   position:absolute;
+   margin-top:-1050px;
+   z-index:10;
+   left:0;                                                                                                   
+   right:0;
+   width:100%;
+   height:auto;
+   overflow:hidden;
+   background-color:rgb(0,0,0);
+   background-color:rgba(0,0,0,0.4);
+}
+.modal-content {
+       background-color: #fefefe;
+       margin: 15% auto; 
+       padding: 20px;
+       border: 1px solid #888;
+       width: 40%;  
+       border-radius: 5px;
+   }
+</style>
+
 <div class="modal-div">
-   <div class="dialog2" id="modal-container">
-      <div class="modal-content2">
-      </div>
-      </div>
-</div>  -
+	<div class="dialog2" id="modal-container">
+		<div class="modal-content2">
+		</div>
+   	</div>
+</div>    
+<%@ include file="footer.jsp"%>

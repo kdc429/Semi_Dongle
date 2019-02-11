@@ -372,6 +372,7 @@ java.util.*" %>
    
    <h2 id="set-head">동글 관리자 페이지</h2>
 
+<<<<<<< HEAD
    <div class="panel panel-default" style="margin-top: 5%; width: 600px">
       <div class="panel-heading">동글 관리</div>
       <div class="panel-body">
@@ -389,6 +390,28 @@ java.util.*" %>
             data-target="#remove-dongle-modal">동글 삭제</a>
       </div>
    </div>
+=======
+	<div class="panel panel-default" style="margin-top: 5%; width: 600px">
+		<div class="panel-heading">동글 관리</div>
+		<div class="panel-body">
+			<a data-toggle="modal" data-target="#change-dongle-modal">동글 정보
+				수정</a>
+		</div>
+		<div class='panel-body'>
+			<a id='update-main-image'>동글 메인 변경</a>
+		</div>
+		<div class="modal fade"></div>
+		<div class="panel-heading">동글 회원관리</div>
+		<div class="panel-body"><a id="delete-member-btn">회원 탈퇴 관리</a></div>
+		<div class="panel-body"><a id="report-member-btn">신고 회원 관리</a></div>
+	</div>
+	<div class="panel panel-default" style="width: 600px">
+		<div class="panel-body">
+			<a style="color: red; font-style: italic;" data-toggle="modal"
+				data-target="#remove-dongle-modal">동글 삭제</a>
+		</div>
+	</div>
+>>>>>>> refs/remotes/origin/SJH2
 
 
    <!-- 동글 정보 수정창(modal) -->
@@ -609,6 +632,7 @@ $(function(){
    })
 });
 
+<<<<<<< HEAD
 //동글 정보 변경 연령 10단위 이벤트
 $(function() {
    $('#minAge').on('change', function() {
@@ -646,5 +670,21 @@ $(function() {
       }
    });
 });
+=======
+//동글 메인 이미지 변경
+$(function(){
+	$('#update-main-image').click(function(){
+		var groupNo=<%=groupNo%>
+		$.ajax({
+			url:"<%=request.getContextPath()%>/dongle/updateMain%>",
+			data:{"groupNo":groupNo},
+			type:'post',
+			success:function(data){
+				$('#content-div').html(data);
+			};
+		});
+	});
+})
+>>>>>>> refs/remotes/origin/SJH2
 
 </script>

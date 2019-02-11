@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dongle.group.model.vo.Group"%>
+<%@ page import="com.dongle.group.model.vo.Group,com.dongle.member.model.vo.Member"%>
 <%@ page import="com.dongle.group.model.service.GroupService"%>
 <%@ page import="java.util.*" %> 
 

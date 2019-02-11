@@ -179,5 +179,21 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateBoardCommentReportStatus2(int groupNo,int reportBoCommentNo)
+	{
+		Connection conn=getConnection();
+		int result = new BoardDao().updateBoardCommentReportStatus2(conn, groupNo,reportBoCommentNo);
+		if (result > 0)
+		{
+			commit(conn);
+		}
+		else
+		{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
 	

@@ -5,7 +5,6 @@
 <%
 	List<Board> list=(List)request.getAttribute("list");
 	Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-	int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 	Group g = (Group)request.getAttribute("group");
 %>
 
@@ -53,7 +52,7 @@
 </style>
 	<div id="board-container" >
 		<h2>공지사항</h2>
-		<% if(loginMember!=null&&loginMember.getMemberId().equals("user01")){%> 
+		<% if(loginMember!=null&&loginMember.getMemberNo()==g.getMemberNo()){%> 
 			<button type="button" class="btn btn-default" id="add-btn" style="font-family: '나눔스퀘어라운드 Regular';">글쓰기</button>
 		 <%} %>  
 		<table class="table table-hover">
@@ -92,7 +91,7 @@
 		$('.boardView-btn').click(function(e){
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
-			var groupNo=<%=groupNo%>;
+			var groupNo=<%=g.getGroupNo()%>;
 			console.log(groupNo);
 			console.log(num);
 			$.ajax({
@@ -113,7 +112,7 @@
 			console.log($(this).children('input').val());
 			var num=$(this).children('input').val();
 			$.ajax({
-				url:"<%=request.getContextPath()%>/board/boardForm?groupNo=<%=groupNo%>",
+				url:"<%=request.getContextPath()%>/board/boardForm?groupNo=<%=g.getGroupNo()%>",
 				type:"get",
 				dataType:"html",
 				success:function(data){

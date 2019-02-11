@@ -18,7 +18,7 @@
 //ajax이용하기여 앨범 불러오기
 $(function(){
 	$('.alImg').click(function(event){
-		var albumCode = $(event.target).nextAll("#albumCode")[0].value;
+		var albumCode = $(event.target).nextAll("#albumCode")[0].val();
 		console.log(albumCode);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallery/galleryGet?groupNo=<%=groupNo%>&albumCode="+albumCode,

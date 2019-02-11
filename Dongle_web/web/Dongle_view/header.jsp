@@ -81,7 +81,7 @@ div.user-back #logout_btn{
 .dialog2{
    display:none;
    position:absolute;
-   margin-top:-1200px;
+   margin-top:-1050px;
    z-index:10;
    left:0;                                                                                                   
    right:0;
@@ -96,7 +96,7 @@ div.user-back #logout_btn{
        margin: 15% auto; 
        padding: 20px;
        border: 1px solid #888;
-       width: 45%;  
+       width: 60%;  
        border-radius: 5px;
    }
 </style>
@@ -105,6 +105,7 @@ div.user-back #logout_btn{
 <body>
    <header>
         <div class="headerBack">
+        	
             <div class="bar">
                <!-- <button class="search-icon" style="background-color: rgba(255,255,255,0);" > -->
                <img src="<%=request.getContextPath() %>/images/button-images/user-img.png" id='userInfo_btn' onclick="memberView();" style="width: 30px; height: 30px;">
@@ -132,11 +133,11 @@ div.user-back #logout_btn{
             </div>
               <button class="search-btn">동글 검색</button>
               <button class="guide-btn">동글 가이드</button>
-              <div onclick='logoGo()' style='width:300px; height:100px;display:inline-block;'></div>\
+              <div onclick='logoGo()' style='width:300px; height:100px;display:inline-block;'></div>
               <script>
-                 function logoGo(){
-                    location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
-                 }
+              	function logoGo(){
+              		location.href="<%=request.getContextPath()%>/login?userId=<%=loginMember.getMemberId()%>&password=<%=loginMember.getMemberPwd()%>";
+              	}
               </script>
         </div>
         <script>
@@ -155,7 +156,7 @@ div.user-back #logout_btn{
         });
         
         $(document).ready(function(){
-			$('.search-btn').on('click',function(){
+			$(document).on('click','.search-btn',function(){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/main/mainSearch",
 					type:"post",
@@ -166,6 +167,7 @@ div.user-back #logout_btn{
 				})
 			})
 		})
+
         </script>
     </header>
 </body>
