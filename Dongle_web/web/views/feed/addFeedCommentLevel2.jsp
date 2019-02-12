@@ -16,7 +16,19 @@
                     		<span class="comment-info">
                        			<span class="comment-writer"><%=commentGroupMember.getGroupMemberNickname() %></span>
                        			<span class="comment-date"><%=fcl2.getFeCommentDate() %></span>
-      			
+      						<%if(fcl2.getMemberNo()!=commentGroupMember.getMemberNo()){ %>
+                                 <button class="report-comment-button">
+                                    <input type="hidden" class="comment-writer-nick" value="<%=commentGroupMember.getGroupMemberNickname() %>"/>
+                                    <input type="hidden" class="comment-no" value="<%=fcl2.getFeCommentNo() %>"/>
+                                    <input type="hidden" class="comment-writer-no" value="<%=fcl2.getMemberNo() %>">
+                                    <img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
+                                 </button>
+                            <%}else if(fcl2.getMemberNo()==commentGroupMember.getMemberNo()){ %>
+                                 <button class="delete-comment-button">
+                                    <input type="hidden" class="comment-no" value="<%=fcl2.getFeCommentNo() %>"/>
+                                    <img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">
+                                 </button>
+                                 <%} %>
                    			</span>
                    			<span class="comment-content-back">
                        			<span class="comment-content"><%=fcl2.getFeCommentContent() %></span>

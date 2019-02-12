@@ -638,5 +638,26 @@ public class FeedDao {
 		return ff;
 	}
 	
+	public int deleteComment(Connection conn,int feedCommentNo) {
+
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		String sql=prop.getProperty("deleteComment");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, feedCommentNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 
 }

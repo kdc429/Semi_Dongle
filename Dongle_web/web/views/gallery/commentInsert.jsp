@@ -11,7 +11,6 @@
 %>
 	<link href="<%=request.getContextPath() %>/css/gallery_style.css" rel="stylesheet">
 	<!-- 댓글창 시작 -->
-	<div class="comment-editor" style='background-color:rgb(248,248,248);'>
 		<ul>
 			<%if(gclist.size()!=0){ %>
 				<%for(GalleryCommentJoin g:gclist){ %>
@@ -82,7 +81,6 @@
 				<button type="button" class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>
 			</div>
 		</fieldset>
-	</div>
 <%if(relist!=null){ %>
 		<form id='reportFrm' name="reportFrm">
 	         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
@@ -139,33 +137,34 @@ $(document).ready(function(){
 
 /* 댓글 삭제하기 */
 $(function(){
-	$('.btn-delete').click(function(){
-		if(!confirm("정말로 삭제하시겠습니까?")){return;}
-		else{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/gallery/deleteComment",
-				data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
-					'galNo':<%=gplist.get(0).getGalNo()%>,
-					'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
-					'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
-				},
-				type:'post',
-				dataType:'html',
-				success:function(data){
-					if(data!=null)
-					{	
-						alert('댓글을 삭제하였습니다');
-						$('.comment-editor').html(data);
+		$('.btn-delete').click(function(){
+			
+			if(!confirm("정말로 삭제하시겠습니까?")){return;}
+			else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/gallery/deleteComment",
+					data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
+						'galNo':<%=gplist.get(0).getGalNo()%>,
+						'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
+						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
+					},
+					type:'post',
+					dataType:'html',
+					success:function(data){
+						if(data!=null)
+						{	
+							alert('댓글을 삭제하였습니다');
+							$('.comment-editor').html(data);
+						}
+						else
+						{
+							alert('댓글 삭제에 실패하였습니다');
+						}
 					}
-					else
-					{
-						alert('댓글 삭제에 실패하였습니다');
-					}
-				}
-			})
-		}
+				})
+			}
+		});
 	});
-});
 /* 대댓글 쓰기 함수*/
 $(function(){
 	var eventflag;

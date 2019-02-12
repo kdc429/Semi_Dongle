@@ -230,5 +230,22 @@ public class FeedService {
 		return ff;
 		
 	}
+	
+	public int deleteComment(int feedCommentNo) {
+		
+		Connection conn=getConnection();
+		int result=new FeedDao().deleteComment(conn,feedCommentNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 
 }

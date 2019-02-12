@@ -528,7 +528,7 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 
 </div>
 
-<div style='display: inline-block; width:1024px;height:60px;background-color:color:rgb(250,237,125);position:relative;'></div>
+<!-- <div style='display: inline-block; width:1024px;height:60px;background-color:color:rgb(250,237,125);position:relative;'></div> -->
 
 <script>
 /* 갤러리 클릭시 매핑함수 */

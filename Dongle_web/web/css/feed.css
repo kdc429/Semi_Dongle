@@ -84,14 +84,15 @@ textarea{
     width: auto;
     height: auto;
 }
-}
-.delete-btn{
+
+.delete-comment-button{
+   float:right;
    border:0;
    background-color:rgba(0,0,0,0);
 }
 .update-btn{
    border:0;
-   background-color:rgba(0,0,0,0);;
+   background-color:rgba(0,0,0,0);
 }
 .feed-header {
    height: 70px;

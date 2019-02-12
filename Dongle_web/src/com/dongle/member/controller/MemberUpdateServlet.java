@@ -71,12 +71,15 @@ public class MemberUpdateServlet extends HttpServlet {
       String msg="";
       String loc="";
       String view="";
-      if(result1!=null)
+      if(!m.getEmail().equals(loginMember.getEmail()))
       {   
-         msg="존재하는 이메일 입니다. 다시 확인해주세요";
-         response.setContentType("text/html;charset=UTF-8");
-         response.getWriter().append(msg);
-         return;
+         if(result1!=null)
+         {
+            msg="존재하는 이메일 입니다. 다시 확인해주세요";
+             response.setContentType("text/html;charset=UTF-8");
+             response.getWriter().append(msg);
+             return;
+         }
       }
       else {
          int result=new MemberService().memberUpdate(m);
@@ -112,6 +115,7 @@ public class MemberUpdateServlet extends HttpServlet {
       //경로앞에 /안써주면 : 상대경로
        //* 받은경로에서부터 시작!
    }
+
 
    /**
     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

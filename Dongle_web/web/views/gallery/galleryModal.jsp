@@ -376,35 +376,8 @@ if (n < 1) {slideIndex = slides.length}
 				<button type="button" class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>
 			</div>
 		</fieldset>
-	</div>
-	<%if(relist!=null){ %>
-		<form id='reportFrm' name="reportFrm">
-	         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
-	         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
-	         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
-	         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
-	         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
-	         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
-	         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
-	         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
-	         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
-	         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
-	         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
-	         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
-	         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
-	         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
-	         
-          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
-	         <input type="hidden" id="reportGalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
-	         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
-	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
-	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
-	      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
-	      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
-	      	 <input type="hidden" id="reportGalCommentLevel" name="reportGalCommentLevel" value=""/> 
-	      </form>
-      <%} %>
-<script>
+		
+		<script>
 	/* 댓글 신고하기 */
 	$(document).ready(function(){
 		$('#btn-report').click(function(e){
@@ -576,6 +549,36 @@ if (n < 1) {slideIndex = slides.length}
       });
    });
 </script>
+<%if(relist!=null){ %>
+		<form id='reportFrm' name="reportFrm">
+	         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
+	         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
+	         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
+	         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
+	         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
+	         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
+	         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
+	         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
+	         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
+	         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
+	         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
+	         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
+	         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
+	         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
+	         
+          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
+	         <input type="hidden" id="reportGalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
+	         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
+	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
+	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
+	      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
+	      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
+	      	 <input type="hidden" id="reportGalCommentLevel" name="reportGalCommentLevel" value=""/> 
+	      </form>
+      <%} %>
+	</div>
+	
+
 <script>
 //사진게시물 삭제하기 스크립트 입니다.
    $('#deleteIgm').click(function(e){

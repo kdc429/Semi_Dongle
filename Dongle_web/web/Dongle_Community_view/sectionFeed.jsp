@@ -251,6 +251,7 @@
          //피드 댓글 레벨
          var feedCommentRef=$(this).parent('.comment_btn').parent('.modal_comment').siblings('.feedCommentRef').val();
          //피드 댓글 참조 변수
+         var feedCommentArea=$(this).parent('.comment_btn').siblings('.comment_write').children('.feedCommentContent');
          var feedCommentContent=$(this).parent('.comment_btn').siblings('.comment_write').children('.feedCommentContent').val();
          //피드 댓글 내용
          var commentLevel1=$(this).parent().parent().siblings('ul');
@@ -282,6 +283,7 @@
                success:function(data){
                   
                   commentLevel1.append(data);
+                  feedCommentArea.val("");
                   
                      
                }
@@ -306,6 +308,7 @@
                success:function(data){
                   
                   commentLevel2.after(data);
+                  feedCommentArea.val("");
                   commentRepleTag.remove();
                }
             })
@@ -324,6 +327,7 @@
          console.log(feedNo);
          <%if(loginMember!=null){%>
             eventflag=true;
+            console.log("event?");
             var div=$(this).parent().siblings('.recomment_content');
             var html="";
             html+="<input type='hidden' class='groupNo' value='<%=g.getGroupNo()%>'/>"
@@ -520,6 +524,49 @@
       
    })
    
+   $(document).ready(function(){
+	 $(document).on('click','.delete-comment-button',function(){
+		
+		 var feedCommentNo=$(this).children('.comment-no').val();
+		 var lengthFeed=$('.feed').length;
+		 var groupNo=<%=g.getGroupNo()%>;
+		 
+		 $.ajax({
+			
+			 url:"<%=request.getContextPath()%>/feed/deleteComment",
+			 data:{"feedCommentNo":feedCommentNo},
+			 dataType:"html",
+			 type:"post",
+			 success:function(data){
+				 if(data>0){
+					 alert("삭제되었습니다.");
+				 }else{
+					 alert("삭제 실패했습니다.");
+				 }
+				 
+				 $.ajax({
+					 url:"<%=request.getContextPath()%>/feed/feedListView",
+			         type:"post",
+			         data:{
+			            "groupNo":groupNo,
+			            "currentFeed":lengthFeed
+			         },
+			         
+			         dataType:"html",
+			         success:function(data){
+			        	
+			            $('#content-div').html(data);
+			            setImage();
+			            $("#feed-btn").css('background-color','rgb(255,234,184)');
+			            $("#feed-btn").css('color','white');
+
+			         }
+				 })
+			 }
+		 })
+	 })
+   })
+   
    
    </script>
    <div class="newsfeed">
@@ -704,6 +751,11 @@
                                     <input type="hidden" class="comment-writer-no" value="<%=fc.getMemberNo() %>">
                                     <img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
                                  </button>
+                                 <%}else if(fc.getMemberNo()==loginMember.getMemberNo()){ %>
+                                 <button class="delete-comment-button">
+                                    <input type="hidden" class="comment-no" value="<%=fc.getFeCommentNo() %>"/>
+                                    <img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">삭제
+                                 </button>
                                  <%} %>
                                  <button class="comment-reple">
                                     <img class="reple-icon" src="<%=request.getContextPath()%>/images/button-images/comments-solid.png">답글
@@ -739,6 +791,11 @@
                                     <input type="hidden" class="comment-no" value="<%=fcl2.getFeCommentNo() %>"/>
                                     <input type="hidden" class="comment-writer-no" value="<%=fcl2.getMemberNo() %>">
                                     <img class="report-icon" src="<%=request.getContextPath()%>/images/button-images/report-solid.png">
+                                 </button>
+                                 <%}else if(fcl2.getMemberNo()==loginMember.getMemberNo()){ %>
+                                 <button class="delete-comment-button">
+                                    <input type="hidden" class="comment-no" value="<%=fcl2.getFeCommentNo() %>"/>
+                                    <img class="delete-icon" src="<%=request.getContextPath()%>/images/button-images/trash-alt-solid.png">삭제
                                  </button>
                                  <%} %>
                                  
