@@ -137,9 +137,14 @@ public class MemberService {
 			rollback(conn);
 		}
 		
-		return result;
-	
+		return result;		
+	}	
+	public Member selectEmail(Member m) {		
+		Connection conn=getConnection();
+		Member data=new MemberDao().selectEmail(conn,m);
+		close(conn);
 		
+		return data;
 	}
 
 }

@@ -16,9 +16,6 @@ import com.dongle.member.model.service.MemberService;
  * Servlet implementation class MemberEnrollEndServlet
  */
 @WebServlet("/memberEnrollEnd")
-//@WebServlet(name="MemberEnrollEndServlet",
-//
-//			urlPatterns="/memberEnrollEnd")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -65,21 +62,30 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		m.setPwdHintAnswer(passwordAnswer);
 		
 		int result=new MemberService().insertMember(m);
-		
+		Member result1 = new MemberService().selectEmail(m);
 		String view="/Dongle_view/msg.jsp";
 		String loc="";
 		String msg="";
 		
-		if(result>0)
+		if(result1!=null)
 		{
-			msg="회원가입이 완료되었습니다!";
-			loc="/";
+			msg="존재하는 이메일 입니다, 다시 확인해주세요.";
+			loc="/memberEnroll";
 		}
 		else
 		{
-			msg="회원가입을 실패하였습니다.!";
-			loc="/";
+			if(result>0)
+			{
+				msg="회원가입이 완료되었습니다!";
+				loc="/";
+			}
+			else
+			{
+				msg="회원가입을 실패하였습니다.!";
+				loc="/";
+			}
 		}
+		
 		//응답객체에 데이터넣어야함
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

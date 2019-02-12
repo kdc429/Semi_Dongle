@@ -348,7 +348,7 @@
 		<button class="create-img" onclick="location.href='<%=request.getContextPath() %>/admin/memberList'" style="color: black; font-family: '여기어때잘난서체';">관리자 메뉴</button>
 		<%} %>
 		<!-- 동글 개설하기 버튼! -->
-		<button id="create-dongle" data-toggle="modal" data-target="#change-dongle-modal" style="color: black; font-family: '여기어때잘난서체';">동글 개설</button>
+		<button id="create-dongle" data-toggle="modal" data-target="#change-dongle-modal" style="border:1px; background-color:rgba(0,0,0,0); color: black; font-family: '여기어때잘난서체';">동글 개설</button>
 	</div>
 	<h2 class="item-logo">MY DONGLE</h2>
 	<!-- 가입한 동글 캐러셀 -->

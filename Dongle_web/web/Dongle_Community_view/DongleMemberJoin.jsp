@@ -125,12 +125,10 @@
                               data:{"userId":$('#nickname').val()},
                               success:function(data){
                                  console.log(data);
-                                 if(data){
-                                    
+                                 if(data){                                   
                                     $('#id_check').html("사용 가능한 닉네임입니다.").css('color', 'green');               
                                  }
-                                 else if(!data){
-                                    
+                                 else if(!data){                                    
                                     $('#id_check').html("사용 불가능한 닉네임입니다.").css('color', 'red');         
                                  }
                               },

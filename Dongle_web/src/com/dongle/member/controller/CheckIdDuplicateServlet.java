@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+
 import com.dongle.member.model.service.MemberService;
 import com.dongle.member.model.vo.Member;
 
@@ -34,24 +37,25 @@ public class CheckIdDuplicateServlet extends HttpServlet {
       //파라미터로 전송된 id가 DB에 있는지 확인하는것!
       String userId=request.getParameter("userId");
       System.out.println("글자");
+      System.out.println(userId);
       Member m=new Member();
       m.setMemberId(userId);
       m=new MemberService().selectMember(m);
       System.out.println(m);
+/*      String memberId;
+      memberId = m.getMemberId();*/
       
-      boolean isAble=(m==null)?true:false;
+      boolean isAble=(m==null);
       //id true면 사용가능, false면 사용불가
+      System.out.println(isAble);
       
-      request.setAttribute("userId", userId);
-      request.setAttribute("isAble", isAble);
-      
-      RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/idDuplicate.jsp");
-      rd.forward(request, response);
-      
+      JSONObject json = new JSONObject();
+      json.put("isAble", isAble);
+      json.put("userId", userId);
       
       
-      
-   
+      response.getWriter().print(json);
+
    }
 
    /**

@@ -7,6 +7,7 @@
 
 <%
 	Member m=(Member)request.getAttribute("member");
+	Member loginMember = (Member) session.getAttribute("loginMember");
 	String pw = m.getMemberPwd();
 	String id=m.getMemberId();
 	String name=m.getMemberName();
@@ -14,14 +15,15 @@
 	String phone=m.getPhone();
 	String address=m.getAddress();
 	String email=m.getEmail();	
+	String msg=(String)request.getAttribute("msg");
 %>
-<table class="grey12" style="width: 450px; border: 0;" >
+<table class="grey12" style="width: 450px; border: 0;">
 	<tr>
 		<td style="padding: 50px 0 50px 270px;">
 			<table class='user-adit'>
 				<tr>
 					<td style="padding:15px; border-top:2px #cccccc solid; border-right:2px #cccccc solid; border-bottom:2px #cccccc solid; border-left:2px #cccccc solid;">
-						<form name="memberFrm" id="memberFrm" method="post" onclick="return fn_update_validate();">
+						<!-- <form name="memberFrm" id="memberFrm" method="post" onclick="return fn_update_validate();"> -->
   						<table width="380" border="0" cellspacing="1" class="regtable">
   							<tr>
 
@@ -35,7 +37,7 @@
   							<tr style="padding: 10px;">
   								<td height="25" bgcolor="#f4f4f4">이름</td>
   								<td style="padding-bottom: 5px;">
-									<input type="text" class='form-control' name="userName" value='<%=name %>' required/>
+									<input type="text" class='form-control' name="userName" id="userName" value='<%=name %>' required/>
   								</td>
 							  </tr>
 							  <tr>
@@ -63,7 +65,7 @@
 								</td>
 							</tr>
 						</table>
-					  </form>  
+					 <!--  </form>  --> 
 					</td>
 				</tr>
 			</table>
@@ -83,12 +85,64 @@
 	</tr>
 </table>
 <script>
+		var re =/^[a-z]{1}[a-zA-Z0-9]{4,12}$/;
+		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var email = document.getElementById("email"); 
+		 
+		
+		
+		function check(re, what, message) {
+		    if(re.test(what.value)) {
+		         return true;
+		     }else{
+		         return false;
+		     }  
+		} 
+		
+		//회원정보수정했을때 동작
+		function fn_update_member(){
+			var msg;
+			if(!check(re2,email,"적합하지 않은 이메일 형식입니다.")){
+				alert("적합하지 않은 이메일 형식입니다.");
+		        return false;
+			}
+			console.log(msg);
+			$.ajax({
+				url:"<%=request.getContextPath()%>/memberUpdate",
+				type:"post",
+				data:{
+					"userId":$("#userId_").val().trim(),
+					"userName":$("#userName").val().trim(),
+					"age":$("#age").val(),
+					"phone":$("#phone").val(),
+					"address":$("#address").val(),
+					"email":$("#email").val()			
+				},
+				dataType:"html",
+				success:function(data){
+					console.log(data);
+					alert(data);
+					
+					 $.ajax({
+                         url:"<%=request.getContextPath()%>/Dongle_view/memberView?userId=<%=loginMember.getMemberId()%>",
+                         success:
+                            function(data){
+                               $('section').html(data); //header에 section으로 이동
+                              }
+                      });
+				}
+				
+			});
+		}
+		
+		
 		function fn_update_password(){
 			var url="<%=request.getContextPath()%>/updatePassword?userId=<%=id%>";
 			var title="updatePassword";
 			var status="left=200px, top=200px, width=400px, height=210px";
-			var popUp=open(url,title,status);
+			var popUp=open(url,title,status);				
 		}
+		
 		function resetMemberView(){
 			var frm=$('#memberFrm');
 			var url="<%=request.getContextPath()%>/login?userId=<%=id%>&password=<%=pw%>";
@@ -100,24 +154,13 @@
 			
 			return true;
 		}
-		//회원정보수정했을때 동작
-		function fn_update_member(){
-			
-			var frm=$('#memberFrm');			
-			var url="<%=request.getContextPath()%>/memberUpdate";
-			frm.attr('action',url);			
-			frm.submit();
-		}
+
 	
-		//회원 탈퇴
-		
-		function confirmDelete(){ln
-			
-			var dele=$('#memberFrm');
-			
+		//회원 탈퇴		
+		function confirmDelete(){			
+			var dele=$('#memberFrm');			
 			var url="<%=request.getContextPath()%>/memberDeleteEnd";
-			dele.attr('action',url);
-			
+			dele.attr('action',url);			
 			dele.submit();
 		}
 	

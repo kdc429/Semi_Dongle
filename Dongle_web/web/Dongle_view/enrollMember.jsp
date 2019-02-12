@@ -118,29 +118,19 @@
 
 </section>
 <script>
-var re = /^[a-z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-var re22=/^[a-z][a-z\d]{3,11}$/;
+var re = /^[a-z]{1}[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
     var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     // 이메일이 적합한지 검사할 정규식
     
     var id = document.getElementById("userId_");
     var pw = document.getElementById("password_");
     var pwf = document.getElementById("password_2");
-    var email = document.getElementById("email");
-/*     var name = document.getElementById("userName");
-    var hint = document.getElementById("hintAnswer");
-    var age = document.getElementById("age");
-    var phone = document.getElementById("phone");
-    var address = document.getElementById("address"); */
-  
+    var email = document.getElementById("email"); 
 
 function check(re, what, message) {
     if(re.test(what.value)) {
          return true;
      }else{
-        //alert(message);
-        //what.value = "";
-         //what.focus();
          return false;
      }  
 } 
@@ -155,32 +145,25 @@ $(function(){
 });
 
 function fn_enroll_validate(){
-
     if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
        alert("적합하지 않은 이메일 형식입니다.");
         return false;
     }
-    
-/*     if(name.value=="") {
-        alert("이름을 입력해 주세요");
-        name.focus();
-        return false;
-    } */
+    if(!check(re,pw,"적합하지 않은 비밀번호 형식입니다.")){
+    	alert("적합하지 않은 비밀번호 형식입니다.");
+    	return false;
+    }   
 }
 
-//아이디 중복검사하기 : 팝업창을 띄워서 해보자~! 
+//아이디 중복검사하기 : 팝업창을 띄워서 해보자~!
 function fn_checkduplicate(){
-   var userId=$("#userId_").val().trim();
-   if(!userId || userId.length<4)
+   var password=$("#password_").val().trim();
+   if(!password || password.length<4)
    {
-      alert("아이디를 4글자 이상 입력하세요~!");
+      alert("패스워드를 4글자 이상 입력하세요~!");
       return;   
    }
-   if(!check(re22,id,'첫글자가 영문자 소문자이고 4~12자를 입력해주세요.'))
-   {//^[a-z]가 한 자리를 차지하기 때문에 3부터 11까지임
-       alert("첫글자가 영문자 소문자이고 4~12자를 입력해주세요.");
-      return;
-     } 
+ 
 }
   $(function(){
     $('#userId_').on('change keyup paste',(function(){
@@ -196,27 +179,21 @@ function fn_checkduplicate(){
                {//^[a-z]가 한 자리를 차지하기 때문에 3부터 11까지임
                   $('#id_check').html("첫글자가 영문자 소문자이고 4~12자를 입력해주세요.").css('color', 'red');
                   return;
-               }else{
-                  
+               }else{                  
                   $.ajax({
                         url:'<%=request.getContextPath()%>/checkIdDuplicate',
                         type:"POST",
                         data:{"userId":$('#userId_').val()},
                         success:function(data){
-                           console.log(data);
-                           if(data){
-                              
-                              $('#id_check').html("사용 가능한 아이디입니다.").css('color', 'green');               
+                        	console.log(data);
+                        	console.log('안녕!!')
+                           if(JSON.parse(data).isAble){
+                              	$('#id_check').html("사용 가능한 아이디입니다.").css('color', 'green');               
                            }
-                           else if(!data){
-                              
+                           else if(!JSON.parse(data).isAble){                             
                               $('#id_check').html("사용 불가능한 아이디입니다.").css('color', 'red');         
                            }
                         },
-         /*                 error:function(xhr,status){
-                           alert(xhr+" : "+status);
-                      } */
-                     
                    });
                } 
 
@@ -224,20 +201,6 @@ function fn_checkduplicate(){
             }
     })); 
   });
- <%--   //팝업창에 대한 설정해주기!@
-   var url="<%=request.getContextPath()%>/checkIdDuplicate";
-   var title="checkIdDuplicate";
-   var shape="left=200px, top=100px, width=300px, height=200px";
-   
-   var popup=open("",title,shape);
-   
-   //현재페이지에 있는값을 새창으로 옮기는 작업~!
-   checkIdDuplicateFrm.userId.value=userId;
-   //popup창에서 이 폼을 작동시키게 하는 구문!
-   checkIdDuplicateFrm.target=title;
-   checkIdDuplicateFrm.action=url;
-   checkIdDuplicateFrm.method="post";
-   checkIdDuplicateFrm.submit();       --%>
 
 $(document).ready(function(){
    $('#enroll-reset-btn').click(function(){
@@ -245,65 +208,6 @@ $(document).ready(function(){
    })
 });
 
-
-/* $(function(){
-   
-   var idValue=id.value;
-   $('#id_ck_btn').click(function(){
-      console.log(idValue);
-      console.log($(this));
-       if(!check(re22,id,'첫글자가 영문자 소문자이고 4~12자를 입력해주세요.'))
-          {//^[a-z]가 한 자리를 차지하기 때문에 3부터 11까지임
-             
-              return false;
-          }else{
-             //alert("사용가능!");
-             
-             
-          }  
-   });
-     
-})   */ 
-    
-/*     if(name.value=="") {
-        alert("이름을 입력해 주세요");
-        name.focus();
-        return false;
-    }
-    
-    var hint = document.getElementById("hintAnswer");
-    var age = document.getElementById("age");
-    var phone = document.getElementById("phone");
-    var address = document.getElementById("address"); */
-
-
-
-
-/*  $(function(){
-   $('#email').blur(function(){
-        if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
-           email.value='nonono';
-            return false;
-        }
-   })
-     
-}) */
-
-/*      
-    $("#userId_2").blur(function() {
-       /* alert("ddddd"); */
-  /*       console.log("fFF");
-       if(re.test( $("#userId_2").value)) {
-               return;
-           }
-           alert('dfdf');
-           id.value = "";
-           id.focus(); */
-/*         if(!check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")){
-            break;
-        }  
-});
-          */
 </script>
 </body>
 </html>

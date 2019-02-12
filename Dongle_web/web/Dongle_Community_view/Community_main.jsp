@@ -270,8 +270,8 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
                   <%for(int i=0;i<editList.size();i++){ %>
                      <%if(editList.get(i).getGroupNo()==groupNo){ %>
                         <%editnum++; %>
-                        <img alt="" src="<%=request.getContextPath() %>/images/editor_images/groupEdit.png" style='width:30px; height:30px;position:fixed;'>
-                        <span style='display:inline-block;margin-left:37px;margin-top:7px;position: fixed;'>에디터 선정</span>
+                        <img alt="" src="<%=request.getContextPath() %>/images/editor_images/groupEdit.png" style='width:20px; height:20px;position:fixed;'>
+                        <span style="display:inline-block;margin-left:25px; font-family:'여기어때잘난서체'; position: fixed;">에디터 선정</span>
                   <%} %>
                   <%} %>
                   <%if(editnum==0){ %>

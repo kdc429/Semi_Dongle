@@ -34,14 +34,14 @@ public class MemberViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id=request.getParameter("userId");
-		System.out.println(id);
+		System.out.println("sdfg"+id);
 		Member m=new Member();
 		m.setMemberId(id);
 		
 		Member data=new MemberService().selectMember(m);
 		
 		request.setAttribute("member", data);
-		
+		System.out.println("zzzzz");
 		RequestDispatcher rd=request.getRequestDispatcher("/Dongle_view/memberView.jsp"); //화면에 띄울 화면을 여기 jsp로 이동!
 		rd.forward(request, response);
 	}
