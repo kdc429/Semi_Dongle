@@ -15,6 +15,8 @@ import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardComment;
 import com.dongle.board.model.vo.BoardPath;
 import com.dongle.gallery.model.service.GalleryService;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 import com.dongle.member.model.vo.ReportReason;
 
@@ -23,7 +25,7 @@ import com.dongle.member.model.vo.ReportReason;
  */
 @WebServlet("/board/boardView")
 public class BoardViewServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,81 +35,84 @@ public class BoardViewServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
-		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
-		BoardPath bp=new BoardService().selectBoardPath(boardNo,groupNo);
-		System.out.println("게시글번호"+boardNo+" : "+"그룹번호"+groupNo);
-		
-		Cookie[] cookies=request.getCookies();
-		String boardCookieVal="";
-		boolean hasRead=false;//false : 안읽음 / true : 읽음
-		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		
-		if(cookies!=null)
-		{
-			outer:
-				for(Cookie c : cookies)
-				{
-					String name=c.getName();
-					String value=c.getValue();
-					System.out.println(name);
-					System.out.println(value);
-					if("boardCookie".equals(name))
-					{
-						boardCookieVal=value;
-						if(value.contains("|"+boardNo+"|"))
-						{
-							hasRead=true;
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      int boardNo=Integer.parseInt(request.getParameter("boardNo"));
+      int groupNo=Integer.parseInt(request.getParameter("groupNo"));
+      BoardPath bp=new BoardService().selectBoardPath(boardNo,groupNo);
+      System.out.println("게시글번호"+boardNo+" : "+"그룹번호"+groupNo);
+      
+      Group g = new GroupService().selectGrInfo(groupNo);
+      
+      Cookie[] cookies=request.getCookies();
+      String boardCookieVal="";
+      boolean hasRead=false;//false : 안읽음 / true : 읽음
+      Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+      
+      if(cookies!=null)
+      {
+         outer:
+            for(Cookie c : cookies)
+            {
+               String name=c.getName();
+               String value=c.getValue();
+               System.out.println(name);
+               System.out.println(value);
+               if("boardCookie".equals(name))
+               {
+                  boardCookieVal=value;
+                  if(value.contains("|"+boardNo+"|"))
+                  {
+                     hasRead=true;
 
-						}
-						break outer;	
-					}
-				}
-		}
+                  }
+                  break outer;   
+               }
+            }
+      }
 
-		System.out.println("hasRead: "+hasRead);
-		if(!hasRead)
-		{
-			Cookie boardCookie=new Cookie("boardCookie", boardCookieVal+"|"+boardNo+"|");
-			boardCookie.setMaxAge(-1);//브라우저종료시 삭제
-			boardCookie.setPath("/");
-			response.addCookie(boardCookie);//쿠키추가	
-		}
-		Board b=new BoardService().selectOne(boardNo,groupNo,hasRead);
-		
-		String view="";
-		if(b!=null)
-		{
-			//신고 카테고리 뽑아오기
-		      List<ReportReason> relist = new GalleryService().selectReportReason();
-			List<BoardComment> bclist=new BoardService().selectCommentList(boardNo,groupNo);
-			
-			request.setAttribute("relist", relist);
-			request.setAttribute("board", b);
-			view="/views/board/boardView.jsp";
-			request.setAttribute("groupNo", groupNo);
-			request.setAttribute("boardPath", bp);
-			request.setAttribute("bclist", bclist);
-		}
-		else
-		{
-			request.setAttribute("msg", "조회한 공지사항이 존재하지 않습니다.");
-			request.setAttribute("loc", "/board/boardList?groupNo="+groupNo);
-			view="/views/common/msg.jsp";
-		}
-		request.getRequestDispatcher(view).forward(request, response);
-	}
+      System.out.println("hasRead: "+hasRead);
+      if(!hasRead)
+      {
+         Cookie boardCookie=new Cookie("boardCookie", boardCookieVal+"|"+boardNo+"|");
+         boardCookie.setMaxAge(-1);//브라우저종료시 삭제
+         boardCookie.setPath("/");
+         response.addCookie(boardCookie);//쿠키추가   
+      }
+      Board b=new BoardService().selectOne(boardNo,groupNo,hasRead);
+      
+      String view="";
+      if(b!=null)
+      {
+         //신고 카테고리 뽑아오기
+            List<ReportReason> relist = new GalleryService().selectReportReason();
+         List<BoardComment> bclist=new BoardService().selectCommentList(boardNo,groupNo);
+         
+         request.setAttribute("relist", relist);
+         request.setAttribute("board", b);
+         view="/views/board/boardView.jsp";
+         request.setAttribute("groupNo", groupNo);
+         request.setAttribute("boardPath", bp);
+         request.setAttribute("bclist", bclist);
+         request.setAttribute("g", g);
+      }
+      else
+      {
+         request.setAttribute("msg", "조회한 공지사항이 존재하지 않습니다.");
+         request.setAttribute("loc", "/board/boardList?groupNo="+groupNo);
+         view="/views/common/msg.jsp";
+      }
+      request.getRequestDispatcher(view).forward(request, response);
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

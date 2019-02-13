@@ -307,8 +307,11 @@ com.dongle.board.model.vo.Board,com.dongle.gallery.model.vo.*,com.dongle.member.
 
                <div id="dongle_info_view" style="font-size: 11px; padding-left: 40px;">회원수 : <%=result %> 명 &nbsp;</div>
                <button id="dongle_mem_btn" class='com_mian_btn'>멤버보기</button>
+               <%if(gm!=null){ %>   
+                     <button id="dongle_mem_update" class='com_mian_btn'>정보수정</button>
+                     <%} %>
                <%if(gm==null){ %>
-                   <button id="dongle_mem_join" class='com_mian_btn'>가입하기</button>
+                     <button id="dongle_mem_join" class='com_mian_btn'>가입하기</button>
                <%} %>
 
                

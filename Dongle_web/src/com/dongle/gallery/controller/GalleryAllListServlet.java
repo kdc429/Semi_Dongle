@@ -43,6 +43,7 @@ public class GalleryAllListServlet extends HttpServlet {
       Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
       
       Group g = new GroupService().selectGrInfo(groupNo);
+            
       
       //신고 카테고리 뽑아오기
       List<ReportReason> relist = new GalleryService().selectReportReason();
@@ -57,6 +58,7 @@ public class GalleryAllListServlet extends HttpServlet {
             request.setAttribute("gclist", gclist);
             System.out.println("gclst: "+gclist);
          }
+         System.out.println("gplst: "+gplist);
          request.setAttribute("g", g);
          request.setAttribute("relist", relist);
          request.setAttribute("gplist", gplist);

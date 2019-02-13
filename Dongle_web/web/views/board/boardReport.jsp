@@ -52,19 +52,19 @@
    }
    
     $(document).ready(function(){
-  		$('#report-reason').on('change',function(){
-  			
-  			var reportCode=$('#report-reason option:selected').val();
-  			console.log(reportCode);
-  			window.opener.document.getElementById('selectRecode').value=reportCode;
-  			report();
-  		});
-  	})
+        $('#report-reason').on('change',function(){
+           
+           var reportCode=$('#report-reason option:selected').val();
+           console.log(reportCode);
+           window.opener.document.getElementById('selectRecode').value=reportCode;
+           report();
+        });
+     })
    
    $(function(){
       
       $('.report-close').click(function(){
-    	 var reportBoardNo = window.opener.document.getElementById('reportBoardNo').value;
+        var reportBoardNo = window.opener.document.getElementById('reportBoardNo').value;
          var reportBoCommentNo=window.opener.document.getElementById('reportBoCommentNo').value;
          var reportBoCommentLevel=window.opener.document.getElementById('reportBoCommentLevel').value;
          var groupNo=window.opener.document.getElementById('reportGroupNo').value;
@@ -73,42 +73,42 @@
          console.log(reportBoCommentNo);
          if(!confirm('정말로 신고하시겠습니까?')){return;}
          {
-        	 if(reportBoCommentNo!=0){
- 	            $.ajax({
- 	               url:"<%=request.getContextPath()%>/board/boardCommentReport",
- 	               type:"post",
- 	               data:{
- 	                  "groupNo":groupNo,
- 	                  "memberNo":memberNo,
- 	                  "reportCode":reportCode,
- 	                  "reportBoCommentNo":reportBoCommentNo,
- 	                  "reportBoCommentLevel":reportBoCommentLevel
- 	               },
- 	               success:function(data){
- 	                	 alert("Message: "+data);
- 	                     
- 	                     $.ajax({
- 	                        url:"<%=request.getContextPath()%>/board/boardView",
- 	                        type:"post",
- 	                        data:{
- 	                           "groupNo":groupNo,
- 	                           "memberNo":memberNo,
- 	                           "boardNo":reportBoardNo
- 	                        },
- 	                        
- 	                       dataType:"html",
-	                        success:function(data){
-	                        	$(opener.document).find('#content-div').html(data);
-	                           self.close();
-	                        }
- 	                        
- 	                     });
- 	               }
- 	            })
-	         }else{
-	        	 alert("신고 실패 하였습니다. 다시 시도해주세요.")
-	        	 self.close();
-	         } 
+            if(reportBoCommentNo!=0){
+                $.ajax({
+                   url:"<%=request.getContextPath()%>/board/boardCommentReport",
+                   type:"post",
+                   data:{
+                      "groupNo":groupNo,
+                      "memberNo":memberNo,
+                      "reportCode":reportCode,
+                      "reportBoCommentNo":reportBoCommentNo,
+                      "reportBoCommentLevel":reportBoCommentLevel
+                   },
+                   success:function(data){
+                        alert("Message: "+data);
+                         
+                         $.ajax({
+                            url:"<%=request.getContextPath()%>/board/boardView",
+                            type:"post",
+                            data:{
+                               "groupNo":groupNo,
+                               "memberNo":memberNo,
+                               "boardNo":reportBoardNo
+                            },
+                            
+                           dataType:"html",
+                           success:function(data){
+                              $(opener.document).find('#board-container').html(data);
+                              self.close();
+                           }
+                            
+                         });
+                   }
+                })
+            }else{
+               alert("신고 실패 하였습니다. 다시 시도해주세요.")
+               self.close();
+            } 
          } 
       })
    })

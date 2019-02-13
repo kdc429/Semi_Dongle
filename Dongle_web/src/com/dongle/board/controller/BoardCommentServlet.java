@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.BoardComment;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -16,7 +18,7 @@ import com.dongle.member.model.vo.Member;
  */
 @WebServlet("/board/commentInsert")
 public class BoardCommentServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,50 +28,50 @@ public class BoardCommentServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
-		String boardCommentContent=request.getParameter("boardCommentContent");
-		int boCommentWriter=loginMember.getMemberNo();
-		int boardCommentLevel=Integer.parseInt(request.getParameter("boardCommentLevel"));
-		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
-		int boardCommentRef=Integer.parseInt(request.getParameter("boardCommentRef"));
-		
-		System.out.println(groupNo+" : "+boardNo+boardCommentContent+boardCommentLevel+boardCommentRef);
-		
-		BoardComment bc=new BoardComment();
-		
-		bc.setGroupNo(groupNo);
-		bc.setMemberNo(boCommentWriter);
-		bc.setBoardNo(boardNo);
-		bc.setBoCommentContent(boardCommentContent);
-		bc.setBoCommentLevel(boardCommentLevel);
-		bc.setBoCommentRef(boardCommentRef);
-		
-		int result=new BoardService().insertBoComment(bc);
-		
-		if(result>0)
-		{
-			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().println("댓글 등록 성공");
-		}
-		else
-		{
-			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().println("댓글 등록 실패");
-		}
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+      int boardNo=Integer.parseInt(request.getParameter("boardNo"));
+      String boardCommentContent=request.getParameter("boardCommentContent");
+      int boCommentWriter=loginMember.getMemberNo();
+      int boardCommentLevel=Integer.parseInt(request.getParameter("boardCommentLevel"));
+      int groupNo = Integer.parseInt(request.getParameter("groupNo"));
+      int boardCommentRef=Integer.parseInt(request.getParameter("boardCommentRef"));
+      
+      System.out.println(groupNo+" : "+boardNo+boardCommentContent+boardCommentLevel+boardCommentRef);
+      
+      BoardComment bc=new BoardComment();
+      
+      bc.setGroupNo(groupNo);
+      bc.setMemberNo(boCommentWriter);
+      bc.setBoardNo(boardNo);
+      bc.setBoCommentContent(boardCommentContent);
+      bc.setBoCommentLevel(boardCommentLevel);
+      bc.setBoCommentRef(boardCommentRef);
+      
+      int result=new BoardService().insertBoComment(bc);
+      
+      if(result>0)
+      {
+         response.setContentType("text/html;charset=UTF-8");
+         response.getWriter().println("댓글 등록 성공");
+      }
+      else
+      {
+         response.setContentType("text/html;charset=UTF-8");
+         response.getWriter().println("댓글 등록 실패");
+      }
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

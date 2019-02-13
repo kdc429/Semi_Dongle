@@ -4,7 +4,7 @@
     
 <% 
    Board b=(Board)request.getAttribute("board");
-   Group g = (Group)request.getAttribute("group");
+   Group group = (Group)request.getAttribute("g");
    BoardPath bp=(BoardPath)request.getAttribute("boardPath");
    Member loginMember = (Member)request.getSession().getAttribute("loginMember");
    int groupNo=(int)request.getAttribute("groupNo");
@@ -30,7 +30,6 @@ div.view-btn
 div.board-comment-editor fieldset.modal_comment{
 padding:8px 10px 10px;
 border-bottom:1px solid #efefef;
-font-family:'a흑진주L';
 border-top:1px solid #e8e8e8;
 background-color:rgb(240,240,240);
 position:relative;
@@ -87,7 +86,7 @@ background-color:white;
             <thead>
                <br><br>
                <tr>
-                  <th colspan="3" id="title" style="border-top:1px solid #dddddd; ">공지사항</th>
+                  <th colspan="3" id="title" style="background-color:rgb(20,150,200);">공지사항</th>
                </tr>
             </thead>
             <tbody>
@@ -128,7 +127,7 @@ background-color:white;
       </form>
       <div class="view-btn">
          <button type="button" class="btn btn-default" id='view-list-btn' style="text-align:center; font-family: '나눔스퀘어라운드 Regular';">목록으로</button>
-         <%if(loginMember.getMemberId().equals(b.getBoardWriter())||loginMember.getMemberId().equals("admin")) {%>
+         <%if(loginMember!=null&&loginMember.getMemberNo()==group.getMemberNo()) {%>
          <button type="button" class="btn btn-default" id='view-update-btn' style="font-family: '나눔스퀘어라운드 Regular';">수정하기</button>
          <input type="hidden" value="<%=groupNo%>" name="groupNo" name="groupNo"/>
          <button type="button" class="btn btn-default" id="view-delete-btn" style="font-family: '나눔스퀘어라운드 Regular';">삭제하기</button>
@@ -148,7 +147,7 @@ background-color:white;
          value="<%=b.getBoCommentNo()%>"/> --%>
          <input type="hidden" name="boardCommentRef" id="boardCommentRef"
          value="0"/>
-         <textarea cols='70' rows='3' style='resize:none;' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
+         <textarea cols='65' rows='3' style='resize:none;' name="boardCommentContent" id="boardCommentContent" placeholder="댓글을 입력하세요."></textarea>
          <button type="button" class="btn btn-default" id="comment-insert-btn" style="float:right; width:60px; height:65px;">등록</button>
       </div>
       <!-- 댓글목록 테이블 -->
@@ -167,16 +166,16 @@ background-color:white;
                         <span class='board-comment-date'>
                            <%=c.getBoCommentDate()%>
                            <p class='btn-bocomment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
-                  		<input type='hidden' class='bocomment-report-no' value='<%=c.getBoCommentNo()%>' >
-                  		<input type='hidden' class='reportBoCommentLevel' value='<%=c.getBoCommentLevel()%>' >
-						<input type='hidden' class='reportBoCommentNickName' value='<%=c.getGroupMemberNickname()%>' >
-						<input type='hidden' class='reportMemberNo' value='<%=c.getMemberNo()%>' >
+                        <input type='hidden' class='bocomment-report-no' value='<%=c.getBoCommentNo()%>' >
+                        <input type='hidden' class='reportBoCommentLevel' value='<%=c.getBoCommentLevel()%>' >
+                  <input type='hidden' class='reportBoCommentNickName' value='<%=c.getGroupMemberNickname()%>' >
+                  <input type='hidden' class='reportMemberNo' value='<%=c.getMemberNo()%>' >
                         </span>
                         <br/>
                         <span class='board_comment_content'>
                            <%=c.getBoCommentContent() %>
                            <button style='border:none;background-color:none;' class='comment-reply-btn' value='<%=c.getBoCommentNo()%>'>답글</button>
-                           <%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
+                           <%if(loginMember.getMemberNo()==c.getMemberNo()||loginMember.getMemberNo()==group.getMemberNo()){%>
                               <button style='border:none;background-color:none;float:right;' class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
                            <%} %>
                         </span>
@@ -192,13 +191,13 @@ background-color:white;
                      <span class="board-comment-date">
                         <%=c.getBoCommentDate()%>
                         <p class='btn-bocomment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
-                  		<input type='hidden' class='bocomment-report-no' value='<%=c.getBoCommentNo()%>' >
-                  		<input type='hidden' class='reportBoCommentLevel' value='<%=c.getBoCommentLevel()%>' >
-						<input type='hidden' class='reportBoCommentNickName' value='<%=c.getGroupMemberNickname()%>' >
-						<input type='hidden' class='reportMemberNo' value='<%=c.getMemberNo()%>' >
-                        <%if(loginMember.getMemberId()!=null&&(loginMember.getMemberId().equals(c.getGroupMemberNickname())||loginMember.getMemberId().equals("admin"))){%>
-                           <button style='border:none;background-color:none;float:right;' class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
-                        <%} %>
+                        <input type='hidden' class='bocomment-report-no' value='<%=c.getBoCommentNo()%>' >
+                        <input type='hidden' class='reportBoCommentLevel' value='<%=c.getBoCommentLevel()%>' >
+                  <input type='hidden' class='reportBoCommentNickName' value='<%=c.getGroupMemberNickname()%>' >
+                  <input type='hidden' class='reportMemberNo' value='<%=c.getMemberNo()%>' >
+                           <%if(loginMember.getMemberNo()==c.getMemberNo()||loginMember.getMemberNo()==group.getMemberNo()){%>
+                              <button style='border:none;background-color:none;float:right;' class="comment-delete-btn" value="<%=c.getBoCommentNo() %>">삭제</button>
+                           <%} %>
                      </span>
                      <br/>
                      <span class='board_comment_content'>
@@ -211,31 +210,31 @@ background-color:white;
          }%>
          </ul>
       </div>
-      	<%if(relist!=null){ %>
-			<form id='reportFrm' name="reportFrm">
-		         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
-		         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
-		         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
-		         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
-		         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
-		         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
-		         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
-		         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
-		         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
-		         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
-		         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
-		         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
-		         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
-		         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
-		         
-		         <input type="hidden" id="reportBoardNo" name="reportBoardNo" value="<%=b.getBoardNo() %>">
-		         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="">
-	          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
-		         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
-		      	 <input type="hidden" id="reportBoCommentNo" name="reportBoCommentNo" value=""/>
-		      	 <input type="hidden" id="reportBoCommentLevel" name="reportBoCommentlevel" value=""/>
-		      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
-		      </form>
+         <%if(relist!=null){ %>
+         <form id='reportFrm' name="reportFrm">
+               <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
+               <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
+               <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
+               <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
+               <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
+               <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
+               <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
+               <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
+               <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
+               <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
+               <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
+               <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
+               <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
+               <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
+               
+               <input type="hidden" id="reportBoardNo" name="reportBoardNo" value="<%=b.getBoardNo() %>">
+               <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="">
+                 <input type="hidden" id="reportNickName" name="reportNickName" value="">
+               <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
+                <input type="hidden" id="reportBoCommentNo" name="reportBoCommentNo" value=""/>
+                <input type="hidden" id="reportBoCommentLevel" name="reportBoCommentlevel" value=""/>
+                <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
+            </form>
       <%} %>
 </div>
       
@@ -243,20 +242,25 @@ background-color:white;
 
 /* 댓글 신고하기 */
 $(document).ready(function(){
-	
-	$('.btn-bocomment-report').click(function(e){
-		 var reportWin=window.open("<%=request.getContextPath()%>/views/board/boardReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
-		 var reportBoCommentNo=$(this).siblings('.bocomment-report-no').val();
-		 var reportBoCommentLevel=$(this).siblings('.reportBoCommentLevel').val();
-		 var reportBoCommentNickName=$(this).siblings('.reportBoCommentNickName').val();
-		 var reportMemberNo=$(this).siblings('input.reportMemberNo').val();
-		 document.getElementById('reportBoCommentNo').value=reportBoCommentNo;
-		 document.getElementById('reportBoCommentLevel').value=reportBoCommentLevel;
-		 document.getElementById('reportNickName').value=reportBoCommentNickName;
-		 document.getElementById('reportMemberNo').value=reportMemberNo;
-		 console.log(reportBoCommentNo);
-	});
-	
+   
+   $('.btn-bocomment-report').click(function(e){
+      var reportMemberNo=$(this).siblings('input.reportMemberNo').val();
+      if(<%=loginMember.getMemberNo()%>==reportMemberNo){
+         alert('자신을 신고할 수 없습니다.');
+         return;
+      }
+       var reportWin=window.open("<%=request.getContextPath()%>/views/board/boardReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
+       var reportBoCommentNo=$(this).siblings('.bocomment-report-no').val();
+       var reportBoCommentLevel=$(this).siblings('.reportBoCommentLevel').val();
+       var reportBoCommentNickName=$(this).siblings('.reportBoCommentNickName').val();
+       
+       document.getElementById('reportBoCommentNo').value=reportBoCommentNo;
+       document.getElementById('reportBoCommentLevel').value=reportBoCommentLevel;
+       document.getElementById('reportNickName').value=reportBoCommentNickName;
+       document.getElementById('reportMemberNo').value=reportMemberNo;
+       console.log(reportBoCommentNo);
+   });
+   
 });
 $(function(){
    $('#comment-insert-btn').click(function(){
