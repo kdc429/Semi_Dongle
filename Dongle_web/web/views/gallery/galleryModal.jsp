@@ -358,13 +358,6 @@ if (n < 1) {slideIndex = slides.length}
 				<%} %>
 			<%}%> 
 		</ul>
-		<input type="hidden" name="groupNo" id='groupNo' value="<%=gplist.get(0).getGroupNo() %>"/>
-		<input type="hidden" name="galNo" id="galNo" value="<%=gplist.get(0).getGalNo() %>"/>
-		<input type="hidden" name="galCommentWriterNo" id='galCommentWriterNo' value="<%=loginMember.getMemberNo() %>"/>
-		<input type="hidden" name="galCommentLevel" id='galCommentLevel' value="1"/>
-		<input type="hidden" name="galCommentRef" id='galCommentRef' value="0"/>
-		<input type="hidden" name="albumCode" id='albumCode' value="<%=gplist.get(0).getAlbumCode()%>"/>
-		<input type="hidden" name="galFileNo" id='galFileNo' value="<%=gplist.get(0).getGalFileNo()%>"/>
 		<fieldset class='modal_comment'>
 			<legend class='screen_out'>댓글쓰기 폼</legend>
 			<div class='comment_write'>
@@ -375,6 +368,14 @@ if (n < 1) {slideIndex = slides.length}
 				<button type="button" class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>
 			</div>
 		</fieldset>
+		<input type="hidden" name="groupNo" id='groupNo' value="<%=gplist.get(0).getGroupNo() %>"/>
+		<input type="hidden" name="galNoC1" id="galNoC1" value="<%=gplist.get(0).getGalNo() %>"/>
+		<input type="hidden" name="galCommentWriterNo" id='galCommentWriterNo' value="<%=loginMember.getMemberNo() %>"/>
+		<input type="hidden" name="galCommentLevel" id='galCommentLevel' value="1"/>
+		<input type="hidden" name="galCommentRef" id='galCommentRef' value="0"/>
+		<input type="hidden" name="albumCode" id='albumCode' value="<%=gplist.get(0).getAlbumCode()%>"/>
+		<input type="hidden" name="galFileNoC1" id='galFileNoC1' value="<%=gplist.get(0).getGalFileNo()%>"/>
+
 		<%if(relist!=null){ %>
 			<form id='reportFrm' name="reportFrm">
 		         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
@@ -404,6 +405,43 @@ if (n < 1) {slideIndex = slides.length}
 		      </form>
 	      <%} %>
 		<script>
+		/* 댓글 등록 */
+			$(function(){
+				$('.btn-insert1').click(function(){
+					var galNo=$('.comment-editor').find('.modal_comment').siblings('#galNoC1').val();
+					var galFileNo=$('.comment-editor').find('.modal_comment').siblings('#galFileNoC1').val();
+					if($('#galCommentContent').val().trim()==0)
+					{
+						alert('내용을 입력해주세요');
+						return;
+					}
+					$.ajax({
+						url:"<%=request.getContextPath()%>/gallery/commentInsert",
+						data:{"groupNo":$('#groupNo').val(),
+							"galNo":galNo,
+							"galCommentWriterNo":$('#galCommentWriterNo').val(),
+							"galCommentLevel":$('#galCommentLevel').val(),
+							"galCommentRef":$('#galCommentRef').val(),
+							"albumCode":$('#albumCode').val(),
+							"galFileNo":galFileNo,
+							"galCommentContent":$('#galCommentContent').val(),
+						},
+						type:"post",
+						success:function(data){
+							if(data!=null)
+							{	
+								alert('댓글 등록 완료!');
+								$('.comment-editor').html(data);
+							}
+							else
+							{
+								alert('댓글 등록에 실패하였습니다');
+							}
+						},
+						error:function(request){console.log(request);}
+					});					
+				});
+			});
 			/* 댓글 신고하기 */
 			$(document).ready(function(){
 				$('#btn-report').click(function(e){
@@ -467,49 +505,50 @@ if (n < 1) {slideIndex = slides.length}
 			$(function(){
 				var eventflag;
 				$('.btn-reply').on('click',function(e){
-					console.log($(this));
 					<%if(loginMember!=null){%>
 						eventflag=true;
 						var div=$("<div class='recomment_content'></div>");
 						var html="";
-						html+="<input type='hidden' name='groupNo' value='<%=groupNo %>'/>"
-						html+="<input type='hidden' name='galNo' value='<%=gplist.get(0).getGalNo()%>'/>";
-						html+="<input type='hidden' name='galCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
-						html+="<input type='hidden' name='galCommentLevel' value='2'/>";
-						html+="<input type='hidden' name='albumCode' value='<%=gplist.get(0).getAlbumCode()%>'/>";
-						html+="<input type='hidden' name='galFileNo' value='<%=gplist.get(0).getGalFileNo()%>'/>";
-						html+="<input type='hidden' name='galCommentRef2' value='"+$(this).val()+"'/>";
 						html+="<fieldset class='modal_comment'>";
 						html+="<div class='comment_write'>";
-						html+="<textarea name='galCommentContent' id='galCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
+						html+="<textarea name='galReCommentContent' id='galReCommentContent' placeholder='소중한 댓글을 입력해주세요' tabindex='3' style='resize:none;box-sizing: border-box;width:100%;height:80;border:1px solid #fff;'></textarea>";
 						html+="</div>";
 						html+="<div class='comment_btn'>";
-						html+="<button value='"+$(this).val()+"' type='button' class='btn-insert' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
+						html+="<button value='"+$(this).val()+"' type='button' class='btn-insert2' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>";
 						html+="</div>"
 						html+="</fieldset>"
+						html+="<input type='hidden' name='groupNo' value='<%=groupNo %>'/>"
+						html+="<input type='hidden' name='galNoC3'/>";
+						html+="<input type='hidden' name='galCommentWriterNo' value='<%=loginMember.getMemberNo()%>'/>";
+						html+="<input type='hidden' name='galCommentLevel' value='2'/>";
+						html+="<input type='hidden' name='albumCodeC3' id='albumCodeC3' value='<%=gplist.get(0).getAlbumCode()%>'/>";
+						html+="<input type='hidden' name='galFileNoC3' />";
+						html+="<input type='hidden' name='galCommentRef2'  value='"+$(this).val()+"'/>";
 						div.html(html);
 						div.insertAfter($(this).parent().parent().parent()).children("span").slideDown(800);
-						/* 연결된 이벤트 삭제 */
-						/* $(this).off('click'); */
-
-						
-						div.find('.btn-insert').click(function(e){
+						/* 대댓글 등록 */
+						div.find('.btn-insert2').click(function(e){
 							if(<%=loginMember==null%>)
 							{
 							 	fn_loginAlert();
 								e.preventDefault();
 								return;
 							}
+							if($('#galReCommentContent').val().trim()==0)
+							{
+								alert('내용을 입력해주세요');
+								return;
+							}
 							$.ajax({
 								url:"<%=request.getContextPath()%>/gallery/commentInsert",
 								data:{"groupNo":$('#groupNo').val(),
-									"galNo":$('#galNo').val(),
-									"galCommentWriterNo":$('#galCommentWriterNo').val(),
+									"galNo":'<%=gplist.get(0).getGalNo()%>',
+									"galCommentWriterNo":'<%=loginMember.getMemberNo()%>',
 									"galCommentLevel":2,
 									"galCommentRef":$(this).val(),
-									"albumCode":$('#albumCode').val(),
-									"galFileNo":$('#galFileNo').val(),
-									"galCommentContent":$('#galCommentContent').val(),
+									"albumCode":$('#albumCodeC3').val(),
+									"galFileNo":'<%=gplist.get(0).getGalFileNo()%>',
+									"galCommentContent":$('#galReCommentContent').val(),
 								},
 								type:"post",
 								success:function(data){
@@ -542,38 +581,6 @@ if (n < 1) {slideIndex = slides.length}
 				{
 					alert('로그인 후 이용할 수 있습니다.');
 				}
-		
-				
-				/* 댓글 등록 */
-				$(function(){
-					$('.btn-insert1').click(function(){
-						$.ajax({
-							url:"<%=request.getContextPath()%>/gallery/commentInsert",
-							data:{"groupNo":$('#groupNo').val(),
-								"galNo":$('#galNo').val(),
-								"galCommentWriterNo":$('#galCommentWriterNo').val(),
-								"galCommentLevel":$('#galCommentLevel').val(),
-								"galCommentRef":$('#galCommentRef').val(),
-								"albumCode":$('#albumCode').val(),
-								"galFileNo":$('#galFileNo').val(),
-								"galCommentContent":$('#galCommentContent').val(),
-							},
-							type:"post",
-							success:function(data){
-								if(data!=null)
-								{	
-									alert('댓글 등록 완료!');
-									$('.comment-editor').html(data);
-								}
-								else
-								{
-									alert('댓글 등록에 실패하였습니다');
-								}
-							},
-							error:function(request){console.log(request);}
-						});					
-					});
-				});
 			});
 		</script>
 	</div>

@@ -43,14 +43,6 @@ public class GalleryCommentReportServlet extends HttpServlet {
 			int result = new GalleryService().updateGalleryCommentReport(groupNo,galNo,galCommentNo);
 			if(galCommentLevel==1) {
 				int result2 = new GalleryService().updateGalleryCommentReport2(groupNo, galNo, galCommentNo);
-				
-				if(result2!=0)
-				{
-					System.out.println("레벨 2도 신고됨");
-				}else
-				{
-					System.out.println("레벨 2 신고안됨");
-				}
 			}
 			 if(result!=0)
 		      {

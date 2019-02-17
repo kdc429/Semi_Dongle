@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 import com.dongle.member.model.vo.ReportReason;
 
@@ -45,6 +47,9 @@ public class GalleryDeleteCommentServlet extends HttpServlet {
 		
         //신고 카테고리 뽑아오기
         List<ReportReason> relist = new GalleryService().selectReportReason();
+        
+        Group g = new GroupService().selectGrInfo(groupNo);
+        
 		if(rs!=0)
 		{
 			List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
@@ -59,6 +64,7 @@ public class GalleryDeleteCommentServlet extends HttpServlet {
 				request.setAttribute("relist", relist);
 				request.setAttribute("gplist", gplist);
 				request.setAttribute("groupNo", groupNo);
+		        request.setAttribute("g", g);
 				request.getRequestDispatcher("/views/gallery/commentInsert.jsp").forward(request, response);
 			}
 		}
