@@ -45,6 +45,7 @@ public class GalleryCommentInsertServlet extends HttpServlet {
       int galCommentRef = Integer.parseInt(request.getParameter("galCommentRef"));
       int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
       String albumCode=request.getParameter("albumCode");
+      
       GalleryCommentJoin gcj =  new GalleryCommentJoin();
       gcj.setGroupNo(groupNo);
       gcj.setGalNo(galNo);
@@ -53,7 +54,8 @@ public class GalleryCommentInsertServlet extends HttpServlet {
       gcj.setGalFileNo(galFileNo);
       gcj.setMemberNo(galCommentWriterNo);
       gcj.setGalCommentRef(galCommentRef);
-      System.out.println("gcj: "+gcj);
+      
+      System.out.println("gcj는 "+gcj);
       Group g = new GroupService().selectGrInfo(groupNo);
       
       //신고 카테고리 뽑아오기
@@ -73,7 +75,7 @@ public class GalleryCommentInsertServlet extends HttpServlet {
             request.setAttribute("relist", relist);
             request.setAttribute("gplist", gplist);
             request.setAttribute("groupNo", groupNo);
-               request.setAttribute("g", g);
+              request.setAttribute("g", g);
             request.getRequestDispatcher("/views/gallery/commentInsert.jsp").forward(request, response);
          }
       }
