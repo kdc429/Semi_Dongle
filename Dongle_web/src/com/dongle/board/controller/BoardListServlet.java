@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
 /**
@@ -34,8 +36,10 @@ public class BoardListServlet extends HttpServlet {
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		List<Board> list=new BoardService().selectList(groupNo,loginMember.getMemberId());
 		
+		Group group = new GroupService().selectGrInfo(groupNo);
 		System.out.println("여기확인해주세요: "+groupNo+" : "+list);
 		
+		request.setAttribute("group", group);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);;
 		

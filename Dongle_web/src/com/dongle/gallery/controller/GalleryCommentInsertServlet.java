@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 import com.dongle.member.model.vo.ReportReason;
 import com.google.gson.Gson;
@@ -44,7 +46,6 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
 		String albumCode=request.getParameter("albumCode");
 		Member loginMember=(Member)(request.getSession().getAttribute("loginMember"));
-		System.out.println("galCommentNo: "+galCommentRef);
 		GalleryCommentJoin gcj =  new GalleryCommentJoin();
 		gcj.setGroupNo(groupNo);
 		gcj.setGalNo(galNo);
@@ -53,6 +54,8 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 		gcj.setGalFileNo(galFileNo);
 		gcj.setMemberNo(galCommentWriterNo);
 		gcj.setGalCommentRef(galCommentRef);
+		
+		Group g = new GroupService().selectGrInfo(groupNo);
 		
 		//신고 카테고리 뽑아오기
 		List<ReportReason> relist = new GalleryService().selectReportReason();	
@@ -71,6 +74,7 @@ public class GalleryCommentInsertServlet extends HttpServlet {
 				request.setAttribute("relist", relist);
 				request.setAttribute("gplist", gplist);
 				request.setAttribute("groupNo", groupNo);
+		         request.setAttribute("g", g);
 				request.getRequestDispatcher("/views/gallery/commentInsert.jsp").forward(request, response);
 			}
 		}

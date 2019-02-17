@@ -80,6 +80,7 @@ div.back-div button.insert-bnt{float:right; border:none;background-color:rgb(0,0
       //모달띄우기
       $('.galImg').click(function(event){
          var galFileNo = $(event.target).nextAll('#galFileNo')[0].value;
+         console.log(galFileNo);
          var galNo = $(event.target).nextAll('#galNo')[0].value;
          $.ajax({
             url:"<%=request.getContextPath()%>/gallery/galleryAllList?groupNo=<%=groupNo%>&albumCode=<%=albumCode%>&galFileNo="+galFileNo+"&galNo="+galNo,

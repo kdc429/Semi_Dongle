@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.BoardComment;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 
 /**

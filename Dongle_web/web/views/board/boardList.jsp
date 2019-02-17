@@ -30,7 +30,7 @@
 	.table th
 	{
 		font-family: 'netmarble Medium';
-		background-color: rgba(112,136,172);
+		background-color: rgb(20,150,200);
 		color : white;
 		text-align: center;
 		}
@@ -53,8 +53,8 @@
 </style>
 	<div id="board-container" >
 		<h2>공지사항</h2>
-		<% if(loginMember!=null&&loginMember.getMemberId().equals("admin")){%> 
-			<button type="button" class="btn btn-default" id="add-btn" style="font-family: '나눔스퀘어라운드 Regular';">글쓰기</button>
+		<% if(loginMember!=null&&loginMember.getMemberNo()==g.getMemberNo()){%> 
+			<button type="button" class="btn btn-default" id="add-btn" style="float:right;font-family: '나눔스퀘어라운드 Regular';">글쓰기</button>
 		 <%} %>  
 		<table class="table table-hover">
 			<tr>

@@ -70,7 +70,7 @@
 				<thead>
 					<br/><br/>
 					<tr>
-						<th colspan="3" style="border-top:1px solid #dddddd; background-color: rgba(112,136,172); font-family: 'netmarble Medium';">공지사항</th>
+						<th colspan="3" style="border-top:1px solid #dddddd; background-color: rgba(20,150,200); font-family: 'netmarble Medium';">공지사항</th>
 					</tr>
 				</thead>
 				<tbody>

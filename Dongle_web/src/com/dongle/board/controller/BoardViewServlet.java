@@ -15,6 +15,8 @@ import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardComment;
 import com.dongle.board.model.vo.BoardPath;
 import com.dongle.gallery.model.service.GalleryService;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 import com.dongle.member.model.vo.ReportReason;
 
@@ -41,6 +43,8 @@ public class BoardViewServlet extends HttpServlet {
 		int groupNo=Integer.parseInt(request.getParameter("groupNo"));
 		BoardPath bp=new BoardService().selectBoardPath(boardNo,groupNo);
 		System.out.println("게시글번호"+boardNo+" : "+"그룹번호"+groupNo);
+		
+		Group g = new GroupService().selectGrInfo(groupNo);
 		
 		Cookie[] cookies=request.getCookies();
 		String boardCookieVal="";
@@ -92,6 +96,7 @@ public class BoardViewServlet extends HttpServlet {
 			request.setAttribute("groupNo", groupNo);
 			request.setAttribute("boardPath", bp);
 			request.setAttribute("bclist", bclist);
+			request.setAttribute("g", g);
 		}
 		else
 		{

@@ -98,7 +98,7 @@
  	                        
  	                       dataType:"html",
 	                        success:function(data){
-	                        	$(opener.document).find('#content-div').html(data);
+	                        	$(opener.document).find('#board-container').html(data);
 	                           self.close();
 	                        }
  	                        

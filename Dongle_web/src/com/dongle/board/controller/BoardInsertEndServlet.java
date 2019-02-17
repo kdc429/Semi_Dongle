@@ -15,6 +15,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.dongle.board.model.service.BoardService;
 import com.dongle.board.model.vo.Board;
 import com.dongle.board.model.vo.BoardPath;
+import com.dongle.group.model.service.GroupService;
+import com.dongle.group.model.vo.Group;
 import com.dongle.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -68,7 +70,6 @@ public class BoardInsertEndServlet extends HttpServlet {
 		bp.setBoardFileOldPath(mr.getOriginalFileName("upfile"));
 		bp.setBoardFileNewPath(mr.getFilesystemName("upfile"));
 		String memberId=mr.getParameter("loginMember");
-		
 		
 		System.out.println(bp);
 		int result=new BoardService().insertBoard(bp);

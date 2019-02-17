@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
-<%@ page import="com.dongle.member.model.vo.ReportReason,com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath" %>
+<%@ page import="com.dongle.group.model.vo.Group,com.dongle.member.model.vo.ReportReason,com.dongle.gallery.model.vo.GalleryCommentJoin,java.util.*,com.dongle.member.model.vo.Member,com.dongle.gallery.model.vo.GalleryPath" %>
 <%
 	List<GalleryPath> gplist=(List)request.getAttribute("gplist");
 	List<GalleryCommentJoin> gclist=(List)request.getAttribute("gclist");
 	int groupNo = (int)request.getAttribute("groupNo");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	List<ReportReason> relist = (List)request.getAttribute("relist");
+	Group group =(Group)request.getAttribute("g");
+	int cCount=0;
 %>
 	<link href="<%=request.getContextPath() %>/css/gallery_style.css" rel="stylesheet">
 	<!-- 댓글창 시작 -->
-	<div class="comment-editor" style='background-color:rgb(248,248,248);'>
 		<ul>
 			<%if(gclist.size()!=0){ %>
 				<%for(GalleryCommentJoin g:gclist){ %>
@@ -25,13 +26,15 @@
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
 									<p class='btn-comment-report' value='<%=g.getGalCommentNo()%>'  style='float:right;color:RGB(112,136,172);' >신고</p>
-									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportGalCommentNo' value='<%=g.getGalCommentNo()%>' >
 									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
+									<input type='hidden' class='reportCommentLevel' value='<%=g.getGalCommentLevel()%>'>
+									<input type='hidden' class='reportCMemberNo' value='<%=g.getMemberNo()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
 									<%=g.getGalCommentContent() %>
-									<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+									<%if((loginMember.getMemberNo()==group.getMemberNo())||(g.getMemberNo()==loginMember.getMemberNo())){ %>
 										<button class='btn-delete' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);' >삭제</button>
 									<%} %>
 									<button class='btn-reply' value='<%=g.getGalCommentNo()%>'>답글</button>
@@ -49,13 +52,15 @@
 								<span class='comment-date'>
 									<%=g.getGalCommentDate() %>
 									<p class='btn-comment-report' style='float:right;color:RGB(112,136,172);' >신고</p>
-									<input type='hidden' class='comment-report-no' value='<%=g.getGalCommentNo()%>' >
+									<input type='hidden' class='reportGalCommentNo' value='<%=g.getGalCommentNo()%>' >
 									<input type='hidden' class='reportCommentNickName' value='<%=g.getGroupMemberNickname()%>' >
+									<input type='hidden' class='reportCommentLevel' value='<%=g.getGalCommentLevel()%>' >
+									<input type='hidden' class='reportCMemberNo' value='<%=g.getMemberNo()%>' >
 								</span>
 								<br/>
 								<span class='comment_content'>
 									<%=g.getGalCommentContent() %>
-									<%if(loginMember.getMemberId().equals("admin")||gclist.get(0).getMemberNo()==loginMember.getMemberNo()){ %>
+									<%if((loginMember.getMemberNo()==group.getMemberNo())||(g.getMemberNo()==loginMember.getMemberNo())){ %>
 										<button class='btn-delete' value='<%=g.getGalCommentNo()%>' style='float:right;color:RGB(112,136,172);' >삭제</button>
 									<%} %>
 								</span>
@@ -82,39 +87,39 @@
 				<button type="button" class='btn-insert1' style='float:right;width:65px;height:28px;font-size:14px;line-height:15px;border-radius: 20px;border:none;background-color:white;'>입력</button>
 			</div>
 		</fieldset>
-	</div>
-<%if(relist!=null){ %>
-		<form id='reportFrm' name="reportFrm">
-	         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
-	         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
-	         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
-	         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
-	         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
-	         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
-	         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
-	         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
-	         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
-	         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
-	         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
-	         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
-	         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
-	         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
-	         
-          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
-	         <input type="hidden" id="reportGalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
-	         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
-	         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
-	      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
-	      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
-	      	 <input type="hidden" id="reportCommentNo" name="selectRecode" value=""/>
-	      </form>
-      <%} %>
+		<%if(relist!=null){ %>
+			<form id='reportFrm' name="reportFrm">
+		         <input type="hidden" id="report1" name="report1" value="<%=relist.get(0).getReportCode()%>">
+		         <input type="hidden" id="reason1" name="reason1" value="<%=relist.get(0).getReportReason()%>">
+		         <input type="hidden" id="report2" name="report2" value="<%=relist.get(1).getReportCode()%>">
+		         <input type="hidden" id="reason2" name="reason2" value="<%=relist.get(1).getReportReason()%>">
+		         <input type="hidden" id="report3" name="report3" value="<%=relist.get(2).getReportCode()%>">
+		         <input type="hidden" id="reason3" name="reason3" value="<%=relist.get(2).getReportReason()%>">
+		         <input type="hidden" id="report4" name="report4" value="<%=relist.get(3).getReportCode()%>">
+		         <input type="hidden" id="reason4" name="reason4" value="<%=relist.get(3).getReportReason()%>">
+		         <input type="hidden" id="report5" name="report5" value="<%=relist.get(4).getReportCode()%>">
+		         <input type="hidden" id="reason5" name="reason5" value="<%=relist.get(4).getReportReason()%>">
+		         <input type="hidden" id="report6" name="report6" value="<%=relist.get(5).getReportCode()%>">
+		         <input type="hidden" id="reason6" name="reason6" value="<%=relist.get(5).getReportReason()%>">
+		         <input type="hidden" id="report7" name="report7" value="<%=relist.get(6).getReportCode()%>">
+		         <input type="hidden" id="reason7" name="reason7" value="<%=relist.get(6).getReportReason()%>">
+		         
+	          	 <input type="hidden" id="reportNickName" name="reportNickName" value="">
+	          	 <input type="hidden" id="reportCMemberNo" name="reportCMemberNo" value="">
+		         <input type="hidden" id="reportGalNo" name="reportGalNo" value="<%=gplist.get(0).getGalNo()%>">
+		         <input type="hidden" id="reportGroupNo" name="reportGroupNo" value="<%=groupNo%>">
+		         <input type="hidden" id="reportMemberNo" name="reportMemberNo" value="<%=gplist.get(0).getMemberNo()%>">
+		      	 <input type="hidden" id="reportAlbumCode" name="reportAlbumCode" value="<%=gplist.get(0).getAlbumCode()%>">
+		      	 <input type="hidden" id="reportCommentNo" name="reportCommentNo" value=""/>
+		      	 <input type="hidden" id="selectRecode" name="selectRecode" value=""/>
+		      	 <input type="hidden" id="reportGalCommentLevel" name="reportGalCommentLevel" value=""/> 
+		      </form>
+	      <%} %>
 <script>
 /* 댓글 신고하기 */
 $(document).ready(function(){
-	
 	$('#btn-report').click(function(e){
-		if(loginMember.getMemberNo()==<%=gplist.get(0).getMemberNo()%>){
+		if(<%=loginMember.getMemberNo()%>==<%=gplist.get(0).getMemberNo()%>){
 			alert('자신을 신고할 수 없습니다.');
 			return;
 		}
@@ -123,48 +128,54 @@ $(document).ready(function(){
 	});
 	
 	$('.btn-comment-report').click(function(e){
-		if(loginMember.getMemberNo()==<%=gplist.get(0).getMemberNo()%>){
+		 var reportCMemberNo=$(this).siblings('.reportCMemberNo').val();
+		if(<%=loginMember.getMemberNo()%>==reportCMemberNo){
 			alert('자신을 신고할 수 없습니다.');
 			return;
 		}
 		 var reportWin=window.open("<%=request.getContextPath()%>/views/gallery/galleryReport.jsp","reportWin","width=500, height=300, top=200,left=500, menubar=no, status=no, toolbar=no");
-		 var reportCommentNo=$(this).siblings('[input.comment-report-no]').val();
-		 var reportCommentNickName=$(this).siblings('[input.reportCommentNickName]').val();
+		 var reportCommentNo=$(this).siblings('.reportGalCommentNo').val();
+		 var reportCommentNickName=$(this).siblings('.reportCommentNickName').val();
+		 var reportGalCommentLevel=$(this).siblings('.reportCommentLevel').val();
+
 		 document.getElementById('reportCommentNo').value=reportCommentNo;
 		 document.getElementById('reportNickName').value=reportCommentNickName;
+		 document.getElementById('reportGalCommentLevel').value=reportGalCommentLevel;
 	});
 	
 });
 
 /* 댓글 삭제하기 */
 $(function(){
-	$('.btn-delete').click(function(){
-		if(!confirm("정말로 삭제하시겠습니까?")){return;}
-		else{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/gallery/deleteComment",
-				data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
-					'galNo':<%=gplist.get(0).getGalNo()%>,
-					'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
-					'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
-				},
-				type:'post',
-				dataType:'html',
-				success:function(data){
-					if(data!=null)
-					{	
-						alert('댓글을 삭제하였습니다');
-						$('.comment-editor').html(data);
+		$('.btn-delete').click(function(){
+			
+			if(!confirm("정말로 삭제하시겠습니까?")){return;}
+			else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/gallery/deleteComment",
+					data:{'galCommentNo':$(this).val(),'groupNo':<%=groupNo%>,
+						'galNo':<%=gplist.get(0).getGalNo()%>,
+						'galFileNo':<%=gplist.get(0).getGalFileNo()%>,
+						'albumCode':'<%=gplist.get(0).getAlbumCode()%>'
+					},
+					type:'post',
+					dataType:'html',
+					success:function(data){
+						if(data!=null)
+						{	
+							/* console.log(data); */
+							alert('댓글을 삭제하였습니다');
+							$('.comment-editor').html(data);
+						}
+						else
+						{
+							alert('댓글 삭제에 실패하였습니다');
+						}
 					}
-					else
-					{
-						alert('댓글 삭제에 실패하였습니다');
-					}
-				}
-			})
-		}
+				})
+			}
+		});
 	});
-});
 /* 대댓글 쓰기 함수*/
 $(function(){
 	var eventflag;
@@ -192,16 +203,16 @@ $(function(){
 			div.html(html);
 			div.insertAfter($(this).parent().parent().parent()).children("span").slideDown(800);
 			/* 연결된 이벤트 삭제 */
-			$(this).off('click');
+			/* $(this).off('click'); */
 			/* 빈공간 누르면 display바뀌는 것 */
-/* 				$('.recomment_content').click(function(){
+			$('.recomment_content').click(function(){
 				if(eventflag)
 				{
 					$(this).css('display','none');
 					eventflag=false;
 					return;
 				}
-			}) */
+			}) 
 			
 			div.find('.btn-insert').click(function(e){
 				if(<%=loginMember==null%>)
@@ -263,6 +274,7 @@ $(function(){
 				success:function(data){
 					if(data!=null)
 					{	
+						console.log(data);
 						alert('댓글 등록 완료!');
 						$('.comment-editor').html(data);
 					}

@@ -13,6 +13,7 @@ import com.dongle.gallery.model.service.GalleryService;
 import com.dongle.gallery.model.vo.GalleryCommentJoin;
 import com.dongle.gallery.model.vo.GalleryPath;
 import com.dongle.member.model.vo.Member;
+import com.dongle.member.model.vo.ReportReason;
 
 /**
  * Servlet implementation class GalleryDeleteCommentServlet
@@ -33,7 +34,6 @@ public class GalleryDeleteCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("뭐야 왜 안들어와 ㅠ");
 		int galCommentNo = Integer.parseInt(request.getParameter("galCommentNo"));
 		int groupNo = Integer.parseInt(request.getParameter("groupNo"));
 		
@@ -43,9 +43,10 @@ public class GalleryDeleteCommentServlet extends HttpServlet {
 		int galFileNo=Integer.parseInt(request.getParameter("galFileNo"));
 		String albumCode=request.getParameter("albumCode");
 		
+        //신고 카테고리 뽑아오기
+        List<ReportReason> relist = new GalleryService().selectReportReason();
 		if(rs!=0)
 		{
-
 			List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
 			if(gplist!=null) {
 				//갤러리 해당 댓글 뽑아오기
@@ -55,6 +56,7 @@ public class GalleryDeleteCommentServlet extends HttpServlet {
 					System.out.println("2코멘트gplist: "+gplist);
 					System.out.println("2코멘트gclist: "+gclist);
 				}
+				request.setAttribute("relist", relist);
 				request.setAttribute("gplist", gplist);
 				request.setAttribute("groupNo", groupNo);
 				request.getRequestDispatcher("/views/gallery/commentInsert.jsp").forward(request, response);
