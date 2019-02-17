@@ -58,8 +58,6 @@ public class AlbumGetServlet extends HttpServlet {
 		List<AlbumCategory> list = new GalleryService().albumGet(groupNo);
 		//메인 이미지로 띄우기 위한 해당 앨범의 갤러리 뽑아오기
 		List<GalleryPath> galList = new GalleryService().albumAndGalList(groupNo);
-		System.out.println("albumGetServlst의 "+list.size()+list);
-		System.out.println("albumGetServlst의 "+galList.size()+galList);
 		
 		request.setAttribute("g", g);
 		request.setAttribute("galList", galList);

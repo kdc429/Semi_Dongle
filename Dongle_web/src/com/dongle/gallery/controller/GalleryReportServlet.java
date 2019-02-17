@@ -36,7 +36,6 @@ public class GalleryReportServlet extends HttpServlet {
 		int memberNo=Integer.parseInt(request.getParameter("memberNo"));
 		String albumCode=request.getParameter("albumCode");
 		String reportCode=(String)request.getParameter("reportCode");
-		System.out.println("reportCode: "+reportCode);
 	
 		int rs = new GalleryService().insertReport(groupNo,memberNo,reportCode);
 		if(rs!=0) {

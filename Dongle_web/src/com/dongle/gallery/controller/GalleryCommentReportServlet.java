@@ -36,7 +36,6 @@ public class GalleryCommentReportServlet extends HttpServlet {
       int galCommentNo=Integer.parseInt(request.getParameter("galCommentNo"));
       int galCommentLevel=Integer.parseInt(request.getParameter("galCommentLevel"));
       String reportCode=(String)request.getParameter("reportCode");                                               
-      System.out.println("galCommentNo: "+galCommentNo);
       
       int rs = new GalleryService().insertReport(groupNo,memberNo,reportCode);
       if(rs!=0) {

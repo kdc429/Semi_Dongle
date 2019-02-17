@@ -58,8 +58,6 @@ public class GalleryDeleteCommentServlet extends HttpServlet {
             List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
             if(gclist!=null) {
                request.setAttribute("gclist", gclist);
-               System.out.println("2코멘트gplist: "+gplist);
-               System.out.println("2코멘트gclist: "+gclist);
             }
             request.setAttribute("relist", relist);
             request.setAttribute("gplist", gplist);

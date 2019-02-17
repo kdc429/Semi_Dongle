@@ -64,14 +64,13 @@ public class GalleryInsertEndServlet extends HttpServlet {
 		String albumCode = mr.getParameter("albumCode");
 		int imageCount = Integer.parseInt(mr.getParameter("image_count"));
 		List galNoList= new GalleryService().distictGalNoList(albumCode, groupNo);
-		System.out.println(galNoList);
 		int galNo=0;
 		if(galNoList.size()==0) {galNo=1;}
 		else if(galNoList.size()!=0){
 			galNo = Integer.parseInt(galNoList.get(0).toString())+1;
 		}
 		String galFileContent = mr.getParameter("galFileContent");
-		System.out.println(groupNo+" : "+memberNo+" : "+albumCode+" : "+imageCount+" : "+galNo);
+		/*System.out.println(groupNo+" : "+memberNo+" : "+albumCode+" : "+imageCount+" : "+galNo);*/
 		
 		GalleryPath gp = new GalleryPath();
 		gp.setGroupNo(groupNo);
@@ -91,11 +90,11 @@ public class GalleryInsertEndServlet extends HttpServlet {
 				oldFileName.add(mr.getOriginalFileName(name));
 				newFileName.add(mr.getFilesystemName(name));
 			}
-			for(int i=0;i<oldFileName.size();i++)
+/*			for(int i=0;i<oldFileName.size();i++)
 			{
 				System.out.println(oldFileName.get(i));
 				System.out.println(newFileName.get(i));
-			}
+			}*/
 
 		}catch(Exception e)
 		{

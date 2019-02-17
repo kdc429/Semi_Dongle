@@ -90,7 +90,6 @@ public class GroupDao {
 		List<Group> list=new ArrayList();
 		Group g=null;
 		String sql=prop.getProperty("selectGroup");
-		System.out.println(id);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -122,7 +121,6 @@ public class GroupDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(list);
 		return list;
 		
 		
@@ -134,7 +132,6 @@ public class GroupDao {
 		ResultSet rs=null;
 		Group g=null;
 		String sql=prop.getProperty("selectGrInfo");
-		System.out.println(groupNo);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, groupNo);
@@ -167,7 +164,6 @@ public class GroupDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(g);
 		return g;
 	}
 	public List<EditPickGroup> selectEditGr(Connection conn){
@@ -210,7 +206,6 @@ public class GroupDao {
 		Group g=null;
 		List<Group> rankList=new ArrayList<Group>();
 		String sql="SELECT * FROM GROUP_TAB JOIN(SELECT GROUP_NO,COUNT(MEMBER_NO) FROM GROUP_MEMBER_TAB GROUP BY GROUP_NO) USING(GROUP_NO) WHERE ROWNUM BETWEEN 1 AND 5";
-		System.out.println("gg"+sql);
 		
 		try {
 			
@@ -253,7 +248,6 @@ public class GroupDao {
         ResultSet rs=null;
         GroupMember gm = null;
         String sql=prop.getProperty("selectGmInfo");
-        System.out.println("dao2: "+sql);
         try {
            pstmt=conn.prepareStatement(sql);
            System.out.println("dao"+sql);
@@ -279,7 +273,6 @@ public class GroupDao {
            close(rs);
            close(pstmt);
         }
-        System.out.println("dao: "+gm);
         return gm;
      }
 	 
@@ -305,7 +298,6 @@ public class GroupDao {
 		 finally {
 			 close(pstmt);
 		 }
-		 System.out.println("카운트"+result);
 		 return result;
 	}
 
@@ -520,7 +512,6 @@ public class GroupDao {
 		ResultSet rs=null;
 		String sql="SELECT M.*, LOC_METRO_NAME||' '||LOC_AREA_NAME||' '||LOC_TOWN_NAME AS LOCATION_NAME FROM MULTI_LOCATION_TAB M JOIN LOCATION_CATEGORY_TABLE L ON(M.LOC_CTG_CODE=L.LOC_CTG_CODE) WHERE GROUP_NO IN("+groupNo+")";
 		List<MultiLocationName> locationList=new ArrayList();
-		System.out.println(sql);
 		MultiLocationName ml=null;
 		try {
 			

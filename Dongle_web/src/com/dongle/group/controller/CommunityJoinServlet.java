@@ -56,9 +56,9 @@ public class CommunityJoinServlet extends HttpServlet {
 		List<MultiTopic> topicList=new GroupService().selectGrTopic(groupNo);
 		List<MultiLocation> locationList=new GroupService().selectGrLoc(groupNo);
 		
-		System.out.println(editList);
+/*		System.out.println(editList);
 		System.out.println(topicList);
-		System.out.println(locationList);
+		System.out.println(locationList);*/
 		
 
 		String view="/Dongle_view/msg.jsp";
@@ -73,8 +73,6 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);
 		}else {
 
-			//List<GalleryPath>galList = new GalleryService().albumAndGalList(groupNo);
-			//System.out.println("CommunityJoinServlet의 갤러리"+galList);
 			loc="/Dongle_Community_view/Community_main.jsp";
 			request.setAttribute("group", g);
 			request.setAttribute("groupMember", gm);
@@ -85,7 +83,6 @@ public class CommunityJoinServlet extends HttpServlet {
 			request.setAttribute("loginMember", loginMember);
 			request.setAttribute("result",result);
 
-			//request.setAttribute("galList",galList);
 			request.getRequestDispatcher(loc).forward(request, response);
 			
 		}

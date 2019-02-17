@@ -54,7 +54,6 @@ public class GalleryGetServlet extends HttpServlet {
 
 		//test : gal_no만 distinct된 dao에 갔다오기
 		List<Integer> galNoList = new GalleryService().distictGalNoList(albumCode,groupNo); //7,6,5,4,3,2,1
-		System.out.println(galNoList);
 		//test : 전체 list뽑아오기
 		List<GalleryPath> list =new GalleryService().getAllList(albumCode,groupNo);
 		//##테스트 중입니다.
@@ -74,9 +73,7 @@ public class GalleryGetServlet extends HttpServlet {
 			tList.add(i, t2List.get(0));
 		}
 		//tList의 length가 totalMember와 같음
-		System.out.println(tList);
 		
-		int totalMember = new GalleryService().selectGalleryCount(albumCode,groupNo);//tList랑 같음
 		request.setAttribute("groupNo", groupNo);
 		request.setAttribute("albumCode", albumCode);
 		request.setAttribute("groupMember", gm);

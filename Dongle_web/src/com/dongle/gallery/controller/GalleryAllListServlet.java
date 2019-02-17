@@ -47,7 +47,6 @@ public class GalleryAllListServlet extends HttpServlet {
       
       //신고 카테고리 뽑아오기
       List<ReportReason> relist = new GalleryService().selectReportReason();
-      System.out.println("relist"+relist);
       //해당 갤러리 리스트 뽑아오기
       List<GalleryPath> gplist = new GalleryService().selectOneList(groupNo,galNo,albumCode);
       
@@ -56,9 +55,9 @@ public class GalleryAllListServlet extends HttpServlet {
          List<GalleryCommentJoin> gclist = new GalleryService().selectGalCommentList(groupNo,galFileNo,galNo);
          if(gclist!=null) {
             request.setAttribute("gclist", gclist);
-            System.out.println("gclst: "+gclist);
+            /*System.out.println("gclst: "+gclist);*/
          }
-         System.out.println("gplst: "+gplist);
+         /*System.out.println("gplst: "+gplist);*/
          request.setAttribute("g", g);
          request.setAttribute("relist", relist);
          request.setAttribute("gplist", gplist);
