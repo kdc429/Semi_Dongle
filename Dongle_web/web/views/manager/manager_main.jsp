@@ -656,9 +656,8 @@ $(function(){
 			type:'post',
 			success:function(data){
 				$('#content-div').html(data);
-			};
+			}
 		});
 	});
-})
-
+});
 </script>
